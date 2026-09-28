@@ -4,16 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resources — POS guides by sector | FairRate Audit</title>
-<meta name="description" content="Free POS resources organized by sector: retail, restaurants, quick-service, hotel, grocery, and services. Setup guides, install guides, troubleshooting, hardware options, and sample setups.">
+<meta name="description" content="Free POS resources organized by sector: retail, restaurants, quick-service, hotel, grocery, services, and other business types. Setup guides, install guides, troubleshooting, hardware options, and sample setups.">
 <link rel="stylesheet" href="style.css">
 <style>
 .crumb{font-size:.9rem;margin:18px 0 4px;color:var(--muted)}
 .crumb a{color:var(--accent-dark);text-decoration:none}
 .crumb a:hover{text-decoration:underline}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}
-.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;cursor:pointer;font-size:.9rem;color:var(--navy);transition:border-color .15s ease,color .15s ease,background .15s ease,transform .15s ease}
-.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.chip:hover{border-color:var(--accent);color:var(--accent-dark);transform:translateY(-1px)}
+.res-search{display:flex;gap:10px;align-items:center;margin:14px 0 6px;max-width:560px}
+.res-search input{flex:1;border:1px solid var(--line);border-radius:var(--radius);padding:11px 14px;font-size:1rem;background:#fff;color:var(--ink)}
+.res-search input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.res-search .clear-btn{border:1px solid var(--line);background:#fff;border-radius:var(--radius);padding:11px 16px;cursor:pointer;font-size:.95rem;color:var(--navy)}
+.res-search .clear-btn:hover{border-color:var(--accent);color:var(--accent-dark)}
+.res-count{font-size:.9rem;color:var(--muted);margin:4px 0 0}
+.res-sector{margin:26px 0 6px}
+.res-sector-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:4px}
+.res-sector-head h2{margin:0;font-size:1.35rem}
+.res-sector-head .sector-note{color:var(--muted);font-size:.92rem;margin:0}
+.res-sector-head .sector-icon{font-size:1.5rem}
 .r-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:18px 0 30px}
 .r-card{border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:#fff;display:flex;flex-direction:column;gap:8px;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
 .r-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(14,42,71,.1);border-color:var(--accent)}
@@ -25,8 +32,8 @@
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
 .tag2{font-size:.75rem;background:var(--bg);color:var(--navy);border-radius:999px;padding:3px 10px}
 .tag2.soon{background:#fff8e6;color:#8a5a00}
-.res-count{font-size:.9rem;color:var(--muted);margin:4px 0 0}
 .note-box{background:var(--accent-soft);border:1px solid var(--accent);border-radius:var(--radius);padding:14px 16px;margin:20px 0;font-size:.94rem;color:var(--ink)}
+.no-results{display:none;text-align:center;color:var(--muted);padding:30px 0;font-size:1.05rem}
 </style>
 </head>
 <body>
@@ -42,6 +49,7 @@
       <a href="about.html">About</a>
       <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
+      <a href="search.html">Search</a>
       <a class="btn" href="contact.html">Free audit</a>
     </nav>
   </div>
@@ -51,7 +59,7 @@
   <div class="wrap">
     <p class="kicker">Resource hub · POS guides by sector</p>
     <h1>POS resources, organized by sector</h1>
-    <p class="lead">Pick your sector first — every guide below is written for how that business actually operates. Use the topic chips to narrow things down, or jump straight to the cost simulator and the plain-English PCI scope guide.</p>
+    <p class="lead">Pick your sector first — every guide below is written for how that business actually operates. Use the search box to narrow things down, or jump straight to the cost simulator and the plain-English PCI scope guide.</p>
     <div class="btn-row">
       <a class="btn" href="contact.html">Request your free audit</a>
       <a class="btn ghost" href="pos-services.html">Explore POS services</a>
@@ -63,243 +71,285 @@
 <section class="section">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a> &rsaquo; Resources</nav>
-    
 
-    <div class="chips" id="chips">
-      <button class="chip on" data-filter="all">All</button>
-      <button class="chip" data-filter="pos-systems">POS systems</button>
-      <button class="chip" data-filter="setup-guides">Setup guides</button>
-      <button class="chip" data-filter="install-guides">Install guides</button>
-      <button class="chip" data-filter="troubleshooting">Troubleshooting</button>
-      <button class="chip" data-filter="hardware-options">Hardware options</button>
-      <button class="chip" data-filter="sample-setups">Sample setups</button>
-      <button class="chip" data-filter="providers">Providers</button>
-      <button class="chip" data-filter="pci">PCI</button>
-      <button class="chip" data-filter="ai-impact">AI impact</button>
+    <div class="res-search" role="search">
+      <input type="search" id="resSearch" placeholder="Search guides — try &quot;kiosk&quot;, &quot;tip&quot;, &quot;scale&quot;&hellip;" aria-label="Search resources">
+      <button type="button" class="clear-btn" id="resClear" hidden>Clear</button>
     </div>
     <p class="res-count" id="resCount"></p>
 
-    <div class="r-grid" id="resGrid">
-      <!-- Sector hub cards (sector-first) -->
-      <article class="r-card sector-card" data-topic="pos-systems">
-        <h3><a href="sector-retail.html">Retail</a></h3>
-        <p>Independent shops and specialty stores: inventory-first setup, barcode scanning, multi-lane checkout.</p>
-        <div class="tags"><span class="tag2">Retail</span><span class="tag2">POS systems</span></div>
-      </article>
-      <article class="r-card sector-card" data-topic="pos-systems">
-        <h3><a href="sector-restaurant-full-service.html">Full-service restaurant</a></h3>
-        <p>Table service with courses, tipping, and kitchen display: menu routing, tableside payments, reservations.</p>
-        <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">POS systems</span></div>
-      </article>
-      <article class="r-card sector-card" data-topic="pos-systems">
-        <h3><a href="sector-quick-service-cafe.html">Quick-service / caf&eacute;</a></h3>
-        <p>Counter speed, kiosks, and online-order pickup: tap-first checkout, KDS, rush-hour reliability.</p>
-        <div class="tags"><span class="tag2">Quick-service / caf&eacute;</span><span class="tag2">POS systems</span></div>
-      </article>
-      <article class="r-card sector-card" data-topic="pos-systems">
-        <h3><a href="sector-hotel-hospitality.html">Hotel &amp; hospitality</a></h3>
-        <p>Front desk, restaurant, and events on one system: room charges, folio billing, and group settlement.</p>
-        <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">POS systems</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card sector-card" data-topic="pos-systems">
-        <h3><a href="sector-grocery-convenience.html">Grocery / convenience</a></h3>
-        <p>High-volume lanes and fresh departments: scale integration, age-restricted items, shrink control.</p>
-        <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">POS systems</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card sector-card" data-topic="pos-systems">
-        <h3><a href="sector-services-salon.html">Services / salon</a></h3>
-        <p>Appointments, memberships, and tips: booking, no-show protection, and stylist-level reporting.</p>
-        <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">POS systems</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <!-- Retail guides -->
-      <article class="r-card" data-topic="setup-guides">
-        <h3><a href="sector-retail.html#setup-guide">Retail setup guide</a></h3>
-        <p>Clean SKUs, tax setup, supplier workflows, and cutover day for an independent shop.</p>
-        <div class="tags"><span class="tag2">Retail</span><span class="tag2">Setup guides</span></div>
-      </article>
-      <article class="r-card" data-topic="install-guides">
-        <h3><a href="sector-retail.html#install-guides">Retail install guide</a></h3>
-        <p>Network-first installation: printers, scanners, drawers, and terminals in the right order.</p>
-        <div class="tags"><span class="tag2">Retail</span><span class="tag2">Install guides</span></div>
-      </article>
-      <article class="r-card" data-topic="troubleshooting">
-        <h3><a href="sector-retail.html#troubleshooting">Retail troubleshooting</a></h3>
-        <p>Who to call and what to check when the lane goes down mid-rush.</p>
-        <div class="tags"><span class="tag2">Retail</span><span class="tag2">Troubleshooting</span></div>
-      </article>
-      <article class="r-card" data-topic="hardware-options">
-        <h3><a href="sector-retail.html#hardware-options">Retail hardware options</a></h3>
-        <p>Real receipt printers and barcode scanners with verified links and Canadian availability notes.</p>
-        <div class="tags"><span class="tag2">Retail</span><span class="tag2">Hardware options</span></div>
-      </article>
-      <article class="r-card" data-topic="sample-setups">
-        <h3><a href="sector-retail.html#sample-setup">Retail sample setup</a></h3>
-        <p>A two-lane specialty store mapped end to end, with layout notes and daily workflow.</p>
-        <div class="tags"><span class="tag2">Retail</span><span class="tag2">Sample setups</span></div>
-      </article>
-      <!-- Full-service restaurant guides -->
-      <article class="r-card" data-topic="setup-guides">
-        <h3><a href="sector-restaurant-full-service.html#setup-guide">Full-service restaurant setup guide</a></h3>
-        <p>Menus and modifiers first, then floor plan, printer routing, tipping, and mock service.</p>
-        <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Setup guides</span></div>
-      </article>
-      <article class="r-card" data-topic="install-guides">
-        <h3><a href="sector-restaurant-full-service.html#install-guides">Full-service restaurant install guide</a></h3>
-        <p>Stations, KDS screens, kitchen printers, and a wired kitchen network that survives dinner rush.</p>
-        <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Install guides</span></div>
-      </article>
-      <article class="r-card" data-topic="troubleshooting">
-        <h3><a href="sector-restaurant-full-service.html#troubleshooting">Full-service restaurant troubleshooting</a></h3>
-        <p>KDS not talking to POS, tickets to the wrong printer, tip and pre-auth problems.</p>
-        <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Troubleshooting</span></div>
-      </article>
-      <article class="r-card" data-topic="hardware-options">
-        <h3><a href="sector-restaurant-full-service.html#hardware-options">Restaurant hardware options</a></h3>
-        <p>Verified receipt printers and payment terminals, plus what to ask about kitchen-rated gear.</p>
-        <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Hardware options</span></div>
-      </article>
-      <article class="r-card" data-topic="sample-setups">
-        <h3><a href="sector-restaurant-full-service.html#sample-setup">Full-service restaurant sample setup</a></h3>
-        <p>An 80-seat dining room with expo KDS, tableside payments, and kitchen routing mapped.</p>
-        <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Sample setups</span></div>
-      </article>
-      <!-- Quick-service / cafe guides -->
-      <article class="r-card" data-topic="setup-guides">
-        <h3><a href="sector-quick-service-cafe.html#setup-guide">Quick-service / caf&eacute; setup guide</a></h3>
-        <p>Simplified menu taps, order types, one kiosk pilot, and a unified online-order queue.</p>
-        <div class="tags"><span class="tag2">Quick-service / caf&eacute;</span><span class="tag2">Setup guides</span></div>
-      </article>
-      <article class="r-card" data-topic="install-guides">
-        <h3><a href="sector-quick-service-cafe.html#install-guides">Quick-service / caf&eacute; install guide</a></h3>
-        <p>Counter station, KDS, kiosk cabling, and isolating the POS network from guest Wi-Fi.</p>
-        <div class="tags"><span class="tag2">Quick-service / caf&eacute;</span><span class="tag2">Install guides</span></div>
-      </article>
-      <article class="r-card" data-topic="troubleshooting">
-        <h3><a href="sector-quick-service-cafe.html#troubleshooting">Quick-service / caf&eacute; troubleshooting</a></h3>
-        <p>Rush-hour failures: blank kiosks, offline payments, and the charged backup terminal.</p>
-        <div class="tags"><span class="tag2">Quick-service / caf&eacute;</span><span class="tag2">Troubleshooting</span></div>
-      </article>
-      <article class="r-card" data-topic="hardware-options">
-        <h3><a href="sector-quick-service-cafe.html#hardware-options">Quick-service hardware options</a></h3>
-        <p>Verified printers, scanners, and payment readers for high-volume counter environments.</p>
-        <div class="tags"><span class="tag2">Quick-service / caf&eacute;</span><span class="tag2">Hardware options</span></div>
-      </article>
-      <article class="r-card" data-topic="sample-setups">
-        <h3><a href="sector-quick-service-cafe.html#sample-setup">Quick-service / caf&eacute; sample setup</a></h3>
-        <p>A high-volume caf&eacute; with kiosk, pickup shelf, and backup terminal — connection map included.</p>
-        <div class="tags"><span class="tag2">Quick-service / caf&eacute;</span><span class="tag2">Sample setups</span></div>
-      </article>
-      <!-- Hotel & hospitality guides -->
-      <article class="r-card" data-topic="setup-guides">
-        <h3><a href="sector-hotel-hospitality.html#setup-guide">Hotel setup guide</a></h3>
-        <p>Front desk, outlets, and events coordinated before go-live.</p>
-        <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Setup guides</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="install-guides">
-        <h3><a href="sector-hotel-hospitality.html#install-guides">Hotel install guide</a></h3>
-        <p>Property network, folio printers, and terminal placement across outlets.</p>
-        <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Install guides</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="troubleshooting">
-        <h3><a href="sector-hotel-hospitality.html#troubleshooting">Hotel troubleshooting</a></h3>
-        <p>Folio posting failures, night-audit hiccups, and outlet connectivity.</p>
-        <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Troubleshooting</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="hardware-options">
-        <h3><a href="sector-hotel-hospitality.html#hardware-options">Hotel hardware options</a></h3>
-        <p>Verified printers and terminals suited to front-desk and outlet use.</p>
-        <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Hardware options</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="sample-setups">
-        <h3><a href="sector-hotel-hospitality.html#sample-setup">Hotel sample setup</a></h3>
-        <p>Front desk, restaurant, and banquet outlets connected to one guest-folio flow.</p>
-        <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Sample setups</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <!-- Grocery / convenience guides -->
-      <article class="r-card" data-topic="setup-guides">
-        <h3><a href="sector-grocery-convenience.html#setup-guide">Grocery setup guide</a></h3>
-        <p>Departments, scale PLUs, age-restricted items, and shrink controls from day one.</p>
-        <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Setup guides</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="install-guides">
-        <h3><a href="sector-grocery-convenience.html#install-guides">Grocery install guide</a></h3>
-        <p>Lane hardware, scale wiring, and back-office connectivity for perishables.</p>
-        <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Install guides</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="troubleshooting">
-        <h3><a href="sector-grocery-convenience.html#troubleshooting">Grocery troubleshooting</a></h3>
-        <p>Scale misreads, PLU errors, and lane slowdowns at peak hours.</p>
-        <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Troubleshooting</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="hardware-options">
-        <h3><a href="sector-grocery-convenience.html#hardware-options">Grocery hardware options</a></h3>
-        <p>Verified printers and scanners rated for high-volume lane duty.</p>
-        <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Hardware options</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="sample-setups">
-        <h3><a href="sector-grocery-convenience.html#sample-setup">Grocery sample setup</a></h3>
-        <p>Three-lane neighbourhood grocery with deli scale and self-checkout mapped.</p>
-        <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Sample setups</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <!-- Services / salon guides -->
-      <article class="r-card" data-topic="setup-guides">
-        <h3><a href="sector-services-salon.html#setup-guide">Services / salon setup guide</a></h3>
-        <p>Service menus, booking rules, deposits, and tip workflows before opening day.</p>
-        <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Setup guides</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="install-guides">
-        <h3><a href="sector-services-salon.html#install-guides">Services / salon install guide</a></h3>
-        <p>Front-desk station, mobile checkout for stylists, and receipt printing.</p>
-        <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Install guides</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="troubleshooting">
-        <h3><a href="sector-services-salon.html#troubleshooting">Services / salon troubleshooting</a></h3>
-        <p>Booking sync failures, tip entry errors, and card-on-file declines.</p>
-        <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Troubleshooting</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="hardware-options">
-        <h3><a href="sector-services-salon.html#hardware-options">Services / salon hardware options</a></h3>
-        <p>Verified mobile-friendly terminals and printers for appointment-based businesses.</p>
-        <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Hardware options</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <article class="r-card" data-topic="sample-setups">
-        <h3><a href="sector-services-salon.html#sample-setup">Services / salon sample setup</a></h3>
-        <p>A six-chair salon with front-desk checkout and mobile tip collection mapped.</p>
-        <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Sample setups</span><span class="tag2 soon">Coming soon</span></div>
-      </article>
-      <!-- AI impact cards -->
-      <article class="r-card" data-topic="ai-impact">
-        <h3><a href="sector-retail.html#ai">How AI is changing retail checkout</a></h3>
-        <p>Demand forecasting, inventory platforms, and where human review still matters.</p>
-        <div class="tags"><span class="tag2">Retail</span><span class="tag2">AI impact</span></div>
-      </article>
-      <article class="r-card" data-topic="ai-impact">
-        <h3><a href="sector-restaurant-full-service.html#ai">How AI is changing full-service restaurants</a></h3>
-        <p>Phone answering, food-cost tools, scheduling, and waste tracking — with real product names.</p>
-        <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">AI impact</span></div>
-      </article>
-      <article class="r-card" data-topic="ai-impact">
-        <h3><a href="sector-quick-service-cafe.html#ai">How AI is changing quick-service</a></h3>
-        <p>Phone AI, kiosk analytics, and where the ROI case is (and isn't) there.</p>
-        <div class="tags"><span class="tag2">Quick-service / caf&eacute;</span><span class="tag2">AI impact</span></div>
-      </article>
-      <!-- Cross-cutting resources -->
-      <article class="r-card" data-topic="pci">
-        <h3><a href="pci-scope-guide.html">PCI scope: the 30-second version</a></h3>
-        <p>The conceptual difference between card data through your POS and a standalone terminal.</p>
-        <div class="tags"><span class="tag2">All sectors</span><span class="tag2">PCI</span></div>
-      </article>
-      <article class="r-card" data-topic="providers">
-        <h3><a href="simulator.html">Processing-cost simulator</a></h3>
-        <p>Model your effective rate and see what a lower rate would save you each month.</p>
-        <div class="tags"><span class="tag2">All sectors</span><span class="tag2">Providers</span></div>
-      </article>
-      <article class="r-card" data-topic="pos-systems">
-        <h3><a href="pos-services.html">Bundled platforms vs. standalone POS</a></h3>
-        <p>Why all-in-one bundles hide your processing cost — and what changing processor really means.</p>
-        <div class="tags"><span class="tag2">All sectors</span><span class="tag2">POS systems</span></div>
-      </article>
+    <!-- 1. Retail -->
+    <div class="res-sector" data-sector="retail">
+      <div class="res-sector-head"><span class="sector-icon" aria-hidden="true">🛍️</span><h2>Retail</h2><p class="sector-note">Independent shops and specialty stores</p></div>
+      <div class="r-grid">
+        <article class="r-card sector-card" data-topic="pos-systems">
+          <h3><a href="sector-retail.html">Retail sector hub</a></h3>
+          <p>Inventory-first setup, barcode scanning, multi-lane checkout — the full retail picture.</p>
+          <div class="tags"><span class="tag2">Retail</span><span class="tag2">POS systems</span></div>
+        </article>
+        <article class="r-card" data-topic="setup-guides">
+          <h3><a href="sector-retail.html#setup-guide">Retail setup guide</a></h3>
+          <p>Clean SKUs, tax setup, supplier workflows, and cutover day for an independent shop.</p>
+          <div class="tags"><span class="tag2">Retail</span><span class="tag2">Setup guides</span></div>
+        </article>
+        <article class="r-card" data-topic="install-guides">
+          <h3><a href="sector-retail.html#install-guides">Retail install guide</a></h3>
+          <p>Network-first installation: printers, scanners, drawers, and terminals in the right order.</p>
+          <div class="tags"><span class="tag2">Retail</span><span class="tag2">Install guides</span></div>
+        </article>
+        <article class="r-card" data-topic="troubleshooting">
+          <h3><a href="sector-retail.html#troubleshooting">Retail troubleshooting</a></h3>
+          <p>Who to call and what to check when the lane goes down mid-rush.</p>
+          <div class="tags"><span class="tag2">Retail</span><span class="tag2">Troubleshooting</span></div>
+        </article>
+        <article class="r-card" data-topic="hardware-options">
+          <h3><a href="sector-retail.html#hardware-options">Retail hardware options</a></h3>
+          <p>Real receipt printers and barcode scanners with verified links and Canadian availability notes.</p>
+          <div class="tags"><span class="tag2">Retail</span><span class="tag2">Hardware options</span></div>
+        </article>
+        <article class="r-card" data-topic="sample-setups">
+          <h3><a href="sector-retail.html#sample-setup">Retail sample setup</a></h3>
+          <p>A two-lane specialty store mapped end to end, with layout notes and daily workflow.</p>
+          <div class="tags"><span class="tag2">Retail</span><span class="tag2">Sample setups</span></div>
+        </article>
+        <article class="r-card" data-topic="ai-impact">
+          <h3><a href="sector-retail.html#ai">How AI is changing retail checkout</a></h3>
+          <p>Demand forecasting, inventory platforms, and where human review still matters.</p>
+          <div class="tags"><span class="tag2">Retail</span><span class="tag2">AI impact</span></div>
+        </article>
+      </div>
     </div>
+
+    <!-- 2. Full-service restaurant -->
+    <div class="res-sector" data-sector="restaurant">
+      <div class="res-sector-head"><span class="sector-icon" aria-hidden="true">🍽️</span><h2>Full-service restaurant</h2><p class="sector-note">Table service with courses, tipping, and kitchen display</p></div>
+      <div class="r-grid">
+        <article class="r-card sector-card" data-topic="pos-systems">
+          <h3><a href="sector-restaurant-full-service.html">Full-service restaurant hub</a></h3>
+          <p>Menu routing, tableside payments, reservations — the full dining-room picture.</p>
+          <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">POS systems</span></div>
+        </article>
+        <article class="r-card" data-topic="setup-guides">
+          <h3><a href="sector-restaurant-full-service.html#setup-guide">Full-service restaurant setup guide</a></h3>
+          <p>Menus and modifiers first, then floor plan, printer routing, tipping, and mock service.</p>
+          <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Setup guides</span></div>
+        </article>
+        <article class="r-card" data-topic="install-guides">
+          <h3><a href="sector-restaurant-full-service.html#install-guides">Full-service restaurant install guide</a></h3>
+          <p>Stations, KDS screens, kitchen printers, and a wired kitchen network that survives dinner rush.</p>
+          <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Install guides</span></div>
+        </article>
+        <article class="r-card" data-topic="troubleshooting">
+          <h3><a href="sector-restaurant-full-service.html#troubleshooting">Full-service restaurant troubleshooting</a></h3>
+          <p>KDS not talking to POS, tickets to the wrong printer, tip and pre-auth problems.</p>
+          <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Troubleshooting</span></div>
+        </article>
+        <article class="r-card" data-topic="hardware-options">
+          <h3><a href="sector-restaurant-full-service.html#hardware-options">Restaurant hardware options</a></h3>
+          <p>Verified receipt printers and payment terminals, plus what to ask about kitchen-rated gear.</p>
+          <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Hardware options</span></div>
+        </article>
+        <article class="r-card" data-topic="sample-setups">
+          <h3><a href="sector-restaurant-full-service.html#sample-setup">Full-service restaurant sample setup</a></h3>
+          <p>An 80-seat dining room with expo KDS, tableside payments, and kitchen routing mapped.</p>
+          <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">Sample setups</span></div>
+        </article>
+        <article class="r-card" data-topic="ai-impact">
+          <h3><a href="sector-restaurant-full-service.html#ai">How AI is changing full-service restaurants</a></h3>
+          <p>Phone answering, food-cost tools, scheduling, and waste tracking — with real product names.</p>
+          <div class="tags"><span class="tag2">Full-service restaurant</span><span class="tag2">AI impact</span></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- 3. Quick-service / cafe -->
+    <div class="res-sector" data-sector="qsr">
+      <div class="res-sector-head"><span class="sector-icon" aria-hidden="true">☕</span><h2>Quick-service / café</h2><p class="sector-note">Counter speed, kiosks, and online-order pickup</p></div>
+      <div class="r-grid">
+        <article class="r-card sector-card" data-topic="pos-systems">
+          <h3><a href="sector-quick-service-cafe.html">Quick-service / café hub</a></h3>
+          <p>Tap-first checkout, KDS, and rush-hour reliability — the full counter-service picture.</p>
+          <div class="tags"><span class="tag2">Quick-service / café</span><span class="tag2">POS systems</span></div>
+        </article>
+        <article class="r-card" data-topic="setup-guides">
+          <h3><a href="sector-quick-service-cafe.html#setup-guide">Quick-service / café setup guide</a></h3>
+          <p>Simplified menu taps, order types, one kiosk pilot, and a unified online-order queue.</p>
+          <div class="tags"><span class="tag2">Quick-service / café</span><span class="tag2">Setup guides</span></div>
+        </article>
+        <article class="r-card" data-topic="install-guides">
+          <h3><a href="sector-quick-service-cafe.html#install-guides">Quick-service / café install guide</a></h3>
+          <p>Counter station, KDS, kiosk cabling, and isolating the POS network from guest Wi-Fi.</p>
+          <div class="tags"><span class="tag2">Quick-service / café</span><span class="tag2">Install guides</span></div>
+        </article>
+        <article class="r-card" data-topic="troubleshooting">
+          <h3><a href="sector-quick-service-cafe.html#troubleshooting">Quick-service / café troubleshooting</a></h3>
+          <p>Rush-hour failures: blank kiosks, offline payments, and the charged backup terminal.</p>
+          <div class="tags"><span class="tag2">Quick-service / café</span><span class="tag2">Troubleshooting</span></div>
+        </article>
+        <article class="r-card" data-topic="hardware-options">
+          <h3><a href="sector-quick-service-cafe.html#hardware-options">Quick-service hardware options</a></h3>
+          <p>Verified printers, scanners, and payment readers for high-volume counter environments.</p>
+          <div class="tags"><span class="tag2">Quick-service / café</span><span class="tag2">Hardware options</span></div>
+        </article>
+        <article class="r-card" data-topic="sample-setups">
+          <h3><a href="sector-quick-service-cafe.html#sample-setup">Quick-service / café sample setup</a></h3>
+          <p>A high-volume café with kiosk, pickup shelf, and backup terminal — connection map included.</p>
+          <div class="tags"><span class="tag2">Quick-service / café</span><span class="tag2">Sample setups</span></div>
+        </article>
+        <article class="r-card" data-topic="ai-impact">
+          <h3><a href="sector-quick-service-cafe.html#ai">How AI is changing quick-service</a></h3>
+          <p>Phone AI, kiosk analytics, and where the ROI case is (and isn't) there.</p>
+          <div class="tags"><span class="tag2">Quick-service / café</span><span class="tag2">AI impact</span></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- 4. Hotel & hospitality -->
+    <div class="res-sector" data-sector="hotel">
+      <div class="res-sector-head"><span class="sector-icon" aria-hidden="true">🏨</span><h2>Hotel &amp; hospitality</h2><p class="sector-note">Front desk, restaurant, and events on one system</p></div>
+      <div class="r-grid">
+        <article class="r-card sector-card" data-topic="pos-systems">
+          <h3><a href="sector-hotel-hospitality.html">Hotel &amp; hospitality hub</a></h3>
+          <p>Room charges, folio billing, and group settlement — the full property picture.</p>
+          <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">POS systems</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="setup-guides">
+          <h3><a href="sector-hotel-hospitality.html">Hotel setup guide</a></h3>
+          <p>Front desk, outlets, and events coordinated before go-live.</p>
+          <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Setup guides</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="install-guides">
+          <h3><a href="sector-hotel-hospitality.html">Hotel install guide</a></h3>
+          <p>Property network, folio printers, and terminal placement across outlets.</p>
+          <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Install guides</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="troubleshooting">
+          <h3><a href="sector-hotel-hospitality.html">Hotel troubleshooting</a></h3>
+          <p>Folio posting failures, night-audit hiccups, and outlet connectivity.</p>
+          <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Troubleshooting</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="hardware-options">
+          <h3><a href="sector-hotel-hospitality.html">Hotel hardware options</a></h3>
+          <p>Verified printers and terminals suited to front-desk and outlet use.</p>
+          <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Hardware options</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="sample-setups">
+          <h3><a href="sector-hotel-hospitality.html">Hotel sample setup</a></h3>
+          <p>Front desk, restaurant, and banquet outlets connected to one guest-folio flow.</p>
+          <div class="tags"><span class="tag2">Hotel &amp; hospitality</span><span class="tag2">Sample setups</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- 5. Grocery / convenience -->
+    <div class="res-sector" data-sector="grocery">
+      <div class="res-sector-head"><span class="sector-icon" aria-hidden="true">🛒</span><h2>Grocery / convenience</h2><p class="sector-note">High-volume lanes and fresh departments</p></div>
+      <div class="r-grid">
+        <article class="r-card sector-card" data-topic="pos-systems">
+          <h3><a href="sector-grocery-convenience.html">Grocery / convenience hub</a></h3>
+          <p>Scale integration, age-restricted items, shrink control — the full grocery picture.</p>
+          <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">POS systems</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="setup-guides">
+          <h3><a href="sector-grocery-convenience.html">Grocery setup guide</a></h3>
+          <p>Departments, scale PLUs, age-restricted items, and shrink controls from day one.</p>
+          <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Setup guides</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="install-guides">
+          <h3><a href="sector-grocery-convenience.html">Grocery install guide</a></h3>
+          <p>Lane hardware, scale wiring, and back-office connectivity for perishables.</p>
+          <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Install guides</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="troubleshooting">
+          <h3><a href="sector-grocery-convenience.html">Grocery troubleshooting</a></h3>
+          <p>Scale misreads, PLU errors, and lane slowdowns at peak hours.</p>
+          <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Troubleshooting</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="hardware-options">
+          <h3><a href="sector-grocery-convenience.html">Grocery hardware options</a></h3>
+          <p>Verified printers and scanners rated for high-volume lane duty.</p>
+          <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Hardware options</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="sample-setups">
+          <h3><a href="sector-grocery-convenience.html">Grocery sample setup</a></h3>
+          <p>Three-lane neighbourhood grocery with deli scale and self-checkout mapped.</p>
+          <div class="tags"><span class="tag2">Grocery / convenience</span><span class="tag2">Sample setups</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- 6. Services / salon -->
+    <div class="res-sector" data-sector="salon">
+      <div class="res-sector-head"><span class="sector-icon" aria-hidden="true">💈</span><h2>Services / salon</h2><p class="sector-note">Appointments, memberships, and tips</p></div>
+      <div class="r-grid">
+        <article class="r-card sector-card" data-topic="pos-systems">
+          <h3><a href="sector-services-salon.html">Services / salon hub</a></h3>
+          <p>Booking, no-show protection, and stylist-level reporting — the full services picture.</p>
+          <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">POS systems</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="setup-guides">
+          <h3><a href="sector-services-salon.html">Services / salon setup guide</a></h3>
+          <p>Service menus, booking rules, deposits, and tip workflows before opening day.</p>
+          <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Setup guides</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="install-guides">
+          <h3><a href="sector-services-salon.html">Services / salon install guide</a></h3>
+          <p>Front-desk station, mobile checkout for stylists, and receipt printing.</p>
+          <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Install guides</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="troubleshooting">
+          <h3><a href="sector-services-salon.html">Services / salon troubleshooting</a></h3>
+          <p>Booking sync failures, tip entry errors, and card-on-file declines.</p>
+          <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Troubleshooting</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="hardware-options">
+          <h3><a href="sector-services-salon.html">Services / salon hardware options</a></h3>
+          <p>Verified mobile-friendly terminals and printers for appointment-based businesses.</p>
+          <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Hardware options</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+        <article class="r-card" data-topic="sample-setups">
+          <h3><a href="sector-services-salon.html">Services / salon sample setup</a></h3>
+          <p>A six-chair salon with front-desk checkout and mobile tip collection mapped.</p>
+          <div class="tags"><span class="tag2">Services / salon</span><span class="tag2">Sample setups</span><span class="tag2 soon">Coming soon</span></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- 7. Other business types -->
+    <div class="res-sector" data-sector="other">
+      <div class="res-sector-head"><span class="sector-icon" aria-hidden="true">🏪</span><h2>Other business types</h2><p class="sector-note">Mobile, market-stall, online-only, or mixed businesses</p></div>
+      <div class="r-grid">
+        <article class="r-card sector-card" data-topic="providers">
+          <h3><a href="simulator.html">Cost simulator — Other sector</a></h3>
+          <p>Don't fit a sector above? The simulator's Other sector models your stack and processing costs without forcing you into a retail or restaurant box.</p>
+          <div class="tags"><span class="tag2">Other</span><span class="tag2">Cost simulator</span></div>
+        </article>
+        <article class="r-card" data-topic="pos-systems">
+          <h3><a href="pos-services.html">Custom setup help</a></h3>
+          <p>Unusual layout or workflow? Our POS services cover custom installs for businesses that don't match a standard sector template.</p>
+          <div class="tags"><span class="tag2">Other</span><span class="tag2">POS services</span></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- 8. General / cross-sector -->
+    <div class="res-sector" data-sector="general">
+      <div class="res-sector-head"><span class="sector-icon" aria-hidden="true">📚</span><h2>General / cross-sector</h2><p class="sector-note">Applies to every business, whatever the sector</p></div>
+      <div class="r-grid">
+        <article class="r-card" data-topic="pci">
+          <h3><a href="pci-scope-guide.html">PCI scope: the 30-second version</a></h3>
+          <p>The conceptual difference between card data through your POS and a standalone terminal.</p>
+          <div class="tags"><span class="tag2">All sectors</span><span class="tag2">PCI</span></div>
+        </article>
+        <article class="r-card" data-topic="pos-systems">
+          <h3><a href="pos-services.html">Bundled platforms vs. standalone POS</a></h3>
+          <p>Why all-in-one bundles hide your processing cost — and what changing processor really means.</p>
+          <div class="tags"><span class="tag2">All sectors</span><span class="tag2">POS systems</span></div>
+        </article>
+      </div>
+    </div>
+
+    <p class="no-results" id="noResults">No guides match that search — try a different word, or <a href="contact.html">ask us directly</a>.</p>
 
     <div class="note-box">
       <strong>A note on bundled platforms.</strong> All-in-one platforms like Square, Toast, Mindbody, and Vagaro bundle the POS software, hardware, and payment processing together — which means the true processing cost is hidden inside the bundle. Switching to a cheaper processor on one of these platforms may require replacing the whole stack. On every sector page, bundled platforms are kept in their own clearly separated category so they are never mixed into standalone provider or POS comparisons.
@@ -316,27 +366,36 @@
 
 <script>
 (function(){
-  var chips=document.querySelectorAll('#chips .chip');
-  var cards=document.querySelectorAll('#resGrid .r-card');
+  var input=document.getElementById('resSearch');
+  var clearBtn=document.getElementById('resClear');
   var count=document.getElementById('resCount');
-  function update(){
-    var on=document.querySelector('#chips .chip.on');
-    var t=on?on.getAttribute('data-filter'):'all';
-    var n=0;
-    for(var i=0;i<cards.length;i++){
-      var show=(t==='all'||cards[i].getAttribute('data-topic')===t);
-      cards[i].style.display=show?'':'none';
-      if(show)n++;
-    }
-    count.textContent=n+' of '+cards.length+' resources shown';
-  }
-  for(var i=0;i<chips.length;i++){
-    chips[i].addEventListener('click',function(){
-      for(var j=0;j<chips.length;j++)chips[j].classList.remove('on');
-      this.classList.add('on');
-      update();
+  var noResults=document.getElementById('noResults');
+  var sectors=document.querySelectorAll('.res-sector');
+  var cards=[];
+  sectors.forEach(function(sec){
+    sec.querySelectorAll('.r-card').forEach(function(c){
+      var tags=Array.prototype.map.call(c.querySelectorAll('.tag2'),function(t){return t.textContent;}).join(' ');
+      cards.push({el:c,sec:sec,hay:(c.querySelector('h3').textContent+' '+c.querySelector('p').textContent+' '+tags).toLowerCase()});
     });
+  });
+  function update(){
+    var q=input.value.trim().toLowerCase();
+    var shown=0;
+    cards.forEach(function(c){
+      var show=!q||c.hay.indexOf(q)!==-1;
+      c.el.style.display=show?'':'none';
+      if(show)shown++;
+    });
+    sectors.forEach(function(sec){
+      var any=Array.prototype.some.call(sec.querySelectorAll('.r-card'),function(c){return c.style.display!=='none';});
+      sec.style.display=any?'':'none';
+    });
+    count.textContent=shown+' of '+cards.length+' resources shown'+(q?' for "'+input.value.trim()+'"':'');
+    noResults.style.display=shown?'none':'block';
+    clearBtn.hidden=!q;
   }
+  input.addEventListener('input',update);
+  clearBtn.addEventListener('click',function(){input.value='';update();input.focus();});
   update();
 })();
 </script>

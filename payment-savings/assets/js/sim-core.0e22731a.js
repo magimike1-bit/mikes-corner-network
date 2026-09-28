@@ -2,14 +2,14 @@
  * Rebuilt 2026-09-28 to force a fresh asset hash: the edge was serving a stale
  * same-name copy of the built bundle (old import generation), leaving the
  * totals strip stuck on "…". No behavior change in this rebuild. */
-import { S } from './session.js';
-import { $, money, esc, pyRound, clampN, pct1 } from './util.js';
-import { loadData } from './data.js';
-import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, softwareLaborNote, stackLaborValue, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.js';
-import { renderMap, mapJumpToItem, initMapEvents } from './visual-map.js';
-import { trainMathHTML, updateTrainMath, renderTrainingTier } from './training.js';
-import { ensureNET, netDevCounts, netZoneDevices, netWiredDrops, netWiredDesc, dropUnitCost, renderNetPlan } from './net-plan.js';
-import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters.js';
+import { S } from './session.d6748862.js';
+import { $, money, esc, pyRound, clampN, pct1 } from './util.03612f15.js';
+import { loadData } from './data.46f8bb54.js';
+import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, softwareLaborNote, stackLaborValue, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.622d97a6.js';
+import { renderMap, mapJumpToItem, initMapEvents } from './visual-map.a716fd63.js';
+import { trainMathHTML, updateTrainMath, renderTrainingTier } from './training.f08b57d0.js';
+import { ensureNET, netDevCounts, netZoneDevices, netWiredDrops, netWiredDesc, dropUnitCost, renderNetPlan } from './net-plan.a1631221.js';
+import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters.5c285d13.js';
 /* core.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   function recFor(item){ return S.DATA.recTiers[S.sector + ":" + item.id] || S.DATA.recTiers["*:" + item.id] || null; }

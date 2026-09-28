@@ -53,6 +53,9 @@
   <p class="hint">The catalog, suggestions, and floor-plan map reconfigure for each sector.</p>
   <div class="sector-grid" id="sector-grid"></div>
   <div style="margin-top:1.2em;max-width:420px">
+    <div><label for="in-subsector">What kind of <span id="subsector-sector-name">retail store</span>?</label><select id="in-subsector"></select><div class="input-note" id="subsector-margin-note"></div></div>
+  </div>
+  <div style="margin-top:1.2em;max-width:420px">
     <div><label for="in-revenue">Approximate annual revenue (CAD) — optional</label><input type="number" id="in-revenue" min="0" step="1000" placeholder="e.g. 1200000"><div class="input-note">Estimate is fine — or skip it. If you enter it, every cost below is also shown as a % of revenue, benchmarked against sector norms.</div></div>
   </div>
 </section>
@@ -119,6 +122,7 @@
     <div><label for="in-terminals">Payment terminals</label><input type="number" id="in-terminals" min="0" value="1"><div class="input-note">Auto-set from your answers — editable.</div></div>
     <div><label for="in-employees">Employees on payroll</label><input type="number" id="in-employees" min="0" value="5"></div>
     <div><label for="in-volume">Monthly card volume (CAD)</label><input type="number" id="in-volume" min="0" value="40000" step="1000"><div class="input-note">From your processor statements if you have them.</div></div>
+    <div><label for="in-ticket">Average card ticket (CAD)</label><input type="number" id="in-ticket" min="1" value="50" step="1"><div class="input-note">Your typical card transaction. Volume ÷ ticket = transactions/month, shown in your numbers.</div></div>
     <div><label for="in-rate">Current processing rate (%)</label><input type="number" id="in-rate" min="0" max="10" step="0.05" value="2.65"><div class="input-note">Your effective rate. Don't know it? 2.65% is a typical flat rate — an estimate, not your number.</div></div>
     <div id="wrap-marketplace" style="display:none"><label for="in-marketplace">Monthly delivery-app sales (CAD)</label><input type="number" id="in-marketplace" min="0" value="0" step="500"><div class="input-note">Sales through DoorDash, Uber Eats, Skip.</div></div>
   </div>
@@ -232,14 +236,17 @@
     <span class="tag" style="display:inline-block;background:var(--accent);color:#fff;font-size:.95rem;font-weight:800;letter-spacing:.08em;padding:6px 14px;border-radius:6px;margin-bottom:.8em">Illustrative — not a promise</span>
     <h3>What you're paying in processing fees right now</h3>
     <p class="big" id="proc-cost">$0 / month</p>
+    <p style="margin:.4em 0" id="proc-tickets"></p>
     <p style="margin:.4em 0" id="proc-save"></p>
     <p style="margin:.4em 0" id="proc-rev"></p>
+    <p style="margin:.4em 0" id="proc-margin"></p>
     <p class="input-note">Based on the volume and rate you entered above. A 0.5% saving is a common audit finding used here only to show the math — your statements decide the real number.</p>
   </div>
   <div class="total-bar">
     <div id="total-lines"></div>
     <div class="row grand"><span>Estimated total</span><span id="grand-total">$0/mo</span></div>
     <div id="rev-lines"></div>
+    <p style="margin:.4em 0" id="labor-line"></p>
     <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ its expected life — a 5-year terminal costs less per month than a 2-year printer at the same price). Not quotes — your free audit measures your real numbers.</p>
     <div id="pay-breakout"></div>
   </div>
@@ -272,8 +279,8 @@
   </div>
 </footer>
 <!-- __SIM_JS__ -->
-<script type="module" src="assets/js/sim-core.18b35d49.js"></script>
-<script type="module" src="assets/js/sim-save.97280053.js"></script>
+<script type="module" src="assets/js/sim-core.34e150fe.js"></script>
+<script type="module" src="assets/js/sim-save.2c8498fb.js"></script>
 <script type="module" src="assets/js/stepper.f81377fe.js"></script>
 
   <script type="module" src="assets/js/site-auth.b25b5fe2.js"></script>

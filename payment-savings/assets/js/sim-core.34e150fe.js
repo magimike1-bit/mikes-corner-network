@@ -1,7 +1,7 @@
-import { S } from './session.babf8dd5.js';
+import { S } from './session.d6748862.js';
 import { $, money, esc, pyRound, clampN, pct1 } from './util.03612f15.js';
-import { loadData } from './data.40b26683.js';
-import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.85cce070.js';
+import { loadData } from './data.6a447e17.js';
+import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, softwareLaborNote, stackLaborValue, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.5461eed1.js';
 import { renderMap, mapJumpToItem, initMapEvents } from './visual-map.5e4c126b.js';
 import { trainMathHTML, updateTrainMath, renderTrainingTier } from './training.f08b57d0.js';
 import { ensureNET, netDevCounts, netZoneDevices, netWiredDrops, netWiredDesc, dropUnitCost, renderNetPlan } from './net-plan.a1631221.js';
@@ -32,6 +32,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       employees: Math.max(0, +$("in-employees").value || 0),
       volume: Math.max(0, +$("in-volume").value || 0),
       rate: Math.max(0, +$("in-rate").value || 0),
+      ticket: Math.max(1, +$("in-ticket").value || 1),
       revenue: Math.max(0, +$("in-revenue").value || 0),
       marketplace: Math.max(0, +$("in-marketplace").value || 0),
       tables: Math.max(0, +$("in-tables").value || 0)
@@ -76,6 +77,37 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     ["restaurant","qsr","retail","hotel","grocery","salon"].forEach(k => {
       const el = $("q-" + k); if(el) el.style.display = (k === S.sector) ? "" : "none";
     });
+    renderSubsectors();
+  }
+
+  /* ---- P3: sub-sector picker. The picker (not a margin number from the user)
+     applies the sub-sector's researched average net margin, used in the
+     % of revenue view to show processing as a share of margin. ---- */
+  function subsectorList(){
+    return (S.DATA.subsectors && S.DATA.subsectors.sectors[S.sector]) || [];
+  }
+
+  function subsectorDef(){
+    const list = subsectorList();
+    return list.find(s => s.id === S.subsector) || list[0] || null;
+  }
+
+  function renderSubsectors(){
+    const sel = $("in-subsector"); if(!sel) return;
+    const list = subsectorList();
+    if(!list.find(s => s.id === S.subsector)) S.subsector = list.length ? list[0].id : null;
+    sel.innerHTML = list.map(s =>
+      '<option value="' + s.id + '"' + (s.id === S.subsector ? " selected" : "") + ">" + esc(s.label) + "</option>"
+    ).join("");
+    const name = $("subsector-sector-name");
+    if(name) name.textContent = (S.DATA.hardware.sectors[S.sector] || {}).label || S.sector;
+    const d = subsectorDef();
+    const note = $("subsector-margin-note");
+    if(note) note.innerHTML = d
+      ? "Typical net margin for <strong>" + esc(d.label) + "</strong>: <strong>" + d.margin + "%</strong>" +
+        " (industry average" + (d.est ? ", estimate" : "") + " \u2014 your books win). " +
+        "Used below to show processing as a share of your margin."
+      : "";
   }
 
   /* ---- Infrastructure auto-derive: the owner answers business questions,
@@ -516,6 +548,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     Object.values(t.q).forEach((v, i) => set(S.DATA.typical.qIds[S.sector][i], v));
     set("in-locations", t.basics.locations); set("in-employees", t.basics.employees);
     set("in-volume", t.basics.volume); setRate(t.basics.rate);
+    set("in-ticket", t.basics.ticket);
     set("in-marketplace", t.basics.marketplace);
     /* Joseph rule: support-type selections survive navigation. Snapshot the support
        fields before the typical reset wipes S.state, re-apply after the rebuild. */
@@ -684,6 +717,9 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
               '<div class="net-note">' + manualNetNote(item, opt) + "</div>" +
               '<div class="manual-src">Hours source: ' + md.src + "</div></div>";
           }
+          /* P2: when the software is on (not manual), show the net labor value
+             right on the card — residual hours already subtracted. */
+          if(st.checked && !st.manual) inner += softwareLaborNote(item, st);
         }
         inner += "</div>";
         const isManual = md && st.manual;
@@ -849,6 +885,12 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     // % of revenue view (optional revenue input)
     const bm = S.DATA.sim.benchmarks[S.sector] || S.DATA.sim.benchmarks.retail;
     const sw = S.DATA.sim.sectorWord[S.sector] || "businesses";
+    const sub = subsectorDef();
+    // P1: transaction count from the average ticket (drives the per-transaction view)
+    const txns = inp.volume > 0 && inp.ticket > 0 ? Math.round(inp.volume / inp.ticket) : 0;
+    $("proc-tickets").innerHTML = txns > 0
+      ? "That's ≈ <strong>" + txns.toLocaleString("en-CA") + " card transactions/month</strong> at your average ticket."
+      : "";
     if(inp.revenue > 0){
       const techPct = (total * 12) / inp.revenue * 100;
       $("rev-lines").innerHTML = '<div class="row grand" style="font-size:1.1rem"><span>Your tech stack as % of revenue</span><span>' + pct1(techPct) + '</span></div>' +
@@ -857,10 +899,28 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       $("proc-rev").innerHTML = "That's <strong>" + pct1(procPct) + " of your revenue</strong> going to processing " +
         "(typical " + sw + ": " + bm.proc + "). " + bm.note +
         ' <a href="contact.html">Find out your real processing % — free audit</a>.';
+      // P3: the sub-sector's average margin turns processing into a share of profit.
+      if(sub && sub.margin > 0){
+        const share = Math.round(procPct / sub.margin * 100);
+        $("proc-margin").innerHTML = "Typical net margin for " + esc(sub.label.toLowerCase()) + ": <strong>" + sub.margin +
+          "%</strong> (industry average" + (sub.est ? ", estimate" : "") + ") — your " + pct1(procPct) +
+          " processing eats <strong>" + share + "% of that margin</strong>, before a single fee saving.";
+      } else {
+        $("proc-margin").innerHTML = "";
+      }
     } else {
       $("rev-lines").innerHTML = "";
       $("proc-rev").innerHTML = "";
+      $("proc-margin").innerHTML = "";
     }
+    // P2: stack-wide labor value — software time savings with residual labor subtracted.
+    const lab = stackLaborValue();
+    $("labor-line").innerHTML = lab.valMo > 0
+      ? "💪 <strong>Labor value of this stack:</strong> saves ~" + (Math.round(lab.saveWk * 10) / 10) +
+        " hrs/week vs doing it all by hand (≈ <strong>" + money(lab.valMo) + "/mo</strong> at your wage settings) — " +
+        "the ~" + (Math.round(lab.resWk * 10) / 10) + " hrs/week of your time the software still needs is already subtracted." +
+        (lab.est ? " (hours are estimates — your reality wins)" : "")
+      : "";
     renderMap();
     updateTotalBar(total);
     updateInstallLaborTotal();
@@ -892,7 +952,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     $("grand-total").textContent = money(total) + "/mo";
   }
 
-  ["in-locations","in-stations","in-terminals","in-employees","in-volume","in-rate","in-revenue","in-marketplace",
+  ["in-locations","in-stations","in-terminals","in-employees","in-volume","in-ticket","in-rate","in-revenue","in-marketplace","in-subsector",
    "in-tables","in-bar","in-takeout","in-drivethru","in-seats","in-kiosks","in-sqft-r","in-weigh","in-sco",
    "in-rooms","in-floors","in-fb","in-sqft-g","in-deli","in-lottery","in-chairs","in-trooms","in-retailct"]
     .forEach(id => {
@@ -900,6 +960,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       const h = () => {
         if(id === "in-stations") S.stationsAuto = false; // manual override sticks
         if(id === "in-terminals"){ S.terminalsAuto = false; S.terminalsTouched = true; }
+        if(id === "in-subsector") S.subsector = $("in-subsector").value; // P3 picker state
         if(id === "in-marketplace" && document.activeElement === $(id)){ ensureME(); S.ME.sales = null; }
         renderCatalog();
       };
@@ -928,4 +989,4 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
 
 /* Test hooks: named exports for the headless boot/section smoke test
    (tools-independent; harmless in production). */
-export { getInputs, getQuestions, derive, loadTypical, renderCatalog, recalc, renderSectors, applySectorInfraDefaults };
+export { getInputs, getQuestions, derive, loadTypical, renderCatalog, recalc, renderSectors, renderSubsectors, subsectorDef, applySectorInfraDefaults };

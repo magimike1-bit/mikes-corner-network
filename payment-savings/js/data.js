@@ -19,6 +19,7 @@ const FILES = {
   manual: "manual.json",
   sim: "sim.json",
   network: "network.json",
+  subsectors: "subsectors.json",
 };
 
 // __DATA_VERSIONS__ (build rewrites this line)

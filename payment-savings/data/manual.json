@@ -6,7 +6,15 @@
         15
       ],
       "per": "week",
-      "src": "Restaurant Magazine May 2026 — reported; vendor byline, sanity-check these hours"
+      "src": "Restaurant Magazine May 2026 — reported; vendor byline, sanity-check these hours",
+      "residual": {
+        "hrs": [
+          3,
+          5
+        ],
+        "src": "Conservative estimate — software drafts the schedule, the manager still adjusts for availability, swaps, and overtime rules. Flagged for Joseph's smell test like the manual figure.",
+        "est": true
+      }
     },
     "payroll": {
       "hrs": [
@@ -14,7 +22,15 @@
         5
       ],
       "per": "payperiod",
-      "src": "QuickBooks/Kelton survey via Bloomberg Tax — ~4h52m per pay period calculating, filing and remitting"
+      "src": "QuickBooks/Kelton survey via Bloomberg Tax — ~4h52m per pay period calculating, filing and remitting",
+      "residual": {
+        "hrs": [
+          0.5,
+          1
+        ],
+        "src": "Conservative estimate — software files and remits, the owner still reviews hours, approves, and handles exceptions.",
+        "est": true
+      }
     },
     "pos": {
       "hrs": [
@@ -22,7 +38,15 @@
         7
       ],
       "per": "week",
-      "src": "PYMNTS/Ingo 2024 — 45–60 min/shift manual closeout + tip math × 7 days"
+      "src": "PYMNTS/Ingo 2024 — 45–60 min/shift manual closeout + tip math × 7 days",
+      "residual": {
+        "hrs": [
+          0.5,
+          1
+        ],
+        "src": "Conservative estimate — integrated payments auto-post tips, but the cash drawer still gets hand-counted.",
+        "est": true
+      }
     },
     "pms": {
       "hrs": [
@@ -31,7 +55,15 @@
       ],
       "per": "week",
       "src": "No published figure — night audit by hand, estimated. Drag to your reality.",
-      "est": true
+      "est": true,
+      "residual": {
+        "hrs": [
+          0.5,
+          1.5
+        ],
+        "src": "Conservative estimate — the PMS auto-posts folios, the night audit becomes exception review. Drag to your reality.",
+        "est": true
+      }
     },
     "booking": {
       "hrs": [
@@ -40,7 +72,15 @@
       ],
       "per": "week",
       "src": "No published figure — confirmation calls + no-show chasing, estimated. Drag to your reality.",
-      "est": true
+      "est": true,
+      "residual": {
+        "hrs": [
+          1,
+          2
+        ],
+        "src": "Conservative estimate — automated reminders handle the routine, staff still chase exceptions and no-show follow-ups.",
+        "est": true
+      }
     },
     "acct": {
       "hrs": [
@@ -49,7 +89,15 @@
       ],
       "per": "week",
       "src": "No published figure — manual bookkeeping, estimated. Drag to your reality.",
-      "est": true
+      "est": true,
+      "residual": {
+        "hrs": [
+          1,
+          2
+        ],
+        "src": "Conservative estimate — invoice OCR + bank feeds cut keying (CodeWords 2026: 15 min -> <60 sec/invoice), but categorization and reconciliation still need human review.",
+        "est": true
+      }
     },
     "ecom": {
       "hrs": [
@@ -58,7 +106,15 @@
       ],
       "per": "week",
       "src": "No published figure — manual order entry, estimated. Drag to your reality.",
-      "est": true
+      "est": true,
+      "residual": {
+        "hrs": [
+          0.5,
+          1.5
+        ],
+        "src": "Conservative estimate — synced orders remove re-keying, staff still handle exceptions, refunds, and catalog updates.",
+        "est": true
+      }
     },
     "loyalty": {
       "hrs": [
@@ -67,7 +123,15 @@
       ],
       "per": "week",
       "src": "No published figure — punch cards and tallying, estimated.",
-      "est": true
+      "est": true,
+      "residual": {
+        "hrs": [
+          0.25,
+          0.5
+        ],
+        "src": "Conservative estimate — points accrue automatically, staff still handle sign-ups and dispute fixes.",
+        "est": true
+      }
     },
     "crm": {
       "hrs": [
@@ -76,7 +140,15 @@
       ],
       "per": "week",
       "src": "No published figure — estimated. Drag to your reality.",
-      "est": true
+      "est": true,
+      "residual": {
+        "hrs": [
+          0.25,
+          0.5
+        ],
+        "src": "Conservative estimate — campaigns run themselves, someone still reviews the list and the copy.",
+        "est": true
+      }
     },
     "reserv": {
       "hrs": [
@@ -85,7 +157,15 @@
       ],
       "per": "week",
       "src": "No published figure — reservation book by hand, estimated. Drag to your reality.",
-      "est": true
+      "est": true,
+      "residual": {
+        "hrs": [
+          0.5,
+          1
+        ],
+        "src": "Conservative estimate — online reservations replace the paper book, staff still confirm large parties and walk-ins.",
+        "est": true
+      }
     }
   },
   "perFactor": {

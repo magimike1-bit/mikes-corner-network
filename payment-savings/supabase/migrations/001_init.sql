@@ -187,11 +187,11 @@ drop policy if exists "wall anon insert" on public.wall_submissions;
 create policy "wall anon insert" on public.wall_submissions
   for insert to anon, authenticated with check (true);
 -- public aggregate view: medians + sample sizes, cells with < 3 suppressed.
--- SECURITY DEFINER is required here: wall_submissions has RLS with no
--- client SELECT policy (raw rows are never readable), so a plain view would
--- return zero rows. As the view owner (postgres) it bypasses RLS, and the
--- GROUP BY + HAVING count(*) >= 3 keeps small cells suppressed.
-create or replace view public.wall_aggregates with (security_definer = true) as
+-- A plain view is correct here: it executes with the view owner's (postgres)
+-- privileges, so it reads past the table's RLS while direct client queries
+-- on wall_submissions stay blocked (no SELECT policy for anon/authenticated).
+-- The GROUP BY + HAVING count(*) >= 3 keeps small cells suppressed.
+create or replace view public.wall_aggregates as
 select processor, sector, volume_band,
        count(*)::int as n,
        percentile_cont(0.5) within group (order by rate_bp)::int as median_bp,

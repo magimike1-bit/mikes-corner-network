@@ -98,7 +98,8 @@ else ok("config.js state OK (" + (keyReal ? "live anon key" : "key placeholder, 
 // migration: RLS on every table
 const sql = fs.readFileSync(path.join(ROOT, "supabase/migrations/001_init.sql"), "utf8");
 const tables = ["profiles", "simulator_states", "rate_runs", "fee_entries",
-  "alert_subscriptions", "referrals", "wall_submissions", "surcharge_runs", "settlement_runs"];
+  "alert_subscriptions", "referrals", "wall_submissions", "surcharge_runs", "settlement_runs",
+  "audit_requests", "briefs", "audits"];
 for (const t of tables) {
   if (!new RegExp("alter table public\\." + t + " enable row level security").test(sql))
     fail("RLS not enabled on " + t);

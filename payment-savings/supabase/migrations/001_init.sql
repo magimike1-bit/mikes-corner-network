@@ -4,7 +4,10 @@
 --
 -- Tables: profiles, simulator_states, rate_runs, fee_entries,
 --         alert_subscriptions, referrals, wall_submissions,
---         surcharge_runs, settlement_runs
+--         surcharge_runs, settlement_runs,
+--         audit_requests (contact/audit lead capture),
+--         briefs (rate-change brief archive),
+--         audits (shared-savings deal pipeline — dashboard-managed)
 -- RLS is enabled on EVERY table. Clients only ever use the anon key.
 
 -- ============ helpers ============
@@ -230,3 +233,73 @@ create policy "settlementruns insert any" on public.settlement_runs
 drop policy if exists "settlementruns read own" on public.settlement_runs;
 create policy "settlementruns read own" on public.settlement_runs
   for select using (auth.uid() = user_id);
+
+-- ============ audit_requests (contact form / audit lead capture) ============
+create table if not exists public.audit_requests (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references public.profiles(id) on delete set null,
+  name text not null,
+  business_name text,
+  email text not null
+    check (email ~ '^[^@\s]+@[^@\s]+\.[^@\s]+$'),
+  phone text,
+  volume_band text,
+  message text,
+  status text not null default 'new'
+    check (status in ('new', 'contacted', 'statements-received', 'analyzing',
+                      'proposal-sent', 'signed', 'closed', 'spam')),
+  created_at timestamptz not null default now()
+);
+alter table public.audit_requests enable row level security;
+-- anyone may request an audit (public contact form); Joseph triages in the
+-- dashboard. Logged-in users may read their own requests.
+drop policy if exists "auditreq anon insert" on public.audit_requests;
+create policy "auditreq anon insert" on public.audit_requests
+  for insert to anon, authenticated with check (true);
+drop policy if exists "auditreq read own" on public.audit_requests;
+create policy "auditreq read own" on public.audit_requests
+  for select using (auth.uid() = user_id);
+
+-- ============ briefs (rate-change brief archive) ============
+create table if not exists public.briefs (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  title text not null,
+  summary text,
+  body_md text,
+  published boolean not null default false,
+  published_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+alter table public.briefs enable row level security;
+-- public may read published briefs; only Joseph (dashboard) writes
+drop policy if exists "briefs public read" on public.briefs;
+create policy "briefs public read" on public.briefs
+  for select to anon, authenticated using (published = true);
+
+-- ============ audits (shared-savings deal pipeline) ============
+create table if not exists public.audits (
+  id uuid primary key default gen_random_uuid(),
+  merchant_name text not null,
+  contact_name text,
+  contact_email text,
+  user_id uuid references public.profiles(id) on delete set null,
+  status text not null default 'lead'
+    check (status in ('lead', 'statements', 'analysis', 'proposal',
+                      'signed', 'monitoring', 'paused', 'lost')),
+  monthly_volume numeric
+    check (monthly_volume is null or monthly_volume >= 0),
+  baseline_rate_bp integer
+    check (baseline_rate_bp is null or (baseline_rate_bp > 0 and baseline_rate_bp < 1500)),
+  current_rate_bp integer
+    check (current_rate_bp is null or (current_rate_bp > 0 and current_rate_bp < 1500)),
+  savings_share_bp integer not null default 5000
+    check (savings_share_bp > 0 and savings_share_bp <= 10000), -- 5000 = 50/50
+  notes text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+alter table public.audits enable row level security;
+-- no client policies: Joseph manages the pipeline in the Supabase dashboard.
+-- merchant-facing reads get added when a client portal ships.

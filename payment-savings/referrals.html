@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referrals — Double-Sided Rewards | FairRate Audit</title>
+<meta name="description" content="Refer another business owner and get one month of your shared-savings fee waived per signed audit. They get audit priority. No downlines, no signup gaming — rewards trigger on signed audits.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense: ad code goes here -->
+<style>
+.ref-banner{background:var(--accent-soft);border:2px solid var(--accent);border-radius:14px;padding:20px 24px;margin:26px 0;font-size:1.02rem}
+.ref-banner p{margin:0}
+.link-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin:1.2em 0}
+.link-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.link-row input[type=text]{flex:1;min-width:240px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:.95rem;font-family:inherit;background:var(--bg)}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:1.2em}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center}
+.stat .num{font-size:1.6rem;font-weight:800;color:var(--navy)}
+.stat .lbl{font-size:.85rem;color:var(--muted)}
+@media(max-width:640px){.stat-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="section" style="padding-bottom:8px">
+  <div class="wrap">
+    <div class="ref-banner" id="ref-notice" hidden>
+      <p>🤝 <strong>Referred by a fellow owner</strong> — you'll get <strong>audit priority</strong>: your audit jumps to the front of the queue when you request it.</p>
+    </div>
+    <p class="kicker">Referral program</p>
+    <h1>Refer an owner, skip a month of fees</h1>
+    <p class="section-sub">Double-sided, by design. You get <strong>one month of your shared-savings fee waived</strong> for every referred audit that signs. They get <strong>audit priority</strong>. Rewards trigger on <strong>signed audits</strong> — not signups — so there's nothing to game.</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Share your link</h3>
+        <p>Send your referral link to a business owner who pays card processing fees. Below, or in your account.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>They get priority</h3>
+        <p>Anyone who signs up through your link jumps to the front of the audit queue.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>You skip a fee month</h3>
+        <p>When their audit is <strong>signed</strong>, one month of your shared-savings fee is waived. One signed audit, one waived month.</p>
+      </div>
+    </div>
+    <p class="section-sub" style="margin-top:1.6em"><strong>Why it's built this way:</strong> one level, no downlines — nobody recruits recruiters. And the reward is a fee waiver, not cash, <strong>by design: it kills self-referral fraud</strong>. Fake signups earn nothing because nothing pays out until an audit is actually signed. At this scale, <strong>audit-signed status is confirmed by us manually</strong> — we'll know, because we're the ones signing the audits.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">Your referral link</h2>
+    <div id="ref-panel"><p class="fine">Loading…</p></div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">Plain terms</h2>
+    <ul class="checklist">
+      <li><strong>Referrer reward:</strong> one month of your shared-savings fee waived per signed audit from your link.</li>
+      <li><strong>Referee reward:</strong> audit priority — the referred business moves to the front of the audit queue.</li>
+      <li><strong>Trigger:</strong> the audit being signed. Signups, clicks, and conversations earn nothing.</li>
+      <li><strong>One level:</strong> no downlines, no tiers, no multi-level anything.</li>
+      <li><strong>Non-cash by design:</strong> the fee waiver can't be cashed out, transferred, or stacked with anything else — that's what keeps self-referral pointless.</li>
+      <li><strong>Manual confirmation:</strong> audit-signed status is confirmed by us manually. When your referral's audit signs, the waiver applies to your next fee month.</li>
+      <li><strong>Changes:</strong> if the program ever changes, terms in force at the time your referral's audit signed are the ones that apply.</li>
+    </ul>
+    <div class="cta-band">
+      <h2>No link yet?</h2>
+      <p>Create a free account and your referral link is ready in seconds. Audits stay free either way.</p>
+      <a class="btn" href="account.html">Create my free account</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+  <script type="module" src="assets/js/site-auth.cc128bd0.js"></script>
+  <script type="module" src="assets/js/referrals.bb3b9f93.js"></script>
+</body>
+</html>

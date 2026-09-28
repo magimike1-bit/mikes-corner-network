@@ -925,4 +925,4 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
 
 /* Test hooks: named exports for the headless boot/section smoke test
    (tools-independent; harmless in production). */
-export { getInputs, getQuestions, derive, loadTypical, renderCatalog, recalc, renderSectors };
+export { getInputs, getQuestions, derive, loadTypical, renderCatalog, recalc, renderSectors, applySectorInfraDefaults };

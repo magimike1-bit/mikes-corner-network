@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My account — FairRate Audit</title>
+<meta name="description" content="Sign in or create a free FairRate Audit account to keep your saved simulator setups, rate history, fee-creep tracking, and referrals in one place, on any device.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense: ad code goes here -->
+<style>
+/* account page — scoped additions to style.css */
+.acct-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px;max-width:520px;margin:0 auto;box-shadow:0 8px 24px rgba(14,42,71,.08)}
+.acct-tabs{display:flex;gap:6px;margin-bottom:1.4em;border-bottom:1px solid var(--line)}
+.acct-tab{background:none;border:none;border-bottom:3px solid transparent;padding:10px 14px;font-size:1rem;font-weight:700;color:var(--muted);cursor:pointer}
+.acct-tab.active{color:var(--accent-dark);border-bottom-color:var(--accent)}
+.acct-panel label{display:block;margin:0 0 1em;font-weight:600;color:var(--navy)}
+.acct-panel input{display:block;width:100%;margin-top:6px;padding:12px 14px;font-size:1rem;border:1px solid var(--line);border-radius:10px;font-family:inherit}
+.acct-panel input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.acct-msg{font-size:.95rem;color:#a33;margin:.8em 0}
+.acct-msg.ok{color:var(--accent-dark)}
+.acct-note{font-size:.92rem;color:var(--muted);margin:1.4em 0 0;border-top:1px solid var(--line);padding-top:1.2em}
+.acct-forgot{margin:.8em 0 0;font-size:.92rem}
+.acct-reset{display:none;margin-top:1em;padding-top:1em;border-top:1px dashed var(--line)}
+.acct-reset.open{display:block}
+.acct-guest-banner{background:#fff8e6;border:1px solid #ecd98a;border-radius:var(--radius);padding:18px 22px;margin-bottom:2em;font-size:.97rem}
+.acct-guest-banner strong{color:var(--navy)}
+.acct-block{margin-bottom:3em}
+.acct-big{font-size:3rem;font-weight:800;color:var(--accent-dark);line-height:1;margin:.2em 0 .1em}
+.acct-chart{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-top:1em}
+.acct-creep{background:#fdeeee;border:1px solid #f0b4b4;border-left:6px solid #c0392b;border-radius:10px;padding:16px 20px;margin:1.2em 0}
+.acct-creep strong{color:#8e2b1f}
+table.acct-table{width:100%;border-collapse:collapse;background:#fff;font-size:.95rem;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+table.acct-table th,table.acct-table td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+table.acct-table th{background:var(--accent-soft);color:var(--navy)}
+table.acct-table tr:last-child td{border-bottom:none}
+.acct-rows{display:grid;gap:12px;margin-top:1.2em}
+.acct-row{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.acct-row .meta{color:var(--muted);font-size:.9rem}
+.acct-row h3{margin:0 0 .2em;font-size:1.05rem}
+.acct-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:1.2em 0}
+.acct-stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center}
+.acct-stat .n{font-size:2rem;font-weight:800;color:var(--navy)}
+.acct-stat .l{font-size:.85rem;color:var(--muted)}
+.acct-reflink{display:flex;gap:10px;flex-wrap:wrap;margin-top:1em}
+.acct-reflink input{flex:1;min-width:220px;padding:12px 14px;font-size:.95rem;border:1px solid var(--line);border-radius:10px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.acct-alert{background:#fff;border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:10px;padding:14px 18px;margin-bottom:12px}
+.acct-email{color:var(--accent-dark);font-weight:700;margin:2em 0 0}
+@media(max-width:640px){.acct-card{padding:24px 20px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Free account · Your tools, synced</p>
+    <h1>My account</h1>
+    <p class="lead">Your saved simulator setups, effective-rate history, fee-creep tracking, alerts, and referrals — in one place, on any device.</p>
+  </div>
+</section>
+
+<main class="section">
+  <div class="wrap" id="account-app">
+    <p class="section-sub">Loading your account…</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+  <script type="module" src="assets/js/site-auth.cc128bd0.js"></script>
+  <script type="module" src="assets/js/account.74dbd1bc.js"></script>
+</body>
+</html>

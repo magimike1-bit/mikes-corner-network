@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://budget-gaming-gear-ev4md.kinsta.page/sitemap.xml

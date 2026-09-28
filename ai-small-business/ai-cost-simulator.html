@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Cost Simulator — What Should AI Cost My Business? | AI Small Business Playbook</title>
+<meta name="description" content="Build your small business's AI stack item by item: pick your business type, answer 3 questions, and see real AI tool prices next to the staff hours each one replaces. Estimates with labeled sources.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+<style>
+/* ===== AI cost simulator (scoped) ===== */
+.sim-wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.sim-step{margin:2.2em 0}
+.sim-step h2{font-size:1.35rem;margin:0 0 .3em;color:var(--navy)}
+.sim-step .hint{color:var(--muted);font-size:.95rem;margin:0 0 1em}
+.type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.type-card{border:2px solid var(--line);border-radius:var(--radius);background:var(--paper);padding:18px 10px;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.type-card:hover{border-color:var(--amber)}
+.type-card.selected{border-color:var(--amber);box-shadow:0 0 0 3px rgba(242,164,31,.35)}
+.type-card .emoji{font-size:2rem;display:block;margin-bottom:6px}
+.type-card strong{display:block;font-size:.95rem;color:var(--navy)}
+.input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.input-grid label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--navy)}
+.input-grid input,.input-grid select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit;background:#fff}
+.input-note{font-size:.8rem;color:var(--muted);margin-top:4px}
+.q-block{margin-bottom:6px}
+.derive-summary{background:var(--amber-soft);border:1px solid var(--amber);border-radius:10px;padding:12px 16px;margin-top:14px;font-size:.92rem;color:var(--ink)}
+.derive-summary strong{color:var(--navy)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:1em 0;font-size:.8rem}
+.conf{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.04em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.conf.official{background:#e6f6ec;color:#157a3a}
+.conf.reported{background:#fff4e0;color:#9a6a00}
+.conf.estimate{background:#f1f1f4;color:#5a5a66}
+.conf.quote{background:#f1eafe;color:#6d28d9}
+.typical-wrap{text-align:center;margin:0 0 18px;padding:16px;background:var(--amber-soft);border:2px dashed var(--amber-dark);border-radius:12px}
+.typical-btn{background:var(--amber);color:var(--navy);border:0;border-radius:10px;padding:12px 26px;font-size:1.05em;font-weight:800;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.typical-btn:hover{background:var(--amber-dark);color:#fff}
+.sim-columns{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:960px){.sim-columns{grid-template-columns:1.25fr .75fr;align-items:start}}
+.tier{margin:1.6em 0}
+.tier>h3{font-size:1.15rem;margin:0 0 .2em;color:var(--navy);display:flex;align-items:center;gap:8px}
+.tier.nice>h3{color:var(--muted)}
+.tier .tier-sub{font-size:.88rem;color:var(--muted);margin:0 0 1em}
+.sim-item{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:14px 16px;margin-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start}
+.tier.nice .sim-item{background:#fbfaf7;border-style:dashed}
+.sim-item .name{font-weight:700;font-size:.98rem;color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.sim-item .name input{margin-right:8px;transform:scale(1.2)}
+.sim-item .detail{font-size:.85rem;color:var(--muted);margin-top:4px}
+.sim-item select{max-width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:.88rem;margin-top:8px;font-family:inherit;background:#fff}
+.sim-item .price{text-align:right;white-space:nowrap;padding-top:2px}
+.sim-item .price .amt{font-weight:800;font-size:1.05rem;color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.sim-item .price .per{font-size:.78rem;color:var(--muted);display:block}
+.wage-line{font-size:.83rem;color:#1c6b2a;background:#edf7ee;border-radius:6px;padding:6px 10px;margin-top:8px}
+.wage-line b{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.src{font-size:.75rem;color:var(--muted);margin-top:6px}
+.total-bar{background:var(--navy);color:#fff;border-radius:var(--radius);padding:22px;margin-top:1.4em}
+.total-bar h3{margin:0 0 .4em;color:var(--amber);font-size:1.1rem}
+.total-bar .row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;font-size:.95rem;border-bottom:1px solid var(--navy-3);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.total-bar .row .val{font-weight:800;color:var(--amber);text-align:right;white-space:nowrap}
+.total-bar .row.grand{border-bottom:none;font-size:1.25rem;font-weight:800;padding-top:12px}
+.total-bar .row.grand .val{font-size:1.4rem}
+.total-bar .fine{font-size:.8rem;color:#9fb0cc;margin-top:10px}
+.reality{background:var(--paper);border:1px solid var(--line);border-left:8px solid var(--amber);border-radius:0 var(--radius) var(--radius) 0;padding:20px 22px;margin:2em 0}
+.reality h2{color:var(--navy);font-size:1.15rem;margin:0 0 .5em}
+.reality ul{margin:.4em 0;padding-left:1.2em;font-size:.95rem}
+.reality li{margin:.4em 0}
+.sources{font-size:.85rem;color:var(--muted)}
+.sources h2{color:var(--navy);font-size:1.1rem}
+.sources li{margin:.35em 0}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.type-card:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+@media(min-width:960px){.sim-side{position:sticky;top:90px;max-height:calc(100vh - 110px);overflow:auto}}
+@media(max-width:640px){.sim-item{grid-template-columns:1fr}.sim-item .price{text-align:left}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/index.html"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/index.html">Home</a>
+      <a href="/index.html#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html" class="active">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="breadcrumbs"><a href="/index.html">Home</a> › Cost simulator</p>
+</main>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Interactive tool · Canadian small business</p>
+    <h1>What should AI cost your business?</h1>
+    <p class="lead">Pick your business type, answer 3 quick questions, and build a realistic AI stack item by item. Every price comes from a real product with a labeled source — and every tool is shown next to the staff hours it replaces, with the wage math visible.</p>
+    <div class="btn-row"><a class="btn ghost" href="#sim-start">Start building your stack</a></div>
+  </div>
+</section>
+
+<main>
+<div class="sim-wrap">
+
+<section class="sim-step" id="sim-start">
+  <h2>1 · Pick your business type</h2>
+  <p class="hint">The questions, the suggested stack, and the hours math reconfigure for each type.</p>
+  <div class="type-grid" id="type-grid"></div>
+</section>
+
+<section class="sim-step">
+  <h2>2 · Answer 3 quick questions</h2>
+  <p class="hint">We build a realistic starting stack from your answers — everything stays adjustable below.</p>
+
+  <div class="q-block" id="q-restaurant">
+    <div class="input-grid">
+      <div><label for="rt-tables">Dining tables</label><input type="number" id="rt-tables" min="0" value="30"><div class="input-note">Drives call volume and how much phone time you lose.</div></div>
+      <div><label for="rt-reservations">Take phone reservations?</label><select id="rt-reservations"><option value="yes" selected>Yes</option><option value="no">No</option></select><div class="input-note">Missed reservation calls are pure leakage.</div></div>
+      <div><label for="rt-books">Who does the books?</label><select id="rt-books"><option value="self" selected>Me, after hours</option><option value="bookkeeper">A bookkeeper</option><option value="accountant">Accountant only</option></select><div class="input-note">Decides whether invoice capture helps you.</div></div>
+    </div>
+  </div>
+
+  <div class="q-block" id="q-retail" style="display:none">
+    <div class="input-grid">
+      <div><label for="re-staff">Staff on the rota</label><input type="number" id="re-staff" min="0" value="6"><div class="input-note">Drives whether scheduling software pays off.</div></div>
+      <div><label for="re-phoneorders">Take phone orders?</label><select id="re-phoneorders"><option value="no" selected>No</option><option value="yes">Yes</option></select><div class="input-note">Phone orders = missed calls = lost sales.</div></div>
+      <div><label for="re-books">Who does the books?</label><select id="re-books"><option value="self" selected>Me, after hours</option><option value="bookkeeper">A bookkeeper</option><option value="accountant">Accountant only</option></select><div class="input-note">Decides whether invoice capture helps you.</div></div>
+    </div>
+  </div>
+
+  <div class="q-block" id="q-trades" style="display:none">
+    <div class="input-grid">
+      <div><label for="tr-crew">Crew size (incl. you)</label><input type="number" id="tr-crew" min="1" value="3"><div class="input-note">Field staff who can't answer the phone.</div></div>
+      <div><label for="tr-phone">Who answers the phone during jobs?</label><select id="tr-phone"><option value="me" selected>Me, between jobs</option><option value="office">Office staff</option><option value="nobody">Nobody — voicemail</option></select><div class="input-note">The #1 leak for trades: the job goes to whoever picks up.</div></div>
+      <div><label for="tr-invoicing">How do you invoice?</label><select id="tr-invoicing"><option value="app" selected>Invoicing app</option><option value="paper">Paper / spreadsheets</option><option value="accountant">Accountant handles it</option></select><div class="input-note">Paper invoicing is where AI capture earns its keep.</div></div>
+    </div>
+  </div>
+
+  <div class="q-block" id="q-prof" style="display:none">
+    <div class="input-grid">
+      <div><label for="pf-team">Team size (incl. you)</label><input type="number" id="pf-team" min="1" value="4"><div class="input-note">Drives per-user tool costs.</div></div>
+      <div><label for="pf-meetings">Client meetings per week</label><input type="number" id="pf-meetings" min="0" value="6"><div class="input-note">Each one generates notes and follow-ups.</div></div>
+      <div><label for="pf-leads">Where do leads come from?</label><select id="pf-leads"><option value="referrals" selected>Referrals</option><option value="website">Website</option><option value="ads">Ads</option></select><div class="input-note">Website/ads leads need fast follow-up.</div></div>
+    </div>
+  </div>
+
+  <div class="q-block" id="q-ecommerce" style="display:none">
+    <div class="input-grid">
+      <div><label for="ec-orders">Orders per month</label><input type="number" id="ec-orders" min="0" value="300"><div class="input-note">Drives support volume and catalog work.</div></div>
+      <div><label for="ec-support">Support messages per week</label><input type="number" id="ec-support" min="0" value="10"><div class="input-note">"Where's my order?" — the chatbot's job.</div></div>
+      <div><label for="ec-books">Who does the books?</label><select id="ec-books"><option value="self" selected>Me, after hours</option><option value="bookkeeper">A bookkeeper</option><option value="accountant">Accountant only</option></select><div class="input-note">Decides whether invoice capture helps you.</div></div>
+    </div>
+  </div>
+
+  <div class="q-block" id="q-salon" style="display:none">
+    <div class="input-grid">
+      <div><label for="sa-chairs">Chairs / service stations</label><input type="number" id="sa-chairs" min="1" value="8"><div class="input-note">Drives booking and phone volume.</div></div>
+      <div><label for="sa-onlinebooking">Online booking already?</label><select id="sa-onlinebooking"><option value="no" selected>No — phone/text only</option><option value="yes">Yes</option></select><div class="input-note">No online booking = the biggest single gap.</div></div>
+      <div><label for="sa-marketing">Who does marketing?</label><select id="sa-marketing"><option value="self" selected>Me, when I can</option><option value="none">Nobody</option><option value="agency">An agency</option></select><div class="input-note">Decides whether email tools help.</div></div>
+    </div>
+  </div>
+
+  <div class="derive-summary" id="derive-summary" aria-live="polite"></div>
+
+  <h3 style="margin:1.4em 0 .3em;font-size:1.05rem;color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Your wage baseline</h3>
+  <p class="hint">Every "hours replaced" figure below is converted with this number — change it to match your reality.</p>
+  <div class="input-grid" style="max-width:420px">
+    <div><label for="in-wage">Average hourly labor cost (CAD/hr)</label><input type="number" id="in-wage" min="0" step="0.5" value="25"><div class="input-note">Wage + overhead, or your own effective rate.</div></div>
+  </div>
+</section>
+
+<section class="sim-step">
+  <h2>3 · Build your AI stack</h2>
+  <p class="hint">Tick what you'd actually use. Price tiers adjust per tool.</p>
+  <div class="legend">
+    <span><span class="conf official">Official</span> vendor's own price</span>
+    <span><span class="conf reported">Reported</span> reputable third-party</span>
+    <span><span class="conf estimate">Estimate</span> our reasonable estimate</span>
+    <span><span class="conf quote">Quote-based</span> no published price</span>
+  </div>
+  <div class="sim-columns">
+    <div>
+      <div class="typical-wrap">
+        <button id="btn-typical" class="typical-btn">✨ Load a typical setup for my business type</button>
+        <div class="input-note" style="margin-top:8px">Zero-effort path: fills in a normal configuration. A starting point — not a recommendation. Adjust to match yours.</div>
+      </div>
+      <div class="tier" id="tier-core"><h3>✅ Essentials — the core stack</h3><p class="tier-sub">Tools with a proven small-business track record. Start here; most shops need only 2–3 of these.</p><div id="core-list"></div></div>
+      <div class="tier nice" id="tier-nice"><h3>💡 Nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="nice-list"></div></div>
+    </div>
+    <div class="sim-side">
+      <div class="total-bar" aria-live="polite">
+        <h3>Your running total</h3>
+        <div class="row"><span>Monthly AI cost</span><span class="val" id="t-cost">$0</span></div>
+        <div class="row"><span>Staff hours freed / month</span><span class="val" id="t-hours">0</span></div>
+        <div class="row"><span>Value of freed time</span><span class="val" id="t-value">$0</span></div>
+        <div class="row grand"><span>Est. net monthly</span><span class="val" id="t-net">$0</span></div>
+        <p class="fine">Estimates from published pricing (see confidence labels). Freed time only becomes money if you redeploy it — serve more customers, cut overtime, drop a shift. Prices change: verify before you buy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sim-step">
+  <div class="reality">
+    <h2>Read this before you spend a dollar</h2>
+    <ul>
+      <li><strong>Start with one tool, not six.</strong> Every successful small-business AI story looks the same: one well-defined workflow, a measurable baseline, a human in the loop.</li>
+      <li><strong>Free tiers first.</strong> Most tools above have a free plan — run the free tier for a month and measure the hours before paying.</li>
+      <li><strong>Most "AI" wins are software wins.</strong> Salon no-shows fall 25–40% from automated SMS reminders — a 2015 technology. AI phone answering is the upgrade, not the foundation.</li>
+      <li><strong>Your data is the blocker, not the model.</strong> An agent is only as good as the records feeding it. Clean item lists and digital invoices come before agents.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sim-step">
+  <div class="wrap" style="padding:0">
+    <div class="calc-teaser">
+      <div>
+        <h2>Picked a tool? Run the ROI math.</h2>
+        <p>Take the monthly cost from your stack above and plug it into the ROI calculator with your own hours — it'll show estimated payback time and net benefit.</p>
+      </div>
+      <a class="btn" href="/roi-calculator.html">Open the ROI calculator</a>
+    </div>
+  </div>
+</section>
+
+<section class="sim-step sources">
+  <h2>Sources &amp; access dates</h2>
+  <p>All prices verified or re-verified on <strong>2026-09-28</strong>. "Official" = the vendor's own page; "Reported" = reputable third-party; "Estimate" = our clearly-labeled reasonable estimate; "Quote-based" = no published SMB price — get a quote.</p>
+  <ul>
+    <li>ChatGPT Plus US$20/mo; free tier — <strong>official</strong> (OpenAI Help Center).</li>
+    <li>Shopify Magic: $0, included with every Shopify plan — <strong>official</strong> (Shopify App Store listing).</li>
+    <li>GlossGenius Standard US$24/mo, Gold US$48/mo — <strong>official</strong> (glossgenius.com blog, 2026).</li>
+    <li>Tidio: Free $0; Starter ~US$29/mo; Growth from ~US$59/mo — <strong>official</strong> (tidio.com blog, 2026).</li>
+    <li>7shifts: free Comp plan for small teams; Essentials ~US$40/mo/location; Pro ~US$80/mo/location — <strong>reported</strong> (ontheclock.com, posusa.com, emergent.sh, Sep 2026).</li>
+    <li>Slang.ai Core ~US$399/mo per location — <strong>reported</strong> (cloudtalk.io, maple.inc, G2, Sep 2026). Entry-tier phone agents ~US$66–79/mo (Goodcall-style); Dialzara from US$29/mo — <strong>reported</strong> (cloudtalk.io, Sep 2026).</li>
+    <li>Stockbot inventory forecasting: free plan; paid ~US$9–25/mo — <strong>reported</strong> (taranker.com, commoninja.com, 2026).</li>
+    <li>Otter.ai: Basic free; Pro ~US$17/mo per user — <strong>reported</strong> (castmagic.io, ecommerceparadise.com, MeetGeek, Sep 2026).</li>
+    <li>Mailchimp: Free (250 contacts); Essentials from ~US$13/mo; Standard from ~US$20/mo — <strong>reported</strong> (sendx.io, justpricing.com, smtpedia.com, Sep 2026).</li>
+    <li>Vagaro ~US$24–30/mo; Square Appointments free for solo — <strong>reported</strong> (glossgenius.com blog, cherdigitalanalytics.com, 2026).</li>
+    <li>QuickBooks/Xero AI invoice capture: $0 extra, built into plans — <strong>reported</strong> (widely documented; research 2026-09-28).</li>
+    <li>Scandit ShelfView: from ~US$199/mo starting tier — <strong>reported</strong> (published pricing tier; research 2026-09-28).</li>
+    <li>Hours-replaced figures: <strong>estimates</strong> unless noted — e.g. 42-seat Portland restaurant saved 10 staff hrs/wk at $89/mo (Medium, Jun 2026); scheduling 2–4 manager hrs/wk is a vendor-adjacent rule of thumb.</li>
+    <li>AI review-response drafting: <strong>quote-based</strong> — no published small-business benchmark found.</li>
+  </ul>
+  <p>Most AI tools bill in USD — your card statement will show the CAD equivalent at its own rate.</p>
+</section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p><strong>AI Small Business Playbook</strong> — practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/index.html#guides">All guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  <p class="footer-nav"><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+<script>
+/* ============================================================================
+   AI_PRICES — EDIT PRICES HERE
+   All figures verified or re-verified 2026-09-28. Confidence: "official"
+   (vendor's own page), "reported" (reputable third-party), "estimate" (our
+   reasonable estimate), "quote" (no published SMB price — get a quote).
+   hours = illustrative staff hrs/month the tool replaces, per business type.
+   ============================================================================ */
+const AI_PRICES = {
+  meta: { updated: "2026-09-28" },
+  types: {
+    retail:     { label: "Retail shop",          emoji: "🏪" },
+    restaurant: { label: "Restaurant / café",    emoji: "🍽️" },
+    trades:     { label: "Trades / contractor",  emoji: "🔧" },
+    prof:       { label: "Professional services", emoji: "💼" },
+    ecommerce:  { label: "Ecommerce",            emoji: "🛒" },
+    salon:      { label: "Salon / services",     emoji: "💈" }
+  },
+  items: [
+    { id:"phone-ai", tier:"core", name:"AI phone answering",
+      detail:"Answers every call 24/7 — reservations, quotes, FAQs — then texts you a summary. The strongest 2026 small-business AI case: missed calls are pure leakage.",
+      types:["restaurant","retail","trades","prof","salon"],
+      options:[
+        {label:"Entry tier — ~US$79/mo", monthly:79, conf:"reported", src:"Goodcall-style plans US$66–79/mo; Dialzara from US$29/mo (cloudtalk.io, Sep 2026)"},
+        {label:"Slang.ai Core — ~US$399/mo per location", monthly:399, conf:"reported", src:"cloudtalk.io / maple.inc / G2, Sep 2026"}
+      ],
+      hours:{restaurant:40, retail:16, trades:24, prof:12, salon:48},
+      hoursNote:"Portland 42-seat restaurant: 10 staff hrs/wk saved at $89/mo (Medium, Jun 2026) — illustrative, your call volume differs." },
+
+    { id:"sched", tier:"core", name:"AI staff scheduling (7shifts)",
+      detail:"Builds schedules from sales history against labor-cost targets; staff swap shifts in the app. Free tier covers small teams.",
+      types:["restaurant","retail","salon"],
+      options:[
+        {label:"Comp (free) — $0", monthly:0, conf:"reported", src:"Free plan for small teams (ontheclock.com / posusa.com, Sep 2026)"},
+        {label:"Essentials — ~US$40/mo per location", monthly:40, conf:"reported", src:"US$39.99/mo per location (ontheclock.com / selecthub.com, Sep 2026)"},
+        {label:"Pro — ~US$80/mo per location", monthly:80, conf:"reported", src:"US$79.99/mo per location (ontheclock.com, Sep 2026)"}
+      ],
+      hours:{restaurant:12, retail:12, salon:12},
+      hoursNote:"Rule of thumb: 2–4 manager hrs/wk reclaimed (vendor-adjacent — treat as illustrative)." },
+
+    { id:"invoice", tier:"core", name:"AI invoice capture (in your accounting software)",
+      detail:"Snap or forward supplier bills — AI reads the vendor, amounts and line items, and suggests categories. Usually a toggle in software you already pay for, not a new purchase.",
+      types:["retail","restaurant","trades","prof","ecommerce","salon"],
+      options:[
+        {label:"$0 extra — included in QuickBooks Online / Xero plans", monthly:0, conf:"reported", src:"Built-in AI bill capture from Essentials tier up — widely documented (research 2026-09-28)"}
+      ],
+      hoursBy:"books",
+      hoursNote:"For 30–60 invoices/mo with one approver, a few hours of manual entry disappear (illustrative)." },
+
+    { id:"booking", tier:"core", name:"Online booking + reminders (salon software)",
+      detail:"Clients book themselves; automated SMS reminders cut no-shows 25–40% (industry reports). Honest note: most of that win is the reminders — 2015 technology. The AI layer (smart rebooking, phone answering) is the upgrade.",
+      types:["salon"],
+      options:[
+        {label:"Square Appointments — free for solo", monthly:0, conf:"reported", src:"Free to start for one stylist (cherdigitalanalytics.com, 2026)"},
+        {label:"GlossGenius Standard — US$24/mo", monthly:24, conf:"official", src:"glossgenius.com blog, 2026"},
+        {label:"GlossGenius Gold — US$48/mo", monthly:48, conf:"official", src:"glossgenius.com blog, 2026"}
+      ],
+      hours:{salon:20},
+      hoursNote:"Front-desk booking admin + fewer no-show gaps to fill (illustrative)." },
+
+    { id:"chatbot", tier:"core", name:"Website AI chatbot (Tidio + Lyro)",
+      detail:"Answers routine questions on your site 24/7 from your own FAQ and pages; hands off to you when it's stuck.",
+      types:["ecommerce","retail","restaurant","salon","prof"],
+      options:[
+        {label:"Free — $0", monthly:0, conf:"official", src:"tidio.com free plan, Sep 2026 (50 billable conversations/mo)"},
+        {label:"Starter — ~US$29/mo", monthly:29, conf:"official", src:"tidio.com blog, 2026"},
+        {label:"Growth — from ~US$59/mo", monthly:59, conf:"official", src:"tidio.com blog, 2026"}
+      ],
+      hours:{ecommerce:8, retail:8, restaurant:8, salon:8, prof:8},
+      hoursNote:"Vendor-claimed ~67% resolution on routine inquiries (Tidio) — illustrative." },
+
+    { id:"assistant", tier:"core", name:"AI writing & research assistant",
+      detail:"Drafts posts, emails, quotes, SOPs; crunches numbers from a spreadsheet. The cheapest AI hire you'll ever make.",
+      types:["retail","restaurant","trades","prof","ecommerce","salon"],
+      options:[
+        {label:"Free tier — $0", monthly:0, conf:"official", src:"OpenAI free tier, Sep 2026"},
+        {label:"ChatGPT Plus — US$20/mo", monthly:20, conf:"official", src:"OpenAI Help Center, Sep 2026"}
+      ],
+      hours:{retail:6, restaurant:6, trades:6, prof:6, ecommerce:6, salon:6},
+      hoursNote:"A few hours a month of drafting and research (illustrative)." },
+
+    { id:"mailchimp", tier:"nice", name:"AI-assisted email marketing (Mailchimp)",
+      detail:"Drafts subject lines and campaigns; send-time optimization on the Standard plan. Worth it once you have a real list.",
+      types:["retail","ecommerce","salon","restaurant"],
+      options:[
+        {label:"Free — $0 (250 contacts)", monthly:0, conf:"reported", src:"Free plan: 250 contacts, 500 sends/mo (sendx.io / justpricing.com, Sep 2026)"},
+        {label:"Essentials — from ~US$13/mo", monthly:13, conf:"reported", src:"From US$13/mo at 500 contacts (sendx.io / smtpedia.com, Sep 2026)"},
+        {label:"Standard — from ~US$20/mo", monthly:20, conf:"reported", src:"From US$20/mo at 500 contacts (sendx.io / smtpedia.com, Sep 2026)"}
+      ],
+      hours:{retail:4, ecommerce:4, salon:4, restaurant:4},
+      hoursNote:"Campaign drafting and list admin (illustrative)." },
+
+    { id:"stockbot", tier:"nice", name:"AI demand forecasting (Stockbot)",
+      detail:"Shopify app: forecasts replenishment quantities, flags slow movers, sets low-stock alerts. Auto-POs keep a human approval click — the honest way to run it.",
+      types:["retail","ecommerce"],
+      options:[
+        {label:"Free plan — $0", monthly:0, conf:"reported", src:"Free plan available (taranker.com, 2026)"},
+        {label:"Paid — ~US$9/mo", monthly:9, conf:"reported", src:"US$9–25/mo band (taranker.com / commoninja.com, 2026)"},
+        {label:"Paid top tier — ~US$25/mo", monthly:25, conf:"reported", src:"US$9–25/mo band (taranker.com / commoninja.com, 2026)"}
+      ],
+      hours:{retail:8, ecommerce:8},
+      hoursNote:"Manual ordering and stock-checking time (illustrative)." },
+
+    { id:"otter", tier:"nice", name:"AI meeting notes (Otter.ai)",
+      detail:"Joins your Zoom, Meet or Teams calls automatically, transcribes, and sends a summary with action items.",
+      types:["prof","trades"],
+      options:[
+        {label:"Basic (free) — $0", monthly:0, conf:"reported", src:"300 min/mo free (castmagic.io / MeetGeek, Sep 2026)"},
+        {label:"Pro — ~US$17/mo per user", monthly:17, conf:"reported", src:"US$16.99/mo per user (castmagic.io / softwaretestinghelp.com, Sep 2026)"}
+      ],
+      hours:{prof:8, trades:8},
+      hoursNote:"~2 hrs/wk of note-taking and follow-up writing (illustrative)." },
+
+    { id:"magic", tier:"nice", name:"AI product copy (Shopify Magic)",
+      detail:"Generates product descriptions, email subject lines and image backgrounds right inside the Shopify admin. Already yours if you're on Shopify.",
+      types:["ecommerce"],
+      options:[
+        {label:"$0 — included with every Shopify plan", monthly:0, conf:"official", src:"Shopify App Store listing, Sep 2026: free AI product descriptions, no apps required"}
+      ],
+      hours:{ecommerce:4},
+      hoursNote:"Product-description drafting (illustrative)." },
+
+    { id:"scandit", tier:"nice", name:"Phone-based shelf audits (Scandit ShelfView)",
+      detail:"Staff walk the aisle with a phone; AI flags gaps and wrong SKUs. The indie-accessible version of shelf cameras — the directing is solved, the seeing is still the expensive part.",
+      types:["retail"],
+      options:[
+        {label:"From ~US$199/mo starting tier", monthly:199, conf:"reported", src:"Published starting tier, 30-day trial (research 2026-09-28)"}
+      ],
+      hours:{retail:16},
+      hoursNote:"Manual gap-scan walks (illustrative)." },
+
+    { id:"reputation", tier:"nice", name:"AI review-response drafting",
+      detail:"Drafts replies to Google and Facebook reviews; you approve before anything posts. Never let it write fake reviews — Google's purge waves actively punish that.",
+      types:["restaurant","retail","salon","trades"],
+      options:[
+        {label:"Quote-based — no published small-business benchmark", monthly:0, conf:"quote", info_only:true, src:"No credible published SMB price found as of Sep 2026 — get a vendor quote"}
+      ],
+      hours:{restaurant:4, retail:4, salon:4, trades:4},
+      hoursNote:"Reply drafting time (illustrative)." }
+  ]
+};
+
+/* One-click typical setups: [itemId, optionIndex] */
+const TYPICAL = {
+  restaurant:[["phone-ai",0],["sched",0],["invoice",0],["assistant",1],["chatbot",0],["mailchimp",0]],
+  retail:[["sched",0],["invoice",0],["assistant",1],["chatbot",0],["stockbot",0],["mailchimp",0]],
+  trades:[["phone-ai",0],["invoice",0],["assistant",1],["otter",0]],
+  prof:[["otter",0],["assistant",1],["chatbot",0],["invoice",0],["phone-ai",0]],
+  ecommerce:[["chatbot",1],["stockbot",2],["magic",0],["assistant",1],["mailchimp",1],["invoice",0]],
+  salon:[["booking",1],["phone-ai",0],["invoice",0],["assistant",1],["mailchimp",1],["chatbot",0]]
+};
+(function(){
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const money = n => "$" + Math.round(n).toLocaleString("en-CA");
+  const CONF_LABEL = {official:"Official", reported:"Reported", estimate:"Estimate", quote:"Quote-based"};
+  let type = "restaurant";
+  const state = {}; // itemId -> {checked, optIdx, userPicked}
+
+  function getQ(){
+    const num = id => Math.max(0, +$(id).value || 0);
+    const sel = id => $(id).value;
+    return {
+      tables: num("rt-tables"), reservations: sel("rt-reservations"), rtBooks: sel("rt-books"),
+      staff: num("re-staff"), phoneOrders: sel("re-phoneorders"), reBooks: sel("re-books"),
+      crew: num("tr-crew"), phone: sel("tr-phone"), invoicing: sel("tr-invoicing"),
+      team: num("pf-team"), meetings: num("pf-meetings"), leads: sel("pf-leads"),
+      orders: num("ec-orders"), support: num("ec-support"), ecBooks: sel("ec-books"),
+      chairs: num("sa-chairs"), onlineBooking: sel("sa-onlinebooking"), marketing: sel("sa-marketing"),
+      wage: Math.max(0, +$("in-wage").value || 0)
+    };
+  }
+
+  function booksAnswer(q){
+    if(type === "restaurant") return q.rtBooks;
+    if(type === "retail") return q.reBooks;
+    if(type === "ecommerce") return q.ecBooks;
+    if(type === "trades") return q.invoicing === "accountant" ? "accountant" : (q.invoicing === "paper" ? "self" : "bookkeeper");
+    return "bookkeeper"; // prof, salon: no books question — conservative
+  }
+
+  function setItem(id, checked, optIdx){
+    const st = state[id] || (state[id] = {checked:false, optIdx:0, userPicked:false});
+    st.checked = checked;
+    if(!st.userPicked && optIdx !== undefined) st.optIdx = optIdx;
+  }
+
+  /* ---- Derivation: 3 answers -> suggested stack. Re-runs on answer change;
+     user's own price-tier picks are kept (userPicked). ---- */
+  function derive(){
+    const q = getQ();
+    const reasons = [];
+    const R = (id, on, optIdx, reason) => { setItem(id, on, optIdx); if(on && reason) reasons.push("<strong>" + itemById(id).name + "</strong> — " + reason); };
+
+    if(type === "restaurant"){
+      R("phone-ai", q.reservations === "yes", 0, "you take phone reservations — every missed call is a lost booking");
+      R("sched", true, 0, "scheduling is the most deployable AI win for restaurants (free tier covers small teams)");
+      R("invoice", q.rtBooks === "self", 0, q.rtBooks === "self" ? "you do the books yourself after hours" : null);
+      R("chatbot", q.reservations === "yes", 0, "routine questions (hours, menu, parking) deflect to the bot");
+      R("assistant", true, 1, "the cheapest drafting help you'll ever hire");
+    } else if(type === "retail"){
+      R("sched", q.staff >= 3, 0, q.staff >= 3 ? q.staff + " staff on the rota — scheduling pays for itself" : null);
+      R("phone-ai", q.phoneOrders === "yes", 0, "you take phone orders — missed calls are lost sales");
+      R("invoice", q.reBooks === "self", 0, q.reBooks === "self" ? "you do the books yourself after hours" : null);
+      R("chatbot", true, 0, "answers routine questions on your site 24/7");
+      R("assistant", true, 1, "the cheapest drafting help you'll ever hire");
+      R("stockbot", q.staff >= 3, 0, q.staff >= 3 ? "forecasting beats gut-feel ordering across a team" : null);
+    } else if(type === "trades"){
+      R("phone-ai", q.phone === "me" || q.phone === "nobody", 0, q.phone === "nobody" ? "calls go to voicemail during jobs — the job goes to whoever picks up" : "you answer between jobs — the AI covers you on the tools");
+      R("invoice", q.invoicing !== "accountant", 0, q.invoicing === "paper" ? "paper invoicing is where AI capture earns its keep" : null);
+      R("assistant", true, 1, "quotes and follow-up emails write themselves");
+      R("otter", false, 0, null);
+    } else if(type === "prof"){
+      R("otter", q.meetings >= 3, 0, q.meetings >= 3 ? q.meetings + " meetings a week generate notes and follow-ups" : null);
+      R("assistant", true, 1, "proposals, reports and research drafts");
+      R("chatbot", q.leads !== "referrals", 0, q.leads !== "referrals" ? "website/ads leads need a fast first response" : null);
+      R("invoice", false, 0, null);
+      R("phone-ai", false, 0, null);
+    } else if(type === "ecommerce"){
+      R("chatbot", q.support >= 5 || q.orders >= 100, 1, q.support + " support messages a week — the bot takes the routine ones");
+      R("stockbot", q.orders >= 50, 2, "forecasting beats gut-feel reordering at " + q.orders + " orders/mo");
+      R("magic", true, 0, "already included with your Shopify plan — $0");
+      R("assistant", true, 1, "product copy, emails and ad drafts");
+      R("mailchimp", true, 1, "worth it once the list is real");
+      R("invoice", q.ecBooks === "self", 0, q.ecBooks === "self" ? "you do the books yourself after hours" : null);
+    } else if(type === "salon"){
+      R("booking", q.onlineBooking === "no", 1, "no online booking — the biggest single gap; reminders cut no-shows 25–40%");
+      R("phone-ai", true, 0, "missed calls are missed bookings — reception can't do hair and phones at once");
+      R("invoice", false, 0, null);
+      R("assistant", true, 1, "posts, promos and policy drafts");
+      R("mailchimp", q.marketing === "self", 1, "you do marketing yourself when you can — make it count");
+      R("chatbot", false, 0, null);
+    }
+
+    const s = reasons.length
+      ? "From your answers: " + reasons.join("; ") + "."
+      : "No strong matches from these answers — tick what fits, or load a typical setup below.";
+    $("derive-summary").innerHTML = s;
+    renderItems();
+  }
+
+  function itemById(id){ return AI_PRICES.items.find(i => i.id === id); }
+
+  function savedHours(it, q){
+    if(it.hoursBy === "books"){
+      const b = booksAnswer(q);
+      if(b === "self") return 6;
+      if(b === "bookkeeper") return 2;
+      return 0;
+    }
+    return (it.hours && it.hours[type]) || 0;
+  }
+
+  function renderTypes(){
+    const g = $("type-grid"); g.innerHTML = "";
+    Object.keys(AI_PRICES.types).forEach(k => {
+      const t = AI_PRICES.types[k];
+      const d = document.createElement("div");
+      d.className = "type-card" + (k === type ? " selected" : "");
+      d.innerHTML = '<span class="emoji">' + t.emoji + "</span><strong>" + t.label + "</strong>";
+      d.setAttribute("role", "button");
+      d.setAttribute("tabindex", "0");
+      d.setAttribute("aria-pressed", k === type ? "true" : "false");
+      const pick = () => {
+        if(k === type) return;
+        type = k;
+        Object.keys(state).forEach(sk => delete state[sk]);
+        renderTypes(); renderQuestions(); derive();
+      };
+      d.addEventListener("click", pick);
+      d.addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(); } });
+      g.appendChild(d);
+    });
+  }
+
+  function renderQuestions(){
+    ["restaurant","retail","trades","prof","ecommerce","salon"].forEach(k => {
+      $("q-" + k).style.display = (k === type) ? "" : "none";
+    });
+  }
+
+  function renderItems(){
+    const q = getQ();
+    ["core","nice"].forEach(tier => {
+      const list = $(tier === "core" ? "core-list" : "nice-list");
+      list.innerHTML = "";
+      AI_PRICES.items.filter(it => it.tier === tier && it.types.includes(type)).forEach(it => {
+        const st = state[it.id] || (state[it.id] = {checked:false, optIdx:0, userPicked:false});
+        const opt = it.options[st.optIdx] || it.options[0];
+        const hrs = savedHours(it, q);
+        const val = hrs * q.wage;
+
+        const wrap = document.createElement("div");
+        wrap.className = "sim-item";
+
+        const left = document.createElement("div");
+        const nameRow = document.createElement("div");
+        nameRow.className = "name";
+        const cb = document.createElement("input");
+        cb.type = "checkbox"; cb.checked = st.checked;
+        cb.setAttribute("aria-label", "Include " + it.name);
+        cb.addEventListener("change", () => { st.checked = cb.checked; recalc(); });
+        nameRow.appendChild(cb);
+        nameRow.appendChild(document.createTextNode(it.name + " "));
+        const badge = document.createElement("span");
+        badge.className = "conf " + opt.conf;
+        badge.textContent = CONF_LABEL[opt.conf];
+        nameRow.appendChild(badge);
+        left.appendChild(nameRow);
+
+        const det = document.createElement("div");
+        det.className = "detail"; det.textContent = it.detail;
+        left.appendChild(det);
+
+        if(it.options.length > 1){
+          const selEl = document.createElement("select");
+          selEl.setAttribute("aria-label", it.name + " price tier");
+          it.options.forEach((o, i) => {
+            const oEl = document.createElement("option");
+            oEl.value = i; oEl.textContent = o.label;
+            if(i === st.optIdx) oEl.selected = true;
+            selEl.appendChild(oEl);
+          });
+          selEl.addEventListener("change", () => { st.optIdx = +selEl.value; st.userPicked = true; renderItems(); });
+          left.appendChild(selEl);
+        }
+
+        const src = document.createElement("div");
+        src.className = "src";
+        src.textContent = "Source: " + opt.src;
+        left.appendChild(src);
+
+        const wl = document.createElement("div");
+        wl.className = "wage-line";
+        if(hrs > 0){
+          wl.innerHTML = "≈ <b>" + hrs + " staff hrs/mo</b> freed → <b>" + money(val) + "/mo</b> in time value at " + money(q.wage) + "/hr. " + it.hoursNote;
+        } else {
+          wl.textContent = "No hours modeled for your answers — value here is convenience, not time. " + it.hoursNote;
+        }
+        left.appendChild(wl);
+
+        const price = document.createElement("div");
+        price.className = "price";
+        if(opt.info_only){
+          price.innerHTML = '<span class="amt">Quote-based</span><span class="per">no published price</span>';
+        } else {
+          price.innerHTML = '<span class="amt">' + money(opt.monthly) + '</span><span class="per">/mo' + (opt.monthly === 0 ? " — free" : "") + "</span>";
+        }
+        wrap.appendChild(left);
+        wrap.appendChild(price);
+        list.appendChild(wrap);
+      });
+    });
+    recalc();
+  }
+
+  function recalc(){
+    const q = getQ();
+    let cost = 0, hours = 0;
+    AI_PRICES.items.filter(it => it.types.includes(type)).forEach(it => {
+      const st = state[it.id];
+      if(!st || !st.checked) return;
+      const opt = it.options[st.optIdx] || it.options[0];
+      if(!opt.info_only) cost += opt.monthly;
+      hours += savedHours(it, q);
+    });
+    const value = hours * q.wage;
+    $("t-cost").textContent = money(cost) + "/mo";
+    $("t-hours").textContent = hours;
+    $("t-value").textContent = money(value) + "/mo";
+    const net = value - cost;
+    $("t-net").textContent = (net < 0 ? "−" : "") + money(Math.abs(net)) + "/mo";
+  }
+
+  function loadTypical(){
+    Object.keys(state).forEach(sk => delete state[sk]);
+    (TYPICAL[type] || []).forEach(([id, optIdx]) => { setItem(id, true, optIdx); });
+    const names = (TYPICAL[type] || []).map(([id]) => itemById(id).name).join(", ");
+    $("derive-summary").innerHTML = "Typical setup loaded: " + names + ". Adjust tiers and ticks to match your reality.";
+    renderItems();
+  }
+
+  $("btn-typical").addEventListener("click", loadTypical);
+  $("in-wage").addEventListener("input", recalc);
+
+  // question inputs re-derive the suggested stack (price-tier picks are kept)
+  document.querySelectorAll(".q-block input, .q-block select").forEach(el => {
+    el.addEventListener("change", derive);
+  });
+
+  renderTypes();
+  renderQuestions();
+  derive();
+})();
+</script>
+</body>
+</html>

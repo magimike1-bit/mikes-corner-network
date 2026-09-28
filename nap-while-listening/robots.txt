@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nap-while-listening.pages.dev/sitemap.xml

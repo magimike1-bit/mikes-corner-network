@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cranky-teenager.pages.dev/sitemap.xml

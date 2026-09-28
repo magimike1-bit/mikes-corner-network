@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://toast-creations.pages.dev/sitemap.xml

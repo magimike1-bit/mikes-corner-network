@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Tools to Check Drive Health — Hard Drive Health</title>
+<meta name="description" content="The categories of free drive-health tools: built-in OS utilities, manufacturer diagnostics, and open-source monitors — what each does and when to use it.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Free tools to check drive health</h1>
+  <p class="meta">Diagnostics &middot; 6 min read</p>
+  <!-- AdSense: ad code goes here -->
+
+  <p>You don't need to buy anything to check whether your drive is healthy. The free options
+  fall into three categories: tools already built into your operating system, diagnostic tools
+  from the drive manufacturers, and open-source monitoring tools. Here's what each category
+  does, what it's good at, and when to reach for it.</p>
+
+  <h2>Category 1: Built-in OS utilities</h2>
+  <p>Every major operating system ships with something that can check a drive's basic health —
+  no download required.</p>
+  <ul>
+    <li><strong>Windows</strong> includes a file-system check accessible from a drive's
+    properties, plus drive-health information in the Settings/Storage area on newer versions.
+    These are quick first checks: they verify the file system is consistent and surface basic
+    health warnings.</li>
+    <li><strong>macOS</strong> includes Disk Utility, whose First Aid function checks and
+    repairs file-system issues. It operates on the file system rather than the drive hardware,
+    but file-system corruption is often the first visible symptom of a hardware problem.</li>
+    <li><strong>Linux</strong> users have the smartmontools package, which provides a
+    command-line tool for reading a drive's full SMART data directly. It's the most detailed of
+    the built-in options and the backbone many other tools are built on.</li>
+  </ul>
+  <p><strong>Strengths:</strong> already installed, trustworthy, good for a quick sanity check.
+  <strong>Limits:</strong> generally one-shot checks rather than continuous monitoring, and the
+  reports can be terse. If the built-in tool says something's wrong, believe it — but a clean
+  result from a quick check isn't a full bill of health.</p>
+
+  <h2>Category 2: Manufacturer diagnostic tools</h2>
+  <p>The companies that make drives publish their own free diagnostic utilities. These are
+  worth knowing about because they understand their own firmware better than any generic tool
+  can — including brand-specific attributes and self-tests the drive supports.</p>
+  <p>Typically these tools can:</p>
+  <ul>
+    <li>Run short and extended self-tests (the drive tests itself and reports back).</li>
+    <li>Show detailed SMART data with the manufacturer's own interpretation.</li>
+    <li>Update drive firmware, which occasionally fixes bugs that look like hardware failure.</li>
+    <li>In some cases, perform a secure erase when you're retiring a drive.</li>
+  </ul>
+  <p><strong>When to use them:</strong> when a generic tool flags a problem and you want a
+  second opinion from the source, or before contacting support about a warranty claim —
+  manufacturers often ask for their own tool's test result. <strong>One caution:</strong> use
+  the tool made for your drive's brand. A diagnostic written for one manufacturer's firmware
+  can misread another's.</p>
+
+  <h2>Category 3: Open-source and third-party monitors</h2>
+  <p>This is the "set it and forget it" category: free tools that sit in the background,
+  continuously watch your drives' SMART data and temperatures, and alert you when something
+  changes. Typical features include:</p>
+  <ul>
+    <li>A simple health dashboard — green/yellow/red per drive.</li>
+    <li>Email or desktop notifications when an attribute degrades.</li>
+    <li>Temperature history, so you can spot a drive that's slowly cooking itself.</li>
+    <li>History graphs that make trends visible — remember, trends matter more than
+    snapshots (see our <a href="/posts/smart-basics-explained.html">SMART guide</a>).</li>
+  </ul>
+  <p><strong>When to use them:</strong> on any computer you care about — a home server, a work
+  PC, a machine holding family photos. Continuous monitoring catches the slow decline you'd
+  never notice with a once-a-year manual check. Pick a well-established open-source option
+  with an active community rather than a random download.</p>
+
+  <h2>How to run a check: a sane routine</h2>
+  <ol>
+    <li><strong>Start with the built-in tool</strong> for a quick read of the situation.</li>
+    <li><strong>If anything looks off, confirm with the manufacturer's tool</strong> and run
+    its extended self-test.</li>
+    <li><strong>For ongoing peace of mind, install a monitor</strong> and let it watch in the
+    background.</li>
+    <li><strong>Recheck on a schedule</strong> — monthly is plenty for most home users.</li>
+  </ol>
+
+  <h2>What these tools can't do</h2>
+  <ul>
+    <li><strong>They can't predict sudden electronic failure.</strong> A drive whose controller
+    board dies gives no SMART warning. No software fixes this.</li>
+    <li><strong>They can't repair hardware.</strong> A clean scan doesn't fix bad sectors; at
+    best the drive remaps them itself. Software "repairs" a failing drive the way a fresh coat
+    of paint repairs rust.</li>
+    <li><strong>Intensive scans stress the drive.</strong> An extended self-test or full surface
+    scan works the drive hard. That's fine on a healthy drive, but on a drive you already
+    suspect is dying, <strong>back up first, scan second</strong> — a scan can be the final
+    straw for marginal hardware.</li>
+  </ul>
+
+  <h2>The bottom line</h2>
+  <p>Start free and stay free: your OS already has a basic check, the manufacturer has a deeper
+  one, and open-source monitors will watch things for you continuously. Use all three layers,
+  interpret results conservatively (any real warning means back up and plan a replacement),
+  and remember that the goal of all this monitoring is simple — to give you warning <em>before</em>
+  the failure, while your <a href="/posts/the-3-2-1-backup-rule.html">backups</a> are what save
+  you when warning isn't enough.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  </div>
+</footer>
+</body>
+</html>

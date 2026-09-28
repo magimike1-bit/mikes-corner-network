@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mike&#8217;s Corner &#8212; Every Site in the Network, in One Place</title>
+<meta name="description" content="Mike's Corner: a directory of every site in the network — parenting, food, tech how-tos, money-saving guides, and just-for-fun projects.">
+<link rel="stylesheet" href="/style.css">
+<!--
+  ADS: paste your Google AdSense code below (replace ca-pub-XXXX with your publisher ID),
+  then remove the comment markers.
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Mike&#8217;s Corner</a>
+    <p class="tagline">Every site in the network, in one place.</p>
+  </div>
+</header>
+<main class="wrap">
+  <section class="intro">
+    <h1>Browse the whole network</h1>
+    <p>Fifty-three sites and counting — practical how-to guides, money-saving tips, and a few
+    purely ridiculous projects. Pick a category or just wander.</p>
+  </section>
+  <div class="filters" role="group" aria-label="Filter sites by category">
+  <button class="filter-btn active" data-filter="all" aria-pressed="true">All <span class="count">53</span></button>
+  <button class="filter-btn" data-filter="parenting" aria-pressed="false">Parenting &amp; Family <span class="count">8</span></button>
+  <button class="filter-btn" data-filter="food" aria-pressed="false">Food &amp; Cooking <span class="count">6</span></button>
+  <button class="filter-btn" data-filter="tech" aria-pressed="false">Tech &amp; How-To <span class="count">12</span></button>
+  <button class="filter-btn" data-filter="money" aria-pressed="false">Money &amp; Deals <span class="count">11</span></button>
+  <button class="filter-btn" data-filter="home" aria-pressed="false">Home &amp; Auto <span class="count">4</span></button>
+  <button class="filter-btn" data-filter="work" aria-pressed="false">Work &amp; Business <span class="count">4</span></button>
+  <button class="filter-btn" data-filter="fun" aria-pressed="false">Just for Fun <span class="count">8</span></button>
+  </div>
+  <p class="showing" id="showing">Showing 53 of 53 sites</p>
+  <section class="grid" id="grid">
+    <article class="card" data-category="parenting">
+      <span class="tag">Parenting &amp; Family</span>
+      <h3>Life With Four Kids</h3>
+      <p>Real-world survival tips for big, busy families.</p>
+      <a class="visit" href="https://dealing-with-four-kids.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="parenting">
+      <span class="tag">Parenting &amp; Family</span>
+      <h3>Raising Independent Kids</h3>
+      <p>Age-by-age steps toward self-reliant kids.</p>
+      <a class="visit" href="https://kids-independence-guide.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="parenting">
+      <span class="tag">Parenting &amp; Family</span>
+      <h3>Getting Kids Ready for University</h3>
+      <p>Applications, money, and life skills.</p>
+      <a class="visit" href="https://kids-university-prep.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="parenting">
+      <span class="tag">Parenting &amp; Family</span>
+      <h3>Dealing With a Cranky Teenager</h3>
+      <p>What&#8217;s behind the mood, and what actually helps.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="parenting">
+      <span class="tag">Parenting &amp; Family</span>
+      <h3>Pretending to Listen to Drama Practice</h3>
+      <p>A parent&#8217;s comedic survival guide.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="parenting">
+      <span class="tag">Parenting &amp; Family</span>
+      <h3>Napping Through Kids&#8217; Presentations</h3>
+      <p>Shh. A tongue-in-cheek guide.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="parenting">
+      <span class="tag">Parenting &amp; Family</span>
+      <h3>Kids&#8217; Jokes (Ages 9-12)</h3>
+      <p>Clean jokes, riddles, and puns.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="parenting">
+      <span class="tag">Parenting &amp; Family</span>
+      <h3>Teen Money Lessons</h3>
+      <p>Allowance, first jobs, and budgeting.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="food">
+      <span class="tag">Food &amp; Cooking</span>
+      <h3>Pizza Cooking</h3>
+      <p>Homemade pizza, done right.</p>
+      <a class="visit" href="https://pizza-cooking.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="food">
+      <span class="tag">Food &amp; Cooking</span>
+      <h3>Baking Tips</h3>
+      <p>Measure right, bake better.</p>
+      <a class="visit" href="https://baking-tips.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="food">
+      <span class="tag">Food &amp; Cooking</span>
+      <h3>Funny Baking Ideas</h3>
+      <p>Glorious baking fails and funny creations.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="food">
+      <span class="tag">Food &amp; Cooking</span>
+      <h3>Things to Make Out of Toast</h3>
+      <p>Exactly what it sounds like.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="food">
+      <span class="tag">Food &amp; Cooking</span>
+      <h3>Slow Cooker Dinners</h3>
+      <p>Feed the family with 10 minutes of prep.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="food">
+      <span class="tag">Food &amp; Cooking</span>
+      <h3>Cupboard Meals</h3>
+      <p>Dinners from what&#8217;s already on the shelf.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Robot Vacuum Repair</h3>
+      <p>Fix it yourself before replacing it.</p>
+      <a class="visit" href="https://robot-vacuum-repair.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Home Lab Setup</h3>
+      <p>Build a home server lab step by step.</p>
+      <a class="visit" href="https://home-lab-setup.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Hard Drive Health</h3>
+      <p>Check your drives before they die.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Typing 101</h3>
+      <p>Type faster without looking down.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>BC Retail Tips</h3>
+      <p>Business Central and LS Retail tips from the trenches.</p>
+      <a class="visit" href="https://bc-retail-tips.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Metal Detecting for Beginners</h3>
+      <p>Gear, permissions, and where to hunt.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>3D Printing at Home</h3>
+      <p>First prints to fixing failed ones.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Old Laptop Revival</h3>
+      <p>Upgrades that make old laptops useful again.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Old Tech, New Life</h3>
+      <p>New jobs for old phones, tablets, and PCs.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Fix Your Wi-Fi</h3>
+      <p>Dead zones, placement, and extenders.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>AI Starter Guide</h3>
+      <p>What AI chatbots can and can&#8217;t do.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="tech">
+      <span class="tag">Tech &amp; How-To</span>
+      <h3>Using AI Agents</h3>
+      <p>Give clear instructions, check the work.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Grocery Saving Tips</h3>
+      <p>Cut the food bill without eating sad meals.</p>
+      <a class="visit" href="https://grocery-saving-tips.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Reward Card Reviews</h3>
+      <p>How reward cards actually work.</p>
+      <a class="visit" href="https://reward-card-reviews.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Discount Stacking</h3>
+      <p>Stack sales, coupons, and cashback.</p>
+      <a class="visit" href="https://discount-stacking.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Crypto Investing</h3>
+      <p>The basics, minus the hype.</p>
+      <a class="visit" href="https://crypto-investing.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Crypto Mining Guide</h3>
+      <p>What mining is, and whether it&#8217;s worth it.</p>
+      <a class="visit" href="https://crypto-mining.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Play-to-Earn Games</h3>
+      <p>Games with crypto rewards, honestly reviewed.</p>
+      <a class="visit" href="https://play-to-earn-games.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Play-to-Earn Sites</h3>
+      <p>Sites and apps that pay you to play.</p>
+      <a class="visit" href="https://play-to-earn-sites.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Career Specialization</h3>
+      <p>Go deep, get paid.</p>
+      <a class="visit" href="https://career-specialization.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Work From Home Setups</h3>
+      <p>Build a workspace that works.</p>
+      <a class="visit" href="https://work-from-home-setups.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>Flipping Auction Finds</h3>
+      <p>How liquidation auctions work, and spotting value.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="money">
+      <span class="tag">Money &amp; Deals</span>
+      <h3>True Cost of a Car</h3>
+      <p>Ownership cost over time, honestly added up.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="home">
+      <span class="tag">Home &amp; Auto</span>
+      <h3>Home Renovation Guides</h3>
+      <p>Plan it right before you swing a hammer.</p>
+      <a class="visit" href="https://home-renovation-guides.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="home">
+      <span class="tag">Home &amp; Auto</span>
+      <h3>Dodge Grand Caravan DIY Repairs</h3>
+      <p>Common fixes you can do yourself.</p>
+      <a class="visit" href="https://dodge-caravan-repairs.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="home">
+      <span class="tag">Home &amp; Auto</span>
+      <h3>Garage Organization</h3>
+      <p>Storage that survives a family.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="home">
+      <span class="tag">Home &amp; Auto</span>
+      <h3>Home Shelving Options</h3>
+      <p>From floating shelves to garage racks.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="work">
+      <span class="tag">Work &amp; Business</span>
+      <h3>Retail Inventory Management</h3>
+      <p>Stock counts, reorders, and shrinkage.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="work">
+      <span class="tag">Work &amp; Business</span>
+      <h3>Data Management Basics</h3>
+      <p>Files, backups, and shared drives that make sense.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="work">
+      <span class="tag">Work &amp; Business</span>
+      <h3>How to Write a Business Case</h3>
+      <p>Costs, benefits, and getting to yes.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="work">
+      <span class="tag">Work &amp; Business</span>
+      <h3>What to Focus On at Work</h3>
+      <p>Priorities, deep work, and managing up.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="fun">
+      <span class="tag">Just for Fun</span>
+      <h3>The Trend Roast</h3>
+      <p>Outrageous sarcasm on trending topics.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="fun">
+      <span class="tag">Just for Fun</span>
+      <h3>Ridiculous Old-Textbook Uses</h3>
+      <p>25 uses that have nothing to do with reading.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="fun">
+      <span class="tag">Just for Fun</span>
+      <h3>Brick Builds</h3>
+      <p>LEGO fan guides and build ideas.</p>
+      <a class="visit" href="https://brick-builds.pages.dev">Visit &rarr;</a>
+    </article>
+    <article class="card" data-category="fun">
+      <span class="tag">Just for Fun</span>
+      <h3>Dad Jokes Vault</h3>
+      <p>Classics, puns, and groaners.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="fun">
+      <span class="tag">Just for Fun</span>
+      <h3>Family Game Nights</h3>
+      <p>Games that work for mixed ages.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="fun">
+      <span class="tag">Just for Fun</span>
+      <h3>Board Game Reviews</h3>
+      <p>Find your next table favorite.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="fun">
+      <span class="tag">Just for Fun</span>
+      <h3>Marvel Series Reviews</h3>
+      <p>What to watch, and what to skip.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+    <article class="card" data-category="fun">
+      <span class="tag">Just for Fun</span>
+      <h3>Campsite Reviews</h3>
+      <p>Picking the right campground.</p>
+      <span class="soon">Coming soon</span>
+    </article>
+  </section>
+  <section class="about">
+    <h2>About the author</h2>
+    <p>I&#8217;m Mike &#8212; a Toronto-based dad and IT professional. By day I work with
+    Microsoft Dynamics 365 Business Central and retail systems; on the side I run
+    <a href="https://www.bestmikedeals.com/">BestMikeDeals</a>, my little resale store.</p>
+    <p>My kids range from teens to college-age, so this network covers a bit of everything our
+    household actually talks about: parenting, cooking, tech, saving money, fixing things around
+    the house &#8212; and the occasional completely ridiculous project. Roughly half of it is
+    practical how-to guides, and the other half is just for fun.</p>
+    <p>When I&#8217;m not writing or working, I&#8217;m usually baking, 3D printing, out with the
+    metal detector, or gaming. Everything here is written in plain language from real experience &#8212;
+    starter guides, not textbooks. I hope something here helps you out, or at least makes you laugh.</p>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Mike&#8217;s Corner &#8212; a directory of personal projects. Each site&#8217;s content is a
+    starter guide for general information only, not professional advice.</p>
+  </div>
+</footer>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('.card');
+  var showing = document.getElementById('showing');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      buttons.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      var f = btn.getAttribute('data-filter');
+      var n = 0;
+      cards.forEach(function (card) {
+        var show = (f === 'all' || card.getAttribute('data-category') === f);
+        card.style.display = show ? '' : 'none';
+        if (show) { n++; }
+      });
+      showing.textContent = 'Showing ' + n + ' of ' + cards.length + ' sites';
+    });
+  });
+})();
+</script>
+</body>
+</html>

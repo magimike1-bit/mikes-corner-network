@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART Basics, Explained Simply — Hard Drive Health</title>
+<meta name="description" content="What SMART is, how your drive monitors itself, which SMART attributes actually matter, and how to read the results without a computer science degree.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>SMART basics, explained simply</h1>
+  <p class="meta">Drive monitoring &middot; 6 min read</p>
+  <!-- AdSense: ad code goes here -->
+
+  <p>Almost every modern hard drive and SSD is constantly grading its own homework. That
+  self-monitoring system is called SMART — Self-Monitoring, Analysis and Reporting Technology.
+  It's built into the drive's firmware, it runs whether you ask it to or not, and it keeps a
+  running log of how the drive is doing. This guide explains what SMART actually tells you,
+  which readings matter, and how to interpret them without overthinking it.</p>
+
+  <h2>What SMART is (and isn't)</h2>
+  <p>SMART is a standard set of measurements the drive tracks about itself: how many sectors
+  had to be remapped, how many read errors occurred, how hot the drive runs, how long it has
+  been powered on, and so on. Your operating system or a health-check tool can read these
+  measurements on demand.</p>
+  <p>What SMART <em>isn't</em>: a crystal ball. It's a dashboard, not a guarantee. A drive can
+  report "healthy" right up until an electronic component fails without warning. Think of
+  SMART the way you'd think of a car's dashboard warning lights — extremely useful, but the
+  absence of a lit warning doesn't prove everything is fine.</p>
+
+  <h2>The overall status: the one number most people need</h2>
+  <p>Most tools summarize SMART as a simple status: healthy/good, caution/warning, or bad/failing.
+  For most people, this summary is enough for day-to-day use:</p>
+  <ul>
+    <li><strong>Good</strong> — nothing alarming detected. Keep your normal backup routine.</li>
+    <li><strong>Caution</strong> — something is degrading. Back up now and plan a replacement;
+    don't wait for it to become "bad."</li>
+    <li><strong>Bad</strong> — the drive considers itself to be failing. Back up immediately,
+    minimize use, and replace the drive.</li>
+  </ul>
+  <p>Take "bad" at face value. People talk themselves out of it — "but it still works!" — and
+  that's exactly how data gets lost.</p>
+
+  <h2>The attributes that actually matter</h2>
+  <p>If you open a detailed SMART report you'll see a long list of cryptically named counters.
+  Most of them are noise for everyday use. These are the ones worth understanding:</p>
+
+  <h3>Reallocated sectors</h3>
+  <p>Drives keep spare sectors in reserve. When a sector goes bad, the drive quietly swaps in a
+  spare — that's a reallocation. A small number that never grows is usually fine and can date
+  back to manufacturing. A count that <em>keeps increasing</em> means the drive's surface is
+  deteriorating. Growing is the keyword: watch the trend, not just the number.</p>
+
+  <h3>Pending and uncorrectable sectors</h3>
+  <p>"Pending" sectors are ones the drive suspects are bad but hasn't confirmed yet;
+  "uncorrectable" sectors are ones it couldn't read even after retrying. Any nonzero count here
+  deserves attention, because it means the drive is actively having trouble reading your data
+  right now — not at some point in the past.</p>
+
+  <h3>Temperature</h3>
+  <p>Heat is the enemy of all electronics, and drives report their own temperature. Occasional
+  warmth under heavy load is normal; consistently running hot shortens a drive's life. If your
+  drive runs hot, the fix is usually airflow — make sure vents aren't blocked and fans are
+  working — not a new drive.</p>
+
+  <h3>Power-on hours</h3>
+  <p>Simply how long the drive has been running. It doesn't directly measure health, but it's
+  useful context: a drive with tens of thousands of hours on it is elderly, and you should
+  treat its backups with extra respect even if every other reading looks fine.</p>
+
+  <h3>For HDDs: spin-up and seek behavior</h3>
+  <p>Mechanical drives also track things like spin retry counts and seek errors — how often the
+  platters struggled to get up to speed or the heads struggled to find their target. Rising
+  counts here point to mechanical wear, the classic slow-decline failure mode of spinning disks.</p>
+
+  <h3>For SSDs: wear and remaining life</h3>
+  <p>SSDs track wear differently: many report a "remaining life" or "wear level" percentage, and
+  the total amount of data ever written to the drive. Flash memory cells wear out with each
+  write, so these readings estimate how much of the drive's write endurance has been used. A
+  drive showing very high wear deserves a replacement plan even if it still feels fast.</p>
+
+  <h2>How to read SMART without obsessing</h2>
+  <ul>
+    <li><strong>Check periodically, not daily.</strong> A monthly glance — or a monitoring tool
+    that alerts you automatically — is plenty. Daily checking just creates anxiety.</li>
+    <li><strong>Trends beat snapshots.</strong> A single odd reading means little; a reading that
+    gets worse month after month means a lot. Some tools keep history for exactly this reason.</li>
+    <li><strong>Don't invent your own thresholds.</strong> Different manufacturers scale
+    attributes differently, and raw numbers aren't comparable across brands. Trust the tool's
+    overall assessment and watch for change over time rather than fixating on whether a
+    particular number "looks high."</li>
+    <li><strong>A clean report is not a backup strategy.</strong> SMART catches gradual
+    degradation well and sudden electronic failure poorly. Keep backups current regardless of
+    what SMART says.</li>
+  </ul>
+
+  <h2>The bottom line</h2>
+  <p>SMART is free insight your drive is already collecting — use it. Glance at the overall
+  status now and then, pay attention to growing reallocated sectors and any pending or
+  uncorrectable errors, and act on warnings promptly instead of negotiating with them. Pair
+  that habit with real backups (see
+  <a href="/posts/the-3-2-1-backup-rule.html">the 3-2-1 backup rule</a>), and you've covered
+  the two things that actually protect your data: early warning and a way out.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -80,3 +80,5 @@ main { padding: 32px 0 48px; }
 @media (max-width: 600px) {
   .intro h1 { font-size: 1.6rem; }
 }
+
+.site-footer .ai-disclosure{font-size:.85em;opacity:.85}

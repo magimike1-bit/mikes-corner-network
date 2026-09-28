@@ -247,3 +247,5 @@ figure.diagram figcaption{font-size:.85rem;color:var(--muted);margin-top:10px;te
   .article h1{font-size:1.65rem}
   ol.steps>li{padding-left:66px}
 }
+
+.site-footer .ai-disclosure{font-size:.85em;opacity:.85}

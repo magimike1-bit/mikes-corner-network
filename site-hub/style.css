@@ -127,3 +127,5 @@ main { padding: 32px 0 48px; }
   .intro h1 { font-size: 1.6rem; }
   .about { padding: 20px; }
 }
+
+.site-footer .ai-disclosure{font-size:.85em;opacity:.85}

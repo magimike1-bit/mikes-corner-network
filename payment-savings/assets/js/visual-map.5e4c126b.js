@@ -1,7 +1,7 @@
 import { S } from './session.babf8dd5.js';
 import { $, esc, money } from './util.03612f15.js';
-import { dispAmt, lifeLabel, installHoursTotal, allItems, cadOf, installHrsLabel, installHrsMid, itemQty, itemUpfront, lifeDataFor, manualDef, manualMonthly } from './cost-engine.0a69d341.js';
-import { netZoneDevices, netDevCounts, ensureNET } from './net-plan.a2c6b11f.js';
+import { dispAmt, lifeLabel, installHoursTotal, allItems, cadOf, installHrsLabel, installHrsMid, itemQty, itemUpfront, lifeDataFor, manualDef, manualMonthly } from './cost-engine.85cce070.js';
+import { netZoneDevices, netDevCounts, netWiredDrops, ensureNET } from './net-plan.a1631221.js';
 /* map.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   const MAP_NETZONE = { // item id -> S.NET zone id: how each device reaches the network
@@ -359,7 +359,9 @@ import { netZoneDevices, netDevCounts, ensureNET } from './net-plan.a2c6b11f.js'
     const boBox = boxes.filter(b => b.z.id === "backoffice")[0] || boxes[boxes.length - 1];
     const hub = swNode ? {x:swNode._x + CW / 2, y:swNode._y + CH / 2}
                        : {x:boBox.x + boBox.w - 46, y:boBox.y + boBox.h - 36};
-    const wiredN = built.nodes.filter(n => n.kind === "hw" && n.link === "wired").reduce((s, n) => s + n.qty, 0);
+    // Wired-run callout uses the single authoritative count shared with the network plan
+    // (netWiredDrops) — never a separate node tally, so the two views always agree.
+    const wiredN = netWiredDrops();
     svg.setAttribute("viewBox", "0 0 " + W + " " + H);
     const apOn = !!(S.state["ap"] && S.state["ap"].checked);
     const wifiAt = {};

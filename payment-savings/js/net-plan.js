@@ -1,6 +1,6 @@
 import { S } from './session.js';
 import { $, money } from './util.js';
-import { dispAmt, cadOf, findItem } from './cost-engine.js';
+import { dispAmt, cadOf, findItem, itemQty } from './cost-engine.js';
 /* netplan.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   function ensureNET(){
@@ -8,7 +8,11 @@ import { dispAmt, cadOf, findItem } from './cost-engine.js';
   }
 
   function netDevCounts(){
-    const q = id => { const st = S.state[id]; return (st && st.checked) ? Math.max(0, st.qty || 0) : 0; };
+    // Authoritative device quantities: use itemQty (per_station/per_terminal/per_unit),
+    // NOT st.qty — st.qty is 1 for terminal/station while the real counts live in inputs.
+    const inp = S.getInputs();
+    const q = id => { const item = findItem(id); const st = S.state[id];
+      return (item && st && st.checked) ? Math.max(0, itemQty(item, inp)) : 0; };
     const c = { station:q("station"), terminal:q("terminal"), printer:q("printer"),
              kprinter:q("kprinter"), labelprinter:q("labelprinter"), kds:q("kds"),
              kiosk:q("kiosk"), selfcheckout:q("selfcheckout"), tablets:q("tablets"),
@@ -16,7 +20,7 @@ import { dispAmt, cadOf, findItem } from './cost-engine.js';
     // station-builder addons (per-lane printer/scanner/drawer/scale) also need network
     const sst = S.state["station"];
     if(sst && sst.checked){
-      const n = Math.max(0, sst.qty || 0);
+      const n = Math.max(0, itemQty(findItem("station"), inp));
       ["printer","scanner","drawer","scale"].forEach(a => {
         if(sst.reqs && sst.reqs[a]) c[a] = (c[a] || 0) + n;
       });

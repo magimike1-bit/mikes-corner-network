@@ -95,15 +95,25 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
      TCO comparison shows all three + none, with plain-language profile guidance. ---- */
 
   function supportMonthlyFor(opt, plan, incidentsPerYear){
+    return supportBaseMonthly(opt, plan) + supportIncidentMonthly(opt, plan, incidentsPerYear);
+  }
+
+  /* ---- Split support cost into its priced contract-like base (upfront amortized +
+     monthly) and its expected per-incident part. Break/fix per-incident prices are
+     quote-based, so the incident part is $0 until a real price is entered — it must
+     NEVER be derived from training costs. ---- */
+  function supportBaseMonthly(opt, plan){
     const s = opt && opt.support && opt.support[plan];
-    if(!s) return 0;
-    const inc = Math.max(0, +incidentsPerYear || 0);
+    if(!s || plan === "breakfix") return 0;
     const termMonths = Math.max(1, Math.round((s.years || 1) * 12));
-    const base = (s.upfront ? cadOf(s.upfront, s.cur) / termMonths : 0) + cadOf(s.monthly, s.cur);
-    if(plan === "contract") return base;
-    if(plan === "breakfix") return (cadOf(s.perIncident, s.cur) * inc) / 12;
-    if(plan === "hybrid") return base + (cadOf(s.perIncident, s.cur) * inc) / 12;
-    return 0;
+    return (s.upfront ? cadOf(s.upfront, s.cur) / termMonths : 0) + cadOf(s.monthly, s.cur);
+  }
+
+  function supportIncidentMonthly(opt, plan, incidentsPerYear){
+    const s = opt && opt.support && opt.support[plan];
+    if(!s || plan === "contract") return 0;
+    const inc = Math.max(0, +incidentsPerYear || 0);
+    return (cadOf(s.perIncident, s.cur) * inc) / 12;
   }
 
   function supportPlanPriced(opt, plan){
@@ -129,6 +139,19 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
     if(st.support && st.support !== "none" && opt.support) m += supportMonthlyFor(opt, st.support, st.incidents == null ? 1 : st.incidents) * q;
     if(item.base) m += item.base * (item.calc === "per_location" ? inp.locations : 1);
     return m;
+  }
+
+  /* ---- Canonical leased-hardware monthly for one item. Single source of truth for
+     the "Leased hardware" pay-monthly row — the pay breakout must use this, never a
+     parallel inline computation, so the row can never show $0 while leases exist. ---- */
+  function leaseMonthly(item, inp){
+    const st = S.state[item.id]; if(!st || !st.checked) return 0;
+    if(item.builder || item.calc === "training_init" || item.calc === "training_ongoing") return 0;
+    if(st.manual && manualDef(item)) return 0;
+    if(S.DATA.hardware.install.indexOf(item) !== -1) return 0;
+    const opt = item.options[st.optIdx || 0];
+    if(!opt || opt.info_only || !opt.monthly || !opt.lease) return 0;
+    return cadOf(opt.monthly, opt.cur) * itemQty(item, inp);
   }
 
   /* ---- Upfront (pay-now) math: purchase prices + install items + station hardware.
@@ -227,7 +250,7 @@ function lifeDataFor(opt){
   return (opt._item && S.DATA.lifecycle[opt._item]) || null;
 }
 
-export { cadOf, dispAmt, lifeDataFor, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, switchFor, perLabel };
+export { cadOf, dispAmt, lifeDataFor, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, switchFor, perLabel };
 
   function itemMonthlyPreviewNoSupport(item, opt){
     const inp = S.getInputs();

@@ -1,11 +1,11 @@
 import { S } from './session.babf8dd5.js';
 import { $, money, esc, pyRound, clampN, pct1 } from './util.03612f15.js';
 import { loadData } from './data.40b26683.js';
-import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.0a69d341.js';
-import { renderMap, mapJumpToItem, initMapEvents } from './visual-map.f3bf507d.js';
-import { trainMathHTML, updateTrainMath, renderTrainingTier } from './training.059d12df.js';
-import { ensureNET, netDevCounts, netZoneDevices, netWiredDrops, netWiredDesc, dropUnitCost, renderNetPlan } from './net-plan.a2c6b11f.js';
-import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters.d5d79129.js';
+import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.85cce070.js';
+import { renderMap, mapJumpToItem, initMapEvents } from './visual-map.5e4c126b.js';
+import { trainMathHTML, updateTrainMath, renderTrainingTier } from './training.f08b57d0.js';
+import { ensureNET, netDevCounts, netZoneDevices, netWiredDrops, netWiredDesc, dropUnitCost, renderNetPlan } from './net-plan.a1631221.js';
+import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters.5c285d13.js';
 /* core.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   function recFor(item){ return S.DATA.recTiers[S.sector + ":" + item.id] || S.DATA.recTiers["*:" + item.id] || null; }
@@ -389,7 +389,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       const s = supObj[p]; if(!s) return;
       const fake = {support: supObj};
       const cost = supportPlanPriced(fake, p) ? " — " + money(supportMonthlyFor(fake, p, curInc)) + "/mo" : " — quote-based";
-      h += '<option value="' + p + '"' + (curPlan === p ? " selected" : "") + '>" + labels[p] + cost + "</option>';
+      h += '<option value="' + p + '"' + (curPlan === p ? " selected" : "") + ">" + labels[p] + cost + "</option>";
     });
     return h + "</select>";
   }
@@ -443,8 +443,11 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
         const inc = st.reqInc == null ? 1 : st.reqInc;
         const addSup = (supObj, plan) => {
           if(!plan || plan === "none" || !supObj) return;
-          const m = supportMonthlyFor({support: supObj}, plan, inc) * q;
-          if(plan === "contract") contractMo += m; else breakfixMo += m;
+          // Contract-like priced base (upfront/term + monthly) -> contracts.
+          // Expected per-incident part -> break/fix. Break/fix incident prices are
+          // quote-based, so that part is $0 until a real price exists — never training.
+          contractMo += supportBaseMonthly({support: supObj}, plan) * q;
+          breakfixMo += supportIncidentMonthly({support: supObj}, plan, inc) * q;
         };
         if(st.path === "aio") addSup(item.aio.support, st.aioSupport);
         else item.addons.forEach(a => { if(st.reqs && st.reqs[a.id]) addSup(a.support, st.reqSupport && st.reqSupport[a.id]); });
@@ -456,11 +459,15 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       const q = itemQty(item, inp);
       if(isInstall){ installUpfront += cadOf(opt.upfront, opt.cur) * q; return; }
       if(opt.upfront) hwUpfront += cadOf(opt.upfront, opt.cur) * q;
-      if(opt.monthly){ const mc = cadOf(opt.monthly, opt.cur); if(opt.lease) leaseMo += mc * q; else saasMo += mc * q; }
+      leaseMo += leaseMonthly(item, inp); // single source of truth — never a parallel inline calc
+      if(opt.monthly && !opt.lease) saasMo += cadOf(opt.monthly, opt.cur) * q;
       if(item.base) saasMo += item.base * (item.calc === "per_location" ? inp.locations : 1);
       if(st.support && st.support !== "none" && opt.support){
-        const m = supportMonthlyFor(opt, st.support, st.incidents == null ? 1 : st.incidents) * q;
-        if(st.support === "contract") contractMo += m; else breakfixMo += m;
+        // Contract-like priced base -> contracts; expected per-incident part -> break/fix.
+        // Break/fix incident prices are quote-based ($0) — never derived from training.
+        const inc = st.incidents == null ? 1 : st.incidents;
+        contractMo += supportBaseMonthly(opt, st.support) * q;
+        breakfixMo += supportIncidentMonthly(opt, st.support, inc) * q;
       }
     });
     const hrs = installHoursTotal(inp);
@@ -484,13 +491,15 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       r("Leased hardware", money(leaseMo), true) +
       r("Subscriptions (SaaS)", money(saasMo), true) +
       r("Support contracts", money(contractMo), true) +
-      r("Expected break/fix", money(breakfixMo), true) +
+      (breakfixMo > 0 ? r("Expected break/fix", money(breakfixMo), true)
+        : '<div class="pay-row"><span>Expected break/fix</span><strong>—</strong></div>') +
       r("New-hire training", money(trainMo), true) +
       r("Processing fees", money(proc), true) +
       "</div></div>" +
       '<p class="fine">Bought hardware is due in full at install — the monthly total above spreads it over its expected life for comparison only. ' +
       "Cable drops and setup are one-time: they never appear in the monthly column. " +
       "Leasing converts hardware to a real monthly bill — lease terms are quote-based, ask your reseller.<br>" +
+      "Break/fix visits are quote-based, so Expected break/fix stays blank until a vendor prices a visit — it is never estimated from training costs.<br>" +
       "Foreign-currency research prices are converted to CAD at US$1 = C$1.416 and £1 = C$1.72 (market rates, 2026-09-28) — approximate; your bank\u2019s rate will differ slightly. No foreign-currency amount ever enters a total unconverted.</p></div>";
   }
 
@@ -501,9 +510,11 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
   function loadTypical(){
     const t = S.DATA.typical.setups[S.sector]; if(!t) return;
     const set = (id, v) => { const el = $(id); if(el && v !== undefined) el.value = v; };
+    // Processing rate is always shown with at most 2 decimals — never a float artifact like 2.6500000953674316.
+    const setRate = v => { const el = $("in-rate"); if(el && v !== undefined && v !== null && v !== "") el.value = Math.round(+v * 100) / 100; };
     Object.values(t.q).forEach((v, i) => set(S.DATA.typical.qIds[S.sector][i], v));
     set("in-locations", t.basics.locations); set("in-employees", t.basics.employees);
-    set("in-volume", t.basics.volume); set("in-rate", t.basics.rate);
+    set("in-volume", t.basics.volume); setRate(t.basics.rate);
     set("in-marketplace", t.basics.marketplace);
     /* Joseph rule: support-type selections survive navigation. Snapshot the support
        fields before the typical reset wipes S.state, re-apply after the rebuild. */
@@ -892,6 +903,12 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       el.addEventListener("input", h);
       el.addEventListener("change", h);
     });
+  // Keep the rate display clean: normalize any float artifact to max 2 decimals on edit.
+  const rateEl = $("in-rate");
+  if(rateEl) rateEl.addEventListener("change", () => {
+    const v = parseFloat(rateEl.value);
+    if(isFinite(v)) rateEl.value = Math.round(v * 100) / 100;
+  });
 
   $("btn-typical").addEventListener("click", loadTypical);
   meEvents();

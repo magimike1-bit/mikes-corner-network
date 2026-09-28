@@ -1,6 +1,6 @@
 import { S } from './session.babf8dd5.js';
 import { $, money } from './util.03612f15.js';
-import { trainEmps, trainingInitCost, trainingOngoingMonthly } from './cost-engine.0a69d341.js';
+import { trainEmps, trainingInitCost, trainingOngoingMonthly } from './cost-engine.85cce070.js';
 /* training.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   function trainMathHTML(inp){
@@ -76,7 +76,15 @@ import { trainEmps, trainingInitCost, trainingOngoingMonthly } from './cost-engi
     live("tr-turn", v => { S.TRAIN.turnover = v / 100; }, v => v + "%/yr");
     live("tr-hirehrs", v => { S.TRAIN.hireHrs = v; }, v => v + " hrs");
     const te = $("tr-emps");
-    if(te) te.addEventListener("change", () => { S.TRAIN.emps = Math.max(0, +te.value || 0); S.TRAIN.empsTouched = true; S.renderCatalog(); });
+    if(te){
+      // Live recalc on every keystroke (not just on blur/change) — the computed
+      // training text must never lag behind what the user typed.
+      te.addEventListener("input", () => {
+        S.TRAIN.emps = Math.max(0, +te.value || 0); S.TRAIN.empsTouched = true;
+        updateTrainMath(); S.recalc();
+      });
+      te.addEventListener("change", () => { S.TRAIN.emps = Math.max(0, +te.value || 0); S.TRAIN.empsTouched = true; S.renderCatalog(); });
+    }
     document.querySelectorAll('input[name="tr-trainer"]').forEach(r => {
       r.addEventListener("change", () => { S.TRAIN.trainerMode = r.value; S.renderCatalog(); });
     });

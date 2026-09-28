@@ -1,6 +1,6 @@
 import { S } from './session.babf8dd5.js';
 import { $, money, pct1 } from './util.03612f15.js';
-import { allItems, itemMonthly } from './cost-engine.0a69d341.js';
+import { allItems, itemMonthly } from './cost-engine.85cce070.js';
 /* me.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   function ensureME(){
@@ -44,8 +44,8 @@ import { allItems, itemMonthly } from './cost-engine.0a69d341.js';
     let revPct = "";
     if(inp.revenue > 0 && comm > 0) revPct = " \u2014 that\u2019s " + pct1(comm * 12 / inp.revenue * 100) + " of your revenue";
     $("me-comm-result").innerHTML = sales > 0
-      ? 'At <b>' + money(sales) + '/mo</b> in delivery sales, ' + plat.label + " " + plan.name +
-        ' costs you <span class="big">' + money(comm) + '/mo</span>' + revPct +
+      ? 'At&nbsp;<b>' + money(sales) + '/mo</b>&nbsp;in delivery sales, ' + plat.label + " " + plan.name +
+        ' costs you&nbsp;<span class="big">' + money(comm) + '/mo</span>' + revPct +
         '.<br>Cost-of-sales, not IT \u2014 kept out of your tech stack total on purpose.'
       : "Enter your monthly delivery-app sales above \u2014 then watch what the % really costs.";
     // --- card 2: first-party comparison ---

@@ -244,3 +244,20 @@ Per item/category, THREE support types are modelled, not just with/without:
     avg ~73–76%, BLS via Escoffier/7shifts, accessed 2026-09-28; merchant sets theirs).
   - Wage default $18/hr adjustable (Ontario minimum $17.95/hr from Oct 1, 2026, ontario.ca).
   - Hour defaults are estimates, labelled as such (go-live 6 hrs/employee, 4 hrs/new hire, 4 trainer hrs).
+
+## Currency rule (added 2026-09-28 — load-bearing)
+- No mixed-currency math, ever. Research prices quoted in US$ or £ are tagged
+  `cur:"USD"` / `cur:"GBP"` in the data and converted to CAD via `cadOf()` at
+  STATED rates before entering ANY total: US$1 = C$1.416 (Finnhub/OANDA, 2026-09-28),
+  £1 = C$1.72 (exchangerates.org.uk, 2026-09-28). Rates + date + sources are
+  declared in the FX block and footnoted next to totals.
+- Displays show the converted CAD figure with the original foreign figure beside
+  it (e.g. "C$283 (orig. US$200 @ 1.416, 2026-09-28)").
+- Pre-converted research values (e.g. Toast POS ~US$69/mo stored as C$95) are
+  tagged cur:"CAD" with a note saying they were pre-converted at research time.
+- Info-only options (quote-based) never enter totals regardless of currency.
+
+## State preservation (added 2026-09-28)
+- Support-type selections (support/incidents/reqSupport/reqInc/aioSupport) survive
+  sector switches and typical-setup resets: loadTypical() snapshots them before
+  wiping state and re-applies after the rebuild.

@@ -249,3 +249,36 @@ figure.diagram figcaption{font-size:.85rem;color:var(--muted);margin-top:10px;te
 }
 
 .site-footer .ai-disclosure{font-size:.85em;opacity:.85}
+
+/* ---------- design-review polish (2026-09-28) ---------- */
+/* anchor offset: keep section headings visible under the sticky header */
+section[id]{scroll-margin-top:92px}
+
+/* card hover: gentle lift so grids feel interactive */
+.cat-card,.feat-card,.path-step{
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.cat-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 24px rgba(14,31,56,.14);
+  border-color:var(--amber);
+}
+.feat-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 24px rgba(14,31,56,.14);
+  border-color:var(--amber);
+}
+.feat-card:hover img{transform:scale(1.02)}
+.feat-card img{transition:transform .25s ease}
+.path-step:hover{box-shadow:0 6px 16px rgba(14,31,56,.10)}
+.btn{transition:background .15s ease,color .15s ease,border-color .15s ease}
+
+/* hero: warm glow + faint grid so it isn't flat navy */
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(560px 320px at 85% 12%,rgba(242,164,31,.22),transparent 70%),
+    radial-gradient(720px 420px at 8% 95%,rgba(242,164,31,.08),transparent 70%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 56px);
+}
+.hero .wrap{position:relative;z-index:1}

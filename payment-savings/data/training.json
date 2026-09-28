@@ -262,6 +262,42 @@
         "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
         "No-show policy: enforced at booking with a deposit — never argued at the chair."
       ]
+    },
+    "other": {
+      "checklist": [
+        "Everyone gets their own login PIN on day one — no shared logins, ever.",
+        "Run 10 practice checkouts per person before go-live: sale, void, refund, split payment.",
+        "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+        "Mobile readers: pair and test every reader before it goes on the truck — dead batteries kill sales.",
+        "Card-on-file: never store full card numbers in notes, spreadsheets, or texts — use the processor's vault.",
+        "Invoicing: send the invoice while you're still on site — payment speed halves after 24 hours.",
+        "End-of-day close: one person owns it, same steps, every night.",
+        "Write the 'when it breaks' card: who to call, what's the backup (spare reader? paper slips?).",
+        "Reconcile payouts weekly — online sales should match deposits minus fees.",
+        "Week-one review: 15 minutes with each person — what confused them? Fix it now."
+      ],
+      "cashier": [
+        "Your PIN is you — every void, discount and refund traces to it. Never share it.",
+        "Card fails twice → change tender. Don't tap five times and hope.",
+        "Say the total out loud before they pay — catches mis-rings instantly.",
+        "On-site payments: confirm the amount on the reader screen before handing it over.",
+        "Deposits up front — the no-show policy only works if it's collected before the work."
+      ],
+      "kitchen": [
+        "Not every 'other' business has a back of house — treat this list as the warehouse / prep-area version.",
+        "Label and date everything that goes on a shelf — FIFO keeps stock honest.",
+        "Packing slips match the invoice, every time — disputes start at the loading dock.",
+        "Damaged goods get quarantined same-day, not 'when someone gets to it'.",
+        "The person who picks the order initials it — accountability travels with the box."
+      ],
+      "manager": [
+        "End-of-day close is yours — same person, same steps, every night. No exceptions.",
+        "Voids, refunds, discounts: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+        "User PINs: create on hire, disable on departure — same day.",
+        "Check the chargeback inbox weekly — online and card-on-file payments dispute more often.",
+        "Review the effective processing rate monthly — card-not-present pricing creeps fastest.",
+        "Keep one spare reader charged and paired — it's the cheapest insurance you own."
+      ]
     }
   }
 }

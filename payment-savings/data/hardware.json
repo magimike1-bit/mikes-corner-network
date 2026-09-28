@@ -2008,6 +2008,216 @@
           "h": 120
         }
       ]
+    },
+    "other": {
+      "label": "Other business",
+      "emoji": "🧩",
+      "needs": [
+        {
+          "id": "pos",
+          "name": "POS / billing software",
+          "calc": "per_location",
+          "map": {
+            "zone": "counter",
+            "icon": "🖥️",
+            "label": "POS"
+          },
+          "options": [
+            {
+              "label": "Square POS — free",
+              "monthly": 0,
+              "conf": "official",
+              "bundled": true,
+              "note": "squareup.com/ca"
+            },
+            {
+              "label": "Helcim — $0/mo software",
+              "monthly": 0,
+              "conf": "official",
+              "note": "helcim.com/pricing — interchange-plus processing; POS locked to Helcim"
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "sub": "Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. All-in-one (Square Register class) = simpler — screen, reader and software in one box — but processor-locked, and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.",
+          "name": "Payment terminal",
+          "calc": "per_terminal",
+          "map": {
+            "zone": "counter",
+            "icon": "💳",
+            "label": "Terminal"
+          },
+          "options": [
+            {
+              "label": "Countertop — lease $34.95/mo (Moneris Go)",
+              "monthly": 34.95,
+              "conf": "official",
+              "lease": true,
+              "note": "Moneris published lease"
+            },
+            {
+              "label": "Countertop — buy ~$499",
+              "upfront": 499,
+              "conf": "reported",
+              "note": "$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"
+            },
+            {
+              "label": "Mobile/handheld — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "tableside + line-busting; price varies by model — get a quote"
+            },
+            {
+              "label": "All-in-one — ~$900 (Square Register)",
+              "upfront": 900,
+              "conf": "reported",
+              "bundled": true,
+              "note": "Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."
+            }
+          ]
+        },
+        {
+          "id": "station",
+          "name": "POS station — build each payment spot",
+          "calc": "per_station",
+          "builder": true,
+          "map": {
+            "zone": "counter",
+            "icon": "🖥️",
+            "label": "Station"
+          },
+          "addons": [
+            {
+              "id": "printer",
+              "label": "Receipt printer (USB)",
+              "upfront": 300,
+              "conf": "reported",
+              "note": "~$300 new — benchmark CA$200–500 (research). Where a dead printer stops sales, keep one spare on the shelf — a $300 printer beats a closed lane."
+            },
+            {
+              "id": "scanner",
+              "label": "Barcode scanner (Bluetooth)",
+              "upfront": 330,
+              "conf": "reported",
+              "note": "~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"
+            },
+            {
+              "id": "drawer",
+              "label": "Cash drawer",
+              "upfront": 80,
+              "conf": "reported",
+              "note": "~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"
+            },
+            {
+              "id": "pinpad",
+              "label": "PIN pad (card reader) at each station",
+              "pinsync": true,
+              "note": "sets your payment-terminal count to match the station count (plus pay-at-table handhelds for restaurants)"
+            }
+          ],
+          "defaultReqs": {
+            "printer": true,
+            "pinpad": true
+          },
+          "aio": {
+            "upfront": 900,
+            "conf": "reported",
+            "note": "Square Register ~$900 CAD (amazon.ca / square.ca)"
+          }
+        },
+        {
+          "id": "online",
+          "name": "Online checkout / invoicing",
+          "calc": "per_location",
+          "map": {
+            "zone": "backoffice",
+            "icon": "🌐",
+            "label": "Web"
+          },
+          "options": [
+            {
+              "label": "Shopify Basic — $49/mo",
+              "monthly": 49,
+              "conf": "reported",
+              "note": "shopify.com/ca pricing via third-party check 2026-09"
+            },
+            {
+              "label": "Payment links + invoicing — ~$0/mo add-on",
+              "monthly": 0,
+              "conf": "estimate",
+              "note": "Most processors include payment links and basic invoicing with the merchant account — confirm on your statement; per-invoice fees vary by processor."
+            }
+          ]
+        },
+        {
+          "id": "acct",
+          "name": "Accounting software",
+          "calc": "flat",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📊",
+            "label": "Acctg"
+          },
+          "options": [
+            {
+              "label": "QuickBooks Essentials — $70/mo",
+              "monthly": 70,
+              "conf": "official",
+              "note": "quickbooks.intuit.com/ca"
+            },
+            {
+              "label": "Xero Standard — $60/mo",
+              "monthly": 60,
+              "conf": "official",
+              "note": "xero.com/ca"
+            }
+          ]
+        }
+      ],
+      "toys": [
+        {
+          "id": "crm",
+          "name": "Marketing / CRM",
+          "calc": "per_location",
+          "info_only": true,
+          "options": [
+            {
+              "label": "Not yet researched — varies",
+              "monthly": 0,
+              "conf": "estimate",
+              "note": "email/SMS marketing tools vary widely; research pending"
+            }
+          ]
+        }
+      ],
+      "zones": [
+        {
+          "id": "counter",
+          "label": "Front counter",
+          "x": 20,
+          "y": 20,
+          "w": 300,
+          "h": 150
+        },
+        {
+          "id": "field",
+          "label": "On-site / mobile",
+          "x": 340,
+          "y": 20,
+          "w": 240,
+          "h": 150
+        },
+        {
+          "id": "backoffice",
+          "label": "Back office",
+          "x": 20,
+          "y": 190,
+          "w": 560,
+          "h": 120
+        }
+      ]
     }
   },
   "infra": [
@@ -2188,7 +2398,8 @@
     "qsr": "Minimal: 1–2 APs, a few drops. Kiosks want wired Ethernet, not Wi-Fi.",
     "hotel": "The big one — an AP every 4–8 rooms, PMS on its own VLAN, more switches per floor. Cost scales with rooms, not revenue.",
     "grocery": "Large footprint = more APs (3–6). Every lane wired; size the PoE switch for cameras too.",
-    "salon": "Minimal — 1 AP, 2–3 drops. The booking PC holds card-on-file data: segment it."
+    "salon": "Minimal — 1 AP, 2–3 drops. The booking PC holds card-on-file data: segment it.",
+    "other": "Small footprint — 1 access point and a couple of cable runs cover most businesses here. The payment stack for this sector is more software than hardware: gateway fees and chargebacks matter more than the counter."
   },
   "install": [
     {

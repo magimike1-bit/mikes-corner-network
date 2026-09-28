@@ -14,7 +14,8 @@ const INPUT_IDS = ["in-locations", "in-stations", "in-terminals", "in-employees"
   "in-volume", "in-ticket", "in-subsector", "in-rate", "in-revenue", "in-marketplace", "in-tables", "in-bar",
   "in-takeout", "in-drivethru", "in-seats", "in-kiosks", "in-sqft-r", "in-weigh",
   "in-sco", "in-rooms", "in-floors", "in-fb", "in-sqft-g", "in-deli", "in-lottery",
-  "in-chairs", "in-trooms", "in-retailct"];
+  "in-chairs", "in-trooms", "in-retailct",
+  "in-o-how", "in-o-spots", "in-o-cof"];
 
 const clone = (o) => JSON.parse(JSON.stringify(o == null ? {} : o));
 

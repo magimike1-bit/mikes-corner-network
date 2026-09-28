@@ -7,7 +7,7 @@
  * rows by design (RLS allows anon INSERT only).
  */
 import { isConfigured } from './config.0aae547a.js';
-import { getClient, getUser } from './sb.93d47640.js';
+import { getClient, getUser } from './sb.c957517c.js';
 
 export { isConfigured };
 

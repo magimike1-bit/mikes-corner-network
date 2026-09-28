@@ -11,7 +11,7 @@
  */
 import {
   getUser, signUp, signIn, signInMagic, resetPassword, signOut, onAuthChange,
-} from './sb.93d47640.js';
+} from './sb.c957517c.js';
 import {
   listSimStates, deleteSimState, listRateRuns, listFeeEntries, detectCreep,
   listAlertSubs, referralLink, claimPendingReferral, getReferralStats, guestNudge,
@@ -169,7 +169,7 @@ function guestBanner() {
 
 /* Sections take pre-fetched data (renderDashboard fetches everything in
    parallel). A null dataset means the fetch failed → friendly error state. */
-async function setupsSection(states) {
+function setupsSection(states) {
   const sec = el(`<section class="acct-block">
     <h2 class="section-title">Saved simulator setups</h2>
     <p class="section-sub">Reopen a saved configuration in the cost simulator, or remove one you no longer need.</p>

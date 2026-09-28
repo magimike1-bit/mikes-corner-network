@@ -332,6 +332,7 @@ create index if not exists idx_rate_runs_user on public.rate_runs(user_id);
 create index if not exists idx_fee_entries_user on public.fee_entries(user_id);
 create index if not exists idx_alert_subs_user on public.alert_subscriptions(user_id);
 create index if not exists idx_alert_subs_email on public.alert_subscriptions(email);
+create index if not exists idx_alert_subs_email_lower on public.alert_subscriptions(lower(email));
 create index if not exists idx_surcharge_runs_user on public.surcharge_runs(user_id);
 create index if not exists idx_settlement_runs_user on public.settlement_runs(user_id);
 create index if not exists idx_referrals_referrer on public.referrals(referrer_id);

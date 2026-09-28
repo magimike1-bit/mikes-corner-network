@@ -12,7 +12,7 @@
  */
 import { subscribeAlerts, isConfigured } from './db.e456647d.js';
 import { emailSendingEnabled } from './email.40dca101.js';
-import { getClient } from './sb.93d47640.js';
+import { getClient } from './sb.c957517c.js';
 
 function $(id) { return document.getElementById(id); }
 function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }

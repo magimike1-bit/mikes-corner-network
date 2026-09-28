@@ -2,7 +2,7 @@
  * Injects "Sign in / My account" + sign-out into .main-nav, driven by session.
  * Safe no-op when Supabase isn't configured (shows "Sign in" → account.html,
  * which explains local mode). */
-import { isConfigured, getUser, signOut, onAuthChange } from './sb.93d47640.js';
+import { isConfigured, getUser, signOut, onAuthChange } from './sb.c957517c.js';
 
 function mount() {
   const nav = document.querySelector(".main-nav");

@@ -23,7 +23,7 @@ const FILES = {
 };
 
 // __DATA_VERSIONS__ (build rewrites this line)
-const DATA_VERSIONS = {"benchmarks.json":"407dc674","fx.json":"17364eea","hardware.json":"3c1e8f33","install.json":"8d1e0f33","lifecycle.json":"21ca534f","manual.json":"4c977195","network.json":"7b3c69d9","rec-tiers.json":"113c24fe","sim.json":"5bb8ab50","subsectors.json":"a9068efa","support.json":"9bc86229","surcharge-rules.json":"0dde07aa","training.json":"2ef06e73","typical.json":"5ba0b6b4"};
+const DATA_VERSIONS = {"benchmarks.json":"407dc674","fx.json":"17364eea","hardware.json":"2cae3605","install.json":"8d1e0f33","lifecycle.json":"21ca534f","manual.json":"4c977195","network.json":"7b3c69d9","rec-tiers.json":"113c24fe","sim.json":"32c73b5b","subsectors.json":"bbe646e9","support.json":"9bc86229","surcharge-rules.json":"0dde07aa","training.json":"e181cba5","typical.json":"15ef7fcb"};
 
 function dataUrl(file) {
   const v = DATA_VERSIONS[file];

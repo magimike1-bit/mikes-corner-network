@@ -17,6 +17,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { buildSearchIndex } from "./build-search-index.mjs";
 
 const ROOT = "/home/hatch/workspace/sites/github-network/payment-savings";
 const hash8 = buf => crypto.createHash("sha1").update(buf).digest("hex").slice(0, 8);
@@ -121,4 +122,6 @@ for (const [page, spec] of Object.entries(PAGES)) {
   }
 }
 console.log(touched.length ? "pages updated: " + touched.join(", ") : "all pages already current");
+// search index: regenerated on every build so new pages are picked up
+buildSearchIndex();
 console.log("build complete");

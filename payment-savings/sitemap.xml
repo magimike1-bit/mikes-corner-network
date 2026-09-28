@@ -26,5 +26,6 @@
   <url><loc>https://payments.flswarehouse.com/referrals.html</loc><lastmod>2026-09-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://payments.flswarehouse.com/transparency-wall.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://payments.flswarehouse.com/annual-report.html</loc><lastmod>2026-09-28</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://payments.flswarehouse.com/how-we-get-paid.html</loc><lastmod>2026-09-28</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://payments.flswarehouse.com/how-we-get-paid.html</loc>
+<loc>https://payments.flswarehouse.com/search.html</loc><lastmod>2026-09-28</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
 </urlset>

@@ -42,7 +42,21 @@ for (const [page, mod] of Object.entries(PAGES)) {
 // no secrets anywhere in the repo: flag JWT-shaped tokens and live secret keys.
 // (The words "service_role"/"anon key" in README/config warnings are fine —
 // only actual key material fails.)
+// Exception: js/config.js may hold the PUBLIC anon key (it ships in the
+// browser by design). Any JWT there must decode with role "anon" —
+// "service_role" or anything else fails.
 const SECRET_PAT = /eyJ[A-Za-z0-9_-]{30,}|sk-(live|test)[A-Za-z0-9_-]+|xoxb-[A-Za-z0-9-]+|re_[A-Za-z0-9_]{20,}/;
+const JWT_PAT = /eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/g;
+function jwtRole(tok) {
+  try {
+    const payload = tok.split(".")[1];
+    const json = Buffer.from(payload.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8");
+    return JSON.parse(json).role || null;
+  } catch { return null; }
+}
+function isConfigCopy(rel) {
+  return rel === "js/config.js" || /^assets\/js\/config\.[0-9a-f]+\.js$/.test(rel);
+}
 function walk(d) {
   for (const f of fs.readdirSync(d)) {
     const p = path.join(d, f);
@@ -51,22 +65,35 @@ function walk(d) {
     if (st.isDirectory()) { if (!["_research", "_work", "supabase"].includes(f) || f === "supabase") walk(p); }
     else if (/\.(js|html|json|md|sh|sql)$/.test(f)) {
       const c = fs.readFileSync(p, "utf8");
-      if (SECRET_PAT.test(c)) fail("possible secret in " + path.relative(ROOT, p));
+      const rel = path.relative(ROOT, p);
+      let scan = c;
+      if (isConfigCopy(rel)) {
+        // Strip full anon-role JWTs (public key, ships in the browser by
+        // design) before the secret scan; anything else still fails.
+        for (const t of (c.match(JWT_PAT) || [])) {
+          if (jwtRole(t) === "anon") scan = scan.split(t).join("");
+        }
+      }
+      const toks = scan.match(new RegExp(SECRET_PAT.source, "g")) || [];
+      for (const tok of toks) fail("possible secret in " + rel);
     }
   }
 }
 walk(ROOT);
 ok("no secrets in repo");
 
-// config: URL may be filled (project created); anon key must still be a
-// placeholder until Joseph supplies it. isConfigured() must stay false.
+// config: URL may be filled (project created); anon key may be the placeholder
+// (local guest mode) or a real JWT decoding with role "anon" (live accounts).
+// Anything else (e.g. a service_role key) fails the secret scan above.
 const cfg = fs.readFileSync(path.join(ROOT, "js/config.js"), "utf8");
 const urlFilled = /SUPABASE_URL = "https:\/\/[a-z0-9-]+\.supabase\.co"/.test(cfg);
 const urlPlaceholder = cfg.includes("__SUPABASE_URL__");
 const keyPlaceholder = cfg.includes("__SUPABASE_ANON_KEY__");
-if ((!urlFilled && !urlPlaceholder) || !keyPlaceholder)
-  fail("config.js: URL must be placeholder or real supabase URL; anon key must stay a placeholder");
-else ok("config.js placeholders correct (key pending, local mode safe)");
+const keyToks = cfg.match(/eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/g) || [];
+const keyReal = keyToks.length > 0 && keyToks.every((t) => jwtRole(t) === "anon");
+if ((!urlFilled && !urlPlaceholder) || !(keyPlaceholder || keyReal))
+  fail("config.js: URL must be placeholder or real supabase URL; anon key must be placeholder or a real anon-role JWT");
+else ok("config.js state OK (" + (keyReal ? "live anon key" : "key placeholder, local mode") + ")");
 
 // migration: RLS on every table
 const sql = fs.readFileSync(path.join(ROOT, "supabase/migrations/001_init.sql"), "utf8");

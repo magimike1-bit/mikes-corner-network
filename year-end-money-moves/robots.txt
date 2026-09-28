@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://year-end-money-moves-yeqfe.kinsta.page/sitemap.xml

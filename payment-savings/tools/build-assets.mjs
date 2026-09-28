@@ -67,7 +67,7 @@ for (const f of cssFiles) {
 // references in each page to their content-hashed filenames. site-auth.js
 // (header sign-in widget) is injected on every page.
 const PAGES = {
-  "simulator.html":             { js: ["sim-core.js", "sim-save.js"], css: ["simulator.css"] },
+  "simulator.html":             { js: ["sim-core.js", "sim-save.js", "stepper.js"], css: ["simulator.css"] },
   "account.html":               { js: ["account.js"], css: [] },
   "rate-calculator.html":       { js: ["rate-calculator.js"], css: [] },
   "fee-tracker.html":           { js: ["fee-tracker.js"], css: [] },

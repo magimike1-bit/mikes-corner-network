@@ -476,6 +476,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     const trainNow = (trI && trI.checked) ? trainingInitCost(inp) : 0;
     const trainMo = (trO && trO.checked) ? trainingOngoingMonthly(inp) : 0;
     const payNow = hwUpfront + installUpfront + laborUpfront + trainNow;
+    S.totals = Object.assign(S.totals || {}, { payNow });
     const proc = inp.volume * (inp.rate / 100);
     const r = (label, val, mo) => '<div class="pay-row"><span>' + label + "</span><strong>" + val + (mo ? "/mo" : "") + "</strong></div>";
     el.innerHTML = '<div class="pay-breakout"><h4>💰 Pay now vs pay monthly</h4><div class="pay-cols">' +
@@ -866,6 +867,8 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     renderPayBreakout();
     renderMarginEaters();
     renderNetPlan();
+    S.totals = Object.assign(S.totals || {}, { monthly: total, save });
+    if(typeof S.renderStrip === "function") S.renderStrip();
   }
 
   function updateTotalBar(total){

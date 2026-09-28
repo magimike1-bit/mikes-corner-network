@@ -960,7 +960,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       const h = () => {
         if(id === "in-stations") S.stationsAuto = false; // manual override sticks
         if(id === "in-terminals"){ S.terminalsAuto = false; S.terminalsTouched = true; }
-        if(id === "in-subsector") S.subsector = $("in-subsector").value; // P3 picker state
+        if(id === "in-subsector"){ S.subsector = $("in-subsector").value; renderSubsectors(); } // P3 picker state + refresh margin note
         if(id === "in-marketplace" && document.activeElement === $(id)){ ensureME(); S.ME.sales = null; }
         renderCatalog();
       };

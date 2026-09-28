@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://christmas-gift-guide-2026-470a3.kinsta.page/sitemap.xml

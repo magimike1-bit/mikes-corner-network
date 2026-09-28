@@ -160,6 +160,10 @@ export async function subscribeAlerts(email, topics, source) {
   };
   const { error } = await sb.from("alert_subscriptions").upsert(row, { onConflict: "email" });
   if (!error) return { ok: true, pending: false };
+  // A logged-out resubscribe on an already-subscribed email hits the upsert's
+  // UPDATE path, which RLS rejects (42501). Say so plainly instead of
+  // leaking the raw "row-level security policy" message.
+  if (!me && error.code === "42501") throw new Error("That email is already subscribed.");
   // An anonymous row for this email may already exist (subscribed before
   // signing up). The upsert's UPDATE is then rejected by RLS (42501) because
   // the row's user_id is NULL. Claim it via the SECURITY DEFINER function.

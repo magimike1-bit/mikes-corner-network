@@ -11,8 +11,13 @@ function mount() {
   area.id = "fra-auth-area";
   area.style.cssText = "display:inline-flex;gap:8px;align-items:center;margin-left:8px";
   nav.appendChild(area);
+  // Same clear-then-append race as account.js boot(): a superseded render
+  // bails so concurrent auth events can't duplicate the nav links.
+  let renderSeq = 0;
   const render = async () => {
+    const my = ++renderSeq;
     const user = await getUser();
+    if (my !== renderSeq) return;
     if (user) {
       area.innerHTML = "";
       const a = document.createElement("a");

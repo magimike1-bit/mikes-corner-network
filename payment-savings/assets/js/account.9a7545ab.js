@@ -15,7 +15,7 @@ import {
 import {
   listSimStates, deleteSimState, listRateRuns, listFeeEntries, detectCreep,
   listAlertSubs, referralLink, claimPendingReferral, getReferralStats, guestNudge,
-} from './db.e456647d.js';
+} from './db.786d07d3.js';
 import { lineChart, fmtBp } from './chart.42f77134.js';
 
 /* ---------- tiny DOM helpers (browser only, called after boot) ---------- */
@@ -387,8 +387,15 @@ function claimOnce() {
 }
 
 let authWatching = false;
+// Guards the double-render race: boot() runs on DOMContentLoaded AND again
+// when onAuthStateChange fires INITIAL_SESSION, and sign-out triggers both
+// the button and the SIGNED_OUT event. A superseded boot bails before it can
+// append a second dashboard (duplicated IDs, doubled handlers).
+let bootSeq = 0;
+let bootDoneSeq = 0;  // seq of the last boot that finished rendering
 
 async function boot() {
+  const my = ++bootSeq;
   const app = document.getElementById("account-app");
   if (!app) return;
   // Re-render only on real session changes. TOKEN_REFRESHED fires roughly
@@ -407,12 +414,21 @@ async function boot() {
   app.innerHTML = "";
   let user = null;
   try { user = await getUser(); } catch (e) { user = null; }
+  if (my !== bootSeq) return;
   if (user) {
     claimOnce();
     await renderDashboard(app, user);
   } else {
     renderAuthCard(app);
     await renderDashboard(app, null);
+  }
+  // Superseded while rendering: clear only if no newer boot has finished
+  // since (a newer boot that already rendered owns the DOM; a newer boot
+  // still fetching will fill it).
+  if (my !== bootSeq) {
+    if (bootDoneSeq < my) app.innerHTML = "";
+  } else {
+    bootDoneSeq = my;
   }
 }
 

@@ -4,7 +4,7 @@
  * Node-safe: no top-level document/window/localStorage — DOM work is
  * inside init(), which only runs where document exists.
  */
-import { submitWallEntry, getWallAggregates, guestNudge } from './db.e456647d.js';
+import { submitWallEntry, getWallAggregates, guestNudge } from './db.786d07d3.js';
 
 const SECTOR_LABELS = {
   retail: "Retail",

@@ -112,6 +112,14 @@
     </div>
   </div>
 
+  <div id="q-other" style="display:none">
+    <div class="input-grid">
+      <div><label for="in-o-how">How do customers pay you?</label><select id="in-o-how"><option value="inperson">In person</option><option value="online">Online only</option><option value="both" selected>Both</option></select><div class="input-note">Online-only = no physical terminals needed.</div></div>
+      <div><label for="in-o-spots">Payment spots</label><input type="number" id="in-o-spots" min="0" value="2"><div class="input-note">Trucks, stalls, counters, registers — anywhere a card is taken.</div></div>
+      <div><label for="in-o-cof">Card-on-file / invoiced payments?</label><select id="in-o-cof"><option value="no">No</option><option value="yes" selected>Yes</option></select><div class="input-note">Adds invoicing / virtual-terminal math.</div></div>
+    </div>
+  </div>
+
   <div class="input-note" id="autobuild-summary" style="margin:10px 2px 0;font-size:.92rem"></div>
 
   <h3 style="margin:1.4em 0 .3em;font-size:1.4rem">Your business basics</h3>
@@ -279,8 +287,8 @@
   </div>
 </footer>
 <!-- __SIM_JS__ -->
-<script type="module" src="assets/js/sim-core.6921bad0.js"></script>
-<script type="module" src="assets/js/sim-save.2c8498fb.js"></script>
+<script type="module" src="assets/js/sim-core.0240cf5b.js"></script>
+<script type="module" src="assets/js/sim-save.bed58b91.js"></script>
 <script type="module" src="assets/js/stepper.7f9bc200.js"></script>
 
   <script type="module" src="assets/js/site-auth.b25b5fe2.js"></script>

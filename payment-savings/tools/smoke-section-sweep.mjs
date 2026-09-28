@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-/* Section sweep: boots the modular simulator, then for each of the 6 sectors
-   runs every section renderer (catalog, map, training, net plan, margin
-   eaters, totals). Catches per-sector/per-section runtime errors. */
+/* Section sweep: boots the modular simulator, then for each sector discovered
+   from data/hardware.json runs every section renderer (catalog, map, training,
+   net plan, margin eaters, totals). Catches per-sector/per-section runtime
+   errors. Sectors are discovered, never hardcoded — new sectors are swept
+   automatically. */
 import fs from "node:fs";
 
 const ROOT = new URL("../", import.meta.url).pathname.replace(/\/$/, "");
@@ -77,7 +79,7 @@ const training = await import(ROOT + "/js/training.js");
 const net = await import(ROOT + "/js/net-plan.js");
 const me = await import(ROOT + "/js/margin-eaters.js");
 
-const sectors = ["restaurant", "qsr", "retail", "hotel", "grocery", "salon"];
+const sectors = Object.keys(JSON.parse(fs.readFileSync(ROOT + "/data/hardware.json", "utf8")).sectors);
 let ran = 0;
 for (const sec of sectors) {
   try {
@@ -102,4 +104,4 @@ try { S.mapViewPref = "list"; map.renderMap(); S.mapViewPref = "svg"; map.render
 catch (e) { errors.push("map toggle: " + (e && e.stack || e)); }
 
 if (errors.length) { console.log("SWEEP FAIL:"); errors.forEach(e => console.log(e)); process.exit(1); }
-console.log(`SWEEP OK — ${ran}/6 sectors x all sections rendered without throwing`);
+console.log(`SWEEP OK — ${ran}/${sectors.length} sectors x all sections rendered without throwing`);

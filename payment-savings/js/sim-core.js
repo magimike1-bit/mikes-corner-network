@@ -54,7 +54,8 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       weigh: yn("in-weigh"), sco: $("in-sco").value,
       rooms: num("in-rooms"), floors: Math.max(1, num("in-floors")), fb: yn("in-fb"),
       deli: yn("in-deli"), lottery: yn("in-lottery"),
-      chairs: num("in-chairs"), trooms: num("in-trooms"), retailct: yn("in-retailct")
+      chairs: num("in-chairs"), trooms: num("in-trooms"), retailct: yn("in-retailct"),
+      how: $("in-o-how").value, spots: num("in-o-spots"), cof: yn("in-o-cof")
     };
   }
 
@@ -74,7 +75,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       g.appendChild(d);
     });
     // sector-specific question blocks (3 questions each drive the auto-build)
-    ["restaurant","qsr","retail","hotel","grocery","salon"].forEach(k => {
+    ["restaurant","qsr","retail","hotel","grocery","salon","other"].forEach(k => {
       const el = $("q-" + k); if(el) el.style.display = (k === S.sector) ? "" : "none";
     });
     renderSubsectors();
@@ -182,6 +183,20 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       return { reception, calendars: C, room_tablet: q.trooms > 0 ? 1 : 0, scanner: q.retailct ? 1 : 0,
                aps, wired_drops: reception, switch: switchFor(reception, aps),
                stations: reception, terminals: reception };
+    },
+    /* P6: "other" — warehouses, dropshippers, web-only stores, mobile trades,
+       market stalls. Generic questions: how customers pay, how many payment
+       spots, whether card-on-file/invoiced payments are taken. */
+    other(q){
+      const online = q.how === "online";
+      const inperson = q.how === "inperson" || q.how === "both";
+      const spots = clampN(q.spots || 0, 0, 8);
+      const terminals = inperson ? Math.max(1, spots) : 0;
+      const stations = inperson ? Math.max(1, spots) : 1;
+      const aps = 1;
+      const wired = terminals + 1;
+      return { online, inperson, spots, terminals, stations, aps,
+               wired_drops: wired, switch: switchFor(wired, aps) };
     }
   };
 
@@ -190,8 +205,10 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     S.D = RULES[S.sector](q);
     /* Joseph's redundancy rule: never recommend a single payment terminal.
        If it dies mid-rush, sales stop. The auto-build always includes a spare;
-       dropping to one manually raises a risk warning, not a saving. */
-    if(S.D.terminals < 2) S.D.terminals = 2;
+       dropping to one manually raises a risk warning, not a saving.
+       Zero means "no physical terminals in this build" (all-online setup) —
+       the floor only applies when hardware exists. */
+    if(S.D.terminals > 0 && S.D.terminals < 2) S.D.terminals = 2;
     // Derived station / terminal counts fill the editable inputs (manual edits stick).
     if(S.stationsAuto){
       const el = $("in-stations");
@@ -244,6 +261,15 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       noteWhy("booking", "Auto-added: " + plural(S.D.calendars, "booking calendar") + " — 1 per chair (software seats, not hardware).");
       noteWhy("terminal", "Auto-added: " + plural(S.D.terminals, "terminal") + " — 1 per reception station." + " Minimum 2 \u2014 if one dies mid-rush, the spare keeps you selling.");
     }
+    if(S.sector === "other"){
+      const sellOnline = q.how === "online" || q.how === "both";
+      setAuto("online", (sellOnline || q.cof) ? 1 : 0,
+        "Auto-added: online checkout / invoicing \u2014 " + (sellOnline ? "you take payments online" : "you take card-on-file / invoiced payments") + ".");
+      if(S.D.terminals > 0)
+        noteWhy("terminal", "Auto-added: " + plural(S.D.terminals, "terminal") + " \u2014 1 per payment spot." + " Minimum 2 \u2014 if one dies mid-rush, the spare keeps you selling.");
+      else
+        noteWhy("terminal", "No physical terminal needed \u2014 all-online setup. If you ever take cards in person, a mobile reader is the cheap backup.");
+    }
 
     /* ---- infrastructure: 1 cable run per wired device; switch = smallest of
        8/16/24/48 covering wired drops + APs + 4 spare ports ---- */
@@ -281,9 +307,11 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     $("wrap-marketplace").style.display =
       (S.sector === "qsr" || (S.sector === "restaurant" && (q.takeout === "apps" || q.takeout === "both"))) ? "" : "none";
 
-    // PIN pad sync: station builder drives the payment-terminal count (+ handhelds for restaurants)
+    // PIN pad sync: station builder drives the payment-terminal count (+ handhelds for restaurants).
+    // Skipped when the auto-build has zero physical terminals (all-online setup) —
+    // a countertop station must not conjure terminals a web-only business doesn't need.
     S.pinSync = !!(sst && sst.checked && sst.path !== "aio" && sst.reqs && sst.reqs.pinpad);
-    if(S.pinSync && !S.terminalsTouched){
+    if(S.pinSync && !S.terminalsTouched && S.D.terminals > 0){
       const tEl = $("in-terminals");
       const want = Math.max(2, inp.stations + (S.D.handhelds || 0)); // redundancy floor
       if(tEl && document.activeElement !== tEl && String(want) !== tEl.value) tEl.value = want;
@@ -302,6 +330,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       case "grocery": return "about 1 per 5,000 sq ft (staff coverage).";
       case "hotel": return "about 1 per 25 rooms + lobby" + (q.fb ? " + F&B" : "") + ", min 1 per floor.";
       case "salon": return "about 1 per 12 chairs (waiting-area guest Wi-Fi).";
+      case "other": return "1 covers a counter + back office (mobile and online work doesn't need more).";
     }
     return "";
   }
@@ -315,6 +344,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       case "hotel": return p(S.D.aps, "AP") + " + " + p(S.D.frontdesk, "front-desk station") + (q.fb ? " + 2 F&B POS + 2 F&B KDS" : "") + " + 2 back-office drops";
       case "grocery": return p(S.D.lanes, "lane") + (q.deli ? " + 1 deli POS" : "") + (q.lottery ? " + 1 lottery terminal" : "");
       case "salon": return p(S.D.reception, "reception station");
+      case "other": return p(S.D.terminals, "payment spot") + " + 1 back-office drop";
     }
     return "";
   }
@@ -353,6 +383,11 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
         return "From " + p(q.chairs, "chair") + ": " + p(S.D.reception, "reception POS station") + ", " +
           p(S.D.calendars, "booking calendar") + " (software seats)" +
           (S.D.room_tablet ? ", 1 wireless room tablet" : "") + (S.D.scanner ? ", 1 retail barcode scanner" : "") + ", " +
+          p(S.D.aps, "Wi-Fi AP") + ", " + p(S.D.wired_drops, "cable run") + " → " + S.D.switch + "-port PoE switch.";
+      case "other":
+        return "From " + (q.how === "online" ? "online-only sales" : q.how === "inperson" ? "in-person sales" : "in-person + online sales") +
+          (S.D.inperson ? " across " + p(S.D.spots, "payment spot") : "") + (q.cof ? " + card-on-file / invoicing" : "") + ": " +
+          (S.D.terminals > 0 ? p(S.D.terminals, "terminal") + ", " : "no physical terminals, ") +
           p(S.D.aps, "Wi-Fi AP") + ", " + p(S.D.wired_drops, "cable run") + " → " + S.D.switch + "-port PoE switch.";
     }
     return "";
@@ -954,7 +989,8 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
 
   ["in-locations","in-stations","in-terminals","in-employees","in-volume","in-ticket","in-rate","in-revenue","in-marketplace","in-subsector",
    "in-tables","in-bar","in-takeout","in-drivethru","in-seats","in-kiosks","in-sqft-r","in-weigh","in-sco",
-   "in-rooms","in-floors","in-fb","in-sqft-g","in-deli","in-lottery","in-chairs","in-trooms","in-retailct"]
+   "in-rooms","in-floors","in-fb","in-sqft-g","in-deli","in-lottery","in-chairs","in-trooms","in-retailct",
+   "in-o-how","in-o-spots","in-o-cof"]
     .forEach(id => {
       const el = $(id); if(!el) return;
       const h = () => {

@@ -18,7 +18,8 @@
     "qsr": "quick-service spots",
     "hotel": "hotels",
     "grocery": "grocers",
-    "salon": "salons"
+    "salon": "salons",
+    "other": "businesses like yours"
   },
   "benchmarks": {
     "retail": {
@@ -50,6 +51,11 @@
       "it": "no published benchmark (often ~1–3%)",
       "proc": "2.5–3.5%+",
       "note": "Card-on-file bookings skew toward the high end of the band."
+    },
+    "other": {
+      "it": "no published benchmark",
+      "proc": "2.5–3.5% (card-not-present anchor: 2.9% + $0.30)",
+      "note": "A mixed bag by design — compare against your own statements, not a sector average. Card-not-present sales (online, invoiced) price higher than in-person taps."
     }
   },
   "infraDefaults": {
@@ -70,6 +76,9 @@
     },
     "salon": {
       "guest": true
+    },
+    "other": {
+      "guest": false
     }
   },
   "infraWarns": {

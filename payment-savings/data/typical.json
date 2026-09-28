@@ -191,6 +191,38 @@
         }
       },
       "guest": true
+    },
+    "other": {
+      "label": "Typical independent business outside the six sectors",
+      "q": {
+        "how": "both",
+        "spots": 2,
+        "cof": "yes"
+      },
+      "basics": {
+        "locations": 1,
+        "employees": 4,
+        "volume": 30000,
+        "rate": 2.9,
+        "ticket": 60
+      },
+      "check": [
+        "pos",
+        "station",
+        "terminal",
+        "online",
+        "acct",
+        "internet",
+        "ups"
+      ],
+      "station": {
+        "path": "build",
+        "reqs": {
+          "printer": true,
+          "pinpad": true
+        }
+      },
+      "guest": false
     }
   },
   "qIds": {
@@ -223,6 +255,11 @@
       "in-chairs",
       "in-trooms",
       "in-retailct"
+    ],
+    "other": [
+      "in-o-how",
+      "in-o-spots",
+      "in-o-cof"
     ]
   }
 }

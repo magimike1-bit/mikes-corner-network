@@ -51,6 +51,38 @@
   </div>
 </section>
 
+<section class="section alt" id="eol-assessment">
+  <div class="wrap">
+    <h2 class="section-title">POS end-of-life assessment</h2>
+    <p class="section-sub">Every terminal on your counter has a retirement date — set by the manufacturer, not by you. We find it before it finds you.</p>
+    <div class="plays">
+      <div class="play">
+        <span class="badge">What it means</span>
+        <h3>End of life, in plain terms</h3>
+        <p>When a manufacturer declares a terminal or POS component end-of-life, three things stop: <strong>security patches</strong>, <strong>spare parts</strong>, and <strong>vendor support</strong>. The device doesn't stop working that day — it stops getting safer. For a small business, that means the machine reading your customers' card data is frozen in time while fraud techniques keep moving — and when it breaks, the fix is a scramble instead of a phone call.</p>
+      </div>
+      <div class="play">
+        <span class="badge">Costs</span>
+        <h3>Replacing on purpose vs. replacing in a panic</h3>
+        <p>A planned replacement is priced, scheduled, and installed on a quiet day. Staying past end-of-life trades that for three real costs: <strong>downtime risk</strong> (no working terminal means no card sales, for as long as a replacement takes to arrive), <strong>emergency-replacement premiums</strong> (rush orders and expedited shipping cost more than the same hardware bought calmly), and <strong>PCI exposure</strong> (unpatched payment devices are a compliance liability — a breach is the most expensive "saving" there is). The assessment puts numbers on both sides, so the call is a business decision instead of a gamble.</p>
+      </div>
+      <div class="play">
+        <span class="badge">Draft — Mike to confirm</span>
+        <h3>What can keep running past end-of-life — and what can't</h3>
+        <p><em>This guidance is a working draft. Mike confirms the final call for your specific equipment before anything is acted on.</em></p>
+        <p>The general principle we're working from: <strong>anything that touches card data, or runs an operating system, must not stay past end-of-life.</strong> That covers countertop terminals, mobile readers, PIN pads, and the POS register software itself — if it reads a card or sits on your network, an unpatched one is a liability, full stop.</p>
+        <p>Anything else is judged case by case in the assessment. A cash drawer or receipt printer that never touches card data may be fine to keep running well past its official retirement — but only once Mike has confirmed exactly what role it plays in your setup. Nothing here is a blanket pass; the draft label exists because the safe call depends on how each piece is actually connected.</p>
+      </div>
+      <div class="play">
+        <span class="badge">Redundancy</span>
+        <h3>The spare-terminal audit</h3>
+        <p>Most end-of-life pain isn't the failure — it's the lead time. If your terminal dies and the replacement takes five business days, that's five days of cash-only. The assessment checks whether you have a <strong>working spare on hand</strong> — and whether it's the right kind for how you actually take payments (a countertop spare doesn't help a mobile setup). One spare terminal is the cheapest business-interruption insurance in the building.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.6em;max-width:680px">The end-of-life assessment runs as part of the POS health check above. And if your stack just needs small corrections rather than new hardware, start with the <a href="#settings-fixes">ten-minute settings fixes</a> below — things you can safely do yourself today.</p>
+  </div>
+</section>
+
 <section class="section alt">
   <div class="wrap">
     <h2 class="section-title">Then the project work, priced in writing</h2>
@@ -80,13 +112,31 @@
   </div>
 </section>
 
+<section class="section" id="settings-fixes">
+  <div class="wrap">
+    <h2 class="section-title">Ten-minute settings fixes</h2>
+    <p class="section-sub">Not everything needs a project. These are safe, reversible settings any merchant can check themselves — if one of them is wrong, it's money leaking every single day.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Misconfigured tender types</h3><p>Card sales accidentally rung up as cash (or the reverse) corrupt your reports and your books. Run one day's close and make sure every tender type on the report matches how the money actually arrived.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Missing tip prompts</h3><p>If the terminal skips the tip screen, that's gratuity your staff never sees. Check that tip prompts appear on every terminal — countertop and mobile — for each tender type where they belong.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Unreconciled batches</h3><p>Batches that never settle never get paid. Pick a day, match the batch total to the deposit in your account — and if your system claims to auto-settle, confirm it's actually doing it.</p></div>
+    </div>
+    <div class="steps" style="margin-top:18px">
+      <div class="step"><div class="step-num">4</div><h3>Stale tax rates</h3><p>Tax rates change; POS configurations often don't follow. Verify the rate your register is charging matches the current rate for your province and municipality — an undercharge comes out of your pocket.</p></div>
+      <div class="step"><div class="step-num">5</div><h3>Duplicate or dead menu buttons</h3><p>Dead buttons slow every sale; duplicates split your reporting so bestsellers look like slow movers. A ten-minute tidy of the button layout pays off at every rush.</p></div>
+      <div class="step"><div class="step-num">6</div><h3>Receipt and refund settings</h3><p>Make sure receipts print (or email) by default and that refunds require a manager code. Unrestricted voids and refunds are the quietest way money walks out the door.</p></div>
+    </div>
+    <p style="margin-top:1.6em;max-width:680px"><strong>Honest scope:</strong> these are settings, not surgery. If a fix needs a password you don't have, a firmware update, or a call to your processor, that's what the <a href="#eol-assessment">health check</a> is for. Nothing listed here can stop you taking payments — and when in doubt, <a href="contact.html">ask us first</a>.</p>
+  </div>
+</section>
+
 <section class="section">
   <div class="wrap">
     <h2 class="section-title">Why it pairs with the audit</h2>
     <p style="max-width:680px">The free payment audit already puts Mike inside your checkout stack — your statements show the processors, your terminals show the hardware, and the conversations surface the software pain. The POS health check is the natural next step: fix the fees <em>and</em> the machinery in one pass, project-managed by the same person. Many clients start with the audit and never need anything else. The POS work is there when the stack needs it.</p>
     <div class="cta-band">
       <h2>What's hurting — terminals, software, integrations, or inventory?</h2>
-      <p>Tell us in an email. We'll tell you honestly whether it's a health check, a project, or a ten-minute settings fix you can do yourself.</p>
+      <p>Tell us in an email. We'll tell you honestly whether it's a health check, a project, or a <a href="#settings-fixes" style="color:#fff;text-decoration:underline">ten-minute settings fix</a> you can do yourself.</p>
       <a class="btn" href="contact.html">Contact us</a>
     </div>
   </div>

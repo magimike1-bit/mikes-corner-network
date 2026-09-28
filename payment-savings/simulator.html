@@ -2197,6 +2197,13 @@ const REC_TIERS = {
     set("in-locations", t.basics.locations); set("in-employees", t.basics.employees);
     set("in-volume", t.basics.volume); set("in-rate", t.basics.rate);
     set("in-marketplace", t.basics.marketplace);
+    /* Joseph rule: support-type selections survive navigation. Snapshot the support
+       fields before the typical reset wipes state, re-apply after the rebuild. */
+    const keepSup = {};
+    Object.keys(state).forEach(k => { const st = state[k];
+      keepSup[k] = {support:st.support, incidents:st.incidents,
+        reqSupport: st.reqSupport ? Object.assign({}, st.reqSupport) : undefined,
+        reqInc: st.reqInc, aioSupport: st.aioSupport}; });
     Object.keys(state).forEach(k => delete state[k]);
     stationsAuto = terminalsAuto = true;
     reqsAuto = { scale: true, scanner: true };
@@ -2209,6 +2216,12 @@ const REC_TIERS = {
       state["station"].reqs = Object.assign({}, state["station"].reqs, t.station.reqs);
     }
     if(state["firewall"] && t.firewall) state["firewall"].checked = true;
+    Object.keys(keepSup).forEach(k => { const st = state[k]; if(!st) return; const ks = keepSup[k];
+      if(ks.support) st.support = ks.support;
+      if(ks.incidents != null) st.incidents = ks.incidents;
+      if(ks.reqSupport) st.reqSupport = Object.assign({}, ks.reqSupport);
+      if(ks.reqInc != null) st.reqInc = ks.reqInc;
+      if(ks.aioSupport) st.aioSupport = ks.aioSupport; });
     const note = $("typical-note");
     if(note) note.textContent = t.label + " loaded — a starting point, not a recommendation. Adjust to match yours.";
     renderCatalog();

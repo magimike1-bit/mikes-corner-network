@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI ROI Calculator — AI for Small Business</title>
+<meta name="description" content="Estimate whether an AI tool pays off for your small business: enter your hourly cost, hours spent, tool price, and how much of the task AI handles. Free, runs in your browser.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html" class="active">ROI Calculator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap calc-wrap">
+  <p class="breadcrumbs"><a href="/">Home</a> › ROI Calculator</p>
+  <p class="kicker">Interactive tool</p>
+  <h1 style="color:var(--navy)">Will this AI tool pay off? Do the math.</h1>
+  <p class="lede">Enter your own numbers. Everything below is an <strong>estimate</strong> — example math to support a decision, not a prediction. Nothing you type leaves your browser.</p>
+
+  <div class="calc-grid">
+    <div class="calc-form">
+      <h2 style="color:var(--navy);margin-top:0">Your numbers</h2>
+      <label for="in-hourly">Hourly labor cost ($/hr)
+        <small>What an hour of the relevant person's time is worth — wage plus overhead, or your own effective rate.</small>
+      </label>
+      <input id="in-hourly" type="number" min="0" step="0.5" value="25" inputmode="decimal">
+
+      <label for="in-hours">Hours per week spent on this task
+        <small>Be honest: include the fiddly bits (re-reading, fixing, chasing).</small>
+      </label>
+      <input id="in-hours" type="number" min="0" step="0.5" value="5" inputmode="decimal">
+
+      <label for="in-tool">AI tool cost ($/month)
+        <small>The subscription or usage cost. Check the vendor's current pricing.</small>
+      </label>
+      <input id="in-tool" type="number" min="0" step="1" value="30" inputmode="decimal">
+
+      <label for="in-pct">% of the task AI realistically handles
+        <small>Not the marketing claim — the share after you review, fix, and handle exceptions. 50–80% is a common planning range.</small>
+      </label>
+      <input id="in-pct" type="number" min="0" max="100" step="1" value="70" inputmode="decimal">
+
+      <label for="in-setup">One-time setup cost ($, optional)
+        <small>Your setup hours × hourly rate, plus any onboarding fees. Used for payback time.</small>
+      </label>
+      <input id="in-setup" type="number" min="0" step="10" value="0" inputmode="decimal">
+    </div>
+
+    <div class="calc-results" aria-live="polite">
+      <h2>Estimated result</h2>
+      <div class="result-row">
+        <span>Time saved per month</span>
+        <span class="val" id="out-hours">—</span>
+      </div>
+      <div class="result-row">
+        <span>Monthly time value</span>
+        <span class="val" id="out-gross">—</span>
+      </div>
+      <div class="result-row">
+        <span>Minus tool cost</span>
+        <span class="val" id="out-tool">—</span>
+      </div>
+      <div class="result-row hero-result">
+        <span>Est. net monthly benefit</span>
+        <span class="val" id="out-net">—</span>
+      </div>
+      <div class="result-row">
+        <span>Est. payback on setup cost</span>
+        <span class="val" id="out-payback">—</span>
+      </div>
+      <p class="calc-note">Estimates only — example math, not a guarantee. Excludes training time, ongoing maintenance, and the cost of mistakes the AI makes. Re-run monthly with real measured hours; see <a href="/articles/measure-ai-roi.html" style="color:var(--amber)">how to measure AI ROI</a>.</p>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>AI Small Business Playbook</strong> — practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/#guides">All guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</footer>
+<script>
+(function () {
+  "use strict";
+  var WEEKS_PER_MONTH = 4.33;
+
+  function num(id) {
+    var v = parseFloat(document.getElementById(id).value);
+    return isFinite(v) && v >= 0 ? v : 0;
+  }
+  function money(v) {
+    return "$" + v.toLocaleString("en-US", { maximumFractionDigits: 0 });
+  }
+
+  function pctClamped() {
+    var p = num("in-pct");
+    return Math.min(100, Math.max(0, p)) / 100;
+  }
+
+  function recalc() {
+    var hourly = num("in-hourly");
+    var hoursWeek = num("in-hours");
+    var toolCost = num("in-tool");
+    var setupCost = num("in-setup");
+    var share = pctClamped();
+
+    var hoursMonth = hoursWeek * WEEKS_PER_MONTH * share;
+    var gross = hoursMonth * hourly;
+    var net = gross - toolCost;
+
+    document.getElementById("out-hours").textContent =
+      hoursMonth.toLocaleString("en-US", { maximumFractionDigits: 1 }) + " hrs";
+    document.getElementById("out-gross").textContent = money(gross);
+    document.getElementById("out-tool").textContent = "−" + money(toolCost);
+    document.getElementById("out-net").textContent =
+      (net < 0 ? "−" : "") + money(Math.abs(net));
+
+    var paybackEl = document.getElementById("out-payback");
+    if (setupCost <= 0) {
+      paybackEl.textContent = "n/a (no setup cost entered)";
+    } else if (net <= 0) {
+      paybackEl.textContent = "never at these numbers";
+    } else {
+      var months = setupCost / net;
+      paybackEl.textContent = months < 1
+        ? "under 1 month"
+        : "≈ " + months.toLocaleString("en-US", { maximumFractionDigits: 1 }) + " months";
+    }
+  }
+
+  var ids = ["in-hourly", "in-hours", "in-tool", "in-pct", "in-setup"];
+  for (var i = 0; i < ids.length; i++) {
+    document.getElementById(ids[i]).addEventListener("input", recalc);
+  }
+  recalc();
+})();
+</script>
+</body>
+</html>

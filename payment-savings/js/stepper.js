@@ -32,9 +32,20 @@ function sectionsOf(n){
    Same figures as the results step: Pay now = install-time total,
    Per month = the monthly stack total, You save = the 0.5% illustration. */
 function renderStrip(){
-  const t = S.totals || { payNow: 0, monthly: 0, save: 0 };
+  const t = S.totals;
   const el = document.getElementById("wf-strip");
-  if(el) el.innerHTML =
+  if(!el) return;
+  if(!t){
+    /* sim-core is still loading its data (sequential JSON fetches) — show a
+       neutral loading state, never misleading $0s. sim-core's recalc() calls
+       S.renderStrip() as soon as the first real totals exist. */
+    el.innerHTML =
+      "<span>Pay now <strong>…</strong></span><span class=\"wf-sep\">·</span>" +
+      "<span>Per month <strong>…</strong></span><span class=\"wf-sep\">·</span>" +
+      "<span>You save <strong>…</strong></span>";
+    return;
+  }
+  el.innerHTML =
     "<span>Pay now <strong>" + money(t.payNow) + "</strong></span><span class=\"wf-sep\">·</span>" +
     "<span>Per month <strong>" + money(t.monthly) + "</strong></span><span class=\"wf-sep\">·</span>" +
     "<span>You save <strong>" + money(t.save) + "/mo</strong></span>";

@@ -30,6 +30,46 @@
 .ask label{display:inline-block;margin:0 18px 12px 0;font-size:1.08em;cursor:pointer}
 .why-line{font-size:1em;color:#0f766e;background:#e6f4f1;border-radius:6px;padding:10px 14px;margin-top:10px}
 .warn-line{font-size:1em;color:#9a3412;background:#fef3e8;border-radius:6px;padding:10px 14px;margin-top:10px}
+.tier-badge{display:inline-block;font-size:.82rem;font-weight:800;letter-spacing:.05em;padding:4px 12px;border-radius:20px;margin-left:8px;vertical-align:middle}
+.tier-badge.essential{background:#dcefe7;color:#0b6b3a}
+.tier-badge.recommended{background:#fff1d6;color:#8a5a00}
+.tier-badge.optional{background:#eef0f3;color:#5a6470}
+.tier-why{font-size:1.02rem;color:#33544e;margin-top:8px;line-height:1.5}
+.tier-why strong{color:#10312b}
+.risk-line{font-size:1.05em;color:#9a3412;background:#fef3e8;border:2px solid #e8a04c;border-radius:8px;padding:12px 16px;margin-top:10px;font-weight:700}
+.me-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:1.2em 0}
+.me-card{background:#fff;border:2px solid #e8a04c;border-radius:12px;padding:24px}
+.me-card h3{margin:0 0 .6em;font-size:1.3rem}
+.me-card label{display:block;font-weight:700;font-size:1.02rem;margin:12px 0 4px}
+.me-card input[type=number],.me-card input[type=text],.me-card select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:1.1rem;margin-top:4px}
+.me-card input[type=range]{width:100%;accent-color:#b45309}
+.me-result{background:#fef3e8;border-radius:8px;padding:14px 16px;margin-top:14px;font-size:1.05rem;line-height:1.6}
+.me-result .big{font-size:1.6rem;font-weight:800;color:#9a3412}
+.me-total{background:#10312b;color:#fff;border-radius:12px;padding:22px 28px;margin-top:1.2em;font-size:1.3rem;font-weight:800;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.me-total .sub{font-size:1rem;font-weight:400;opacity:.85}
+.net-plan{background:#fff;border:2px solid var(--accent);border-radius:12px;padding:24px;margin:1.4em 0}
+.net-plan h4{margin:0 0 .6em;font-size:1.35rem}
+.net-trade{background:#f0f7f4;border-radius:8px;padding:14px 18px;margin-bottom:8px;font-size:1.05rem;line-height:1.7}
+.net-zone{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:13px 0;border-top:1px solid var(--line)}
+.net-zone .zname{flex:1 1 240px;font-weight:700;font-size:1.05rem}
+.net-zone .zdev{color:#5b6470;font-size:.95rem;flex:1 1 140px}
+.net-zone label{font-weight:700;display:flex;align-items:center;gap:7px;cursor:pointer;font-size:1.02rem}
+.net-zone input[type=radio]{width:22px;height:22px;accent-color:var(--accent-dark)}
+.net-scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px}
+.net-scen .sc{background:#f8faf9;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.net-scen .sc.rec{border:2px solid var(--accent);background:#fff}
+.net-scen .sc .t{font-weight:800;font-size:1.05rem}
+.net-scen .sc .c{font-size:1.6rem;font-weight:800;color:var(--accent-dark);margin:.3em 0}
+.net-scen .sc .m{font-size:1rem;color:#374151}
+.net-scen .sc .n{font-size:.92rem;color:#5b6470;margin-top:.4em;line-height:1.5}
+.wifi-warn{background:#fef2f2;border:3px solid #dc2626;border-radius:10px;padding:20px 22px;margin-top:18px;font-size:1.05rem;line-height:1.75}
+.wifi-warn .wt{color:#991b1b;font-size:1.2rem;font-weight:800;display:block;margin-bottom:.4em}
+.bundled-tag{display:inline-block;font-size:.82rem;font-weight:800;padding:4px 10px;border-radius:20px;margin-left:6px;vertical-align:middle;background:#f3e8ff;color:#6b21a8}
+.manual-box{background:#f4f8f6;border:1px dashed #9db8b0;border-radius:8px;padding:14px 16px;margin-top:10px}
+.manual-box .mrow{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:1.02rem}
+.manual-box input[type=range]{flex:1;accent-color:#0f766e}
+.net-note{font-size:1.05rem;font-weight:700;color:#10312b;background:#e6f4f1;border-radius:6px;padding:10px 14px;margin-top:10px;line-height:1.5}
+.manual-src{font-size:.9rem;color:var(--muted);margin-top:6px}
 .auto-badge{display:inline-block;font-size:.82em;background:#e6f4f1;color:#0f766e;border-radius:10px;padding:3px 10px;margin-left:8px;vertical-align:middle}
 .typical-wrap{text-align:center;margin:0 0 24px;padding:26px;background:#eef4f1;border:2px dashed #0f766e;border-radius:12px}
 .typical-btn{background:#0f766e;color:#fff;border:0;border-radius:10px;padding:18px 38px;font-size:1.3em;font-weight:700;cursor:pointer}
@@ -223,9 +263,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
       <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (÷ 36), clearly labeled.</p>
       <div class="infra-ask">
         <div class="ask"><span class="ask-q">How things connect — handled for you</span>
-          <div class="input-note" style="margin:0">Fixed gear (POS stations, terminals, kitchen screens, printers, scanners, scales) is <strong>wired by default</strong> — reliability beats everything at the till. Tablets go on <strong>Wi-Fi</strong>. Guest Wi-Fi is on or off depending on what's normal for your sector (toggle it below). We add the cable runs and switch ports automatically — every auto-added item tells you why it's there.</div>
+          <div class="input-note" style="margin:0">There's no single right answer — so choose per zone in the network plan below. The default is <strong>hybrid</strong>: the devices that take money get cables; the devices that move get Wi-Fi. Guest Wi-Fi is on or off depending on what's normal for your sector (toggle it below). Cable runs and switch ports follow your plan automatically — every auto-added item tells you why it's there.</div>
         </div>
       </div>
+      <div id="net-plan"></div>
       <div id="infra-list"></div></div>
       <div class="tier toys" id="tier-toys"><h3>🧸 Toys — nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="toys-list"></div></div>
     </div>
@@ -238,6 +279,39 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
       </div>
     </div>
   </div>
+</section>
+
+<section class="sim-step" id="margin-eaters">
+  <h2>🦈 Margin eaters \u2014 cost of sales, not IT</h2>
+  <p class="hint">Commissions and platform cuts scale with your revenue \u2014 they\u2019re <strong>cost-of-sales</strong>, not technology. They\u2019re kept out of your IT stack total on purpose: mixing them in hides how much damage they do.</p>
+  <div class="me-grid">
+    <div class="me-card">
+      <h3>🛵 Delivery-app commissions</h3>
+      <label>Platform<select id="me-platform"></select></label>
+      <label>Plan<select id="me-plan"></select></label>
+      <div class="input-note" id="me-plan-src"></div>
+      <label>Monthly sales through delivery apps (CA$)<input id="me-sales" type="number" min="0" step="100"></label>
+      <label>Roughly what share of sales comes through delivery apps?<input id="me-share" type="range" min="0" max="60" step="1"> <b id="me-share-v"></b></label>
+      <div class="me-result" id="me-comm-result"></div>
+    </div>
+    <div class="me-card">
+      <h3>🏠 Your own ordering instead</h3>
+      <label>Ordering website<select id="me-site"><option value="49">Shopify Basic \u2014 $49/mo</option><option value="0">Already have a site \u2014 $0</option></select></label>
+      <label>Your delivery cost per order (CA$)<input id="me-fee" type="number" min="0" step="0.5" placeholder="e.g., 6.99"></label>
+      <div class="input-note">Flat-fee courier or your own driver \u2014 enter <em>your</em> number. No guesswork.<br>Published flat-fee options (2026-09-28): Uber Direct from <strong>CA$7.99</strong>/delivery (official); DoorDash Drive <strong>$6.99\u2013$10.99</strong>/order (official, currency as printed); SkipGo ~<strong>CA$7\u20139</strong> (reported).</div>
+      <label>Average delivery ticket (CA$)<input id="me-ticket" type="number" min="1" step="1" value="40"></label>
+      <div class="me-result" id="me-compare-result"></div>
+    </div>
+    <div class="me-card">
+      <h3>🧾 Other platform cut</h3>
+      <p class="input-note">Booking platforms, marketplaces, app stores \u2014 anything that takes a % of your revenue. Name it and price it.</p>
+      <label>What is it?<input id="me-other-name" type="text" placeholder="e.g., booking-platform commission"></label>
+      <label>Their cut (%)<input id="me-other-pct" type="number" min="0" max="100" step="0.5" placeholder="e.g., 20"></label>
+      <label>Monthly revenue it applies to (CA$)<input id="me-other-base" type="number" min="0" step="100"></label>
+      <div class="me-result" id="me-other-result"></div>
+    </div>
+  </div>
+  <div class="me-total" id="me-total"></div>
 </section>
 
 <section class="sim-step map-section" id="sim-map-section">
@@ -293,7 +367,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
    Two paths: build-your-own (mix and match) vs all-in-one (one box, processor-locked). */
 function stationBuilder(zone, withScale, defaultReqs){
   const addons = [
-    {id:"printer", label:"Receipt printer (USB)", upfront:300, conf:"reported", note:"~$300 new — benchmark CA$200–500 (research)"},
+    {id:"printer", label:"Receipt printer (USB)", upfront:300, conf:"reported", note:"~$300 new — benchmark CA$200–500 (research). Where a dead printer stops sales, keep one spare on the shelf — a $300 printer beats a closed lane."},
     {id:"scanner", label:"Barcode scanner (Bluetooth)", upfront:330, conf:"reported", note:"~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"},
     {id:"drawer", label:"Cash drawer", upfront:80, conf:"reported", note:"~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"}
   ];
@@ -315,13 +389,18 @@ const SIM_PRICES = {
       needs: [
         { id:"pos", name:"POS software", calc:"per_location", map:{zone:"lanes",icon:"🖥️",label:"POS"},
           options:[
-            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
-            {label:"Shopify POS Lite — free with plan", monthly:0, conf:"reported", note:"included with Shopify plan"},
-            {label:"Lightspeed Retail — ~$179/mo typical", monthly:179, conf:"estimate", note:"third-party pricing guides; confirm with vendor"} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
+            {label:"Square POS — free", monthly:0, conf:"official", bundled:true, note:"squareup.com/ca"},
+            {label:"Shopify POS Lite — free with plan", monthly:0, conf:"reported", bundled:true, note:"included with Shopify plan"},
+            {label:"Lightspeed Retail — ~$179/mo typical", monthly:179, conf:"estimate", note:"third-party pricing guides; confirm with vendor"},
+            {label:"Helcim — $0/mo software", monthly:0, conf:"official", note:"helcim.com/pricing — interchange-plus processing; POS locked to Helcim"} ]},
+        { id:"terminal", sub:"Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. " +
+          "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
+          "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — illustrative, not a fee"} ]},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
+            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
         stationBuilder("lanes", true, {printer:true, scanner:true, drawer:true, pinpad:true}),
         { id:"ecom", name:"Online store", calc:"per_location", map:{zone:"backoffice",icon:"🌐",label:"Web"},
           options:[ {label:"Shopify Basic — $49/mo", monthly:49, conf:"reported", note:"shopify.com/ca pricing via third-party check 2026-09"} ]},
@@ -333,7 +412,25 @@ const SIM_PRICES = {
           options:[ {label:"Square Loyalty — ~$45/mo", monthly:45, conf:"reported", note:"third-party sources — confirm on squareup.com/ca"} ]}
       ],
       toys: [
-        { id:"signage", name:"Digital signage screen", calc:"per_unit", unit:"screen", map:{zone:"floor",icon:"📺",label:"Sign"},
+                { id:"labelprinter", name:"Label printer", calc:"per_unit", unit:"printer", map:{zone:"backoffice",icon:"🏷️",label:"Labels"},
+          options:[
+            {label:"DYMO LabelWriter 550 — $159.68", upfront:159.68, conf:"reported", note:"BestBuy Canada, 2026-09-28"},
+            {label:"DYMO LabelWriter 550 Turbo — $200", upfront:200, conf:"reported", note:"Uline Canada, 2026-09-28 ($186 at 2+)"} ]},
+        { id:"custdisplay", name:"Customer-facing display", calc:"per_unit", unit:"display", map:{zone:"lanes",icon:"🖥️",label:"Display"},
+          options:[
+            {label:"SkyTab add-on — $39.99/mo", monthly:39.99, conf:"official", note:"skytab.com/en-CA — sold as a POS bundle add-on"},
+            {label:"POS-X pole display — ~$144 USD", upfront:144.29, conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
+            {label:"Standalone — quote-based", monthly:0, conf:"estimate", info_only:true, note:"Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"} ]},
+        { id:"pinpad", name:"Spare PIN pad / mobile reader", calc:"per_unit", unit:"reader", map:{zone:"lanes",icon:"💳",label:"PIN pad"},
+          options:[
+            {label:"Processor-supplied — bundled / quote-based", monthly:0, conf:"estimate", info_only:true, note:"Ingenico/Verifone/PAX pads come through your processor with the merchant account — no standalone published price"},
+            {label:"Square Reader (contactless + chip) — $59", upfront:59, conf:"official", note:"squareup.com — official CAD price (2nd gen ~$53.98 on amazon.ca), 2026-09-28"} ]},
+        { id:"scanner", name:"Barcode scanner — fixed", calc:"per_unit", unit:"scanner", map:{zone:"lanes",icon:"🔍",label:"Scanner"},
+          options:[
+            {label:"Presentation — Zebra DS9308 ~$416.99", upfront:416.99, conf:"reported", note:"Insight Canada CAD, 2026-09-28"},
+            {label:"In-counter — Zebra MP7000 ~$3,222", upfront:3222, conf:"reported", note:"DirectDial CAD, 2026-09-28 (listed backordered — confirm stock)"},
+            {label:"Handheld — per-lane", monthly:0, conf:"estimate", info_only:true, note:"per-lane Bluetooth handhelds live in the station builder (~$330); this item is for fixed scanners"} ]},
+{ id:"signage", name:"Digital signage screen", calc:"per_unit", unit:"screen", map:{zone:"floor",icon:"📺",label:"Sign"},
           options:[ {label:"~$25/mo equiv.", monthly:25, conf:"estimate", note:"estimate incl. hardware + software"} ]},
         { id:"selfcheckout", name:"Self-checkout kiosk", calc:"per_unit", unit:"kiosk", info_only:true, map:{zone:"lanes",icon:"🤖",label:"SCO"},
           options:[ {label:"Quote-based — varies widely", monthly:0, conf:"estimate", note:"no published benchmark; get a vendor quote"} ]}
@@ -350,36 +447,63 @@ const SIM_PRICES = {
         { id:"pos", name:"POS software", calc:"per_location", map:{zone:"bar",icon:"🖥️",label:"POS"},
           options:[
             {label:"TouchBistro — $69/mo", monthly:69, conf:"official", note:"touchbistro.com (currency unstated on page)"},
-            {label:"Moneris Go Restaurant — $64.94/mo", monthly:64.94, conf:"official", note:"includes Go terminal"} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"dining",icon:"💳",label:"Terminal"},
+            {label:"Moneris Go Restaurant — $64.94/mo", monthly:64.94, conf:"official", note:"includes Go terminal"},
+            {label:"Toast — quote-based (Canada)", monthly:0, conf:"estimate", info_only:true, bundled:true, note:"Canadian pricing unpublished — get a quote"},
+            {label:"Lightspeed Restaurant — quote-based", monthly:0, conf:"estimate", info_only:true, note:"Canadian pricing unpublished — get a quote"},
+            {label:"Helcim — $0/mo software", monthly:0, conf:"official", note:"helcim.com/pricing — interchange-plus processing; POS locked to Helcim"} ]},
+        { id:"terminal", sub:"Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. " +
+          "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
+          "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"dining",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
+            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
         { id:"kds", name:"Kitchen display screen", calc:"per_unit", unit:"screen", map:{zone:"kitchen",icon:"🍳",label:"KDS"},
           options:[
-            {label:"~$30/mo per screen", monthly:30, conf:"reported", note:"third-party pricing guides"},
-            {label:"TouchBistro KDS — ~$89/mo", monthly:89, conf:"reported", note:"third-party review sites"} ]},
+            {label:"Budget — tablet as KDS (~$250 + $20/mo)", upfront:250, monthly:20, conf:"reported", note:"Midpoints of the reported $200–300/tablet hardware and $10–30/mo software ranges (loman.ai KDS guide; fresh.technology, accessed 2026-09-28). Square-style — the small-business default."},
+            {label:"Purpose-built — commercial screen (~$550 + $25/mo)", upfront:550, monthly:25, conf:"reported", note:"Midpoint of the reported $400–700/screen hardware range + monthly software (loman.ai, accessed 2026-09-28). Epson/Toast class; 22in touchscreens ~$700 (techryde.com, accessed 2026-09-28)."},
+            {label:"TouchBistro KDS — ~$89/mo", monthly:89, conf:"reported", note:"third-party review sites; bring your own screen"},
+            {label:"Wall/pole mount — quote-based", monthly:0, conf:"estimate", info_only:true, note:"mounts vary by screen size — price with the screen"} ]},
         { id:"kprinter", name:"Kitchen / bar printer", calc:"per_unit", unit:"printer", map:{zone:"kitchen",icon:"🧾",label:"Printer"},
-          options:[ {label:"Thermal printer — ~$16/mo equiv.", monthly:16, conf:"illus", note:"~$575 new ÷ 36 mo"} ]},
+          options:[
+            {label:"Used/refurb thermal — ~$8/mo equiv.", upfront:300, conf:"reported", note:"$225–375 band (Kijiji, reported) ÷ 36 mo"},
+            {label:"New thermal (Epson class) — ~$16/mo equiv.", monthly:16, conf:"illus", note:"~$575 new ÷ 36 mo"},
+            {label:"Impact (Epson TM-U220B) — $774", upfront:774, conf:"reported", note:"DirectDial CAD, 2026-09-28 (MSRP $1,140) — kitchen-rated, survives heat and grease"} ]},
         stationBuilder("bar", false, {printer:true, pinpad:true}),
         { id:"sched", name:"Staff scheduling", calc:"per_location",
           options:[ {label:"7shifts — ~$90/mo typical", monthly:89.99, conf:"reported", note:"entry $40–$45, Pro ~$90; third-party"} ]},
         { id:"payroll", name:"Payroll", calc:"per_employee", base:40, map:{zone:"backoffice",icon:"💰",label:"Pay"},
           options:[ {label:"Wagepoint Unlimited — $40 + $6/employee", monthly:6, conf:"reported", note:"base $40/mo + $6 per employee"} ]},
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+                { id:"inventory", name:"Inventory management", calc:"per_location", map:{zone:"backoffice",icon:"📦",label:"Inv"},
+          manualDef:{hours:5, unit:"manager hours/month", freq:"mo", why:"Manual counts run 4–6 manager hrs/month (QSR Web citing SynergySuite research, Sep 2025)."},
+          options:[
+            {label:"Inventory software — quote-based", monthly:0, conf:"estimate", info_only:true, note:"perpetual inventory tied to POS (MarketMan, BevSpot class) — price per location; get the vendor quote"} ]},
+{ id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
           options:[
             {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"},
             {label:"Xero Standard — $60/mo", monthly:60, conf:"official", note:"xero.com/ca"} ]}
       ],
       toys: [
-        { id:"aiphone", name:"AI phone answering", calc:"per_location",
+                { id:"pinpad", name:"Spare PIN pad / mobile reader", calc:"per_unit", unit:"reader", map:{zone:"bar",icon:"💳",label:"PIN pad"},
+          options:[
+            {label:"Processor-supplied — bundled / quote-based", monthly:0, conf:"estimate", info_only:true, note:"Ingenico/Verifone/PAX pads come through your processor with the merchant account — no standalone published price"},
+            {label:"Square Reader (contactless + chip) — $59", upfront:59, conf:"official", note:"squareup.com — official CAD price (2nd gen ~$53.98 on amazon.ca), 2026-09-28"} ]},
+        { id:"handheld", name:"Handheld ordering device", calc:"per_unit", unit:"device", map:{zone:"dining",icon:"📱",label:"Handheld"},
+          options:[
+            {label:"Zebra TC26 — ~$882.53", upfront:882.53, conf:"reported", note:"SELECA Distribution CAD, 2026-09-28 (listed 0 available — confirm stock)"},
+            {label:"Enterprise config — quote-based", monthly:0, conf:"estimate", info_only:true, note:"distributor/login pricing (e.g., OCR/Levata MSRP $1,450.70)"} ]},
+        { id:"mprinter", name:"Mobile receipt printer", calc:"per_unit", unit:"printer", map:{zone:"dining",icon:"🧾",label:"Mobile printer"},
+          options:[
+            {label:"Star SM-L200 — $700.42 MSRP", upfront:700.42, conf:"reported", note:"OCR/Levata CAD MSRP, 2026-09-28 (web pricing login-gated — actual buy price varies)"},
+            {label:"Star SM-L200 — from $345.34 USD", upfront:345.34, conf:"reported", note:"barcodesinc.com USD starting price, 2026-09-28 — plus exchange"} ]},
+{ id:"aiphone", name:"AI phone answering", calc:"per_location",
           options:[ {label:"~$399/mo per location", monthly:399, conf:"reported", note:"e.g., Slang.ai; third-party reporting"} ]},
-        { id:"marketplace", name:"Delivery-app commissions", calc:"percent_marketplace", rate:0.25,
-          options:[ {label:"~25% of delivery sales (mid-tier)", monthly:0, conf:"reported", note:"DoorDash/Uber Eats 15–30% tiers; Skip ~25–30%"} ]},
         { id:"reserv", name:"Reservation system", calc:"per_location",
           options:[ {label:"OpenTable — ~$249/mo", monthly:249, conf:"reported", note:"third-party figure + per-cover fees; unverified"} ]},
         { id:"tablets", name:"Ordering tablets (tableside / line-busting)", calc:"per_unit", unit:"tablet", map:{zone:"dining",icon:"📱",label:"Tablet"},
-          options:[ {label:"~$8/mo equiv. per tablet", monthly:8, conf:"estimate", note:"generic 10-inch tablet ~$250 ÷ 36 mo; wireless — no cable run needed"} ]}
+          options:[ {label:"~$8/mo equiv. per tablet", monthly:8, conf:"estimate", note:"generic 10-inch tablet ~$250 ÷ 36 mo; wireless — no cable run needed"},
+            {label:"Heckler WindFall stand — $155.99", upfront:155.99, conf:"reported", note:"Insight Canada CAD, 2026-09-28 — countertop tablet stand"} ]}
       ],
       zones: [
         {id:"dining", label:"Dining room", x:20, y:20, w:280, h:170},
@@ -393,27 +517,51 @@ const SIM_PRICES = {
       needs: [
         { id:"pos", name:"POS software", calc:"per_location", map:{zone:"counter",icon:"🖥️",label:"POS"},
           options:[
-            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
-            {label:"Toast POS — ~US$69/mo", monthly:95, conf:"reported", note:"US pricing page; Canadian pricing quote-based — CAD approx."} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"counter",icon:"💳",label:"Terminal"},
+            {label:"Square POS — free", monthly:0, conf:"official", bundled:true, note:"squareup.com/ca"},
+            {label:"Toast POS — ~US$69/mo", monthly:95, conf:"reported", bundled:true, note:"US pricing page; Canadian pricing quote-based — CAD approx."},
+            {label:"Helcim — $0/mo software", monthly:0, conf:"official", note:"helcim.com/pricing — interchange-plus processing; POS locked to Helcim"} ]},
+        { id:"terminal", sub:"Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. " +
+          "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
+          "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"counter",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
+            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
         stationBuilder("counter", false, {printer:true, pinpad:true}),
         { id:"kds", name:"Kitchen display / KDS-lite", calc:"per_unit", unit:"screen", map:{zone:"kitchen",icon:"🍳",label:"KDS"},
-          options:[ {label:"~$30/mo per screen", monthly:30, conf:"reported", note:"third-party pricing guides"} ]},
-        { id:"marketplace", name:"Delivery-app commissions", calc:"percent_marketplace", rate:0.25,
-          options:[ {label:"~25% of delivery sales (mid-tier)", monthly:0, conf:"reported", note:"15–30% tiers depending on plan"} ]},
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+          options:[
+            {label:"Budget — tablet as KDS (~$250 + $20/mo)", upfront:250, monthly:20, conf:"reported", note:"Midpoints of the reported $200–300/tablet hardware and $10–30/mo software ranges (loman.ai KDS guide; fresh.technology, accessed 2026-09-28)."},
+            {label:"KDS software only — ~$30/mo per screen", monthly:30, conf:"reported", note:"third-party pricing guides; bring your own tablet ($200–300)"},
+            {label:"Wall/pole mount — quote-based", monthly:0, conf:"estimate", info_only:true, note:"mounts vary by screen size — price with the screen"} ]},
+                { id:"inventory", name:"Inventory management", calc:"per_location", map:{zone:"backoffice",icon:"📦",label:"Inv"},
+          manualDef:{hours:5, unit:"manager hours/month", freq:"mo", why:"Manual counts run 4–6 manager hrs/month (QSR Web citing SynergySuite research, Sep 2025)."},
+          options:[
+            {label:"Inventory software — quote-based", monthly:0, conf:"estimate", info_only:true, note:"perpetual inventory tied to POS (MarketMan, BevSpot class) — price per location; get the vendor quote"} ]},
+{ id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
           options:[ {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
       ],
       toys: [
-        { id:"kiosk", name:"Self-order kiosk", calc:"per_unit", unit:"kiosk", map:{zone:"counter",icon:"🤖",label:"Kiosk"},
+                { id:"pinpad", name:"Spare PIN pad / mobile reader", calc:"per_unit", unit:"reader", map:{zone:"counter",icon:"💳",label:"PIN pad"},
+          options:[
+            {label:"Processor-supplied — bundled / quote-based", monthly:0, conf:"estimate", info_only:true, note:"Ingenico/Verifone/PAX pads come through your processor with the merchant account — no standalone published price"},
+            {label:"Square Reader (contactless + chip) — $59", upfront:59, conf:"official", note:"squareup.com — official CAD price (2nd gen ~$53.98 on amazon.ca), 2026-09-28"} ]},
+        { id:"custdisplay", name:"Customer-facing display", calc:"per_unit", unit:"display", map:{zone:"counter",icon:"🖥️",label:"Display"},
+          options:[
+            {label:"SkyTab add-on — $39.99/mo", monthly:39.99, conf:"official", note:"skytab.com/en-CA — sold as a POS bundle add-on"},
+            {label:"POS-X pole display — ~$144 USD", upfront:144.29, conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
+            {label:"Standalone — quote-based", monthly:0, conf:"estimate", info_only:true, note:"Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"} ]},
+        { id:"mprinter", name:"Mobile receipt printer", calc:"per_unit", unit:"printer", map:{zone:"counter",icon:"🧾",label:"Mobile printer"},
+          options:[
+            {label:"Star SM-L200 — $700.42 MSRP", upfront:700.42, conf:"reported", note:"OCR/Levata CAD MSRP, 2026-09-28 (web pricing login-gated — actual buy price varies)"},
+            {label:"Star SM-L200 — from $345.34 USD", upfront:345.34, conf:"reported", note:"barcodesinc.com USD starting price, 2026-09-28 — plus exchange"} ]},
+{ id:"kiosk", name:"Self-order kiosk", calc:"per_unit", unit:"kiosk", map:{zone:"counter",icon:"🤖",label:"Kiosk"},
           options:[ {label:"Quote-based — varies widely", monthly:0, conf:"estimate", note:"no published benchmark; get a vendor quote", info_only:true} ]},
         { id:"menuboard", name:"Digital menu boards", calc:"per_unit", unit:"screen",
           options:[ {label:"~$25/mo equiv. per screen", monthly:25, conf:"estimate", note:"estimate incl. hardware + software"} ]},
         { id:"tablets", name:"Ordering tablets (line-busting / tableside)", calc:"per_unit", unit:"tablet", map:{zone:"counter",icon:"📱",label:"Tablet"},
-          options:[ {label:"~$8/mo equiv. per tablet", monthly:8, conf:"estimate", note:"generic 10-inch tablet ~$250 ÷ 36 mo; wireless — no cable run needed"} ]}
+          options:[ {label:"~$8/mo equiv. per tablet", monthly:8, conf:"estimate", note:"generic 10-inch tablet ~$250 ÷ 36 mo; wireless — no cable run needed"},
+            {label:"Heckler WindFall stand — $155.99", upfront:155.99, conf:"reported", note:"Insight Canada CAD, 2026-09-28 — countertop tablet stand"} ]}
       ],
       zones: [
         {id:"counter", label:"Counter", x:20, y:20, w:360, h:150},
@@ -429,10 +577,14 @@ const SIM_PRICES = {
           options:[
             {label:"Cloudbeds — from ~$600/mo", monthly:600, conf:"reported", note:"hoteltechreport; currency unverified; quote-based in practice"},
             {label:"MiniHotel — from ~$200/mo", monthly:200, conf:"reported", note:"hoteltechreport; currency unverified"} ]},
-        { id:"terminal", name:"Payment terminal (front desk + outlets)", calc:"per_terminal", map:{zone:"frontdesk",icon:"💳",label:"Terminal"},
+        { id:"terminal", sub:"Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. " +
+          "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
+          "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal (front desk + outlets)", calc:"per_terminal", map:{zone:"frontdesk",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
+            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
         stationBuilder("frontdesk", false, {printer:true, pinpad:true}),
         { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
           options:[ {label:"QuickBooks Plus — $110/mo", monthly:110, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
@@ -455,19 +607,46 @@ const SIM_PRICES = {
       needs: [
         { id:"pos", name:"POS software", calc:"per_location", map:{zone:"lanes",icon:"🖥️",label:"POS"},
           options:[
-            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
-            {label:"Lightspeed Retail — ~$179/mo typical", monthly:179, conf:"estimate", note:"third-party guides; confirm with vendor"} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
+            {label:"Square POS — free", monthly:0, conf:"official", bundled:true, note:"squareup.com/ca"},
+            {label:"Lightspeed Retail — ~$179/mo typical", monthly:179, conf:"estimate", note:"third-party guides; confirm with vendor"},
+            {label:"Helcim — $0/mo software", monthly:0, conf:"official", note:"helcim.com/pricing — interchange-plus processing; POS locked to Helcim"} ]},
+        { id:"terminal", sub:"Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. " +
+          "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
+          "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
+            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
         stationBuilder("lanes", true, {printer:true, scanner:true, drawer:true, scale:true, pinpad:true}),
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+                { id:"inventory", name:"Inventory management", calc:"per_location", map:{zone:"backoffice",icon:"📦",label:"Inv"},
+          manualDef:{hours:5, unit:"manager hours/month", freq:"mo", why:"Manual counts run 4–6 manager hrs/month (QSR Web citing SynergySuite research, Sep 2025)."},
+          options:[
+            {label:"Inventory software — quote-based", monthly:0, conf:"estimate", info_only:true, note:"perpetual inventory tied to POS (MarketMan, BevSpot class) — price per location; get the vendor quote"} ]},
+{ id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
           options:[ {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
       ],
       toys: [
         { id:"ecom", name:"Online ordering / ecommerce", calc:"per_location",
           options:[ {label:"Shopify Basic — $49/mo", monthly:49, conf:"reported", note:"plus transaction fees"} ]},
+        { id:"labelprinter", name:"Label printer", calc:"per_unit", unit:"printer", map:{zone:"backoffice",icon:"🏷️",label:"Labels"},
+          options:[
+            {label:"DYMO LabelWriter 550 — $159.68", upfront:159.68, conf:"reported", note:"BestBuy Canada, 2026-09-28"},
+            {label:"DYMO LabelWriter 550 Turbo — $200", upfront:200, conf:"reported", note:"Uline Canada, 2026-09-28 ($186 at 2+)"} ]},
+        { id:"custdisplay", name:"Customer-facing display", calc:"per_unit", unit:"display", map:{zone:"lanes",icon:"🖥️",label:"Display"},
+          options:[
+            {label:"SkyTab add-on — $39.99/mo", monthly:39.99, conf:"official", note:"skytab.com/en-CA — sold as a POS bundle add-on"},
+            {label:"POS-X pole display — ~$144 USD", upfront:144.29, conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
+            {label:"Standalone — quote-based", monthly:0, conf:"estimate", info_only:true, note:"Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"} ]},
+        { id:"pinpad", name:"Spare PIN pad / mobile reader", calc:"per_unit", unit:"reader", map:{zone:"lanes",icon:"💳",label:"PIN pad"},
+          options:[
+            {label:"Processor-supplied — bundled / quote-based", monthly:0, conf:"estimate", info_only:true, note:"Ingenico/Verifone/PAX pads come through your processor with the merchant account — no standalone published price"},
+            {label:"Square Reader (contactless + chip) — $59", upfront:59, conf:"official", note:"squareup.com — official CAD price (2nd gen ~$53.98 on amazon.ca), 2026-09-28"} ]},
+        { id:"scanner", name:"Barcode scanner — fixed", calc:"per_unit", unit:"scanner", map:{zone:"lanes",icon:"🔍",label:"Scanner"},
+          options:[
+            {label:"Presentation — Zebra DS9308 ~$416.99", upfront:416.99, conf:"reported", note:"Insight Canada CAD, 2026-09-28"},
+            {label:"In-counter — Zebra MP7000 ~$3,222", upfront:3222, conf:"reported", note:"DirectDial CAD, 2026-09-28 (listed backordered — confirm stock)"},
+            {label:"Handheld — per-lane", monthly:0, conf:"estimate", info_only:true, note:"per-lane Bluetooth handhelds live in the station builder (~$330); this item is for fixed scanners"} ]},
         { id:"loyalty", name:"Loyalty program", calc:"per_location",
           options:[ {label:"Square Loyalty — ~$45/mo", monthly:45, conf:"reported", note:"third-party sources — confirm on squareup.com/ca"} ]}
       ],
@@ -482,15 +661,20 @@ const SIM_PRICES = {
       needs: [
         { id:"booking", name:"Booking & scheduling", calc:"per_location", map:{zone:"reception",icon:"📅",label:"Book"},
           options:[
-            {label:"Square Appointments Plus — $35/mo", monthly:35, conf:"official", note:"squareup.com/ca"},
+            {label:"Square Appointments Plus — $35/mo", monthly:35, conf:"official", bundled:true, note:"squareup.com/ca"},
             {label:"Jane App — $79/mo + $19/practitioner", monthly:79, conf:"official", note:"jane.app pricing; +$19 per extra practitioner"},
             {label:"Vagaro — ~$30/mo per calendar", monthly:30, conf:"reported", note:"third-party sources"} ]},
         { id:"pos", name:"POS software", calc:"per_location", map:{zone:"reception",icon:"🖥️",label:"POS"},
-          options:[ {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"reception",icon:"💳",label:"Terminal"},
+          options:[ {label:"Square POS — free", monthly:0, conf:"official", bundled:true, note:"squareup.com/ca"},
+            {label:"Helcim — $0/mo software", monthly:0, conf:"official", note:"helcim.com/pricing — interchange-plus processing; POS locked to Helcim"} ]},
+        { id:"terminal", sub:"Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. " +
+          "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
+          "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"reception",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
+            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
         stationBuilder("reception", false, {printer:true, pinpad:true}),
         { id:"payroll", name:"Payroll", calc:"per_employee", base:40, map:{zone:"backoffice",icon:"💰",label:"Pay"},
           options:[ {label:"Wagepoint Unlimited — $40 + $6/employee", monthly:6, conf:"reported", note:"base $40/mo + $6 per employee"} ]},
@@ -534,7 +718,13 @@ const SIM_PRICES = {
     { id:"ups", name:"UPS 1500VA (network + lanes)", calc:"flat",
       options:[ {label:"$220 one-time", upfront:220, conf:"reported", note:"amazon.ca; covers firewall, switch, modem + lanes through blips"} ]},
     { id:"guestwifi", name:"Guest Wi-Fi (separate SSID + VLAN)", calc:"flat", info_only:true,
-      options:[ {label:"$0 extra — built into AP/controller", monthly:0, conf:"official", note:"captive portal $0–300/yr optional; keep guests off the card network"} ]}
+      options:[ {label:"$0 extra — built into AP/controller", monthly:0, conf:"official", note:"captive portal $0–300/yr optional; keep guests off the card network"} ]},
+    { id:"failover", name:"Cellular internet failover", calc:"flat",
+      options:[
+        {label:"Cradlepoint COR + Rogers plan — $2,076 + $104.99/mo", upfront:2076, monthly:104.99, conf:"reported", note:"Cradlepoint COR Wi-Fi 5 $2,076 CAD (DirectDial); Rogers Wireless Business Internet $104.99/mo (official PDF) — 2026-09-28. When the main line drops, cards still go through."},
+        {label:"Hardware only — Cradlepoint COR ~$2,076", upfront:2076, conf:"reported", note:"DirectDial CAD, 2026-09-28 — add your own data plan"} ]},
+    { id:"bopc", name:"Back-office PC", calc:"flat", info_only:true,
+      options:[ {label:"Quote-based — a refurb office PC does the job", monthly:0, conf:"estimate", note:"no published benchmark; price a refurb locally — it never touches cards"} ]}
   ],
   infra_notes: {
     retail: "Wire every checkout lane — reliability beats everything. 1–2 APs cover staff + guest.",
@@ -545,6 +735,84 @@ const SIM_PRICES = {
     salon: "Minimal — 1 AP, 2–3 drops. The booking PC holds card-on-file data: segment it."
   }
 };
+/* ---- Recommendation tiers: ESSENTIAL / RECOMMENDED / OPTIONAL.
+   Every item gets a concrete, owner-voiced "why". Keyed "sector:id", with
+   "*:id" fallback for shared items (infrastructure, station builder). ---- */
+const REC_TIERS = {
+ "retail:pos":["essential","Everything hangs off the POS \u2014 sales records, inventory, and the audit trail the CRA expects."],
+ "retail:terminal":["essential","The thing that takes money. Never just one \u2014 when a terminal dies mid-rush, the spare keeps the line moving."],
+ "retail:station":["essential","The till itself \u2014 screen, printer, drawer and reader per lane. No station, no checkout."],
+ "retail:ecom":["recommended","A second till that\u2019s open 24/7. Skip only if you truly sell in-store only."],
+ "retail:acct":["recommended","The CRA doesn\u2019t accept shoeboxes \u2014 and clean books are what make a processing audit possible."],
+ "retail:loyalty":["recommended","Repeat customers are cheaper than new ones. If your regulars come weekly, this pays for itself."],
+ "retail:signage":["optional","Nice behind the counter; nobody ever lost a sale for lack of a screen."],
+ "retail:selfcheckout":["optional","Saves labour at volume \u2014 but each kiosk is a capital project. Price it, don\u2019t guess it."],
+ "restaurant:pos":["essential","Tickets, tables and payments live here. The restaurant runs on this."],
+ "restaurant:terminal":["essential","Takes the money \u2014 keep a spare. One dead terminal on a Saturday night is a dining room that can\u2019t pay."],
+ "restaurant:kds":["recommended","The kitchen stops shouting and tickets stop getting lost."],
+ "restaurant:kprinter":["recommended","The KDS\u2019s backup \u2014 when a screen dies mid-service, paper keeps the kitchen firing."],
+ "restaurant:station":["essential","Bar and host stations \u2014 where orders and payments actually happen."],
+ "restaurant:sched":["recommended","Scheduling by gut costs a manager 10\u201315 hours a week; the software costs less than one wasted shift."],
+ "restaurant:payroll":["recommended","Payday errors are how you lose good staff. Automate the math."],
+ "restaurant:acct":["recommended","Food cost means nothing if the books are a mess."],
+ "restaurant:aiphone":["optional","Pays when you miss calls during rush \u2014 but at ~$399/mo, count your missed covers first."],
+ "restaurant:reserv":["optional","Worth it when no-shows cost you tables; overkill if your book is regulars who always show."],
+ "restaurant:tablets":["optional","Line-busting and tableside ordering \u2014 a speed play, not a necessity."],
+ "qsr:pos":["essential","Speed at the counter is the business. The POS is the counter."],
+ "qsr:terminal":["essential","Takes the money \u2014 keep a spare. A dead lone terminal is a line walking out the door."],
+ "qsr:station":["essential","The counter station \u2014 order in, payment out."],
+ "qsr:kds":["essential","The kitchen\u2019s eyes. In quick-service, the KDS is the difference between 3-minute and 8-minute tickets."],
+ "qsr:acct":["recommended","Thin margins need clean books."],
+ "qsr:kiosk":["optional","Throughput without counter staff \u2014 but each kiosk is a capital project. Price it properly."],
+ "qsr:menuboard":["optional","Looks sharp, changes prices in seconds. Earns its keep at 3+ screens."],
+ "qsr:tablets":["optional","Line-busting during rush \u2014 nice when the queue hits the door."],
+ "hotel:pms":["essential","The hotel doesn\u2019t run without it \u2014 reservations, rooms, folios, night audit."],
+ "hotel:terminal":["essential","Front desk and outlets take cards around the clock \u2014 spares aren\u2019t optional at an 11pm check-in."],
+ "hotel:station":["essential","Front-desk stations where guests check in, pay, and complain."],
+ "hotel:acct":["recommended","Multi-outlet revenue needs real books."],
+ "hotel:guestmsg":["optional","Answers \u2018what\u2019s the Wi-Fi password\u2019 at 2am so your night auditor doesn\u2019t have to."],
+ "grocery:pos":["essential","Lanes are the business. The POS keeps them moving."],
+ "grocery:terminal":["essential","Every lane needs one, plus a spare \u2014 a dead terminal closes a lane on a Sunday afternoon."],
+ "grocery:station":["essential","Each lane\u2019s full kit \u2014 screen, scanner, scale, printer, drawer."],
+ "grocery:acct":["recommended","Perishable shrink hides in messy books."],
+ "grocery:ecom":["recommended","Curbside and delivery are table stakes now \u2014 price the picking labour honestly."],
+ "grocery:loyalty":["optional","Works when baskets are big and trips are weekly; a points program nobody checks is just a discount."],
+ "salon:booking":["essential","No-shows eat 15\u201330% of the book. This is the thing that fixes it."],
+ "salon:pos":["essential","Checkout, retail sales and the client record in one place."],
+ "salon:terminal":["essential","Takes the money \u2014 keep a spare. A dead terminal at 5pm Friday is a book of clients who can\u2019t pay."],
+ "salon:station":["essential","The reception till \u2014 where rebooking and retail happen."],
+ "salon:payroll":["recommended","Commission and chair-rental math gets old fast by hand."],
+ "salon:acct":["recommended","Product retail and service revenue need separating."],
+ "salon:crm":["optional","Worth it when you\u2019re ready to fill quiet Tuesdays; skip until the book is the problem."],
+ "*:drops":["essential","Every wired device needs a path back to the switch. No drop, no wire, no connection."],
+ "*:ap":["recommended","Staff devices and guest Wi-Fi need coverage where the work happens \u2014 dead zones at the till are not an option."],
+ "*:switch":["essential","The thing everything plugs into. Size it for today plus the cameras you\u2019ll add next year."],
+ "*:firewall":["recommended","Keeps the card network away from guests and staff phones. Your PCI scope will thank you."],
+ "*:internet":["essential","No internet, no card payments, no cloud POS. This one isn\u2019t a choice."],
+ "*:ups":["recommended","A two-second power blip shouldn\u2019t reboot your whole network mid-sale."],
+ "*:guestwifi":["optional","Nice for caf\u00e9s and waiting areas; skip it where customers don\u2019t linger."],
+ "*:bopc":["optional","For the books, ordering and everything you don\u2019t want on the till \u2014 a refurb office PC does the job."],
+ "*:failover":["recommended","When the internet dies, card payments die with it. Failover keeps the till taking cards."],
+ "restaurant:inventory":["recommended","Shrink and food-cost creep eat margin quietly. Software ties inventory to sales; manual counts (4\u20136 manager hrs/month) work, they just cost your time."],
+ "qsr:inventory":["recommended","Food-cost drift hides in manual counts. Software flags it daily; manual (4\u20136 manager hrs/month) is free in dollars, not in hours."],
+ "grocery:inventory":["recommended","Fresh and high-theft SKUs need daily visibility. Software gives it; manual counts (4\u20136 manager hrs/month) lag behind."],
+ "retail:labelprinter":["recommended","Shipping + shelf labels without hand-writing — a $160 DYMO pays for itself in a month of avoided label chaos."],
+ "grocery:labelprinter":["recommended","Deli + shelf-edge labels print in seconds — no more hand-written price signs."],
+ "retail:custdisplay":["optional","Shows the total facing the customer — fewer 'how much was that?' disputes at the till."],
+ "qsr:custdisplay":["optional","Order-confirmation screen cuts 'that's not what I ordered' remakes."],
+ "grocery:custdisplay":["optional","Price transparency at the lane — fewer disputes, faster bagging."],
+ "retail:pinpad":["recommended","A second payment point keeps the line moving when the main till is tied up."],
+ "restaurant:pinpad":["optional","A spare reader for the patio or events — cheap insurance at $59."],
+ "qsr:pinpad":["optional","Second payment point for rush hour — the line never stops for one reader."],
+ "grocery:pinpad":["optional","Express-lane backup reader — one dead PIN pad shouldn't close a lane."],
+ "retail:scanner":["recommended","A fixed presentation scanner at the till beats aiming a handheld at every barcode."],
+ "grocery:scanner":["recommended","In-counter scanners are built for belt speed; presentation scanners suit express lanes."],
+ "restaurant:handheld":["optional","Take orders tableside without running to a terminal — but each one is an $880 device to drop."],
+ "restaurant:mprinter":["optional","Print the bill tableside instead of walking back to the station."],
+ "qsr:mprinter":["optional","Line-busting receipts at the door — the queue keeps moving."],
+ "*:station":["essential","The till itself \u2014 screen, printer, drawer and reader assembled per lane. No station, no checkout."]
+};
+
 </script>
 <script>
 (function(){
@@ -555,6 +823,58 @@ const SIM_PRICES = {
   const state = {}; // itemId -> {checked, optIdx, qty}
 
   const CONF_LABEL = {official:"Official", reported:"Reported", estimate:"Estimate", illus:"Illustrative"};
+  const TIER_LABEL = {essential:"ESSENTIAL", recommended:"RECOMMENDED", optional:"OPTIONAL"};
+  function recFor(item){ return REC_TIERS[sector + ":" + item.id] || REC_TIERS["*:" + item.id] || null; }
+  function recBadge(item){
+    const r = recFor(item); if(!r) return "";
+    return '<span class="tier-badge ' + r[0] + '">' + TIER_LABEL[r[0]] + "</span>";
+  }
+  const BUNDLED_NOTE = "there\u2019s no separate processing rate to audit \u2014 the platform sets it. Savings come from comparing the effective rate against interchange-plus, not from renegotiating a markup.";
+  function bundledTag(opt){ return opt.bundled ? '<span class="bundled-tag">\u26a0\ufe0f Bundled processing</span>' : ""; }
+  function recWhy(item){
+    const r = recFor(item); if(!r) return "";
+    return '<div class="tier-why"><strong>Why ' + r[0] + ":</strong> " + r[1] + "</div>";
+  }
+  const SINGLE_TERMINAL_RISK = "\u26a0\ufe0f One terminal is a single point of failure \u2014 if it dies mid-rush, you can\u2019t take cards until it\u2019s replaced. Keep a spare; redundancy beats saving ~$35/mo.";
+  /* ---- "Go manual instead": every software item can be done on paper/Excel.
+     $0 software, but the labor hours below x the wage slider. Sources from
+     _research/workflow-labor-costs.md (2026-09-28). Where no published figure
+     exists the hours are an adjustable estimate — never a fixed claim. ---- */
+  const MANUAL_HOURS = {
+    sched:  {hrs:[10,15], per:"week",      src:"Restaurant Magazine May 2026 \u2014 reported; vendor byline, sanity-check these hours"},
+    payroll:{hrs:[4,5],   per:"payperiod", src:"QuickBooks/Kelton survey via Bloomberg Tax \u2014 ~4h52m per pay period calculating, filing and remitting"},
+    pos:    {hrs:[5,7],   per:"week",      src:"PYMNTS/Ingo 2024 \u2014 45\u201360 min/shift manual closeout + tip math \u00d7 7 days"},
+    pms:    {hrs:[3,7],   per:"week",      src:"No published figure \u2014 night audit by hand, estimated. Drag to your reality.", est:true},
+    booking:{hrs:[3,8],   per:"week",      src:"No published figure \u2014 confirmation calls + no-show chasing, estimated. Drag to your reality.", est:true},
+    acct:   {hrs:[2,5],   per:"week",      src:"No published figure \u2014 manual bookkeeping, estimated. Drag to your reality.", est:true},
+    ecom:   {hrs:[2,6],   per:"week",      src:"No published figure \u2014 manual order entry, estimated. Drag to your reality.", est:true},
+    loyalty:{hrs:[1,2],   per:"week",      src:"No published figure \u2014 punch cards and tallying, estimated.", est:true},
+    crm:    {hrs:[1,3],   per:"week",      src:"No published figure \u2014 estimated. Drag to your reality.", est:true},
+    reserv: {hrs:[2,5],   per:"week",      src:"No published figure \u2014 reservation book by hand, estimated. Drag to your reality.", est:true}
+  };
+  const MANUAL_PER_FACTOR = {week:4.33, payperiod:2.167, month:1};
+  const MANUAL_WAGE_DEFAULT = 27; // manager/owner time: suggested ~1.5x Ontario minimum ($17.95), adjustable
+  function manualDef(item){ return MANUAL_HOURS[item.id] || null; }
+  function ensureManual(st, item){
+    const md = manualDef(item); if(!md) return;
+    if(st.mhrs === undefined) st.mhrs = (md.hrs[0] + md.hrs[1]) / 2;
+    if(st.mwage === undefined) st.mwage = MANUAL_WAGE_DEFAULT;
+  }
+  function manualMonthly(item, st){
+    const md = manualDef(item); if(!md || !st.manual) return 0;
+    return st.mhrs * st.mwage * (MANUAL_PER_FACTOR[md.per] || 4.33);
+  }
+  function manualNetNote(item, opt){
+    const st = state[item.id];
+    const labor = manualMonthly(item, st);
+    const soft = itemMonthlyPreview(item, opt);
+    const net = labor - soft;
+    const per = {week:"week", payperiod:"pay period", month:"month"}[manualDef(item).per];
+    let t = "Going manual saves you " + money(soft) + "/mo in software but costs ~" + money(labor) +
+      "/mo in manager time (" + st.mhrs + " hrs/" + per + " \u00d7 CA$" + st.mwage + "/hr) \u2014 ";
+    t += net >= 0 ? "net: you lose " + money(net) + "/mo." : "net: you come out " + money(-net) + "/mo ahead on paper \u2014 double-check the hours before believing it.";
+    return t;
+  }
 
   // Sector norms for the % of revenue view (from _research/sector-it-cost-benchmarks.md, accessed 2026-09-28)
   const SECTOR_WORD = {retail:"retailers", restaurant:"restaurants", qsr:"quick-service spots", hotel:"hotels", grocery:"grocers", salon:"salons"};
@@ -695,19 +1015,20 @@ const SIM_PRICES = {
   function itemMonthly(item, inp){
     const st = state[item.id]; if(!st || !st.checked) return 0;
     if(item.builder) return builderPerStation(item, st) * itemQty(item, inp);
+    if(st.manual && manualDef(item)) return manualMonthly(item, st);
     const opt = item.options[st.optIdx || 0];
     if(opt.info_only) return 0;
     const q = itemQty(item, inp);
     let m = 0;
     if(item.calc === "percent_marketplace") m = inp.marketplace * (item.rate || 0);
-    else if(opt.upfront && !opt.monthly) m = (opt.upfront / 36) * q; // amortized monthly equivalent
-    else m = opt.monthly * q;
+    else m = ((opt.upfront ? opt.upfront / 36 : 0) + (opt.monthly || 0)) * q; // amortized hardware + recurring
     if(item.base) m += item.base * (item.calc === "per_location" ? inp.locations : 1);
     return m;
   }
 
   function itemUpfront(item, inp){
     const st = state[item.id]; if(!st || !st.checked) return 0;
+    if(st.manual && manualDef(item)) return 0;
     const opt = item.options[st.optIdx || 0];
     if(opt.info_only || !opt.upfront) return 0;
     return opt.upfront * itemQty(item, inp);
@@ -761,6 +1082,8 @@ const SIM_PRICES = {
   };
 
   function applySectorInfraDefaults(){
+    ME = null;
+    NET = null;
     const d = INFRA_DEFAULTS[sector] || {guest:false};
     guestWifi = d.guest; terminalsTouched = false; pinSync = false;
     SIM_PRICES.infra.forEach(item => { const st = state[item.id]; if(st) st.auto = true; });
@@ -775,6 +1098,10 @@ const SIM_PRICES = {
   function derive(){
     const q = getQuestions();
     D = RULES[sector](q);
+    /* Joseph's redundancy rule: never recommend a single payment terminal.
+       If it dies mid-rush, sales stop. The auto-build always includes a spare;
+       dropping to one manually raises a risk warning, not a saving. */
+    if(D.terminals < 2) D.terminals = 2;
     // Derived station / terminal counts fill the editable inputs (manual edits stick).
     if(stationsAuto){
       const el = $("in-stations");
@@ -802,35 +1129,30 @@ const SIM_PRICES = {
       setAuto("kprinter", D.kprint, "Auto-added: " + plural(D.kprint, "kitchen printer") + " — the backup when a screen goes dark.");
       const apps = q.takeout === "apps" || q.takeout === "both";
       setAuto("tablets", apps ? 2 : 0, apps ? "Auto-added: 2 aggregator tablets — one per delivery app. They rarely integrate with your POS, and they're wireless (no cable run)." : "");
-      const mst = state["marketplace"];
-      if(mst){
-        mst.why = apps ? "Auto-added: you sell through delivery apps — commissions run ~25% off those sales. Enter your app sales above." : "";
-        mst.rec = apps;
-        if(mst.auto) mst.checked = apps;
-      }
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per fixed station + " + plural(D.handhelds, "pay-at-table handheld") + ".");
+      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per fixed station + " + plural(D.handhelds, "pay-at-table handheld") + "." + " Minimum 2 \u2014 if one dies mid-rush, the spare keeps you selling.");
     }
     if(sector === "qsr"){
       setAuto("kds", D.kds, "Auto-added: " + plural(D.kds, "kitchen screen") + " (make-line" + (D.kds > 1 ? " + expo" : "") + (q.drivethru ? " + drive-thru" : "") + ").");
       setAuto("kiosk", D.kiosks, D.kiosks > 0 ? "Auto-added: " + plural(D.kiosks, "self-order kiosk") + " — about 1 per 40 seats." : "");
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per counter" + (q.drivethru ? " + drive-thru" : "") + ".");
+      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per counter" + (q.drivethru ? " + drive-thru" : "") + "." + " Minimum 2 \u2014 if one dies mid-rush, the spare keeps you selling.");
     }
     if(sector === "retail"){
       setAuto("selfcheckout", D.sco, D.sco > 0 ? "Auto-added: " + plural(D.sco, "self-checkout unit") + " — priced by vendor quote." : "");
       if(sst && sst.reqs && reqsAuto.scale) sst.reqs.scale = q.weigh;
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per lane.");
+      setAuto("bopc", D.backoffice, "Auto-added: " + plural(D.backoffice, "back-office PC") + " — for the books and ordering, off the till.");
+      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per lane." + " Minimum 2 \u2014 if one dies mid-rush, the spare keeps you selling.");
     }
     if(sector === "hotel"){
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per front-desk station" + (q.fb ? " + F&B outlet" : "") + ".");
+      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per front-desk station" + (q.fb ? " + F&B outlet" : "") + "." + " Minimum 2 \u2014 if one dies mid-rush, the spare keeps you selling.");
     }
     if(sector === "grocery"){
       if(sst && sst.reqs && reqsAuto.scale) sst.reqs.scale = q.deli;
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per lane" + (q.deli ? " + deli" : "") + ".");
+      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per lane" + (q.deli ? " + deli" : "") + "." + " Minimum 2 \u2014 if one dies mid-rush, the spare keeps you selling.");
     }
     if(sector === "salon"){
       if(sst && sst.reqs && reqsAuto.scanner) sst.reqs.scanner = q.retailct;
       noteWhy("booking", "Auto-added: " + plural(D.calendars, "booking calendar") + " — 1 per chair (software seats, not hardware).");
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per reception station.");
+      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per reception station." + " Minimum 2 \u2014 if one dies mid-rush, the spare keeps you selling.");
     }
 
     /* ---- infrastructure: 1 cable run per wired device; switch = smallest of
@@ -845,13 +1167,22 @@ const SIM_PRICES = {
       if(apSt.auto){ apSt.qty = D.aps; apSt.checked = true; }
     }
     if(dSt){
-      dSt.why = "Auto-added: 1 cable run per wired device — " + dropsWhy(q) + ".";
+      ensureNET();
+      const nd = netWiredDrops();
+      dSt.why = "Auto-added: " + nd + " cable runs — from your network plan above (" + netWiredDesc() + "). Change a zone and this updates.";
       dSt.rec = true;
-      if(dSt.auto){ dSt.qty = D.wired_drops; dSt.checked = D.wired_drops > 0; }
+      if(dSt.auto){ dSt.qty = nd; dSt.checked = nd > 0; }
+    }
+    const foSt = state["failover"], inetSt = state["internet"];
+    if(foSt && inetSt){
+      foSt.why = "Recommended: when the main line drops, card payments stop — cellular failover keeps the till taking cards. Real hardware + plan pricing above.";
+      foSt.rec = true;
+      if(foSt.auto) foSt.checked = inetSt.checked;
     }
     if(swSt){
-      const need = D.wired_drops + D.aps + 4;
-      swSt.why = "Auto-added: " + D.wired_drops + " drops + " + D.aps + " APs + 4 spare = " + need + " ports → " + D.switch + "-port PoE switch. Access points draw power through the network cable — no electrician needed at the ceiling.";
+      ensureNET();
+      const need = netWiredDrops() + 4;
+      swSt.why = "Auto-added: " + netWiredDrops() + " drops + 4 spare = " + need + " ports → " + D.switch + "-port PoE switch. Access points draw power through the network cable — no electrician needed at the ceiling.";
       swSt.rec = true;
       if(swSt.auto){ swSt.checked = true; swSt.optIdx = { 8: 0, 16: 1, 24: 2, 48: 3 }[D.switch]; }
     }
@@ -864,7 +1195,7 @@ const SIM_PRICES = {
     pinSync = !!(sst && sst.checked && sst.path !== "aio" && sst.reqs && sst.reqs.pinpad);
     if(pinSync && !terminalsTouched){
       const tEl = $("in-terminals");
-      const want = inp.stations + (D.handhelds || 0);
+      const want = Math.max(2, inp.stations + (D.handhelds || 0)); // redundancy floor
       if(tEl && document.activeElement !== tEl && String(want) !== tEl.value) tEl.value = want;
     }
     const sumEl = $("autobuild-summary");
@@ -906,7 +1237,7 @@ const SIM_PRICES = {
           p(D.fixed, "fixed POS station") + ", " + p(D.handhelds, "pay-at-table handheld") + ", " +
           p(D.kds, "kitchen screen") + ", " + p(D.kprint, "kitchen printer") + ", " +
           p(D.aps, "Wi-Fi AP") + ", " + p(D.wired_drops, "cable run") + " → " + D.switch + "-port PoE switch." +
-          ((q.takeout === "apps" || q.takeout === "both") ? " Delivery apps: 2 aggregator tablets + ~25% commissions." : "") +
+          ((q.takeout === "apps" || q.takeout === "both") ? " Delivery apps: 2 aggregator tablets (commissions under Margin eaters below)." : "") +
           (q.takeout === "none" ? " No takeout." : "");
       case "qsr":
         return "From " + p(q.seats, "seat") + (q.drivethru ? " + drive-thru" : "") + ": " +
@@ -942,7 +1273,8 @@ const SIM_PRICES = {
     const inp = getInputs();
     const perStation = builderPerStation(item, st);
     const q = Math.max(0, inp.stations);
-    let inner = '<div><div class="name">' + item.name + ' <span class="conf reported">Reported</span></div>' +
+    let inner = '<div><div class="name">' + item.name + recBadge(item) + ' <span class="conf reported">Reported</span></div>' +
+      recWhy(item) +
       '<div class="detail">Tick what each station needs — we assemble the station and price it. Applies to every station you add in step 2.</div>' +
       '<div class="path-pick" role="radiogroup" aria-label="Station path">' +
       '<label><input type="radio" name="station-path" value="build"' + (st.path !== "aio" ? " checked" : "") + '> 🧩 <strong>Build your own</strong> — mix and match</label>' +
@@ -951,7 +1283,7 @@ const SIM_PRICES = {
       inner += '<div class="aio-note">All-in-one (like the Square Register, ~$900 CAD): screen, card reader, POS software and customer display in one box — <strong>' + money(item.aio.upfront / 36) + '/mo equiv.</strong> ($900 upfront ÷ 36).<br>' +
         '✅ Simpler — one thing to plug in, one vendor to call.<br>' +
         '⚠️ Trade-offs: you\'re locked to that processor\'s rates, and if one part dies the whole box goes for repair. Printer and cash drawer are usually sold separately.<br>' +
-        '💡 It has its own card reader, so you can uncheck the separate payment terminal above.</div>';
+        '💡 It has its own card reader \u2014 but don\u2019t drop to a single payment path. If this box dies mid-rush, sales stop: keep a backup terminal.</div>';
     } else {
       inner += '<div class="reqs">';
       item.addons.forEach(a => {
@@ -1044,7 +1376,7 @@ const SIM_PRICES = {
   }
 
   // Items whose qty/checked follow the 3 questions until the user overrides them.
-  const DERIVED_AUTO = {kds:1, kprinter:1, kiosk:1, tablets:1, selfcheckout:1, marketplace:1, ap:1, drops:1, switch:1};
+  const DERIVED_AUTO = {kds:1, kprinter:1, kiosk:1, tablets:1, selfcheckout:1, ap:1, drops:1, switch:1};
 
   function renderCatalog(){
     // make sure every item has state, then auto-build from the questions
@@ -1053,6 +1385,7 @@ const SIM_PRICES = {
         const inNeeds = SIM_PRICES.sectors[sector].needs.indexOf(item) !== -1;
         const base = {checked:false, optIdx:0, qty: inNeeds ? 1 : 0, auto: DERIVED_AUTO[item.id] ? true : SIM_PRICES.infra.indexOf(item) !== -1};
         if(item.builder){ base.path = "build"; base.reqs = Object.assign({}, item.defaultReqs); }
+        ensureManual(base, item);
         state[item.id] = base;
       }
     });
@@ -1065,6 +1398,7 @@ const SIM_PRICES = {
         if(!state[item.id]){
           const base = {checked:false, optIdx:0, qty: tier === "needs" ? 1 : 0, auto: DERIVED_AUTO[item.id] ? true : tier === "infra"};
           if(item.builder){ base.path = "build"; base.reqs = Object.assign({}, item.defaultReqs); }
+          ensureManual(base, item);
           state[item.id] = base;
         }
         const st = state[item.id];
@@ -1074,8 +1408,12 @@ const SIM_PRICES = {
         const opt = item.options[st.optIdx];
         let inner = '<div><div class="name">' + item.name +
           (tier === "infra" && st.auto ? '<span class="auto-badge">auto</span>' : "") +
+          recBadge(item) + bundledTag(opt) +
           '<span class="conf ' + opt.conf + '">' + CONF_LABEL[opt.conf] + "</span></div>" +
+          recWhy(item) +
           '<div class="detail">' + (opt.note || "") + "</div>";
+        if(item.id === "terminal" && st.checked && getInputs().terminals <= 1)
+          inner += '<div class="risk-line">' + SINGLE_TERMINAL_RISK + "</div>";
         if(st.why && st.checked) inner += '<div class="why-line">' + st.why + "</div>";
         if(tier === "infra" && st.rec && !st.checked) inner += '<div class="warn-line">' + (INFRA_WARNS[item.id] || "") + "</div>";
         if(item.options.length > 1){
@@ -1087,15 +1425,30 @@ const SIM_PRICES = {
         } else {
           inner += '<div class="detail" style="margin-top:6px">' + opt.label + "</div>";
         }
+        if(opt.bundled) inner += '<div class="detail">\u26a0\ufe0f <strong>Bundled processing:</strong> ' + BUNDLED_NOTE + "</div>";
+        if(item.sub) inner += '<div class="detail">' + item.sub + "</div>";
         if(item.calc === "per_unit"){
           inner += '<div class="qty"><button data-q="-1" data-item="' + item.id + '">−</button><span>' + st.qty + " " + (item.unit || "unit") + (st.qty === 1 ? "" : "s") + '</span><button data-q="1" data-item="' + item.id + '">+</button></div>';
         }
-        if(item.calc === "percent_marketplace"){
-          inner += '<div class="detail" style="margin-top:6px">Enter delivery-app sales in step 2 — cost = sales × ' + Math.round((item.rate||0)*100) + "%.</div>";
+        const md = manualDef(item);
+        if(md){
+          inner += '<label class="sim-check"><input type="checkbox" data-manual="' + item.id + '"' + (st.manual ? " checked" : "") + '> <span><strong>Go manual instead</strong> — paper / Excel, $0 software</span></label>';
+          if(st.manual){
+            const perW = {week:"week", payperiod:"pay period", month:"month"}[md.per];
+            inner += '<div class="manual-box">' +
+              '<label class="mrow"><span>Manual time</span><input type="range" min="' + md.hrs[0] + '" max="' + md.hrs[1] + '" step="0.5" value="' + st.mhrs + '" data-mhrs="' + item.id + '" aria-label="Manual hours"><span><b>' + st.mhrs + " hrs/" + perW + "</b>" + (md.est ? " (est.)" : "") + "</span></label>" +
+              '<label class="mrow"><span>Manager wage</span><input type="range" min="15" max="60" value="' + st.mwage + '" data-mwage="' + item.id + '" aria-label="Manager hourly wage"><span><b>CA$" + st.mwage + "/hr</b></span></label>' +
+              '<div class="net-note">' + manualNetNote(item, opt) + "</div>" +
+              '<div class="manual-src">Hours source: ' + md.src + "</div></div>";
+          }
         }
         inner += "</div>";
-        const priceTxt = opt.info_only ? "—" : money(itemMonthlyPreview(item, opt)) + "/mo" + ((opt.upfront && !opt.monthly) ? " equiv." : "");
-        const perTxt = opt.info_only ? "excluded from total"
+        const isManual = md && st.manual;
+        const priceTxt = isManual ? money(manualMonthly(item, st)) + "/mo"
+          : opt.info_only ? "—" : money(itemMonthlyPreview(item, opt)) + "/mo" + ((opt.upfront && !opt.monthly) ? " equiv." : "");
+        const perTxt = isManual ? "/mo manual labor"
+          : opt.info_only ? "excluded from total"
+          : (opt.upfront && opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront + " + perLabel(item))
           : (opt.upfront && !opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront ÷ 36")
           : perLabel(item);
         inner += '<div class="price"><label class="sim-check" style="margin:0 0 6px;justify-content:flex-end"><input type="checkbox" data-item="' + item.id + '" aria-label="Include ' + item.name + '"' + (st.checked ? " checked" : "") + '></label>' +
@@ -1153,6 +1506,30 @@ const SIM_PRICES = {
         renderCatalog();
       };
     });
+    document.querySelectorAll('input[data-manual]').forEach(cb => {
+      cb.onchange = () => {
+        const st = state[cb.dataset.manual];
+        st.manual = cb.checked;
+        if(cb.checked) st.checked = true;
+        renderCatalog();
+      };
+    });
+    const manualSlider = (sel, key) => {
+      document.querySelectorAll(sel).forEach(r => {
+        r.addEventListener("input", () => {
+          const st = state[r.dataset.mhrs || r.dataset.mwage];
+          st[key] = +r.value;
+          const label = r.parentElement.querySelector("span:last-child b");
+          if(label) label.textContent = key === "mhrs"
+            ? (+r.value) + " hrs/" + ({week:"week", payperiod:"pay period", month:"month"}[manualDef(findItem(r.dataset.mhrs)).per])
+            : "CA$" + r.value + "/hr";
+          recalc();
+        });
+        r.addEventListener("change", () => renderCatalog());
+      });
+    };
+    manualSlider('input[data-mhrs]', "mhrs");
+    manualSlider('input[data-mwage]', "mwage");
     document.querySelectorAll(".qty button").forEach(b => {
       b.onclick = () => {
         const id = b.dataset.item;
@@ -1254,6 +1631,255 @@ const SIM_PRICES = {
     svg.innerHTML = '<g transform="scale(2)">' + html + "</g>";
   }
 
+  /* ---- Margin eaters: revenue-based costs (delivery commissions, platform cuts).
+     Deliberately OUTSIDE the IT stack total — they are cost-of-sales. ---- */
+  const COMMISSION_PLANS = {
+    doordash:{label:"DoorDash", src:"merchants.doordash.com/en-ca/pricing \u2014 official, accessed 2026-09-28",
+      plans:[
+        {name:"Basic \u2014 20%", rate:0.20},
+        {name:"Plus \u2014 25%", rate:0.25},
+        {name:"Premier \u2014 29%", rate:0.29}]},
+    ubereats:{label:"Uber Eats", src:"Plan structure official (merchants.ubereats.com/ca/en/pricing); tier % reported via Deliverect CA / Avanto Eats / iOrders \u2014 accessed 2026-09-28. (Mar 2026 Lite\u201320% hike was US-only.)",
+      plans:[
+        {name:"Lite \u2014 15%", rate:0.15},
+        {name:"Plus \u2014 25%", rate:0.25},
+        {name:"Premium \u2014 30%", rate:0.30}]},
+    skip:{label:"SkipTheDishes", src:"No official public rates \u2014 per-contract. 20\u201330% reported (Deliverect, Avanto Eats 2026) \u2014 accessed 2026-09-28; confirm with your Skip rep",
+      plans:[{name:"Standard \u2014 ~25%", rate:0.25}]}
+  };
+  let ME = null;
+  /* ---- Network plan: per-zone wired/WiFi choice. Hybrid default:
+     the devices that take money get cables; the devices that move get WiFi. ---- */
+  let NET = null;
+  const NET_ZONES = [
+    {id:"tills", label:"Till stations — POS + payment terminals", pay:true, def:"wired",
+     dev:d => d.station + d.terminal},
+    {id:"printers", label:"Printers — receipt + kitchen + label", pay:false, def:"wired",
+     dev:d => d.printer + d.kprinter + d.labelprinter},
+    {id:"kds", label:"Kitchen screens", pay:false, def:"wired", dev:d => d.kds},
+    {id:"kiosks", label:"Self-serve kiosks / self-checkout", pay:true, def:"wired",
+     dev:d => d.kiosk + d.selfcheckout},
+    {id:"tablets", label:"Tablets + handhelds", pay:true, def:"wifi", dev:d => d.tablets},
+    {id:"backoffice", label:"Back office — PC", pay:false, def:"wired", dev:d => d.bopc}
+  ];
+  function ensureNET(){
+    if(!NET){ NET = {}; NET_ZONES.forEach(z => { NET[z.id] = z.def; }); }
+  }
+  function netDevCounts(){
+    const q = id => { const st = state[id]; return (st && st.checked) ? Math.max(0, st.qty || 0) : 0; };
+    const c = { station:q("station"), terminal:q("terminal"), printer:q("printer"),
+             kprinter:q("kprinter"), labelprinter:q("labelprinter"), kds:q("kds"),
+             kiosk:q("kiosk"), selfcheckout:q("selfcheckout"), tablets:q("tablets"),
+             bopc:q("bopc"), ap:q("ap") };
+    // station-builder addons (per-lane printer/scanner/drawer/scale) also need network
+    const sst = state["station"];
+    if(sst && sst.checked){
+      const n = Math.max(0, sst.qty || 0);
+      ["printer","scanner","drawer","scale"].forEach(a => {
+        if(sst.reqs && sst.reqs[a]) c[a] = (c[a] || 0) + n;
+      });
+    }
+    return c;
+  }
+  function netZoneDevices(){
+    ensureNET();
+    const d = netDevCounts(), out = {};
+    NET_ZONES.forEach(z => { out[z.id] = z.dev(d); });
+    out.aps = d.ap;
+    return out;
+  }
+  function netWiredDrops(){
+    const zd = netZoneDevices();
+    let n = zd.aps;
+    NET_ZONES.forEach(z => { if(NET[z.id] === "wired") n += zd[z.id]; });
+    return n;
+  }
+  function netWiredDesc(){
+    const zd = netZoneDevices();
+    let dev = 0;
+    NET_ZONES.forEach(z => { if(NET[z.id] === "wired") dev += zd[z.id]; });
+    return dev + " wired devices + " + zd.aps + " APs";
+  }
+  function dropUnitCost(){
+    const item = findItem("drops"), st = state["drops"];
+    if(item && st){ const opt = item.options[st.optIdx || 0]; if(opt && opt.upfront) return opt.upfront; }
+    return 175;
+  }
+  function renderNetPlan(){
+    const host = $("net-plan");
+    if(!host) return;
+    ensureNET();
+    const zd = netZoneDevices(), perRun = dropUnitCost();
+    let h = '<div class="net-plan"><h4>🌐 Network plan — wired or Wi-Fi, per zone</h4>' +
+      '<div class="net-trade"><strong>Hardwired:</strong> more secure and more reliable — a till that can\u2019t drop mid-transaction. ' +
+      'But every cable run costs real money (~$' + perRun + ' installed, per your cable-drop selection below).<br>' +
+      '<strong>Wi-Fi:</strong> far cheaper to scale — one good access point covers dozens of devices for the same money. ' +
+      'But less secure and less reliable — a congested or dropped signal at the till is a failed sale.<br>' +
+      '<strong>The realistic answer is hybrid</strong> (the default): the devices that take money get cables; the devices that move get Wi-Fi.</div>';
+    NET_ZONES.forEach(z => {
+      const n = zd[z.id], cur = NET[z.id];
+      h += '<div class="net-zone"><span class="zname">' + z.label + '</span>' +
+        '<span class="zdev">' + (n > 0 ? n + " device" + (n === 1 ? "" : "s") : "no devices selected") + '</span>' +
+        '<label><input type="radio" name="net-' + z.id + '" data-zone="' + z.id + '" value="wired"' + (cur === "wired" ? " checked" : "") + '> Wired</label>' +
+        '<label><input type="radio" name="net-' + z.id + '" data-zone="' + z.id + '" value="wifi"' + (cur === "wifi" ? " checked" : "") + '> Wi-Fi</label></div>';
+    });
+    // payment-on-wifi warning (unmissable, inline)
+    const payOnWifi = NET_ZONES.some(z => z.pay && NET[z.id] === "wifi" && zd[z.id] > 0);
+    if(payOnWifi){
+      h += '<div class="wifi-warn"><span class="wt">\u26a0\ufe0f Read this before you put payment on Wi-Fi</span>' +
+        'When the signal drops mid-transaction, the terminal loses its connection <strong>in the middle of the authorization</strong>. ' +
+        'Two bad outcomes: the sale doesn\u2019t complete and you look down to find nothing went through — or worse, ' +
+        'the customer\u2019s card <strong>is</strong> charged but your POS never sees the approval. You find out at closeout when the batch doesn\u2019t balance: ' +
+        'a $48 charge the customer swears they paid, no record on your end. Voiding it and re-running means the customer sees ' +
+        'two pending charges in their banking app and panics — <strong>while the line builds behind them</strong>.<br>' +
+        '<strong>What\u2019s exposed:</strong> anything taking payment over Wi-Fi — tableside handhelds, mobile terminals, kiosks.<br>' +
+        '<strong>How to protect yourself:</strong> (1) <strong>Offline mode</strong>, where your processor supports it — the terminal stores the transaction ' +
+        'and submits when the signal returns, but if that card was maxed out or stolen, <em>you</em> eat it. ' +
+        '(2) A <strong>second AP or failover Wi-Fi network</strong>, so one dead AP doesn\u2019t kill the floor. ' +
+        '(3) Keep <strong>at least one wired till as the fallback</strong> — when Wi-Fi dies, you walk the customer to the till that can\u2019t drop.</div>';
+    }
+    // cost scenarios
+    const allDev = NET_ZONES.reduce((s, z) => s + zd[z.id], 0);
+    const scen = [
+      {t:"All-wired", drops: allDev + zd.aps, rec:false,
+       n:"Maximum reliability. Every device gets a cable — and every cable costs $" + perRun + "."},
+      {t:"Your hybrid (recommended)", drops: netWiredDrops(), rec:true,
+       n:"The devices that take money get cables; the devices that move get Wi-Fi."},
+      {t:"All-Wi-Fi", drops: zd.aps, rec:false,
+       n:"Cheapest to install — APs still need their own cable runs. Read the warning above before choosing this to save money."}
+    ];
+    h += '<div class="net-scen">';
+    scen.forEach(s => {
+      const one = s.drops * perRun;
+      h += '<div class="sc' + (s.rec ? " rec" : "") + '"><div class="t">' + s.t + '</div>' +
+        '<div class="c">' + money(one) + '</div>' +
+        '<div class="m">one-time · ~' + money(one / 36) + '/mo equiv. (' + s.drops + ' runs)</div>' +
+        '<div class="n">' + s.n + '</div></div>';
+    });
+    h += "</div></div>";
+    host.innerHTML = h;
+    host.querySelectorAll('input[type=radio][data-zone]').forEach(r => {
+      r.addEventListener("change", () => {
+        ensureNET(); NET[r.dataset.zone] = r.value;
+        const dSt = state["drops"]; if(dSt) dSt.auto = true; // plan drives the drops
+        renderCatalog();
+      });
+    });
+  }
+  function ensureME(){
+    if(!ME) ME = {platform:"doordash", plan:0, sales:null, share:15, site:49, fee:"", ticket:40,
+                  oName:"", oPct:"", oBase:""};
+  }
+  function meSales(){
+    ensureME();
+    return ME.sales !== null && ME.sales !== "" ? Math.max(0, +ME.sales || 0) : Math.max(0, +($("in-marketplace") ? $("in-marketplace").value : 0) || 0);
+  }
+  function renderMarginEaters(){
+    ensureME();
+    const pSel = $("me-platform"), plSel = $("me-plan");
+    if(pSel && !pSel.options.length){
+      Object.keys(COMMISSION_PLANS).forEach(k => {
+        const o = document.createElement("option"); o.value = k; o.textContent = COMMISSION_PLANS[k].label;
+        pSel.appendChild(o);
+      });
+    }
+    if(pSel) pSel.value = ME.platform;
+    const plat = COMMISSION_PLANS[ME.platform] || COMMISSION_PLANS.doordash;
+    if(plSel){
+      plSel.innerHTML = "";
+      plat.plans.forEach((p, i) => {
+        const o = document.createElement("option"); o.value = i; o.textContent = p.name + " (" + Math.round(p.rate * 100) + "%)";
+        plSel.appendChild(o);
+      });
+      plSel.value = Math.min(ME.plan, plat.plans.length - 1);
+    }
+    const plan = plat.plans[Math.min(ME.plan, plat.plans.length - 1)];
+    if($("me-plan-src")) $("me-plan-src").textContent = "Source: " + plat.src;
+    const sales = meSales();
+    if($("me-sales") && document.activeElement !== $("me-sales")) $("me-sales").value = sales || "";
+    if($("me-share")) $("me-share").value = ME.share;
+    if($("me-share-v")) $("me-share-v").textContent = ME.share + "%";
+    const inp = getInputs();
+    // --- card 1: commission cost ---
+    const comm = sales * plan.rate;
+    let revPct = "";
+    if(inp.revenue > 0 && comm > 0) revPct = " \u2014 that\u2019s " + pct1(comm * 12 / inp.revenue * 100) + " of your revenue";
+    $("me-comm-result").innerHTML = sales > 0
+      ? 'At <b>' + money(sales) + '/mo</b> in delivery sales, ' + plat.label + " " + plan.name +
+        ' costs you <span class="big">' + money(comm) + '/mo</span>' + revPct +
+        '.<br>Cost-of-sales, not IT \u2014 kept out of your tech stack total on purpose.'
+      : "Enter your monthly delivery-app sales above \u2014 then watch what the % really costs.";
+    // --- card 2: first-party comparison ---
+    const ticket = Math.max(1, +ME.ticket || 40);
+    const orders = sales > 0 ? sales / ticket : 0;
+    const fee = ME.fee === "" ? null : Math.max(0, +ME.fee || 0);
+    const site = +ME.site || 0;
+    let cmp;
+    if(sales <= 0) cmp = "Enter delivery sales on the left to run the comparison.";
+    else if(fee === null) cmp = "Enter <em>your</em> per-order delivery cost above to see the break-even.";
+    else {
+      const flat = site + fee * orders;
+      const diff = comm - flat;
+      const perOrderRate = fee / ticket;
+      let be = "";
+      if(plan.rate > perOrderRate && site > 0)
+        be = " The flat setup wins once delivery passes <b>" + money(site / (plan.rate - perOrderRate)) + "/mo</b>.";
+      else if(site === 0 && plan.rate > perOrderRate)
+        be = " With no website cost, your own setup wins at any volume.";
+      cmp = "At " + money(sales) + "/mo in delivery sales, the " + Math.round(plan.rate * 100) + "% commission costs you <b>" +
+        money(comm) + "/mo</b> \u2014 your own ordering setup costs ~<b>" + money(flat) + "/mo</b> flat (" +
+        money(site) + " website + " + money(fee * orders) + " delivery)." +
+        (diff >= 0 ? " You\u2019d keep <b>" + money(diff) + "/mo</b> going first-party." + be
+                   : " At this volume the apps are cheaper by <b>" + money(-diff) + "/mo</b> \u2014 but that flips as you grow." + be);
+    }
+    $("me-compare-result").innerHTML = cmp;
+    // --- card 3: other platform cut ---
+    const oPct = Math.max(0, +ME.oPct || 0), oBase = Math.max(0, +ME.oBase || 0);
+    $("me-other-result").innerHTML = (oPct > 0 && oBase > 0)
+      ? "<b>" + money(oBase * oPct / 100) + "/mo</b> to " + (ME.oName || "the platform") + " (" + oPct + "% of " + money(oBase) + "). Also cost-of-sales."
+      : "Fill in the three fields to price any revenue-based cut.";
+    // --- total ---
+    const other = (oPct > 0 && oBase > 0) ? oBase * oPct / 100 : 0;
+    const total = comm + other;
+    let techTotal = 0;
+    allItems().forEach(item => { techTotal += itemMonthly(item, inp); });
+    $("me-total").innerHTML = "<span>Total margin eaters: " + money(total) + "/mo</span>" +
+      '<span class="sub">on top of your ' + money(techTotal) + '/mo tech stack \u2014 two different budgets, two different decisions</span>';
+  }
+  function meEvents(){
+    const bind = (id, key, parse) => {
+      const el = $(id); if(!el) return;
+      el.addEventListener("input", () => {
+        ensureME(); ME[key] = parse(el.value);
+        if(id === "me-sales" && $("in-marketplace")) $("in-marketplace").value = el.value;
+        recalc();
+      });
+      el.addEventListener("change", () => { ensureME(); ME[key] = parse(el.value); renderMarginEaters(); });
+    };
+    bind("me-platform", "platform", v => v);
+    bind("me-plan", "plan", v => +v || 0);
+    bind("me-sales", "sales", v => (v === "" ? null : Math.max(0, +v || 0)));
+    bind("me-site", "site", v => +v || 0);
+    bind("me-fee", "fee", v => (v === "" ? "" : Math.max(0, +v || 0)));
+    bind("me-ticket", "ticket", v => Math.max(1, +v || 40));
+    bind("me-other-name", "oName", v => v);
+    bind("me-other-pct", "oPct", v => (v === "" ? "" : Math.max(0, +v || 0)));
+    bind("me-other-base", "oBase", v => (v === "" ? "" : Math.max(0, +v || 0)));
+    const sh = $("me-share");
+    if(sh){
+      sh.addEventListener("input", () => {
+        ensureME(); ME.share = +sh.value || 0;
+        const rev = Math.max(0, +($("in-revenue") ? $("in-revenue").value : 0) || 0);
+        if(rev > 0){
+          ME.sales = Math.round(rev / 12 * ME.share / 100);
+          if($("in-marketplace")) $("in-marketplace").value = ME.sales;
+        }
+        recalc();
+      });
+      sh.addEventListener("change", () => renderMarginEaters());
+    }
+  }
+
   function recalc(){
     const inp = getInputs();
     const s = SIM_PRICES.sectors[sector];
@@ -1282,6 +1908,8 @@ const SIM_PRICES = {
     }
     drawMap();
     updateTotalBar(total);
+    renderMarginEaters();
+    renderNetPlan();
   }
 
   function updateTotalBar(total){
@@ -1295,7 +1923,8 @@ const SIM_PRICES = {
     allItems().forEach(item => {
       const m = itemMonthly(item, inp);
       if(m > 0){
-        const conf = item.builder ? "Reported" : CONF_LABEL[item.options[state[item.id].optIdx].conf];
+        const mst = state[item.id];
+        const conf = (mst.manual && manualDef(item)) ? "Manual labor" : item.builder ? "Reported" : CONF_LABEL[item.options[mst.optIdx].conf];
         lines += '<div class="row"><span>' + item.name + ' <span style="opacity:.65;font-size:.9em">(' + conf + ")</span></span><span>" + money(m) + "/mo</span></div>";
       }
     });
@@ -1312,6 +1941,7 @@ const SIM_PRICES = {
       const h = () => {
         if(id === "in-stations") stationsAuto = false; // manual override sticks
         if(id === "in-terminals"){ terminalsAuto = false; terminalsTouched = true; }
+        if(id === "in-marketplace" && document.activeElement === $(id)){ ensureME(); ME.sales = null; }
         renderCatalog();
       };
       el.addEventListener("input", h);
@@ -1319,6 +1949,7 @@ const SIM_PRICES = {
     });
 
   $("btn-typical").addEventListener("click", loadTypical);
+  meEvents();
 
   applySectorInfraDefaults();
   renderSectors();

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Stack Cost Simulator — What Should It Cost? | FairRate Audit</title>
+<meta name="description" content="Estimate what your business's tech stack should cost per month — POS, terminals, software and more — by sector. Illustrative estimates from published pricing. Then get a free audit of your real numbers.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense: ad code goes here -->
+<style>
+/* ===== Cost simulator (scoped) ===== */
+.sim-wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.sim-step{margin:2.2em 0}
+.sim-step h2{font-size:1.35rem;margin:0 0 .3em}
+.sim-step .hint{color:var(--muted);font-size:.95rem;margin:0 0 1em}
+.sector-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.sector-card{border:2px solid var(--line);border-radius:var(--radius);background:#fff;padding:16px 12px;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.sector-card:hover{border-color:var(--accent)}
+.sector-card.selected{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sector-card .emoji{font-size:1.8rem;display:block;margin-bottom:6px}
+.sector-card strong{display:block;font-size:.98rem}
+.input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.input-grid label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px}
+.input-grid input,.input-grid select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:1rem}
+.input-note{font-size:.8rem;color:var(--muted);margin-top:4px}
+.sim-columns{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:960px){.sim-columns{grid-template-columns:1.2fr .8fr;align-items:start}}
+.tier{margin:1.6em 0}
+.tier>h3{font-size:1.15rem;margin:0 0 .2em;display:flex;align-items:center;gap:8px}
+.tier.toys>h3{color:var(--muted)}
+.tier .tier-sub{font-size:.88rem;color:var(--muted);margin:0 0 1em}
+.sim-item{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px 16px;margin-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.tier.toys .sim-item{background:#fafbfc;border-style:dashed}
+.sim-item .name{font-weight:700;font-size:.98rem}
+.sim-item .detail{font-size:.83rem;color:var(--muted);margin-top:3px}
+.sim-item select{max-width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:.9rem;margin-top:6px}
+.sim-item .price{text-align:right;white-space:nowrap}
+.sim-item .price .amt{font-weight:800;font-size:1.05rem;color:var(--accent-dark)}
+.sim-item .price .per{font-size:.78rem;color:var(--muted);display:block}
+.conf{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.04em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.conf.official{background:#e6f6ec;color:#157a3a}
+.conf.reported{background:#fff4e0;color:#9a6a00}
+.conf.estimate{background:#f1f1f4;color:#5a5a66}
+.conf.illus{background:#eef2ff;color:#3b4fd8}
+.qty{display:flex;align-items:center;gap:8px;margin-top:8px}
+.qty button{width:30px;height:30px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:1.1rem;cursor:pointer;line-height:1}
+.qty button:hover{border-color:var(--accent)}
+.qty span{min-width:28px;text-align:center;font-weight:700}
+.sim-check{display:flex;gap:10px;align-items:flex-start;margin-top:8px;font-size:.9rem}
+.sim-check input{margin-top:4px}
+#sim-map{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+#sim-map h3{margin:0 0 .3em;font-size:1.1rem}
+#sim-map .hint{font-size:.83rem;color:var(--muted);margin:0 0 .8em}
+#sim-map svg{width:100%;height:auto;border:1px dashed var(--line);border-radius:8px;background:#fbfdfc}
+.total-bar{background:var(--navy);color:#fff;border-radius:var(--radius);padding:22px;margin-top:1.4em}
+.total-bar .row{display:flex;justify-content:space-between;padding:6px 0;font-size:.95rem;border-bottom:1px solid rgba(255,255,255,.14)}
+.total-bar .row.grand{border-bottom:none;font-size:1.3rem;font-weight:800;padding-top:12px}
+.total-bar .fine{font-size:.8rem;opacity:.75;margin-top:10px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:1em 0;font-size:.8rem}
+.proc-line{background:#fff;border:2px solid var(--accent);border-radius:10px;padding:16px;margin:1.4em 0}
+.proc-line h3{margin:0 0 .4em;font-size:1.05rem}
+.proc-line .big{font-size:1.5rem;font-weight:800;color:var(--accent-dark)}
+/* breadcrumbs + sector switcher (v2 chrome) */
+.crumbs{font-size:.85rem;color:var(--muted);padding:16px 0 0}
+.crumbs a{color:var(--accent-dark);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.sector-switch{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:.85rem;padding:10px 0 4px}
+.ss-label{font-weight:700;color:var(--navy);margin-right:2px}
+.sector-switch a{text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--ink);font-size:.83rem}
+.sector-switch a:hover{border-color:var(--accent);color:var(--accent-dark)}
+/* visible focus states */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.sector-card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+/* sticky running-total column on desktop */
+@media(min-width:960px){.sim-side{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a class="active" href="simulator.html">Cost simulator</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span aria-hidden="true">›</span> <a href="resources.html">Resources</a> <span aria-hidden="true">›</span> <span aria-current="page">Cost simulator</span></nav>
+  <div class="sector-switch"><span class="ss-label">I run a:</span><a href="sector-retail.html">Retail store</a><a href="sector-restaurant.html">Restaurant</a><a href="sector-quick-service-cafe.html">Quick-service / caf&eacute;</a><a href="sector-hotel-hospitality.html">Hotel</a><a href="sector-grocery-convenience.html">Grocery / convenience</a><a href="sector-services-salon.html">Services / salon</a></div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Interactive tool · Canadian small business</p>
+    <h1>What should your tech stack cost?</h1>
+    <p class="lead">Pick your sector, tell us about your business, and build your stack item by item. Every figure comes from published pricing and is labeled by confidence — then see what the numbers say and get a free audit of your real costs.</p>
+    <div class="btn-row"><a class="btn ghost" href="#sim-start">Start building your stack</a></div>
+  </div>
+</section>
+
+<main>
+<div class="sim-wrap">
+
+<section class="sim-step" id="sim-start">
+  <h2>1 · Pick your sector</h2>
+  <p class="hint">The catalog, suggestions, and floor-plan map reconfigure for each sector.</p>
+  <div class="sector-grid" id="sector-grid"></div>
+</section>
+
+<section class="sim-step">
+  <h2>2 · Tell us about your business</h2>
+  <p class="hint">These drive the per-station, per-terminal, and per-location math.</p>
+  <div class="input-grid">
+    <div><label for="in-locations">Locations</label><input type="number" id="in-locations" min="1" value="1"></div>
+    <div><label for="in-stations">POS stations</label><input type="number" id="in-stations" min="0" value="1"></div>
+    <div><label for="in-terminals">Payment terminals</label><input type="number" id="in-terminals" min="0" value="1"></div>
+    <div id="wrap-employees"><label for="in-employees">Employees on payroll</label><input type="number" id="in-employees" min="0" value="5"></div>
+    <div><label for="in-volume">Monthly card volume (CAD)</label><input type="number" id="in-volume" min="0" value="40000" step="1000"><div class="input-note">From your processor statements if you have them.</div></div>
+    <div><label for="in-rate">Current processing rate (%)</label><input type="number" id="in-rate" min="0" max="10" step="0.05" value="2.65"><div class="input-note">Your effective rate. Don't know it? 2.65% is a typical flat rate — an estimate, not your number.</div></div>
+    <div id="wrap-marketplace" style="display:none"><label for="in-marketplace">Monthly delivery-app sales (CAD)</label><input type="number" id="in-marketplace" min="0" value="0" step="500"><div class="input-note">Sales through DoorDash, Uber Eats, Skip.</div></div>
+    <div id="wrap-tables" style="display:none"><label for="in-tables">Dining tables</label><input type="number" id="in-tables" min="0" value="20"></div>
+    <div id="wrap-practitioners" style="display:none"><label for="in-practitioners">Practitioners / chairs</label><input type="number" id="in-practitioners" min="0" value="3"></div>
+    <div><label for="in-sqft">Floor area (sq ft)</label><input type="number" id="in-sqft" min="0" value="2000" step="100"><div class="input-note" id="ap-suggest"></div></div>
+  </div>
+</section>
+
+<section class="sim-step">
+  <h2>3 · Build your stack</h2>
+  <p class="hint">Tick what you have (or plan to get). Quantities adjust per item.</p>
+  <div class="legend">
+    <span><span class="conf official">Official</span> vendor's own price</span>
+    <span><span class="conf reported">Reported</span> reputable third-party</span>
+    <span><span class="conf estimate">Estimate</span> our reasonable estimate</span>
+    <span><span class="conf illus">Illustrative</span> purchase ÷ 36 mo</span>
+  </div>
+  <div class="sim-columns">
+    <div>
+      <div class="tier" id="tier-needs"><h3>✅ What you actually need</h3><p class="tier-sub">The core stack — real, verified, useful. Start here.</p><div id="needs-list"></div></div>
+      <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (÷ 36), clearly labeled.</p><div id="infra-list"></div></div>
+      <div class="tier toys" id="tier-toys"><h3>🧸 Toys — nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="toys-list"></div></div>
+    </div>
+    <div class="sim-side">
+      <div id="sim-map">
+        <h3>Your floor plan</h3>
+        <p class="hint">Schematic — icons appear as you add items. Not to scale.</p>
+        <svg id="floorplan" viewBox="0 0 600 430" role="img" aria-label="Schematic floor plan of selected equipment"></svg>
+      </div>
+      <div class="total-bar">
+        <div id="total-lines"></div>
+        <div class="row grand"><span>Estimated total</span><span id="grand-total">$0/mo</span></div>
+        <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ 36). Not quotes — your free audit measures your real numbers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sim-step">
+  <div class="proc-line">
+    <span class="tag" style="display:inline-block;background:var(--accent);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.08em;padding:5px 12px;border-radius:6px;margin-bottom:.8em">Illustrative — not a promise</span>
+    <h3>What you're paying in processing fees right now</h3>
+    <p class="big" id="proc-cost">$0 / month</p>
+    <p style="margin:.4em 0" id="proc-save"></p>
+    <p class="input-note">Based on the volume and rate you entered above. A 0.5% saving is a common audit finding used here only to show the math — your statements decide the real number.</p>
+  </div>
+</section>
+
+<section class="sim-step">
+  <div class="cta-band">
+    <h2>Know your real numbers?</h2>
+    <p>This simulator runs on published prices and estimates. Your statements tell the true story — send us 3–6 months and we'll measure exactly what you're paying, free.</p>
+    <a class="btn" href="contact.html">Get your free processing audit</a>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Simulator figures are estimates from published pricing — your costs will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a> · <a href="pos-services.html">POS services</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+<script>
+/* ============================================================================
+   SIM_PRICES — EDIT PRICES HERE
+   All figures in CAD unless noted. Confidence: "official" (vendor's own page),
+   "reported" (reputable third-party), "estimate" (our reasonable estimate),
+   "illus" (illustrative monthly equivalent = purchase price / 36, NOT a fee).
+   Sources researched 2026-09-28; see ~/workspace/ai-opportunities/payment-savings-research/system-monthly-costs.md. Slang/HiJiffy/Asksuite figures are sibling-sourced (third-party reporting, not that file) - re-verify from named third party before treating as sourced.
+   calc: flat | per_location | per_station | per_terminal | per_employee |
+         per_unit | percent_volume | percent_marketplace
+   ============================================================================ */
+const SIM_PRICES = {
+  meta: { currency: "CAD", updated: "2026-09-28", amortize_months: 36 },
+  sectors: {
+    retail: {
+      label: "Retail", emoji: "🏬",
+      needs: [
+        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"lanes",icon:"🖥️",label:"POS"},
+          options:[
+            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
+            {label:"Shopify POS Lite — free with plan", monthly:0, conf:"reported", note:"included with Shopify plan"},
+            {label:"Lightspeed Retail — ~$179/mo typical", monthly:179, conf:"estimate", note:"third-party pricing guides; confirm with vendor"} ]},
+        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
+          options:[
+            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — illustrative, not a fee"} ]},
+        { id:"printer", name:"Receipt printer", calc:"per_station", map:{zone:"lanes",icon:"🧾",label:"Printer"},
+          options:[ {label:"Thermal printer — ~$16/mo equiv.", monthly:16, conf:"illus", note:"~$575 new ÷ 36 mo"} ]},
+        { id:"scanner", name:"Barcode scanner", calc:"per_station", map:{zone:"lanes",icon:"🔫",label:"Scanner"},
+          options:[ {label:"Handheld scanner — ~$7/mo equiv.", monthly:7, conf:"estimate", note:"estimate; varies by model"} ]},
+        { id:"ecom", name:"Online store", calc:"per_location", map:{zone:"backoffice",icon:"🌐",label:"Web"},
+          options:[ {label:"Shopify Basic — $49/mo", monthly:49, conf:"reported", note:"shopify.com/ca pricing via third-party check 2026-09"} ]},
+        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+          options:[
+            {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"},
+            {label:"Xero Standard — $60/mo", monthly:60, conf:"official", note:"xero.com/ca"} ]},
+        { id:"loyalty", name:"Loyalty program", calc:"per_location",
+          options:[ {label:"Square Loyalty — ~$45/mo", monthly:45, conf:"reported", note:"third-party sources — confirm on squareup.com/ca"} ]}
+      ],
+      toys: [
+        { id:"signage", name:"Digital signage screen", calc:"per_unit", unit:"screen", map:{zone:"floor",icon:"📺",label:"Sign"},
+          options:[ {label:"~$25/mo equiv.", monthly:25, conf:"estimate", note:"estimate incl. hardware + software"} ]},
+        { id:"selfcheckout", name:"Self-checkout kiosk", calc:"flat", info_only:true,
+          options:[ {label:"Quote-based — varies widely", monthly:0, conf:"estimate", note:"no published benchmark; get a vendor quote"} ]}
+      ],
+      zones: [
+        {id:"lanes", label:"Checkout lanes", x:20, y:20, w:340, h:150},
+        {id:"floor", label:"Sales floor", x:20, y:190, w:340, h:120},
+        {id:"backoffice", label:"Back office", x:380, y:20, w:200, h:290}
+      ]
+    },
+    restaurant: {
+      label:"Full-service restaurant", emoji:"🍽️",
+      needs: [
+        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"bar",icon:"🖥️",label:"POS"},
+          options:[
+            {label:"TouchBistro — $69/mo", monthly:69, conf:"official", note:"touchbistro.com (currency unstated on page)"},
+            {label:"Moneris Go Restaurant — $64.94/mo", monthly:64.94, conf:"official", note:"includes Go terminal"} ]},
+        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"dining",icon:"💳",label:"Terminal"},
+          options:[
+            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+        { id:"kds", name:"Kitchen display screen", calc:"per_unit", unit:"screen", map:{zone:"kitchen",icon:"🍳",label:"KDS"},
+          options:[
+            {label:"~$30/mo per screen", monthly:30, conf:"reported", note:"third-party pricing guides"},
+            {label:"TouchBistro KDS — ~$89/mo", monthly:89, conf:"reported", note:"third-party review sites"} ]},
+        { id:"kprinter", name:"Kitchen / bar printer", calc:"per_unit", unit:"printer", map:{zone:"kitchen",icon:"🧾",label:"Printer"},
+          options:[ {label:"Thermal printer — ~$16/mo equiv.", monthly:16, conf:"illus", note:"~$575 new ÷ 36 mo"} ]},
+        { id:"sched", name:"Staff scheduling", calc:"per_location",
+          options:[ {label:"7shifts — ~$90/mo typical", monthly:89.99, conf:"reported", note:"entry $40–$45, Pro ~$90; third-party"} ]},
+        { id:"payroll", name:"Payroll", calc:"per_employee", base:40, map:{zone:"backoffice",icon:"💰",label:"Pay"},
+          options:[ {label:"Wagepoint Unlimited — $40 + $6/employee", monthly:6, conf:"reported", note:"base $40/mo + $6 per employee"} ]},
+        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+          options:[
+            {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"},
+            {label:"Xero Standard — $60/mo", monthly:60, conf:"official", note:"xero.com/ca"} ]}
+      ],
+      toys: [
+        { id:"aiphone", name:"AI phone answering", calc:"per_location",
+          options:[ {label:"~$399/mo per location", monthly:399, conf:"reported", note:"e.g., Slang.ai; third-party reporting"} ]},
+        { id:"marketplace", name:"Delivery-app commissions", calc:"percent_marketplace", rate:0.25,
+          options:[ {label:"~25% of delivery sales (mid-tier)", monthly:0, conf:"reported", note:"DoorDash/Uber Eats 15–30% tiers; Skip ~25–30%"} ]},
+        { id:"reserv", name:"Reservation system", calc:"per_location",
+          options:[ {label:"OpenTable — ~$249/mo", monthly:249, conf:"reported", note:"third-party figure + per-cover fees; unverified"} ]}
+      ],
+      zones: [
+        {id:"dining", label:"Dining room", x:20, y:20, w:280, h:170},
+        {id:"bar", label:"Bar", x:320, y:20, w:260, h:170},
+        {id:"kitchen", label:"Kitchen", x:20, y:210, w:280, h:150},
+        {id:"backoffice", label:"Office", x:320, y:210, w:260, h:150}
+      ]
+    },
+    qsr: {
+      label:"Quick-service / café", emoji:"☕",
+      needs: [
+        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"counter",icon:"🖥️",label:"POS"},
+          options:[
+            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
+            {label:"Toast POS — ~US$69/mo", monthly:95, conf:"reported", note:"US pricing page; Canadian pricing quote-based — CAD approx."} ]},
+        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"counter",icon:"💳",label:"Terminal"},
+          options:[
+            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+        { id:"kds", name:"Kitchen display / KDS-lite", calc:"per_unit", unit:"screen", map:{zone:"kitchen",icon:"🍳",label:"KDS"},
+          options:[ {label:"~$30/mo per screen", monthly:30, conf:"reported", note:"third-party pricing guides"} ]},
+        { id:"marketplace", name:"Delivery-app commissions", calc:"percent_marketplace", rate:0.25,
+          options:[ {label:"~25% of delivery sales (mid-tier)", monthly:0, conf:"reported", note:"15–30% tiers depending on plan"} ]},
+        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+          options:[ {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
+      ],
+      toys: [
+        { id:"kiosk", name:"Self-order kiosk", calc:"per_unit", unit:"kiosk", map:{zone:"counter",icon:"🤖",label:"Kiosk"},
+          options:[ {label:"Quote-based — varies widely", monthly:0, conf:"estimate", note:"no published benchmark; get a vendor quote", info_only:true} ]},
+        { id:"menuboard", name:"Digital menu boards", calc:"per_unit", unit:"screen",
+          options:[ {label:"~$25/mo equiv. per screen", monthly:25, conf:"estimate", note:"estimate incl. hardware + software"} ]}
+      ],
+      zones: [
+        {id:"counter", label:"Counter", x:20, y:20, w:360, h:150},
+        {id:"kitchen", label:"Kitchen", x:20, y:190, w:360, h:150},
+        {id:"pickup", label:"Pickup shelf", x:400, y:20, w:180, h:150},
+        {id:"backoffice", label:"Office", x:400, y:190, w:180, h:150}
+      ]
+    },
+    hotel: {
+      label:"Hotel & hospitality", emoji:"🏨",
+      needs: [
+        { id:"pms", name:"Property management system", calc:"per_location", map:{zone:"frontdesk",icon:"🏨",label:"PMS"},
+          options:[
+            {label:"Cloudbeds — from ~$600/mo", monthly:600, conf:"reported", note:"hoteltechreport; currency unverified; quote-based in practice"},
+            {label:"MiniHotel — from ~$200/mo", monthly:200, conf:"reported", note:"hoteltechreport; currency unverified"} ]},
+        { id:"terminal", name:"Payment terminal (front desk + outlets)", calc:"per_terminal", map:{zone:"frontdesk",icon:"💳",label:"Terminal"},
+          options:[
+            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+          options:[ {label:"QuickBooks Plus — $110/mo", monthly:110, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
+      ],
+      toys: [
+        { id:"guestmsg", name:"AI guest messaging", calc:"per_location",
+          options:[
+            {label:"HiJiffy — ~$200/mo", monthly:200, conf:"reported", note:"Hotel Tech Report"},
+            {label:"Asksuite — ~$300/mo", monthly:300, conf:"reported", note:"Hotel Tech Report"} ]}
+      ],
+      zones: [
+        {id:"frontdesk", label:"Front desk", x:20, y:20, w:300, h:150},
+        {id:"rooms", label:"Rooms (PMS-managed)", x:340, y:20, w:240, h:150},
+        {id:"restaurant", label:"On-site restaurant", x:20, y:190, w:300, h:150},
+        {id:"backoffice", label:"Back office", x:340, y:190, w:240, h:150}
+      ]
+    },
+    grocery: {
+      label:"Grocery / convenience", emoji:"🛒",
+      needs: [
+        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"lanes",icon:"🖥️",label:"POS"},
+          options:[
+            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
+            {label:"Lightspeed Retail — ~$179/mo typical", monthly:179, conf:"estimate", note:"third-party guides; confirm with vendor"} ]},
+        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
+          options:[
+            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+        { id:"scanner", name:"Presentation scanner", calc:"per_station", map:{zone:"lanes",icon:"🔫",label:"Scanner"},
+          options:[ {label:"Hands-free scanner — ~$10/mo equiv.", monthly:10, conf:"estimate", note:"estimate; varies by model"} ]},
+        { id:"printer", name:"Receipt printer", calc:"per_station", map:{zone:"lanes",icon:"🧾",label:"Printer"},
+          options:[ {label:"Thermal printer — ~$16/mo equiv.", monthly:16, conf:"illus", note:"~$575 new ÷ 36 mo"} ]},
+        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+          options:[ {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
+      ],
+      toys: [
+        { id:"ecom", name:"Online ordering / ecommerce", calc:"per_location",
+          options:[ {label:"Shopify Basic — $49/mo", monthly:49, conf:"reported", note:"plus transaction fees"} ]},
+        { id:"loyalty", name:"Loyalty program", calc:"per_location",
+          options:[ {label:"Square Loyalty — ~$45/mo", monthly:45, conf:"reported", note:"third-party sources — confirm on squareup.com/ca"} ]}
+      ],
+      zones: [
+        {id:"lanes", label:"Checkout lanes", x:20, y:20, w:340, h:150},
+        {id:"deli", label:"Deli / prepared", x:20, y:190, w:340, h:120},
+        {id:"backoffice", label:"Back office / receiving", x:380, y:20, w:200, h:290}
+      ]
+    },
+    salon: {
+      label:"Services / salon", emoji:"💈",
+      needs: [
+        { id:"booking", name:"Booking & scheduling", calc:"per_location", map:{zone:"reception",icon:"📅",label:"Book"},
+          options:[
+            {label:"Square Appointments Plus — $35/mo", monthly:35, conf:"official", note:"squareup.com/ca"},
+            {label:"Jane App — $79/mo + $19/practitioner", monthly:79, conf:"official", note:"jane.app pricing; +$19 per extra practitioner"},
+            {label:"Vagaro — ~$30/mo per calendar", monthly:30, conf:"reported", note:"third-party sources"} ]},
+        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"reception",icon:"🖥️",label:"POS"},
+          options:[ {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"} ]},
+        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"reception",icon:"💳",label:"Terminal"},
+          options:[
+            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
+        { id:"payroll", name:"Payroll", calc:"per_employee", base:40, map:{zone:"backoffice",icon:"💰",label:"Pay"},
+          options:[ {label:"Wagepoint Unlimited — $40 + $6/employee", monthly:6, conf:"reported", note:"base $40/mo + $6 per employee"} ]},
+        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
+          options:[ {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
+      ],
+      toys: [
+        { id:"crm", name:"Marketing / CRM", calc:"per_location", info_only:true,
+          options:[ {label:"Not yet researched — varies", monthly:0, conf:"estimate", note:"email/SMS marketing tools vary widely; research pending"} ]}
+      ],
+      zones: [
+        {id:"reception", label:"Reception", x:20, y:20, w:300, h:150},
+        {id:"stations", label:"Service stations / chairs", x:340, y:20, w:240, h:150},
+        {id:"backoffice", label:"Back office", x:20, y:190, w:560, h:120}
+      ]
+    }
+  },
+  /* ---- Infrastructure tier: shared across sectors. upfront = one-time cost,
+     shown as monthly equivalent (÷ 36) and labeled. monthly = recurring. ---- */
+  infra: [
+    { id:"drops", name:"Network cable drops (Cat6, installed)", calc:"per_unit", unit:"drop",
+      options:[
+        {label:"Standard drop — $175", upfront:175, conf:"reported", note:"$125–300 band; fixr/monoprice 2026"},
+        {label:"Difficult drop — $300", upfront:300, conf:"reported", note:"finished walls, conduit, plenum"} ]},
+    { id:"ap", name:"Wi-Fi access point", calc:"per_unit", unit:"AP",
+      options:[
+        {label:"Mid-tier AP hardware — $175", upfront:175, conf:"reported", note:"e.g., Omada EAP772 $169.99, official store"},
+        {label:"AP installed — ~$325", upfront:325, conf:"reported", note:"Toronto installer ~$300/AP hardware + install"} ]},
+    { id:"switch", name:"PoE network switch", calc:"flat",
+      options:[
+        {label:"8-port smart-managed PoE — $110", upfront:110, conf:"reported", note:"VLAN-capable; the small-business sweet spot"},
+        {label:"16-port managed PoE — $285", upfront:285, conf:"reported", note:"growing sites, more APs/cameras"} ]},
+    { id:"firewall", name:"Firewall / router", calc:"flat",
+      options:[
+        {label:"No-subscription tier — $400", upfront:400, conf:"reported", note:"UniFi/TP-Link class; $199–929 band"},
+        {label:"Subscription UTM — ~$1,700 / 3 yr", upfront:1700, conf:"reported", note:"Fortinet/SonicWall/Meraki + licenses"} ]},
+    { id:"internet", name:"Business internet", calc:"flat",
+      options:[ {label:"~500 Mbps — $95/mo", monthly:95, conf:"reported", note:"Bell/Rogers business 2026; $70–110 band"} ]},
+    { id:"ups", name:"UPS 1500VA (network + lanes)", calc:"flat",
+      options:[ {label:"$220 one-time", upfront:220, conf:"reported", note:"amazon.ca; covers firewall, switch, modem + lanes through blips"} ]},
+    { id:"guestwifi", name:"Guest Wi-Fi (separate SSID + VLAN)", calc:"flat", info_only:true,
+      options:[ {label:"$0 extra — built into AP/controller", monthly:0, conf:"official", note:"captive portal $0–300/yr optional; keep guests off the card network"} ]}
+  ],
+  infra_notes: {
+    retail: "Wire every checkout lane — reliability beats everything. 1–2 APs cover staff + guest.",
+    restaurant: "KDS and printers get WIRES (kitchens are Wi-Fi-hostile). Tableside terminals on a dedicated staff SSID.",
+    qsr: "Minimal: 1–2 APs, a few drops. Kiosks want wired Ethernet, not Wi-Fi.",
+    hotel: "The big one — an AP every 4–8 rooms, PMS on its own VLAN, more switches per floor. Cost scales with rooms, not revenue.",
+    grocery: "Large footprint = more APs (3–6). Every lane wired; size the PoE switch for cameras too.",
+    salon: "Minimal — 1 AP, 2–3 drops. The booking PC holds card-on-file data: segment it."
+  }
+};
+</script>
+<script>
+(function(){
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const money = n => "$" + Math.round(n).toLocaleString("en-CA");
+  let sector = "retail";
+  const state = {}; // itemId -> {checked, optIdx, qty}
+
+  const CONF_LABEL = {official:"Official", reported:"Reported", estimate:"Estimate", illus:"Illustrative"};
+
+  function getInputs(){
+    return {
+      locations: Math.max(1, +$("in-locations").value || 1),
+      stations: Math.max(0, +$("in-stations").value || 0),
+      terminals: Math.max(0, +$("in-terminals").value || 0),
+      employees: Math.max(0, +$("in-employees").value || 0),
+      volume: Math.max(0, +$("in-volume").value || 0),
+      rate: Math.max(0, +$("in-rate").value || 0),
+      marketplace: Math.max(0, +$("in-marketplace").value || 0),
+      tables: Math.max(0, +$("in-tables").value || 0),
+      practitioners: Math.max(0, +$("in-practitioners").value || 0)
+    };
+  }
+
+  function itemQty(item, inp){
+    switch(item.calc){
+      case "per_location": return inp.locations;
+      case "per_station": return inp.stations;
+      case "per_terminal": return inp.terminals;
+      case "per_employee": return inp.employees;
+      case "per_unit": return (state[item.id] && state[item.id].qty) || 0;
+      default: return 1;
+    }
+  }
+
+  function itemMonthly(item, inp){
+    const st = state[item.id]; if(!st || !st.checked) return 0;
+    const opt = item.options[st.optIdx || 0];
+    if(opt.info_only) return 0;
+    const q = itemQty(item, inp);
+    let m = 0;
+    if(item.calc === "percent_marketplace") m = inp.marketplace * (item.rate || 0);
+    else if(opt.upfront && !opt.monthly) m = (opt.upfront / 36) * q; // amortized monthly equivalent
+    else m = opt.monthly * q;
+    if(item.base) m += item.base * (item.calc === "per_location" ? inp.locations : 1);
+    return m;
+  }
+
+  function itemUpfront(item, inp){
+    const st = state[item.id]; if(!st || !st.checked) return 0;
+    const opt = item.options[st.optIdx || 0];
+    if(opt.info_only || !opt.upfront) return 0;
+    return opt.upfront * itemQty(item, inp);
+  }
+
+  function allItems(){
+    const s = SIM_PRICES.sectors[sector];
+    return s.needs.concat(SIM_PRICES.infra, s.toys);
+  }
+
+  function perLabel(item){
+    return {flat:"/mo flat", per_location:"/mo per location", per_station:"/mo per station",
+      per_terminal:"/mo per terminal", per_employee:"/mo per employee + base",
+      per_unit:"/mo per " + (item.unit || "unit"), percent_marketplace:"of delivery sales"}[item.calc] || "/mo";
+  }
+
+  function renderSectors(){
+    const g = $("sector-grid"); g.innerHTML = "";
+    Object.keys(SIM_PRICES.sectors).forEach(k => {
+      const s = SIM_PRICES.sectors[k];
+      const d = document.createElement("div");
+      d.className = "sector-card" + (k === sector ? " selected" : "");
+      d.innerHTML = '<span class="emoji">' + s.emoji + "</span><strong>" + s.label + "</strong>";
+      d.setAttribute("role", "button");
+      d.setAttribute("tabindex", "0");
+      d.setAttribute("aria-pressed", k === sector ? "true" : "false");
+      const pick = () => { sector = k; renderSectors(); renderCatalog(); };
+      d.onclick = pick;
+      d.onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(); } };
+      g.appendChild(d);
+    });
+    // sector-specific inputs
+    $("wrap-marketplace").style.display = (sector === "restaurant" || sector === "qsr") ? "" : "none";
+    $("wrap-tables").style.display = (sector === "restaurant") ? "" : "none";
+    $("wrap-practitioners").style.display = (sector === "salon") ? "" : "none";
+  }
+
+  function renderCatalog(){
+    [["needs","needs-list"],["infra","infra-list"],["toys","toys-list"]].forEach(([tier, listId]) => {
+      const list = $(listId);
+      list.innerHTML = "";
+      const items = tier === "infra" ? SIM_PRICES.infra : SIM_PRICES.sectors[sector][tier];
+      items.forEach(item => {
+        if(!state[item.id]) state[item.id] = {checked:false, optIdx:0, qty: tier === "needs" ? 1 : 0};
+        const st = state[item.id];
+        const opt = item.options[st.optIdx];
+        const d = document.createElement("div");
+        d.className = "sim-item";
+        let inner = '<div><div class="name">' + item.name +
+          '<span class="conf ' + opt.conf + '">' + CONF_LABEL[opt.conf] + "</span></div>" +
+          '<div class="detail">' + (opt.note || "") + "</div>";
+        if(item.options.length > 1){
+          inner += '<select data-item="' + item.id + '">';
+          item.options.forEach((o,i) => {
+            inner += '<option value="' + i + '"' + (i === st.optIdx ? " selected" : "") + ">" + o.label + "</option>";
+          });
+          inner += "</select>";
+        } else {
+          inner += '<div class="detail" style="margin-top:6px">' + opt.label + "</div>";
+        }
+        if(item.calc === "per_unit"){
+          inner += '<div class="qty"><button data-q="-1" data-item="' + item.id + '">−</button><span>' + st.qty + " " + (item.unit || "unit") + (st.qty === 1 ? "" : "s") + '</span><button data-q="1" data-item="' + item.id + '">+</button></div>';
+        }
+        if(item.calc === "percent_marketplace"){
+          inner += '<div class="detail" style="margin-top:6px">Enter delivery-app sales in step 2 — cost = sales × ' + Math.round((item.rate||0)*100) + "%.</div>";
+        }
+        inner += "</div>";
+        const priceTxt = opt.info_only ? "—" : money(itemMonthlyPreview(item, opt)) + "/mo" + ((opt.upfront && !opt.monthly) ? " equiv." : "");
+        const perTxt = opt.info_only ? "excluded from total"
+          : (opt.upfront && !opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront ÷ 36")
+          : perLabel(item);
+        inner += '<div class="price"><label class="sim-check" style="margin:0 0 6px;justify-content:flex-end"><input type="checkbox" data-item="' + item.id + '" aria-label="Include ' + item.name + '"' + (st.checked ? " checked" : "") + '></label>' +
+          '<span class="amt">' + priceTxt + '</span><span class="per">' + perTxt + "</span></div>";
+        d.innerHTML = inner;
+        list.appendChild(d);
+      });
+    });
+    listEvents();
+    recalc();
+  }
+
+  // preview monthly for one item using current inputs (for the per-item figure)
+  function itemMonthlyPreview(item, opt){
+    const inp = getInputs();
+    const keep = state[item.id];
+    const st = {checked:true, optIdx: item.options.indexOf(opt), qty: keep.qty};
+    const real = state[item.id]; state[item.id] = st;
+    const m = itemMonthly(item, inp);
+    state[item.id] = real;
+    return m;
+  }
+
+  function listEvents(){
+    document.querySelectorAll("#needs-list select, #infra-list select, #toys-list select").forEach(sel => {
+      sel.onchange = () => { state[sel.dataset.item].optIdx = +sel.value; renderCatalog(); };
+    });
+    document.querySelectorAll('#needs-list input[type="checkbox"], #infra-list input[type="checkbox"], #toys-list input[type="checkbox"]').forEach(cb => {
+      cb.onchange = () => {
+        const it = findItem(cb.dataset.item);
+        state[cb.dataset.item].checked = cb.checked;
+        if(cb.checked && it.calc === "per_unit" && state[cb.dataset.item].qty < 1) state[cb.dataset.item].qty = 1;
+        recalc(); drawMap(); updateTotalBar();
+      };
+    });
+    document.querySelectorAll(".qty button").forEach(b => {
+      b.onclick = () => {
+        const id = b.dataset.item;
+        state[id].qty = Math.max(0, state[id].qty + (+b.dataset.q));
+        if(state[id].qty > 0) state[id].checked = true;
+        renderCatalog();
+      };
+    });
+  }
+
+  function findItem(id){
+    return allItems().find(i => i.id === id);
+  }
+
+  function drawMap(){
+    const svg = $("floorplan");
+    const s = SIM_PRICES.sectors[sector];
+    const inp = getInputs();
+    let html = "";
+    s.zones.forEach(z => {
+      html += '<rect x="' + z.x + '" y="' + z.y + '" width="' + z.w + '" height="' + z.h +
+        '" rx="8" fill="#f4f8f6" stroke="#c9d8d2"/>' +
+        '<text x="' + (z.x + 10) + '" y="' + (z.y + 20) + '" font-size="12" font-weight="700" fill="#5a6b66">' + z.label + "</text>";
+    });
+    // collect icons per zone
+    const icons = {};
+    s.zones.forEach(z => icons[z.id] = []);
+    const push = (zone, icon, label, n) => {
+      n = Math.min(n, 8);
+      for(let i = 0; i < n; i++) icons[zone] && icons[zone].push({icon, label});
+    };
+    allItems().forEach(item => {
+      const st = state[item.id]; if(!st || !st.checked || !item.map) return;
+      const q = itemQty(item, inp);
+      if(q <= 0) return;
+      push(item.map.zone, item.map.icon, item.map.label, q);
+    });
+    // sector extras: tables for restaurant, practitioners for salon
+    if(sector === "restaurant" && inp.tables > 0) push("dining", "🪑", "Table", inp.tables);
+    if(sector === "salon" && inp.practitioners > 0) push("stations", "💺", "Chair", inp.practitioners);
+    s.zones.forEach(z => {
+      const list = icons[z.id];
+      list.forEach((ic, i) => {
+        const col = i % 4, row = Math.floor(i / 4);
+        const x = z.x + 18 + col * 62, y = z.y + 44 + row * 52;
+        html += '<text x="' + x + '" y="' + y + '" font-size="22">' + ic.icon + "</text>" +
+          '<text x="' + x + '" y="' + (y + 16) + '" font-size="10" fill="#5a6b66">' + ic.label + "</text>";
+      });
+    });
+    if(!Object.values(icons).some(a => a.length))
+      html += '<text x="300" y="215" text-anchor="middle" font-size="14" fill="#9aa8a3">Tick items in your stack — they\'ll appear here.</text>';
+    svg.innerHTML = html;
+  }
+
+  function recalc(){
+    const inp = getInputs();
+    const s = SIM_PRICES.sectors[sector];
+    let total = 0;
+    allItems().forEach(item => { total += itemMonthly(item, inp); });
+    // processing line
+    const proc = inp.volume * (inp.rate / 100);
+    const save = inp.volume * 0.005;
+    $("proc-cost").textContent = money(proc) + " / month";
+    $("proc-save").innerHTML = "A 0.5% saving on that volume would be worth <strong>" + money(save) + "/month</strong> — " +
+      "illustrative only; your statements decide the real number.";
+    drawMap();
+    updateTotalBar(total);
+  }
+
+  function updateTotalBar(total){
+    if(total === undefined){
+      const inp = getInputs(); const s = SIM_PRICES.sectors[sector]; total = 0;
+      allItems().forEach(item => { total += itemMonthly(item, inp); });
+    }
+    const inp = getInputs();
+    const s = SIM_PRICES.sectors[sector];
+    let lines = "";
+    allItems().forEach(item => {
+      const m = itemMonthly(item, inp);
+      if(m > 0){
+        const opt = item.options[state[item.id].optIdx];
+        lines += '<div class="row"><span>' + item.name + ' <span style="opacity:.6;font-size:.8em">(' + CONF_LABEL[opt.conf] + ")</span></span><span>" + money(m) + "/mo</span></div>";
+      }
+    });
+    if(!lines) lines = '<div class="row"><span>No items selected yet</span><span>—</span></div>';
+    $("total-lines").innerHTML = lines;
+    $("grand-total").textContent = money(total) + "/mo";
+  }
+
+  ["in-locations","in-stations","in-terminals","in-employees","in-volume","in-rate","in-marketplace","in-tables","in-practitioners"]
+    .forEach(id => { $(id).addEventListener("input", recalc); });
+
+  renderSectors();
+  renderCatalog();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick-service &amp; caf&eacute; POS guide — kiosks, KDS &amp; rush-proofing | FairRate Audit</title>
+<meta name="description" content="Quick-service and cafe POS guide: tap-first counter hardware, self-order kiosks, KDS setup, a high-volume sample setup with connection map, troubleshooting, integrations, and honest benchmarks.">
+<link rel="stylesheet" href="style.css">
+<style>
+.crumb{font-size:.9rem;margin:18px 0 4px;color:var(--muted)}
+.crumb a{color:var(--accent-dark);text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.switcher{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--accent-soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:14px 0 26px;font-size:.92rem}
+.switcher span{font-weight:700;margin-right:4px;color:var(--navy)}
+.switcher a{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;text-decoration:none;color:var(--ink);transition:border-color .15s ease,color .15s ease,transform .15s ease}
+.switcher a:hover{border-color:var(--accent);color:var(--accent-dark);transform:translateY(-1px)}
+.switcher a.now{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700}
+.switcher a.res{background:var(--bg);border-color:var(--accent);color:var(--accent-dark)}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0;padding:14px 16px;margin:18px 0}
+.callout p:last-child{margin-bottom:0}
+.warn{border-left-color:#e8b93c;background:#fff8e6}
+.good{border-left-color:var(--accent);background:var(--accent-soft)}
+.deem{opacity:.68;background:var(--bg);border:1px dashed var(--line);border-radius:var(--radius);padding:16px;margin:26px 0;font-size:.93rem}
+table.cmp{width:100%;border-collapse:collapse;margin:14px 0}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;font-size:.92rem;vertical-align:top}
+table.cmp th{background:var(--accent-soft);color:var(--navy)}
+table.cmp tr:nth-child(even) td{background:#f7faf8}
+.fine2{font-size:.85rem;color:var(--muted)}
+.int{border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0;background:#fff;transition:transform .15s ease,box-shadow .15s ease}
+.int:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(14,42,71,.1)}
+.int h3{margin:0 0 8px}
+.int p{margin:8px 0}
+.roi{background:var(--accent-soft);border:1px solid #b9d6c2;border-radius:10px;padding:12px 14px;margin-top:10px;font-size:.93rem}
+.roi strong{display:block;margin-bottom:4px;color:var(--accent-dark)}
+.sysmap{width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff;margin:14px 0}
+.num-list{counter-reset:step}
+.num-list li{margin-bottom:10px}
+code.k{background:var(--bg);border-radius:4px;padding:1px 6px;font-size:.88em}
+.bundled{background:#fff8e6;border:1px solid #e8b93c;border-radius:var(--radius);padding:16px;margin:18px 0;transition:box-shadow .15s ease}
+.bundled:hover{box-shadow:0 8px 22px rgba(14,42,71,.08)}
+.bundled h3{margin-top:0}
+h2.sec{margin-top:44px;padding-top:18px;border-top:1px solid var(--line)}
+@media(max-width:640px){table.cmp th,table.cmp td{font-size:.84rem;padding:6px 8px}.bundled,.int{padding:14px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html" class="active">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Sector guide · Quick-service &amp; café</p>
+    <h1>Quick-service / caf&eacute;: POS setup, kiosks &amp; rush-proofing</h1>
+    <p class="lead">Speed is the product. Counter stations, self-order kiosks, and a kitchen flow that survives the morning rush.</p>
+    <div class="btn-row">
+      <a class="btn" href="contact.html">Request your free audit</a>
+      <a class="btn ghost" href="pos-services.html">Explore POS services</a>
+    </div>
+  </div>
+</section>
+
+<main>
+<section class="section">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="resources.html">Resources</a> &rsaquo; Quick-service / caf&eacute;</nav>
+    <div class="switcher" aria-label="Sector switcher">
+      <span>I run a:</span>
+      <a href="sector-retail.html">Retail</a>
+      <a href="sector-restaurant-full-service.html">Full-service restaurant</a>
+      <a class="now" href="sector-quick-service-cafe.html">Quick-service / caf&eacute;</a>
+      <a href="sector-hotel-hospitality.html">Hotel &amp; hospitality</a>
+      <a href="sector-grocery-convenience.html">Grocery / convenience</a>
+      <a href="sector-services-salon.html">Services / salon</a>
+      <a class="res" href="resources.html">&larr; All resources</a>
+    </div>
+
+    
+
+    <h2 class="sec" id="overview">1. Sector overview</h2>
+    <p>Quick-service restaurants, caf&eacute;s, bakeries, and takeout counters live and die on throughput. What makes this sector different:</p>
+    <ul>
+      <li><strong>Speed beats ceremony.</strong> Tap-first checkout, minimal taps per order, and no bottlenecks at the till during peak.</li>
+      <li><strong>Orders arrive from everywhere.</strong> Counter, kiosk, phone, your own website, and delivery marketplaces — all must land in one kitchen queue.</li>
+      <li><strong>Tickets are small and frequent.</strong> Low average tickets at high volume mean fixed per-transaction fees hurt more than in full-service.</li>
+      <li><strong>Kiosks change the labour math.</strong> Self-order kiosks shift order entry to the customer — but only if the kiosk is as fast as a good cashier.</li>
+      <li><strong>Rushes are predictable and brutal.</strong> The 7:30–9:00am caf&eacute; rush or the lunch crush is when everything must simply work.</li>
+    </ul>
+
+    <h2 class="sec" id="hardware">2. In-store hardware &amp; software</h2>
+    <table class="cmp">
+      <tr><th>Role</th><th>What it does</th><th>Typical connection</th></tr>
+      <tr><td><strong>Counter POS station</strong></td><td>Tap-first order entry and payment for staffed lanes.</td><td>Tablet or terminal on the counter network.</td></tr>
+      <tr><td><strong>Customer display</strong></td><td>Shows the order total to the customer as it's rung in.</td><td>Wired or paired to the counter station.</td></tr>
+      <tr><td><strong>Payment terminal</strong></td><td>Tap-heavy card acceptance at the counter.</td><td>Ethernet preferred.</td></tr>
+      <tr><td><strong>Receipt printer</strong></td><td>Customer receipts and order numbers.</td><td>USB to the station or ethernet.</td></tr>
+      <tr><td><strong>Cash drawer</strong></td><td>Float for the minority of cash sales.</td><td>Wired to the printer's <code class="k">RJ11/RJ12</code> kick port.</td></tr>
+      <tr><td><strong>Kitchen printer or KDS</strong></td><td>Order tickets for the prep line.</td><td>Ethernet; KDS for high volume, printer as backup or for small kitchens.</td></tr>
+      <tr><td><strong>Self-order kiosk (optional)</strong></td><td>Customer self-ordering with card payment.</td><td>Ethernet strongly preferred — a kiosk on flaky Wi-Fi is a support ticket generator.</td></tr>
+      <tr><td><strong>Backup payment terminal</strong></td><td>Independent terminal that works if the POS goes down.</td><td>Standalone; kept charged.</td></tr>
+    </table>
+
+    <div class="bundled" id="bundled">
+      <h3>Bundled platforms — a separate category</h3>
+      <p>All-in-one platforms such as <strong>Square</strong> bundle the counter POS, online ordering, loyalty, and payment processing into one package — popular with caf&eacute;s and small QSRs for exactly that simplicity. The trade-off: <strong>the processing cost is hidden inside the bundle</strong>, and switching to a cheaper processor may require replacing the whole stack. Bundled platforms are kept in their own category on this site and are never mixed into standalone provider/POS comparisons.</p>
+    </div>
+
+    <h2 class="sec" id="sample-setup">3. Flagship sample setup</h2>
+    <p><strong>Scenario:</strong> a high-volume neighbourhood caf&eacute; — staffed counter lane, one self-order kiosk, pickup shelf, and delivery orders flowing in.</p>
+    <h3>Connection map (model-agnostic)</h3>
+    <svg viewBox="0 0 760 580" class="sysmap" role="img" aria-label="Connection map for a high-volume cafe with kiosk and pickup shelf">
+      <rect x="280" y="10" width="200" height="54" rx="8" fill="#eef3fa" stroke="#274b73" stroke-width="2"/>
+      <text x="380" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Caf&eacute; router / switch</text>
+      <text x="380" y="52" text-anchor="middle" font-size="11" fill="#44505e">POS network isolated from guest Wi-Fi</text>
+      <rect x="20" y="100" width="220" height="50" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="130" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Counter POS station</text>
+      <text x="130" y="140" text-anchor="middle" font-size="11" fill="#44505e">tap-first · staffed lane</text>
+      <rect x="20" y="180" width="220" height="50" rx="8" fill="#fff" stroke="#2e8b47" stroke-width="2"/>
+      <text x="130" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Payment terminal (counter)</text>
+      <text x="130" y="220" text-anchor="middle" font-size="11" fill="#44505e">ethernet · tap-first</text>
+      <rect x="20" y="260" width="220" height="50" rx="8" fill="#fff" stroke="#c77700" stroke-width="2"/>
+      <text x="130" y="282" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Receipt printer + drawer</text>
+      <text x="130" y="300" text-anchor="middle" font-size="11" fill="#44505e">USB · drawer on RJ11 kick port</text>
+      <rect x="270" y="100" width="220" height="50" rx="8" fill="#fff" stroke="#6a5acd" stroke-width="2"/>
+      <text x="380" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Self-order kiosk</text>
+      <text x="380" y="140" text-anchor="middle" font-size="11" fill="#44505e">ethernet · card payment built in</text>
+      <rect x="270" y="180" width="220" height="50" rx="8" fill="#fff" stroke="#b03a5b" stroke-width="2"/>
+      <text x="380" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Kitchen display (KDS)</text>
+      <text x="380" y="220" text-anchor="middle" font-size="11" fill="#44505e">ethernet · one unified queue</text>
+      <rect x="270" y="260" width="220" height="50" rx="8" fill="#fff" stroke="#c77700" stroke-width="2"/>
+      <text x="380" y="282" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Kitchen printer (backup)</text>
+      <text x="380" y="300" text-anchor="middle" font-size="11" fill="#44505e">ethernet · static IP</text>
+      <rect x="520" y="100" width="220" height="50" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="630" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Pickup shelf + display</text>
+      <text x="630" y="140" text-anchor="middle" font-size="11" fill="#44505e">order-status screen</text>
+      <rect x="520" y="180" width="220" height="50" rx="8" fill="#f6f9fd" stroke="#274b73" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="630" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Backup payment terminal</text>
+      <text x="630" y="220" text-anchor="middle" font-size="11" fill="#44505e">charged · standalone-capable</text>
+      <line x1="130" y1="64" x2="130" y2="100" stroke="#274b73" stroke-width="1.5"/>
+      <line x1="380" y1="64" x2="380" y2="100" stroke="#6a5acd" stroke-width="1.5"/>
+      <line x1="630" y1="64" x2="630" y2="100" stroke="#274b73" stroke-width="1.5"/>
+      <line x1="130" y1="150" x2="130" y2="180" stroke="#2e8b47" stroke-width="1.5"/>
+      <line x1="130" y1="230" x2="130" y2="260" stroke="#c77700" stroke-width="1.5"/>
+      <line x1="380" y1="150" x2="380" y2="180" stroke="#b03a5b" stroke-width="1.5"/>
+      <line x1="380" y1="230" x2="380" y2="260" stroke="#c77700" stroke-width="1.5"/>
+      <text x="390" y="360" text-anchor="middle" font-size="12" fill="#44505e">Counter, kiosk, and online orders all land in ONE kitchen queue — the KDS doesn't care where the order came from.</text>
+      <text x="390" y="382" text-anchor="middle" font-size="12" fill="#44505e">The kiosk is wired (purple), not on Wi-Fi. The backup terminal (dashed) keeps the line moving if the POS fails.</text>
+      <text x="390" y="404" text-anchor="middle" font-size="12" fill="#44505e">Guest Wi-Fi is a separate network entirely — never shared with POS devices.</text>
+    </svg>
+    <h3>Hardware list</h3>
+    <table class="cmp">
+      <tr><th>Qty</th><th>Role</th><th>Notes</th></tr>
+      <tr><td>1</td><td>Counter POS station</td><td>Tap-first layout; customer display paired.</td></tr>
+      <tr><td>1</td><td>Ethernet payment terminal</td><td>Tap-first; positioned for customer self-tap.</td></tr>
+      <tr><td>1</td><td>Receipt printer + cash drawer</td><td>Drawer on printer RJ11 kick port.</td></tr>
+      <tr><td>1</td><td>Self-order kiosk</td><td>Ethernet; mounted where the queue naturally forms.</td></tr>
+      <tr><td>1</td><td>KDS screen</td><td>Ethernet; prep line line-of-sight.</td></tr>
+      <tr><td>1</td><td>Kitchen printer (backup)</td><td>Fallback if the KDS screen fails.</td></tr>
+      <tr><td>1</td><td>Pickup-shelf order display</td><td>Shows ready order numbers/names.</td></tr>
+      <tr><td>1</td><td>Router + switch</td><td>POS network isolated from guest Wi-Fi.</td></tr>
+      <tr><td>1</td><td>Backup standalone terminal</td><td>Charged; covers POS outages.</td></tr>
+    </table>
+    <h3>Layout notes</h3>
+    <ul>
+      <li>The kiosk goes <strong>beside the staffed lane</strong>, not instead of it — customers choose, and staff can see when someone struggles.</li>
+      <li>Mount the kiosk where the queue forms naturally; a kiosk hidden in a corner gets ignored.</li>
+      <li>The pickup shelf sits between the kitchen pass and the door so runners don't cross the ordering queue.</li>
+      <li>Run ethernet to the kiosk location during fit-out; retrofitting later means drilling through a finished floor.</li>
+      <li>Keep the backup terminal at the counter, charged, logged in — a 30-second swap during rush beats a 10-minute reboot.</li>
+    </ul>
+    <h3>Daily workflow</h3>
+    <ol class="num-list">
+      <li><strong>Pre-rush:</strong> kiosk on and responsive, KDS showing today's menu, printers loaded, backup terminal charged, one test order through the kiosk.</li>
+      <li><strong>Rush:</strong> staffed lane for complex orders and cash, kiosk for standard orders; expo calls or displays ready orders; runners keep the shelf clear.</li>
+      <li><strong>Between rushes:</strong> wipe down the kiosk screen, check paper, review the KDS for stuck tickets.</li>
+      <li><strong>Close:</strong> settle batches before cutoff, reconcile the drawer, run the end-of-day report, put all devices on charge.</li>
+    </ol>
+    <h2 class="sec" id="setup-guide">4. Setup guide</h2>
+    <ol class="num-list">
+      <li><strong>Simplify the menu into fast taps.</strong> Fewer than ~30 visible buttons per screen; bestsellers biggest. Every extra tap costs seconds times hundreds of orders.</li>
+      <li><strong>Define order types.</strong> Dine-in, takeout, delivery, and pickup need different ticket formats, tax handling, and kitchen routing.</li>
+      <li><strong>Configure kitchen routing.</strong> Drinks to the bar printer, food to the KDS, pastries to the front — tested with every category.</li>
+      <li><strong>Pilot one kiosk beside the staffed lane.</strong> Run it for two weeks before adding more; watch where customers hesitate and simplify those screens.</li>
+      <li><strong>Unify the online-order queue.</strong> Your website, phone orders, and marketplace orders should land in the same KDS queue — not three tablets.</li>
+      <li><strong>Set up low-friction loyalty.</strong> Phone-number or tap-based; anything requiring an app download and account creation will be skipped at rush.</li>
+      <li><strong>Test payments and offline behaviour.</strong> Chip, tap, Interac; then unplug the internet and confirm what the POS does. Offline behaviour varies by platform — confirm yours with the vendor.</li>
+      <li><strong>Simulate a rush.</strong> Fire 30 test orders in 15 minutes with staff playing customers. You'll find the bottleneck — fix it before Friday.</li>
+      <li><strong>Cut over on a weekday.</strong> Mid-week morning, not the weekend. Keep the old setup as reference for one week.</li>
+    </ol>
+
+    <h2 class="sec" id="install-guides">5. Install guides</h2>
+    <div class="int">
+      <h3>Network isolation first</h3>
+      <p>Install the POS network <strong>isolated from guest Wi-Fi</strong> — separate SSID at minimum, separate VLAN or physical network ideally. Wire ethernet to the kiosk, KDS, printers, and counter terminal. Test signal strength at the kiosk location and the far tables.</p>
+    </div>
+    <div class="int">
+      <h3>Counter station install</h3>
+      <p>Mount or place the station for staff ergonomics, pair the customer display, connect the receipt printer (USB or ethernet), and wire the drawer to the printer's RJ11 kick port. Test a full sale: order, tap payment, receipt, drawer kick.</p>
+    </div>
+    <div class="int">
+      <h3>Kiosk install</h3>
+      <p>Mount securely (kiosks get leaned on), connect via <strong>ethernet</strong>, and configure the payment flow end to end — including what happens when a card declines mid-order. Set the idle timeout and attract screen. Test with gloves, wet hands, and sunglasses: real customers aren't lab conditions.</p>
+    </div>
+    <div class="int">
+      <h3>KDS / kitchen printer install</h3>
+      <p>Ethernet to the prep area, static IP for printers, ticket routing per order type. Set the kitchen printer as the automatic fallback for the KDS screen. Confirm ticket chimes are audible over the equipment noise.</p>
+    </div>
+    <div class="int">
+      <h3>Update scheduling</h3>
+      <p>Schedule POS and kiosk software updates <strong>outside service hours</strong> — an auto-update at 8am is a disaster. Confirm updates don't reset your routing or tax settings; check both after every update.</p>
+    </div>
+    <div class="int">
+      <h3>Offline drill</h3>
+      <p>Unplug the internet during a quiet period: can you still take cards? Do kiosk orders queue or fail? Document the result and tape it in the office. Keep the backup terminal charged regardless — it's your insurance policy.</p>
+    </div>
+
+    <h2 class="sec" id="troubleshooting">6. Troubleshooting</h2>
+    <table class="cmp">
+      <tr><th>Symptom</th><th>Check first</th><th>Who owns it</th></tr>
+      <tr><td>Kiosk blank or frozen</td><td>Power, cables, and network <strong>before</strong> escalating — most kiosk "failures" are a kicked power cable. Then reboot per the vendor's procedure.</td><td>POS vendor</td></tr>
+      <tr><td>Orders not reaching the kitchen</td><td>Confirm KDS/printer share the POS network (not guest Wi-Fi); check order-type routing rules.</td><td>POS vendor</td></tr>
+      <tr><td>Card payment times out</td><td><strong>Verify the transaction status before retrying</strong> — timeouts can hide completed charges.</td><td>Processor / acquirer</td></tr>
+      <tr><td>Online orders not appearing</td><td>Check the ordering integration's last successful sync; confirm the marketplace tablet (if any) is online.</td><td>POS vendor / ordering provider</td></tr>
+      <tr><td>Receipt printer jammed mid-rush</td><td>Clear the jam, reload paper, reprint the last ticket from the POS — don't re-ring the order.</td><td>POS vendor</td></tr>
+      <tr><td>Everything down at once</td><td>Network first: router, switch, cables. Switch the counter to the backup standalone terminal and keep selling.</td><td>POS vendor / ISP</td></tr>
+    </table>
+    <div class="callout warn">
+      <strong>Rush-hour rule:</strong> the backup terminal exists so a POS outage becomes a 30-second lane switch, not a closed store. If it's not charged and logged in, it doesn't exist.
+    </div>
+
+    <h2 class="sec" id="hardware-options">7. Hardware options reference</h2>
+    <p>Real models only. Links were verified to resolve on <strong>2026-09-28</strong>; confirm stock, pricing, and <strong>compatibility with your POS platform</strong> before buying.</p>
+    <table class="cmp">
+      <tr><th>Model</th><th>Role</th><th>Link</th><th>Canadian availability</th></tr>
+      <tr><td>Epson OmniLink TM-T88VII</td><td>Thermal receipt printer (USB + ethernet)</td><td><a href="https://epson.ca/For-Work/POS-System-Devices/POS-Printers/OmniLink-TM-T88VII-Single-station-Thermal-Receipt-Printer/p/C31CJ57052">Epson Canada product page</a></td><td>Yes — official Canadian product page.</td></tr>
+      <tr><td>Star Micronics TSP143III LAN</td><td>Thermal receipt printer (ethernet)</td><td><a href="https://starmicronics.com.au/products-solutions/thermal-printers/tsp143iii-lan-printer/">Star Micronics product page</a></td><td>Not confirmed — check with a Canadian POS hardware reseller.</td></tr>
+      <tr><td>Socket Mobile SocketScan S740</td><td>Bluetooth barcode scanner (loyalty cards, retail items)</td><td><a href="https://www.pc-canada.com/item/socket-mobile-socketscan-s740-1d-2d-imager-barcode-scanner-white/cx3419-1838">PC-Canada listing</a></td><td>Yes — Canadian reseller showing CAD pricing and stock.</td></tr>
+      <tr><td>Zebra DS2208-SR</td><td>Handheld USB barcode scanner</td><td><a href="https://www.directdial.com/ca/item/zebra-ds2208-sr-standard-range-handheld-barcode-scanner/ds2208-sr7u2100sgw">DirectDial Canada listing</a></td><td>Yes — Canadian reseller showing CAD pricing and stock.</td></tr>
+      <tr><td>Stripe Reader M2 / S700</td><td>Mobile / smart payment terminal</td><td><a href="https://stripe.com/terminal">Stripe Terminal</a></td><td>Sold through the Stripe dashboard — confirm Canadian availability at order time.</td></tr>
+    </table>
+    <p class="fine2">Kiosk hardware and software is typically bundled with — and certified by — your POS platform; confirm the exact kiosk model against your POS vendor's supported list rather than buying generic hardware. No standalone terminal model is listed because terminals must come from your processor's supported list.</p>
+
+    <h2 class="sec" id="pci">8. PCI scope callout</h2>
+    <div class="callout">
+      <p><strong>The concept, in two sentences:</strong> if card data flows <strong>through your POS or kiosk software</strong> (the system sees, stores, or transmits the card number), that system is in scope for PCI security requirements. If you take cards on a <strong>standalone terminal</strong> — or a terminal that encrypts card data in a validated tunnel straight to the processor so the POS never sees it — your scope is reduced.</p>
+      <p>This is a conceptual overview only, not a compliance determination. Your actual obligations must be confirmed with your processor/acquirer or a qualified assessor. Read the full plain-English version: <a href="pci-scope-guide.html">PCI scope guide</a>.</p>
+    </div>
+    <h2 class="sec" id="integrations">9. Integrations you may also need</h2>
+    <p>Each integration is separated on purpose: what it is, why you'd want it, what it costs (real published pricing or "quote-based"), and an <strong>illustrative</strong> ROI sketch — a hypothetical example to show the math, not a promise. Prices below were observed in research during September 2026 and change often — verify current pricing before buying.</p>
+
+    <div class="int">
+      <h3>First-party online ordering + POS + KDS + loyalty (one stream)</h3>
+      <p><strong>What it is:</strong> your own ordering channel sharing one order and customer stream with the counter POS, the KDS, and loyalty — instead of separate tablets and logins.</p>
+      <p><strong>Benefits:</strong> one kitchen queue, one customer record, no re-keying, and you keep the margin that marketplaces take as commission.</p>
+      <p><strong>Cost:</strong> often bundled with the POS platform; verify what's included in your plan before paying for an add-on.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> a caf&eacute; doing 100 delivery orders/week at a $22 average ticket, shifting from a 25% marketplace commission to its own channel, keeps roughly $550/week in commission — minus any platform fee and the marketing to drive the traffic. Your volume and mix will differ.</div>
+    </div>
+    <div class="int">
+      <h3>Kiosk hardware &amp; software</h3>
+      <p><strong>What it is:</strong> self-order kiosk units with integrated card payment, managed by your POS platform.</p>
+      <p><strong>Benefits:</strong> shorter perceived waits, higher average tickets (kiosks upsell consistently), and order accuracy — the customer entered it.</p>
+      <p><strong>Cost:</strong> quote-based — hardware plus per-kiosk software licensing; varies widely by vendor.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> if one kiosk absorbs the order volume of a part-time cashier shift (say 20 hours/week at $18/hour ≈ $1,440/month) and lifts average ticket 10% on kiosk orders, the payback math is usually measured in months — but only if the kiosk is actually faster than your cashier. Pilot one first.</div>
+    </div>
+    <div class="int">
+      <h3>Delivery middleware</h3>
+      <p><strong>What it is:</strong> one hub merging Uber Eats, DoorDash, and Skip orders into your POS/KDS.</p>
+      <p><strong>Benefits:</strong> no tablet farm, one kitchen queue, fewer missed orders during rush.</p>
+      <p><strong>Cost:</strong> quote-based — priced by locations and order volume.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> for a QSR doing 40%+ of volume through delivery apps, eliminating 2–3 missed or remade orders a week plus 20 minutes of daily tablet management usually pays back in weeks. Model it with your own miss rate.</div>
+    </div>
+    <div class="int">
+      <h3>Loyalty program</h3>
+      <p><strong>What it is:</strong> visit- or spend-based rewards (e.g., every 10th coffee free) tied to a phone number or tap.</p>
+      <p><strong>Benefits:</strong> repeat visits from regulars — the entire business model of a neighbourhood caf&eacute; — plus a customer list for slow-day promotions.</p>
+      <p><strong>Cost:</strong> Square Loyalty around $45/month per location per third-party pricing observed September 2026 (verify current pricing); many POS platforms bundle basic loyalty.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> if loyalty lifts visit frequency 15% among enrolled regulars who represent 40% of revenue, that's a ~6% revenue lift on that base against ~$45/month. The discount cost of the rewards themselves decides the net — run it on your own numbers.</div>
+    </div>
+    <div class="int">
+      <h3>Distributor / inventory integrations</h3>
+      <p><strong>What it is:</strong> electronic ordering and invoice import from your food and beverage distributors.</p>
+      <p><strong>Benefits:</strong> faster ordering, fewer price-entry errors, actual cost tracking per item.</p>
+      <p><strong>Cost:</strong> usually bundled with the POS/inventory module or quote-based depending on distributor.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> the win is mostly time and accuracy — a manager spending 3 hours a week on manual ordering and invoice entry getting half of it back. Value it at your manager's hourly cost.</div>
+    </div>
+
+    <h2 class="sec" id="system-map">10. Everything integrated — full operational system map</h2>
+    <svg viewBox="0 0 760 400" class="sysmap" role="img" aria-label="Full operational system map for a quick-service cafe">
+      <rect x="300" y="20" width="160" height="54" rx="8" fill="#eef3fa" stroke="#274b73" stroke-width="2"/>
+      <text x="380" y="43" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">QSR POS</text>
+      <text x="380" y="61" text-anchor="middle" font-size="11" fill="#44505e">the hub — orders + payments</text>
+      <rect x="20" y="140" width="170" height="54" rx="8" fill="#fff" stroke="#2e8b47" stroke-width="2"/>
+      <text x="105" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Payment processing</text>
+      <text x="105" y="181" text-anchor="middle" font-size="11" fill="#44505e">terminals → acquirer</text>
+      <rect x="210" y="140" width="170" height="54" rx="8" fill="#fff" stroke="#b03a5b" stroke-width="2"/>
+      <text x="295" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">KDS + kitchen printer</text>
+      <text x="295" y="181" text-anchor="middle" font-size="11" fill="#44505e">one unified queue</text>
+      <rect x="400" y="140" width="150" height="54" rx="8" fill="#fff" stroke="#c77700" stroke-width="2"/>
+      <text x="475" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Order channels</text>
+      <text x="475" y="181" text-anchor="middle" font-size="11" fill="#44505e">kiosk · web · apps</text>
+      <rect x="570" y="140" width="170" height="54" rx="8" fill="#fff" stroke="#6a5acd" stroke-width="2"/>
+      <text x="655" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Loyalty</text>
+      <text x="655" y="181" text-anchor="middle" font-size="11" fill="#44505e">regulars + promos</text>
+      <rect x="120" y="260" width="170" height="54" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="205" y="283" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Inventory / distributors</text>
+      <text x="205" y="301" text-anchor="middle" font-size="11" fill="#44505e">ordering · invoices</text>
+      <rect x="310" y="260" width="150" height="54" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="385" y="283" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Scheduling</text>
+      <text x="385" y="301" text-anchor="middle" font-size="11" fill="#44505e">rush coverage</text>
+      <rect x="480" y="260" width="170" height="54" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="565" y="283" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Accounting</text>
+      <text x="565" y="301" text-anchor="middle" font-size="11" fill="#44505e">sales · payouts</text>
+      <line x1="360" y1="74" x2="120" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="370" y1="74" x2="300" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="400" y1="74" x2="470" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="430" y1="74" x2="650" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="330" y1="74" x2="210" y2="260" stroke="#888" stroke-width="1.5"/>
+      <line x1="380" y1="74" x2="385" y2="260" stroke="#888" stroke-width="1.5"/>
+      <line x1="430" y1="74" x2="560" y2="260" stroke="#888" stroke-width="1.5"/>
+      <text x="380" y="350" text-anchor="middle" font-size="12" fill="#44505e">Every order channel feeds one queue; the POS feeds the kitchen, loyalty, the books, and the schedule.</text>
+    </svg>
+
+    <h2 class="sec" id="benchmarks">11. What normal looks like</h2>
+    <p>Honest benchmarks, honestly labeled. There is <strong>no separate robust IT benchmark for quick-service</strong> — use the restaurant working range of roughly <strong>1–3% of revenue</strong>, explicitly labeled directional, with one QSR-specific adjustment: <strong>per-location device density is higher</strong> (kiosk, KDS, pickup display), so technology cost per location runs higher than a comparable full-service seat count. Low-ticket, high-volume businesses are also <strong>more sensitive to fixed per-transaction fees</strong> — a 10¢ fee on a $6 coffee is a bigger bite than on a $60 dinner.</p>
+    <table class="cmp">
+      <tr><th>Annual revenue</th><th>Illustrative annual technology spend</th><th>What that usually covers</th></tr>
+      <tr><td>Under $500K</td><td>$5K–$18K / year</td><td>Counter POS, tap terminal, KDS or kitchen printer, basic online ordering.</td></tr>
+      <tr><td>$500K–$5M</td><td>Roughly 1–3% (directional)</td><td>Kiosk(s), full KDS, loyalty, delivery middleware, scheduling.</td></tr>
+      <tr><td>$5M–$50M</td><td>Roughly 2–3% (directional)</td><td>Multi-unit QSR POS, centralized menu management, above-store reporting.</td></tr>
+      <tr><td>$50M+</td><td>Roughly 2–4% (directional)</td><td>Enterprise QSR systems, integrations team, kiosk fleet management.</td></tr>
+    </table>
+    <p class="fine2">Labels: directional figures borrowed from restaurant data, not QSR-specific studies. Because fixed per-transaction fees bite harder on small tickets, run your own numbers through the <a href="simulator.html">cost simulator</a> before assuming your rate is fine.</p>
+
+    <h2 class="sec" id="ai">12. How AI is changing this sector</h2>
+    <p>Real products only — no drive-through voice vendors are named here because no Canadian-priced product was verified.</p>
+    <ul>
+      <li><strong>Slang.ai</strong> — AI phone answering for restaurants and caf&eacute;s; around $399/location/month per third-party comparisons (observed September 2026). Pays when missed calls are lost orders.</li>
+      <li><strong>Bodega</strong> — AI phone ordering for QSR; around $250/month starting per a practitioner guide (observed September 2026 — verify current pricing).</li>
+      <li><strong>Kiosk and menu analytics</strong> — POS platforms increasingly surface which kiosk screens convert and where customers abandon. Descriptive analytics, useful for menu layout — not magic.</li>
+    </ul>
+    <div class="callout">
+      <strong>Where the ROI case is weak:</strong> if phone orders are a small share of your business (most counter-first caf&eacute;s), phone AI saves few orders. Spend on kiosk speed and the KDS fallback first — those pay every rush.
+    </div>
+
+    <div class="deem" id="enterprise">
+      <h3>Enterprise software landscape</h3>
+      <p>Above roughly $50M in revenue, QSR technology shifts to enterprise platforms — multi-unit menu management, kiosk fleet management, centralized procurement, and dedicated integrations teams. If you're evaluating that tier, analyst firms publish structured market evaluations; here's how one of them explains its methodology: <a href="https://www.gartner.com/en/research/methodologies/magic-quadrants-research">Gartner Magic Quadrant research methodology</a> (verified to resolve 2026-09-28). For most independent caf&eacute;s and QSRs, the sections above matter far more than this one.</p>
+    </div>
+
+    <div class="cta-band">
+      <h2>Small tickets feel every basis point</h2>
+      <p>On a $6 coffee, fee structure matters more than headline rates. The free audit reads your statements and shows your true effective rate — or confirms you're already paying fairly. Need the stack itself reviewed? See our <a href="pos-services.html" style="color:#fff">POS services</a>.</p>
+      <a class="btn" href="contact.html">Start your free audit</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+</body>
+</html>

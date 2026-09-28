@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full-service restaurant POS guide — setup, KDS &amp; integrations | FairRate Audit</title>
+<meta name="description" content="Full-service restaurant POS guide: table-side hardware, KDS and kitchen printer routing, an 80-seat sample setup with connection map, install and troubleshooting guides, integrations, and honest benchmarks.">
+<link rel="stylesheet" href="style.css">
+<style>
+.crumb{font-size:.9rem;margin:18px 0 4px;color:var(--muted)}
+.crumb a{color:var(--accent-dark);text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.switcher{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--accent-soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:14px 0 26px;font-size:.92rem}
+.switcher span{font-weight:700;margin-right:4px;color:var(--navy)}
+.switcher a{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;text-decoration:none;color:var(--ink);transition:border-color .15s ease,color .15s ease,transform .15s ease}
+.switcher a:hover{border-color:var(--accent);color:var(--accent-dark);transform:translateY(-1px)}
+.switcher a.now{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700}
+.switcher a.res{background:var(--bg);border-color:var(--accent);color:var(--accent-dark)}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0;padding:14px 16px;margin:18px 0}
+.callout p:last-child{margin-bottom:0}
+.warn{border-left-color:#e8b93c;background:#fff8e6}
+.good{border-left-color:var(--accent);background:var(--accent-soft)}
+.deem{opacity:.68;background:var(--bg);border:1px dashed var(--line);border-radius:var(--radius);padding:16px;margin:26px 0;font-size:.93rem}
+table.cmp{width:100%;border-collapse:collapse;margin:14px 0}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;font-size:.92rem;vertical-align:top}
+table.cmp th{background:var(--accent-soft);color:var(--navy)}
+table.cmp tr:nth-child(even) td{background:#f7faf8}
+.fine2{font-size:.85rem;color:var(--muted)}
+.int{border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0;background:#fff;transition:transform .15s ease,box-shadow .15s ease}
+.int:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(14,42,71,.1)}
+.int h3{margin:0 0 8px}
+.int p{margin:8px 0}
+.roi{background:var(--accent-soft);border:1px solid #b9d6c2;border-radius:10px;padding:12px 14px;margin-top:10px;font-size:.93rem}
+.roi strong{display:block;margin-bottom:4px;color:var(--accent-dark)}
+.sysmap{width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff;margin:14px 0}
+.num-list{counter-reset:step}
+.num-list li{margin-bottom:10px}
+code.k{background:var(--bg);border-radius:4px;padding:1px 6px;font-size:.88em}
+.bundled{background:#fff8e6;border:1px solid #e8b93c;border-radius:var(--radius);padding:16px;margin:18px 0;transition:box-shadow .15s ease}
+.bundled:hover{box-shadow:0 8px 22px rgba(14,42,71,.08)}
+.bundled h3{margin-top:0}
+h2.sec{margin-top:44px;padding-top:18px;border-top:1px solid var(--line)}
+@media(max-width:640px){table.cmp th,table.cmp td{font-size:.84rem;padding:6px 8px}.bundled,.int{padding:14px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html" class="active">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Sector guide · Full-service restaurant</p>
+    <h1>Full-service restaurant: POS setup, KDS &amp; integrations</h1>
+    <p class="lead">Table service with courses, tipping, and a kitchen that can't wait — the POS decisions that keep dinner service moving.</p>
+    <div class="btn-row">
+      <a class="btn" href="contact.html">Request your free audit</a>
+      <a class="btn ghost" href="pos-services.html">Explore POS services</a>
+    </div>
+  </div>
+</section>
+
+<main>
+<section class="section">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="resources.html">Resources</a> &rsaquo; Full-service restaurant</nav>
+    <div class="switcher" aria-label="Sector switcher">
+      <span>I run a:</span>
+      <a href="sector-retail.html">Retail</a>
+      <a class="now" href="sector-restaurant-full-service.html">Full-service restaurant</a>
+      <a href="sector-quick-service-cafe.html">Quick-service / caf&eacute;</a>
+      <a href="sector-hotel-hospitality.html">Hotel &amp; hospitality</a>
+      <a href="sector-grocery-convenience.html">Grocery / convenience</a>
+      <a href="sector-services-salon.html">Services / salon</a>
+      <a class="res" href="resources.html">&larr; All resources</a>
+    </div>
+
+    
+
+    <h2 class="sec" id="overview">1. Sector overview</h2>
+    <p>Full-service restaurants — dine-in with table service, from casual bistros to fine dining — run on coordination between the floor and the kitchen. What makes this sector different:</p>
+    <ul>
+      <li><strong>Courses and timing matter.</strong> Appetizers, mains, desserts, and fired/hold commands mean orders have routing logic, not just item lists.</li>
+      <li><strong>Tipping is part of checkout.</strong> Pre-auth, tip adjust, and tip pooling make card handling more complex than retail.</li>
+      <li><strong>The kitchen is a real-time system.</strong> Kitchen display screens (KDS) or kitchen printers decide whether the line cooks in the right order.</li>
+      <li><strong>Reservations and walk-ins coexist.</strong> Floor plans, table turns, and waitlists are operational tools, not nice-to-haves.</li>
+      <li><strong>Margins are thin.</strong> A published 2025 industry figure put full-service margins around 2.8% — every fee line item matters more here than in most sectors.</li>
+    </ul>
+
+    <h2 class="sec" id="hardware">2. In-store hardware &amp; software</h2>
+    <table class="cmp">
+      <tr><th>Role</th><th>What it does</th><th>Typical connection</th></tr>
+      <tr><td><strong>Server station</strong></td><td>Runs the POS app — order entry, course firing, bill splitting, payments.</td><td>Counter tablet or terminal on the restaurant network.</td></tr>
+      <tr><td><strong>Mobile payment device</strong></td><td>Tableside ordering and pay-at-table.</td><td>Wi-Fi handheld; pairs with the POS.</td></tr>
+      <tr><td><strong>Kitchen display (KDS)</strong></td><td>Shows tickets to the line in real time; bump when done.</td><td>Ethernet strongly preferred — the kitchen is the worst place for Wi-Fi flakiness.</td></tr>
+      <tr><td><strong>Kitchen / bar printer</strong></td><td>Prints order tickets where a screen won't survive (heat, grease, noise).</td><td>Ethernet with a static IP; heat-rated paper.</td></tr>
+      <tr><td><strong>Receipt printer (front of house)</strong></td><td>Guest checks and receipts at the host stand or bar.</td><td>USB to the server station or ethernet.</td></tr>
+      <tr><td><strong>Cash drawer</strong></td><td>Holds the float at the bar or host stand.</td><td>Wired to the receipt printer's <code class="k">RJ11/RJ12</code> kick port.</td></tr>
+      <tr><td><strong>Restaurant network</strong></td><td>Connects stations, KDS, printers, and terminals.</td><td>Wired backbone; dedicated Wi-Fi for POS devices, separate from guest Wi-Fi.</td></tr>
+    </table>
+
+    <div class="bundled" id="bundled">
+      <h3>Bundled platforms — a separate category</h3>
+      <p>All-in-one platforms such as <strong>Toast</strong> and <strong>TouchBistro</strong> bundle the POS software, hardware, KDS, and payment processing into one package. The upside is a system designed to work together out of the box. The trade-off: <strong>the processing cost is hidden inside the bundle</strong>, and changing to a cheaper processor may require replacing the whole stack. Bundled platforms are kept in their own category on this site and are never mixed into standalone provider/POS comparisons.</p>
+    </div>
+
+    <h2 class="sec" id="sample-setup">3. Flagship sample setup</h2>
+    <p><strong>Scenario:</strong> an 80-seat full-service restaurant — dining room, bar, expo window, and a hot line.</p>
+    <h3>Connection map (model-agnostic)</h3>
+    <svg viewBox="0 0 760 560" class="sysmap" role="img" aria-label="Connection map for an 80-seat full-service restaurant POS setup">
+      <rect x="280" y="10" width="200" height="54" rx="8" fill="#eef3fa" stroke="#274b73" stroke-width="2"/>
+      <text x="380" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Restaurant router / switch</text>
+      <text x="380" y="52" text-anchor="middle" font-size="11" fill="#44505e">wired backbone · POS-only Wi-Fi</text>
+      <rect x="20" y="100" width="220" height="50" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="130" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Server station (POS)</text>
+      <text x="130" y="140" text-anchor="middle" font-size="11" fill="#44505e">host stand · order + pay</text>
+      <rect x="20" y="180" width="220" height="50" rx="8" fill="#fff" stroke="#2e8b47" stroke-width="2"/>
+      <text x="130" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Tableside payment devices</text>
+      <text x="130" y="220" text-anchor="middle" font-size="11" fill="#44505e">Wi-Fi handhelds · tip adjust</text>
+      <rect x="20" y="260" width="220" height="50" rx="8" fill="#fff" stroke="#c77700" stroke-width="2"/>
+      <text x="130" y="282" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Receipt printer + drawer</text>
+      <text x="130" y="300" text-anchor="middle" font-size="11" fill="#44505e">USB · drawer on RJ11 kick port</text>
+      <rect x="270" y="100" width="220" height="50" rx="8" fill="#fff" stroke="#b03a5b" stroke-width="2"/>
+      <text x="380" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Expo KDS screen</text>
+      <text x="380" y="140" text-anchor="middle" font-size="11" fill="#44505e">ethernet · bump bar</text>
+      <rect x="270" y="180" width="220" height="50" rx="8" fill="#fff" stroke="#b03a5b" stroke-width="2"/>
+      <text x="380" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Kitchen KDS screen</text>
+      <text x="380" y="220" text-anchor="middle" font-size="11" fill="#44505e">ethernet · hot line</text>
+      <rect x="270" y="260" width="220" height="50" rx="8" fill="#fff" stroke="#c77700" stroke-width="2"/>
+      <text x="380" y="282" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Kitchen / bar printer</text>
+      <text x="380" y="300" text-anchor="middle" font-size="11" fill="#44505e">ethernet · static IP · backup route</text>
+      <rect x="520" y="100" width="220" height="50" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="630" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Bar station (POS)</text>
+      <text x="630" y="140" text-anchor="middle" font-size="11" fill="#44505e">drinks · quick tabs</text>
+      <rect x="520" y="180" width="220" height="50" rx="8" fill="#f6f9fd" stroke="#274b73" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="630" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Backup payment terminal</text>
+      <text x="630" y="220" text-anchor="middle" font-size="11" fill="#44505e">charged · standalone-capable</text>
+      <line x1="130" y1="64" x2="130" y2="100" stroke="#274b73" stroke-width="1.5"/>
+      <line x1="380" y1="64" x2="380" y2="100" stroke="#b03a5b" stroke-width="1.5"/>
+      <line x1="630" y1="64" x2="630" y2="100" stroke="#274b73" stroke-width="1.5"/>
+      <line x1="130" y1="150" x2="130" y2="180" stroke="#2e8b47" stroke-width="1.5"/>
+      <line x1="130" y1="230" x2="130" y2="260" stroke="#c77700" stroke-width="1.5"/>
+      <line x1="380" y1="150" x2="380" y2="180" stroke="#b03a5b" stroke-width="1.5"/>
+      <line x1="380" y1="230" x2="380" y2="260" stroke="#c77700" stroke-width="1.5"/>
+      <text x="390" y="360" text-anchor="middle" font-size="12" fill="#44505e">Orders flow: station → router → KDS screens and kitchen printer (red). Payments flow: handhelds → router → processor (green).</text>
+      <text x="390" y="382" text-anchor="middle" font-size="12" fill="#44505e">KDS and POS must share the same local network — a screen on guest Wi-Fi will drop tickets.</text>
+      <text x="390" y="404" text-anchor="middle" font-size="12" fill="#44505e">Kitchen printer is the fallback route: if a KDS screen dies mid-service, tickets still print.</text>
+    </svg>
+    <h3>Hardware list</h3>
+    <table class="cmp">
+      <tr><th>Qty</th><th>Role</th><th>Notes</th></tr>
+      <tr><td>2</td><td>Server station (tablet/terminal)</td><td>Host stand + bar; identical setup so any server can use either.</td></tr>
+      <tr><td>3–4</td><td>Tableside payment handhelds</td><td>Wi-Fi; tip-adjust capable; docks at the host stand.</td></tr>
+      <tr><td>2</td><td>KDS screens (expo + kitchen)</td><td>Ethernet; bump bar at expo.</td></tr>
+      <tr><td>1–2</td><td>Kitchen / bar printer</td><td>Ethernet, static IP; the fallback if a KDS screen fails.</td></tr>
+      <tr><td>1</td><td>Front-of-house receipt printer + cash drawer</td><td>Drawer on printer RJ11 kick port.</td></tr>
+      <tr><td>1</td><td>Router + managed switch</td><td>Wired drops to KDS, printers, stations; separate guest Wi-Fi.</td></tr>
+      <tr><td>1</td><td>Backup payment terminal</td><td>Standalone-capable; kept charged for outages.</td></tr>
+    </table>
+    <h3>Layout notes</h3>
+    <ul>
+      <li>KDS screens mount where the line can see them without turning — expo screen faces the pass, kitchen screen faces the hot line.</li>
+      <li>Kitchen printers need heat-rated paper and a spot away from direct steam; mount high enough that tickets don't get splashed.</li>
+      <li>Run ethernet to the kitchen <strong>before</strong> opening — retrofitting cable through a working kitchen is miserable.</li>
+      <li>Handheld docks live at the host stand on chargers; a dead handheld at 7pm is a staffing problem, not a tech problem.</li>
+      <li>Keep the switch and router in a locked office; label every cable at both ends.</li>
+    </ul>
+    <h3>Daily workflow</h3>
+    <ol class="num-list">
+      <li><strong>Pre-service:</strong> KDS screens on and showing the right dayparts, printers loaded, handhelds charged, one test fire to the kitchen.</li>
+      <li><strong>Service:</strong> orders fired by course; expo bumps completed tickets; handhelds take payment at the table with tip adjust.</li>
+      <li><strong>If the KDS dies:</strong> switch routing to the kitchen printer (pre-configured fallback) — don't re-enter tickets by hand mid-rush.</li>
+      <li><strong>Close:</strong> settle card batches before the processor cutoff, reconcile tips, run the end-of-day report, charge everything.</li>
+    </ol>
+    <h2 class="sec" id="setup-guide">4. Setup guide</h2>
+    <p>Restaurants fail POS go-lives on the menu, not the hardware. Do these in order.</p>
+    <ol class="num-list">
+      <li><strong>Build the menu with modifiers first.</strong> Every item, every modifier (add chicken, no onion, dressing on side), every forced question — the menu is the database everything else hangs off.</li>
+      <li><strong>Set up taxes.</strong> Dine-in vs. takeout can tax differently depending on province and product — confirm with your accountant.</li>
+      <li><strong>Draw the floor and table map.</strong> Tables, sections, bar seats, patio — servers can't run a floor the system doesn't understand.</li>
+      <li><strong>Configure printer and KDS routing.</strong> Which items fire to the hot line, which to the bar, which to expo. Test every category, not just the common ones.</li>
+      <li><strong>Set up tipping.</strong> Tip prompts, tip adjust on pre-auths, tip pooling or tip-out rules if you use them.</li>
+      <li><strong>Define staff roles and permissions.</strong> Who can void, comp, discount, open the drawer without a sale — and an audit trail for all of it.</li>
+      <li><strong>Run live tests.</strong> Real orders, real payments, real voids and comps, on a quiet afternoon — with the kitchen actually cooking.</li>
+      <li><strong>Drill the offline scenario.</strong> Unplug the internet: what still works? Offline card behaviour varies by platform — confirm yours in writing with the vendor rather than assuming.</li>
+      <li><strong>Set the printer fallback.</strong> If a KDS screen dies, tickets must route to the kitchen printer automatically or with one tap — decided and tested before opening.</li>
+      <li><strong>Run a mock service.</strong> Staff as guests, full menu, real timing. You'll find three routing mistakes and one menu error — that's the point.</li>
+      <li><strong>Cut over on a slow day.</strong> Tuesday lunch, not Friday dinner. Keep the old system accessible for one week as a reference, not a crutch.</li>
+    </ol>
+
+    <h2 class="sec" id="install-guides">5. Install guides</h2>
+    <div class="int">
+      <h3>Network first — especially the kitchen</h3>
+      <p>Wire ethernet to every fixed point: KDS screens, kitchen/bar printers, server stations. The kitchen is hot, greasy, and full of metal — the worst environment for Wi-Fi. Use a dedicated POS Wi-Fi network for handhelds, physically or logically separate from guest Wi-Fi. Label every drop.</p>
+    </div>
+    <div class="int">
+      <h3>KDS install</h3>
+      <p>Mount screens at line-of-sight for the cooks, connect via ethernet, and add them in the POS as kitchen stations. Configure ticket columns (new / working / done), bump behaviour, and all-day timers. Fire a test ticket from every menu category and confirm it lands on the right screen.</p>
+    </div>
+    <div class="int">
+      <h3>Kitchen / bar printer install</h3>
+      <p>Assign a static IP (or DHCP reservation), add by IP in the POS, and set it as the fallback route for its KDS screen. Load heat-rated paper, test the cutter, and confirm the chime/bell is audible over the line noise.</p>
+    </div>
+    <div class="int">
+      <h3>Payment device install</h3>
+      <p>Pair handhelds through the POS, confirm tip-adjust works on a pre-auth, and test a split bill across two cards. Record the settlement cutoff and the support number for payment issues — it differs from POS software support.</p>
+    </div>
+    <div class="int">
+      <h3>Offline drill</h3>
+      <p>Unplug the internet during a quiet period and run the full flow: fire an order, check the KDS, take a card payment. Document exactly what degrades — some platforms queue card payments offline, some don't. Confirm your platform's behaviour with the vendor; don't generalize from another restaurant's setup.</p>
+    </div>
+
+    <h2 class="sec" id="troubleshooting">6. Troubleshooting</h2>
+    <table class="cmp">
+      <tr><th>Symptom</th><th>Check first</th><th>Who owns it</th></tr>
+      <tr><td>Tickets not reaching the KDS</td><td>KDS and POS must share the same local network — confirm the screen didn't hop onto guest Wi-Fi. Then check menu routing for that item category.</td><td>POS vendor</td></tr>
+      <tr><td>Tickets printing at the wrong printer</td><td>Review printer/KDS routing rules per menu category; someone may have edited routing during a menu change.</td><td>POS vendor</td></tr>
+      <tr><td>Tip adjust / pre-auth problems</td><td>Confirm the transaction settled with the adjusted amount; check the batch before cutoff.</td><td>Processor / acquirer</td></tr>
+      <tr><td>Handheld won't connect</td><td>Wi-Fi signal at the far tables; confirm it's on the POS network, not guest Wi-Fi; reboot the handheld.</td><td>POS vendor</td></tr>
+      <tr><td>Kitchen printer jammed or silent</td><td>Paper, cutter, IP address (did it change?), cable. Switch routing to the KDS-only path while you fix it.</td><td>POS vendor</td></tr>
+      <tr><td>Cards declined at the table</td><td>Try a second card; verify terminal connectivity; check for a processor outage.</td><td>Processor / acquirer</td></tr>
+      <tr><td>End-of-day totals don't match</td><td>Compare POS end-of-day to processor settlement for the same batch window; watch for tips adjusted after cutoff.</td><td>Processor first, POS vendor for exports</td></tr>
+    </table>
+
+    <h2 class="sec" id="hardware-options">7. Hardware options reference</h2>
+    <p>Real models only. Links were verified to resolve on <strong>2026-09-28</strong>; confirm stock, pricing, and <strong>compatibility with your POS platform</strong> before buying.</p>
+    <table class="cmp">
+      <tr><th>Model</th><th>Role</th><th>Link</th><th>Canadian availability</th></tr>
+      <tr><td>Epson OmniLink TM-T88VII</td><td>Thermal receipt printer — front-of-house guest checks (USB + ethernet)</td><td><a href="https://epson.ca/For-Work/POS-System-Devices/POS-Printers/OmniLink-TM-T88VII-Single-station-Thermal-Receipt-Printer/p/C31CJ57052">Epson Canada product page</a></td><td>Yes — official Canadian product page.</td></tr>
+      <tr><td>Star Micronics TSP143III LAN</td><td>Thermal receipt printer — front-of-house (ethernet)</td><td><a href="https://starmicronics.com.au/products-solutions/thermal-printers/tsp143iii-lan-printer/">Star Micronics product page</a></td><td>Not confirmed — check with a Canadian POS hardware reseller.</td></tr>
+      <tr><td>Stripe Reader M2 / S700</td><td>Mobile / smart payment terminal</td><td><a href="https://stripe.com/terminal">Stripe Terminal</a></td><td>Sold through the Stripe dashboard — confirm Canadian availability at order time.</td></tr>
+    </table>
+    <div class="callout warn">
+      <strong>Kitchen environments are special.</strong> Hot lines often need impact or kitchen-rated printers that survive heat, grease, and moisture — the receipt printers above are for front-of-house guest checks. No kitchen-rated model is named here because none was verified; confirm the exact kitchen printer model against your POS vendor's supported list before buying.
+    </div>
+
+    <h2 class="sec" id="pci">8. PCI scope callout</h2>
+    <div class="callout">
+      <p><strong>The concept, in two sentences:</strong> if card data flows <strong>through your POS system</strong> (the POS sees, stores, or transmits the card number — including tip-adjust data tied to the card), your POS is in scope for PCI security requirements. If you take cards on a <strong>standalone terminal</strong> — or a terminal that encrypts card data in a validated tunnel straight to the processor so the POS never sees it — your scope is reduced.</p>
+      <p>This is a conceptual overview only, not a compliance determination. Your actual obligations must be confirmed with your processor/acquirer or a qualified assessor. Read the full plain-English version: <a href="pci-scope-guide.html">PCI scope guide</a>.</p>
+    </div>
+    <h2 class="sec" id="integrations">9. Integrations you may also need</h2>
+    <p>Each integration is separated on purpose: what it is, why you'd want it, what it costs (real published pricing or "quote-based"), and an <strong>illustrative</strong> ROI sketch — a hypothetical example to show the math, not a promise. Prices below were observed in research during September 2026 and change often — verify current pricing before buying.</p>
+
+    <div class="int">
+      <h3>Online ordering</h3>
+      <p><strong>What it is:</strong> your own pickup/delivery ordering (website, QR code) feeding straight into the POS and KDS — no re-keying from a tablet.</p>
+      <p><strong>Benefits:</strong> one order stream, no tablet farm, you keep the customer data and the margin that marketplaces take.</p>
+      <p><strong>Cost:</strong> first-party online ordering is often bundled with the POS platform; GloriaFood offers a free tier (verify current terms). Marketplace commissions are separate and much higher.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> a restaurant shifting 50 orders/week from a 25%-commission marketplace to its own $0-commission ordering at a $40 average ticket keeps roughly $500/week in commission — minus any platform fee. Your volume and mix will differ.</div>
+    </div>
+    <div class="int">
+      <h3>Delivery middleware</h3>
+      <p><strong>What it is:</strong> one hub (e.g., Deliverect, Chowly, ItsaCheckmate) that merges Uber Eats, DoorDash, and Skip orders into your POS/KDS.</p>
+      <p><strong>Benefits:</strong> kills the tablet farm; orders fire to the kitchen like any other ticket; fewer missed or duplicated orders.</p>
+      <p><strong>Cost:</strong> quote-based — priced by locations and order volume.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> if tablet chaos costs 30 minutes of manager time daily and 2–3 missed orders a week, the payback is usually measured in weeks for busy delivery locations. Model it with your own labour cost and miss rate.</div>
+    </div>
+    <div class="int">
+      <h3>Reservations &amp; waitlist</h3>
+      <p><strong>What it is:</strong> online reservations, table management, and waitlist tied to your floor plan.</p>
+      <p><strong>Benefits:</strong> fewer no-shows, faster table turns, a guest database for slow nights.</p>
+      <p><strong>Cost:</strong> OpenTable around $249/month plus per-cover fees (third-party figure observed September 2026 — verify current pricing). Simpler waitlist tools cost less; many POS platforms bundle basic versions.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> if reservations cut no-shows from 8% to 3% on 200 covers/week at a $45 average check, that's roughly $450/week in recovered revenue against the subscription. Your no-show rate decides this one.</div>
+    </div>
+    <div class="int">
+      <h3>Inventory &amp; food-costing</h3>
+      <p><strong>What it is:</strong> recipe costing, invoice capture, and theoretical-vs-actual food cost (e.g., MarketMan, MarginEdge).</p>
+      <p><strong>Benefits:</strong> you see which menu items actually make money and where waste or over-portioning leaks margin.</p>
+      <p><strong>Cost:</strong> MarketMan around $199/month starter (observed September 2026 — verify current pricing); MarginEdge is quote-based.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> a restaurant doing $80K/month in food sales that trims food cost by 2 points through portion and waste control saves ~$1,600/month. The software only pays if someone acts on the numbers weekly.</div>
+    </div>
+    <div class="int">
+      <h3>Staff scheduling</h3>
+      <p><strong>What it is:</strong> shift scheduling with labour-cost forecasting (e.g., 7shifts).</p>
+      <p><strong>Benefits:</strong> schedules matched to forecasted covers; less overstaffing on dead Tuesdays.</p>
+      <p><strong>Cost:</strong> 7shifts roughly $40/month per location (observed September 2026 — verify current pricing).</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> cutting 5 unnecessary labour hours a week at $20/hour saves ~$400/month against a ~$40 subscription. Requires a manager who actually trims the schedule.</div>
+    </div>
+    <div class="int">
+      <h3>Accounting connector (QuickBooks / Xero)</h3>
+      <p><strong>What it is:</strong> daily sales, tips, and payouts pushed into bookkeeping automatically.</p>
+      <p><strong>Benefits:</strong> clean month-end, tip reporting that reconciles, no spreadsheet archaeology.</p>
+      <p><strong>Cost:</strong> QuickBooks Online / Xero roughly $30–80 CAD/month (observed September 2026), connectors often extra. Pricing changes — verify before buying.</p>
+      <div class="roi"><strong>Illustrative ROI (example only — not a promise):</strong> if your bookkeeper spends 6 hours a month untangling POS exports at $60/hour, halving that is ~$180/month against ~$60 in software. Your rates will differ.</div>
+    </div>
+
+    <h2 class="sec" id="system-map">10. Everything integrated — full operational system map</h2>
+    <svg viewBox="0 0 760 400" class="sysmap" role="img" aria-label="Full operational system map for a full-service restaurant">
+      <rect x="300" y="20" width="160" height="54" rx="8" fill="#eef3fa" stroke="#274b73" stroke-width="2"/>
+      <text x="380" y="43" text-anchor="middle" font-size="13" font-weight="bold" fill="#17324f">Restaurant POS</text>
+      <text x="380" y="61" text-anchor="middle" font-size="11" fill="#44505e">the hub — orders + payments</text>
+      <rect x="20" y="140" width="170" height="54" rx="8" fill="#fff" stroke="#2e8b47" stroke-width="2"/>
+      <text x="105" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Payment processing</text>
+      <text x="105" y="181" text-anchor="middle" font-size="11" fill="#44505e">terminals → acquirer</text>
+      <rect x="210" y="140" width="170" height="54" rx="8" fill="#fff" stroke="#b03a5b" stroke-width="2"/>
+      <text x="295" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">KDS + kitchen printers</text>
+      <text x="295" y="181" text-anchor="middle" font-size="11" fill="#44505e">ticket routing</text>
+      <rect x="400" y="140" width="150" height="54" rx="8" fill="#fff" stroke="#c77700" stroke-width="2"/>
+      <text x="475" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Online ordering</text>
+      <text x="475" y="181" text-anchor="middle" font-size="11" fill="#44505e">own site + marketplaces</text>
+      <rect x="570" y="140" width="170" height="54" rx="8" fill="#fff" stroke="#6a5acd" stroke-width="2"/>
+      <text x="655" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Reservations</text>
+      <text x="655" y="181" text-anchor="middle" font-size="11" fill="#44505e">floor plan + waitlist</text>
+      <rect x="120" y="260" width="170" height="54" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="205" y="283" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Inventory / food cost</text>
+      <text x="205" y="301" text-anchor="middle" font-size="11" fill="#44505e">recipes · waste · invoices</text>
+      <rect x="310" y="260" width="150" height="54" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="385" y="283" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Scheduling</text>
+      <text x="385" y="301" text-anchor="middle" font-size="11" fill="#44505e">labour vs. covers</text>
+      <rect x="480" y="260" width="170" height="54" rx="8" fill="#fff" stroke="#274b73" stroke-width="2"/>
+      <text x="565" y="283" text-anchor="middle" font-size="12" font-weight="bold" fill="#17324f">Accounting</text>
+      <text x="565" y="301" text-anchor="middle" font-size="11" fill="#44505e">sales · tips · payouts</text>
+      <line x1="360" y1="74" x2="120" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="370" y1="74" x2="300" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="400" y1="74" x2="470" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="430" y1="74" x2="650" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="330" y1="74" x2="210" y2="260" stroke="#888" stroke-width="1.5"/>
+      <line x1="380" y1="74" x2="385" y2="260" stroke="#888" stroke-width="1.5"/>
+      <line x1="430" y1="74" x2="560" y2="260" stroke="#888" stroke-width="1.5"/>
+      <text x="380" y="350" text-anchor="middle" font-size="12" fill="#44505e">Orders flow into the POS from every channel; the POS feeds the kitchen, the books, and the schedule.</text>
+    </svg>
+
+    <h2 class="sec" id="benchmarks">11. What normal looks like</h2>
+    <p>Honest benchmarks, honestly labeled. Restaurant IT-spend figures come from <strong>dated industry studies plus modern framing</strong> — treat the range below as a working range, not a quote: roughly <strong>1–3% of revenue</strong> for independent full-service restaurants. Card processing research gives a broad <strong>2.0–3.5%</strong> transaction-cost range, and a published 2025 figure put full-service margins around <strong>2.8%</strong> — which is why the processing line deserves its own audit.</p>
+    <table class="cmp">
+      <tr><th>Annual revenue</th><th>Illustrative annual technology spend</th><th>What that usually covers</th></tr>
+      <tr><td>Under $500K</td><td>$5K–$15K / year</td><td>POS subscription, a few handhelds, one KDS or kitchen printer, basic online ordering.</td></tr>
+      <tr><td>$500K–$5M</td><td>Roughly 1–3%</td><td>Full KDS, reservations, inventory costing, scheduling, accounting connector.</td></tr>
+      <tr><td>$5M–$50M</td><td>Roughly 2–3%</td><td>Multi-unit POS, centralized reporting, delivery middleware, dedicated support.</td></tr>
+      <tr><td>$50M+</td><td>Roughly 2–4%</td><td>Enterprise hospitality systems, integrations team, above-store analytics.</td></tr>
+    </table>
+    <p class="fine2">Labels: directional/working-range figures, not quotes. Processing fees sit on top of these numbers — see what yours actually are with the <a href="simulator.html">cost simulator</a>.</p>
+
+    <h2 class="sec" id="ai">12. How AI is changing this sector</h2>
+    <p>Real products only. Costs are labeled by source type and date — verify current pricing before buying; none of these imply results.</p>
+    <ul>
+      <li><strong>Slang.ai</strong> — AI phone answering for restaurants; around $399/location/month per third-party comparisons (observed September 2026).</li>
+      <li><strong>Maple</strong> — AI phone ordering; around $350/month monthly or $220/month annual per vendor pricing (observed September 2026).</li>
+      <li><strong>Loman</strong> — AI phone agent; $199/month per vendor blog (observed September 2026).</li>
+      <li><strong>Bite Buddy</strong> — AI ordering assistant; $1.50/order per vendor pricing (observed September 2026).</li>
+      <li><strong>MarginEdge</strong> — invoice and food-cost automation; around $350/month/location per industry reporting (observed September 2026).</li>
+      <li><strong>Restaurant365</strong> — accounting and operations platform with automation features; quote-based pricing.</li>
+      <li><strong>7shifts</strong> — scheduling with demand forecasting; around $45/month/location per AI-sector research (observed September 2026).</li>
+      <li><strong>Winnow</strong> — AI food-waste tracking; quote-based, usually enterprise or institutional scale.</li>
+    </ul>
+    <div class="callout">
+      <strong>Practical rule:</strong> phone AI pays when missed calls are lost revenue (busy dinner service, catering inquiries). If your phone mostly rings for hours and directions, the ROI case is thin — spend the money on the KDS fallback instead.
+    </div>
+
+    <div class="deem" id="enterprise">
+      <h3>Enterprise software landscape</h3>
+      <p>Above roughly $50M in revenue, hospitality technology shifts to enterprise suites — multi-unit POS, centralized procurement, above-store analytics, and dedicated integrations teams. If you're evaluating that tier, analyst firms publish structured market evaluations; here's how one of them explains its methodology: <a href="https://www.gartner.com/en/research/methodologies/magic-quadrants-research">Gartner Magic Quadrant research methodology</a> (verified to resolve 2026-09-28). For most independent restaurants, the sections above matter far more than this one.</p>
+    </div>
+
+    <div class="cta-band">
+      <h2>Processing fees on thin margins hurt more</h2>
+      <p>At a ~2.8% industry margin, a half-point of processing overcharge is real money. The free audit finds it — or confirms you're already paying fairly. And if the tech stack needs work, see our <a href="pos-services.html" style="color:#fff">POS services</a>.</p>
+      <a class="btn" href="contact.html">Start your free audit</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+</body>
+</html>

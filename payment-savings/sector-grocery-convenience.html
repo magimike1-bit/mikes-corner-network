@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grocery &amp; Convenience POS Setup: Lanes, Scales &amp; Costs | FairRate Audit</title>
+<meta name="description" content="A plain-language guide to grocery and convenience store payments: checkout lane hardware, deli scales and label printers, sample two-lane setup, install steps, troubleshooting, benchmarks, PCI scope, and honest integration costs.">
+<link rel="stylesheet" href="style.css">
+<style>
+.crumbs{font-size:.9rem;color:var(--muted);padding:18px 0 0}
+.crumbs a{color:var(--accent-dark);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.switcher{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-top:14px}
+.switcher .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.switcher strong{color:var(--navy);font-size:.95rem;margin-right:4px}
+.switcher a{text-decoration:none;font-size:.9rem;padding:7px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);background:var(--bg)}
+.switcher a:hover{border-color:var(--accent);color:var(--accent-dark)}
+.switcher a[aria-current]{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700}
+.hub-link{display:inline-block;margin-top:14px;font-size:.92rem}
+.callout{background:var(--accent-soft);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 26px;margin:1.6em 0}
+.callout h3{margin-top:0}
+.callout p:last-child{margin-bottom:0}
+.warn{background:#fff8e6;border:1px solid #e8b93c;border-radius:var(--radius);padding:22px 26px;margin:1.6em 0}
+.warn h3{margin-top:0;color:#8a5a00}
+.svgmap{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:1.4em 0}
+.svgmap svg{width:100%;height:auto;display:block}
+.hwlist{columns:2;column-gap:28px}
+.hwlist li{margin-bottom:.55em;break-inside:avoid}
+@media(max-width:640px){.hwlist{columns:1}}
+.bench{width:100%;border-collapse:collapse;margin:1.2em 0;font-size:.95rem}
+.bench th,.bench td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.bench th{background:var(--navy);color:#fff}
+.bench tr:nth-child(even) td{background:#f7faf8}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:1.2em 0}
+.fnode{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:.9rem}
+.fnode b{color:var(--navy)}
+.farrow{align-self:center;color:var(--accent-dark);font-weight:800}
+.buried{font-size:.84rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:1.4em;margin-top:2.6em}
+.buried h2{font-size:1.05rem;color:var(--muted)}
+.roi-note{font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html" class="active">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Sector guide · Grocery &amp; convenience</p>
+    <h1>Grocery checkout, built for speed and thin margins</h1>
+    <p class="lead">Grocery runs on volume: fast lanes, weight-embedded deli labels, PLU codes when the scanner can't read, and perishables that punish bad inventory data. This guide covers the lane hardware, the setup, the costs, and where the money quietly leaks.</p>
+    <div class="btn-row">
+      <a class="btn" href="contact.html">Request your free audit</a>
+      <a class="btn ghost" href="pos-services.html">Explore POS services</a>
+    </div>
+  </div>
+</section>
+
+<main>
+<div class="wrap">
+  <p class="crumbs"><a href="index.html">Home</a> › <a href="resources.html">Resources</a> › Grocery &amp; convenience</p>
+</div>
+<div class="switcher">
+  <div class="wrap">
+    <strong>I run a:</strong>
+    <a href="sector-retail.html">Retail stores</a>
+    <a href="sector-hotel-hospitality.html">Hotels &amp; hospitality</a>
+    <a href="sector-restaurant-full-service.html">Restaurants &amp; cafés</a>
+    <a href="sector-quick-service-cafe.html">Quick-service / café</a>
+    <a href="sector-grocery-convenience.html" aria-current="page">Grocery &amp; convenience</a>
+    <a href="sector-services-salon.html">Services &amp; salons</a>
+  </div>
+</div>
+<div class="wrap">
+  <p><a class="hub-link" href="resources.html">← Back to the Resources hub</a></p>
+</div>
+
+<section class="section" style="padding-top:28px">
+  <div class="wrap">
+    <h2 class="section-title">1. Sector overview</h2>
+    <p class="section-sub">Why grocery POS is its own discipline.</p>
+    <p>Grocery is the highest-transaction, lowest-margin corner of retail. A lane that stalls for thirty seconds creates a line; a deli scale that drifts creates shrink; a PLU file that's out of date creates wrong prices at the shelf edge and at the till. Everything in this sector is about <strong>throughput and accuracy at the same time</strong> — and the equipment choices follow from that.</p>
+    <p>What makes grocery different from general retail:</p>
+    <ul>
+      <li><strong>Weighed items.</strong> Deli, produce, and bulk goods are priced by weight. The scale and label printer must talk to the POS so a weight-embedded barcode scans like any other item — and the scale needs regular accuracy checks.</li>
+      <li><strong>PLU codes.</strong> When a barcode won't scan (or the item has none), cashiers fall back to price-lookup codes. A printed PLU backup at the lane keeps things moving when the system doesn't.</li>
+      <li><strong>Perishables and shrink.</strong> Spoilage, damage, and markdowns eat margin daily. Inventory and receiving discipline matters more here than in any other sector on this site.</li>
+      <li><strong>Direct-store-delivery (DSD) vendors.</strong> Bread, dairy, and beverage vendors stock your shelves directly. Receiving has to reconcile what they say they delivered with what actually arrived.</li>
+      <li><strong>Age-restricted items.</strong> Tobacco, lottery, and in some provinces alcohol need age-verification prompts configured at the POS — get this wrong and it's a compliance problem, not just a training one.</li>
+    </ul>
+    <p>On payments specifically: grocery sees a heavy debit mix (in Canada, Interac), high transaction counts, and small average tickets. That makes your <strong>per-transaction fees</strong> disproportionately important — a pricing plan that looks fine on percentage rate alone can be expensive once flat per-tap fees multiply across thousands of small baskets. This is exactly what a <a href="contact.html">statement audit</a> catches.</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">2. In-store hardware &amp; software</h2>
+    <p class="section-sub">The roles each piece plays across the lanes and the back office.</p>
+    <div class="trust-row">
+      <div class="trust"><div class="icon">🧾</div><h3>Lane POS station</h3><p>The cashier's screen and computer at each checkout lane. Wired via Ethernet — lanes are the last place you want a Wi-Fi hiccup mid-transaction.</p></div>
+      <div class="trust"><div class="icon">💳</div><h3>Lane payment terminal</h3><p>Ethernet-connected (ideally semi-integrated with the POS so amounts flow automatically) card terminal at each lane. Handles the tap/insert/swipe volume all day.</p></div>
+      <div class="trust"><div class="icon">🔫</div><h3>Presentation scanner</h3><p>Hands-free scanner the cashier slides items across. USB-connected; reads both shelf barcodes and weight-embedded deli labels.</p></div>
+    </div>
+    <div class="trust-row">
+      <div class="trust"><div class="icon">🖨️</div><h3>Receipt printer</h3><p>USB or Ethernet thermal printer at each lane. The cash drawer usually connects through the printer's drawer-kick port.</p></div>
+      <div class="trust"><div class="icon">⚖️</div><h3>Deli scale &amp; label printer</h3><p>Weighs deli/produce items and prints weight-embedded barcode labels the lane scanner reads. Uses the wired link your scale vendor supports.</p></div>
+      <div class="trust"><div class="icon">🖥️</div><h3>Back-office PC</h3><p>Ethernet-connected PC for receiving, inventory, price changes, label printing, and end-of-day reconciliation — away from the lanes.</p></div>
+    </div>
+    <p>Software side: the <strong>POS</strong> runs the lanes, <strong>inventory/receiving</strong> tracks what's on the shelf and what spoiled, the <strong>scale/label software</strong> manages PLUs and label formats, and <strong>accounting/payroll</strong> closes the loop. Purchasing ties it together — see the integrations section below.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">3. Sample setup: a two-lane independent grocer</h2>
+    <p class="section-sub">One workable layout for a small grocery or large convenience store. Add lanes as identical copies — never as snowflakes.</p>
+    <div class="svgmap" role="img" aria-label="Connection map: two identical checkout lanes, each with Ethernet POS, Ethernet payment terminal, USB scanner, USB receipt printer and cash drawer; a back-office PC on Ethernet; a deli scale with wired label printer; printed PLU backup.">
+    <svg viewBox="0 0 780 520" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+      <rect x="0" y="0" width="780" height="520" rx="14" fill="#F9F5ED"/>
+      <text x="24" y="34" font-size="15" font-weight="800" fill="#1F2937">Sample setup — two-lane independent grocer (connection map)</text>
+      <!-- Lane 1 -->
+      <rect x="24" y="52" width="344" height="300" rx="12" fill="none" stroke="#1F2937" stroke-width="2"/>
+      <text x="40" y="78" font-size="13" font-weight="800" fill="#1F2937">LANE 1</text>
+      <rect x="40" y="92" width="312" height="52" rx="9" fill="#1F2937"/>
+      <text x="54" y="114" font-size="12" font-weight="700" fill="#F9F5ED">Lane POS station</text>
+      <text x="54" y="132" font-size="11" fill="#D1D5DB">Ethernet → store switch</text>
+      <rect x="40" y="156" width="150" height="52" rx="9" fill="#374151"/>
+      <text x="52" y="178" font-size="12" font-weight="700" fill="#F9F5ED">Payment terminal</text>
+      <text x="52" y="196" font-size="11" fill="#D1D5DB">Ethernet (semi-integrated)</text>
+      <rect x="202" y="156" width="150" height="52" rx="9" fill="#374151"/>
+      <text x="214" y="178" font-size="12" font-weight="700" fill="#F9F5ED">Scanner</text>
+      <text x="214" y="196" font-size="11" fill="#D1D5DB">USB · hands-free</text>
+      <rect x="40" y="220" width="150" height="52" rx="9" fill="#374151"/>
+      <text x="52" y="242" font-size="12" font-weight="700" fill="#F9F5ED">Receipt printer</text>
+      <text x="52" y="260" font-size="11" fill="#D1D5DB">USB</text>
+      <rect x="202" y="220" width="150" height="52" rx="9" fill="#374151"/>
+      <text x="214" y="242" font-size="12" font-weight="700" fill="#F9F5ED">Cash drawer</text>
+      <text x="214" y="260" font-size="11" fill="#D1D5DB">Via printer kick port</text>
+      <rect x="40" y="284" width="312" height="52" rx="9" fill="#6B7280"/>
+      <text x="54" y="306" font-size="12" font-weight="700" fill="#F9F5ED">Printed PLU backup</text>
+      <text x="54" y="324" font-size="11" fill="#F9F5ED">At the lane for no-scan items</text>
+      <!-- Lane 2 -->
+      <rect x="412" y="52" width="344" height="300" rx="12" fill="none" stroke="#1F2937" stroke-width="2"/>
+      <text x="428" y="78" font-size="13" font-weight="800" fill="#1F2937">LANE 2 — identical to Lane 1</text>
+      <rect x="428" y="92" width="312" height="52" rx="9" fill="#1F2937"/>
+      <text x="442" y="114" font-size="12" font-weight="700" fill="#F9F5ED">Lane POS station</text>
+      <text x="442" y="132" font-size="11" fill="#D1D5DB">Ethernet → store switch</text>
+      <rect x="428" y="156" width="150" height="52" rx="9" fill="#374151"/>
+      <text x="440" y="178" font-size="12" font-weight="700" fill="#F9F5ED">Payment terminal</text>
+      <text x="440" y="196" font-size="11" fill="#D1D5DB">Ethernet (semi-integrated)</text>
+      <rect x="590" y="156" width="150" height="52" rx="9" fill="#374151"/>
+      <text x="602" y="178" font-size="12" font-weight="700" fill="#F9F5ED">Scanner</text>
+      <text x="602" y="196" font-size="11" fill="#D1D5DB">USB · hands-free</text>
+      <rect x="428" y="220" width="150" height="52" rx="9" fill="#374151"/>
+      <text x="440" y="242" font-size="12" font-weight="700" fill="#F9F5ED">Receipt printer</text>
+      <text x="440" y="260" font-size="11" fill="#D1D5DB">USB</text>
+      <rect x="590" y="220" width="150" height="52" rx="9" fill="#374151"/>
+      <text x="602" y="242" font-size="12" font-weight="700" fill="#F9F5ED">Cash drawer</text>
+      <text x="602" y="260" font-size="11" fill="#D1D5DB">Via printer kick port</text>
+      <rect x="428" y="284" width="312" height="52" rx="9" fill="#6B7280"/>
+      <text x="442" y="306" font-size="12" font-weight="700" fill="#F9F5ED">Printed PLU backup</text>
+      <text x="442" y="324" font-size="11" fill="#F9F5ED">At the lane for no-scan items</text>
+      <!-- Back office -->
+      <rect x="24" y="376" width="344" height="104" rx="10" fill="#C8A24A"/>
+      <text x="40" y="402" font-size="13" font-weight="800" fill="#1F2937">Back-office PC</text>
+      <text x="40" y="422" font-size="11" fill="#1F2937">Ethernet · receiving, inventory,</text>
+      <text x="40" y="438" font-size="11" fill="#1F2937">price changes, reconciliation</text>
+      <text x="40" y="462" font-size="11" fill="#1F2937">↕ syncs PLU/price file to lanes</text>
+      <!-- Deli -->
+      <rect x="412" y="376" width="344" height="104" rx="10" fill="#C8A24A"/>
+      <text x="428" y="402" font-size="13" font-weight="800" fill="#1F2937">Deli scale + label printer</text>
+      <text x="428" y="422" font-size="11" fill="#1F2937">Wired link · weight-embedded</text>
+      <text x="428" y="438" font-size="11" fill="#1F2937">barcodes scanned at the lane</text>
+      <text x="428" y="462" font-size="11" fill="#1F2937">Labels read by lane scanners</text>
+      <text x="24" y="508" font-size="11" fill="#6B7280">Every lane is an identical copy: same devices, same cabling, same configuration. A lane that differs is a lane that breaks differently.</text>
+    </svg>
+    </div>
+    <h3>Hardware list</h3>
+    <ul class="hwlist">
+      <li><strong>2× lane POS stations</strong> — one per lane, each connected by Ethernet to the store switch.</li>
+      <li><strong>2× lane payment terminals</strong> — Ethernet, semi-integrated with the POS so the amount flows automatically (no manual keying).</li>
+      <li><strong>2× hands-free presentation scanners</strong> — USB; must read weight-embedded deli labels as well as shelf barcodes.</li>
+      <li><strong>2× receipt printers</strong> — USB thermal printers, one per lane.</li>
+      <li><strong>2× cash drawers</strong> — each triggered through its lane printer's drawer-kick port.</li>
+      <li><strong>Back-office PC</strong> — Ethernet; receiving, inventory, price maintenance, and reconciliation.</li>
+      <li><strong>Deli scale + label printer</strong> — connected over the wired link your scale vendor supports; prints weight-embedded labels.</li>
+      <li><strong>Printed PLU backup</strong> — a current PLU list at each lane for items that won't scan.</li>
+    </ul>
+    <h3>Layout notes</h3>
+    <ul>
+      <li>Build lanes as <strong>identical copies</strong>: same devices, same cable runs, same settings. When Lane 2 breaks, you want the fix you learned on Lane 1 to apply.</li>
+      <li>Wire every lane device you can. Scanners and printers are USB to the POS; the POS and payment terminal go Ethernet to the switch. Wi-Fi has no business at a checkout lane.</li>
+      <li>Put the back-office PC where deliveries arrive — receiving happens there, and the person receiving shouldn't have to walk past the lanes with a clipboard.</li>
+      <li>Keep the deli scale where staff can weigh, wrap, and label in one motion, with the label printer in arm's reach.</li>
+      <li>The printed PLU backup lives <strong>at the lane</strong>, updated whenever prices change — not in a binder in the back office.</li>
+    </ul>
+    <h3>Daily workflow</h3>
+    <ol>
+      <li><strong>Opening:</strong> check lane connectivity (POS, terminal, scanner, printer all responding), verify the scale reads accurately, and count the cash drawers.</li>
+      <li><strong>Through the day:</strong> rapid scan at the lane; scan weight-embedded deli labels like any barcode; fall back to PLU codes from the printed backup when a scan fails.</li>
+      <li><strong>Tender:</strong> card, debit, cash, or mixed — the semi-integrated terminal takes the amount straight from the POS, so there's no re-keying to get wrong.</li>
+      <li><strong>Exceptions:</strong> refunds and price overrides follow your written policy; age-restricted items trigger the POS verification prompt.</li>
+      <li><strong>Closing:</strong> reconcile each lane (POS totals vs. terminal batch vs. cash counted), review spoilage/markdown entries, and sync the day's price changes to the PLU backup.</li>
+    </ol>
+    <div class="warn">
+      <h3>⚠️ Watch the per-transaction fees, not just the rate</h3>
+      <p>Grocery's small average tickets and high transaction counts make flat per-transaction fees disproportionately expensive. A plan with an attractive percentage rate can still overcharge you once per-tap fees multiply across thousands of baskets. Compare your <strong>effective rate</strong> (total fees ÷ total volume) — or <a href="contact.html">let the free audit compute it</a> from your statements.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">4. Setup guide</h2>
+    <p class="section-sub">The order that avoids expensive rework.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Choose the POS first</h3><p>Pick a POS with real grocery features: PLU management, weight-embedded barcodes, age verification, and receiving. Everything else hangs off this choice.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Confirm the payment pairing</h3><p>Verify your processor and terminal support semi-integrated mode with your POS, so amounts flow automatically. Get it in writing.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Wire the store</h3><p>Ethernet to every lane position and the back office before a single device is unboxed. One switch, labelled ports, spare drops for the next lane.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Build one lane, then clone it</h3><p>Assemble, configure, and fully test Lane 1 — then replicate it exactly for Lane 2. Identical lanes, identical troubleshooting.</p></div>
+      <div class="step"><div class="step-num">5</div><h3>Load PLUs and test the scale path</h3><p>Import your item and PLU file, print deli labels, and scan them at the lane. Weigh, label, scan — end to end — before opening.</p></div>
+      <div class="step"><div class="step-num">6</div><h3>Train on the exceptions</h3><p>Normal sales are easy. Train cashiers on PLU fallback, refunds, age-restricted prompts, and what to do when the terminal times out.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">5. Install guides</h2>
+    <p class="section-sub">Per-device installation notes. Always follow your POS vendor's and processor's current documentation alongside these.</p>
+    <div class="faq">
+      <details>
+        <summary>Lane POS station (Ethernet)</summary>
+        <div class="answer">
+          <p>Position the station with the screen facing the cashier and room for bagging. Connect Ethernet to the store switch and power, install the POS software per your vendor's guide, and verify it reaches the back-office PC (for PLU/price sync). Run a test sale end to end before connecting any peripherals.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Lane payment terminal (semi-integrated)</summary>
+        <div class="answer">
+          <p>Connect Ethernet and power, complete the processor's activation, then pair the terminal with the POS in semi-integrated mode per both vendors' instructions. Test that the sale total flows from POS to terminal automatically — if the cashier has to key the amount by hand, the integration isn't working. Run a small test transaction and void it, and confirm it appears in the POS totals.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Presentation scanner (USB)</summary>
+        <div class="answer">
+          <p>Connect via USB to the lane POS and confirm the POS recognizes it as a keyboard-style input. Test with shelf barcodes, then with a weight-embedded deli label — both must ring up correctly. If the scanner reads but the POS ignores it, check the POS peripheral settings before assuming the hardware is faulty.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Receipt printer &amp; cash drawer</summary>
+        <div class="answer">
+          <p>Connect the printer to the lane POS (USB) per your POS vendor's supported list, then connect the cash drawer to the printer's drawer-kick port. Print a test receipt from the POS and confirm the drawer fires on cash sales. Keep spare rolls at each lane.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Deli scale &amp; label printer</summary>
+        <div class="answer">
+          <p>Install per your scale vendor's guide using the wired link they support. Load your PLU file into the scale software, print a test weight-embedded label, and scan it at the lane — the price must match the scale's calculation. Verify scale accuracy with a known weight; recalibrate on the vendor's schedule, not when a customer complains.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Back-office PC</summary>
+        <div class="answer">
+          <p>Connect via Ethernet, install the POS back-office/inventory software, and verify it syncs PLU and price changes to the lanes. Set up receiving workflows and user accounts (cashiers shouldn't have back-office price-change access). Confirm the end-of-day reconciliation reports pull correctly before your first real close.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">6. Troubleshooting</h2>
+    <p class="section-sub">Work the universal sequence first: power/charge → connection → what changed recently → restart network gear, then the POS, then the terminal and peripherals.</p>
+    <div class="faq">
+      <details>
+        <summary>Scanner won't read barcodes</summary>
+        <div class="answer"><p>Clean the scanner window, check the USB connection, and try a known-good barcode. If shelf tags scan but deli labels don't, the problem is the label print quality or the weight-embedded format — check the scale/label printer. Fall back to the printed PLU backup to keep the lane moving while you fix it.</p></div>
+      </details>
+      <details>
+        <summary>Terminal timed out — do I retry the payment?</summary>
+        <div class="answer"><p><strong>Verify the transaction status before retrying.</strong> Check the POS totals and the terminal/processor transaction list first. Retrying blind is how a customer gets charged twice — and in grocery, that customer is back tomorrow to complain.</p></div>
+      </details>
+      <details>
+        <summary>Price at the till doesn't match the shelf</summary>
+        <div class="answer"><p>The lane is reading the PLU file it has, not the price you changed this morning. Verify the back-office price change actually synced to the lane, and update the printed PLU backup at the same time. Honor the shelf price for the customer in front of you, then fix the sync.</p></div>
+      </details>
+      <details>
+        <summary>Scale labels scan but ring up wrong</summary>
+        <div class="answer"><p>Check the scale-to-POS path: the PLU on the label must match the PLU in the POS file, and the scale's price per unit must be current. Reprint a test label after any price change and scan it before the labels reach the floor.</p></div>
+      </details>
+      <details>
+        <summary>Age-restriction prompt isn't appearing</summary>
+        <div class="answer"><p>This is POS configuration, not cashier training: verify the item is flagged as age-restricted in the item file and that the prompt is enabled per lane. Test with a restricted item after every POS software update.</p></div>
+      </details>
+      <details>
+        <summary>Who do I call for what?</summary>
+        <div class="answer"><p>Money movement, authorization, and settlement problems: your <strong>processor</strong>. Scanner, printer, drawer, scale, or POS software issues: your <strong>POS vendor</strong>. Scale hardware and label formats: your <strong>scale vendor</strong>. Item-file and PLU sync problems: your <strong>POS vendor</strong> first.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">7. Hardware options reference</h2>
+    <p class="section-sub">Real products with links to the manufacturer's own pages (verified 2026-09-28). Models change — confirm compatibility with your POS vendor before buying.</p>
+    <h3>Payment terminals</h3>
+    <ul>
+      <li><strong>Moneris Go terminal</strong> — Moneris's countertop smart terminal for Canadian businesses: <a href="https://www.moneris.com/help/MGo-A920-R12-2021-WH-EN/UYT/Moneris_Go_terminal.htm">Moneris Go terminal help &amp; product page</a>.</li>
+      <li><strong>Helcim Smart Terminal</strong> — countertop smart terminal; Helcim publishes Canadian pricing on its own page (listed at CA$429 when checked 2026-09-28 — confirm current pricing before budgeting): <a href="https://www.helcim.com/start/ca/smart-terminal-pricing/">Helcim Smart Terminal pricing (Canada)</a>.</li>
+    </ul>
+    <h3>Receipt printers</h3>
+    <ul>
+      <li><strong>Epson TM-T88VII</strong> — thermal receipt printer, a lane staple; Ethernet and USB models: <a href="https://epson.ca/For-Work/POS-System-Devices/POS-Printers/OmniLink-TM-T88VII-Single-station-Thermal-Receipt-Printer/p/C31CJ57052">Epson Canada TM-T88VII product page</a>.</li>
+      <li><strong>Star Micronics TSP143III series</strong> — compact thermal receipt printer with USB, Ethernet, Bluetooth, and Wi-Fi variants (manufacturer's regional product page): <a href="https://starmicronics.co.th/en/product/star-tsp143iii-series/">Star TSP143III product page</a>.</li>
+    </ul>
+    <p class="roi-note">Lane scanners, cash drawers, and deli scales vary by vendor — buy from your POS vendor's (or scale vendor's) supported-hardware list. We link only to manufacturer pages we could directly verify; anything else here would be a guess.</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="callout">
+      <h3>🔒 PCI scope: where your card data flows matters</h3>
+      <p>Whether your lane POS systems fall inside or outside your PCI compliance scope depends on one thing: <strong>does card data pass through the POS, or does it stay inside the payment terminal?</strong> A standalone or properly semi-integrated terminal keeps card data out of your POS and back-office PC; a setup where card numbers flow through the lane POS pulls far more of your store network into scope.</p>
+      <p><a href="pci-scope-guide.html">Read the plain-language PCI scope guide →</a> (conceptual only — always check current official requirements with the PCI Security Standards Council.)</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">9. Integrations you may also need</h2>
+    <p class="section-sub">Each integration below: what it is, why it matters, what it costs, and an honestly labelled illustrative ROI sketch.</p>
+
+    <h3>Inventory &amp; perishables management</h3>
+    <p><strong>What it is:</strong> tracking what's on the shelf, what's in the cooler, what's expiring, and what got marked down or thrown out — tied to receiving and the POS.</p>
+    <p><strong>Benefits:</strong> less spoilage, fewer stockouts on staples, and shrink numbers you can actually see and manage.</p>
+    <p><strong>Cost:</strong> often bundled with grocery POS software; standalone tools are quote-based.</p>
+    <div class="example">
+      <span class="tag">Illustrative example — not a promise</span>
+      <h3>Shrink-reduction sketch</h3>
+      <table>
+        <tr><th>Item</th><th>Amount</th></tr>
+        <tr><td>Monthly sales (example)</td><td>$150,000</td></tr>
+        <tr><td>Shrink reduction (example: 1 percentage point)</td><td>$1,500 / month</td></tr>
+      </table>
+      <p class="fine">Illustrative only. Your sales, shrink rate, and achievable reduction will differ. Shown to demonstrate the shape of the math, not a result.</p>
+    </div>
+
+    <h3>Purchasing &amp; receiving</h3>
+    <p><strong>What it is:</strong> purchase orders, delivery check-in, and invoice matching — including DSD vendors who stock your shelves directly.</p>
+    <p><strong>Benefits:</strong> catches short deliveries and price discrepancies before they become margin leaks.</p>
+    <p><strong>Cost:</strong> usually bundled with the POS/inventory module; quote-based standalone.</p>
+
+    <h3>Deli scale &amp; label management</h3>
+    <p><strong>What it is:</strong> the software side of the scale: PLU file management, label formats, and price-per-unit updates.</p>
+    <p><strong>Benefits:</strong> accurate weight-embedded labels, fewer lane disputes, and price changes that actually reach the scale.</p>
+    <p><strong>Cost:</strong> typically bundled with the scale hardware or POS; confirm with your vendors.</p>
+
+    <h3>Accounting &amp; payroll</h3>
+    <p><strong>What it is:</strong> bookkeeping and staff payroll fed by the POS day totals.</p>
+    <p><strong>Benefits:</strong> clean books, labor cost visibility, and a faster month-end.</p>
+    <p><strong>Cost:</strong> quote-based; many small grocers use their accountant's preferred platform.</p>
+    <p class="roi-note">ROI sketches are illustrative examples to show how the math works — not quotes, guarantees, or predictions.</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">10. Everything integrated — full system map</h2>
+    <p class="section-sub">How the pieces connect when it's all working.</p>
+    <div class="flow">
+      <span class="fnode"><b>Purchasing</b><br>orders to suppliers</span><span class="farrow">→</span>
+      <span class="fnode"><b>Receiving</b><br>check-in at back office</span><span class="farrow">→</span>
+      <span class="fnode"><b>Inventory / perishables</b><br>shelf, cooler, shrink</span>
+    </div>
+    <div class="flow">
+      <span class="fnode"><b>DSD vendors</b><br>bread · dairy · beverage</span><span class="farrow">→</span>
+      <span class="fnode"><b>Receiving</b></span><span class="farrow">→</span>
+      <span class="fnode"><b>Shelf</b></span>
+    </div>
+    <div class="flow">
+      <span class="fnode"><b>Deli scale + label printer</b><br>weight-embedded labels</span><span class="farrow">→</span>
+      <span class="fnode"><b>Lane POS</b><br>scan · PLU · tender</span><span class="farrow">↔</span>
+      <span class="fnode"><b>Payment terminal</b><br>semi-integrated</span><span class="farrow">→</span>
+      <span class="fnode"><b>Processor</b></span>
+    </div>
+    <div class="flow">
+      <span class="fnode"><b>Lane totals</b></span><span class="farrow">→</span>
+      <span class="fnode"><b>End-of-day reconciliation</b></span><span class="farrow">→</span>
+      <span class="fnode"><b>Accounting / payroll</b></span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">11. What normal looks like — technology spending benchmarks</h2>
+    <p class="section-sub">Published IT-spending figures for context. Payment processing fees sit <em>outside</em> these formal IT budgets — add them separately when comparing total cost.</p>
+    <table class="bench">
+      <tr><th>Store size (annual revenue)</th><th>Typical technology spend (% of sales)</th><th>Notes</th></tr>
+      <tr><td>Under $500K</td><td>No credible exact benchmark</td><td>Small stores vary too widely; use qualitative planning, not a percentage.</td></tr>
+      <tr><td>$500K – $5M</td><td>≈ 1–3%</td><td>Typical independent range.</td></tr>
+      <tr><td>$5M – $50M</td><td>≈ 1.5–3%</td><td>Mid-size independents and small chains.</td></tr>
+      <tr><td>$50M+</td><td>≈ 1.5–2.5%</td><td>Larger chains with scale efficiencies.</td></tr>
+    </table>
+    <p>Food-retailing benchmarks in the wild: <strong>FMI's 2026 food retailing review</strong> puts technology spending around <strong>1.9% of sales</strong>, and a <strong>Columbus Consulting / National Grocers Association 2026</strong> figure cites a <strong>1–4%</strong> range. Use these as context, not targets — and remember processing fees aren't in them.</p>
+    <p>High transaction counts make per-transaction fees the hidden driver. <a href="contact.html">The free audit measures your true effective rate</a> from your own statements.</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">12. How AI is changing this sector</h2>
+    <p class="section-sub">Real products, honestly framed. Grocery has less proven SMB AI than the hype suggests.</p>
+    <ul>
+      <li><strong>Prediko</strong> and <strong>Cin7</strong> — real demand-forecasting and inventory-planning products used in retail and wholesale. Pricing is quote-based; neither publishes SMB grocery-specific pricing we could verify.</li>
+    </ul>
+    <p>The honest angle for an independent grocer: <strong>consistent use of your POS's own reorder reports may outperform buying "AI."</strong> Most shrink and stockout problems in small stores are data-discipline problems (receiving not recorded, spoilage not logged, PLUs out of date) — no forecasting tool fixes data that was never entered. Get receiving and inventory discipline right first; then a forecasting product has something to work with.</p>
+    <p>We could not verify any SMB-priced self-checkout vision product with public pricing — so we're not naming one. If a vendor pitches you AI cameras for the lane, ask for a measured shrink-reduction figure from a store your size, in writing.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="buried">
+      <h2>Enterprise software landscape</h2>
+      <p>Large grocery chains run enterprise supply-chain, merchandising, and replenishment suites — a different market from independent-store POS, evaluated through analyst research rather than per-store trials. Relevant evaluations include reports such as the <strong>2026 Gartner Magic Quadrant for Supply Chain Planning Solutions: Process Industries</strong> and the <strong>2026 Gartner Magic Quadrant for Supply Chain Planning Solutions: Discrete Industries</strong>; <a href="https://www.gartner.com/en/research/methodologies/magic-quadrants-research">Gartner's Magic Quadrant research methodology</a> explains how those evaluations are constructed. For independent grocers, this section can be safely ignored.</p>
+    </div>
+    <div class="cta-band">
+      <h2>Thousands of small tickets — are per-transaction fees eating you alive?</h2>
+      <p>Send 3–6 months of processing statements. We'll find the overcharges — you keep half of the documented savings, and owe nothing if we find nothing.</p>
+      <a class="btn" href="contact.html">Start your free audit</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+</body>
+</html>

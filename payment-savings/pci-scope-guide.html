@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCI Scope Explained: Where Card Data Flows &amp; Why It Matters | FairRate Audit</title>
+<meta name="description" content="A plain-language, conceptual guide to PCI scope: standalone terminals, semi-integrated and P2PE setups, and POS-handled card data — plus seven common scope-creep mistakes. No compliance advice; check current official PCI SSC requirements.">
+<link rel="stylesheet" href="style.css">
+<style>
+.crumbs{font-size:.9rem;color:var(--muted);padding:18px 0 0}
+.crumbs a{color:var(--accent-dark);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.switcher{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-top:14px}
+.switcher .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.switcher strong{color:var(--navy);font-size:.95rem;margin-right:4px}
+.switcher a{text-decoration:none;font-size:.9rem;padding:7px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);background:var(--bg)}
+.switcher a:hover{border-color:var(--accent);color:var(--accent-dark)}
+.hub-link{display:inline-block;margin-top:14px;font-size:.92rem}
+.callout{background:var(--accent-soft);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 26px;margin:1.6em 0}
+.callout h3{margin-top:0}
+.callout p:last-child{margin-bottom:0}
+.warn{background:#fff8e6;border:1px solid #e8b93c;border-radius:var(--radius);padding:22px 26px;margin:1.6em 0}
+.warn h3{margin-top:0;color:#8a5a00}
+.arch{border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;margin:1.2em 0;background:#fff}
+.arch h3{margin-top:0}
+.arch .verdict{display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:.6em}
+.v-low{background:#e7f6ee;color:#12703e}
+.v-mid{background:#fff8e6;color:#8a5a00}
+.v-high{background:#fdecec;color:#a93226}
+.svgmap{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:1.4em 0}
+.svgmap svg{width:100%;height:auto;display:block}
+.mistakes{counter-reset:mistake}
+.mistake{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin-bottom:14px;position:relative;padding-left:64px}
+.mistake::before{counter-increment:mistake;content:counter(mistake);position:absolute;left:20px;top:20px;width:32px;height:32px;border-radius:50%;background:#a93226;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.mistake h3{margin-top:0;font-size:1.05rem}
+.mistake p:last-child{margin-bottom:0}
+.arch{transition:transform .15s ease,box-shadow .15s ease}
+.arch:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(14,42,71,.1)}
+.mistake{transition:box-shadow .15s ease}
+.mistake:hover{box-shadow:0 8px 22px rgba(14,42,71,.1)}
+@media(max-width:640px){.mistake{padding:16px 16px 16px 58px}.mistake::before{left:14px;top:16px}.arch,.callout,.warn{padding:18px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html" class="active">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Resource · PCI scope, conceptually</p>
+    <h1>PCI scope, in plain language</h1>
+    <p class="lead">Nobody reads PCI documentation for fun. Here's the one idea that matters: <strong>wherever card data flows, compliance obligations follow.</strong> Keep card data out of your other systems, and most of your network stays out of scope.</p>
+    <div class="btn-row">
+      <a class="btn" href="contact.html">Request your free audit</a>
+      <a class="btn ghost" href="pos-services.html">Explore POS services</a>
+    </div>
+  </div>
+</section>
+
+<main>
+<div class="wrap">
+  <p class="crumbs"><a href="index.html">Home</a> › <a href="resources.html">Resources</a></p>
+</div>
+<div class="switcher">
+  <div class="wrap">
+    <strong>I run a:</strong>
+    <a href="sector-retail.html">Retail stores</a>
+    <a href="sector-hotel-hospitality.html">Hotels &amp; hospitality</a>
+    <a href="sector-restaurant-full-service.html">Restaurants &amp; cafés</a>
+    <a href="sector-quick-service-cafe.html">Quick-service / café</a>
+    <a href="sector-grocery-convenience.html">Grocery &amp; convenience</a>
+    <a href="sector-services-salon.html">Services &amp; salons</a>
+  </div>
+</div>
+<div class="wrap">
+  <p><a class="hub-link" href="resources.html">← Back to the Resources hub</a></p>
+</div>
+
+<section class="section" style="padding-top:28px">
+  <div class="wrap">
+    <div class="warn">
+      <h3>⚠️ What this page is (and isn't)</h3>
+      <p>This is a <strong>conceptual overview</strong> to help you ask better questions of your vendors. It is not compliance advice, it doesn't cover assessment types or detailed rules, and PCI requirements change. For the actual requirements that apply to you, <strong>check current official requirements here: <a href="https://www.pcisecuritystandards.org/">PCI Security Standards Council</a></strong> — the official source.</p>
+    </div>
+
+    <h2 class="section-title">The core principle</h2>
+    <p class="section-sub">One sentence that explains 90% of PCI scope decisions.</p>
+    <p><strong>If card data passes through a system, that system is in scope.</strong> If card data never touches it, it generally isn't. That's the whole game: every cable, Wi-Fi hop, and software integration that carries (or could carry) card numbers drags the systems on both ends into your compliance obligations. Design your setup so card data travels the shortest possible path — ideally, it never leaves the payment terminal at all.</p>
+    <p>Think of it like plumbing: you don't waterproof the whole house, you keep the water in the pipes. The terminal is the pipe. Everything else should stay dry.</p>
+
+    <h2 class="section-title" style="margin-top:1.6em">The three architectures</h2>
+    <p class="section-sub">Every card-present setup is some version of one of these.</p>
+
+    <div class="arch">
+      <span class="verdict v-low">Smallest scope</span>
+      <h3>1. Standalone terminal</h3>
+      <p>The terminal sits on the counter, connected directly to the processor. The cashier keys in (or the customer sees) the amount, the card is tapped or inserted, and the receipt prints from the terminal. <strong>Card data never touches your POS, your PC, or your network beyond carrying the terminal's own encrypted traffic.</strong></p>
+      <p>Because nothing else in your business ever sees card data, your POS, back-office computers, and other systems are largely out of scope. This is the simplest architecture to secure and to assess — which is why it's the right choice for many small businesses that don't need deep POS integration.</p>
+      <div class="svgmap" role="img" aria-label="Diagram: card data flows only between the customer card, the standalone terminal, and the processor. The POS and back-office PC are outside the card-data path.">
+      <svg viewBox="0 0 720 190" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+        <rect x="0" y="0" width="720" height="190" rx="14" fill="#F9F5ED"/>
+        <rect x="24" y="60" width="150" height="70" rx="10" fill="#1F2937"/>
+        <text x="40" y="90" font-size="12" font-weight="700" fill="#F9F5ED">Customer card</text>
+        <text x="40" y="108" font-size="11" fill="#D1D5DB">tap / insert / swipe</text>
+        <rect x="214" y="60" width="170" height="70" rx="10" fill="#1B9E57"/>
+        <text x="230" y="90" font-size="12" font-weight="700" fill="#fff">Standalone terminal</text>
+        <text x="230" y="108" font-size="11" fill="#fff">card data stays here</text>
+        <rect x="424" y="60" width="150" height="70" rx="10" fill="#1F2937"/>
+        <text x="440" y="90" font-size="12" font-weight="700" fill="#F9F5ED">Processor</text>
+        <text x="440" y="108" font-size="11" fill="#D1D5DB">moves the money</text>
+        <line x1="174" y1="95" x2="214" y2="95" stroke="#1B9E57" stroke-width="4"/>
+        <line x1="384" y1="95" x2="424" y2="95" stroke="#1B9E57" stroke-width="4"/>
+        <rect x="24" y="150" width="340" height="30" rx="8" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="36" y="170" font-size="11" fill="#6B7280">POS &amp; back-office PC — outside the card-data path</text>
+        <text x="600" y="170" font-size="11" font-weight="700" fill="#1B9E57">← card data path</text>
+      </svg>
+      </div>
+    </div>
+
+    <div class="arch">
+      <span class="verdict v-mid">Small scope, if done right</span>
+      <h3>2. Semi-integrated / P2PE terminal</h3>
+      <p>Here the terminal connects to your POS so the sale amount flows automatically (no re-keying), but <strong>card data still never touches the POS</strong>. The terminal encrypts the card data the instant it's read and sends it straight to the processor; the POS only ever sees non-sensitive references like approval codes and totals.</p>
+      <p><strong>"P2PE-validated" at a high level:</strong> P2PE stands for point-to-point encryption. A P2PE-validated solution is one where an independent assessor has verified that card data is encrypted inside the terminal and stays encrypted until it reaches the processor — with validated controls around the devices and decryption environment. In plain terms: it's a setup someone qualified has checked actually keeps card data out of your systems, rather than a vendor merely claiming it does.</p>
+      <p>Done properly, the POS stays largely out of scope — you get the convenience of integration without dragging your whole network into scope. Done <em>improperly</em> (card data readable anywhere along the path), it quietly becomes architecture #3.</p>
+    </div>
+
+    <div class="arch">
+      <span class="verdict v-high">Largest scope</span>
+      <h3>3. Card data passing through the POS</h3>
+      <p>In this architecture, card data flows through the POS software or the PC it runs on — for example, a card reader plugged into the POS computer that sends unencrypted card data through the POS application to the processor.</p>
+      <p><strong>The POS is now in scope</strong> — and so is everything connected to it: the PC, the network it sits on, and potentially the back-office systems it talks to. Your compliance obligations grow substantially, and so does your breach risk: card data sitting in more places means more places it can be stolen from.</p>
+      <p>If your setup works this way and you didn't deliberately choose it, that's worth a conversation with your vendors about moving to architecture #1 or #2.</p>
+    </div>
+
+    <div class="callout">
+      <h3>The takeaway</h3>
+      <p>Card data through the POS → the POS is in scope. Standalone terminal, or an appropriately semi-integrated / P2PE-validated device → the POS is largely out of scope. When a vendor proposes a setup, ask one question: <strong>"Show me exactly where the card data travels."</strong> Then check the current official requirements at the <a href="https://www.pcisecuritystandards.org/">PCI Security Standards Council</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">Seven common scope-creep mistakes</h2>
+    <p class="section-sub">Ways businesses accidentally pull more systems into scope than they needed to.</p>
+    <div class="mistakes">
+      <div class="mistake">
+        <h3>Keying card numbers into the POS "just this once"</h3>
+        <p>Typing a card number into the POS for a phone order or a failed terminal puts card data into a system that wasn't designed to hold it. Use your processor's virtual terminal or a proper card-not-present flow instead — and never as a routine workaround.</p>
+      </div>
+      <div class="mistake">
+        <h3>Storing card numbers in notes, spreadsheets, or booking fields</h3>
+        <p>A card number in a booking note, a spreadsheet of "regulars," or an email thread is card data sitting in systems with none of the right protections. Tokenize (store a token, not the number) or don't store it at all.</p>
+      </div>
+      <div class="mistake">
+        <h3>Putting the terminal on the same network as everything else</h3>
+        <p>A flat network where the terminal, the POS, the back-office PC, and guest Wi-Fi all mingle means card-data traffic shares space with everything. Segment the payment traffic away from the rest.</p>
+      </div>
+      <div class="mistake">
+        <h3>Letting guest Wi-Fi touch business systems</h3>
+        <p>Guest devices on the same network as terminals or the POS is a scope and security problem at once. Guest Wi-Fi must be isolated — no path to payment, POS, or PMS systems.</p>
+      </div>
+      <div class="mistake">
+        <h3>Assuming "the cloud handles it"</h3>
+        <p>Cloud POS doesn't automatically mean small scope. What matters is still the card-data path: if card data passes through the local POS app or browser before reaching the cloud, the local environment is in the picture.</p>
+      </div>
+      <div class="mistake">
+        <h3>Forgetting about paper</h3>
+        <p>Printed receipts with full card numbers, old terminal settlement reports in a drawer, carbon copies — paper with card data counts. Truncate, secure, and shred on a schedule.</p>
+      </div>
+      <div class="mistake">
+        <h3>Never re-checking after changes</h3>
+        <p>Scope isn't set once. A new integration, a POS update, a "temporary" workaround during a busy season — any of these can quietly reroute card data through systems that were previously clean. Re-verify the card-data path after every change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">The audit and business angle</h2>
+    <p class="section-sub">Why scope matters beyond compliance paperwork.</p>
+    <p>A smaller scope isn't just less paperwork — it's <strong>less risk and less cost</strong>. Every system in scope needs securing, patching, monitoring, and periodic assessment. Every system holding card data is a system a breach can start from. Businesses with tight, well-designed card-data paths spend less on compliance, face less breach exposure, and have simpler conversations with their processors and insurers.</p>
+    <p>There's a money angle too: the architecture you choose affects your processing setup, and your processing setup affects what you pay. When we audit statements, we sometimes find businesses paying for complexity they didn't choose on purpose — a setup that drifted into a higher-scope, higher-cost shape over years of small changes. The <a href="contact.html">free audit</a> looks at what you're paying; this guide helps you look at <em>why</em> your setup looks the way it does.</p>
+    <div class="callout">
+      <h3>Check the current official requirements</h3>
+      <p>PCI standards evolve, and only the official source is authoritative for what applies to you: <a href="https://www.pcisecuritystandards.org/">PCI Security Standards Council — pcisecuritystandards.org</a>. If a vendor's claim about scope or compliance doesn't match what you find there, believe the Council and ask the vendor harder questions.</p>
+    </div>
+    <div class="cta-band">
+      <h2>Want a second pair of eyes on what you're paying?</h2>
+      <p>The audit is free and takes about a week. If there's nothing to find, you get a clean bill of health and owe us nothing.</p>
+      <a class="btn" href="contact.html">Start your free audit</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+</body>
+</html>

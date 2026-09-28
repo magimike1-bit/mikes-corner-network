@@ -8,6 +8,9 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
 
   function manualDef(item){ return S.DATA.manual.hours[item.id] || null; }
 
+  /* Period label for the labor notes: hoisted so it isn't re-allocated on every call. */
+  const PER_LABEL = {week:"week", payperiod:"pay period", month:"month"};
+
   function ensureManual(st, item){
     const md = manualDef(item); if(!md) return;
     if(st.mhrs === undefined) st.mhrs = (md.hrs[0] + md.hrs[1]) / 2;
@@ -20,9 +23,11 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
      possible, otherwise a clearly-labeled conservative estimate. The savings
      math always subtracts residual labor — never a 100%-elimination fantasy. ---- */
 
-  function manualLaborMonthly(item, st){
+  function manualLaborMonthly(item, st, md){
     // Full manual-labor cost of doing it by hand — regardless of the manual toggle.
-    const md = manualDef(item); if(!md) return 0;
+    // md is resolved once by the caller when already in hand; resolved here otherwise.
+    if(md === undefined) md = manualDef(item);
+    if(!md) return 0;
     const mhrs = st && st.mhrs != null ? st.mhrs : (md.hrs[0] + md.hrs[1]) / 2;
     const wage = st && st.mwage != null ? st.mwage : S.DATA.manual.wageDefault;
     return mhrs * wage * (S.DATA.manual.perFactor[md.per] || 4.33);
@@ -30,9 +35,10 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
 
   function residualMid(md){ return md && md.residual ? (md.residual.hrs[0] + md.residual.hrs[1]) / 2 : 0; }
 
-  function residualMonthly(item, st){
+  function residualMonthly(item, st, md){
     // Residual labor cost with the software: the hours you still spend in it.
-    const md = manualDef(item); if(!md || !md.residual) return 0;
+    if(md === undefined) md = manualDef(item);
+    if(!md || !md.residual) return 0;
     const wage = st && st.mwage != null ? st.mwage : S.DATA.manual.wageDefault;
     return residualMid(md) * wage * (S.DATA.manual.perFactor[md.per] || 4.33);
   }
@@ -42,11 +48,11 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
     return hrs * ((S.DATA.manual.perFactor[per] || 4.33) / 4.33);
   }
 
-  function laborValueMonthly(item, st){
+  function laborValueMonthly(item, st, md){
     // Net monthly labor value of running the software: manual cost minus
     // residual labor cost. The subscription price is separate — this is the
     // time side of the ledger.
-    return manualLaborMonthly(item, st) - residualMonthly(item, st);
+    return manualLaborMonthly(item, st, md) - residualMonthly(item, st, md);
   }
 
   function manualMonthly(item, st){
@@ -57,11 +63,11 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
   function manualNetNote(item, opt){
     const st = S.state[item.id];
     const md = manualDef(item);
-    const labor = manualLaborMonthly(item, st);
+    const labor = manualLaborMonthly(item, st, md);
     const soft = itemMonthlyPreview(item, opt);
-    const res = residualMonthly(item, st);
+    const res = residualMonthly(item, st, md);
     const net = labor - soft - res; // true comparison: manual vs (software + residual labor)
-    const per = {week:"week", payperiod:"pay period", month:"month"}[md.per];
+    const per = PER_LABEL[md.per];
     const resHrs = residualMid(md);
     let t = "Going manual saves you " + money(soft) + "/mo in software but costs ~" + money(labor) +
       "/mo in manager time (" + st.mhrs + " hrs/" + per + " \u00d7 CA$" + st.mwage + "/hr). " +
@@ -80,10 +86,10 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
     const md = manualDef(item); if(!md) return "";
     const manWk = hrsPerWeek(st.mhrs != null ? st.mhrs : (md.hrs[0] + md.hrs[1]) / 2, md.per);
     const resWk = hrsPerWeek(residualMid(md), md.per);
-    const val = laborValueMonthly(item, st);
+    const val = laborValueMonthly(item, st, md);
     if(val <= 0) return "";
     const est = (md.est || (md.residual && md.residual.est)) ? " (estimate)" : "";
-    const per = {week:"week", payperiod:"pay period", month:"month"}[md.per];
+    const per = PER_LABEL[md.per];
     return '<div class="detail labor-line">💪 vs fully manual: saves ~' + (Math.round((manWk - resWk) * 10) / 10) +
       " hrs/" + per + " (" + (Math.round(manWk * 10) / 10) + " by hand − " +
       (Math.round(resWk * 10) / 10) + " you still spend in the software) — net labor value ~" +
@@ -101,7 +107,7 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
       const manH = st.mhrs != null ? st.mhrs : (md.hrs[0] + md.hrs[1]) / 2;
       saveWk += hrsPerWeek(manH - residualMid(md), md.per);
       resWk += hrsPerWeek(residualMid(md), md.per);
-      valMo += laborValueMonthly(item, st);
+      valMo += laborValueMonthly(item, st, md);
       if(md.est || (md.residual && md.residual.est)) est = true;
     });
     return { saveWk, resWk, valMo, est };

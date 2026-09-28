@@ -1,7 +1,7 @@
 import { S } from './session.d6748862.js';
 import { $, money, esc, pyRound, clampN, pct1 } from './util.03612f15.js';
-import { loadData } from './data.6a447e17.js';
-import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, softwareLaborNote, stackLaborValue, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.5461eed1.js';
+import { loadData } from './data.46f8bb54.js';
+import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, softwareLaborNote, stackLaborValue, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.622d97a6.js';
 import { renderMap, mapJumpToItem, initMapEvents } from './visual-map.5e4c126b.js';
 import { trainMathHTML, updateTrainMath, renderTrainingTier } from './training.f08b57d0.js';
 import { ensureNET, netDevCounts, netZoneDevices, netWiredDrops, netWiredDesc, dropUnitCost, renderNetPlan } from './net-plan.a1631221.js';

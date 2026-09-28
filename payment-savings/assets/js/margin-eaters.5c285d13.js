@@ -1,6 +1,6 @@
 import { S } from './session.d6748862.js';
 import { $, money, pct1 } from './util.03612f15.js';
-import { allItems, itemMonthly } from './cost-engine.5461eed1.js';
+import { allItems, itemMonthly } from './cost-engine.622d97a6.js';
 /* me.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   function ensureME(){

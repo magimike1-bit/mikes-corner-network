@@ -188,14 +188,13 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
        market stalls. Generic questions: how customers pay, how many payment
        spots, whether card-on-file/invoiced payments are taken. */
     other(q){
-      const online = q.how === "online";
       const inperson = q.how === "inperson" || q.how === "both";
       const spots = clampN(q.spots || 0, 0, 8);
       const terminals = inperson ? Math.max(1, spots) : 0;
       const stations = inperson ? Math.max(1, spots) : 1;
       const aps = 1;
       const wired = terminals + 1;
-      return { online, inperson, spots, terminals, stations, aps,
+      return { inperson, spots, terminals, stations, aps,
                wired_drops: wired, switch: switchFor(wired, aps) };
     }
   };
@@ -723,8 +722,8 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
         if(opt.upfront){ const LD = lifeDataFor(opt); inner += '<div class="life-line">⏳ Expected life: <strong>' + lifeLabel(opt) + "</strong>" + (LD ? ' <span class="life-src">(' + LD.conf + " confidence" + (LD.est ? " — estimate" : "") + (LD.src ? " — " + LD.src : "") + ")</span>" : (opt.lifeSrc ? ' <span class="life-src">(' + opt.lifeSrc + ")</span>" : "")) +
           (installHrsLabel(opt) ? ' · 🔧 Install: <strong>' + installHrsLabel(opt) + "</strong>" + (opt.installVar ? ' <span class="life-src">(' + opt.installVar + ")</span>" : "") : "") + "</div>"; }
         if(opt.support) inner += supportBox(item, st, opt);
-        if(item.id === "terminal" && st.checked && getInputs().terminals <= 1)
-          inner += '<div class="risk-line">' + S.DATA.sim.singleTerminalRisk + "</div>";
+        if(item.id === "terminal" && st.checked && getInputs().terminals === 1)
+          inner += '<div class="risk-line">' + S.DATA.sim.singleTerminalRisk + "</div>"; // ===1 only: at 0 terminals the row already explains all-online needs none
         if(st.why && st.checked) inner += '<div class="why-line">' + st.why + "</div>";
         if(tier === "infra" && st.rec && !st.checked) inner += '<div class="warn-line">' + (S.DATA.sim.infraWarns[item.id] || "") + "</div>";
         if(item.options.length > 1){

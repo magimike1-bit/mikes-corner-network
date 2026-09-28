@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://black-friday-deal-strategy-2nlcu.kinsta.page/sitemap.xml

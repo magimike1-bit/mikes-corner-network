@@ -104,6 +104,71 @@
 .qty span{min-width:36px;text-align:center;font-weight:700;font-size:1.15rem}
 .sim-check{display:flex;gap:14px;align-items:flex-start;margin-top:10px;font-size:1.05rem}
 .sim-check input{margin-top:6px;width:22px;height:22px;flex:none;accent-color:#0f766e}
+/* lifecycle + support (expected-life amortization, three support types) */
+.life-line{font-size:.95rem;color:var(--muted);margin-top:6px}
+.life-badge{display:inline-block;background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;font-weight:700;font-size:.82rem;border-radius:999px;padding:2px 10px;margin-right:6px}
+.life-src{font-size:.82rem;color:var(--muted);margin-top:4px;font-style:italic}
+.support-box{border:1px solid var(--line);border-radius:10px;background:#f8fafc;padding:12px 16px;margin-top:12px}
+.support-title{font-weight:800;font-size:1.02rem;color:var(--navy);margin-bottom:2px}
+.support-pick .sim-check{margin-top:8px;font-size:.98rem}
+.tco-lines{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+.tco-row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;font-size:.95rem}
+.tco-row span{color:var(--muted)}
+.tco-note{font-size:.82rem;font-style:italic}
+.incident-ctl{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:.95rem}
+.incident-ctl em{color:var(--muted);font-size:.85rem}
+.incident-ctl button{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:1.2rem;cursor:pointer;line-height:1}
+.incident-ctl button:hover{border-color:var(--accent)}
+.support-why{margin-top:8px;font-size:.95rem}
+/* station-builder compact support row */
+.req-support{margin:4px 0 8px 36px;font-size:.92rem}
+.req-support select{font-size:.92rem;padding:4px 8px;border:1px solid var(--line);border-radius:8px;background:#fff}
+/* install tier: labor estimate + rate control */
+.install-labor{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:12px;font-size:1rem}
+.rate-ctl{display:inline-flex;align-items:center;gap:6px;margin:6px 0}
+.rate-ctl input{width:76px;padding:4px 8px;border:1px solid var(--line);border-radius:8px;font-size:1rem}
+.rate-ctl em{color:var(--muted);font-size:.85rem}
+/* pay now vs pay monthly breakout */
+.pay-breakout{margin-top:18px;border-top:1px solid rgba(255,255,255,.18);padding-top:14px}
+.pay-breakout h4{margin:0 0 10px;font-size:1.15rem}
+.pay-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.pay-cols{grid-template-columns:1fr}}
+.pay-col{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:12px 14px}
+.pay-col h5{margin:0 0 8px;font-size:.95rem;letter-spacing:.02em}
+.pay-col.now h5{color:#fbbf24}
+.pay-col.monthly h5{color:#7dd3fc}
+.pay-row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;font-size:.92rem}
+.pay-row span{opacity:.85}
+.pay-row.total{border-top:1px solid rgba(255,255,255,.2);margin-top:6px;padding-top:8px;font-size:1.05rem;font-weight:800}
+.pay-note{font-size:.82rem;opacity:.75;margin-top:6px;font-style:italic}
+.pay-breakout .fine{font-size:.85rem;opacity:.7;margin-top:10px}
+/* training module */
+.train-tracks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+@media(max-width:640px){.train-tracks{grid-template-columns:1fr}}
+.train-track{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.train-track h4{margin:0 0 6px;font-size:1.02rem;color:var(--navy)}
+.train-track p{margin:0;font-size:.95rem;color:var(--ink)}
+.train-warn{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:10px 16px;margin-bottom:12px;font-size:.95rem}
+.train-cost{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:12px}
+.train-cost h4{margin:0 0 8px;font-size:1.05rem;color:var(--navy)}
+.trow{display:flex;align-items:center;gap:12px;margin:10px 0;font-size:1rem;flex-wrap:wrap}
+.trow>span:first-child{min-width:220px;font-weight:600}
+.trow input[type=range]{flex:1;min-width:140px;accent-color:#0f766e}
+.trow input[type=number]{width:76px;padding:4px 8px;border:1px solid var(--line);border-radius:8px;font-size:1rem}
+.trow em{color:var(--muted);font-size:.85rem}
+.trainer-pick{display:flex;gap:18px;flex-wrap:wrap}
+.trainer-pick label{display:flex;align-items:center;gap:6px;font-weight:400}
+.train-math{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;font-size:1rem}
+.train-math>div{padding:3px 0}
+.train-mats{margin-bottom:12px}
+.train-mats h4{margin:0 0 8px;font-size:1.05rem}
+.train-sheet{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+.train-sheet summary{padding:12px 16px;cursor:pointer;font-size:1rem;list-style:none}
+.train-sheet summary::-webkit-details-marker{display:none}
+.train-sheet summary:hover{color:var(--accent-dark)}
+.train-sheet ol{margin:0 0 6px;padding:0 24px 12px 44px;font-size:.95rem}
+.train-sheet li{padding:3px 0}
+.train-items{border-top:1px dashed var(--line);padding-top:6px}
 #sim-map{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
 #sim-map h3{margin:0 0 .3em;font-size:1.5rem}
 #sim-map .hint{font-size:1rem;color:var(--muted);margin:0 0 .8em}
@@ -251,7 +316,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
     <span><span class="conf official">Official</span> vendor's own price</span>
     <span><span class="conf reported">Reported</span> reputable third-party</span>
     <span><span class="conf estimate">Estimate</span> our reasonable estimate</span>
-    <span><span class="conf illus">Illustrative</span> purchase ÷ 36 mo</span>
+    <span><span class="conf illus">Illustrative</span> purchase ÷ expected life</span>
   </div>
   <div class="sim-columns">
     <div>
@@ -260,7 +325,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
         <div class="input-note" id="typical-note">Zero-effort path: fills in a normal configuration for your sector. A starting point — not a recommendation. Adjust to match yours.</div>
       </div>
       <div class="tier" id="tier-needs"><h3>✅ What you actually need</h3><p class="tier-sub">The core stack — real, verified, useful. Start here.</p><div id="needs-list"></div></div>
-      <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (÷ 36), clearly labeled.</p>
+      <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (purchase ÷ expected life in years), clearly labeled.</p>
       <div class="infra-ask">
         <div class="ask"><span class="ask-q">How things connect — handled for you</span>
           <div class="input-note" style="margin:0">There's no single right answer — so choose per zone in the network plan below. The default is <strong>hybrid</strong>: the devices that take money get cables; the devices that move get Wi-Fi. Guest Wi-Fi is on or off depending on what's normal for your sector (toggle it below). Cable runs and switch ports follow your plan automatically — every auto-added item tells you why it's there.</div>
@@ -268,6 +333,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
       </div>
       <div id="net-plan"></div>
       <div id="infra-list"></div></div>
+      <div class="tier" id="tier-install"><h3>🔧 Installation &amp; setup — paid up front, never monthly</h3><p class="tier-sub">One-time work, due at install. Cable drops and setup are paid once — they never belong in a monthly column. Tick what your installer will do; the labor estimate below comes from the install hours on each hardware item × your tech's rate.</p><div id="install-labor-line"></div><div id="install-list"></div></div>
+      <div class="tier" id="tier-training"><h3>🎓 Training — the cost nobody budgets</h3><p class="tier-sub">A new system isn't live when it's installed — it's live when your people can run it at rush without thinking. Training is paid time, and turnover means you pay it again every year.</p><div id="training-list"></div></div>
       <div class="tier toys" id="tier-toys"><h3>🧸 Toys — nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="toys-list"></div></div>
     </div>
     <div class="sim-side">
@@ -275,7 +342,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
         <div id="total-lines"></div>
         <div class="row grand"><span>Estimated total</span><span id="grand-total">$0/mo</span></div>
         <div id="rev-lines"></div>
-        <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ 36). Not quotes — your free audit measures your real numbers.</p>
+        <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ its expected life — a 5-year terminal costs less per month than a 2-year printer at the same price). Not quotes — your free audit measures your real numbers.</p>
+        <div id="pay-breakout"></div>
       </div>
     </div>
   </div>
@@ -357,7 +425,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
    SIM_PRICES — EDIT PRICES HERE
    All figures in CAD unless noted. Confidence: "official" (vendor's own page),
    "reported" (reputable third-party), "estimate" (our reasonable estimate),
-   "illus" (illustrative monthly equivalent = purchase price / 36, NOT a fee).
+   "illus" (illustrative monthly equivalent = purchase price ÷ expected life in months, NOT a fee).
+   Lifecycle: every hardware option carries `life` (expected useful life in YEARS,
+   researched — see _research/equipment-lifecycles.md). Amortized monthly =
+   upfront ÷ (life × 12). Options without `life` fall back to amortize_months.
    Sources researched 2026-09-28; see ~/workspace/ai-opportunities/payment-savings-research/system-monthly-costs.md. Slang/HiJiffy/Asksuite figures are sibling-sourced (third-party reporting, not that file) - re-verify from named third party before treating as sourced.
    calc: flat | per_location | per_station | per_terminal | per_employee |
          per_unit | percent_volume | percent_marketplace
@@ -397,7 +468,7 @@ const SIM_PRICES = {
           "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
             {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
             {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
@@ -455,7 +526,7 @@ const SIM_PRICES = {
           "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"dining",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
             {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
             {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
@@ -524,7 +595,7 @@ const SIM_PRICES = {
           "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"counter",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
             {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
             {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
@@ -581,7 +652,7 @@ const SIM_PRICES = {
           "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal (front desk + outlets)", calc:"per_terminal", map:{zone:"frontdesk",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
             {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
             {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
@@ -614,7 +685,7 @@ const SIM_PRICES = {
           "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
             {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
             {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
@@ -671,7 +742,7 @@ const SIM_PRICES = {
           "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"reception",icon:"💳",label:"Terminal"},
           options:[
-            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
+            {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
             {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
             {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
@@ -733,7 +804,32 @@ const SIM_PRICES = {
     hotel: "The big one — an AP every 4–8 rooms, PMS on its own VLAN, more switches per floor. Cost scales with rooms, not revenue.",
     grocery: "Large footprint = more APs (3–6). Every lane wired; size the PoE switch for cameras too.",
     salon: "Minimal — 1 AP, 2–3 drops. The booking PC holds card-on-file data: segment it."
-  }
+  },
+  /* ---- Installation & setup: one-time, paid UP FRONT at install — never monthly.
+     Priced line items carry upfront; unpriced ones stay info_only/quote-based until
+     the installer quotes them. Tech labor is estimated separately from the
+     per-hardware install hours × the adjustable tech rate. ---- */
+  install: [
+    { id:"inst-mountkit", name:"Mounting kits / brackets — materials", calc:"per_unit", unit:"kit",
+      options:[ {label:"Quote-based — varies by mount type", monthly:0, conf:"estimate", info_only:true, note:"Pole, wall and counter mounts differ; your installer prices the kit with the device."} ]},
+    { id:"inst-cabledrop", name:"Cable drops — per run", calc:"per_unit", unit:"run",
+      sub:"Pulled by a low-voltage contractor — one-time, paid at install, never monthly.",
+      options:[ {label:"Quote-based — varies by site", monthly:0, conf:"estimate", info_only:true, note:"New build with open ceilings is cheap; retrofit through finished walls costs more. Get per-run pricing."} ]},
+    { id:"inst-netconfig", name:"Network config — VLAN + business Wi-Fi", calc:"flat",
+      options:[ {label:"Quote-based — per site", monthly:0, conf:"estimate", info_only:true, note:"Segmenting card traffic from guest Wi-Fi; often done remotely in a few hours."} ]},
+    { id:"inst-possetup", name:"POS software setup & configuration", calc:"per_location",
+      options:[ {label:"Quote-based — per location", monthly:0, conf:"estimate", info_only:true, note:"Taxes, tenders, receipts, users and permissions. Bigger catalog = more hours."} ]},
+    { id:"inst-menubuild", name:"Menu / product catalog build", calc:"per_location",
+      options:[ {label:"Quote-based — per location", monthly:0, conf:"estimate", info_only:true, note:"A 20-item café menu is an afternoon; a 10,000-SKU grocery catalog is a project."} ]},
+    { id:"inst-training", name:"Staff training — per session", calc:"per_unit", unit:"session",
+      options:[ {label:"Quote-based — per session", monthly:0, conf:"estimate", info_only:true, note:"Usually 1–2 sessions at go-live; complex setups (KDS, inventory) need more. This is the installer's fee — your staff's paid time is costed in the Training section below."} ]}
+  ],
+  /* ---- Training: the human cost of a new system. tr-initial is one-time (pay-now);
+     tr-ongoing repeats with turnover (monthly). Computed from TRAIN, not options. ---- */
+  training: [
+    { id:"tr-initial", name:"Go-live training — staff time", calc:"training_init" },
+    { id:"tr-ongoing", name:"New-hire training — ongoing", calc:"training_ongoing" }
+  ]
 };
 /* ---- Recommendation tiers: ESSENTIAL / RECOMMENDED / OPTIONAL.
    Every item gets a concrete, owner-voiced "why". Keyed "sector:id", with
@@ -1005,38 +1101,117 @@ const REC_TIERS = {
     }
   }
 
+  /* ---- Equipment lifecycle: expected useful life in YEARS per option/addon.
+     Amortized monthly = upfront ÷ (life × 12). Falls back to the legacy 36-month
+     divisor (meta.amortize_months) for anything without researched lifecycle data.
+     Sources: _research/equipment-lifecycles.md (2026-09-28). ---- */
+  function lifeMonths(opt){
+    const yrs = opt && opt.life ? +opt.life : (SIM_PRICES.meta.amortize_months / 12);
+    return Math.max(1, Math.round(yrs * 12));
+  }
+  function lifeLabel(opt){
+    const yrs = opt && opt.life ? +opt.life : (SIM_PRICES.meta.amortize_months / 12);
+    return yrs + (yrs === 1 ? " yr" : " yrs");
+  }
+
   function builderPerStation(item, st){
-    if(st.path === "aio") return item.aio.upfront / 36;
+    const inc = st.reqInc == null ? 1 : st.reqInc;
+    if(st.path === "aio"){
+      let per = item.aio.upfront / lifeMonths(item.aio);
+      if(st.aioSupport && st.aioSupport !== "none" && item.aio.support)
+        per += supportMonthlyFor(item.aio, st.aioSupport, inc);
+      return per;
+    }
     let per = 0;
-    item.addons.forEach(a => { if(st.reqs && st.reqs[a.id] && a.upfront) per += a.upfront / 36; });
+    item.addons.forEach(a => {
+      if(!(st.reqs && st.reqs[a.id])) return;
+      if(a.upfront) per += a.upfront / lifeMonths(a);
+      const sp = st.reqSupport && st.reqSupport[a.id];
+      if(sp && sp !== "none" && a.support) per += supportMonthlyFor(a, sp, inc);
+    });
     return per;
+  }
+
+  /* ---- Support plans: THREE types per option, Joseph's model.
+     - "contract": monthly support contract, tech on site (monthly and/or upfront over term)
+     - "breakfix": pay per incident — perIncident × expected calls/yr ÷ 12
+     - "hybrid": lighter contract + reduced per-incident rate
+     The incident rate is an adjustable owner assumption (default 1/yr), never a fact.
+     TCO comparison shows all three + none, with plain-language profile guidance. ---- */
+  function supportMonthlyFor(opt, plan, incidentsPerYear){
+    const s = opt && opt.support && opt.support[plan];
+    if(!s) return 0;
+    const inc = Math.max(0, +incidentsPerYear || 0);
+    const termMonths = Math.max(1, Math.round((s.years || 1) * 12));
+    const base = (s.upfront ? s.upfront / termMonths : 0) + (s.monthly || 0);
+    if(plan === "contract") return base;
+    if(plan === "breakfix") return ((s.perIncident || 0) * inc) / 12;
+    if(plan === "hybrid") return base + ((s.perIncident || 0) * inc) / 12;
+    return 0;
+  }
+  function supportPlanPriced(opt, plan){
+    const s = opt && opt.support && opt.support[plan];
+    if(!s) return false;
+    return !!(s.upfront || s.monthly || s.perIncident);
   }
 
   function itemMonthly(item, inp){
     const st = state[item.id]; if(!st || !st.checked) return 0;
+    if(item.calc === "training_init") return 0; // one-time — pay-now only, never monthly
+    if(item.calc === "training_ongoing") return trainingOngoingMonthly(inp);
     if(item.builder) return builderPerStation(item, st) * itemQty(item, inp);
     if(st.manual && manualDef(item)) return manualMonthly(item, st);
+    // Install & setup is one-time — paid UP FRONT at install, NEVER presented as monthly.
+    if(SIM_PRICES.install.indexOf(item) !== -1) return 0;
     const opt = item.options[st.optIdx || 0];
     if(opt.info_only) return 0;
     const q = itemQty(item, inp);
     let m = 0;
     if(item.calc === "percent_marketplace") m = inp.marketplace * (item.rate || 0);
-    else m = ((opt.upfront ? opt.upfront / 36 : 0) + (opt.monthly || 0)) * q; // amortized hardware + recurring
+    else m = ((opt.upfront ? opt.upfront / lifeMonths(opt) : 0) + (opt.monthly || 0)) * q; // amortized hardware over its expected life + recurring
+    if(st.support && st.support !== "none" && opt.support) m += supportMonthlyFor(opt, st.support, st.incidents == null ? 1 : st.incidents) * q;
     if(item.base) m += item.base * (item.calc === "per_location" ? inp.locations : 1);
     return m;
   }
 
+  /* ---- Upfront (pay-now) math: purchase prices + install items + station hardware.
+     Leased hardware has no upfront by definition — it lives in the monthly column.
+     Install items are one-time: always pay-now, never amortized into monthly. ---- */
   function itemUpfront(item, inp){
     const st = state[item.id]; if(!st || !st.checked) return 0;
     if(st.manual && manualDef(item)) return 0;
+    if(item.calc === "training_init") return trainingInitCost(inp); // go-live: staff time + trainer
+    if(item.builder){
+      const q = Math.max(0, inp.stations);
+      let u = 0;
+      if(st.path === "aio"){ if(item.aio.upfront) u += item.aio.upfront; }
+      else item.addons.forEach(a => { if(st.reqs && st.reqs[a.id] && a.upfront) u += a.upfront; });
+      return u * q;
+    }
     const opt = item.options[st.optIdx || 0];
-    if(opt.info_only || !opt.upfront) return 0;
+    if(!opt || opt.info_only || !opt.upfront) return 0;
     return opt.upfront * itemQty(item, inp);
   }
 
   function allItems(){
     const s = SIM_PRICES.sectors[sector];
-    return s.needs.concat(SIM_PRICES.infra, s.toys);
+    return s.needs.concat(SIM_PRICES.infra, SIM_PRICES.install, SIM_PRICES.training, s.toys);
+  }
+  /* ---- Training cost math. trainEmps: employees trained (follows the employees
+     input until the merchant overrides it in the training section). ---- */
+  function trainEmps(inp){
+    if(!TRAIN.empsTouched) TRAIN.emps = Math.max(0, inp.employees);
+    return Math.max(0, TRAIN.emps || 0);
+  }
+  function trainingInitCost(inp){
+    const emps = trainEmps(inp);
+    const staff = emps * TRAIN.hrsPerEmp * TRAIN.wage;
+    const trainer = TRAIN.trainerMode === "tech" ? TRAIN.trainerHrs * techRate : 0;
+    return staff + trainer;
+  }
+  function trainingOngoingMonthly(inp){
+    const emps = trainEmps(inp);
+    return emps * TRAIN.turnover * TRAIN.hireHrs * TRAIN.wage / 12;
   }
 
   function perLabel(item){
@@ -1069,6 +1244,15 @@ const REC_TIERS = {
   /* ---- Infrastructure auto-derive: the owner answers business questions,
      the simulator does the engineering. ---- */
   let guestWifi = false, terminalsTouched = false, pinSync = false;
+  // Tech labor rate for install math — ADJUSTABLE assumption ($/hr), not a fact.
+  // Default is a placeholder until installer rates are sourced; the merchant sets their real rate.
+  let techRate = 125;
+  /* ---- Training module state — all adjustable. Defaults: wage near Ontario minimum
+     ($17.95/hr from Oct 1, 2026, ontario.ca); turnover 75%/yr (US hospitality avg
+     ~73–76%, BLS via Escoffier/7shifts 2025–26 — adjust to your reality); hours are
+     estimates, labelled as such in the UI. ---- */
+  const TRAIN = { wage:18, hrsPerEmp:6, emps:null, empsTouched:false,
+    trainerMode:"self", trainerHrs:4, turnover:0.75, hireHrs:4 };
   // Guest Wi-Fi default per sector — inferred, never asked. Still toggleable in the list below.
   const INFRA_DEFAULTS = {
     retail:{guest:false}, restaurant:{guest:true},
@@ -1280,24 +1464,484 @@ const REC_TIERS = {
       '<label><input type="radio" name="station-path" value="build"' + (st.path !== "aio" ? " checked" : "") + '> 🧩 <strong>Build your own</strong> — mix and match</label>' +
       '<label><input type="radio" name="station-path" value="aio"' + (st.path === "aio" ? " checked" : "") + '> 📦 <strong>All-in-one</strong> — one box does it all</label></div>';
     if(st.path === "aio"){
-      inner += '<div class="aio-note">All-in-one (like the Square Register, ~$900 CAD): screen, card reader, POS software and customer display in one box — <strong>' + money(item.aio.upfront / 36) + '/mo equiv.</strong> ($900 upfront ÷ 36).<br>' +
+      inner += '<div class="aio-note">All-in-one (like the Square Register, ~$900 CAD): screen, card reader, POS software and customer display in one box — <strong>' + money(item.aio.upfront / lifeMonths(item.aio)) + '/mo equiv.</strong> ($900 upfront ÷ ' + lifeLabel(item.aio) + ').<br>' +
         '✅ Simpler — one thing to plug in, one vendor to call.<br>' +
         '⚠️ Trade-offs: you\'re locked to that processor\'s rates, and if one part dies the whole box goes for repair. Printer and cash drawer are usually sold separately.<br>' +
         '💡 It has its own card reader \u2014 but don\u2019t drop to a single payment path. If this box dies mid-rush, sales stop: keep a backup terminal.</div>';
+      if(item.aio.support){
+        inner += '<div class="req-support">🛡️ Support for this box: ' +
+          supportMiniSelect(item.aio.support, st.aioSupport || "none", st.reqInc == null ? 1 : st.reqInc, "data-aiosup", item.id) + "</div>";
+      }
     } else {
       inner += '<div class="reqs">';
       item.addons.forEach(a => {
         const on = !!(st.reqs && st.reqs[a.id]);
-        const cost = a.upfront ? " — <strong>" + money(a.upfront / 36) + "/mo equiv.</strong>" : "";
+        const cost = a.upfront ? " — <strong>" + money(a.upfront / lifeMonths(a)) + "/mo equiv.</strong> <span class=\"life-badge\">~" + lifeLabel(a) + " life</span>" +
+          (installHrsLabel(a) ? ' <span class="life-badge" title="Average tech install time">🔧 ' + installHrsLabel(a) + " install</span>" : "") : "";
         inner += '<label class="sim-check"><input type="checkbox" data-req="' + a.id + '"' + (on ? " checked" : "") + '> <span>' + a.label + cost +
           '<br><span style="opacity:.75;font-size:.95em">' + (a.note || "") + "</span></span></label>";
+        if(on && a.support){
+          const sp = (st.reqSupport && st.reqSupport[a.id]) || "none";
+          inner += '<div class="req-support">🛡️ Support: ' +
+            supportMiniSelect(a.support, sp, st.reqInc == null ? 1 : st.reqInc, "data-reqsup", a.id) + "</div>";
+        }
       });
       inner += "</div>";
+      const stHasSup = (st.path === "aio" && item.aio.support) ||
+        item.addons.some(a => a.support && st.reqs && st.reqs[a.id]);
+      if(stHasSup){
+        const rinc = st.reqInc == null ? 1 : st.reqInc;
+        inner += '<div class="incident-ctl"><span>Expected service calls/yr <em>(your guess — adjust it)</em>:</span> ' +
+          '<button data-reqinc="-1" aria-label="fewer calls">−</button><strong>' + rinc + "</strong>" +
+          '<button data-reqinc="1" aria-label="more calls">+</button></div>' +
+          '<div class="detail">📋 contract suits busy lanes · 🔧 break/fix suits a single lane that can wait a day · 🧩 hybrid splits the difference.</div>';
+      }
     }
     inner += "</div>";
     inner += '<div class="price"><label class="sim-check" style="margin:0 0 6px;justify-content:flex-end"><input type="checkbox" data-item="' + item.id + '" aria-label="Include ' + item.name + '"' + (st.checked ? " checked" : "") + '></label>' +
       '<span class="amt">' + money(perStation * q) + '/mo</span><span class="per">' + money(perStation) + " per station × " + q + "</span></div>";
     d.innerHTML = inner;
+  }
+
+  /* ---- Compact support selector for the station builder: same three plans,
+     same math (supportMonthlyFor), rendered as a select to fit the lane UI. ---- */
+  function supportMiniSelect(supObj, curPlan, curInc, attr, val){
+    const labels = {contract:"📋 Monthly contract", breakfix:"🔧 Break/fix per visit", hybrid:"🧩 Hybrid"};
+    let h = '<select ' + attr + '="' + val + '" aria-label="Support plan">';
+    h += '<option value="none"' + (curPlan === "none" ? " selected" : "") + ">No support</option>";
+    ["contract","breakfix","hybrid"].forEach(p => {
+      const s = supObj[p]; if(!s) return;
+      const fake = {support: supObj};
+      const cost = supportPlanPriced(fake, p) ? " — " + money(supportMonthlyFor(fake, p, curInc)) + "/mo" : " — quote-based";
+      h += '<option value="' + p + '"' + (curPlan === p ? " selected" : "") + ">" + labels[p] + cost + "</option>";
+    });
+    return h + "</select>";
+  }
+
+  /* ---- Average tech install time per hardware item (hours on site).
+     opt.installHrs: number, or [min,max] range. Midpoint is used for the math;
+     the range + installVar note explain the variance (retrofit vs new build).
+     Sourced or estimate-labelled; feeds install labor = hours × tech rate. ---- */
+  function installHrsMid(opt){
+    if(!opt || opt.installHrs == null) return 0;
+    const h = opt.installHrs;
+    return Array.isArray(h) ? (h[0] + h[1]) / 2 : +h;
+  }
+  function installHrsLabel(opt){
+    if(!opt || opt.installHrs == null) return null;
+    const h = opt.installHrs;
+    const txt = Array.isArray(h) ? (h[0] + "–" + h[1] + " hrs") : (h + (h === 1 ? " hr" : " hrs"));
+    return "~" + txt;
+  }
+
+  /* ---- Install math: total tech hours on site = Σ installHrs × qty over every
+     selected hardware item (station builder included). Install labor = hours ×
+     the adjustable tech rate. One-time, pay-now — never monthly. ---- */
+  function installHoursTotal(inp){
+    let hrs = 0;
+    allItems().forEach(item => {
+      const st = state[item.id]; if(!st || !st.checked) return;
+      if(item.calc === "training_init" || item.calc === "training_ongoing") return; // training has no install hours
+      if(SIM_PRICES.install.indexOf(item) !== -1) return; // install items don't install themselves
+      if(item.builder){
+        const q = Math.max(0, inp.stations);
+        if(st.path === "aio") hrs += installHrsMid(item.aio) * q;
+        else item.addons.forEach(a => { if(st.reqs && st.reqs[a.id]) hrs += installHrsMid(a) * q; });
+        return;
+      }
+      if(st.manual && manualDef(item)) return;
+      const opt = item.options[st.optIdx || 0];
+      if(!opt || opt.info_only) return;
+      hrs += installHrsMid(opt) * itemQty(item, inp);
+    });
+    return hrs;
+  }
+  function renderInstallLabor(){
+    const el = $("install-labor-line"); if(!el) return;
+    const hrs = installHoursTotal(getInputs());
+    el.innerHTML = '<div class="install-labor">⏱️ Estimated tech time on site: <strong id="install-labor-hrs">~' +
+      (Math.round(hrs * 10) / 10) + ' hrs</strong> (from the install hours on each hardware item you selected)<br>' +
+      '<label class="rate-ctl">Tech labor rate: $<input type="number" id="tech-rate" min="25" max="400" step="5" value="' + techRate + '" aria-label="Tech labor rate per hour">/hr ' +
+      '<em>(adjustable — your installer\'s actual rate; default is a placeholder until sourced)</em></label> ' +
+      '= <strong id="install-labor-total">' + money(hrs * techRate) + '</strong> one-time, paid at install.</div>';
+    $("tech-rate").addEventListener("change", () => {
+      techRate = Math.max(0, +$("tech-rate").value || 0);
+      updateInstallLaborTotal();
+      recalc();
+    });
+    updateInstallLaborTotal();
+  }
+  function updateInstallLaborTotal(){
+    const hrs = installHoursTotal(getInputs());
+    const h = $("install-labor-hrs"), t = $("install-labor-total");
+    if(h) h.textContent = "~" + (Math.round(hrs * 10) / 10) + " hrs";
+    if(t) t.textContent = money(hrs * techRate);
+  }
+
+  /* ---- Pay now vs pay monthly breakout (Joseph's rule).
+     PAY NOW: hardware purchases + install labor + install line items (one-time, incl. cable drops).
+     PAY MONTHLY: leased hardware + SaaS + support contracts + expected break/fix + processing fees.
+     Purchased hardware NEVER appears in the monthly column — its amortized equivalent
+     lives in the grand total for comparison only. ---- */
+  function renderPayBreakout(){
+    const el = $("pay-breakout"); if(!el) return;
+    const inp = getInputs();
+    let hwUpfront = 0, installUpfront = 0, installQuoted = 0;
+    let leaseMo = 0, saasMo = 0, contractMo = 0, breakfixMo = 0;
+    allItems().forEach(item => {
+      const st = state[item.id]; if(!st || !st.checked) return;
+      if(item.calc === "training_init" || item.calc === "training_ongoing") return; // dedicated rows below
+      const isInstall = SIM_PRICES.install.indexOf(item) !== -1;
+      if(item.builder){
+        hwUpfront += itemUpfront(item, inp);
+        const q = Math.max(0, inp.stations);
+        const inc = st.reqInc == null ? 1 : st.reqInc;
+        const addSup = (supObj, plan) => {
+          if(!plan || plan === "none" || !supObj) return;
+          const m = supportMonthlyFor({support: supObj}, plan, inc) * q;
+          if(plan === "contract") contractMo += m; else breakfixMo += m;
+        };
+        if(st.path === "aio") addSup(item.aio.support, st.aioSupport);
+        else item.addons.forEach(a => { if(st.reqs && st.reqs[a.id]) addSup(a.support, st.reqSupport && st.reqSupport[a.id]); });
+        return;
+      }
+      if(st.manual && manualDef(item)) return;
+      const opt = item.options[st.optIdx || 0];
+      if(!opt || opt.info_only){ if(isInstall) installQuoted++; return; }
+      const q = itemQty(item, inp);
+      if(isInstall){ installUpfront += opt.upfront * q; return; }
+      if(opt.upfront) hwUpfront += opt.upfront * q;
+      if(opt.monthly){ if(opt.lease) leaseMo += opt.monthly * q; else saasMo += opt.monthly * q; }
+      if(item.base) saasMo += item.base * (item.calc === "per_location" ? inp.locations : 1);
+      if(st.support && st.support !== "none" && opt.support){
+        const m = supportMonthlyFor(opt, st.support, st.incidents == null ? 1 : st.incidents) * q;
+        if(st.support === "contract") contractMo += m; else breakfixMo += m;
+      }
+    });
+    const hrs = installHoursTotal(inp);
+    const laborUpfront = hrs * techRate;
+    const trI = state["tr-initial"], trO = state["tr-ongoing"];
+    const trainNow = (trI && trI.checked) ? trainingInitCost(inp) : 0;
+    const trainMo = (trO && trO.checked) ? trainingOngoingMonthly(inp) : 0;
+    const payNow = hwUpfront + installUpfront + laborUpfront + trainNow;
+    const proc = inp.volume * (inp.rate / 100);
+    const r = (label, val, mo) => '<div class="pay-row"><span>' + label + "</span><strong>" + val + (mo ? "/mo" : "") + "</strong></div>";
+    el.innerHTML = '<div class="pay-breakout"><h4>💰 Pay now vs pay monthly</h4><div class="pay-cols">' +
+      '<div class="pay-col now"><h5>Pay now — due at install</h5>' +
+      r("Hardware purchases", money(hwUpfront)) +
+      r("Install labor (~" + (Math.round(hrs * 10) / 10) + " hrs × " + money(techRate) + "/hr)", money(laborUpfront)) +
+      r("Install line items", installUpfront > 0 ? money(installUpfront) : (installQuoted > 0 ? "quote-based" : money(0))) +
+      r("Training — go-live", money(trainNow)) +
+      '<div class="pay-row total"><span>Total due at install</span><strong>' + money(payNow) + (installQuoted > 0 ? " +" : "") + "</strong></div>" +
+      (installQuoted > 0 ? '<div class="pay-note">' + installQuoted + ' install item(s) still need installer quotes.</div>' : "") +
+      "</div>" +
+      '<div class="pay-col monthly"><h5>Pay monthly — recurring</h5>' +
+      r("Leased hardware", money(leaseMo), true) +
+      r("Subscriptions (SaaS)", money(saasMo), true) +
+      r("Support contracts", money(contractMo), true) +
+      r("Expected break/fix", money(breakfixMo), true) +
+      r("New-hire training", money(trainMo), true) +
+      r("Processing fees", money(proc), true) +
+      "</div></div>" +
+      '<p class="fine">Bought hardware is due in full at install — the monthly total above spreads it over its expected life for comparison only. ' +
+      "Cable drops and setup are one-time: they never appear in the monthly column. " +
+      "Leasing converts hardware to a real monthly bill — lease terms are quote-based, ask your reseller.</p></div>";
+  }
+
+  /* ---- Training materials: genuinely usable starter content, per sector.
+     Two tracks (tech vs process), a quick-start checklist, and role cheat sheets.
+     Plain language, actionable — print these and hand them to new hires. ---- */
+  const TRAINING_TRACKS = [
+    {t:"🔧 Tech training — learning the system",
+     d:"Which buttons to press: ringing a sale, voids, discounts, refunds, split bills, end-of-day close, KDS screens, handhelds. Usually 1–2 sessions per person, often run by the installer. When it's done, a new hire can complete a basic sale without help. This is the part installers sell you."},
+    {t:"🔄 Process training — learning YOUR workflow",
+     d:"How your business actually runs on the system: how orders flow at rush, who covers the till when it's slammed, what to do when the internet drops, how comps and voids get approved, how a return works on a busy Saturday. The installer doesn't know your rush — this part is yours to teach, and it's the part merchants skip. Budget it anyway."}
+  ];
+  const TRAINING_WARN = "⚠️ Merchants under-budget both. They'll budget the hardware to the dollar, then hand a new hire the terminal on a Friday night with no training. The fix is cheap next to the hardware — it's just paid hours. Plan them.";
+  const TRAINING_MATS = {
+  retail: {
+    checklist:["Everyone gets their own login PIN on day one — no shared logins, ever.",
+      "Run 10 practice sales per person before go-live: sale, void, discount, refund, split payment.",
+      "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+      "Voids and refunds need a manager code — practice the call, not just the button.",
+      "Count float at open and close for the first two weeks — shortages surface fast.",
+      "End-of-day close: one person owns it, same steps, every night.",
+      "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+      "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+      "Practice returns and exchanges — they take 3× longer than sales when untrained.",
+      "Loyalty signup at the till: 20 seconds or skip it, don't hold the line."],
+    cashier:["Your PIN is you — every void, discount and refund traces to it. Never share it.",
+      "Card fails twice → change tender. Don't tap five times and hope.",
+      "Say the total out loud before they pay — catches mis-rings instantly.",
+      "Receipts: ask, don't assume. 'Receipt with you?'",
+      "If the line is 3+ deep, call for backup before it becomes 6.",
+      "Returns need the original receipt or ID — know which before they argue.",
+      "'Phone number for points?' — 5 seconds, every sale."],
+    kitchen:["No kitchen here — this is your back-room sheet. Same discipline applies.",
+      "Receive against the PO in the system — count it before you sign.",
+      "Damages go in the system the same day — not 'when I get to it'.",
+      "Put-away: the system's bin location is the law — 'I'll remember' fails.",
+      "Transfers between locations: scan out AND scan in.",
+      "Cycle counts: 15 minutes a day beats a full shutdown count.",
+      "Nothing hits the floor without a price in the system."],
+    manager:["End-of-day close is yours — same person, same steps, every night. No exceptions.",
+      "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+      "User PINs: create on hire, disable on departure — same day.",
+      "Cash: count with the cashier present, both sign. Every time.",
+      "Offline mode drill: once a quarter, run the backup plan before you need it.",
+      "New hire: buddy them with your best cashier for 3 shifts — not your fastest, your most careful.",
+      "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+      "Price overrides need your code — track WHY, not just how much."]},
+  restaurant: {
+    checklist:["Everyone gets their own login PIN on day one — no shared logins, ever.",
+      "Run 10 practice sales per person before go-live: sale, void, discount, refund, split payment.",
+      "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+      "Voids and refunds need a manager code — practice the call, not just the button.",
+      "Count float at open and close for the first two weeks — shortages surface fast.",
+      "End-of-day close: one person owns it, same steps, every night.",
+      "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+      "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+      "Split bills BEFORE firing courses — re-splitting after is where errors happen.",
+      "Walkout tabs: know the comp/void approval path cold before Friday night."],
+    cashier:["Your PIN is you — every void, discount and refund traces to it. Never share it.",
+      "Card fails twice → change tender. Don't tap five times and hope.",
+      "Say the total out loud before they pay — catches mis-rings instantly.",
+      "Receipts: ask, don't assume. 'Receipt with you?'",
+      "If the line is 3+ deep, call for backup before it becomes 6.",
+      "Split checks at ORDER time, not at payment time.",
+      "Walkouts: tell a manager immediately — don't chase."],
+    kitchen:["Bump only when the food LEAVES the pass — bumping early lies to the front.",
+      "Allergy flags: stop, re-read the ticket, clean hands, clean surface.",
+      "86'd: update the KDS the second it happens — not 'after this ticket'.",
+      "Fire times: apps and mains coursed — don't fire everything at once.",
+      "If a ticket looks wrong, ask — refires cost more than questions.",
+      "Rush rule: call out what you need, don't assume someone saw it.",
+      "End of night: close your KDS station — open tickets roll into tomorrow's problem."],
+    manager:["End-of-day close is yours — same person, same steps, every night. No exceptions.",
+      "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+      "User PINs: create on hire, disable on departure — same day.",
+      "Cash: count with the cashier present, both sign. Every time.",
+      "Offline mode drill: once a quarter, run the backup plan before you need it.",
+      "New hire: buddy them with your best cashier for 3 shifts — not your fastest, your most careful.",
+      "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+      "Comp policy in writing: who can comp, how much — and it goes in the system the same shift."]},
+  qsr: {
+    checklist:["Everyone gets their own login PIN on day one — no shared logins, ever.",
+      "Run 10 practice sales per person before go-live: sale, void, discount, refund, split payment.",
+      "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+      "Voids and refunds need a manager code — practice the call, not just the button.",
+      "Count float at open and close for the first two weeks — shortages surface fast.",
+      "End-of-day close: one person owns it, same steps, every night.",
+      "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+      "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+      "Rush drill: 5 orders in 3 minutes on the KDS — bump discipline matters more than speed.",
+      "86'd items: who updates the screen, and how fast — the front can't sell what you don't have."],
+    cashier:["Your PIN is you — every void, discount and refund traces to it. Never share it.",
+      "Card fails twice → change tender. Don't tap five times and hope.",
+      "Say the total out loud before they pay — catches mis-rings instantly.",
+      "Receipts: ask, don't assume. 'Receipt with you?'",
+      "If the line is 3+ deep, call for backup before it becomes 6.",
+      "Read the order back at the speaker — remakes cost more than 10 seconds.",
+      "KDS bump only when the tray is IN the customer's hands."],
+    kitchen:["Make to the screen, not to memory — the KDS is the ticket.",
+      "Bump when bagged or trayed — the customer is waiting on that bump.",
+      "86'd in under 60 seconds — the front can't sell what you don't have.",
+      "Rush stations: one person per station, no crossing over.",
+      "Remake protocol: remake FIRST, figure out fault later.",
+      "Headset discipline: confirm, don't just hear.",
+      "Clean as you go — a slammed station with no space is a slow station."],
+    manager:["End-of-day close is yours — same person, same steps, every night. No exceptions.",
+      "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+      "User PINs: create on hire, disable on departure — same day.",
+      "Cash: count with the cashier present, both sign. Every time.",
+      "Offline mode drill: once a quarter, run the backup plan before you need it.",
+      "New hire: buddy them with your best cashier for 3 shifts — not your fastest, your most careful.",
+      "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+      "Rush labor plan in writing: who moves where when the line hits the door."]},
+  hotel: {
+    checklist:["Everyone gets their own login PIN on day one — no shared logins, ever.",
+      "Run 10 practice check-ins per person before go-live: booking, incidentals auth, folio check, checkout.",
+      "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+      "Voids and refunds need a manager code — practice the call, not just the button.",
+      "Count float at open and close for the first two weeks — shortages surface fast.",
+      "End-of-day close: one person owns it, same steps, every night.",
+      "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+      "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+      "Incidentals authorization at check-in — every time, no exceptions.",
+      "Folio check before checkout: one wrong charge = one bad review."],
+    cashier:["Your PIN is you — every void, discount and refund traces to it. Never share it.",
+      "Card fails twice → change tender. Don't tap five times and hope.",
+      "Say the total out loud before they pay — catches mis-rings instantly.",
+      "Receipts: ask, don't assume. 'Receipt with you?'",
+      "Auth incidentals BEFORE handing over the key — fixing it later is 10× harder.",
+      "Checkout: 'Anything from the minibar?' — ask every time.",
+      "Folio: scan it with the guest before charging — disputes at checkout are the worst kind."],
+    kitchen:["Banquet orders fire on the event-sheet time, not when the ticket prints.",
+      "Room service: check the room number twice — wrong floor, wrong guest.",
+      "Allergy flags: stop, re-read the ticket, clean hands, clean surface.",
+      "Minibar restock counts go in the system daily — revenue leaks here.",
+      "86'd: tell the front desk, not just the KDS.",
+      "Bump on pickup — runners, not cooks, clear the screen.",
+      "Late-night menu: know what's actually available after 11pm."],
+    manager:["End-of-day close is yours — same person, same steps, every night. No exceptions.",
+      "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+      "User PINs: create on hire, disable on departure — same day.",
+      "Cash: count with the cashier present, both sign. Every time.",
+      "Offline mode drill: once a quarter, run the backup plan before you need it.",
+      "New hire: buddy them with your best front-desk agent for 3 shifts — not your fastest, your most careful.",
+      "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+      "Night audit: folios balanced before you sleep — the morning shift can't fix last night."]},
+  grocery: {
+    checklist:["Everyone gets their own login PIN on day one — no shared logins, ever.",
+      "Run 10 practice sales per person before go-live: sale, void, discount, refund, split payment.",
+      "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+      "Voids and refunds need a manager code — practice the call, not just the button.",
+      "Count float at open and close for the first two weeks — shortages surface fast.",
+      "End-of-day close: one person owns it, same steps, every night.",
+      "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+      "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+      "Produce codes: print the top-20 cheat card and tape it to the lane.",
+      "Scale items: tare first, every time — 50g errors add up over a day."],
+    cashier:["Your PIN is you — every void, discount and refund traces to it. Never share it.",
+      "Card fails twice → change tender. Don't tap five times and hope.",
+      "Say the total out loud before they pay — catches mis-rings instantly.",
+      "Receipts: ask, don't assume. 'Receipt with you?'",
+      "If the line is 3+ deep, call for backup before it becomes 6.",
+      "Tape the top-20 produce codes to your lane — memorize 5 a week.",
+      "Check the bottom of the cart. Every time."],
+    kitchen:["Labels print from the system — if the price looks wrong, stop and check.",
+      "Tare the scale before every weigh — 50g errors add up over a day.",
+      "Reduced/clearance stickers: use the markdown function, don't hand-write.",
+      "Allergen prep areas: separate boards, separate knives, every time.",
+      "Waste and damage: log it in the system — shrink you can't see, you can't fix.",
+      "Date checks: oldest out front — the system tracks it, you move it.",
+      "Deli scale tickets must scan at the lane — reprint, don't hand-key."],
+    manager:["End-of-day close is yours — same person, same steps, every night. No exceptions.",
+      "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+      "User PINs: create on hire, disable on departure — same day.",
+      "Cash: count with the cashier present, both sign. Every time.",
+      "Offline mode drill: once a quarter, run the backup plan before you need it.",
+      "New hire: buddy them with your best cashier for 3 shifts — not your fastest, your most careful.",
+      "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+      "Markdown schedule: who marks down, when — and it scans. No hand-written stickers at scale."]},
+  salon: {
+    checklist:["Everyone gets their own login PIN on day one — no shared logins, ever.",
+      "Run 10 practice checkouts per person before go-live: service, product add-on, tip, split payment.",
+      "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+      "Voids and refunds need a manager code — practice the call, not just the button.",
+      "Count float at open and close for the first two weeks — shortages surface fast.",
+      "End-of-day close: one person owns it, same steps, every night.",
+      "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+      "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+      "Deposits at booking — the no-show policy only works if it's collected up front.",
+      "Rebook at checkout while the client is happy — 'Same time in 6 weeks?'"],
+    cashier:["Your PIN is you — every void, discount and refund traces to it. Never share it.",
+      "Card fails twice → change tender. Don't tap five times and hope.",
+      "Say the total out loud before they pay — catches mis-rings instantly.",
+      "Receipts: ask, don't assume. 'Receipt with you?'",
+      "Confirm the price BEFORE starting — 'Just so you know, that's $X today.'",
+      "Rebook at the till: 'Same time in 6 weeks?' — while they're happy.",
+      "No-show/late fees: collected at booking per policy — don't argue it at the chair."],
+    kitchen:["No kitchen here — this is your back-bar sheet: color, product, and what's billable.",
+      "Color formulas: log every mix in the client record — rebookings depend on it.",
+      "Retail product used in service: scan it — that's cost of goods, not free.",
+      "Allergy and patch-test notes go in the client file BEFORE the appointment.",
+      "Running low? Flag it in the system — don't just tell someone.",
+      "Tools sanitized between every client — log it, it's your license on the line.",
+      "End of day: restock your station — tomorrow's first client shouldn't wait."],
+    manager:["End-of-day close is yours — same person, same steps, every night. No exceptions.",
+      "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+      "User PINs: create on hire, disable on departure — same day.",
+      "Cash: count with the cashier present, both sign. Every time.",
+      "Offline mode drill: once a quarter, run the backup plan before you need it.",
+      "New hire: buddy them with your best stylist for 3 shifts — not your fastest, your most careful.",
+      "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+      "No-show policy: enforced at booking with a deposit — never argued at the chair."]}
+  };
+
+  /* ---- Training tier: tracks explainer, adjustable cost math, starter materials,
+     and the two cost items (go-live one-time → pay-now; new-hire ongoing → monthly).
+     Sliders update live without a full re-render (no drag jank); change commits. ---- */
+  function trainMathHTML(inp){
+    const emps = trainEmps(inp);
+    const staffCost = emps * TRAIN.hrsPerEmp * TRAIN.wage;
+    const trainerCost = TRAIN.trainerMode === "tech" ? TRAIN.trainerHrs * techRate : 0;
+    const ongMo = trainingOngoingMonthly(inp);
+    const hiresYr = Math.round(emps * TRAIN.turnover * 10) / 10;
+    return "<div>Go-live staff time: " + emps + " × " + TRAIN.hrsPerEmp + " hrs × $" + TRAIN.wage + "/hr = <strong>" + money(staffCost) + "</strong> one-time</div>" +
+      "<div>Trainer: " + (TRAIN.trainerMode === "tech"
+        ? TRAIN.trainerHrs + " hrs × " + money(techRate) + "/hr = <strong>" + money(trainerCost) + "</strong> one-time"
+        : "you do it — <strong>$0</strong> fee, but it's your hours") + "</div>" +
+      "<div>New hires: " + emps + " × " + Math.round(TRAIN.turnover * 100) + "% ≈ <strong>" + hiresYr + " hires/yr</strong> × " +
+      TRAIN.hireHrs + " hrs × $" + TRAIN.wage + "/hr = <strong>" + money(ongMo) + "/mo</strong> ongoing</div>" +
+      '<div class="detail">At ' + Math.round(TRAIN.turnover * 100) + "% turnover, training isn't a one-time cost — it's a subscription to your own hiring. " +
+      "Cut turnover and this line shrinks; ignore it and you pay it forever.</div>";
+  }
+  function updateTrainMath(){
+    const m = $("train-math"); if(m) m.innerHTML = trainMathHTML(getInputs());
+    const i = $("train-init-amt"), o = $("train-ong-amt");
+    if(i) i.textContent = money(trainingInitCost(getInputs()));
+    if(o) o.textContent = money(trainingOngoingMonthly(getInputs())) + "/mo";
+  }
+  function renderTrainingTier(list){
+    ["tr-initial","tr-ongoing"].forEach(id => { if(!state[id]) state[id] = {checked:true, optIdx:0, qty:0}; });
+    const stI = state["tr-initial"], stO = state["tr-ongoing"];
+    const inp = getInputs();
+    const emps = trainEmps(inp);
+    let html = '<div class="train-tracks">';
+    TRAINING_TRACKS.forEach(t => { html += '<div class="train-track"><h4>' + t.t + "</h4><p>" + t.d + "</p></div>"; });
+    html += '</div><div class="train-warn">' + TRAINING_WARN + "</div>";
+    html += '<div class="train-cost"><h4>💵 What the training actually costs — adjust it to your shop</h4>' +
+      '<label class="trow"><span>Staff wage</span><input type="range" id="tr-wage" min="16" max="40" step="0.5" value="' + TRAIN.wage + '" aria-label="Staff hourly wage"><span><b>$' + TRAIN.wage + '/hr</b> <em>(Ontario minimum $17.95 from Oct 1, 2026 — ontario.ca)</em></span></label>' +
+      '<label class="trow"><span>Go-live training per employee</span><input type="range" id="tr-hrs" min="2" max="16" step="1" value="' + TRAIN.hrsPerEmp + '" aria-label="Go-live training hours per employee"><span><b>' + TRAIN.hrsPerEmp + ' hrs</b> <em>(est. — bigger systems need more)</em></span></label>' +
+      '<label class="trow"><span>Employees to train</span><input type="number" id="tr-emps" min="0" max="500" step="1" value="' + emps + '" aria-label="Employees to train"><span><em>(follows your employee count until you change it)</em></span></label>' +
+      '<div class="trow"><span>Who runs the training?</span><span class="trainer-pick">' +
+      '<label><input type="radio" name="tr-trainer" value="self"' + (TRAIN.trainerMode === "self" ? " checked" : "") + '> We do it — $0 trainer fee</label>' +
+      '<label><input type="radio" name="tr-trainer" value="tech"' + (TRAIN.trainerMode === "tech" ? " checked" : "") + '> Installer/tech does it — <input type="number" id="tr-trainerhrs" min="1" max="40" step="1" value="' + TRAIN.trainerHrs + '" aria-label="Trainer hours"> hrs × tech rate (' + money(techRate) + '/hr)</label>' +
+      '</span></div>' +
+      '<label class="trow"><span>Annual staff turnover</span><input type="range" id="tr-turn" min="0" max="200" step="5" value="' + Math.round(TRAIN.turnover * 100) + '" aria-label="Annual staff turnover percent"><span><b>' + Math.round(TRAIN.turnover * 100) + '%/yr</b> <em>(hospitality avg ~73–76%/yr, US BLS via Escoffier/7shifts — set yours)</em></span></label>' +
+      '<label class="trow"><span>Training per new hire</span><input type="range" id="tr-hirehrs" min="2" max="12" step="1" value="' + TRAIN.hireHrs + '" aria-label="Training hours per new hire"><span><b>' + TRAIN.hireHrs + ' hrs</b> <em>(est. — usually shorter than go-live)</em></span></label>' +
+      '<div class="train-math" id="train-math">' + trainMathHTML(inp) + "</div></div>";
+    const mats = TRAINING_MATS[sector] || TRAINING_MATS.retail;
+    const sheet = (title, emoji, lines) => {
+      let s = '<details class="train-sheet"><summary>' + emoji + " <strong>" + title + "</strong></summary><ol>";
+      lines.forEach(l => { s += "<li>" + l + "</li>"; });
+      return s + "</ol></details>";
+    };
+    html += '<div class="train-mats"><h4>📚 Starter materials — print these, hand them out</h4>' +
+      sheet("Quick-start checklist — everyone's first week", "📋", mats.checklist) +
+      sheet("Cashier cheat sheet", "🧾", mats.cashier) +
+      sheet("Kitchen / back-of-house cheat sheet", "🍳", mats.kitchen) +
+      sheet("Manager cheat sheet", "🧑‍💼", mats.manager) + "</div>";
+    html += '<div class="train-items">' +
+      '<label class="sim-check"><input type="checkbox" data-train="tr-initial"' + (stI.checked ? " checked" : "") + '> <span><strong>Include go-live training</strong> — <strong id="train-init-amt">' + money(trainingInitCost(inp)) + "</strong> one-time, paid at install</span></label>" +
+      '<label class="sim-check"><input type="checkbox" data-train="tr-ongoing"' + (stO.checked ? " checked" : "") + '> <span><strong>Include new-hire training</strong> — <strong id="train-ong-amt">' + money(trainingOngoingMonthly(inp)) + "/mo</strong> ongoing (turnover never sleeps)</span></label>" +
+      "</div>";
+    list.innerHTML = html;
+    const live = (id, fn, fmt) => {
+      const el = $(id); if(!el) return;
+      el.addEventListener("input", () => {
+        fn(+el.value, el);
+        const b = el.closest(".trow").querySelector("b");
+        if(b && fmt) b.textContent = fmt(+el.value);
+        updateTrainMath(); recalc();
+      });
+      el.addEventListener("change", () => renderCatalog());
+    };
+    live("tr-wage", v => { TRAIN.wage = v; }, v => "$" + v + "/hr");
+    live("tr-hrs", v => { TRAIN.hrsPerEmp = v; }, v => v + " hrs");
+    live("tr-turn", v => { TRAIN.turnover = v / 100; }, v => v + "%/yr");
+    live("tr-hirehrs", v => { TRAIN.hireHrs = v; }, v => v + " hrs");
+    const te = $("tr-emps");
+    if(te) te.addEventListener("change", () => { TRAIN.emps = Math.max(0, +te.value || 0); TRAIN.empsTouched = true; renderCatalog(); });
+    document.querySelectorAll('input[name="tr-trainer"]').forEach(r => {
+      r.addEventListener("change", () => { TRAIN.trainerMode = r.value; renderCatalog(); });
+    });
+    const th = $("tr-trainerhrs");
+    if(th) th.addEventListener("change", () => { TRAIN.trainerHrs = Math.max(1, +th.value || 4); renderCatalog(); });
+    document.querySelectorAll('input[data-train]').forEach(cb => {
+      cb.addEventListener("change", () => { state[cb.dataset.train].checked = cb.checked; renderCatalog(); });
+    });
   }
 
   /* ---- One-click typical setups: answers to the 3 questions + business basics.
@@ -1378,26 +2022,109 @@ const REC_TIERS = {
   // Items whose qty/checked follow the 3 questions until the user overrides them.
   const DERIVED_AUTO = {kds:1, kprinter:1, kiosk:1, tablets:1, selfcheckout:1, ap:1, drops:1, switch:1};
 
+  /* ---- Support plan box: three-way selector (none / contract / break-fix / hybrid)
+     with a TCO line for each priced plan, an adjustable incident assumption, and
+     plain-language guidance on which profile each suits. ---- */
+  const SUPPORT_GUIDE = {
+    none: "No support — you buy a replacement out of pocket when it dies. Cheapest if nothing breaks; most expensive Tuesday when it does.",
+    contract: "Monthly contract, tech on site — suits multi-lane or high-volume shops where an hour of downtime costs more than the contract. You call, they come.",
+    breakfix: "Pay per visit — suits a single-location owner-operator who can swap a spare off the shelf and wait a day. Fewer moving parts, no monthly bill.",
+    hybrid: "Lighter contract + per-visit rate — the middle ground: cheap cover for the big failures, pay-as-you-go for the small stuff."
+  };
+  function planCostTxt(s, plan){
+    if(!s) return "quote-based";
+    if(plan === "contract"){
+      const bits = [];
+      if(s.monthly) bits.push(money(s.monthly) + "/mo");
+      if(s.upfront) bits.push("$" + s.upfront.toLocaleString("en-CA") + " upfront");
+      if(s.years) bits.push(s.years + "-yr term");
+      return bits.length ? bits.join(" · ") : "quote-based";
+    }
+    if(plan === "breakfix") return s.perIncident ? ("~$" + s.perIncident.toLocaleString("en-CA") + " per visit") : "quote-based";
+    if(plan === "hybrid"){
+      const bits = [];
+      if(s.monthly) bits.push(money(s.monthly) + "/mo");
+      if(s.upfront) bits.push("$" + s.upfront.toLocaleString("en-CA") + " upfront");
+      if(s.perIncident) bits.push("$" + s.perIncident.toLocaleString("en-CA") + "/visit");
+      return bits.length ? bits.join(" + ") : "quote-based";
+    }
+    return "quote-based";
+  }
+  function supportBox(item, st, opt){
+    const S = opt.support;
+    const inc = st.incidents == null ? 1 : st.incidents;
+    const q = Math.max(1, itemQty(item, getInputs()));
+    const base = itemMonthlyPreviewNoSupport(item, opt);
+    const plans = ["contract", "breakfix", "hybrid"];
+    const planLabels = {contract: "📋 Monthly contract", breakfix: "🔧 Break/fix per visit", hybrid: "🧩 Hybrid"};
+    let html = '<div class="support-box"><div class="support-title">🛡️ Support — how do you want breakdowns handled?</div>';
+    html += '<div class="support-pick" role="radiogroup" aria-label="Support plan for ' + item.name + '">';
+    html += '<label class="sim-check"><input type="radio" name="sup-' + item.id + '" data-support-plan="none" data-item="' + item.id + '"' + (!st.support || st.support === "none" ? " checked" : "") + '> <span><strong>None</strong> — replace out of pocket</span></label>';
+    plans.forEach(p => {
+      const s = S[p];
+      if(!s) return;
+      html += '<label class="sim-check"><input type="radio" name="sup-' + item.id + '" data-support-plan="' + p + '" data-item="' + item.id + '"' + (st.support === p ? " checked" : "") + '> ' +
+        '<span><strong>' + planLabels[p] + "</strong> — " + s.label + " · " + planCostTxt(s, p) +
+        (s.adv ? ' · <strong>advance replacement</strong>' : "") + "</span></label>";
+    });
+    html += "</div>";
+    // TCO comparison across the three types + none
+    html += '<div class="tco-lines"><div class="tco-row"><span>None</span><strong>' + money(base) + '/mo</strong></div>';
+    plans.forEach(p => {
+      const s = S[p];
+      if(!s) return;
+      const tco = supportPlanPriced(opt, p)
+        ? money(base + supportMonthlyFor(opt, p, inc) * q) + "/mo"
+        : "quote-based";
+      const incNote = (p !== "contract") ? ' <span class="tco-note">(at ' + inc + ' call' + (inc === 1 ? "" : "s") + '/yr)</span>' : "";
+      html += '<div class="tco-row"><span>' + planLabels[p] + incNote + "</span><strong>" + tco + "</strong></div>";
+    });
+    html += "</div>";
+    // adjustable incident assumption (break/fix + hybrid depend on it)
+    html += '<div class="incident-ctl"><span>Expected service calls per year <em>(your guess — adjust it)</em>:</span> ' +
+      '<button data-inc="-1" data-item="' + item.id + '" aria-label="fewer calls">−</button><strong>' + inc + "</strong>" +
+      '<button data-inc="1" data-item="' + item.id + '" aria-label="more calls">+</button></div>';
+    const cur = st.support && st.support !== "none" ? st.support : "none";
+    html += '<div class="detail support-why">' + SUPPORT_GUIDE[cur] + "</div>";
+    if(S.src) html += '<div class="life-src">Support sources: ' + S.src + "</div>";
+    html += "</div>";
+    return html;
+  }
+
+  // monthly for an item WITHOUT its support plan (for the TCO comparison line)
+  function itemMonthlyPreviewNoSupport(item, opt){
+    const inp = getInputs();
+    const keep = state[item.id];
+    const st = {checked:true, optIdx: item.options.indexOf(opt), qty: keep.qty, support:"none", incidents:1};
+    const real = state[item.id]; state[item.id] = st;
+    const m = itemMonthly(item, inp);
+    state[item.id] = real;
+    return m;
+  }
+
   function renderCatalog(){
     // make sure every item has state, then auto-build from the questions
     allItems().forEach(item => {
       if(!state[item.id]){
         const inNeeds = SIM_PRICES.sectors[sector].needs.indexOf(item) !== -1;
         const base = {checked:false, optIdx:0, qty: inNeeds ? 1 : 0, auto: DERIVED_AUTO[item.id] ? true : SIM_PRICES.infra.indexOf(item) !== -1};
-        if(item.builder){ base.path = "build"; base.reqs = Object.assign({}, item.defaultReqs); }
+        if(item.calc === "training_init" || item.calc === "training_ongoing") base.checked = true; // training is the rule, not the exception
+        if(item.builder){ base.path = "build"; base.reqs = Object.assign({}, item.defaultReqs); base.reqSupport = {}; base.reqInc = 1; base.aioSupport = "none"; }
         ensureManual(base, item);
         state[item.id] = base;
       }
     });
     derive();
-    [["needs","needs-list"],["infra","infra-list"],["toys","toys-list"]].forEach(([tier, listId]) => {
+    [["needs","needs-list"],["infra","infra-list"],["install","install-list"],["training","training-list"],["toys","toys-list"]].forEach(([tier, listId]) => {
       const list = $(listId);
       list.innerHTML = "";
-      const items = tier === "infra" ? SIM_PRICES.infra : SIM_PRICES.sectors[sector][tier];
+      if(tier === "training"){ renderTrainingTier(list); return; }
+      const items = tier === "infra" ? SIM_PRICES.infra : tier === "install" ? SIM_PRICES.install : SIM_PRICES.sectors[sector][tier];
       items.forEach(item => {
         if(!state[item.id]){
           const base = {checked:false, optIdx:0, qty: tier === "needs" ? 1 : 0, auto: DERIVED_AUTO[item.id] ? true : tier === "infra"};
-          if(item.builder){ base.path = "build"; base.reqs = Object.assign({}, item.defaultReqs); }
+          if(item.calc === "training_init" || item.calc === "training_ongoing") base.checked = true;
+          if(item.builder){ base.path = "build"; base.reqs = Object.assign({}, item.defaultReqs); base.reqSupport = {}; base.reqInc = 1; base.aioSupport = "none"; }
           ensureManual(base, item);
           state[item.id] = base;
         }
@@ -1412,6 +2139,9 @@ const REC_TIERS = {
           '<span class="conf ' + opt.conf + '">' + CONF_LABEL[opt.conf] + "</span></div>" +
           recWhy(item) +
           '<div class="detail">' + (opt.note || "") + "</div>";
+        if(opt.upfront) inner += '<div class="life-line">⏳ Expected life: <strong>~' + lifeLabel(opt) + "</strong>" + (opt.lifeSrc ? ' <span class="life-src">(' + opt.lifeSrc + ")</span>" : "") +
+          (installHrsLabel(opt) ? ' · 🔧 Install: <strong>' + installHrsLabel(opt) + "</strong>" + (opt.installVar ? ' <span class="life-src">(' + opt.installVar + ")</span>" : "") : "") + "</div>";
+        if(opt.support) inner += supportBox(item, st, opt);
         if(item.id === "terminal" && st.checked && getInputs().terminals <= 1)
           inner += '<div class="risk-line">' + SINGLE_TERMINAL_RISK + "</div>";
         if(st.why && st.checked) inner += '<div class="why-line">' + st.why + "</div>";
@@ -1444,12 +2174,15 @@ const REC_TIERS = {
         }
         inner += "</div>";
         const isManual = md && st.manual;
+        const isInstall = tier === "install";
         const priceTxt = isManual ? money(manualMonthly(item, st)) + "/mo"
+          : isInstall ? (opt.info_only ? "quote-based" : "$" + opt.upfront.toLocaleString("en-CA") + " one-time")
           : opt.info_only ? "—" : money(itemMonthlyPreview(item, opt)) + "/mo" + ((opt.upfront && !opt.monthly) ? " equiv." : "");
         const perTxt = isManual ? "/mo manual labor"
+          : isInstall ? (opt.info_only ? "get installer pricing" : "paid at install · never monthly")
           : opt.info_only ? "excluded from total"
           : (opt.upfront && opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront + " + perLabel(item))
-          : (opt.upfront && !opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront ÷ 36")
+          : (opt.upfront && !opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront ÷ " + lifeLabel(opt))
           : perLabel(item);
         inner += '<div class="price"><label class="sim-check" style="margin:0 0 6px;justify-content:flex-end"><input type="checkbox" data-item="' + item.id + '" aria-label="Include ' + item.name + '"' + (st.checked ? " checked" : "") + '></label>' +
           '<span class="amt">' + priceTxt + '</span><span class="per">' + perTxt + "</span></div>";
@@ -1458,6 +2191,7 @@ const REC_TIERS = {
       });
     });
     listEvents();
+    renderInstallLabor();
     recalc();
   }
 
@@ -1473,7 +2207,7 @@ const REC_TIERS = {
   }
 
   function listEvents(){
-    document.querySelectorAll("#needs-list select, #infra-list select, #toys-list select").forEach(sel => {
+    document.querySelectorAll("#needs-list select, #infra-list select, #install-list select, #toys-list select").forEach(sel => {
       sel.onchange = () => {
         const st = state[sel.dataset.item];
         st.optIdx = +sel.value;
@@ -1481,7 +2215,7 @@ const REC_TIERS = {
         renderCatalog();
       };
     });
-    document.querySelectorAll('#needs-list input[type="checkbox"][data-item], #infra-list input[type="checkbox"][data-item], #toys-list input[type="checkbox"][data-item]').forEach(cb => {
+    document.querySelectorAll('#needs-list input[type="checkbox"][data-item], #infra-list input[type="checkbox"][data-item], #install-list input[type="checkbox"][data-item], #toys-list input[type="checkbox"][data-item]').forEach(cb => {
       cb.onchange = () => {
         const it = findItem(cb.dataset.item);
         const st = state[cb.dataset.item];
@@ -1503,6 +2237,44 @@ const REC_TIERS = {
         if(cb.dataset.req === "scanner") reqsAuto.scanner = false;
         if(cb.dataset.req === "pinpad") terminalsTouched = false;
         if(cb.checked) st.checked = true;
+        renderCatalog();
+      };
+    });
+    document.querySelectorAll('input[data-support-plan]').forEach(r => {
+      r.onchange = () => {
+        const st = state[r.dataset.item];
+        if(!st) return;
+        st.support = r.dataset.supportPlan;
+        renderCatalog();
+      };
+    });
+    document.querySelectorAll('button[data-inc]').forEach(b => {
+      b.onclick = () => {
+        const st = state[b.dataset.item];
+        if(!st) return;
+        st.incidents = Math.max(0, Math.min(10, (st.incidents == null ? 1 : st.incidents) + (+b.dataset.inc)));
+        renderCatalog();
+      };
+    });
+    document.querySelectorAll('select[data-reqsup]').forEach(sel => {
+      sel.onchange = () => {
+        const st = state["station"]; if(!st) return;
+        st.reqSupport = st.reqSupport || {};
+        st.reqSupport[sel.dataset.reqsup] = sel.value;
+        renderCatalog();
+      };
+    });
+    document.querySelectorAll('select[data-aiosup]').forEach(sel => {
+      sel.onchange = () => {
+        const st = state[sel.dataset.aiosup]; if(!st) return;
+        st.aioSupport = sel.value;
+        renderCatalog();
+      };
+    });
+    document.querySelectorAll('button[data-reqinc]').forEach(b => {
+      b.onclick = () => {
+        const st = state["station"]; if(!st) return;
+        st.reqInc = Math.max(0, Math.min(10, (st.reqInc == null ? 1 : st.reqInc) + (+b.dataset.reqinc)));
         renderCatalog();
       };
     });
@@ -1908,6 +2680,8 @@ const REC_TIERS = {
     }
     drawMap();
     updateTotalBar(total);
+    updateInstallLaborTotal();
+    renderPayBreakout();
     renderMarginEaters();
     renderNetPlan();
   }
@@ -1924,7 +2698,7 @@ const REC_TIERS = {
       const m = itemMonthly(item, inp);
       if(m > 0){
         const mst = state[item.id];
-        const conf = (mst.manual && manualDef(item)) ? "Manual labor" : item.builder ? "Reported" : CONF_LABEL[item.options[mst.optIdx].conf];
+        const conf = (mst.manual && manualDef(item)) ? "Manual labor" : item.builder ? "Reported" : item.calc === "training_ongoing" ? "Estimate" : CONF_LABEL[item.options[mst.optIdx].conf];
         lines += '<div class="row"><span>' + item.name + ' <span style="opacity:.65;font-size:.9em">(' + conf + ")</span></span><span>" + money(m) + "/mo</span></div>";
       }
     });

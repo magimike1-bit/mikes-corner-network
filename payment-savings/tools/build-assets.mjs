@@ -42,7 +42,7 @@ for (const f of fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith("
 // write hashed JS with rewritten imports + data versions
 for (const f of jsFiles) {
   let src = fs.readFileSync(path.join(ROOT, "js", f), "utf8");
-  src = src.replace(/from\s+['"]\.\/([a-z-]+\.js)['"]/g, (m, dep) => {
+  src = src.replace(/from\s+['"]\.\/([a-z0-9-]+\.js)['"]/g, (m, dep) => {
     if (!jsHash[dep]) throw new Error("unknown js dep: " + dep + " in " + f);
     return `from './${dep.replace(/\.js$/, "")}.${jsHash[dep]}.js'`;
   });
@@ -103,12 +103,21 @@ for (const [page, spec] of Object.entries(PAGES)) {
 // also keep site-auth.js hashed on pages outside the manifest (all *.html get it)
 {
   const hashed = "site-auth." + jsHash[AUTH_JS] + ".js";
+  // every hashed entry module, for the manifest-miss check below
+  const knownHashed = new Set();
+  for (const f of jsFiles) knownHashed.add(f.replace(/\.js$/, "") + "." + jsHash[f] + ".js");
   for (const other of fs.readdirSync(ROOT).filter(f => f.endsWith(".html") && !PAGES[f])) {
     const htmlP = path.join(ROOT, other);
     let html = fs.readFileSync(htmlP, "utf8");
     const orig = html;
     html = html.replace(/assets\/js\/site-auth(\.[0-9a-f]{8})?\.js/, "assets/js/" + hashed);
     if (html !== orig) { fs.writeFileSync(htmlP, html); touched.push(other); }
+    // fail loudly: a page entry module with no manifest entry would keep an
+    // unhashed assets/js/<name>.js reference and 404 at runtime.
+    for (const m of html.matchAll(/assets\/js\/([a-z0-9-]+)\.js/g)) {
+      if (!knownHashed.has(m[1] + ".js"))
+        throw new Error("page " + other + " references unhashed assets/js/" + m[1] + ".js — add it to the PAGES manifest");
+    }
   }
 }
 console.log(touched.length ? "pages updated: " + touched.join(", ") : "all pages already current");

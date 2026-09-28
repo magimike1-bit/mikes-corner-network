@@ -2,7 +2,7 @@
  * Injects "Sign in / My account" + sign-out into .main-nav, driven by session.
  * Safe no-op when Supabase isn't configured (shows "Sign in" → account.html,
  * which explains local mode). */
-import { isConfigured, getUser, signOut, onAuthChange } from './sb.07f755e1.js';
+import { isConfigured, getUser, signOut, onAuthChange } from './sb.93d47640.js';
 
 function mount() {
   const nav = document.querySelector(".main-nav");
@@ -24,7 +24,7 @@ function mount() {
     } else {
       area.innerHTML = "";
       const a = document.createElement("a");
-      a.href = "account.html"; a.textContent = isConfigured() ? "Sign in" : "Sign in";
+      a.href = "account.html"; a.textContent = "Sign in";
       a.className = "btn auth-cta"; a.style.cssText = "padding:8px 16px;font-size:.9rem";
       area.appendChild(a);
     }

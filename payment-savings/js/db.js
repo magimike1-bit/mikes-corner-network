@@ -35,7 +35,7 @@ export async function listSimStates() {
   if (!id) return gget("simstates", []);
   const sb = await getClient();
   const { data, error } = await sb.from("simulator_states")
-    .select("id,name,sector,updated_at").eq("user_id", id).order("updated_at", { ascending: false });
+    .select("id,name,sector,updated_at").eq("user_id", id).order("updated_at", { ascending: false }).limit(100);
   if (error) throw new Error(error.message);
   return data;
 }
@@ -107,9 +107,13 @@ export async function saveFeeEntry(entry) {
     gset("feeentries", [...all, rec].sort((a, b) => a.month < b.month ? -1 : 1));
     return rec;
   }
+  // <input type="month"> yields "YYYY-MM" but the column is date: Postgres
+  // rejects it (22P02). Coerce to the first of the month for the DB write;
+  // the UI keeps working with "YYYY-MM" everywhere else.
+  const dbMonth = entry.month && entry.month.length === 7 ? entry.month + "-01" : entry.month;
   const sb = await getClient();
   const { error } = await sb.from("fee_entries").upsert({
-    user_id: id, month: entry.month, fees: entry.fees, volume: entry.volume, rate_bp: entry.rate_bp,
+    user_id: id, month: dbMonth, fees: entry.fees, volume: entry.volume, rate_bp: entry.rate_bp,
   }, { onConflict: "user_id,month" });
   if (error) throw new Error(error.message);
   return rec;
@@ -121,7 +125,8 @@ export async function listFeeEntries() {
   const { data, error } = await sb.from("fee_entries").select("month,fees,volume,rate_bp")
     .eq("user_id", id).order("month", { ascending: true });
   if (error) throw new Error(error.message);
-  return data.map((r) => ({ month: r.month, fees: +r.fees, volume: +r.volume, rate_bp: r.rate_bp }));
+  // DB stores a full date; the UI speaks "YYYY-MM".
+  return data.map((r) => ({ month: String(r.month).slice(0, 7), fees: +r.fees, volume: +r.volume, rate_bp: r.rate_bp }));
 }
 /* Creep detection: latest rate vs median of previous entries. Returns the
    basis-point increase, or 0 when there is no meaningful creep. */
@@ -148,13 +153,22 @@ export async function subscribeAlerts(email, topics, source) {
   }
   const sb = await getClient();
   const me = await uid();
-  const { error } = await sb.from("alert_subscriptions").upsert({
+  const row = {
     user_id: me, email: clean, topics,
     consent_at: new Date().toISOString(), consent_source: source || "site-form",
     unsubscribed_at: null,
-  }, { onConflict: "email" });
-  if (error) throw new Error(error.message);
-  return { ok: true, pending: false };
+  };
+  const { error } = await sb.from("alert_subscriptions").upsert(row, { onConflict: "email" });
+  if (!error) return { ok: true, pending: false };
+  // An anonymous row for this email may already exist (subscribed before
+  // signing up). The upsert's UPDATE is then rejected by RLS (42501) because
+  // the row's user_id is NULL. Claim it via the SECURITY DEFINER function.
+  if (me && error.code === "42501") {
+    const { error: rpcErr } = await sb.rpc("adopt_alert_subscription", { p_email: clean, p_topics: topics });
+    if (rpcErr) throw new Error(rpcErr.message);
+    return { ok: true, pending: false };
+  }
+  throw new Error(error.message);
 }
 export async function listAlertSubs() {
   if (!isConfigured()) return gget("alertsubs", []);
@@ -231,13 +245,13 @@ export async function getReferralStats() {
   const me = await uid();
   if (!me || !isConfigured()) return { clicks: 0, signups: 0, audits: 0 };
   const sb = await getClient();
-  const { data, error } = await sb.from("referrals").select("status").eq("referrer_id", me);
-  if (error) throw new Error(error.message);
-  return {
-    clicks: data.filter((r) => r.status === "link-clicked").length,
-    signups: data.filter((r) => r.status === "signed-up").length,
-    audits: data.filter((r) => r.status === "audit-signed").length,
-  };
+  // Count server-side; never pull the whole referral list into the browser.
+  const countFor = (status) => sb.from("referrals")
+    .select("id", { count: "exact", head: true }).eq("referrer_id", me).eq("status", status)
+    .then(({ count, error }) => { if (error) throw new Error(error.message); return count || 0; });
+  const [clicks, signups, audits] = await Promise.all(
+    ["link-clicked", "signed-up", "audit-signed"].map(countFor));
+  return { clicks, signups, audits };
 }
 
 /* ---------- transparency wall ---------- */

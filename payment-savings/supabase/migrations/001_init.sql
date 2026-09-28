@@ -111,7 +111,8 @@ alter table public.alert_subscriptions enable row level security;
 -- anyone may subscribe (anon insert); only the owning user may read/manage
 drop policy if exists "alertsubs anon insert" on public.alert_subscriptions;
 create policy "alertsubs anon insert" on public.alert_subscriptions
-  for insert to anon, authenticated with check (true);
+  for insert to anon, authenticated
+  with check (user_id is null or auth.uid() = user_id);
 drop policy if exists "alertsubs read own" on public.alert_subscriptions;
 create policy "alertsubs read own" on public.alert_subscriptions
   for select using (auth.uid() = user_id);
@@ -128,6 +129,22 @@ begin
    where unsub_token = p_token and unsubscribed_at is null;
   get diagnostics r = row_count;
   return r > 0;
+end $$;
+
+-- adopt an anonymous alert row when its owner later signs up: the anon row
+-- (user_id NULL) can't be upserted by the logged-in user (RLS would reject
+-- the update), so this SECURITY DEFINER function claims it for them.
+create or replace function public.adopt_alert_subscription(p_email text, p_topics text[])
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  update public.alert_subscriptions
+     set user_id = auth.uid(),
+         topics = p_topics,
+         consent_at = now(),
+         unsubscribed_at = null
+   where lower(email) = lower(p_email)
+     and user_id is null
+     and auth.uid() is not null;
 end $$;
 
 -- ============ referrals ============
@@ -185,7 +202,8 @@ alter table public.wall_submissions enable row level security;
 -- anyone may submit; NOBODY reads raw rows via the API (aggregates only)
 drop policy if exists "wall anon insert" on public.wall_submissions;
 create policy "wall anon insert" on public.wall_submissions
-  for insert to anon, authenticated with check (true);
+  for insert to anon, authenticated
+  with check (user_id is null or auth.uid() = user_id);
 -- public aggregate view: medians + sample sizes, cells with < 3 suppressed.
 -- A plain view is correct here: it executes with the view owner's (postgres)
 -- privileges, so it reads past the table's RLS while direct client queries
@@ -255,7 +273,8 @@ alter table public.audit_requests enable row level security;
 -- dashboard. Logged-in users may read their own requests.
 drop policy if exists "auditreq anon insert" on public.audit_requests;
 create policy "auditreq anon insert" on public.audit_requests
-  for insert to anon, authenticated with check (true);
+  for insert to anon, authenticated
+  with check (user_id is null or auth.uid() = user_id);
 drop policy if exists "auditreq read own" on public.audit_requests;
 create policy "auditreq read own" on public.audit_requests
   for select using (auth.uid() = user_id);
@@ -303,3 +322,19 @@ create table if not exists public.audits (
 alter table public.audits enable row level security;
 -- no client policies: Joseph manages the pipeline in the Supabase dashboard.
 -- merchant-facing reads get added when a client portal ships.
+
+-- ============ indexes on hot FK / WHERE columns ============
+-- Every RLS policy evaluates auth.uid() = user_id per row; without these,
+-- those become sequential scans as tables grow. (Postgres does not
+-- auto-index foreign-key columns.)
+create index if not exists idx_simulator_states_user on public.simulator_states(user_id);
+create index if not exists idx_rate_runs_user on public.rate_runs(user_id);
+create index if not exists idx_fee_entries_user on public.fee_entries(user_id);
+create index if not exists idx_alert_subs_user on public.alert_subscriptions(user_id);
+create index if not exists idx_alert_subs_email on public.alert_subscriptions(email);
+create index if not exists idx_surcharge_runs_user on public.surcharge_runs(user_id);
+create index if not exists idx_settlement_runs_user on public.settlement_runs(user_id);
+create index if not exists idx_referrals_referrer on public.referrals(referrer_id);
+create index if not exists idx_referrals_referee on public.referrals(referee_id);
+create index if not exists idx_audit_requests_user on public.audit_requests(user_id);
+create index if not exists idx_audits_user on public.audits(user_id);

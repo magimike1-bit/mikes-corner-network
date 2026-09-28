@@ -63,7 +63,7 @@ function walk(d) {
     if (f === ".git" || f === "node_modules") continue;
     const st = fs.statSync(p);
     if (st.isDirectory()) { if (!["_research", "_work", "supabase"].includes(f) || f === "supabase") walk(p); }
-    else if (/\.(js|html|json|md|sh|sql)$/.test(f)) {
+    else if (/\.(m?js|html|json|md|sh|sql|css)$/.test(f)) {
       const c = fs.readFileSync(p, "utf8");
       const rel = path.relative(ROOT, p);
       let scan = c;

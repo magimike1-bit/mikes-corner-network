@@ -7,7 +7,7 @@
  * one per month). Renders the entry table + SVG line chart (chart.js), and
  * db.detectCreep(entries) → prominent banner with the dollar cost of the creep.
  */
-import { saveFeeEntry, listFeeEntries, detectCreep, isConfigured, guestNudge } from './db.e09aae23.js';
+import { saveFeeEntry, listFeeEntries, detectCreep, isConfigured, guestNudge } from './db.e456647d.js';
 import { lineChart, fmtBp } from './chart.42f77134.js';
 
 function $(id) { return document.getElementById(id); }

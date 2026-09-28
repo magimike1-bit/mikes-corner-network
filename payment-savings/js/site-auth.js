@@ -24,7 +24,7 @@ function mount() {
     } else {
       area.innerHTML = "";
       const a = document.createElement("a");
-      a.href = "account.html"; a.textContent = isConfigured() ? "Sign in" : "Sign in";
+      a.href = "account.html"; a.textContent = "Sign in";
       a.className = "btn auth-cta"; a.style.cssText = "padding:8px 16px;font-size:.9rem";
       area.appendChild(a);
     }

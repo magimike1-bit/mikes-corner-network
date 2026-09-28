@@ -10,10 +10,10 @@
  *   accountant-lane link variant for bookkeepers (db.referralLink('accountant')).
  * - Logged out → nudge to create a free account to get a link.
  */
-import { getUser } from './sb.07f755e1.js';
+import { getUser } from './sb.93d47640.js';
 import {
   getProfile, referralLink, recordReferralClick, getReferralStats, guestNudge,
-} from './db.e09aae23.js';
+} from './db.e456647d.js';
 
 function $(id) { return document.getElementById(id); }
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")

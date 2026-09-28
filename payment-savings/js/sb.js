@@ -30,17 +30,32 @@ export async function getClient() {
   return _client;
 }
 
+let _user = null;       // cached server-validated user
+let _userToken = null;  // access token the cache was validated against
+
 export async function getUser() {
   const sb = await getClient();
   if (!sb) return null;
+  // getSession() is local (no network); getUser() hits the auth server.
+  // Validate once per access token and cache: every db.* call shares it
+  // instead of each doing its own round-trip. A token change (refresh,
+  // re-login) re-validates automatically; sign-out clears the cache below.
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { _user = null; _userToken = null; return null; }
+  if (_user && _userToken === session.access_token) return _user;
   const { data } = await sb.auth.getUser();
-  return data && data.user ? data.user : null;
+  _user = data && data.user ? data.user : null;
+  _userToken = session.access_token;
+  return _user;
 }
 
 export function onAuthChange(cb) {
   getClient().then((sb) => {
     if (!sb) { cb("LOCAL_MODE", null); return; }
-    sb.auth.onAuthStateChange((event, session) => cb(event, session));
+    sb.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_OUT") { _user = null; _userToken = null; }
+      cb(event, session);
+    });
   });
 }
 

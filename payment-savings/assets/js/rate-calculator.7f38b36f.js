@@ -11,7 +11,7 @@
  *    so the page shows "sector benchmark pending verification" instead of a number.
  *  - every run is stored via db.saveRateRun (localStorage fallback in guest mode).
  */
-import { saveRateRun, isConfigured, guestNudge } from './db.e09aae23.js';
+import { saveRateRun, isConfigured, guestNudge } from './db.e456647d.js';
 
 const AVG_BP = 236; // verified: MPC 2025 average Visa/Mastercard effective rate
 

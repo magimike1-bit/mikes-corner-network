@@ -135,6 +135,17 @@
 .pay-row.total{border-bottom:none;border-top:2px solid rgba(255,255,255,.22);margin-top:6px;padding-top:10px;font-size:1.08rem;font-weight:800}
 .pay-note{font-size:.82rem;opacity:.75;margin-top:6px;font-style:italic}
 .pay-breakout .fine{font-size:.85rem;opacity:.7;margin-top:10px}
+/* lease configurator */
+.lease-cfg{display:flex;gap:12px;flex-wrap:wrap;margin:2px 0 6px;font-size:.85rem}
+.lease-cfg label{display:flex;align-items:center;gap:6px;opacity:.9}
+.lease-cfg select{background:#12283f;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:6px;padding:3px 6px;font-size:.85rem}
+.lease-note{font-size:.8rem;opacity:.7;margin:0 0 6px}
+.lease-compare{margin-top:8px;padding:9px 11px;background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.28);border-radius:8px;font-size:.88rem;line-height:1.45}
+.lease-gotchas{margin-top:12px;font-size:.88rem;line-height:1.5}
+.lease-gotchas summary{cursor:pointer;font-weight:700}
+.lease-gotchas ul{margin:8px 0;padding-left:20px}
+.lease-gotchas li{margin:6px 0}
+.lease-gotchas .fine{margin-top:8px}
 /* training module */
 .train-it-note{background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.25);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:.92rem}
 .train-tracks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
@@ -220,3 +231,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
 #floorplan .map-node:focus-visible .focus-ring{display:block}
 #floorplan text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 @media(max-width:640px){.map-toolbar{flex-direction:column;align-items:stretch}.map-view-toggle{justify-content:center}}
+
+/* network plan: recommended-connection chart */
+.net-rec { margin: 14px 0; }
+.net-rec h5 { margin: 0 0 8px; font-size: 14px; }
+.net-rec table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.net-rec th, .net-rec td { text-align: left; padding: 7px 9px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+.net-rec th { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #6b7280; }
+.net-rec tr.diff td { background: #fffbeb; }
+.recdot { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.recdot.wired { background: #dbeafe; color: #1e40af; }
+.recdot.wifi { background: #ede9fe; color: #5b21b6; }
+.zdiff { color: #b45309; font-weight: 600; }
+.net-scen .bd { font-size: 12px; color: #4b5563; margin-top: 4px; }
+.net-scen .bd .ap { color: #1e40af; }
+@media (max-width: 640px){
+  .net-rec table { font-size: 12px; }
+  .net-rec th, .net-rec td { padding: 6px 6px; }
+}

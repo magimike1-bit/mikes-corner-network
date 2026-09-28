@@ -1,6 +1,6 @@
-import { S } from './session.babf8dd5.js';
+import { S } from './session.7a9a6abf.js';
 import { $, money } from './util.03612f15.js';
-import { trainEmps, trainingInitCost, trainingOngoingMonthly } from './cost-engine.85cce070.js';
+import { trainEmps, trainingInitCost, trainingOngoingMonthly } from './cost-engine.33998d54.js';
 /* training.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   function trainMathHTML(inp){

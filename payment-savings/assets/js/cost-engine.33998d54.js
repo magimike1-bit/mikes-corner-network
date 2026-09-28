@@ -1,4 +1,4 @@
-import { S } from './session.babf8dd5.js';
+import { S } from './session.7a9a6abf.js';
 import { $, money } from './util.03612f15.js';
 /* cost.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
@@ -65,7 +65,7 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
 
   function lifeLabel(opt){
     const L = lifeDataFor(opt);
-    if(L) return "~" + L.range + (L.est ? " (estimate)" : "");
+    if(L) return "~" + L.range + " yrs" + (L.est ? " (estimate)" : "");
     return "life n/a";
   }
 

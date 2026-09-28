@@ -65,7 +65,7 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
 
   function lifeLabel(opt){
     const L = lifeDataFor(opt);
-    if(L) return "~" + L.range + (L.est ? " (estimate)" : "");
+    if(L) return "~" + L.range + " yrs" + (L.est ? " (estimate)" : "");
     return "life n/a";
   }
 

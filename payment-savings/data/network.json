@@ -24,7 +24,7 @@
     "id": "kds",
     "label": "Kitchen screens",
     "pay": false,
-    "def": "wired",
+    "def": "wifi",
     "dev": [
       "kds"
     ]

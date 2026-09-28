@@ -4,7 +4,7 @@
  * we're in a browser. In node (smoke tests) or without config, every function
  * resolves to a safe logged-out value so pages boot in local mode.
  */
-import { SUPABASE_URL, SUPABASE_ANON_KEY, isConfigured } from './config.d07ddcdf.js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, isConfigured } from './config.0aae547a.js';
 
 export { isConfigured };
 

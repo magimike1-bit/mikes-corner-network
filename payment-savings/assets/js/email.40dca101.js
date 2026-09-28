@@ -14,7 +14,7 @@
  *   4. CASL: only mail addresses with a stored consent_at; honor
  *      unsubscribed_at; include your business name + contact info in the footer.
  */
-import { isConfigured } from './config.d07ddcdf.js';
+import { isConfigured } from './config.0aae547a.js';
 
 export function emailSendingEnabled() { return false; }
 

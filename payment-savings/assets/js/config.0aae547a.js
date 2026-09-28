@@ -13,7 +13,7 @@
  * nudge to create an account to sync across devices).
  */
 export const SUPABASE_URL = "https://mmztfpxbglxhmbzwezga.supabase.co";
-export const SUPABASE_ANON_KEY = "__SUPABASE_ANON_KEY__"; // Joseph to supply (Supabase → Project Settings → API → anon public key)
+export const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tenRmcHhiZ2x4aG1iendlemdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA1ODA2NDQsImV4cCI6MjEwNjE1NjY0NH0.CiDnZkPTi0LCzv2gOPw_-1ePOYjZ1GfxNj7LlYy3uNw"; // anon public key — safe for the browser by design; RLS enforces access
 
 export function isConfigured() {
   return (

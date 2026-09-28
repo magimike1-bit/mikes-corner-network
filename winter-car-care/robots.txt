@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://winter-car-care-basics-2s56k.kinsta.page/sitemap.xml

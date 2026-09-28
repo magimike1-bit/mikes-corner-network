@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="style.css">
 <!-- AdSense: ad code goes here -->
 <!-- __SIM_CSS__ -->
-<link rel="stylesheet" href="assets/simulator.e339acbd.css">
+<link rel="stylesheet" href="assets/simulator.eb75f123.css">
+  <script>document.documentElement.classList.add("wf")</script>
 </head>
 <body>
 <header class="site-header">
@@ -45,7 +46,9 @@
 <main>
 <div class="sim-wrap">
 
-<section class="sim-step" id="sim-start">
+<div id="wf-chrome"></div>
+
+<section class="sim-step wf-step active" id="sim-start" data-step="1">
   <h2>1 · Pick your sector</h2>
   <p class="hint">The catalog, suggestions, and floor-plan map reconfigure for each sector.</p>
   <div class="sector-grid" id="sector-grid"></div>
@@ -54,7 +57,7 @@
   </div>
 </section>
 
-<section class="sim-step">
+<section class="sim-step wf-step" id="sim-questions" data-step="2">
   <h2>2 · Answer 3 quick questions</h2>
   <p class="hint">We build a realistic starting setup from your answers — every number stays adjustable below.</p>
 
@@ -121,7 +124,29 @@
   </div>
 </section>
 
-<section class="sim-step map-section" id="sim-map-section">
+
+
+<section class="sim-step wf-step" id="sim-catalog" data-step="3">
+  <h2>3 · Build your stack</h2>
+  <p class="hint">Tick what you have (or plan to get). Quantities adjust per item.</p>
+  <div class="legend">
+    <span><span class="conf official">Official</span> vendor's own price</span>
+    <span><span class="conf reported">Reported</span> reputable third-party</span>
+    <span><span class="conf estimate">Estimate</span> our reasonable estimate</span>
+    <span><span class="conf illus">Illustrative</span> purchase ÷ expected life</span>
+  </div>
+  <div class="typical-wrap">
+    <button id="btn-typical" class="typical-btn">✨ Load a typical setup for my sector</button>
+    <div class="input-note" id="typical-note">Zero-effort path: fills in a normal configuration for your sector. A starting point — not a recommendation. Adjust to match yours.</div>
+  </div>
+  <div class="tier" id="tier-needs"><h3>✅ What you actually need</h3><p class="tier-sub">The core stack — real, verified, useful. Start here.</p><div id="needs-list"></div></div>
+  <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (purchase ÷ expected life in years), clearly labeled.</p>
+  <div id="infra-list"></div></div>
+  <div class="tier" id="tier-install"><h3>🔧 Installation &amp; setup — paid up front, never monthly</h3><p class="tier-sub">One-time work, due at install. Cable drops and setup are paid once — they never belong in a monthly column. Tick what your installer will do; the labor estimate below comes from the install hours on each hardware item × your tech's rate.</p><div id="install-labor-line"></div><div id="install-list"></div></div>
+  <div class="tier toys" id="tier-toys"><h3>🧸 Toys — nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="toys-list"></div></div>
+</section>
+
+<section class="sim-step wf-step map-section" id="sim-map-section" data-step="3">
   <h2>Your setup, visualized</h2>
   <p class="hint">Every device you tick below appears here, in the zone where it lives — with how it's paid for, how it connects, and how long it should last. Schematic, not to scale. It updates live as you change your stack.</p>
   <div class="map-toolbar">
@@ -154,52 +179,20 @@
   <p class="map-note">Link types follow your <a href="#net-plan">network plan</a> (wired / Wi-Fi per zone) — change the plan and the map updates. Money figures are CAD, converted at the stated rates where originally priced in US$ or £.</p>
 </section>
 
-<section class="sim-step">
-  <h2>3 · Build your stack</h2>
-  <p class="hint">Tick what you have (or plan to get). Quantities adjust per item.</p>
-  <div class="legend">
-    <span><span class="conf official">Official</span> vendor's own price</span>
-    <span><span class="conf reported">Reported</span> reputable third-party</span>
-    <span><span class="conf estimate">Estimate</span> our reasonable estimate</span>
-    <span><span class="conf illus">Illustrative</span> purchase ÷ expected life</span>
-  </div>
-  <div class="sim-columns">
-    <div>
-      <div class="typical-wrap">
-        <button id="btn-typical" class="typical-btn">✨ Load a typical setup for my sector</button>
-        <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-          <button id="btn-save-setup" class="typical-btn" style="background:#fff">💾 Save this setup</button>
-          <a href="account.html" class="input-note" style="margin:0">My saved setups →</a>
-        </div>
-        <div class="input-note" id="typical-note">Zero-effort path: fills in a normal configuration for your sector. A starting point — not a recommendation. Adjust to match yours.</div>
-      </div>
-      <div class="tier" id="tier-needs"><h3>✅ What you actually need</h3><p class="tier-sub">The core stack — real, verified, useful. Start here.</p><div id="needs-list"></div></div>
-      <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (purchase ÷ expected life in years), clearly labeled.</p>
-      <div class="infra-ask">
-        <div class="ask"><span class="ask-q">How things connect — handled for you</span>
-          <div class="input-note" style="margin:0">There's no single right answer — so choose per zone in the network plan below. The default is <strong>hybrid</strong>: the devices that take money get cables; the devices that move get Wi-Fi. Guest Wi-Fi is on or off depending on what's normal for your sector (toggle it below). Cable runs and switch ports follow your plan automatically — every auto-added item tells you why it's there.</div>
-        </div>
-      </div>
-      <div id="net-plan"></div>
-      <div id="infra-list"></div></div>
-      <div class="tier" id="tier-install"><h3>🔧 Installation &amp; setup — paid up front, never monthly</h3><p class="tier-sub">One-time work, due at install. Cable drops and setup are paid once — they never belong in a monthly column. Tick what your installer will do; the labor estimate below comes from the install hours on each hardware item × your tech's rate.</p><div id="install-labor-line"></div><div id="install-list"></div></div>
-      <div class="tier" id="tier-training"><h3>🎓 Training — the cost nobody budgets</h3><p class="tier-sub">A new system isn't live when it's installed — it's live when your people can run it at rush without thinking. Training is paid time, and turnover means you pay it again every year.</p><div id="training-list"></div></div>
-      <div class="tier toys" id="tier-toys"><h3>🧸 Toys — nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="toys-list"></div></div>
-    </div>
-    <div class="sim-side">
-      <div class="total-bar">
-        <div id="total-lines"></div>
-        <div class="row grand"><span>Estimated total</span><span id="grand-total">$0/mo</span></div>
-        <div id="rev-lines"></div>
-        <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ its expected life — a 5-year terminal costs less per month than a 2-year printer at the same price). Not quotes — your free audit measures your real numbers.</p>
-        <div id="pay-breakout"></div>
-      </div>
+<section class="sim-step wf-step" id="sim-network" data-step="4">
+  <h2>4 · Network + training</h2>
+  <p class="hint">How your sites connect, and what it costs to get your team fluent. Both feed your totals.</p>
+  <div class="infra-ask">
+    <div class="ask"><span class="ask-q">How things connect — handled for you</span>
+      <div class="input-note" style="margin:0">There's no single right answer — so choose per zone in the network plan below. The default is <strong>hybrid</strong>: the devices that take money get cables; the devices that move get Wi-Fi. Guest Wi-Fi is on or off depending on what's normal for your sector (toggle it below). Cable runs and switch ports follow your plan automatically — every auto-added item tells you why it's there.</div>
     </div>
   </div>
+  <div id="net-plan"></div>
+  <div class="tier" id="tier-training"><h3>🎓 Training — the cost nobody budgets</h3><p class="tier-sub">A new system isn't live when it's installed — it's live when your people can run it at rush without thinking. Training is paid time, and turnover means you pay it again every year.</p><div id="training-list"></div></div>
 </section>
 
-<section class="sim-step" id="margin-eaters">
-  <h2>🦈 Margin eaters — cost of sales, not IT</h2>
+<section class="sim-step wf-step" id="margin-eaters" data-step="5">
+  <h2>5 · 🦈 Margin eaters — cost of sales, not IT</h2>
   <p class="hint">Commissions and platform cuts scale with your revenue — they’re <strong>cost-of-sales</strong>, not technology. They’re kept out of your IT stack total on purpose: mixing them in hides how much damage they do.</p>
   <div class="me-grid">
     <div class="me-card">
@@ -231,7 +224,10 @@
   <div class="me-total" id="me-total"></div>
 </section>
 
-<section class="sim-step">
+<section class="sim-step wf-step" id="sim-results" data-step="6">
+  <h2>6 · Your numbers</h2>
+  <p class="hint">Everything added up — install cost, monthly stack, and processing savings in one place.</p>
+  <div class="input-note" id="me-skipped-note" hidden></div>
   <div class="proc-line">
     <span class="tag" style="display:inline-block;background:var(--accent);color:#fff;font-size:.95rem;font-weight:800;letter-spacing:.08em;padding:6px 14px;border-radius:6px;margin-bottom:.8em">Illustrative — not a promise</span>
     <h3>What you're paying in processing fees right now</h3>
@@ -240,6 +236,19 @@
     <p style="margin:.4em 0" id="proc-rev"></p>
     <p class="input-note">Based on the volume and rate you entered above. A 0.5% saving is a common audit finding used here only to show the math — your statements decide the real number.</p>
   </div>
+  <div class="total-bar">
+    <div id="total-lines"></div>
+    <div class="row grand"><span>Estimated total</span><span id="grand-total">$0/mo</span></div>
+    <div id="rev-lines"></div>
+    <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ its expected life — a 5-year terminal costs less per month than a 2-year printer at the same price). Not quotes — your free audit measures your real numbers.</p>
+    <div id="pay-breakout"></div>
+  </div>
+  <div class="save-row">
+    <button id="btn-save-setup" class="typical-btn" style="background:#fff;color:var(--navy);border:2px solid var(--navy)">💾 Save this setup</button>
+    <a href="account.html" class="input-note" style="margin:0">My saved setups →</a>
+    <a href="simulator.html" class="input-note" style="margin:0">↺ Start over</a>
+  </div>
+  <div class="input-note" id="save-note" style="margin-top:10px"></div>
 </section>
 
 <section class="sim-step">
@@ -263,9 +272,10 @@
   </div>
 </footer>
 <!-- __SIM_JS__ -->
-<script type="module" src="assets/js/sim-core.82ae9004.js"></script>
-<script type="module" src="assets/js/sim-save.71a7f47e.js"></script>
+<script type="module" src="assets/js/sim-core.18b35d49.js"></script>
+<script type="module" src="assets/js/sim-save.97280053.js"></script>
+<script type="module" src="assets/js/stepper.eb667276.js"></script>
 
-  <script type="module" src="assets/js/site-auth.cc128bd0.js"></script>
+  <script type="module" src="assets/js/site-auth.b25b5fe2.js"></script>
 </body>
 </html>

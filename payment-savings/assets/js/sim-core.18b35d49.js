@@ -1,10 +1,10 @@
-import { S } from './session.7a9a6abf.js';
+import { S } from './session.babf8dd5.js';
 import { $, money, esc, pyRound, clampN, pct1 } from './util.03612f15.js';
 import { loadData } from './data.40b26683.js';
-import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.33998d54.js';
+import { cadOf, dispAmt, lifeDataFor, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, switchFor, perLabel, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem } from './cost-engine.85cce070.js';
 import { renderMap, mapJumpToItem, initMapEvents } from './visual-map.5e4c126b.js';
-import { trainMathHTML, updateTrainMath, renderTrainingTier } from './training.0b080202.js';
-import { ensureNET, netDevCounts, netZoneDevices, netWiredDrops, netWiredDesc, dropUnitCost, renderNetPlan } from './net-plan.1332075a.js';
+import { trainMathHTML, updateTrainMath, renderTrainingTier } from './training.f08b57d0.js';
+import { ensureNET, netDevCounts, netZoneDevices, netWiredDrops, netWiredDesc, dropUnitCost, renderNetPlan } from './net-plan.a1631221.js';
 import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters.5c285d13.js';
 /* core.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
@@ -351,7 +351,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       inner += '<div class="reqs">';
       item.addons.forEach(a => {
         const on = !!(st.reqs && st.reqs[a.id]);
-        const cost = a.upfront ? " — <strong>" + money(cadOf(a.upfront, a.cur) / lifeMonths(a)) + "/mo equiv.</strong> <span class=\"life-badge\">" + lifeLabel(a) + "</span>" +
+        const cost = a.upfront ? " — <strong>" + money(cadOf(a.upfront, a.cur) / lifeMonths(a)) + "/mo equiv.</strong> <span class=\"life-badge\">" + lifeLabel(a) + " life</span>" +
           (installHrsLabel(a) ? ' <span class="life-badge" title="Average tech install time">🔧 ' + installHrsLabel(a) + " install</span>" : "") : "";
         inner += '<label class="sim-check"><input type="checkbox" data-req="' + a.id + '"' + (on ? " checked" : "") + '> <span>' + a.label + cost +
           '<br><span style="opacity:.75;font-size:.95em">' + (a.note || "") + "</span></span></label>";
@@ -428,22 +428,17 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
      Purchased hardware NEVER appears in the monthly column — its amortized equivalent
      lives in the grand total for comparison only. ---- */
 
-  const LEASE_FACTORS = {24:{one:46,ten:42,fmv:42},36:{one:33,ten:30,fmv:30},48:{one:26,ten:24,fmv:24},60:{one:22,ten:20,fmv:20}};
-
-function renderPayBreakout(){
+  function renderPayBreakout(){
     const el = $("pay-breakout"); if(!el) return;
     const inp = getInputs();
     let hwUpfront = 0, installUpfront = 0, installQuoted = 0;
     let leaseMo = 0, saasMo = 0, contractMo = 0, breakfixMo = 0;
-    let leaseBase = 0; // factored-lease base: hardware purchase prices (excl. published leases, install, training)
     allItems().forEach(item => {
       const st = S.state[item.id]; if(!st || !st.checked) return;
       if(item.calc === "training_init" || item.calc === "training_ongoing") return; // dedicated rows below
       const isInstall = S.DATA.hardware.install.indexOf(item) !== -1;
       if(item.builder){
-        const bup = itemUpfront(item, inp);
-        hwUpfront += bup;
-        leaseBase += bup; // station hardware is leasable
+        hwUpfront += itemUpfront(item, inp);
         const q = Math.max(0, inp.stations);
         const inc = st.reqInc == null ? 1 : st.reqInc;
         const addSup = (supObj, plan) => {
@@ -464,9 +459,7 @@ function renderPayBreakout(){
       const q = itemQty(item, inp);
       if(isInstall){ installUpfront += cadOf(opt.upfront, opt.cur) * q; return; }
       if(opt.upfront) hwUpfront += cadOf(opt.upfront, opt.cur) * q;
-      const pubLease = leaseMonthly(item, inp); // single source of truth — never a parallel inline calc
-      leaseMo += pubLease;
-      if(opt.upfront && !isInstall && !pubLease) leaseBase += cadOf(opt.upfront, opt.cur) * q; // factored lease base
+      leaseMo += leaseMonthly(item, inp); // single source of truth — never a parallel inline calc
       if(opt.monthly && !opt.lease) saasMo += cadOf(opt.monthly, opt.cur) * q;
       if(item.base) saasMo += item.base * (item.calc === "per_location" ? inp.locations : 1);
       if(st.support && st.support !== "none" && opt.support){
@@ -483,63 +476,32 @@ function renderPayBreakout(){
     const trainNow = (trI && trI.checked) ? trainingInitCost(inp) : 0;
     const trainMo = (trO && trO.checked) ? trainingOngoingMonthly(inp) : 0;
     const payNow = hwUpfront + installUpfront + laborUpfront + trainNow;
+    S.totals = Object.assign(S.totals || {}, { payNow });
     const proc = inp.volume * (inp.rate / 100);
     const r = (label, val, mo) => '<div class="pay-row"><span>' + label + "</span><strong>" + val + (mo ? "/mo" : "") + "</strong></div>";
-    /* Lease configurator (Joseph 2026-09-28): term + buyout pickers drive a factored monthly
-       estimate from hardware purchase prices. $/mo per $1,000 financed — typical small-ticket
-       POS lease rate factors (research brief 2026-09-28, _work/lease-research-brief.md). */
-    
-    const leaseTerm = S.leaseTerm || 36, leaseBo = S.leaseBuyout || "one";
-    const leaseFactor = (LEASE_FACTORS[leaseTerm] && LEASE_FACTORS[leaseTerm][leaseBo]) || LEASE_FACTORS[36].one;
-    const factoredMo = leaseBase / 1000 * leaseFactor;
-    const buyoutCost = leaseBo === "one" ? 1 : leaseBo === "ten" ? leaseBase * 0.10 : 0;
-    const leaseTermTotal = factoredMo * leaseTerm + buyoutCost;
-    const leaseMult = leaseBase > 0 ? leaseTermTotal / leaseBase : 0;
-    const boDesc = leaseBo === "one" ? "$1 buys it at the end — you will own it."
-      : leaseBo === "ten" ? "10% of the price buys it at the end — or return it."
-      : "Cheapest monthly, but the lessor sets the end buyout — budget a surprise.";
     el.innerHTML = '<div class="pay-breakout"><h4>💰 Pay now vs pay monthly</h4><div class="pay-cols">' +
       '<div class="pay-col now"><h5>Pay now — due at install</h5>' +
       r("Hardware purchases", money(hwUpfront)) +
       r("Install labor (~" + (Math.round(hrs * 10) / 10) + " hrs × " + money(S.techRate) + "/hr)", money(laborUpfront)) +
       r("Install line items", installUpfront > 0 ? money(installUpfront) : (installQuoted > 0 ? "quote-based" : money(0))) +
-      r("Training — go-live on the new system", money(trainNow)) +
+      r("Training — go-live", money(trainNow)) +
       '<div class="pay-row total"><span>Total due at install</span><strong>' + money(payNow) + (installQuoted > 0 ? " +" : "") + "</strong></div>" +
       (installQuoted > 0 ? '<div class="pay-note">' + installQuoted + ' install item(s) still need installer quotes.</div>' : "") +
       "</div>" +
       '<div class="pay-col monthly"><h5>Pay monthly — recurring</h5>' +
-      r("Leased hardware", money(leaseMo + factoredMo), true) +
-      '<div class="lease-cfg"><label>Term <select id="lease-term" aria-label="Lease term">' +
-        [24,36,48,60].map(t => '<option value="' + t + '"' + (leaseTerm === t ? " selected" : "") + ">" + t + " mo</option>").join("") +
-        '</select></label><label>Buyout <select id="lease-buyout" aria-label="Lease buyout type">' +
-        '<option value="one"' + (leaseBo === "one" ? " selected" : "") + ">$1 buyout</option>" +
-        '<option value="ten"' + (leaseBo === "ten" ? " selected" : "") + ">10% option</option>" +
-        '<option value="fmv"' + (leaseBo === "fmv" ? " selected" : "") + ">FMV</option></select></label></div>" +
-      (leaseBase > 0 ? '<div class="lease-note">Estimate from typical lease rates — not a quote. ' + boDesc + "</div>" : "") +
+      r("Leased hardware", money(leaseMo), true) +
       r("Subscriptions (SaaS)", money(saasMo), true) +
       r("Support contracts", money(contractMo), true) +
       (breakfixMo > 0 ? r("Expected break/fix", money(breakfixMo), true)
         : '<div class="pay-row"><span>Expected break/fix</span><strong>—</strong></div>') +
-      r("New-hire training (new system)", money(trainMo), true) +
+      r("New-hire training", money(trainMo), true) +
       r("Processing fees", money(proc), true) +
-      (leaseBase > 0 ? '<div class="lease-compare">Over ' + leaseTerm + ' mo you\'d pay <strong>' + money(leaseTermTotal) + "</strong> total — <strong>" + leaseMult.toFixed(2) + "×</strong> the " + money(leaseBase) + " cash price" + (leaseBo === "fmv" ? " (plus the lessor-set buyout)" : "") + ".</div>" : "") +
       "</div></div>" +
-      '<details class="lease-gotchas"><summary>📝 Read before you sign a lease</summary><ul>' +
-      "<li><strong>Evergreen auto-renewal:</strong> miss the written-notice window (30/60/90 days before term end — it varies) and the lease renews, often 12 more months at full payment. Calendar the notice date the day you sign.</li>" +
-      "<li><strong>FMV buyout is their number:</strong> the contract lets the lessor set fair market value. Get any buyout promise in writing.</li>" +
-      "<li><strong>Return shipping is yours:</strong> freight prepaid, gear in good working order, or you pay condition charges.</li>" +
-      "<li><strong>Non-cancellable + personal guarantee:</strong> you can\'t hand it back early without paying out the term; most small-ticket leases want a personal guarantee.</li>" +
-      "<li><strong>First + last in advance, plus doc fees:</strong> the real day-one cost is 2 payments + a $100–$300 admin fee, not $0.</li></ul>" +
-      '<p class="fine">Tax note: lease payments on a true lease are generally deductible when paid; bought gear is written off over years (CCA). We are not tax advisors — check your accountant.</p></details>' +
       '<p class="fine">Bought hardware is due in full at install — the monthly total above spreads it over its expected life for comparison only. ' +
       "Cable drops and setup are one-time: they never appear in the monthly column. " +
       "Leasing converts hardware to a real monthly bill — lease terms are quote-based, ask your reseller.<br>" +
-      "The lease configurator estimates from typical small-ticket rate factors — your lessor\u2019s numbers will differ.<br>" +
       "Break/fix visits are quote-based, so Expected break/fix stays blank until a vendor prices a visit — it is never estimated from training costs.<br>" +
       "Foreign-currency research prices are converted to CAD at US$1 = C$1.416 and £1 = C$1.72 (market rates, 2026-09-28) — approximate; your bank\u2019s rate will differ slightly. No foreign-currency amount ever enters a total unconverted.</p></div>";
-    const ltSel = $("lease-term"), lbSel = $("lease-buyout");
-    if(ltSel) ltSel.addEventListener("change", () => { S.leaseTerm = +ltSel.value; S.recalc(); });
-    if(lbSel) lbSel.addEventListener("change", () => { S.leaseBuyout = lbSel.value; S.recalc(); });
   }
 
   /* ---- Training materials: genuinely usable starter content, per S.sector.
@@ -905,6 +867,8 @@ function renderPayBreakout(){
     renderPayBreakout();
     renderMarginEaters();
     renderNetPlan();
+    S.totals = Object.assign(S.totals || {}, { monthly: total, save });
+    if(typeof S.renderStrip === "function") S.renderStrip();
   }
 
   function updateTotalBar(total){

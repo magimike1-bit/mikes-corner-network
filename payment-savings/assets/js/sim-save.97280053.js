@@ -4,11 +4,11 @@
  * Loaded as a second module on simulator.html; sim-core is already booted
  * by the time this module's top-level code runs (import ordering).
  */
-import { S } from './session.7a9a6abf.js';
+import { S } from './session.babf8dd5.js';
 import {
   loadTypical, renderCatalog, renderSectors, recalc, applySectorInfraDefaults,
-} from './sim-core.82ae9004.js';
-import { saveSimState, loadSimState, isConfigured, guestNudge } from './db.e09aae23.js';
+} from './sim-core.18b35d49.js';
+import { saveSimState, loadSimState, isConfigured, guestNudge } from './db.786d07d3.js';
 
 const INPUT_IDS = ["in-locations", "in-stations", "in-terminals", "in-employees",
   "in-volume", "in-rate", "in-revenue", "in-marketplace", "in-tables", "in-bar",
@@ -53,7 +53,9 @@ export function applySetup(saved) {
 }
 
 function note(msg) {
-  const n = document.getElementById("typical-note");
+  // Save feedback lives on the results step (step 6); fall back to the
+  // catalog note when the stepper shell is absent.
+  const n = document.getElementById("save-note") || document.getElementById("typical-note");
   if (n) n.textContent = msg;
 }
 
@@ -79,7 +81,9 @@ function wire() {
     loadSimState(loadId).then((saved) => {
       applySetup(saved);
       note("📂 Loaded your saved setup — adjust anything and re-save as needed.");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Saved setups land on the results step (step 6) with everything calculated.
+      if (location.hash !== "#step-6") location.hash = "#step-6";
+      else window.scrollTo({ top: 0, behavior: "smooth" });
     }).catch(() => note("That saved setup couldn't be loaded."));
   }
 }

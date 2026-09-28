@@ -69,8 +69,6 @@
 .reqs{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:6px}
 .reqs .sim-check{align-items:flex-start}
 .aio-note{font-size:1.05em;background:#fff8e1;border-left:4px solid #d99a00;border-radius:6px;padding:14px 18px;margin-top:10px;line-height:1.6}
-.sim-columns{display:grid;grid-template-columns:1fr;gap:32px}
-@media(min-width:960px){.sim-columns{grid-template-columns:1.2fr .8fr;align-items:start}}
 .tier{margin:2.2em 0}
 .tier>h3{font-size:1.6rem;margin:0 0 .2em;display:flex;align-items:center;gap:12px}
 .tier.toys>h3{color:var(--muted)}
@@ -124,30 +122,17 @@
 .pay-breakout h4{margin:0 0 10px;font-size:1.15rem}
 .pay-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:640px){.pay-cols{grid-template-columns:1fr}}
-.pay-col{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:14px 16px;min-width:0}
-/* min-width:0 lets the two columns share desktop width without forcing a horizontal scrollbar; labels wrap at word boundaries — amounts never break mid-number */
+.pay-col{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:12px 14px;min-width:0;overflow-wrap:anywhere}
+/* min-width:0 lets the two columns share desktop width without forcing a horizontal scrollbar; labels wrap instead of overflowing */
 .pay-col h5{margin:0 0 8px;font-size:.95rem;letter-spacing:.02em}
 .pay-col.now h5{color:#fbbf24}
 .pay-col.monthly h5{color:#7dd3fc}
-.pay-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;font-size:.95rem;border-bottom:1px solid rgba(255,255,255,.07)}
-.pay-row span{opacity:.85;min-width:0;overflow-wrap:break-word}
-.pay-row strong{white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
-.pay-row.total{border-bottom:none;border-top:2px solid rgba(255,255,255,.22);margin-top:6px;padding-top:10px;font-size:1.08rem;font-weight:800}
+.pay-row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;font-size:.92rem}
+.pay-row span{opacity:.85}
+.pay-row.total{border-top:1px solid rgba(255,255,255,.2);margin-top:6px;padding-top:8px;font-size:1.05rem;font-weight:800}
 .pay-note{font-size:.82rem;opacity:.75;margin-top:6px;font-style:italic}
 .pay-breakout .fine{font-size:.85rem;opacity:.7;margin-top:10px}
-/* lease configurator */
-.lease-cfg{display:flex;gap:12px;flex-wrap:wrap;margin:2px 0 6px;font-size:.85rem}
-.lease-cfg label{display:flex;align-items:center;gap:6px;opacity:.9}
-.lease-cfg select{background:#12283f;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:6px;padding:3px 6px;font-size:.85rem}
-.lease-note{font-size:.8rem;opacity:.7;margin:0 0 6px}
-.lease-compare{margin-top:8px;padding:9px 11px;background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.28);border-radius:8px;font-size:.88rem;line-height:1.45}
-.lease-gotchas{margin-top:12px;font-size:.88rem;line-height:1.5}
-.lease-gotchas summary{cursor:pointer;font-weight:700}
-.lease-gotchas ul{margin:8px 0;padding-left:20px}
-.lease-gotchas li{margin:6px 0}
-.lease-gotchas .fine{margin-top:8px}
 /* training module */
-.train-it-note{background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.25);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:.92rem}
 .train-tracks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
 @media(max-width:640px){.train-tracks{grid-template-columns:1fr}}
 .train-track{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px}
@@ -197,7 +182,6 @@
 /* visible focus states */
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.sector-card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 /* sticky running-total column on desktop */
-@media(min-width:960px){.sim-side{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}}
 .ask input[type=radio],.ask input[type=checkbox]{width:20px;height:20px;vertical-align:middle;margin-right:6px;accent-color:#0f766e}
 .map-section{margin:2.4em 0}
 #sim-map svg{width:100%;height:auto;display:block}
@@ -232,20 +216,44 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
 #floorplan text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 @media(max-width:640px){.map-toolbar{flex-direction:column;align-items:stretch}.map-view-toggle{justify-content:center}}
 
-/* network plan: recommended-connection chart */
-.net-rec { margin: 14px 0; }
-.net-rec h5 { margin: 0 0 8px; font-size: 14px; }
-.net-rec table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.net-rec th, .net-rec td { text-align: left; padding: 7px 9px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
-.net-rec th { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #6b7280; }
-.net-rec tr.diff td { background: #fffbeb; }
-.recdot { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
-.recdot.wired { background: #dbeafe; color: #1e40af; }
-.recdot.wifi { background: #ede9fe; color: #5b21b6; }
-.zdiff { color: #b45309; font-weight: 600; }
-.net-scen .bd { font-size: 12px; color: #4b5563; margin-top: 4px; }
-.net-scen .bd .ap { color: #1e40af; }
-@media (max-width: 640px){
-  .net-rec table { font-size: 12px; }
-  .net-rec th, .net-rec td { padding: 6px 6px; }
+/* ===== Guided step workflow (wf) ===== */
+/* One step visible at a time. Without JS (no .wf on <html>) everything shows. */
+.wf .wf-step{display:none}
+.wf .wf-step.active{display:block}
+/* Sticky chrome: progress bar + "Your numbers" strip */
+#wf-chrome{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.97);border-bottom:2px solid var(--line);margin:0 -24px;padding:10px 24px 12px}
+.wf-progress-head{margin-bottom:8px}
+#wf-stepcount{font-weight:800;color:var(--navy);font-size:1.05rem}
+.wf-dots{display:flex;gap:6px;list-style:none;margin:0 0 10px;padding:0;flex-wrap:wrap}
+.wf-dots button{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 12px 6px 6px;cursor:pointer;font-size:.9rem;color:var(--ink)}
+.wf-dots button:disabled{opacity:.45;cursor:default}
+.wf-dots button[aria-current="step"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.wf-dot{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;font-size:.85rem;flex:none}
+.wf-dots button:disabled .wf-dot{background:#9aa3ad}
+/* "Your numbers" strip — persistent on steps 1-5, never blank */
+.wf-strip{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--navy);color:#fff;border-radius:10px;padding:10px 16px;font-size:1.02rem}
+.wf-strip .wf-sep{opacity:.5}
+.wf-strip strong{font-weight:800}
+/* Per-step Back / Continue */
+.wf-stepnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:2em 0 0;padding:16px 0;border-top:1px solid var(--line)}
+.wf-stepnav button{border:0;border-radius:10px;padding:14px 28px;font-size:1.1rem;font-weight:700;cursor:pointer}
+.wf-back{background:#eef0f3;color:var(--navy)}
+.wf-continue{background:var(--accent-dark);color:#fff}
+.wf-skip{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+/* Step 6: save row */
+.save-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:1.6em 0}
+/* 390px: no horizontal scroll; condensed strip; sticky bottom action bar */
+@media(max-width:640px){
+  .wf-dotlabel{display:none}
+  .wf-dots button{padding:6px}
+  .wf-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:.78rem;padding:8px 10px;text-align:center;white-space:normal}
+  .wf-strip .wf-sep{display:none}
+  .wf-stepnav{position:sticky;bottom:0;z-index:60;background:rgba(255,255,255,.97);margin:1.4em -24px 0;padding:10px 24px;border-top:2px solid var(--line);flex-wrap:wrap}
+  .wf-stepnav button{padding:12px 16px;font-size:1rem}
+}
+/* Print: results step only, cleanly */
+@media print{
+  #wf-chrome,.wf-stepnav,.site-header,.hero,.sector-switch,.save-row,.cta-band{display:none!important}
+  .wf .wf-step{display:none!important}
+  .wf .wf-step[data-step="6"]{display:block!important}
 }

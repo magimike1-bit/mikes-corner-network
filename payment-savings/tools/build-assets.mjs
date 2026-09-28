@@ -62,16 +62,54 @@ for (const f of cssFiles) {
   console.log("assets/" + out);
 }
 
-// rewrite simulator.html references
-const htmlP = path.join(ROOT, "simulator.html");
-let html = fs.readFileSync(htmlP, "utf8");
-const coreHashed = "sim-core." + jsHash["sim-core.js"] + ".js";
-const cssHashed = "simulator." + cssHash["simulator.css"] + ".css";
-const probe = html.replace(/assets\/js\/sim-core(\.[0-9a-f]{8})?\.js/, "X");
-if (probe === html) throw new Error("simulator.html asset references not found");
-const html2 = html
-  .replace(/assets\/js\/sim-core(\.[0-9a-f]{8})?\.js/, "assets/js/" + coreHashed)
-  .replace(/assets\/simulator(\.[0-9a-f]{8})?\.css/, "assets/" + cssHashed);
-if (html2 !== html) { fs.writeFileSync(htmlP, html2); console.log("simulator.html updated"); }
-else console.log("simulator.html already current");
+// ---- page manifest: which entry modules + css each page needs.
+// The build rewrites unhashed `assets/js/<name>.js` / `assets/<name>.css`
+// references in each page to their content-hashed filenames. site-auth.js
+// (header sign-in widget) is injected on every page.
+const PAGES = {
+  "simulator.html":             { js: ["sim-core.js", "sim-save.js"], css: ["simulator.css"] },
+  "account.html":               { js: ["account.js"], css: [] },
+  "rate-calculator.html":       { js: ["rate-calculator.js"], css: [] },
+  "fee-tracker.html":           { js: ["fee-tracker.js"], css: [] },
+  "alerts.html":                { js: ["alerts.js"], css: [] },
+  "settlement-calculator.html": { js: ["settlement.js"], css: [] },
+  "surcharge-tool.html":        { js: ["surcharge.js"], css: [] },
+  "referrals.html":             { js: ["referrals.js"], css: [] },
+  "transparency-wall.html":     { js: ["wall.js"], css: [] },
+};
+const AUTH_JS = "site-auth.js";
+
+// rewrite asset references in every page
+let touched = [];
+for (const [page, spec] of Object.entries(PAGES)) {
+  const htmlP = path.join(ROOT, page);
+  if (!fs.existsSync(htmlP)) { console.log(page + " not present yet, skipped"); continue; }
+  let html = fs.readFileSync(htmlP, "utf8");
+  const orig = html;
+  for (const f of [...spec.js, AUTH_JS]) {
+    if (!jsHash[f]) throw new Error("unknown js entry: " + f + " (page " + page + ")");
+    const base = f.replace(/\.js$/, "").replace(/\./g, "\\.");
+    const hashed = f.replace(/\.js$/, "") + "." + jsHash[f] + ".js";
+    html = html.replace(new RegExp("assets/js/" + base + "(\\.[0-9a-f]{8})?\\.js"), "assets/js/" + hashed);
+  }
+  for (const f of spec.css) {
+    if (!cssHash[f]) throw new Error("unknown css: " + f + " (page " + page + ")");
+    const base = f.replace(/\.css$/, "").replace(/\./g, "\\.");
+    const hashed = f.replace(/\.css$/, "") + "." + cssHash[f] + ".css";
+    html = html.replace(new RegExp("assets/" + base + "(\\.[0-9a-f]{8})?\\.css"), "assets/" + hashed);
+  }
+  if (html !== orig) { fs.writeFileSync(htmlP, html); touched.push(page); }
+}
+// also keep site-auth.js hashed on pages outside the manifest (all *.html get it)
+{
+  const hashed = "site-auth." + jsHash[AUTH_JS] + ".js";
+  for (const other of fs.readdirSync(ROOT).filter(f => f.endsWith(".html") && !PAGES[f])) {
+    const htmlP = path.join(ROOT, other);
+    let html = fs.readFileSync(htmlP, "utf8");
+    const orig = html;
+    html = html.replace(/assets\/js\/site-auth(\.[0-9a-f]{8})?\.js/, "assets/js/" + hashed);
+    if (html !== orig) { fs.writeFileSync(htmlP, html); touched.push(other); }
+  }
+}
+console.log(touched.length ? "pages updated: " + touched.join(", ") : "all pages already current");
 console.log("build complete");

@@ -429,7 +429,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
    Lifecycle: every hardware option carries `life` (expected useful life in YEARS,
    researched — see _research/equipment-lifecycles.md). Amortized monthly =
    upfront ÷ (life × 12). Options without `life` fall back to amortize_months.
-   Sources researched 2026-09-28; see ~/workspace/ai-opportunities/payment-savings-research/system-monthly-costs.md. Slang/HiJiffy/Asksuite figures are sibling-sourced (third-party reporting, not that file) - re-verify from named third party before treating as sourced.
+   Sources researched 2026-09-28; see ~/workspace/ai-opportunities/payment-savings-research/system-monthly-costs.md. Lifecycle: _research/equipment-lifecycles.md. Slang/HiJiffy/Asksuite figures are sibling-sourced (third-party reporting, not that file) - re-verify from named third party before treating as sourced.
    calc: flat | per_location | per_station | per_terminal | per_employee |
          per_unit | percent_volume | percent_marketplace
    ============================================================================ */
@@ -469,9 +469,9 @@ const SIM_PRICES = {
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
           options:[
             {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
-            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Countertop — buy ~$499", upfront:499, conf:"reported", note:"$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
-            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
+            {label:"All-in-one — ~$900 (Square Register)", upfront:900, conf:"reported", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."} ]},
         stationBuilder("lanes", true, {printer:true, scanner:true, drawer:true, pinpad:true}),
         { id:"ecom", name:"Online store", calc:"per_location", map:{zone:"backoffice",icon:"🌐",label:"Web"},
           options:[ {label:"Shopify Basic — $49/mo", monthly:49, conf:"reported", note:"shopify.com/ca pricing via third-party check 2026-09"} ]},
@@ -527,20 +527,20 @@ const SIM_PRICES = {
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"dining",icon:"💳",label:"Terminal"},
           options:[
             {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
-            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Countertop — buy ~$499", upfront:499, conf:"reported", note:"$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
-            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
+            {label:"All-in-one — ~$900 (Square Register)", upfront:900, conf:"reported", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."} ]},
         { id:"kds", name:"Kitchen display screen", calc:"per_unit", unit:"screen", map:{zone:"kitchen",icon:"🍳",label:"KDS"},
           options:[
-            {label:"Budget — tablet as KDS (~$250 + $20/mo)", upfront:250, monthly:20, conf:"reported", note:"Midpoints of the reported $200–300/tablet hardware and $10–30/mo software ranges (loman.ai KDS guide; fresh.technology, accessed 2026-09-28). Square-style — the small-business default."},
+            {label:"Budget — tablet as KDS (~$250 + $20/mo)", upfront:250, monthly:20, conf:"reported", life:3.5, lifeSrc:"estimate — Apple vintage/obsolete policy; Asurion", lifeConf:"Low", note:"Midpoints of the reported $200–300/tablet hardware and $10–30/mo software ranges (loman.ai KDS guide; fresh.technology, accessed 2026-09-28). Square-style — the small-business default."},
             {label:"Purpose-built — commercial screen (~$550 + $25/mo)", upfront:550, monthly:25, conf:"reported", note:"Midpoint of the reported $400–700/screen hardware range + monthly software (loman.ai, accessed 2026-09-28). Epson/Toast class; 22in touchscreens ~$700 (techryde.com, accessed 2026-09-28)."},
             {label:"TouchBistro KDS — ~$89/mo", monthly:89, conf:"reported", note:"third-party review sites; bring your own screen"},
             {label:"Wall/pole mount — quote-based", monthly:0, conf:"estimate", info_only:true, note:"mounts vary by screen size — price with the screen"} ]},
         { id:"kprinter", name:"Kitchen / bar printer", calc:"per_unit", unit:"printer", map:{zone:"kitchen",icon:"🧾",label:"Printer"},
           options:[
-            {label:"Used/refurb thermal — ~$8/mo equiv.", upfront:300, conf:"reported", note:"$225–375 band (Kijiji, reported) ÷ 36 mo"},
-            {label:"New thermal (Epson class) — ~$16/mo equiv.", monthly:16, conf:"illus", note:"~$575 new ÷ 36 mo"},
-            {label:"Impact (Epson TM-U220B) — $774", upfront:774, conf:"reported", note:"DirectDial CAD, 2026-09-28 (MSRP $1,140) — kitchen-rated, survives heat and grease"} ]},
+            {label:"Used/refurb thermal — ~$300", upfront:300, conf:"reported", life:5, lifeSrc:"FavorPOS (printers 3–5 yrs); Epson TM-T88VI (MTBF 360k hrs)", lifeConf:"Medium", note:"$225–375 band (Kijiji, reported); ≈$5/mo over 5-yr expected life"},
+            {label:"New thermal (Epson class) — ~$575", upfront:575, conf:"reported", life:5, lifeSrc:"FavorPOS (printers 3–5 yrs); Epson TM-T88VI (MTBF 360k hrs)", lifeConf:"Medium", note:"~$575 new; ≈$9.58/mo over 5-yr expected life. Epson Spare-in-the-Air advance replacement available — see Support."},
+            {label:"Impact (Epson TM-U220B) — $774", upfront:774, conf:"reported", note:"DirectDial CAD, 2026-09-28 (MSRP $1,140) — kitchen-rated, survives heat and grease. Onsite install ~US$99/printer (pointofsalepos.com, within 25 mi of major markets, with bundles)."} ]},
         stationBuilder("bar", false, {printer:true, pinpad:true}),
         { id:"sched", name:"Staff scheduling", calc:"per_location",
           options:[ {label:"7shifts — ~$90/mo typical", monthly:89.99, conf:"reported", note:"entry $40–$45, Pro ~$90; third-party"} ]},
@@ -573,7 +573,7 @@ const SIM_PRICES = {
         { id:"reserv", name:"Reservation system", calc:"per_location",
           options:[ {label:"OpenTable — ~$249/mo", monthly:249, conf:"reported", note:"third-party figure + per-cover fees; unverified"} ]},
         { id:"tablets", name:"Ordering tablets (tableside / line-busting)", calc:"per_unit", unit:"tablet", map:{zone:"dining",icon:"📱",label:"Tablet"},
-          options:[ {label:"~$8/mo equiv. per tablet", monthly:8, conf:"estimate", note:"generic 10-inch tablet ~$250 ÷ 36 mo; wireless — no cable run needed"},
+          options:[ {label:"Generic 10-inch tablet — ~$250", upfront:250, conf:"estimate", note:"generic 10-inch tablet ~$250; ≈$5.21/mo over 4-yr expected life (iPadOS/app minimum-version creep); wireless — no cable run needed"},
             {label:"Heckler WindFall stand — $155.99", upfront:155.99, conf:"reported", note:"Insight Canada CAD, 2026-09-28 — countertop tablet stand"} ]}
       ],
       zones: [
@@ -596,13 +596,13 @@ const SIM_PRICES = {
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"counter",icon:"💳",label:"Terminal"},
           options:[
             {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
-            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Countertop — buy ~$499", upfront:499, conf:"reported", note:"$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
-            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
+            {label:"All-in-one — ~$900 (Square Register)", upfront:900, conf:"reported", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."} ]},
         stationBuilder("counter", false, {printer:true, pinpad:true}),
         { id:"kds", name:"Kitchen display / KDS-lite", calc:"per_unit", unit:"screen", map:{zone:"kitchen",icon:"🍳",label:"KDS"},
           options:[
-            {label:"Budget — tablet as KDS (~$250 + $20/mo)", upfront:250, monthly:20, conf:"reported", note:"Midpoints of the reported $200–300/tablet hardware and $10–30/mo software ranges (loman.ai KDS guide; fresh.technology, accessed 2026-09-28)."},
+            {label:"Budget — tablet as KDS (~$250 + $20/mo)", upfront:250, monthly:20, conf:"reported", life:3.5, lifeSrc:"estimate — Apple vintage/obsolete policy; Asurion", lifeConf:"Low", note:"Midpoints of the reported $200–300/tablet hardware and $10–30/mo software ranges (loman.ai KDS guide; fresh.technology, accessed 2026-09-28)."},
             {label:"KDS software only — ~$30/mo per screen", monthly:30, conf:"reported", note:"third-party pricing guides; bring your own tablet ($200–300)"},
             {label:"Wall/pole mount — quote-based", monthly:0, conf:"estimate", info_only:true, note:"mounts vary by screen size — price with the screen"} ]},
                 { id:"inventory", name:"Inventory management", calc:"per_location", map:{zone:"backoffice",icon:"📦",label:"Inv"},
@@ -631,7 +631,7 @@ const SIM_PRICES = {
         { id:"menuboard", name:"Digital menu boards", calc:"per_unit", unit:"screen",
           options:[ {label:"~$25/mo equiv. per screen", monthly:25, conf:"estimate", note:"estimate incl. hardware + software"} ]},
         { id:"tablets", name:"Ordering tablets (line-busting / tableside)", calc:"per_unit", unit:"tablet", map:{zone:"counter",icon:"📱",label:"Tablet"},
-          options:[ {label:"~$8/mo equiv. per tablet", monthly:8, conf:"estimate", note:"generic 10-inch tablet ~$250 ÷ 36 mo; wireless — no cable run needed"},
+          options:[ {label:"Generic 10-inch tablet — ~$250", upfront:250, conf:"estimate", note:"generic 10-inch tablet ~$250; ≈$5.21/mo over 4-yr expected life (iPadOS/app minimum-version creep); wireless — no cable run needed"},
             {label:"Heckler WindFall stand — $155.99", upfront:155.99, conf:"reported", note:"Insight Canada CAD, 2026-09-28 — countertop tablet stand"} ]}
       ],
       zones: [
@@ -653,9 +653,9 @@ const SIM_PRICES = {
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal (front desk + outlets)", calc:"per_terminal", map:{zone:"frontdesk",icon:"💳",label:"Terminal"},
           options:[
             {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
-            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Countertop — buy ~$499", upfront:499, conf:"reported", note:"$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
-            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
+            {label:"All-in-one — ~$900 (Square Register)", upfront:900, conf:"reported", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."} ]},
         stationBuilder("frontdesk", false, {printer:true, pinpad:true}),
         { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
           options:[ {label:"QuickBooks Plus — $110/mo", monthly:110, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
@@ -686,9 +686,9 @@ const SIM_PRICES = {
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
           options:[
             {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
-            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Countertop — buy ~$499", upfront:499, conf:"reported", note:"$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
-            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
+            {label:"All-in-one — ~$900 (Square Register)", upfront:900, conf:"reported", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."} ]},
         stationBuilder("lanes", true, {printer:true, scanner:true, drawer:true, scale:true, pinpad:true}),
                 { id:"inventory", name:"Inventory management", calc:"per_location", map:{zone:"backoffice",icon:"📦",label:"Inv"},
           manualDef:{hours:5, unit:"manager hours/month", freq:"mo", why:"Manual counts run 4–6 manager hrs/month (QSR Web citing SynergySuite research, Sep 2025)."},
@@ -743,9 +743,9 @@ const SIM_PRICES = {
           "and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.", name:"Payment terminal", calc:"per_terminal", map:{zone:"reception",icon:"💳",label:"Terminal"},
           options:[
             {label:"Countertop — lease $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", lease:true, note:"Moneris published lease"},
-            {label:"Countertop — buy ~$499 (~$13.86/mo equiv.)", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — Moneris Go starter bundle"},
+            {label:"Countertop — buy ~$499", upfront:499, conf:"reported", note:"$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"},
             {label:"Mobile/handheld — quote-based", monthly:0, conf:"estimate", info_only:true, note:"tableside + line-busting; price varies by model — get a quote"},
-            {label:"All-in-one — ~$900 (~$25/mo equiv.)", monthly:25, conf:"illus", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca) ÷ 36 mo"} ]},
+            {label:"All-in-one — ~$900 (Square Register)", upfront:900, conf:"reported", bundled:true, note:"Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."} ]},
         stationBuilder("reception", false, {printer:true, pinpad:true}),
         { id:"payroll", name:"Payroll", calc:"per_employee", base:40, map:{zone:"backoffice",icon:"💰",label:"Pay"},
           options:[ {label:"Wagepoint Unlimited — $40 + $6/employee", monthly:6, conf:"reported", note:"base $40/mo + $6 per employee"} ]},
@@ -764,11 +764,11 @@ const SIM_PRICES = {
     }
   },
   /* ---- Infrastructure tier: shared across sectors. upfront = one-time cost,
-     shown as monthly equivalent (÷ 36) and labeled. monthly = recurring. ---- */
+     shown as monthly equivalent (÷ expected life in months) and labeled. monthly = recurring. ---- */
   infra: [
-    { id:"drops", name:"Network cable drops (Cat6, installed)", calc:"per_unit", unit:"drop",
+    { id:"drops", name:"Network cable drops (Cat6, installed)", calc:"per_unit", unit:"drop", noSupport:true,
       options:[
-        {label:"Standard drop — $175", upfront:175, conf:"reported", note:"$125–300 band; fixr/monoprice 2026"},
+        {label:"Standard drop — $175", upfront:175, conf:"reported", note:"$125–300 band; aligns with US$150–250 commercial per-drop research (datawiresolutions.com, 2026-09-28). Building asset: 10–20+ yr life. Also listed under Installation & setup — use one, not both."},
         {label:"Difficult drop — $300", upfront:300, conf:"reported", note:"finished walls, conduit, plenum"} ]},
     { id:"ap", name:"Wi-Fi access point", calc:"per_unit", unit:"AP",
       options:[
@@ -811,18 +811,21 @@ const SIM_PRICES = {
      per-hardware install hours × the adjustable tech rate. ---- */
   install: [
     { id:"inst-mountkit", name:"Mounting kits / brackets — materials", calc:"per_unit", unit:"kit",
-      options:[ {label:"Quote-based — varies by mount type", monthly:0, conf:"estimate", info_only:true, note:"Pole, wall and counter mounts differ; your installer prices the kit with the device."} ]},
+      options:[ {label:"Quote-based — varies by mount type", monthly:0, conf:"estimate", info_only:true, note:"Mount HARDWARE is retail (e.g. POS wall mount ~£33.60 ex VAT, printdesigns.com); install LABOR is the quote part — no published per-device install-labor price found. Ask your local POS installer."} ]},
     { id:"inst-cabledrop", name:"Cable drops — per run", calc:"per_unit", unit:"run",
-      sub:"Pulled by a low-voltage contractor — one-time, paid at install, never monthly.",
-      options:[ {label:"Quote-based — varies by site", monthly:0, conf:"estimate", info_only:true, note:"New build with open ceilings is cheap; retrofit through finished walls costs more. Get per-run pricing."} ]},
+      sub:"Pulled by a low-voltage contractor — one-time, paid at install, never monthly. Building asset: outlives the POS by 10–20+ yrs.",
+      options:[ {label:"US$150–250 per Cat6 drop — midpoint US$200", upfront:200, conf:"reported", note:"US$150–250 commercial per drop (datawiresolutions.com); US$175–285 tested/certified (Rx Technology); harder Cat6A/plenum/after-hours runs US$200–350+. USD — plus exchange. Same work as Infrastructure → Network cable drops above — use one, not both."},
+        {label:"Quote-based — varies by site", monthly:0, conf:"estimate", info_only:true, note:"New build with open ceilings is cheap; retrofit through finished walls costs more. Get per-run pricing."} ]},
     { id:"inst-netconfig", name:"Network config — VLAN + business Wi-Fi", calc:"flat",
-      options:[ {label:"Quote-based — per site", monthly:0, conf:"estimate", info_only:true, note:"Segmenting card traffic from guest Wi-Fi; often done remotely in a few hours."} ]},
+      options:[ {label:"Quote-based — per site", monthly:0, conf:"estimate", info_only:true, note:"No standalone published price — usually bundled with the install. Context: full Wi-Fi install US$2,500–15,000+ depending on coverage; general IT labor US$75–200/hr as proxy (thenetworkinstallers.com). Config survives hardware refresh if documented."} ]},
     { id:"inst-possetup", name:"POS software setup & configuration", calc:"per_location",
-      options:[ {label:"Quote-based — per location", monthly:0, conf:"estimate", info_only:true, note:"Taxes, tenders, receipts, users and permissions. Bigger catalog = more hours."} ]},
+      options:[ {label:"US$500–1,500 professional install — midpoint US$1,000", upfront:1000, conf:"reported", note:"US$500–1,500 professional POS installation per location (theposexchange.com); US$200–1,000 one-time setup/onboarding (swyftpos.com); Toast-era US$300–500. USD — plus exchange. Industry benchmark: US$1,000–5,000 total hidden implementation on top of hardware + software quotes."},
+        {label:"Quote-based — per location", monthly:0, conf:"estimate", info_only:true, note:"Taxes, tenders, receipts, users and permissions. Bigger catalog = more hours."} ]},
     { id:"inst-menubuild", name:"Menu / product catalog build", calc:"per_location",
-      options:[ {label:"Quote-based — per location", monthly:0, conf:"estimate", info_only:true, note:"A 20-item café menu is an afternoon; a 10,000-SKU grocery catalog is a project."} ]},
+      options:[ {label:"Quote-based — per location", monthly:0, conf:"estimate", info_only:true, note:"No standalone published price — usually bundled with implementation (Toast onboarding does menu build; Rezku includes one-on-one training + custom menu build). A 20-item café menu is an afternoon; a 10,000-SKU grocery catalog is a project."} ]},
     { id:"inst-training", name:"Staff training — per session", calc:"per_unit", unit:"session",
-      options:[ {label:"Quote-based — per session", monthly:0, conf:"estimate", info_only:true, note:"Usually 1–2 sessions at go-live; complex setups (KDS, inventory) need more. This is the installer's fee — your staff's paid time is costed in the Training section below."} ]}
+      options:[ {label:"US$100–500 per session — midpoint US$300", upfront:300, conf:"reported", note:"US$100–500 per session (theposexchange.com); Toast-era US$100–200; software proxy RetailEdge US$30/15 min. USD — plus exchange. This is the installer's fee — your staff's paid time is costed in the Training section below."},
+        {label:"Quote-based — per session", monthly:0, conf:"estimate", info_only:true, note:"Usually 1–2 sessions at go-live; complex setups (KDS, inventory) need more."} ]}
   ],
   /* ---- Training: the human cost of a new system. tr-initial is one-time (pay-now);
      tr-ongoing repeats with turnover (monthly). Computed from TRAIN, not options. ---- */
@@ -831,6 +834,116 @@ const SIM_PRICES = {
     { id:"tr-ongoing", name:"New-hire training — ongoing", calc:"training_ongoing" }
   ]
 };
+/* ---- Equipment lifecycle data (researched 2026-09-28).
+   _research/equipment-lifecycles.md — every row carries source + confidence.
+   est:true = thin evidence, rendered as an explicit "(estimate)" tag, never a fact.
+   Midpoint (yrs) feeds the math: monthly equivalent = upfront ÷ (yrs × 12). ---- */
+const LIFECYCLE = {
+  terminal:  {yrs:6,  range:"5–7",   conf:"Medium",      src:"FavorPOS lifespan guide; merchantequip.com", note:"PCI PTS version expiry usually retires terminals before they wear out"},
+  "station:printer": {yrs:5, range:"3–5", conf:"Medium", src:"FavorPOS (printers 3–5 yrs); Epson TM-T88VI spec", note:"thermal receipt printer class"},
+  "station:scanner": {yrs:6, range:"5–7", conf:"Medium", src:"FavorPOS (barcode scanners 5–7 yrs with cleaning)"},
+  "station:drawer":  {yrs:12, range:"10–15", conf:"Medium", src:"FavorPOS ('over 10 years'); APG Series 4000 (4M cycles)", note:"cash drawers rarely die of wear"},
+  "station:scale":   {yrs:8, range:"7–10", conf:"Low", est:true, src:"estimate — Mettler Toledo publishes no year figure"},
+  "station:pinpad":  {yrs:6, range:"5–7", conf:"Medium", src:"merchantequip.com (100k-hr design life); PCI SSC PTS bulletin", note:"PTS approval expiry is the real retirement driver"},
+  "station:aio":     {yrs:6, range:"5–7", conf:"Medium", src:"POS terminal class — FavorPOS; merchantequip.com", note:"all-in-one: one part dies, the whole box goes for repair"},
+  labelprinter: {yrs:5, range:"5", conf:"Low", est:true, src:"estimate — LabelValue; ShipScience; DYMO publishes no figure"},
+  custdisplay:  {yrs:8, range:"7–10", conf:"Medium", src:"Display Industry Association (LCD 50k–60k hrs)", note:"panel backlight life"},
+  pinpad:  {yrs:6, range:"5–7", conf:"Medium", src:"merchantequip.com; PCI SSC PTS bulletin", note:"PTS approval expiry is the real retirement driver"},
+  scanner: {yrs:6, range:"5–7", conf:"Low", est:true, src:"estimate — Zebra publishes no MTBF for DS9300; FavorPOS handheld 5–7 yrs", note:"presentation scanner class"},
+  signage: {yrs:8, range:"7–10", conf:"Medium", src:"commercial display panel class — Display Industry Association"},
+  selfcheckout: {yrs:6, range:"5–7", conf:"Medium", src:"self-service kiosk market report; Firstouch buying guide", note:"chassis outlasts compute/payment modules"},
+  kds:     {yrs:6, range:"5–7", conf:"Medium", src:"Oracle KDS specs (rated 60°C); Elo 1715L (MTBF 50k hrs)", note:"purpose-built screens; consumer tablets used as KDS run 3–4 yrs (estimate)"},
+  kprinter: {yrs:4, range:"3–5", conf:"Medium", src:"FavorPOS (printers 3–5 yrs); Epson TM-U220 (MTBF 180k hrs)", note:"use the lower end in hot/greasy kitchens"},
+  handheld: {yrs:4, range:"3–5", conf:"High", src:"Zebra white paper citing VDC Research (rugged handheld upgrade cycles 3–5 yrs)"},
+  mprinter: {yrs:3.5, range:"3–4", conf:"Low", est:true, src:"estimate — Epson TM-P20 datasheet; batteries (~2-yr) are the limiter"},
+  tablets: {yrs:4, range:"4–5", conf:"Medium", src:"Macworld/AppleInsider (iPadOS support; vintage 5–7); Asurion", note:"always-on POS use retires tablets sooner than consumer use"},
+  kiosk:   {yrs:6, range:"5–7", conf:"Medium", src:"self-service kiosk market report; Firstouch buying guide"},
+  menuboard: {yrs:8, range:"7–10", conf:"Medium", src:"commercial display panel class — Display Industry Association"},
+  drops:   {yrs:15, range:"10–20+", conf:"Medium", src:"industry: cable plant outlives POS gear (2026-09-28)", note:"building asset, not hardware — amortize per location, never monthly"},
+  ap:      {yrs:4, range:"3–5", conf:"Medium", src:"Hummingbird Networks (refresh on firmware-support end / density)"},
+  switch:  {yrs:6, range:"5–7", conf:"Medium-High", src:"Hummingbird Networks (~5 yrs); Allegiant (5–7); Stratus/Meraki (5–10)"},
+  firewall:{yrs:4, range:"4–5", conf:"Medium", src:"Hummingbird Networks (~5 yrs routers); Cradlepoint subscription terms"},
+  ups:     {yrs:5, range:"5", conf:"Low", est:true, src:"estimate — batteries (~3–5 yrs) are the limiter; the unit lasts longer"},
+  failover:{yrs:4, range:"4–5", conf:"Medium", src:"Hummingbird Networks (~5 yrs); Cradlepoint NetCloud 1/3/5-yr terms"},
+  bopc:    {yrs:4, range:"4–5", conf:"High", src:"GDS Technology (4–5 yrs); Seras IT (3–5); IDC via TechNewsWorld"}
+};
+/* ---- Support plan data: three types per option (Joseph's model), researched 2026-09-28.
+   contract = monthly contract w/ on-site tech · breakfix = pay per incident ·
+   hybrid = lighter contract + per-incident. quote:true = no published price —
+   renders "quote-based", never invented. adv:true = advance replacement. ---- */
+const EPSON_SITA = {
+  contract:{label:"Monthly on-site — quote-based", quote:true, note:"Epson's advance options are annual, not monthly; true on-site is VAR-quoted — ask Epson Preferred Plus / reseller"},
+  breakfix:{label:"Per-visit — quote-based", quote:true, note:"no published per-incident price — ask Epson reseller / authorized service"},
+  hybrid:{label:"Spare-in-the-Air 1-yr — US$24.78", upfront:24.78, years:1, adv:true, note:"next-business-day whole-unit exchange — advance replacement (order by 1pm Pacific; geographic limits). US$24.78 reseller retail (barcodesinc.com); flyer MSRP US$16; 3-yr US$43.54–44, 5-yr US$77.84–78"},
+  src:"barcodesinc.com; Epson Extended Service Plans flyer CPD-61012R4 (accessed 2026-09-28)"};
+const ZEBRA_ONECARE = {
+  contract:{label:"Monthly on-site — quote-based", quote:true, note:"Zebra sells multi-year annual contracts, not monthly on-site; any monthly on-site deal is a VAR custom SLA — ask a Zebra partner (ScanSource/BlueStar)"},
+  breakfix:{label:"Depot repair — quote-based", quote:true, note:"out-of-contract repairs quoted case-by-case at a Zebra authorized depot"},
+  hybrid:{label:"OneCare Select 3-yr — ~US$37.80", upfront:37.80, years:3, adv:true, note:"comprehensive incl. accidental damage + 24×7 support; Select = same-day exchange tier (advance-replacement-style). Example DS2208 Select 3-yr US$37.80 (barcodediscount.com) — confirm price for your model; must buy within 30 days of device"},
+  src:"barcodediscount.com; atlasrfidstore.com (accessed 2026-09-28)"};
+const MONERIS_SUPPORT = {
+  contract:{label:"Included in rental — 24/7 Canadian support", included:true, note:"rental includes 24/7 Canadian support + Moneris right to substitute equivalent gear (PAYD agreement) — no published advance-swap timing; accidental breakage not confirmed free"},
+  breakfix:{label:"Lost/stolen — quote-based", quote:true, note:"merchant responsible for safekeeping; charges may apply — ask Moneris rep (PAYD agreement)"},
+  hybrid:{label:"The rental is the hybrid", included:true, note:"monthly rental + bundled replacement right; breakage liability and swap SLA are contract/quote-based — ask Moneris rep"},
+  src:"moneris.com/en/solutions/terminals/pos; PAYD Merchant Agreement (accessed 2026-09-28)"};
+const ELOCARE_AUR = {
+  contract:{label:"EloCare On-Site Exchange — quote-based", quote:true, note:"next-business-day on-site swap, up to 5 yrs — the true monthly-contract shape, but price is quote-based; ask Elo reseller"},
+  breakfix:{label:"Per-visit — quote-based", quote:true, note:"ask Elo reseller"},
+  hybrid:{label:"EloCare AUR 3-yr — ~£33/yr", upfront:98.60, years:3, adv:true, note:"replacement shipped next business day if phone support can't fix it; return dead unit in 15 days — advance replacement. £98.60/3-yr (qual.co.uk, UK reseller) — confirm Canada pricing"},
+  src:"barcodefactory.com (EloCare onepager); online.qual.co.uk (accessed 2026-09-28)"};
+const SQUARE_SUPPORT = {
+  contract:{label:"No monthly plan published — quote-based", quote:true, note:"no Square-sold monthly hardware support plan found — ask Square Canada support"},
+  breakfix:{label:"Per-incident — quote-based", quote:true, note:"under included warranty Square ships a replacement and you return the dead unit in 14 days (advance-replacement-like, defects only)"},
+  hybrid:{label:"Buy a spare — no Square hybrid tier", quote:true, note:"Square gear is cheap and self-installed — the real 'hybrid' for an owner-operator is a spare reader/printer on the shelf, not a contract"},
+  src:"stocktitan.com (Square Register Canada launch); Amazon warranty PDF (accessed 2026-09-28)"};
+const QUOTE_SUPPORT = {
+  contract:{label:"Monthly on-site — quote-based", quote:true, note:"monthly on-site POS hardware contracts are almost always VAR/ISV custom deals — ask your reseller (rare published exception: Epos Now Canada C$55–75/device/mo)"},
+  breakfix:{label:"Per-visit — quote-based", quote:true, note:"VARs quote per job (travel + parts vary); no POS vendor publishes per-visit pricing"},
+  hybrid:{label:"Annual advance-replacement — quote-based", quote:true, note:"the hybrid tier with the most published prices (Epson SITA, Star Swap-A-Star, Zebra Select) — ask your reseller for your model"},
+  src:"support pricing research 2026-09-28"};
+const SUPPORT_BY_LABEL = {
+  "Impact (Epson TM-U220B) — $774": EPSON_SITA,
+  "New thermal (Epson class) — ~$575": EPSON_SITA,
+  "Presentation — Zebra DS9308 ~$416.99": ZEBRA_ONECARE,
+  "Zebra TC26 — ~$882.53": ZEBRA_ONECARE,
+  "Countertop — lease $34.95/mo (Moneris Go)": MONERIS_SUPPORT,
+  "Moneris Go Restaurant — $64.94/mo": MONERIS_SUPPORT,
+  "Purpose-built — commercial screen (~$550 + $25/mo)": ELOCARE_AUR
+};
+const SUPPORT_BY_ADDON = {
+  "station:printer": EPSON_SITA,
+  "station:scanner": ZEBRA_ONECARE,
+  "station:aio": SQUARE_SUPPORT
+};
+/* ---- Stamp every option/addon with its parent item id, then attach researched
+   lifecycle fallback + support blocks. Runs once at load; renderers use _item. ---- */
+(function stampCatalog(){
+  const tiers = [];
+  Object.values(SIM_PRICES.sectors).forEach(sec => { tiers.push.apply(tiers, sec.needs||[]); tiers.push.apply(tiers, sec.toys||[]); });
+  tiers.push.apply(tiers, SIM_PRICES.infra||[]);
+  tiers.push.apply(tiers, SIM_PRICES.install||[]);
+  tiers.forEach(it => {
+    (it.options||[]).forEach(o => {
+      o._item = it.id;
+      if(SUPPORT_BY_LABEL[o.label]) o.support = SUPPORT_BY_LABEL[o.label];
+      else if(!o.support && o.upfront && LIFECYCLE[it.id] && !it.noSupport) o.support = QUOTE_SUPPORT;
+    });
+    if(it.builder){
+      (it.addons||[]).forEach(a => {
+        a._item = it.id + ":" + a.id;
+        if(a.upfront) a.support = SUPPORT_BY_ADDON[it.id + ":" + a.id] || QUOTE_SUPPORT;
+      });
+      if(it.aio){ it.aio._item = it.id + ":aio"; it.aio.support = SQUARE_SUPPORT; }
+    }
+  });
+})();
+/* Resolved lifecycle for an option: per-option override wins, else the LIFECYCLE
+   table by parent item, else null (legacy fallback applies). */
+function lifeDataFor(opt){
+  if(!opt) return null;
+  if(opt.life) return {yrs:+opt.life, range:(+opt.life)+" yrs", conf:opt.lifeConf||"Medium", src:opt.lifeSrc||"", est:!opt.lifeSrc};
+  return (opt._item && LIFECYCLE[opt._item]) || null;
+}
 /* ---- Recommendation tiers: ESSENTIAL / RECOMMENDED / OPTIONAL.
    Every item gets a concrete, owner-voiced "why". Keyed "sector:id", with
    "*:id" fallback for shared items (infrastructure, station builder). ---- */
@@ -1106,11 +1219,14 @@ const REC_TIERS = {
      divisor (meta.amortize_months) for anything without researched lifecycle data.
      Sources: _research/equipment-lifecycles.md (2026-09-28). ---- */
   function lifeMonths(opt){
-    const yrs = opt && opt.life ? +opt.life : (SIM_PRICES.meta.amortize_months / 12);
+    const L = lifeDataFor(opt);
+    const yrs = L ? L.yrs : (SIM_PRICES.meta.amortize_months / 12);
     return Math.max(1, Math.round(yrs * 12));
   }
   function lifeLabel(opt){
-    const yrs = opt && opt.life ? +opt.life : (SIM_PRICES.meta.amortize_months / 12);
+    const L = lifeDataFor(opt);
+    if(L) return "~" + L.range + (L.est ? " (estimate)" : "");
+    const yrs = SIM_PRICES.meta.amortize_months / 12;
     return yrs + (yrs === 1 ? " yr" : " yrs");
   }
 
@@ -1152,7 +1268,7 @@ const REC_TIERS = {
   function supportPlanPriced(opt, plan){
     const s = opt && opt.support && opt.support[plan];
     if(!s) return false;
-    return !!(s.upfront || s.monthly || s.perIncident);
+    return !!(s.upfront || s.monthly || s.perIncident || s.included);
   }
 
   function itemMonthly(item, inp){
@@ -1508,12 +1624,12 @@ const REC_TIERS = {
   function supportMiniSelect(supObj, curPlan, curInc, attr, val){
     const labels = {contract:"📋 Monthly contract", breakfix:"🔧 Break/fix per visit", hybrid:"🧩 Hybrid"};
     let h = '<select ' + attr + '="' + val + '" aria-label="Support plan">';
-    h += '<option value="none"' + (curPlan === "none" ? " selected" : "") + ">No support</option>";
+    h += '<option value="none"' + (curPlan === "none" ? " selected" : "") + '>No support</option>';
     ["contract","breakfix","hybrid"].forEach(p => {
       const s = supObj[p]; if(!s) return;
       const fake = {support: supObj};
       const cost = supportPlanPriced(fake, p) ? " — " + money(supportMonthlyFor(fake, p, curInc)) + "/mo" : " — quote-based";
-      h += '<option value="' + p + '"' + (curPlan === p ? " selected" : "") + ">" + labels[p] + cost + "</option>";
+      h += '<option value="' + p + '"' + (curPlan === p ? " selected" : "") + '>" + labels[p] + cost + "</option>';
     });
     return h + "</select>";
   }
@@ -2034,6 +2150,7 @@ const REC_TIERS = {
   function planCostTxt(s, plan){
     if(!s) return "quote-based";
     if(plan === "contract"){
+      if(s.included) return "included";
       const bits = [];
       if(s.monthly) bits.push(money(s.monthly) + "/mo");
       if(s.upfront) bits.push("$" + s.upfront.toLocaleString("en-CA") + " upfront");
@@ -2139,8 +2256,8 @@ const REC_TIERS = {
           '<span class="conf ' + opt.conf + '">' + CONF_LABEL[opt.conf] + "</span></div>" +
           recWhy(item) +
           '<div class="detail">' + (opt.note || "") + "</div>";
-        if(opt.upfront) inner += '<div class="life-line">⏳ Expected life: <strong>~' + lifeLabel(opt) + "</strong>" + (opt.lifeSrc ? ' <span class="life-src">(' + opt.lifeSrc + ")</span>" : "") +
-          (installHrsLabel(opt) ? ' · 🔧 Install: <strong>' + installHrsLabel(opt) + "</strong>" + (opt.installVar ? ' <span class="life-src">(' + opt.installVar + ")</span>" : "") : "") + "</div>";
+        if(opt.upfront){ const LD = lifeDataFor(opt); inner += '<div class="life-line">⏳ Expected life: <strong>' + lifeLabel(opt) + "</strong>" + (LD ? ' <span class="life-src">(' + LD.conf + " confidence" + (LD.est ? " — estimate" : "") + (LD.src ? " — " + LD.src : "") + ")</span>" : (opt.lifeSrc ? ' <span class="life-src">(' + opt.lifeSrc + ")</span>" : "")) +
+          (installHrsLabel(opt) ? ' · 🔧 Install: <strong>' + installHrsLabel(opt) + "</strong>" + (opt.installVar ? ' <span class="life-src">(' + opt.installVar + ")</span>" : "") : "") + "</div>"; }
         if(opt.support) inner += supportBox(item, st, opt);
         if(item.id === "terminal" && st.checked && getInputs().terminals <= 1)
           inner += '<div class="risk-line">' + SINGLE_TERMINAL_RISK + "</div>";
@@ -2525,7 +2642,7 @@ const REC_TIERS = {
       const one = s.drops * perRun;
       h += '<div class="sc' + (s.rec ? " rec" : "") + '"><div class="t">' + s.t + '</div>' +
         '<div class="c">' + money(one) + '</div>' +
-        '<div class="m">one-time · ~' + money(one / 36) + '/mo equiv. (' + s.drops + ' runs)</div>' +
+        '<div class="m">one-time · ~' + money(one / 180) + '/mo equiv. over 15-yr cable life (' + s.drops + ' runs)</div>' +
         '<div class="n">' + s.n + '</div></div>';
     });
     h += "</div></div>";

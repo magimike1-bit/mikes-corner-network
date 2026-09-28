@@ -928,6 +928,43 @@ const SUPPORT_BY_ADDON = {
   "station:scanner": ZEBRA_ONECARE,
   "station:aio": SQUARE_SUPPORT
 };
+/* ---- Average tech install time per hardware item (researched 2026-09-28).
+   h: hours on site (number or [min,max] range; midpoint feeds the math).
+   est:true = no published figure — a labelled estimate, never a fact.
+   Per-option overrides win; the stamp below fills the rest from this table. ---- */
+const INSTALL_HRS = {
+  terminal:  {h:[0.5,2], c:"Medium", s:"ivepos.com (1–2 terminal install FAQ)", v:"20-min swap on existing network vs 2+ hr for new config, key-injection and cable routing; 6-lane rollout ~1 day"},
+  "station:printer": {h:[0.25,1], c:"Low", est:true, s:"estimate — no published per-device figure", v:"driver/POS config + drawer-kick test; longer if networked (IP) vs USB"},
+  "station:scanner": {h:[0.25,0.5], c:"Low", est:true, s:"estimate", v:"pairing + test scans; batch programming for fleets"},
+  "station:drawer":  {h:[0.25,0.5], c:"Low", est:true, s:"estimate", v:"kick-cable to printer/terminal + pop test"},
+  "station:scale":   {h:[0.75,2], c:"Low", est:true, s:"estimate", v:"PLU count drives time (dozens vs hundreds); label setup; legal-for-trade calibration"},
+  "station:pinpad":  {h:[0.25,0.75], c:"Low", est:true, s:"estimate", v:"plug & pair; longer with key injection or drive-thru mount"},
+  "station:aio":     {h:[0.5,2], c:"Low", est:true, s:"estimate — countertop terminal class (ivepos.com)", v:"self-install common; longer for new network/config"},
+  pinpad:  {h:[0.25,0.75], c:"Low", est:true, s:"estimate", v:"plug & pair; longer with key injection"},
+  kprinter: {h:[0.5,1.5], c:"Low", est:true, s:"estimate", v:"mounting + network routing + kitchen station mapping"},
+  scanner: {h:[0.5,1], c:"Low", est:true, s:"estimate", v:"stand positioning, config, lane integration testing"},
+  labelprinter: {h:[0.5,1], c:"Low", est:true, s:"estimate", v:"standalone USB quick; scale/printer integration doubles it"},
+  kds:     {h:[1,3], c:"Low", est:true, s:"estimate", v:"wall mount + power/network + station config; multi-station routing adds time"},
+  custdisplay: {h:[0.5,1], c:"Low", est:true, s:"estimate", v:"pole-mount assembly + HDMI/USB; ceiling-mount longer"},
+  signage: {h:[2,4], c:"Medium", s:"crowntv-us.com; aiscreen.io", v:"per 3–6-screen cluster; single wall-mount $100–300 vs cluster $400–1,200; drive-thru outdoor 4–8+ hr"},
+  menuboard: {h:[2,4], c:"Medium", s:"crowntv-us.com; aiscreen.io", v:"per 3–6-screen cluster; drive-thru outdoor 4–8+ hr"},
+  selfcheckout: {h:[4,8], c:"Medium-Low", s:"CVS install manual (20–40 min software load/lane); accio.com", v:"assembly + anchoring + payment config; go-live pilots run 1–2 weeks (menu/payment config, not wrench time)"},
+  kiosk:   {h:[2,4], c:"Medium-Low", s:"accio.com; mspcost.com", v:"floor/wall mount + network + payment testing; multi-unit staging faster per unit"},
+  handheld: {h:[0.5,1.5], c:"Low", est:true, s:"estimate", v:"staging, Wi-Fi certs, MDM enrollment, app config; fleet of 20 ≈ a day"},
+  mprinter: {h:[0.25,0.5], c:"Low", est:true, s:"estimate", v:"Bluetooth pairing + belt clip; trivial"},
+  tablets: {h:[0.5,1], c:"Low", est:true, s:"estimate", v:"stand assembly, mounting, enrollment; cable management/anti-theft adds"},
+  switch:  {h:[0.5,1.5], c:"Low", est:true, s:"estimate", v:"swap quick; new VLAN/PoE config adds; excludes cable drops"},
+  ap:      {h:[1,2], c:"Medium", s:"wcctechgroup.com; internetnews.com", v:"with existing drop; 2–4 hr/AP when a new drop is needed; open vs finished ceiling is the driver"},
+  firewall:{h:[1,3], c:"Low", est:true, s:"estimate", v:"config (VPN/filtering/failover) + cutover testing dominate, not physical install"},
+  failover:{h:[1,2], c:"Low", est:true, s:"estimate", v:"config + failover testing; SIM/plan activation adds calendar days"},
+  ups:     {h:[0.5,1], c:"Low", est:true, s:"estimate", v:"rack mount, wiring, self-test"},
+  bopc:    {h:[0.5,1.5], c:"Low", est:true, s:"estimate", v:"OS imaging, domain join, app install; data migration can double it"},
+  drops:   {h:[1,3], c:"High", s:"accutechcom.com ($75–250/drop); Rx Technology (1.5 hr @ $95/hr)", v:"open ceiling/conduit ~1 hr; finished walls/hard lid 2–3 hr; labor is 60–70% of drop cost"}
+};
+/* Per-option install-time overrides (label → hours), for items mixing classes. */
+const INSTALL_HRS_BY_LABEL = {
+  "Budget — tablet as KDS (~$250 + $20/mo)": {h:[0.5,1], c:"Medium", s:"Fresh KDS (5-min self-setup claim); tech time is mounting/network/testing", v:"app vendors claim 5-minute self-setup; tech time is mounting, network and testing"}
+};
 /* ---- Stamp every option/addon with its parent item id, then attach researched
    lifecycle fallback + support blocks. Runs once at load; renderers use _item. ---- */
 (function stampCatalog(){
@@ -940,13 +977,24 @@ const SUPPORT_BY_ADDON = {
       o._item = it.id;
       if(SUPPORT_BY_LABEL[o.label]) o.support = SUPPORT_BY_LABEL[o.label];
       else if(!o.support && o.upfront && LIFECYCLE[it.id] && !it.noSupport) o.support = QUOTE_SUPPORT;
+      if(o.installHrs == null){
+        const IH = INSTALL_HRS_BY_LABEL[o.label] || INSTALL_HRS[it.id];
+        if(IH){ o.installHrs = IH.h; o.installVar = IH.v + " (" + IH.c + " confidence — " + IH.s + ")" + (IH.est ? " [estimate]" : ""); }
+      }
     });
     if(it.builder){
       (it.addons||[]).forEach(a => {
         a._item = it.id + ":" + a.id;
         if(a.upfront) a.support = SUPPORT_BY_ADDON[it.id + ":" + a.id] || QUOTE_SUPPORT;
+        const AH = INSTALL_HRS[it.id + ":" + a.id];
+        if(AH && a.installHrs == null){ a.installHrs = AH.h; a.installVar = AH.v + " (" + AH.c + " confidence — " + AH.s + ")" + (AH.est ? " [estimate]" : ""); }
       });
-      if(it.aio){ it.aio._item = it.id + ":aio"; it.aio.support = SQUARE_SUPPORT; }
+      if(it.aio){ it.aio._item = it.id + ":aio"; it.aio.support = SQUARE_SUPPORT;
+        /* Square Register class = countertop terminal: use the researched terminal lifecycle, not the fallback. */
+        const AL = LIFECYCLE.terminal;
+        if(it.aio.life == null && AL){ it.aio.life = AL.yrs; it.aio.lifeRange = AL.range; it.aio.lifeConf = AL.conf; it.aio.lifeSrc = AL.src; }
+        const IH = INSTALL_HRS[it.id + ":aio"];
+        if(IH && it.aio.installHrs == null){ it.aio.installHrs = IH.h; it.aio.installVar = IH.v + " (" + IH.c + " confidence — " + IH.s + ")" + (IH.est ? " [estimate]" : ""); } }
     }
   });
 })();
@@ -954,7 +1002,7 @@ const SUPPORT_BY_ADDON = {
    table by parent item, else null (legacy fallback applies). */
 function lifeDataFor(opt){
   if(!opt) return null;
-  if(opt.life) return {yrs:+opt.life, range:(+opt.life)+" yrs", conf:opt.lifeConf||"Medium", src:opt.lifeSrc||"", est:!opt.lifeSrc};
+  if(opt.life) return {yrs:+opt.life, range:(opt.lifeRange || ((+opt.life)+" yrs")), conf:opt.lifeConf||"Medium", src:opt.lifeSrc||"", est:!opt.lifeSrc};
   return (opt._item && LIFECYCLE[opt._item]) || null;
 }
 /* ---- Recommendation tiers: ESSENTIAL / RECOMMENDED / OPTIONAL.
@@ -1233,14 +1281,15 @@ const REC_TIERS = {
      Sources: _research/equipment-lifecycles.md (2026-09-28). ---- */
   function lifeMonths(opt){
     const L = lifeDataFor(opt);
-    const yrs = L ? L.yrs : (SIM_PRICES.meta.amortize_months / 12);
-    return Math.max(1, Math.round(yrs * 12));
+    /* Hard-fail: every hardware option must carry explicit lifecycle data (LIFECYCLE table
+       or per-option life). The old universal 36-month amortization is retired — never silently use it. */
+    if(!L) throw new Error("Missing lifecycle data for: " + (opt && opt.label));
+    return Math.max(1, Math.round(L.yrs * 12));
   }
   function lifeLabel(opt){
     const L = lifeDataFor(opt);
     if(L) return "~" + L.range + (L.est ? " (estimate)" : "");
-    const yrs = SIM_PRICES.meta.amortize_months / 12;
-    return yrs + (yrs === 1 ? " yr" : " yrs");
+    return "life n/a";
   }
 
   function builderPerStation(item, st){
@@ -1374,7 +1423,10 @@ const REC_TIERS = {
      the simulator does the engineering. ---- */
   let guestWifi = false, terminalsTouched = false, pinSync = false;
   // Tech labor rate for install math — ADJUSTABLE assumption ($/hr), not a fact.
-  // Default is a placeholder until installer rates are sourced; the merchant sets their real rate.
+  // Default $125 = midpoint of the researched CA$100–150/hr billed-rate estimate for on-site
+  // small-business IT/low-voltage work (Low confidence — no published Canadian POS installer
+  // rate found; from CA$28–38/hr wages × 2–2.5× billed multiple; US low-voltage US$30–120/hr).
+  // Researched 2026-09-28. The merchant sets their real rate.
   let techRate = 125;
   /* ---- Training module state — all adjustable. Defaults: wage near Ontario minimum
      ($17.95/hr from Oct 1, 2026, ontario.ca); turnover 75%/yr (US hospitality avg
@@ -1605,7 +1657,7 @@ const REC_TIERS = {
       inner += '<div class="reqs">';
       item.addons.forEach(a => {
         const on = !!(st.reqs && st.reqs[a.id]);
-        const cost = a.upfront ? " — <strong>" + money(a.upfront / lifeMonths(a)) + "/mo equiv.</strong> <span class=\"life-badge\">~" + lifeLabel(a) + " life</span>" +
+        const cost = a.upfront ? " — <strong>" + money(a.upfront / lifeMonths(a)) + "/mo equiv.</strong> <span class=\"life-badge\">" + lifeLabel(a) + " life</span>" +
           (installHrsLabel(a) ? ' <span class="life-badge" title="Average tech install time">🔧 ' + installHrsLabel(a) + " install</span>" : "") : "";
         inner += '<label class="sim-check"><input type="checkbox" data-req="' + a.id + '"' + (on ? " checked" : "") + '> <span>' + a.label + cost +
           '<br><span style="opacity:.75;font-size:.95em">' + (a.note || "") + "</span></span></label>";
@@ -1691,7 +1743,7 @@ const REC_TIERS = {
     el.innerHTML = '<div class="install-labor">⏱️ Estimated tech time on site: <strong id="install-labor-hrs">~' +
       (Math.round(hrs * 10) / 10) + ' hrs</strong> (from the install hours on each hardware item you selected)<br>' +
       '<label class="rate-ctl">Tech labor rate: $<input type="number" id="tech-rate" min="25" max="400" step="5" value="' + techRate + '" aria-label="Tech labor rate per hour">/hr ' +
-      '<em>(adjustable — your installer\'s actual rate; default is a placeholder until sourced)</em></label> ' +
+      '<em>(adjustable — your installer\'s actual rate; default $125 = midpoint of researched CA$100–150/hr estimate)</em></label> ' +
       '= <strong id="install-labor-total">' + money(hrs * techRate) + '</strong> one-time, paid at install.</div>';
     $("tech-rate").addEventListener("change", () => {
       techRate = Math.max(0, +$("tech-rate").value || 0);

@@ -209,8 +209,22 @@ Per item/category, THREE support types are modelled, not just with/without:
   column — its amortized equivalent lives in the grand total for comparison only.
 - Average tech install time (`installHrs`, hours on site) on every hardware item;
   ranges (retrofit vs new build) show what drives the variance, midpoint feeds math.
+- Install-hours research (2026-09-28): published per-device install-time data
+  barely exists — vendors publish bundled/flat-fee cost far more than hours.
+  Countertop peripherals are minutes-to-under-an-hour jobs (trip-charge minimums
+  dominate, not per-device hours). Sourced anchors: 1–2 terminal install FAQ
+  (ivepos.com, Medium); KDS self-setup claims (Fresh KDS); signage cluster
+  pricing (crowntv-us.com, aiscreen.io); self-checkout install manual (CVS,
+  20–40 min software load/lane); AP install costs (wcctechgroup.com); cable
+  drops High confidence 1–3 hr/run (accutechcom.com; Rx Technology 1.5 hr @
+  $95/hr; labor is 60–70% of drop cost). Everything else is a labelled Low
+  confidence estimate — NEVER presented as fact.
 - Install labor = Σ(installHrs × qty) × techRate. techRate is an ADJUSTABLE
-  assumption ($/hr, default $125 placeholder until installer rates are sourced).
+  assumption ($/hr). Default $125 = midpoint of the researched CA$100–150/hr
+  billed-rate estimate for on-site small-business IT/low-voltage work (Low
+  confidence — no published Canadian POS installer rate found; derived from
+  CA$28–38/hr wages × 2–2.5× billed multiple; US low-voltage US$30–120/hr).
+  Researched 2026-09-28. The merchant sets their real rate.
 - Pay-now vs pay-monthly breakout:
   PAY NOW = hardware purchases + install labor + install line items + go-live training.
   PAY MONTHLY = leased hardware + SaaS + support contracts + expected break/fix

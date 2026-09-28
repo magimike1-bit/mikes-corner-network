@@ -1,0 +1,278 @@
+{
+  "hours": {
+    "terminal": {
+      "h": [
+        0.5,
+        2
+      ],
+      "c": "Medium",
+      "s": "ivepos.com (1–2 terminal install FAQ)",
+      "v": "20-min swap on existing network vs 2+ hr for new config, key-injection and cable routing; 6-lane rollout ~1 day"
+    },
+    "station:printer": {
+      "h": [
+        0.25,
+        1
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate — no published per-device figure",
+      "v": "driver/POS config + drawer-kick test; longer if networked (IP) vs USB"
+    },
+    "station:scanner": {
+      "h": [
+        0.25,
+        0.5
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "pairing + test scans; batch programming for fleets"
+    },
+    "station:drawer": {
+      "h": [
+        0.25,
+        0.5
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "kick-cable to printer/terminal + pop test"
+    },
+    "station:scale": {
+      "h": [
+        0.75,
+        2
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "PLU count drives time (dozens vs hundreds); label setup; legal-for-trade calibration"
+    },
+    "station:pinpad": {
+      "h": [
+        0.25,
+        0.75
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "plug & pair; longer with key injection or drive-thru mount"
+    },
+    "station:aio": {
+      "h": [
+        0.5,
+        2
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate — countertop terminal class (ivepos.com)",
+      "v": "self-install common; longer for new network/config"
+    },
+    "pinpad": {
+      "h": [
+        0.25,
+        0.75
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "plug & pair; longer with key injection"
+    },
+    "kprinter": {
+      "h": [
+        0.5,
+        1.5
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "mounting + network routing + kitchen station mapping"
+    },
+    "scanner": {
+      "h": [
+        0.5,
+        1
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "stand positioning, config, lane integration testing"
+    },
+    "labelprinter": {
+      "h": [
+        0.5,
+        1
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "standalone USB quick; scale/printer integration doubles it"
+    },
+    "kds": {
+      "h": [
+        1,
+        3
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "wall mount + power/network + station config; multi-station routing adds time"
+    },
+    "custdisplay": {
+      "h": [
+        0.5,
+        1
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "pole-mount assembly + HDMI/USB; ceiling-mount longer"
+    },
+    "signage": {
+      "h": [
+        2,
+        4
+      ],
+      "c": "Medium",
+      "s": "crowntv-us.com; aiscreen.io",
+      "v": "per 3–6-screen cluster; single wall-mount $100–300 vs cluster $400–1,200; drive-thru outdoor 4–8+ hr"
+    },
+    "menuboard": {
+      "h": [
+        2,
+        4
+      ],
+      "c": "Medium",
+      "s": "crowntv-us.com; aiscreen.io",
+      "v": "per 3–6-screen cluster; drive-thru outdoor 4–8+ hr"
+    },
+    "selfcheckout": {
+      "h": [
+        4,
+        8
+      ],
+      "c": "Medium-Low",
+      "s": "CVS install manual (20–40 min software load/lane); accio.com",
+      "v": "assembly + anchoring + payment config; go-live pilots run 1–2 weeks (menu/payment config, not wrench time)"
+    },
+    "kiosk": {
+      "h": [
+        2,
+        4
+      ],
+      "c": "Medium-Low",
+      "s": "accio.com; mspcost.com",
+      "v": "floor/wall mount + network + payment testing; multi-unit staging faster per unit"
+    },
+    "handheld": {
+      "h": [
+        0.5,
+        1.5
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "staging, Wi-Fi certs, MDM enrollment, app config; fleet of 20 ≈ a day"
+    },
+    "mprinter": {
+      "h": [
+        0.25,
+        0.5
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "Bluetooth pairing + belt clip; trivial"
+    },
+    "tablets": {
+      "h": [
+        0.5,
+        1
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "stand assembly, mounting, enrollment; cable management/anti-theft adds"
+    },
+    "switch": {
+      "h": [
+        0.5,
+        1.5
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "swap quick; new VLAN/PoE config adds; excludes cable drops"
+    },
+    "ap": {
+      "h": [
+        1,
+        2
+      ],
+      "c": "Medium",
+      "s": "wcctechgroup.com; internetnews.com",
+      "v": "with existing drop; 2–4 hr/AP when a new drop is needed; open vs finished ceiling is the driver"
+    },
+    "firewall": {
+      "h": [
+        1,
+        3
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "config (VPN/filtering/failover) + cutover testing dominate, not physical install"
+    },
+    "failover": {
+      "h": [
+        1,
+        2
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "config + failover testing; SIM/plan activation adds calendar days"
+    },
+    "ups": {
+      "h": [
+        0.5,
+        1
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "rack mount, wiring, self-test"
+    },
+    "bopc": {
+      "h": [
+        0.5,
+        1.5
+      ],
+      "c": "Low",
+      "est": true,
+      "s": "estimate",
+      "v": "OS imaging, domain join, app install; data migration can double it"
+    },
+    "drops": {
+      "h": [
+        1,
+        3
+      ],
+      "c": "High",
+      "s": "accutechcom.com ($75–250/drop); Rx Technology (1.5 hr @ $95/hr)",
+      "v": "open ceiling/conduit ~1 hr; finished walls/hard lid 2–3 hr; labor is 60–70% of drop cost"
+    }
+  },
+  "byLabel": {
+    "Budget — tablet as KDS (~$250 + $20/mo)": {
+      "h": [
+        0.5,
+        1
+      ],
+      "c": "Medium",
+      "s": "Fresh KDS (5-min self-setup claim); tech time is mounting/network/testing",
+      "v": "app vendors claim 5-minute self-setup; tech time is mounting, network and testing"
+    }
+  }
+}

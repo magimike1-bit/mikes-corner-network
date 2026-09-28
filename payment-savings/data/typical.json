@@ -1,0 +1,222 @@
+{
+  "setups": {
+    "retail": {
+      "label": "Typical independent retail store",
+      "q": {
+        "sqft": 1800,
+        "weigh": "no",
+        "sco": "no"
+      },
+      "basics": {
+        "locations": 1,
+        "employees": 5,
+        "volume": 60000,
+        "rate": 2.65
+      },
+      "check": [
+        "pos",
+        "station",
+        "terminal",
+        "acct",
+        "internet",
+        "ups"
+      ],
+      "station": {
+        "path": "build",
+        "reqs": {
+          "printer": true,
+          "scanner": true,
+          "drawer": true,
+          "pinpad": true
+        }
+      },
+      "guest": false
+    },
+    "restaurant": {
+      "label": "Typical independent full-service restaurant",
+      "q": {
+        "tables": 20,
+        "bar": "yes",
+        "takeout": "both"
+      },
+      "basics": {
+        "locations": 1,
+        "employees": 15,
+        "volume": 120000,
+        "rate": 2.65,
+        "marketplace": 8000
+      },
+      "check": [
+        "pos",
+        "station",
+        "terminal",
+        "sched",
+        "payroll",
+        "acct",
+        "internet",
+        "ups"
+      ],
+      "station": {
+        "path": "build",
+        "reqs": {
+          "printer": true,
+          "pinpad": true
+        }
+      },
+      "guest": true
+    },
+    "qsr": {
+      "label": "Typical quick-service café",
+      "q": {
+        "drivethru": "no",
+        "seats": 30,
+        "kiosks": "no"
+      },
+      "basics": {
+        "locations": 1,
+        "employees": 8,
+        "volume": 80000,
+        "rate": 2.65,
+        "marketplace": 12000
+      },
+      "check": [
+        "pos",
+        "station",
+        "terminal",
+        "acct",
+        "internet",
+        "ups"
+      ],
+      "station": {
+        "path": "build",
+        "reqs": {
+          "printer": true,
+          "pinpad": true
+        }
+      },
+      "guest": true
+    },
+    "hotel": {
+      "label": "Typical small hotel",
+      "q": {
+        "rooms": 40,
+        "floors": 3,
+        "fb": "no"
+      },
+      "basics": {
+        "locations": 1,
+        "employees": 20,
+        "volume": 150000,
+        "rate": 2.65
+      },
+      "check": [
+        "pms",
+        "terminal",
+        "acct",
+        "internet",
+        "ups",
+        "firewall"
+      ],
+      "optIdx": {
+        "pms": 1
+      },
+      "guest": true,
+      "firewall": true
+    },
+    "grocery": {
+      "label": "Typical independent grocery / convenience store",
+      "q": {
+        "sqft": 8000,
+        "deli": "yes",
+        "lottery": "no"
+      },
+      "basics": {
+        "locations": 1,
+        "employees": 12,
+        "volume": 200000,
+        "rate": 2.65
+      },
+      "check": [
+        "pos",
+        "station",
+        "terminal",
+        "acct",
+        "internet",
+        "ups"
+      ],
+      "station": {
+        "path": "build",
+        "reqs": {
+          "printer": true,
+          "scanner": true,
+          "drawer": true,
+          "scale": true,
+          "pinpad": true
+        }
+      },
+      "guest": false
+    },
+    "salon": {
+      "label": "Typical salon / services shop",
+      "q": {
+        "chairs": 6,
+        "trooms": 0,
+        "retailct": "no"
+      },
+      "basics": {
+        "locations": 1,
+        "employees": 4,
+        "volume": 35000,
+        "rate": 2.65
+      },
+      "check": [
+        "booking",
+        "station",
+        "terminal",
+        "payroll",
+        "acct",
+        "internet"
+      ],
+      "station": {
+        "path": "build",
+        "reqs": {
+          "printer": true,
+          "pinpad": true
+        }
+      },
+      "guest": true
+    }
+  },
+  "qIds": {
+    "restaurant": [
+      "in-tables",
+      "in-bar",
+      "in-takeout"
+    ],
+    "qsr": [
+      "in-drivethru",
+      "in-seats",
+      "in-kiosks"
+    ],
+    "retail": [
+      "in-sqft-r",
+      "in-weigh",
+      "in-sco"
+    ],
+    "hotel": [
+      "in-rooms",
+      "in-floors",
+      "in-fb"
+    ],
+    "grocery": [
+      "in-sqft-g",
+      "in-deli",
+      "in-lottery"
+    ],
+    "salon": [
+      "in-chairs",
+      "in-trooms",
+      "in-retailct"
+    ]
+  }
+}

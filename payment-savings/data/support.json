@@ -1,0 +1,443 @@
+{
+  "plans": {
+    "epsonSita": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "Epson's advance options are annual, not monthly; true on-site is VAR-quoted — ask Epson Preferred Plus / reseller"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "no published per-incident price — ask Epson reseller / authorized service"
+      },
+      "hybrid": {
+        "label": "Spare-in-the-Air 1-yr — US$24.78",
+        "upfront": 24.78,
+        "cur": "USD",
+        "years": 1,
+        "adv": true,
+        "note": "next-business-day whole-unit exchange — advance replacement (order by 1pm Pacific; geographic limits). US$24.78 reseller retail (barcodesinc.com); flyer MSRP US$16; 3-yr US$43.54–44, 5-yr US$77.84–78"
+      },
+      "src": "barcodesinc.com; Epson Extended Service Plans flyer CPD-61012R4 (accessed 2026-09-28)"
+    },
+    "zebraOnecare": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "Zebra sells multi-year annual contracts, not monthly on-site; any monthly on-site deal is a VAR custom SLA — ask a Zebra partner (ScanSource/BlueStar)"
+      },
+      "breakfix": {
+        "label": "Depot repair — quote-based",
+        "quote": true,
+        "note": "out-of-contract repairs quoted case-by-case at a Zebra authorized depot"
+      },
+      "hybrid": {
+        "label": "OneCare Select 3-yr — ~US$37.80",
+        "upfront": 37.8,
+        "cur": "USD",
+        "years": 3,
+        "adv": true,
+        "note": "comprehensive incl. accidental damage + 24×7 support; Select = same-day exchange tier (advance-replacement-style). Example DS2208 Select 3-yr US$37.80 (barcodediscount.com) — confirm price for your model; must buy within 30 days of device"
+      },
+      "src": "barcodediscount.com; atlasrfidstore.com (accessed 2026-09-28)"
+    },
+    "moneris": {
+      "contract": {
+        "label": "Included in rental — 24/7 Canadian support",
+        "included": true,
+        "note": "rental includes 24/7 Canadian support + Moneris right to substitute equivalent gear (PAYD agreement) — no published advance-swap timing; accidental breakage not confirmed free"
+      },
+      "breakfix": {
+        "label": "Lost/stolen — quote-based",
+        "quote": true,
+        "note": "merchant responsible for safekeeping; charges may apply — ask Moneris rep (PAYD agreement)"
+      },
+      "hybrid": {
+        "label": "The rental is the hybrid",
+        "included": true,
+        "note": "monthly rental + bundled replacement right; breakage liability and swap SLA are contract/quote-based — ask Moneris rep"
+      },
+      "src": "moneris.com/en/solutions/terminals/pos; PAYD Merchant Agreement (accessed 2026-09-28)"
+    },
+    "eloCareAur": {
+      "contract": {
+        "label": "EloCare On-Site Exchange — quote-based",
+        "quote": true,
+        "note": "next-business-day on-site swap, up to 5 yrs — the true monthly-contract shape, but price is quote-based; ask Elo reseller"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "ask Elo reseller"
+      },
+      "hybrid": {
+        "label": "EloCare AUR 3-yr — ~£33/yr",
+        "upfront": 98.6,
+        "cur": "GBP",
+        "years": 3,
+        "adv": true,
+        "note": "replacement shipped next business day if phone support can't fix it; return dead unit in 15 days — advance replacement. £98.60/3-yr (qual.co.uk, UK reseller) — confirm Canada pricing"
+      },
+      "src": "barcodefactory.com (EloCare onepager); online.qual.co.uk (accessed 2026-09-28)"
+    },
+    "star": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "no monthly plan published for Star printers — ask Star reseller (e.g. POSGuys)"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "no published per-visit price — ask reseller"
+      },
+      "hybrid": {
+        "label": "Swap-A-Star 3-yr — ~US$165 total",
+        "upfront": 165,
+        "cur": "USD",
+        "years": 3,
+        "adv": true,
+        "note": "next-business-day replacement via 2nd Day Air — ADVANCE REPLACEMENT; buy within 30 days. Example: TSP100III US$165/3-yr (~US$55/yr, posguys.com) — confirm price for your model. Cheaper carry-in alternative: Extend-A-Star 3-yr US$47.50 (no advance replacement)"
+      },
+      "src": "posguys.com (accessed 2026-09-28)"
+    },
+    "dymo": {
+      "contract": {
+        "label": "No paid plan published — quote-based",
+        "quote": true,
+        "note": "no paid DYMO manufacturer plan found — ask DYMO support/reseller"
+      },
+      "breakfix": {
+        "label": "Per-incident — quote-based",
+        "quote": true,
+        "note": "quote-based at reseller; included warranty is return-to-base with lifetime tech support — not advance replacement"
+      },
+      "hybrid": {
+        "label": "No hybrid tier — buy a spare",
+        "quote": true,
+        "note": "DYMO is register-to-extend-and-forget: included 2-yr extends FREE to 3-yr on registration. Price a spare unit instead of a contract"
+      },
+      "src": "dymo-label-printers.co.uk (accessed 2026-09-28)"
+    },
+    "square": {
+      "contract": {
+        "label": "No monthly plan published — quote-based",
+        "quote": true,
+        "note": "no Square-sold monthly hardware support plan found — ask Square Canada support"
+      },
+      "breakfix": {
+        "label": "Per-incident — quote-based",
+        "quote": true,
+        "note": "under included warranty Square ships a replacement and you return the dead unit in 14 days (advance-replacement-like, defects only)"
+      },
+      "hybrid": {
+        "label": "Buy a spare — no Square hybrid tier",
+        "quote": true,
+        "note": "Square gear is cheap and self-installed — the real 'hybrid' for an owner-operator is a spare reader/printer on the shelf, not a contract"
+      },
+      "src": "stocktitan.com (Square Register Canada launch); Amazon warranty PDF (accessed 2026-09-28)"
+    },
+    "quote": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "monthly on-site POS hardware contracts are almost always VAR/ISV custom deals — ask your reseller (rare published exception: Epos Now Canada C$55–75/device/mo)"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "VARs quote per job (travel + parts vary); no POS vendor publishes per-visit pricing"
+      },
+      "hybrid": {
+        "label": "Annual advance-replacement — quote-based",
+        "quote": true,
+        "note": "the hybrid tier with the most published prices (Epson SITA, Star Swap-A-Star, Zebra Select) — ask your reseller for your model"
+      },
+      "src": "support pricing research 2026-09-28"
+    }
+  },
+  "byLabel": {
+    "Impact (Epson TM-U220B) — $774": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "Epson's advance options are annual, not monthly; true on-site is VAR-quoted — ask Epson Preferred Plus / reseller"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "no published per-incident price — ask Epson reseller / authorized service"
+      },
+      "hybrid": {
+        "label": "Spare-in-the-Air 1-yr — US$24.78",
+        "upfront": 24.78,
+        "cur": "USD",
+        "years": 1,
+        "adv": true,
+        "note": "next-business-day whole-unit exchange — advance replacement (order by 1pm Pacific; geographic limits). US$24.78 reseller retail (barcodesinc.com); flyer MSRP US$16; 3-yr US$43.54–44, 5-yr US$77.84–78"
+      },
+      "src": "barcodesinc.com; Epson Extended Service Plans flyer CPD-61012R4 (accessed 2026-09-28)"
+    },
+    "New thermal (Epson class) — ~$575": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "Epson's advance options are annual, not monthly; true on-site is VAR-quoted — ask Epson Preferred Plus / reseller"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "no published per-incident price — ask Epson reseller / authorized service"
+      },
+      "hybrid": {
+        "label": "Spare-in-the-Air 1-yr — US$24.78",
+        "upfront": 24.78,
+        "cur": "USD",
+        "years": 1,
+        "adv": true,
+        "note": "next-business-day whole-unit exchange — advance replacement (order by 1pm Pacific; geographic limits). US$24.78 reseller retail (barcodesinc.com); flyer MSRP US$16; 3-yr US$43.54–44, 5-yr US$77.84–78"
+      },
+      "src": "barcodesinc.com; Epson Extended Service Plans flyer CPD-61012R4 (accessed 2026-09-28)"
+    },
+    "Presentation — Zebra DS9308 ~$416.99": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "Zebra sells multi-year annual contracts, not monthly on-site; any monthly on-site deal is a VAR custom SLA — ask a Zebra partner (ScanSource/BlueStar)"
+      },
+      "breakfix": {
+        "label": "Depot repair — quote-based",
+        "quote": true,
+        "note": "out-of-contract repairs quoted case-by-case at a Zebra authorized depot"
+      },
+      "hybrid": {
+        "label": "OneCare Select 3-yr — ~US$37.80",
+        "upfront": 37.8,
+        "cur": "USD",
+        "years": 3,
+        "adv": true,
+        "note": "comprehensive incl. accidental damage + 24×7 support; Select = same-day exchange tier (advance-replacement-style). Example DS2208 Select 3-yr US$37.80 (barcodediscount.com) — confirm price for your model; must buy within 30 days of device"
+      },
+      "src": "barcodediscount.com; atlasrfidstore.com (accessed 2026-09-28)"
+    },
+    "Zebra TC26 — ~$882.53": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "Zebra sells multi-year annual contracts, not monthly on-site; any monthly on-site deal is a VAR custom SLA — ask a Zebra partner (ScanSource/BlueStar)"
+      },
+      "breakfix": {
+        "label": "Depot repair — quote-based",
+        "quote": true,
+        "note": "out-of-contract repairs quoted case-by-case at a Zebra authorized depot"
+      },
+      "hybrid": {
+        "label": "OneCare Select 3-yr — ~US$37.80",
+        "upfront": 37.8,
+        "cur": "USD",
+        "years": 3,
+        "adv": true,
+        "note": "comprehensive incl. accidental damage + 24×7 support; Select = same-day exchange tier (advance-replacement-style). Example DS2208 Select 3-yr US$37.80 (barcodediscount.com) — confirm price for your model; must buy within 30 days of device"
+      },
+      "src": "barcodediscount.com; atlasrfidstore.com (accessed 2026-09-28)"
+    },
+    "Countertop — lease $34.95/mo (Moneris Go)": {
+      "contract": {
+        "label": "Included in rental — 24/7 Canadian support",
+        "included": true,
+        "note": "rental includes 24/7 Canadian support + Moneris right to substitute equivalent gear (PAYD agreement) — no published advance-swap timing; accidental breakage not confirmed free"
+      },
+      "breakfix": {
+        "label": "Lost/stolen — quote-based",
+        "quote": true,
+        "note": "merchant responsible for safekeeping; charges may apply — ask Moneris rep (PAYD agreement)"
+      },
+      "hybrid": {
+        "label": "The rental is the hybrid",
+        "included": true,
+        "note": "monthly rental + bundled replacement right; breakage liability and swap SLA are contract/quote-based — ask Moneris rep"
+      },
+      "src": "moneris.com/en/solutions/terminals/pos; PAYD Merchant Agreement (accessed 2026-09-28)"
+    },
+    "Moneris Go Restaurant — $64.94/mo": {
+      "contract": {
+        "label": "Included in rental — 24/7 Canadian support",
+        "included": true,
+        "note": "rental includes 24/7 Canadian support + Moneris right to substitute equivalent gear (PAYD agreement) — no published advance-swap timing; accidental breakage not confirmed free"
+      },
+      "breakfix": {
+        "label": "Lost/stolen — quote-based",
+        "quote": true,
+        "note": "merchant responsible for safekeeping; charges may apply — ask Moneris rep (PAYD agreement)"
+      },
+      "hybrid": {
+        "label": "The rental is the hybrid",
+        "included": true,
+        "note": "monthly rental + bundled replacement right; breakage liability and swap SLA are contract/quote-based — ask Moneris rep"
+      },
+      "src": "moneris.com/en/solutions/terminals/pos; PAYD Merchant Agreement (accessed 2026-09-28)"
+    },
+    "Purpose-built — commercial screen (~$550 + $25/mo)": {
+      "contract": {
+        "label": "EloCare On-Site Exchange — quote-based",
+        "quote": true,
+        "note": "next-business-day on-site swap, up to 5 yrs — the true monthly-contract shape, but price is quote-based; ask Elo reseller"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "ask Elo reseller"
+      },
+      "hybrid": {
+        "label": "EloCare AUR 3-yr — ~£33/yr",
+        "upfront": 98.6,
+        "cur": "GBP",
+        "years": 3,
+        "adv": true,
+        "note": "replacement shipped next business day if phone support can't fix it; return dead unit in 15 days — advance replacement. £98.60/3-yr (qual.co.uk, UK reseller) — confirm Canada pricing"
+      },
+      "src": "barcodefactory.com (EloCare onepager); online.qual.co.uk (accessed 2026-09-28)"
+    },
+    "Star SM-L200 — $700.42 MSRP": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "no monthly plan published for Star printers — ask Star reseller (e.g. POSGuys)"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "no published per-visit price — ask reseller"
+      },
+      "hybrid": {
+        "label": "Swap-A-Star 3-yr — ~US$165 total",
+        "upfront": 165,
+        "cur": "USD",
+        "years": 3,
+        "adv": true,
+        "note": "next-business-day replacement via 2nd Day Air — ADVANCE REPLACEMENT; buy within 30 days. Example: TSP100III US$165/3-yr (~US$55/yr, posguys.com) — confirm price for your model. Cheaper carry-in alternative: Extend-A-Star 3-yr US$47.50 (no advance replacement)"
+      },
+      "src": "posguys.com (accessed 2026-09-28)"
+    },
+    "Star SM-L200 — from $345.34 USD": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "no monthly plan published for Star printers — ask Star reseller (e.g. POSGuys)"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "no published per-visit price — ask reseller"
+      },
+      "hybrid": {
+        "label": "Swap-A-Star 3-yr — ~US$165 total",
+        "upfront": 165,
+        "cur": "USD",
+        "years": 3,
+        "adv": true,
+        "note": "next-business-day replacement via 2nd Day Air — ADVANCE REPLACEMENT; buy within 30 days. Example: TSP100III US$165/3-yr (~US$55/yr, posguys.com) — confirm price for your model. Cheaper carry-in alternative: Extend-A-Star 3-yr US$47.50 (no advance replacement)"
+      },
+      "src": "posguys.com (accessed 2026-09-28)"
+    },
+    "DYMO LabelWriter 550 — $159.68": {
+      "contract": {
+        "label": "No paid plan published — quote-based",
+        "quote": true,
+        "note": "no paid DYMO manufacturer plan found — ask DYMO support/reseller"
+      },
+      "breakfix": {
+        "label": "Per-incident — quote-based",
+        "quote": true,
+        "note": "quote-based at reseller; included warranty is return-to-base with lifetime tech support — not advance replacement"
+      },
+      "hybrid": {
+        "label": "No hybrid tier — buy a spare",
+        "quote": true,
+        "note": "DYMO is register-to-extend-and-forget: included 2-yr extends FREE to 3-yr on registration. Price a spare unit instead of a contract"
+      },
+      "src": "dymo-label-printers.co.uk (accessed 2026-09-28)"
+    },
+    "DYMO LabelWriter 550 Turbo — $200": {
+      "contract": {
+        "label": "No paid plan published — quote-based",
+        "quote": true,
+        "note": "no paid DYMO manufacturer plan found — ask DYMO support/reseller"
+      },
+      "breakfix": {
+        "label": "Per-incident — quote-based",
+        "quote": true,
+        "note": "quote-based at reseller; included warranty is return-to-base with lifetime tech support — not advance replacement"
+      },
+      "hybrid": {
+        "label": "No hybrid tier — buy a spare",
+        "quote": true,
+        "note": "DYMO is register-to-extend-and-forget: included 2-yr extends FREE to 3-yr on registration. Price a spare unit instead of a contract"
+      },
+      "src": "dymo-label-printers.co.uk (accessed 2026-09-28)"
+    }
+  },
+  "byAddon": {
+    "station:printer": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "Epson's advance options are annual, not monthly; true on-site is VAR-quoted — ask Epson Preferred Plus / reseller"
+      },
+      "breakfix": {
+        "label": "Per-visit — quote-based",
+        "quote": true,
+        "note": "no published per-incident price — ask Epson reseller / authorized service"
+      },
+      "hybrid": {
+        "label": "Spare-in-the-Air 1-yr — US$24.78",
+        "upfront": 24.78,
+        "cur": "USD",
+        "years": 1,
+        "adv": true,
+        "note": "next-business-day whole-unit exchange — advance replacement (order by 1pm Pacific; geographic limits). US$24.78 reseller retail (barcodesinc.com); flyer MSRP US$16; 3-yr US$43.54–44, 5-yr US$77.84–78"
+      },
+      "src": "barcodesinc.com; Epson Extended Service Plans flyer CPD-61012R4 (accessed 2026-09-28)"
+    },
+    "station:scanner": {
+      "contract": {
+        "label": "Monthly on-site — quote-based",
+        "quote": true,
+        "note": "Zebra sells multi-year annual contracts, not monthly on-site; any monthly on-site deal is a VAR custom SLA — ask a Zebra partner (ScanSource/BlueStar)"
+      },
+      "breakfix": {
+        "label": "Depot repair — quote-based",
+        "quote": true,
+        "note": "out-of-contract repairs quoted case-by-case at a Zebra authorized depot"
+      },
+      "hybrid": {
+        "label": "OneCare Select 3-yr — ~US$37.80",
+        "upfront": 37.8,
+        "cur": "USD",
+        "years": 3,
+        "adv": true,
+        "note": "comprehensive incl. accidental damage + 24×7 support; Select = same-day exchange tier (advance-replacement-style). Example DS2208 Select 3-yr US$37.80 (barcodediscount.com) — confirm price for your model; must buy within 30 days of device"
+      },
+      "src": "barcodediscount.com; atlasrfidstore.com (accessed 2026-09-28)"
+    },
+    "station:aio": {
+      "contract": {
+        "label": "No monthly plan published — quote-based",
+        "quote": true,
+        "note": "no Square-sold monthly hardware support plan found — ask Square Canada support"
+      },
+      "breakfix": {
+        "label": "Per-incident — quote-based",
+        "quote": true,
+        "note": "under included warranty Square ships a replacement and you return the dead unit in 14 days (advance-replacement-like, defects only)"
+      },
+      "hybrid": {
+        "label": "Buy a spare — no Square hybrid tier",
+        "quote": true,
+        "note": "Square gear is cheap and self-installed — the real 'hybrid' for an owner-operator is a spare reader/printer on the shelf, not a contract"
+      },
+      "src": "stocktitan.com (Square Register Canada launch); Amazon warranty PDF (accessed 2026-09-28)"
+    }
+  }
+}

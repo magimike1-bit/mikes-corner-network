@@ -1,0 +1,267 @@
+{
+  "tracks": [
+    {
+      "t": "🔧 Tech training — learning the system",
+      "d": "Which buttons to press: ringing a sale, voids, discounts, refunds, split bills, end-of-day close, KDS screens, handhelds. Usually 1–2 sessions per person, often run by the installer. When it's done, a new hire can complete a basic sale without help. This is the part installers sell you."
+    },
+    {
+      "t": "🔄 Process training — learning YOUR workflow",
+      "d": "How your business actually runs on the system: how orders flow at rush, who covers the till when it's slammed, what to do when the internet drops, how comps and voids get approved, how a return works on a busy Saturday. The installer doesn't know your rush — this part is yours to teach, and it's the part merchants skip. Budget it anyway."
+    }
+  ],
+  "warn": "⚠️ Merchants under-budget both. They'll budget the hardware to the dollar, then hand a new hire the terminal on a Friday night with no training. The fix is cheap next to the hardware — it's just paid hours. Plan them.",
+  "mats": {
+    "retail": {
+      "checklist": [
+        "Everyone gets their own login PIN on day one — no shared logins, ever.",
+        "Run 10 practice sales per person before go-live: sale, void, discount, refund, split payment.",
+        "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+        "Voids and refunds need a manager code — practice the call, not just the button.",
+        "Count float at open and close for the first two weeks — shortages surface fast.",
+        "End-of-day close: one person owns it, same steps, every night.",
+        "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+        "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+        "Practice returns and exchanges — they take 3× longer than sales when untrained.",
+        "Loyalty signup at the till: 20 seconds or skip it, don't hold the line."
+      ],
+      "cashier": [
+        "Your PIN is you — every void, discount and refund traces to it. Never share it.",
+        "Card fails twice → change tender. Don't tap five times and hope.",
+        "Say the total out loud before they pay — catches mis-rings instantly.",
+        "Receipts: ask, don't assume. 'Receipt with you?'",
+        "If the line is 3+ deep, call for backup before it becomes 6.",
+        "Returns need the original receipt or ID — know which before they argue.",
+        "'Phone number for points?' — 5 seconds, every sale."
+      ],
+      "kitchen": [
+        "No kitchen here — this is your back-room sheet. Same discipline applies.",
+        "Receive against the PO in the system — count it before you sign.",
+        "Damages go in the system the same day — not 'when I get to it'.",
+        "Put-away: the system's bin location is the law — 'I'll remember' fails.",
+        "Transfers between locations: scan out AND scan in.",
+        "Cycle counts: 15 minutes a day beats a full shutdown count.",
+        "Nothing hits the floor without a price in the system."
+      ],
+      "manager": [
+        "End-of-day close is yours — same person, same steps, every night. No exceptions.",
+        "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+        "User PINs: create on hire, disable on departure — same day.",
+        "Cash: count with the cashier present, both sign. Every time.",
+        "Offline mode drill: once a quarter, run the backup plan before you need it.",
+        "New hire: buddy them with your best cashier for 3 shifts — not your fastest, your most careful.",
+        "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+        "Price overrides need your code — track WHY, not just how much."
+      ]
+    },
+    "restaurant": {
+      "checklist": [
+        "Everyone gets their own login PIN on day one — no shared logins, ever.",
+        "Run 10 practice sales per person before go-live: sale, void, discount, refund, split payment.",
+        "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+        "Voids and refunds need a manager code — practice the call, not just the button.",
+        "Count float at open and close for the first two weeks — shortages surface fast.",
+        "End-of-day close: one person owns it, same steps, every night.",
+        "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+        "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+        "Split bills BEFORE firing courses — re-splitting after is where errors happen.",
+        "Walkout tabs: know the comp/void approval path cold before Friday night."
+      ],
+      "cashier": [
+        "Your PIN is you — every void, discount and refund traces to it. Never share it.",
+        "Card fails twice → change tender. Don't tap five times and hope.",
+        "Say the total out loud before they pay — catches mis-rings instantly.",
+        "Receipts: ask, don't assume. 'Receipt with you?'",
+        "If the line is 3+ deep, call for backup before it becomes 6.",
+        "Split checks at ORDER time, not at payment time.",
+        "Walkouts: tell a manager immediately — don't chase."
+      ],
+      "kitchen": [
+        "Bump only when the food LEAVES the pass — bumping early lies to the front.",
+        "Allergy flags: stop, re-read the ticket, clean hands, clean surface.",
+        "86'd: update the KDS the second it happens — not 'after this ticket'.",
+        "Fire times: apps and mains coursed — don't fire everything at once.",
+        "If a ticket looks wrong, ask — refires cost more than questions.",
+        "Rush rule: call out what you need, don't assume someone saw it.",
+        "End of night: close your KDS station — open tickets roll into tomorrow's problem."
+      ],
+      "manager": [
+        "End-of-day close is yours — same person, same steps, every night. No exceptions.",
+        "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+        "User PINs: create on hire, disable on departure — same day.",
+        "Cash: count with the cashier present, both sign. Every time.",
+        "Offline mode drill: once a quarter, run the backup plan before you need it.",
+        "New hire: buddy them with your best cashier for 3 shifts — not your fastest, your most careful.",
+        "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+        "Comp policy in writing: who can comp, how much — and it goes in the system the same shift."
+      ]
+    },
+    "qsr": {
+      "checklist": [
+        "Everyone gets their own login PIN on day one — no shared logins, ever.",
+        "Run 10 practice sales per person before go-live: sale, void, discount, refund, split payment.",
+        "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+        "Voids and refunds need a manager code — practice the call, not just the button.",
+        "Count float at open and close for the first two weeks — shortages surface fast.",
+        "End-of-day close: one person owns it, same steps, every night.",
+        "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+        "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+        "Rush drill: 5 orders in 3 minutes on the KDS — bump discipline matters more than speed.",
+        "86'd items: who updates the screen, and how fast — the front can't sell what you don't have."
+      ],
+      "cashier": [
+        "Your PIN is you — every void, discount and refund traces to it. Never share it.",
+        "Card fails twice → change tender. Don't tap five times and hope.",
+        "Say the total out loud before they pay — catches mis-rings instantly.",
+        "Receipts: ask, don't assume. 'Receipt with you?'",
+        "If the line is 3+ deep, call for backup before it becomes 6.",
+        "Read the order back at the speaker — remakes cost more than 10 seconds.",
+        "KDS bump only when the tray is IN the customer's hands."
+      ],
+      "kitchen": [
+        "Make to the screen, not to memory — the KDS is the ticket.",
+        "Bump when bagged or trayed — the customer is waiting on that bump.",
+        "86'd in under 60 seconds — the front can't sell what you don't have.",
+        "Rush stations: one person per station, no crossing over.",
+        "Remake protocol: remake FIRST, figure out fault later.",
+        "Headset discipline: confirm, don't just hear.",
+        "Clean as you go — a slammed station with no space is a slow station."
+      ],
+      "manager": [
+        "End-of-day close is yours — same person, same steps, every night. No exceptions.",
+        "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+        "User PINs: create on hire, disable on departure — same day.",
+        "Cash: count with the cashier present, both sign. Every time.",
+        "Offline mode drill: once a quarter, run the backup plan before you need it.",
+        "New hire: buddy them with your best cashier for 3 shifts — not your fastest, your most careful.",
+        "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+        "Rush labor plan in writing: who moves where when the line hits the door."
+      ]
+    },
+    "hotel": {
+      "checklist": [
+        "Everyone gets their own login PIN on day one — no shared logins, ever.",
+        "Run 10 practice check-ins per person before go-live: booking, incidentals auth, folio check, checkout.",
+        "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+        "Voids and refunds need a manager code — practice the call, not just the button.",
+        "Count float at open and close for the first two weeks — shortages surface fast.",
+        "End-of-day close: one person owns it, same steps, every night.",
+        "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+        "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+        "Incidentals authorization at check-in — every time, no exceptions.",
+        "Folio check before checkout: one wrong charge = one bad review."
+      ],
+      "cashier": [
+        "Your PIN is you — every void, discount and refund traces to it. Never share it.",
+        "Card fails twice → change tender. Don't tap five times and hope.",
+        "Say the total out loud before they pay — catches mis-rings instantly.",
+        "Receipts: ask, don't assume. 'Receipt with you?'",
+        "Auth incidentals BEFORE handing over the key — fixing it later is 10× harder.",
+        "Checkout: 'Anything from the minibar?' — ask every time.",
+        "Folio: scan it with the guest before charging — disputes at checkout are the worst kind."
+      ],
+      "kitchen": [
+        "Banquet orders fire on the event-sheet time, not when the ticket prints.",
+        "Room service: check the room number twice — wrong floor, wrong guest.",
+        "Allergy flags: stop, re-read the ticket, clean hands, clean surface.",
+        "Minibar restock counts go in the system daily — revenue leaks here.",
+        "86'd: tell the front desk, not just the KDS.",
+        "Bump on pickup — runners, not cooks, clear the screen.",
+        "Late-night menu: know what's actually available after 11pm."
+      ],
+      "manager": [
+        "End-of-day close is yours — same person, same steps, every night. No exceptions.",
+        "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+        "User PINs: create on hire, disable on departure — same day.",
+        "Cash: count with the cashier present, both sign. Every time.",
+        "Offline mode drill: once a quarter, run the backup plan before you need it.",
+        "New hire: buddy them with your best front-desk agent for 3 shifts — not your fastest, your most careful.",
+        "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+        "Night audit: folios balanced before you sleep — the morning shift can't fix last night."
+      ]
+    },
+    "grocery": {
+      "checklist": [
+        "Everyone gets their own login PIN on day one — no shared logins, ever.",
+        "Run 10 practice sales per person before go-live: sale, void, discount, refund, split payment.",
+        "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+        "Voids and refunds need a manager code — practice the call, not just the button.",
+        "Count float at open and close for the first two weeks — shortages surface fast.",
+        "End-of-day close: one person owns it, same steps, every night.",
+        "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+        "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+        "Produce codes: print the top-20 cheat card and tape it to the lane.",
+        "Scale items: tare first, every time — 50g errors add up over a day."
+      ],
+      "cashier": [
+        "Your PIN is you — every void, discount and refund traces to it. Never share it.",
+        "Card fails twice → change tender. Don't tap five times and hope.",
+        "Say the total out loud before they pay — catches mis-rings instantly.",
+        "Receipts: ask, don't assume. 'Receipt with you?'",
+        "If the line is 3+ deep, call for backup before it becomes 6.",
+        "Tape the top-20 produce codes to your lane — memorize 5 a week.",
+        "Check the bottom of the cart. Every time."
+      ],
+      "kitchen": [
+        "Labels print from the system — if the price looks wrong, stop and check.",
+        "Tare the scale before every weigh — 50g errors add up over a day.",
+        "Reduced/clearance stickers: use the markdown function, don't hand-write.",
+        "Allergen prep areas: separate boards, separate knives, every time.",
+        "Waste and damage: log it in the system — shrink you can't see, you can't fix.",
+        "Date checks: oldest out front — the system tracks it, you move it.",
+        "Deli scale tickets must scan at the lane — reprint, don't hand-key."
+      ],
+      "manager": [
+        "End-of-day close is yours — same person, same steps, every night. No exceptions.",
+        "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+        "User PINs: create on hire, disable on departure — same day.",
+        "Cash: count with the cashier present, both sign. Every time.",
+        "Offline mode drill: once a quarter, run the backup plan before you need it.",
+        "New hire: buddy them with your best cashier for 3 shifts — not your fastest, your most careful.",
+        "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+        "Markdown schedule: who marks down, when — and it scans. No hand-written stickers at scale."
+      ]
+    },
+    "salon": {
+      "checklist": [
+        "Everyone gets their own login PIN on day one — no shared logins, ever.",
+        "Run 10 practice checkouts per person before go-live: service, product add-on, tip, split payment.",
+        "Learn the offline mode BEFORE the internet drops — where's the button, what still works.",
+        "Voids and refunds need a manager code — practice the call, not just the button.",
+        "Count float at open and close for the first two weeks — shortages surface fast.",
+        "End-of-day close: one person owns it, same steps, every night.",
+        "Write the 'when it breaks' card: who to call, what's the backup (spare terminal? paper slips?).",
+        "Week-one review: 15 minutes with each person — what confused them? Fix it now.",
+        "Deposits at booking — the no-show policy only works if it's collected up front.",
+        "Rebook at checkout while the client is happy — 'Same time in 6 weeks?'"
+      ],
+      "cashier": [
+        "Your PIN is you — every void, discount and refund traces to it. Never share it.",
+        "Card fails twice → change tender. Don't tap five times and hope.",
+        "Say the total out loud before they pay — catches mis-rings instantly.",
+        "Receipts: ask, don't assume. 'Receipt with you?'",
+        "Confirm the price BEFORE starting — 'Just so you know, that's $X today.'",
+        "Rebook at the till: 'Same time in 6 weeks?' — while they're happy.",
+        "No-show/late fees: collected at booking per policy — don't argue it at the chair."
+      ],
+      "kitchen": [
+        "No kitchen here — this is your back-bar sheet: color, product, and what's billable.",
+        "Color formulas: log every mix in the client record — rebookings depend on it.",
+        "Retail product used in service: scan it — that's cost of goods, not free.",
+        "Allergy and patch-test notes go in the client file BEFORE the appointment.",
+        "Running low? Flag it in the system — don't just tell someone.",
+        "Tools sanitized between every client — log it, it's your license on the line.",
+        "End of day: restock your station — tomorrow's first client shouldn't wait."
+      ],
+      "manager": [
+        "End-of-day close is yours — same person, same steps, every night. No exceptions.",
+        "Voids, refunds, comps: approve in the moment — a pile of 'fix laters' is theft-adjacent.",
+        "User PINs: create on hire, disable on departure — same day.",
+        "Cash: count with the cashier present, both sign. Every time.",
+        "Offline mode drill: once a quarter, run the backup plan before you need it.",
+        "New hire: buddy them with your best stylist for 3 shifts — not your fastest, your most careful.",
+        "The 'when it breaks' card lives by the terminal — your number, the processor's number, the installer's number.",
+        "No-show policy: enforced at booking with a deposit — never argued at the chair."
+      ]
+    }
+  }
+}

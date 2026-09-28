@@ -1,0 +1,290 @@
+{
+  "retail:pos": [
+    "essential",
+    "Everything hangs off the POS — sales records, inventory, and the audit trail the CRA expects."
+  ],
+  "retail:terminal": [
+    "essential",
+    "The thing that takes money. Never just one — when a terminal dies mid-rush, the spare keeps the line moving."
+  ],
+  "retail:station": [
+    "essential",
+    "The till itself — screen, printer, drawer and reader per lane. No station, no checkout."
+  ],
+  "retail:ecom": [
+    "recommended",
+    "A second till that’s open 24/7. Skip only if you truly sell in-store only."
+  ],
+  "retail:acct": [
+    "recommended",
+    "The CRA doesn’t accept shoeboxes — and clean books are what make a processing audit possible."
+  ],
+  "retail:loyalty": [
+    "recommended",
+    "Repeat customers are cheaper than new ones. If your regulars come weekly, this pays for itself."
+  ],
+  "retail:signage": [
+    "optional",
+    "Nice behind the counter; nobody ever lost a sale for lack of a screen."
+  ],
+  "retail:selfcheckout": [
+    "optional",
+    "Saves labour at volume — but each kiosk is a capital project. Price it, don’t guess it."
+  ],
+  "restaurant:pos": [
+    "essential",
+    "Tickets, tables and payments live here. The restaurant runs on this."
+  ],
+  "restaurant:terminal": [
+    "essential",
+    "Takes the money — keep a spare. One dead terminal on a Saturday night is a dining room that can’t pay."
+  ],
+  "restaurant:kds": [
+    "recommended",
+    "The kitchen stops shouting and tickets stop getting lost."
+  ],
+  "restaurant:kprinter": [
+    "recommended",
+    "The KDS’s backup — when a screen dies mid-service, paper keeps the kitchen firing."
+  ],
+  "restaurant:station": [
+    "essential",
+    "Bar and host stations — where orders and payments actually happen."
+  ],
+  "restaurant:sched": [
+    "recommended",
+    "Scheduling by gut costs a manager 10–15 hours a week; the software costs less than one wasted shift."
+  ],
+  "restaurant:payroll": [
+    "recommended",
+    "Payday errors are how you lose good staff. Automate the math."
+  ],
+  "restaurant:acct": [
+    "recommended",
+    "Food cost means nothing if the books are a mess."
+  ],
+  "restaurant:aiphone": [
+    "optional",
+    "Pays when you miss calls during rush — but at ~$399/mo, count your missed covers first."
+  ],
+  "restaurant:reserv": [
+    "optional",
+    "Worth it when no-shows cost you tables; overkill if your book is regulars who always show."
+  ],
+  "restaurant:tablets": [
+    "optional",
+    "Line-busting and tableside ordering — a speed play, not a necessity."
+  ],
+  "qsr:pos": [
+    "essential",
+    "Speed at the counter is the business. The POS is the counter."
+  ],
+  "qsr:terminal": [
+    "essential",
+    "Takes the money — keep a spare. A dead lone terminal is a line walking out the door."
+  ],
+  "qsr:station": [
+    "essential",
+    "The counter station — order in, payment out."
+  ],
+  "qsr:kds": [
+    "essential",
+    "The kitchen’s eyes. In quick-service, the KDS is the difference between 3-minute and 8-minute tickets."
+  ],
+  "qsr:acct": [
+    "recommended",
+    "Thin margins need clean books."
+  ],
+  "qsr:kiosk": [
+    "optional",
+    "Throughput without counter staff — but each kiosk is a capital project. Price it properly."
+  ],
+  "qsr:menuboard": [
+    "optional",
+    "Looks sharp, changes prices in seconds. Earns its keep at 3+ screens."
+  ],
+  "qsr:tablets": [
+    "optional",
+    "Line-busting during rush — nice when the queue hits the door."
+  ],
+  "hotel:pms": [
+    "essential",
+    "The hotel doesn’t run without it — reservations, rooms, folios, night audit."
+  ],
+  "hotel:terminal": [
+    "essential",
+    "Front desk and outlets take cards around the clock — spares aren’t optional at an 11pm check-in."
+  ],
+  "hotel:station": [
+    "essential",
+    "Front-desk stations where guests check in, pay, and complain."
+  ],
+  "hotel:acct": [
+    "recommended",
+    "Multi-outlet revenue needs real books."
+  ],
+  "hotel:guestmsg": [
+    "optional",
+    "Answers ‘what’s the Wi-Fi password’ at 2am so your night auditor doesn’t have to."
+  ],
+  "grocery:pos": [
+    "essential",
+    "Lanes are the business. The POS keeps them moving."
+  ],
+  "grocery:terminal": [
+    "essential",
+    "Every lane needs one, plus a spare — a dead terminal closes a lane on a Sunday afternoon."
+  ],
+  "grocery:station": [
+    "essential",
+    "Each lane’s full kit — screen, scanner, scale, printer, drawer."
+  ],
+  "grocery:acct": [
+    "recommended",
+    "Perishable shrink hides in messy books."
+  ],
+  "grocery:ecom": [
+    "recommended",
+    "Curbside and delivery are table stakes now — price the picking labour honestly."
+  ],
+  "grocery:loyalty": [
+    "optional",
+    "Works when baskets are big and trips are weekly; a points program nobody checks is just a discount."
+  ],
+  "salon:booking": [
+    "essential",
+    "No-shows eat 15–30% of the book. This is the thing that fixes it."
+  ],
+  "salon:pos": [
+    "essential",
+    "Checkout, retail sales and the client record in one place."
+  ],
+  "salon:terminal": [
+    "essential",
+    "Takes the money — keep a spare. A dead terminal at 5pm Friday is a book of clients who can’t pay."
+  ],
+  "salon:station": [
+    "essential",
+    "The reception till — where rebooking and retail happen."
+  ],
+  "salon:payroll": [
+    "recommended",
+    "Commission and chair-rental math gets old fast by hand."
+  ],
+  "salon:acct": [
+    "recommended",
+    "Product retail and service revenue need separating."
+  ],
+  "salon:crm": [
+    "optional",
+    "Worth it when you’re ready to fill quiet Tuesdays; skip until the book is the problem."
+  ],
+  "*:drops": [
+    "essential",
+    "Every wired device needs a path back to the switch. No drop, no wire, no connection."
+  ],
+  "*:ap": [
+    "recommended",
+    "Staff devices and guest Wi-Fi need coverage where the work happens — dead zones at the till are not an option."
+  ],
+  "*:switch": [
+    "essential",
+    "The thing everything plugs into. Size it for today plus the cameras you’ll add next year."
+  ],
+  "*:firewall": [
+    "recommended",
+    "Keeps the card network away from guests and staff phones. Your PCI scope will thank you."
+  ],
+  "*:internet": [
+    "essential",
+    "No internet, no card payments, no cloud POS. This one isn’t a choice."
+  ],
+  "*:ups": [
+    "recommended",
+    "A two-second power blip shouldn’t reboot your whole network mid-sale."
+  ],
+  "*:guestwifi": [
+    "optional",
+    "Nice for cafés and waiting areas; skip it where customers don’t linger."
+  ],
+  "*:bopc": [
+    "optional",
+    "For the books, ordering and everything you don’t want on the till — a refurb office PC does the job."
+  ],
+  "*:failover": [
+    "recommended",
+    "When the internet dies, card payments die with it. Failover keeps the till taking cards."
+  ],
+  "restaurant:inventory": [
+    "recommended",
+    "Shrink and food-cost creep eat margin quietly. Software ties inventory to sales; manual counts (4–6 manager hrs/month) work, they just cost your time."
+  ],
+  "qsr:inventory": [
+    "recommended",
+    "Food-cost drift hides in manual counts. Software flags it daily; manual (4–6 manager hrs/month) is free in dollars, not in hours."
+  ],
+  "grocery:inventory": [
+    "recommended",
+    "Fresh and high-theft SKUs need daily visibility. Software gives it; manual counts (4–6 manager hrs/month) lag behind."
+  ],
+  "retail:labelprinter": [
+    "recommended",
+    "Shipping + shelf labels without hand-writing — a $160 DYMO pays for itself in a month of avoided label chaos."
+  ],
+  "grocery:labelprinter": [
+    "recommended",
+    "Deli + shelf-edge labels print in seconds — no more hand-written price signs."
+  ],
+  "retail:custdisplay": [
+    "optional",
+    "Shows the total facing the customer — fewer 'how much was that?' disputes at the till."
+  ],
+  "qsr:custdisplay": [
+    "optional",
+    "Order-confirmation screen cuts 'that's not what I ordered' remakes."
+  ],
+  "grocery:custdisplay": [
+    "optional",
+    "Price transparency at the lane — fewer disputes, faster bagging."
+  ],
+  "retail:pinpad": [
+    "recommended",
+    "A second payment point keeps the line moving when the main till is tied up."
+  ],
+  "restaurant:pinpad": [
+    "optional",
+    "A spare reader for the patio or events — cheap insurance at $59."
+  ],
+  "qsr:pinpad": [
+    "optional",
+    "Second payment point for rush hour — the line never stops for one reader."
+  ],
+  "grocery:pinpad": [
+    "optional",
+    "Express-lane backup reader — one dead PIN pad shouldn't close a lane."
+  ],
+  "retail:scanner": [
+    "recommended",
+    "A fixed presentation scanner at the till beats aiming a handheld at every barcode."
+  ],
+  "grocery:scanner": [
+    "recommended",
+    "In-counter scanners are built for belt speed; presentation scanners suit express lanes."
+  ],
+  "restaurant:handheld": [
+    "optional",
+    "Take orders tableside without running to a terminal — but each one is an $880 device to drop."
+  ],
+  "restaurant:mprinter": [
+    "optional",
+    "Print the bill tableside instead of walking back to the station."
+  ],
+  "qsr:mprinter": [
+    "optional",
+    "Line-busting receipts at the door — the queue keeps moving."
+  ],
+  "*:station": [
+    "essential",
+    "The till itself — screen, printer, drawer and reader assembled per lane. No station, no checkout."
+  ]
+}

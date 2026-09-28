@@ -483,7 +483,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       r("Hardware purchases", money(hwUpfront)) +
       r("Install labor (~" + (Math.round(hrs * 10) / 10) + " hrs × " + money(S.techRate) + "/hr)", money(laborUpfront)) +
       r("Install line items", installUpfront > 0 ? money(installUpfront) : (installQuoted > 0 ? "quote-based" : money(0))) +
-      r("Training — go-live", money(trainNow)) +
+      r("Training — go-live on the new system", money(trainNow)) +
       '<div class="pay-row total"><span>Total due at install</span><strong>' + money(payNow) + (installQuoted > 0 ? " +" : "") + "</strong></div>" +
       (installQuoted > 0 ? '<div class="pay-note">' + installQuoted + ' install item(s) still need installer quotes.</div>' : "") +
       "</div>" +
@@ -493,7 +493,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
       r("Support contracts", money(contractMo), true) +
       (breakfixMo > 0 ? r("Expected break/fix", money(breakfixMo), true)
         : '<div class="pay-row"><span>Expected break/fix</span><strong>—</strong></div>') +
-      r("New-hire training", money(trainMo), true) +
+      r("New-hire training (new system)", money(trainMo), true) +
       r("Processing fees", money(proc), true) +
       "</div></div>" +
       '<p class="fine">Bought hardware is due in full at install — the monthly total above spreads it over its expected life for comparison only. ' +

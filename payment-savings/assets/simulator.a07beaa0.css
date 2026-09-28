@@ -124,17 +124,19 @@
 .pay-breakout h4{margin:0 0 10px;font-size:1.15rem}
 .pay-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:640px){.pay-cols{grid-template-columns:1fr}}
-.pay-col{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:12px 14px;min-width:0;overflow-wrap:anywhere}
-/* min-width:0 lets the two columns share desktop width without forcing a horizontal scrollbar; labels wrap instead of overflowing */
+.pay-col{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:14px 16px;min-width:0}
+/* min-width:0 lets the two columns share desktop width without forcing a horizontal scrollbar; labels wrap at word boundaries — amounts never break mid-number */
 .pay-col h5{margin:0 0 8px;font-size:.95rem;letter-spacing:.02em}
 .pay-col.now h5{color:#fbbf24}
 .pay-col.monthly h5{color:#7dd3fc}
-.pay-row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;font-size:.92rem}
-.pay-row span{opacity:.85}
-.pay-row.total{border-top:1px solid rgba(255,255,255,.2);margin-top:6px;padding-top:8px;font-size:1.05rem;font-weight:800}
+.pay-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;font-size:.95rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.pay-row span{opacity:.85;min-width:0;overflow-wrap:break-word}
+.pay-row strong{white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.pay-row.total{border-bottom:none;border-top:2px solid rgba(255,255,255,.22);margin-top:6px;padding-top:10px;font-size:1.08rem;font-weight:800}
 .pay-note{font-size:.82rem;opacity:.75;margin-top:6px;font-style:italic}
 .pay-breakout .fine{font-size:.85rem;opacity:.7;margin-top:10px}
 /* training module */
+.train-it-note{background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.25);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:.92rem}
 .train-tracks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
 @media(max-width:640px){.train-tracks{grid-template-columns:1fr}}
 .train-track{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px}

@@ -31,7 +31,7 @@ import { trainEmps, trainingInitCost, trainingOngoingMonthly } from './cost-engi
     const stI = S.state["tr-initial"], stO = S.state["tr-ongoing"];
     const inp = S.getInputs();
     const emps = trainEmps(inp);
-    let html = '<div class="train-tracks">';
+    let html = '<div class="train-it-note">🖥️ <strong>Why training sits in your IT budget:</strong> a new POS/back-office system only pays off if your staff can run it. These are the paid hours to get them there — and it\'s the line most installs quietly blow past.</div><div class="train-tracks">';
     S.DATA.training.tracks.forEach(t => { html += '<div class="train-track"><h4>' + t.t + "</h4><p>" + t.d + "</p></div>"; });
     html += '</div><div class="train-warn">' + S.DATA.training.warn + "</div>";
     html += '<div class="train-cost"><h4>💵 What the training actually costs — adjust it to your shop</h4>' +

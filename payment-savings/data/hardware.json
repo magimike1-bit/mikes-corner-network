@@ -165,7 +165,7 @@
         },
         {
           "id": "acct",
-          "name": "Accounting",
+          "name": "Accounting software",
           "calc": "flat",
           "map": {
             "zone": "backoffice",
@@ -662,7 +662,7 @@
         },
         {
           "id": "acct",
-          "name": "Accounting",
+          "name": "Accounting software",
           "calc": "flat",
           "map": {
             "zone": "backoffice",
@@ -1040,7 +1040,7 @@
         },
         {
           "id": "acct",
-          "name": "Accounting",
+          "name": "Accounting software",
           "calc": "flat",
           "map": {
             "zone": "backoffice",
@@ -1357,7 +1357,7 @@
         },
         {
           "id": "acct",
-          "name": "Accounting",
+          "name": "Accounting software",
           "calc": "flat",
           "map": {
             "zone": "backoffice",
@@ -1591,7 +1591,7 @@
         },
         {
           "id": "acct",
-          "name": "Accounting",
+          "name": "Accounting software",
           "calc": "flat",
           "map": {
             "zone": "backoffice",
@@ -1949,7 +1949,7 @@
         },
         {
           "id": "acct",
-          "name": "Accounting",
+          "name": "Accounting software",
           "calc": "flat",
           "map": {
             "zone": "backoffice",

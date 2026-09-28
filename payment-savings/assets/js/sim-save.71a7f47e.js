@@ -7,7 +7,7 @@
 import { S } from './session.babf8dd5.js';
 import {
   loadTypical, renderCatalog, renderSectors, recalc, applySectorInfraDefaults,
-} from './sim-core.a70ec671.js';
+} from './sim-core.2e4425fc.js';
 import { saveSimState, loadSimState, isConfigured, guestNudge } from './db.e09aae23.js';
 
 const INPUT_IDS = ["in-locations", "in-stations", "in-terminals", "in-employees",

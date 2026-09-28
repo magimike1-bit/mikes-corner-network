@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://toast-creations.pages.dev/</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://toast-creations.pages.dev/posts/toast-art</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://toast-creations.pages.dev/posts/toast-city</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://toast-creations.pages.dev/posts/toast-menagerie</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://toast-creations.pages.dev/posts/toast-towers</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://toast-creations.pages.dev/posts/holiday-toast</loc><lastmod>2026-09-27</lastmod></url>
+  <url>
+    <loc>https://toast-creations-ixlkr.kinsta.page/</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://toast-creations-ixlkr.kinsta.page/posts/holiday-toast.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://toast-creations-ixlkr.kinsta.page/posts/toast-art.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://toast-creations-ixlkr.kinsta.page/posts/toast-city.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://toast-creations-ixlkr.kinsta.page/posts/toast-menagerie.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://toast-creations-ixlkr.kinsta.page/posts/toast-towers.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
 </urlset>

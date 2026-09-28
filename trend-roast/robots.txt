@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://trend-roast.pages.dev/sitemap.xml
+Sitemap: https://trend-roast-cavqs.kinsta.page/sitemap.xml

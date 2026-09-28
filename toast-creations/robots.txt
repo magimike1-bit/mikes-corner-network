@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://toast-creations.pages.dev/sitemap.xml
+Sitemap: https://toast-creations-ixlkr.kinsta.page/sitemap.xml

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fall-yard-cleanup-diy-z2nde.kinsta.page/sitemap.xml

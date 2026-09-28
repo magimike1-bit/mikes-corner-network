@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://side-hustles-that-fit-a-ful-jg2ed.kinsta.page/sitemap.xml

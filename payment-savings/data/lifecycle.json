@@ -1,0 +1,182 @@
+{
+  "terminal": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium",
+    "src": "FavorPOS lifespan guide; merchantequip.com",
+    "note": "PCI PTS version expiry usually retires terminals before they wear out"
+  },
+  "station:printer": {
+    "yrs": 5,
+    "range": "3–5",
+    "conf": "Medium",
+    "src": "FavorPOS (printers 3–5 yrs); Epson TM-T88VI spec",
+    "note": "thermal receipt printer class"
+  },
+  "station:scanner": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium",
+    "src": "FavorPOS (barcode scanners 5–7 yrs with cleaning)"
+  },
+  "station:drawer": {
+    "yrs": 12,
+    "range": "10–15",
+    "conf": "Medium",
+    "src": "FavorPOS ('over 10 years'); APG Series 4000 (4M cycles)",
+    "note": "cash drawers rarely die of wear"
+  },
+  "station:scale": {
+    "yrs": 8,
+    "range": "7–10",
+    "conf": "Low",
+    "est": true,
+    "src": "estimate — Mettler Toledo publishes no year figure"
+  },
+  "station:pinpad": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium",
+    "src": "merchantequip.com (100k-hr design life); PCI SSC PTS bulletin",
+    "note": "PTS approval expiry is the real retirement driver"
+  },
+  "station:aio": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium",
+    "src": "POS terminal class — FavorPOS; merchantequip.com",
+    "note": "all-in-one: one part dies, the whole box goes for repair"
+  },
+  "labelprinter": {
+    "yrs": 5,
+    "range": "5",
+    "conf": "Low",
+    "est": true,
+    "src": "estimate — LabelValue; ShipScience; DYMO publishes no figure"
+  },
+  "custdisplay": {
+    "yrs": 8,
+    "range": "7–10",
+    "conf": "Medium",
+    "src": "Display Industry Association (LCD 50k–60k hrs)",
+    "note": "panel backlight life"
+  },
+  "pinpad": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium",
+    "src": "merchantequip.com; PCI SSC PTS bulletin",
+    "note": "PTS approval expiry is the real retirement driver"
+  },
+  "scanner": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Low",
+    "est": true,
+    "src": "estimate — Zebra publishes no MTBF for DS9300; FavorPOS handheld 5–7 yrs",
+    "note": "presentation scanner class"
+  },
+  "signage": {
+    "yrs": 8,
+    "range": "7–10",
+    "conf": "Medium",
+    "src": "commercial display panel class — Display Industry Association"
+  },
+  "selfcheckout": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium",
+    "src": "self-service kiosk market report; Firstouch buying guide",
+    "note": "chassis outlasts compute/payment modules"
+  },
+  "kds": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium",
+    "src": "Oracle KDS specs (rated 60°C); Elo 1715L (MTBF 50k hrs)",
+    "note": "purpose-built screens; consumer tablets used as KDS run 3–4 yrs (estimate)"
+  },
+  "kprinter": {
+    "yrs": 4,
+    "range": "3–5",
+    "conf": "Medium",
+    "src": "FavorPOS (printers 3–5 yrs); Epson TM-U220 (MTBF 180k hrs)",
+    "note": "use the lower end in hot/greasy kitchens"
+  },
+  "handheld": {
+    "yrs": 4,
+    "range": "3–5",
+    "conf": "High",
+    "src": "Zebra white paper citing VDC Research (rugged handheld upgrade cycles 3–5 yrs)"
+  },
+  "mprinter": {
+    "yrs": 3.5,
+    "range": "3–4",
+    "conf": "Low",
+    "est": true,
+    "src": "estimate — Epson TM-P20 datasheet; batteries (~2-yr) are the limiter"
+  },
+  "tablets": {
+    "yrs": 4,
+    "range": "4–5",
+    "conf": "Medium",
+    "src": "Macworld/AppleInsider (iPadOS support; vintage 5–7); Asurion",
+    "note": "always-on POS use retires tablets sooner than consumer use"
+  },
+  "kiosk": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium",
+    "src": "self-service kiosk market report; Firstouch buying guide"
+  },
+  "menuboard": {
+    "yrs": 8,
+    "range": "7–10",
+    "conf": "Medium",
+    "src": "commercial display panel class — Display Industry Association"
+  },
+  "drops": {
+    "yrs": 15,
+    "range": "10–20+",
+    "conf": "Medium",
+    "src": "industry: cable plant outlives POS gear (2026-09-28)",
+    "note": "building asset, not hardware — amortize per location, never monthly"
+  },
+  "ap": {
+    "yrs": 4,
+    "range": "3–5",
+    "conf": "Medium",
+    "src": "Hummingbird Networks (refresh on firmware-support end / density)"
+  },
+  "switch": {
+    "yrs": 6,
+    "range": "5–7",
+    "conf": "Medium-High",
+    "src": "Hummingbird Networks (~5 yrs); Allegiant (5–7); Stratus/Meraki (5–10)"
+  },
+  "firewall": {
+    "yrs": 4,
+    "range": "4–5",
+    "conf": "Medium",
+    "src": "Hummingbird Networks (~5 yrs routers); Cradlepoint subscription terms"
+  },
+  "ups": {
+    "yrs": 5,
+    "range": "5",
+    "conf": "Low",
+    "est": true,
+    "src": "estimate — batteries (~3–5 yrs) are the limiter; the unit lasts longer"
+  },
+  "failover": {
+    "yrs": 4,
+    "range": "4–5",
+    "conf": "Medium",
+    "src": "Hummingbird Networks (~5 yrs); Cradlepoint NetCloud 1/3/5-yr terms"
+  },
+  "bopc": {
+    "yrs": 4,
+    "range": "4–5",
+    "conf": "High",
+    "src": "GDS Technology (4–5 yrs); Seras IT (3–5); IDC via TechNewsWorld"
+  }
+}

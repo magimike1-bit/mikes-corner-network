@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rate Transparency Wall — What Canadian Small Businesses Really Pay | FairRate Audit</title>
+<meta name="description" content="Anonymous, owner-reported processing rates by processor, sector, and volume band. Aggregates only — no public database of real processing rates exists, so we built one together.">
+<link rel="stylesheet" href="style.css">
+<style>
+.crumbs{font-size:.9rem;color:var(--muted);padding:18px 0 0}
+.crumbs a{color:var(--accent-dark);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.wall-form{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin:1.6em 0}
+.wall-form .fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wall-form label{display:block;font-weight:700;font-size:.92rem;margin-bottom:6px;color:var(--navy)}
+.wall-form input,.wall-form select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:1rem;background:#fff;color:var(--ink)}
+.wall-form input:focus,.wall-form select:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.wall-form .field-full{grid-column:1/-1}
+.wall-form .input-note{font-size:.85rem;color:var(--muted);margin-top:6px}
+.wall-status{margin-top:14px;font-weight:700;font-size:.95rem}
+.wall-status.ok{color:var(--accent-dark)}
+.wall-status.err{color:#a93226}
+.honesty{background:var(--accent-soft);border:1px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:1.6em 0}
+.honesty p{margin:.35em 0}
+.honesty strong{color:var(--accent-dark)}
+.wall-table-wrap{overflow-x:auto;margin:1.2em 0}
+.wall-table{width:100%;border-collapse:collapse;font-size:.97rem;background:#fff;border-radius:var(--radius);overflow:hidden}
+.wall-table th,.wall-table td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+.wall-table thead th{background:var(--accent-soft);color:var(--navy);white-space:nowrap}
+.wall-table tbody tr:nth-child(even) td{background:#f7faf8}
+.wall-empty{background:#fff;border:1px dashed var(--line);border-radius:var(--radius);padding:34px;text-align:center;color:var(--muted);margin:1.2em 0}
+@media (max-width:640px){.wall-form .fields{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span aria-hidden="true">›</span> <span aria-current="page">Transparency wall</span></nav>
+    <p class="kicker">Rate my processor · anonymous owner reports</p>
+    <h1>The transparency wall: what businesses really pay.</h1>
+    <p class="lead">No public database of real processing rates exists. Owners negotiate blind, against an industry that knows exactly what everyone pays. This flips the asymmetry: owners report what they pay, everyone sees the aggregates, nobody sees anything identifiable.</p>
+  </div>
+</section>
+
+<main>
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">Why this exists</h2>
+    <p>When a processor quotes you a rate, you have no way to know whether it's good, average, or terrible. The information is scattered across thousands of private contracts. So here is the deal: <strong>add your numbers anonymously, and the wall gets smarter for everyone.</strong> The more owners report, the tighter and more useful the picture becomes.</p>
+    <p>Every submission is anonymous. We never ask for your business name, and raw submissions are never displayed — only aggregate medians, and only for cells with enough reports to be meaningful.</p>
+
+    <div class="wall-form" id="wall-form-box">
+      <h2 class="section-title" style="margin-top:0">Add your rate</h2>
+      <form id="wall-form" novalidate>
+        <div class="fields">
+          <div>
+            <label for="wall-processor">Processor</label>
+            <input id="wall-processor" name="processor" list="wall-processors" placeholder="e.g. Moneris" autocomplete="off" maxlength="60" required>
+            <datalist id="wall-processors">
+              <option value="Moneris"></option>
+              <option value="Global Payments"></option>
+              <option value="Chase"></option>
+              <option value="Elavon"></option>
+              <option value="Square"></option>
+              <option value="Stripe"></option>
+              <option value="Helcim"></option>
+              <option value="Paysafe"></option>
+            </datalist>
+            <div class="input-note">Suggestions only — type any processor if yours isn't listed.</div>
+          </div>
+          <div>
+            <label for="wall-sector">Sector</label>
+            <select id="wall-sector" name="sector" required>
+              <option value="">Choose…</option>
+              <option value="retail">Retail</option>
+              <option value="restaurant">Restaurant (full-service)</option>
+              <option value="qsr">Quick-service / café</option>
+              <option value="hotel">Hotel / hospitality</option>
+              <option value="grocery">Grocery / convenience</option>
+              <option value="salon">Salon / services</option>
+            </select>
+          </div>
+          <div>
+            <label for="wall-volume">Monthly card volume</label>
+            <select id="wall-volume" name="volume_band" required>
+              <option value="">Choose…</option>
+              <option value="Under $25K">Under $25K</option>
+              <option value="$25–75K">$25–75K</option>
+              <option value="$75–200K">$75–200K</option>
+              <option value="$200K+">$200K+</option>
+            </select>
+            <div class="input-note">Pick the band, not the exact number.</div>
+          </div>
+          <div>
+            <label for="wall-rate">Your effective rate (%)</label>
+            <input id="wall-rate" name="rate" type="number" min="0.01" max="14.99" step="0.01" placeholder="e.g. 2.65" required>
+            <div class="input-note">Total fees ÷ total volume for a typical month, as a percentage.</div>
+          </div>
+        </div>
+        <p style="margin-top:18px"><button class="btn" type="submit" id="wall-submit">Submit anonymously</button></p>
+        <div class="wall-status" id="wall-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <h2 class="section-title">Published aggregates</h2>
+    <div class="honesty">
+      <p><strong>Aggregates only</strong> — cells with fewer than 3 reports are hidden.</p>
+      <p><strong>Medians, not averages</strong> — the middle value, so one extreme outlier can't drag the number.</p>
+      <p><strong>Anonymous</strong> — no names, no businesses, no raw submissions, ever.</p>
+    </div>
+    <div class="wall-table-wrap">
+      <table class="wall-table" id="wall-table" hidden>
+        <thead>
+          <tr>
+            <th scope="col">Processor</th>
+            <th scope="col">Sector</th>
+            <th scope="col">Volume band</th>
+            <th scope="col">Median effective rate</th>
+            <th scope="col">Reporting owners</th>
+          </tr>
+        </thead>
+        <tbody id="wall-tbody"></tbody>
+      </table>
+    </div>
+    <div class="wall-empty" id="wall-empty">
+      No published aggregates yet — be the first to report.
+    </div>
+    <p class="section-sub" style="font-size:.9rem">These are owner-reported figures, not audited results — useful context, not a verdict on any processor. If you want your own number verified properly, that's what the <a href="how-it-works.html">free audit</a> is for.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+  <script type="module" src="assets/js/site-auth.cc128bd0.js"></script>
+  <script type="module" src="assets/js/wall.2379b6f8.js"></script>
+</body>
+</html>

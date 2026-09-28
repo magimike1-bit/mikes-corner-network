@@ -1,0 +1,150 @@
+{
+  "confLabel": {
+    "official": "Official",
+    "reported": "Reported",
+    "estimate": "Estimate",
+    "illus": "Illustrative"
+  },
+  "tierLabel": {
+    "essential": "ESSENTIAL",
+    "recommended": "RECOMMENDED",
+    "optional": "OPTIONAL"
+  },
+  "bundledNote": "there’s no separate processing rate to audit — the platform sets it. Savings come from comparing the effective rate against interchange-plus, not from renegotiating a markup.",
+  "singleTerminalRisk": "⚠️ One terminal is a single point of failure — if it dies mid-rush, you can’t take cards until it’s replaced. Keep a spare; redundancy beats saving ~$35/mo.",
+  "sectorWord": {
+    "retail": "retailers",
+    "restaurant": "restaurants",
+    "qsr": "quick-service spots",
+    "hotel": "hotels",
+    "grocery": "grocers",
+    "salon": "salons"
+  },
+  "benchmarks": {
+    "retail": {
+      "it": "2–4%",
+      "proc": "1.7–2.5% (2.5–3.5% in Canada)",
+      "note": "On retail net margins of 8–15%, processing can consume up to a third of net profit."
+    },
+    "restaurant": {
+      "it": "~1–3%",
+      "proc": "2.0–3.5% (avg 2.35%)",
+      "note": "The average full-service restaurant margin is 2.8% — processing can cost more than the profit it leaves behind."
+    },
+    "qsr": {
+      "it": "~1–3%",
+      "proc": "2.0–3.5%",
+      "note": "High volume + low tickets: the fixed per-transaction fee bites hardest here."
+    },
+    "hotel": {
+      "it": "under 3%",
+      "proc": "2.5–3.5%",
+      "note": "Canadian card-accepting businesses routinely surrender 2.5–3.5% of gross sales to processing."
+    },
+    "grocery": {
+      "it": "~1.9% (range 1–4%)",
+      "proc": "2.5–3.5%",
+      "note": "Enormous card volume on thin margins — every basis point is magnified."
+    },
+    "salon": {
+      "it": "no published benchmark (often ~1–3%)",
+      "proc": "2.5–3.5%+",
+      "note": "Card-on-file bookings skew toward the high end of the band."
+    }
+  },
+  "infraDefaults": {
+    "retail": {
+      "guest": false
+    },
+    "restaurant": {
+      "guest": true
+    },
+    "qsr": {
+      "guest": true
+    },
+    "hotel": {
+      "guest": true
+    },
+    "grocery": {
+      "guest": false
+    },
+    "salon": {
+      "guest": true
+    }
+  },
+  "infraWarns": {
+    "drops": "⚠️ Wired devices each need a cable run. Without these, there's no wire from the device back to the switch.",
+    "ap": "⚠️ With guest Wi-Fi on, skipping access points means no customer coverage.",
+    "switch": "⚠️ Without a switch, your wired devices and access points have nothing to plug into."
+  },
+  "commissionPlans": {
+    "doordash": {
+      "label": "DoorDash",
+      "src": "merchants.doordash.com/en-ca/pricing — official, accessed 2026-09-28",
+      "plans": [
+        {
+          "name": "Basic — 20%",
+          "rate": 0.2
+        },
+        {
+          "name": "Plus — 25%",
+          "rate": 0.25
+        },
+        {
+          "name": "Premier — 29%",
+          "rate": 0.29
+        }
+      ]
+    },
+    "ubereats": {
+      "label": "Uber Eats",
+      "src": "Plan structure official (merchants.ubereats.com/ca/en/pricing); tier % reported via Deliverect CA / Avanto Eats / iOrders — accessed 2026-09-28. (Mar 2026 Lite–20% hike was US-only.)",
+      "plans": [
+        {
+          "name": "Lite — 15%",
+          "rate": 0.15
+        },
+        {
+          "name": "Plus — 25%",
+          "rate": 0.25
+        },
+        {
+          "name": "Premium — 30%",
+          "rate": 0.3
+        }
+      ]
+    },
+    "skip": {
+      "label": "SkipTheDishes",
+      "src": "No official public rates — per-contract. 20–30% reported (Deliverect, Avanto Eats 2026) — accessed 2026-09-28; confirm with your Skip rep",
+      "plans": [
+        {
+          "name": "Standard — ~25%",
+          "rate": 0.25
+        }
+      ]
+    }
+  },
+  "derivedAuto": {
+    "kds": 1,
+    "kprinter": 1,
+    "kiosk": 1,
+    "tablets": 1,
+    "selfcheckout": 1,
+    "ap": 1,
+    "drops": 1,
+    "switch": 1
+  },
+  "supportGuide": {
+    "none": "No support — you buy a replacement out of pocket when it dies. Cheapest if nothing breaks; most expensive Tuesday when it does.",
+    "contract": "Monthly contract, tech on site — suits multi-lane or high-volume shops where an hour of downtime costs more than the contract. You call, they come.",
+    "breakfix": "Pay per visit — suits a single-location owner-operator who can swap a spare off the shelf and wait a day. Fewer moving parts, no monthly bill.",
+    "hybrid": "Lighter contract + per-visit rate — the middle ground: cheap cover for the big failures, pay-as-you-go for the small stuff."
+  },
+  "mapSupportLabel": {
+    "none": "None",
+    "contract": "Monthly contract",
+    "breakfix": "Break/fix",
+    "hybrid": "Hybrid"
+  }
+}

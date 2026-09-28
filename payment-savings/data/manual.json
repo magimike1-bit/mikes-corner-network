@@ -1,0 +1,97 @@
+{
+  "hours": {
+    "sched": {
+      "hrs": [
+        10,
+        15
+      ],
+      "per": "week",
+      "src": "Restaurant Magazine May 2026 — reported; vendor byline, sanity-check these hours"
+    },
+    "payroll": {
+      "hrs": [
+        4,
+        5
+      ],
+      "per": "payperiod",
+      "src": "QuickBooks/Kelton survey via Bloomberg Tax — ~4h52m per pay period calculating, filing and remitting"
+    },
+    "pos": {
+      "hrs": [
+        5,
+        7
+      ],
+      "per": "week",
+      "src": "PYMNTS/Ingo 2024 — 45–60 min/shift manual closeout + tip math × 7 days"
+    },
+    "pms": {
+      "hrs": [
+        3,
+        7
+      ],
+      "per": "week",
+      "src": "No published figure — night audit by hand, estimated. Drag to your reality.",
+      "est": true
+    },
+    "booking": {
+      "hrs": [
+        3,
+        8
+      ],
+      "per": "week",
+      "src": "No published figure — confirmation calls + no-show chasing, estimated. Drag to your reality.",
+      "est": true
+    },
+    "acct": {
+      "hrs": [
+        2,
+        5
+      ],
+      "per": "week",
+      "src": "No published figure — manual bookkeeping, estimated. Drag to your reality.",
+      "est": true
+    },
+    "ecom": {
+      "hrs": [
+        2,
+        6
+      ],
+      "per": "week",
+      "src": "No published figure — manual order entry, estimated. Drag to your reality.",
+      "est": true
+    },
+    "loyalty": {
+      "hrs": [
+        1,
+        2
+      ],
+      "per": "week",
+      "src": "No published figure — punch cards and tallying, estimated.",
+      "est": true
+    },
+    "crm": {
+      "hrs": [
+        1,
+        3
+      ],
+      "per": "week",
+      "src": "No published figure — estimated. Drag to your reality.",
+      "est": true
+    },
+    "reserv": {
+      "hrs": [
+        2,
+        5
+      ],
+      "per": "week",
+      "src": "No published figure — reservation book by hand, estimated. Drag to your reality.",
+      "est": true
+    }
+  },
+  "perFactor": {
+    "week": 4.33,
+    "payperiod": 2.167,
+    "month": 1
+  },
+  "wageDefault": 27
+}

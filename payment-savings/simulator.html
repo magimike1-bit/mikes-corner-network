@@ -7,91 +7,8 @@
 <meta name="description" content="Estimate what your business's tech stack should cost per month — POS, terminals, software and more — by sector. Illustrative estimates from published pricing. Then get a free audit of your real numbers.">
 <link rel="stylesheet" href="style.css">
 <!-- AdSense: ad code goes here -->
-<style>
-/* ===== Cost simulator (scoped) ===== */
-.sim-wrap{max-width:1400px;margin:0 auto;padding:0 24px}
-.sim-step{margin:2.2em 0}
-.sim-step h2{font-size:1.9rem;margin:0 0 .3em}
-.sim-step .hint{color:var(--muted);font-size:1.1rem;margin:0 0 1em}
-.sector-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-.sector-card{border:2px solid var(--line);border-radius:var(--radius);background:#fff;padding:26px 18px;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s}
-.sector-card:hover{border-color:var(--accent)}
-.sector-card.selected{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.sector-card .emoji{font-size:2.8rem;display:block;margin-bottom:10px}
-.sector-card strong{display:block;font-size:1.25rem}
-.input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
-.input-grid label{display:block;font-size:1.05rem;font-weight:700;margin-bottom:8px}
-.input-grid input,.input-grid select{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:8px;font-size:1.15rem}
-.input-note{font-size:.95rem;color:var(--muted);margin-top:6px}
-.infra-ask{background:#f4f8f6;border:1px solid #dfe8e4;border-radius:10px;padding:22px;margin-bottom:18px}
-.ask{margin-bottom:14px}
-.ask:last-child{margin-bottom:0}
-.ask-q{display:block;font-weight:700;margin-bottom:8px;color:#10312b;font-size:1.1rem}
-.ask label{display:inline-block;margin:0 18px 12px 0;font-size:1.08em;cursor:pointer}
-.why-line{font-size:1em;color:#0f766e;background:#e6f4f1;border-radius:6px;padding:10px 14px;margin-top:10px}
-.warn-line{font-size:1em;color:#9a3412;background:#fef3e8;border-radius:6px;padding:10px 14px;margin-top:10px}
-.auto-badge{display:inline-block;font-size:.82em;background:#e6f4f1;color:#0f766e;border-radius:10px;padding:3px 10px;margin-left:8px;vertical-align:middle}
-.typical-wrap{text-align:center;margin:0 0 24px;padding:26px;background:#eef4f1;border:2px dashed #0f766e;border-radius:12px}
-.typical-btn{background:#0f766e;color:#fff;border:0;border-radius:10px;padding:18px 38px;font-size:1.3em;font-weight:700;cursor:pointer}
-.typical-btn:hover{background:#0b5a53}
-.path-pick{display:flex;gap:12px;margin:10px 0;flex-wrap:wrap}
-.path-pick label{background:#f4f8f6;border:1px solid #dfe8e4;border-radius:8px;padding:12px 18px;cursor:pointer;font-size:1.05em}
-.reqs{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:6px}
-.reqs .sim-check{align-items:flex-start}
-.aio-note{font-size:1.05em;background:#fff8e1;border-left:4px solid #d99a00;border-radius:6px;padding:14px 18px;margin-top:10px;line-height:1.6}
-.sim-columns{display:grid;grid-template-columns:1fr;gap:32px}
-@media(min-width:960px){.sim-columns{grid-template-columns:1.2fr .8fr;align-items:start}}
-.tier{margin:2.2em 0}
-.tier>h3{font-size:1.6rem;margin:0 0 .2em;display:flex;align-items:center;gap:12px}
-.tier.toys>h3{color:var(--muted)}
-.tier .tier-sub{font-size:1.05rem;color:var(--muted);margin:0 0 1em}
-.sim-item{border:1px solid var(--line);border-radius:10px;background:#fff;padding:22px 24px;margin-bottom:14px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
-.tier.toys .sim-item{background:#fafbfc;border-style:dashed}
-.sim-item .name{font-weight:700;font-size:1.25rem}
-.sim-item .detail{font-size:1rem;color:var(--muted);margin-top:6px}
-.sim-item select{max-width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:1.05rem;margin-top:8px}
-.sim-item .price{text-align:right;white-space:nowrap}
-.sim-item .price .amt{font-weight:800;font-size:1.5rem;color:var(--accent-dark)}
-.sim-item .price .per{font-size:.9rem;color:var(--muted);display:block}
-.conf{display:inline-block;font-size:.82rem;font-weight:800;letter-spacing:.04em;padding:4px 10px;border-radius:20px;margin-left:6px;vertical-align:middle}
-.conf.official{background:#e6f6ec;color:#157a3a}
-.conf.reported{background:#fff4e0;color:#9a6a00}
-.conf.estimate{background:#f1f1f4;color:#5a5a66}
-.conf.illus{background:#eef2ff;color:#3b4fd8}
-.qty{display:flex;align-items:center;gap:12px;margin-top:10px}
-.qty button{width:46px;height:46px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:1.4rem;cursor:pointer;line-height:1}
-.qty button:hover{border-color:var(--accent)}
-.qty span{min-width:36px;text-align:center;font-weight:700;font-size:1.15rem}
-.sim-check{display:flex;gap:14px;align-items:flex-start;margin-top:10px;font-size:1.05rem}
-.sim-check input{margin-top:6px;width:22px;height:22px;flex:none;accent-color:#0f766e}
-#sim-map{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
-#sim-map h3{margin:0 0 .3em;font-size:1.5rem}
-#sim-map .hint{font-size:1rem;color:var(--muted);margin:0 0 .8em}
-#sim-map svg{width:100%;height:auto;border:1px dashed var(--line);border-radius:8px;background:#fbfdfc}
-.total-bar{background:var(--navy);color:#fff;border-radius:var(--radius);padding:30px}
-.total-bar .row{display:flex;justify-content:space-between;padding:9px 0;font-size:1.15rem;border-bottom:1px solid rgba(255,255,255,.14)}
-.total-bar .row.grand{border-bottom:none;font-size:1.8rem;font-weight:800;padding-top:16px}
-.total-bar .fine{font-size:.95rem;opacity:.75;margin-top:14px}
-.legend{display:flex;flex-wrap:wrap;gap:12px;margin:1em 0;font-size:.95rem}
-.proc-line{background:#fff;border:2px solid var(--accent);border-radius:10px;padding:28px;margin:2em 0}
-.proc-line h3{margin:0 0 .4em;font-size:1.4rem}
-.proc-line .big{font-size:2.2rem;font-weight:800;color:var(--accent-dark)}
-/* breadcrumbs + sector switcher (v2 chrome) */
-.crumbs{font-size:.85rem;color:var(--muted);padding:16px 0 0}
-.crumbs a{color:var(--accent-dark);text-decoration:none}
-.crumbs a:hover{text-decoration:underline}
-.sector-switch{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:.85rem;padding:10px 0 4px}
-.ss-label{font-weight:700;color:var(--navy);margin-right:2px}
-.sector-switch a{text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--ink);font-size:.83rem}
-.sector-switch a:hover{border-color:var(--accent);color:var(--accent-dark)}
-/* visible focus states */
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.sector-card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-/* sticky running-total column on desktop */
-@media(min-width:960px){.sim-side{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}}
-.ask input[type=radio],.ask input[type=checkbox]{width:20px;height:20px;vertical-align:middle;margin-right:6px;accent-color:#0f766e}
-.map-section{margin:2.4em 0}
-#sim-map svg{min-height:420px}
-</style>
+<!-- __SIM_CSS__ -->
+<link rel="stylesheet" href="assets/simulator.7f7c6e8a.css">
 </head>
 <body>
 <header class="site-header">
@@ -204,6 +121,39 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
   </div>
 </section>
 
+<section class="sim-step map-section" id="sim-map-section">
+  <h2>Your setup, visualized</h2>
+  <p class="hint">Every device you tick below appears here, in the zone where it lives — with how it's paid for, how it connects, and how long it should last. Schematic, not to scale. It updates live as you change your stack.</p>
+  <div class="map-toolbar">
+    <div class="map-view-toggle" role="group" aria-label="Choose map or list view">
+      <button type="button" id="map-view-svg" class="map-toggle" aria-pressed="true">🗺️ Map view</button>
+      <button type="button" id="map-view-list" class="map-toggle" aria-pressed="false">📋 List view</button>
+    </div>
+    <div class="map-legend" aria-label="Map legend">
+      <span class="lg"><i class="lg-line wired" aria-hidden="true"></i>wired</span>
+      <span class="lg"><i class="lg-line wifi" aria-hidden="true"></i>Wi-Fi</span>
+      <span class="lg"><i class="lg-sq up" aria-hidden="true"></i>paid up front</span>
+      <span class="lg"><i class="lg-sq mo" aria-hidden="true"></i>monthly</span>
+      <span class="lg"><i class="lg-sq free" aria-hidden="true"></i>free / included</span>
+      <span class="lg"><i class="lg-sq quote" aria-hidden="true"></i>quote-based</span>
+      <span class="lg">⚠️ payment device on Wi-Fi</span>
+    </div>
+  </div>
+  <div id="map-alert"></div>
+  <div id="sim-map">
+    <svg id="floorplan" role="group" aria-label="Schematic floor plan of selected equipment. Each device is a button: Tab to move between devices, Enter to jump to it in your stack."></svg>
+  </div>
+  <div id="map-table-wrap" hidden>
+    <table id="map-table">
+      <caption>Your setup as a list — the same data as the map</caption>
+      <thead><tr><th scope="col">Device</th><th scope="col">Zone</th><th scope="col">Qty</th><th scope="col">Link</th><th scope="col">Paid</th><th scope="col">Expected life</th><th scope="col">Support</th><th scope="col">Install</th></tr></thead>
+      <tbody id="map-tbody"></tbody>
+    </table>
+  </div>
+  <p class="map-note" id="map-install-line"></p>
+  <p class="map-note">Link types follow your <a href="#net-plan">network plan</a> (wired / Wi-Fi per zone) — change the plan and the map updates. Money figures are CAD, converted at the stated rates where originally priced in US$ or £.</p>
+</section>
+
 <section class="sim-step">
   <h2>3 · Build your stack</h2>
   <p class="hint">Tick what you have (or plan to get). Quantities adjust per item.</p>
@@ -211,22 +161,29 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
     <span><span class="conf official">Official</span> vendor's own price</span>
     <span><span class="conf reported">Reported</span> reputable third-party</span>
     <span><span class="conf estimate">Estimate</span> our reasonable estimate</span>
-    <span><span class="conf illus">Illustrative</span> purchase ÷ 36 mo</span>
+    <span><span class="conf illus">Illustrative</span> purchase ÷ expected life</span>
   </div>
   <div class="sim-columns">
     <div>
       <div class="typical-wrap">
         <button id="btn-typical" class="typical-btn">✨ Load a typical setup for my sector</button>
+        <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button id="btn-save-setup" class="typical-btn" style="background:#fff">💾 Save this setup</button>
+          <a href="account.html" class="input-note" style="margin:0">My saved setups →</a>
+        </div>
         <div class="input-note" id="typical-note">Zero-effort path: fills in a normal configuration for your sector. A starting point — not a recommendation. Adjust to match yours.</div>
       </div>
       <div class="tier" id="tier-needs"><h3>✅ What you actually need</h3><p class="tier-sub">The core stack — real, verified, useful. Start here.</p><div id="needs-list"></div></div>
-      <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (÷ 36), clearly labeled.</p>
+      <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (purchase ÷ expected life in years), clearly labeled.</p>
       <div class="infra-ask">
         <div class="ask"><span class="ask-q">How things connect — handled for you</span>
-          <div class="input-note" style="margin:0">Fixed gear (POS stations, terminals, kitchen screens, printers, scanners, scales) is <strong>wired by default</strong> — reliability beats everything at the till. Tablets go on <strong>Wi-Fi</strong>. Guest Wi-Fi is on or off depending on what's normal for your sector (toggle it below). We add the cable runs and switch ports automatically — every auto-added item tells you why it's there.</div>
+          <div class="input-note" style="margin:0">There's no single right answer — so choose per zone in the network plan below. The default is <strong>hybrid</strong>: the devices that take money get cables; the devices that move get Wi-Fi. Guest Wi-Fi is on or off depending on what's normal for your sector (toggle it below). Cable runs and switch ports follow your plan automatically — every auto-added item tells you why it's there.</div>
         </div>
       </div>
+      <div id="net-plan"></div>
       <div id="infra-list"></div></div>
+      <div class="tier" id="tier-install"><h3>🔧 Installation &amp; setup — paid up front, never monthly</h3><p class="tier-sub">One-time work, due at install. Cable drops and setup are paid once — they never belong in a monthly column. Tick what your installer will do; the labor estimate below comes from the install hours on each hardware item × your tech's rate.</p><div id="install-labor-line"></div><div id="install-list"></div></div>
+      <div class="tier" id="tier-training"><h3>🎓 Training — the cost nobody budgets</h3><p class="tier-sub">A new system isn't live when it's installed — it's live when your people can run it at rush without thinking. Training is paid time, and turnover means you pay it again every year.</p><div id="training-list"></div></div>
       <div class="tier toys" id="tier-toys"><h3>🧸 Toys — nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="toys-list"></div></div>
     </div>
     <div class="sim-side">
@@ -234,18 +191,44 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
         <div id="total-lines"></div>
         <div class="row grand"><span>Estimated total</span><span id="grand-total">$0/mo</span></div>
         <div id="rev-lines"></div>
-        <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ 36). Not quotes — your free audit measures your real numbers.</p>
+        <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ its expected life — a 5-year terminal costs less per month than a 2-year printer at the same price). Not quotes — your free audit measures your real numbers.</p>
+        <div id="pay-breakout"></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sim-step map-section" id="sim-map-section">
-  <h2>Your floor plan</h2>
-  <p class="hint">Schematic — icons appear as you add items. Not to scale.</p>
-  <div id="sim-map">
-    <svg id="floorplan" viewBox="0 0 1200 860" role="img" aria-label="Schematic floor plan of selected equipment"></svg>
+<section class="sim-step" id="margin-eaters">
+  <h2>🦈 Margin eaters — cost of sales, not IT</h2>
+  <p class="hint">Commissions and platform cuts scale with your revenue — they’re <strong>cost-of-sales</strong>, not technology. They’re kept out of your IT stack total on purpose: mixing them in hides how much damage they do.</p>
+  <div class="me-grid">
+    <div class="me-card">
+      <h3>🛵 Delivery-app commissions</h3>
+      <label>Platform<select id="me-platform"></select></label>
+      <label>Plan<select id="me-plan"></select></label>
+      <div class="input-note" id="me-plan-src"></div>
+      <label>Monthly sales through delivery apps (CA$)<input id="me-sales" type="number" min="0" step="100"></label>
+      <label>Roughly what share of sales comes through delivery apps?<input id="me-share" type="range" min="0" max="60" step="1"> <b id="me-share-v"></b></label>
+      <div class="me-result" id="me-comm-result"></div>
+    </div>
+    <div class="me-card">
+      <h3>🏠 Your own ordering instead</h3>
+      <label>Ordering website<select id="me-site"><option value="49">Shopify Basic — $49/mo</option><option value="0">Already have a site — $0</option></select></label>
+      <label>Your delivery cost per order (CA$)<input id="me-fee" type="number" min="0" step="0.5" placeholder="e.g., 6.99"></label>
+      <div class="input-note">Flat-fee courier or your own driver — enter <em>your</em> number. No guesswork.<br>Published flat-fee options (2026-09-28): Uber Direct from <strong>CA$7.99</strong>/delivery (official); DoorDash Drive <strong>$6.99–$10.99</strong>/order (official, currency as printed); SkipGo ~<strong>CA$7–9</strong> (reported).</div>
+      <label>Average delivery ticket (CA$)<input id="me-ticket" type="number" min="1" step="1" value="40"></label>
+      <div class="me-result" id="me-compare-result"></div>
+    </div>
+    <div class="me-card">
+      <h3>🧾 Other platform cut</h3>
+      <p class="input-note">Booking platforms, marketplaces, app stores — anything that takes a % of your revenue. Name it and price it.</p>
+      <label>What is it?<input id="me-other-name" type="text" placeholder="e.g., booking-platform commission"></label>
+      <label>Their cut (%)<input id="me-other-pct" type="number" min="0" max="100" step="0.5" placeholder="e.g., 20"></label>
+      <label>Monthly revenue it applies to (CA$)<input id="me-other-base" type="number" min="0" step="100"></label>
+      <div class="me-result" id="me-other-result"></div>
+    </div>
   </div>
+  <div class="me-total" id="me-total"></div>
 </section>
 
 <section class="sim-step">
@@ -273,1057 +256,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
 <footer class="site-footer">
   <div class="wrap">
     <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Simulator figures are estimates from published pricing — your costs will differ. This is not financial advice.</p>
-    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
     <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a> · <a href="pos-services.html">POS services</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>
     <p class="copyright">© 2026 FairRate Audit</p>
   </div>
 </footer>
-<script>
-/* ============================================================================
-   SIM_PRICES — EDIT PRICES HERE
-   All figures in CAD unless noted. Confidence: "official" (vendor's own page),
-   "reported" (reputable third-party), "estimate" (our reasonable estimate),
-   "illus" (illustrative monthly equivalent = purchase price / 36, NOT a fee).
-   Sources researched 2026-09-28; see ~/workspace/ai-opportunities/payment-savings-research/system-monthly-costs.md. Slang/HiJiffy/Asksuite figures are sibling-sourced (third-party reporting, not that file) - re-verify from named third party before treating as sourced.
-   calc: flat | per_location | per_station | per_terminal | per_employee |
-         per_unit | percent_volume | percent_marketplace
-   ============================================================================ */
-/* POS station builder: the user ticks requirements per station ("need a scanner",
-   "no cash drawer"...); the simulator assembles the station and prices it.
-   Two paths: build-your-own (mix and match) vs all-in-one (one box, processor-locked). */
-function stationBuilder(zone, withScale, defaultReqs){
-  const addons = [
-    {id:"printer", label:"Receipt printer (USB)", upfront:300, conf:"reported", note:"~$300 new — benchmark CA$200–500 (research)"},
-    {id:"scanner", label:"Barcode scanner (Bluetooth)", upfront:330, conf:"reported", note:"~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"},
-    {id:"drawer", label:"Cash drawer", upfront:80, conf:"reported", note:"~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"}
-  ];
-  if(withScale) addons.push({id:"scale", label:"Price-computing scale", upfront:425, conf:"reported", note:"~$424 (amazon.ca); deli/produce — simple scales cost less"});
-  addons.push({id:"pinpad", label:"PIN pad (card reader) at each station", pinsync:true, note:"sets your payment-terminal count to match the station count (plus pay-at-table handhelds for restaurants)"});
-  return {
-    id:"station", name:"POS station — build each lane", calc:"per_station", builder:true,
-    map:{zone:zone, icon:"🖥️", label:"Station"},
-    addons:addons, defaultReqs:defaultReqs || {},
-    aio:{upfront:900, conf:"reported", note:"Square Register ~$900 CAD (amazon.ca / square.ca)"}
-  };
-}
+<!-- __SIM_JS__ -->
+<script type="module" src="assets/js/sim-core.a70ec671.js"></script>
+<script type="module" src="assets/js/sim-save.71a7f47e.js"></script>
 
-const SIM_PRICES = {
-  meta: { currency: "CAD", updated: "2026-09-28", amortize_months: 36 },
-  sectors: {
-    retail: {
-      label: "Retail", emoji: "🏬",
-      needs: [
-        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"lanes",icon:"🖥️",label:"POS"},
-          options:[
-            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
-            {label:"Shopify POS Lite — free with plan", monthly:0, conf:"reported", note:"included with Shopify plan"},
-            {label:"Lightspeed Retail — ~$179/mo typical", monthly:179, conf:"estimate", note:"third-party pricing guides; confirm with vendor"} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
-          options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo — illustrative, not a fee"} ]},
-        stationBuilder("lanes", true, {printer:true, scanner:true, drawer:true, pinpad:true}),
-        { id:"ecom", name:"Online store", calc:"per_location", map:{zone:"backoffice",icon:"🌐",label:"Web"},
-          options:[ {label:"Shopify Basic — $49/mo", monthly:49, conf:"reported", note:"shopify.com/ca pricing via third-party check 2026-09"} ]},
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
-          options:[
-            {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"},
-            {label:"Xero Standard — $60/mo", monthly:60, conf:"official", note:"xero.com/ca"} ]},
-        { id:"loyalty", name:"Loyalty program", calc:"per_location",
-          options:[ {label:"Square Loyalty — ~$45/mo", monthly:45, conf:"reported", note:"third-party sources — confirm on squareup.com/ca"} ]}
-      ],
-      toys: [
-        { id:"signage", name:"Digital signage screen", calc:"per_unit", unit:"screen", map:{zone:"floor",icon:"📺",label:"Sign"},
-          options:[ {label:"~$25/mo equiv.", monthly:25, conf:"estimate", note:"estimate incl. hardware + software"} ]},
-        { id:"selfcheckout", name:"Self-checkout kiosk", calc:"per_unit", unit:"kiosk", info_only:true, map:{zone:"lanes",icon:"🤖",label:"SCO"},
-          options:[ {label:"Quote-based — varies widely", monthly:0, conf:"estimate", note:"no published benchmark; get a vendor quote"} ]}
-      ],
-      zones: [
-        {id:"lanes", label:"Checkout lanes", x:20, y:20, w:340, h:150},
-        {id:"floor", label:"Sales floor", x:20, y:190, w:340, h:120},
-        {id:"backoffice", label:"Back office", x:380, y:20, w:200, h:290}
-      ]
-    },
-    restaurant: {
-      label:"Full-service restaurant", emoji:"🍽️",
-      needs: [
-        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"bar",icon:"🖥️",label:"POS"},
-          options:[
-            {label:"TouchBistro — $69/mo", monthly:69, conf:"official", note:"touchbistro.com (currency unstated on page)"},
-            {label:"Moneris Go Restaurant — $64.94/mo", monthly:64.94, conf:"official", note:"includes Go terminal"} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"dining",icon:"💳",label:"Terminal"},
-          options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
-        { id:"kds", name:"Kitchen display screen", calc:"per_unit", unit:"screen", map:{zone:"kitchen",icon:"🍳",label:"KDS"},
-          options:[
-            {label:"~$30/mo per screen", monthly:30, conf:"reported", note:"third-party pricing guides"},
-            {label:"TouchBistro KDS — ~$89/mo", monthly:89, conf:"reported", note:"third-party review sites"} ]},
-        { id:"kprinter", name:"Kitchen / bar printer", calc:"per_unit", unit:"printer", map:{zone:"kitchen",icon:"🧾",label:"Printer"},
-          options:[ {label:"Thermal printer — ~$16/mo equiv.", monthly:16, conf:"illus", note:"~$575 new ÷ 36 mo"} ]},
-        stationBuilder("bar", false, {printer:true, pinpad:true}),
-        { id:"sched", name:"Staff scheduling", calc:"per_location",
-          options:[ {label:"7shifts — ~$90/mo typical", monthly:89.99, conf:"reported", note:"entry $40–$45, Pro ~$90; third-party"} ]},
-        { id:"payroll", name:"Payroll", calc:"per_employee", base:40, map:{zone:"backoffice",icon:"💰",label:"Pay"},
-          options:[ {label:"Wagepoint Unlimited — $40 + $6/employee", monthly:6, conf:"reported", note:"base $40/mo + $6 per employee"} ]},
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
-          options:[
-            {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"},
-            {label:"Xero Standard — $60/mo", monthly:60, conf:"official", note:"xero.com/ca"} ]}
-      ],
-      toys: [
-        { id:"aiphone", name:"AI phone answering", calc:"per_location",
-          options:[ {label:"~$399/mo per location", monthly:399, conf:"reported", note:"e.g., Slang.ai; third-party reporting"} ]},
-        { id:"marketplace", name:"Delivery-app commissions", calc:"percent_marketplace", rate:0.25,
-          options:[ {label:"~25% of delivery sales (mid-tier)", monthly:0, conf:"reported", note:"DoorDash/Uber Eats 15–30% tiers; Skip ~25–30%"} ]},
-        { id:"reserv", name:"Reservation system", calc:"per_location",
-          options:[ {label:"OpenTable — ~$249/mo", monthly:249, conf:"reported", note:"third-party figure + per-cover fees; unverified"} ]},
-        { id:"tablets", name:"Ordering tablets (tableside / line-busting)", calc:"per_unit", unit:"tablet", map:{zone:"dining",icon:"📱",label:"Tablet"},
-          options:[ {label:"~$8/mo equiv. per tablet", monthly:8, conf:"estimate", note:"generic 10-inch tablet ~$250 ÷ 36 mo; wireless — no cable run needed"} ]}
-      ],
-      zones: [
-        {id:"dining", label:"Dining room", x:20, y:20, w:280, h:170},
-        {id:"bar", label:"Bar", x:320, y:20, w:260, h:170},
-        {id:"kitchen", label:"Kitchen", x:20, y:210, w:280, h:150},
-        {id:"backoffice", label:"Office", x:320, y:210, w:260, h:150}
-      ]
-    },
-    qsr: {
-      label:"Quick-service / café", emoji:"☕",
-      needs: [
-        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"counter",icon:"🖥️",label:"POS"},
-          options:[
-            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
-            {label:"Toast POS — ~US$69/mo", monthly:95, conf:"reported", note:"US pricing page; Canadian pricing quote-based — CAD approx."} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"counter",icon:"💳",label:"Terminal"},
-          options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
-        stationBuilder("counter", false, {printer:true, pinpad:true}),
-        { id:"kds", name:"Kitchen display / KDS-lite", calc:"per_unit", unit:"screen", map:{zone:"kitchen",icon:"🍳",label:"KDS"},
-          options:[ {label:"~$30/mo per screen", monthly:30, conf:"reported", note:"third-party pricing guides"} ]},
-        { id:"marketplace", name:"Delivery-app commissions", calc:"percent_marketplace", rate:0.25,
-          options:[ {label:"~25% of delivery sales (mid-tier)", monthly:0, conf:"reported", note:"15–30% tiers depending on plan"} ]},
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
-          options:[ {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
-      ],
-      toys: [
-        { id:"kiosk", name:"Self-order kiosk", calc:"per_unit", unit:"kiosk", map:{zone:"counter",icon:"🤖",label:"Kiosk"},
-          options:[ {label:"Quote-based — varies widely", monthly:0, conf:"estimate", note:"no published benchmark; get a vendor quote", info_only:true} ]},
-        { id:"menuboard", name:"Digital menu boards", calc:"per_unit", unit:"screen",
-          options:[ {label:"~$25/mo equiv. per screen", monthly:25, conf:"estimate", note:"estimate incl. hardware + software"} ]},
-        { id:"tablets", name:"Ordering tablets (line-busting / tableside)", calc:"per_unit", unit:"tablet", map:{zone:"counter",icon:"📱",label:"Tablet"},
-          options:[ {label:"~$8/mo equiv. per tablet", monthly:8, conf:"estimate", note:"generic 10-inch tablet ~$250 ÷ 36 mo; wireless — no cable run needed"} ]}
-      ],
-      zones: [
-        {id:"counter", label:"Counter", x:20, y:20, w:360, h:150},
-        {id:"kitchen", label:"Kitchen", x:20, y:190, w:360, h:150},
-        {id:"pickup", label:"Pickup shelf", x:400, y:20, w:180, h:150},
-        {id:"backoffice", label:"Office", x:400, y:190, w:180, h:150}
-      ]
-    },
-    hotel: {
-      label:"Hotel & hospitality", emoji:"🏨",
-      needs: [
-        { id:"pms", name:"Property management system", calc:"per_location", map:{zone:"frontdesk",icon:"🏨",label:"PMS"},
-          options:[
-            {label:"Cloudbeds — from ~$600/mo", monthly:600, conf:"reported", note:"hoteltechreport; currency unverified; quote-based in practice"},
-            {label:"MiniHotel — from ~$200/mo", monthly:200, conf:"reported", note:"hoteltechreport; currency unverified"} ]},
-        { id:"terminal", name:"Payment terminal (front desk + outlets)", calc:"per_terminal", map:{zone:"frontdesk",icon:"💳",label:"Terminal"},
-          options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
-        stationBuilder("frontdesk", false, {printer:true, pinpad:true}),
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
-          options:[ {label:"QuickBooks Plus — $110/mo", monthly:110, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
-      ],
-      toys: [
-        { id:"guestmsg", name:"AI guest messaging", calc:"per_location",
-          options:[
-            {label:"HiJiffy — ~$200/mo", monthly:200, conf:"reported", note:"Hotel Tech Report"},
-            {label:"Asksuite — ~$300/mo", monthly:300, conf:"reported", note:"Hotel Tech Report"} ]}
-      ],
-      zones: [
-        {id:"frontdesk", label:"Front desk", x:20, y:20, w:300, h:150},
-        {id:"rooms", label:"Rooms (PMS-managed)", x:340, y:20, w:240, h:150},
-        {id:"restaurant", label:"On-site restaurant", x:20, y:190, w:300, h:150},
-        {id:"backoffice", label:"Back office", x:340, y:190, w:240, h:150}
-      ]
-    },
-    grocery: {
-      label:"Grocery / convenience", emoji:"🛒",
-      needs: [
-        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"lanes",icon:"🖥️",label:"POS"},
-          options:[
-            {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"},
-            {label:"Lightspeed Retail — ~$179/mo typical", monthly:179, conf:"estimate", note:"third-party guides; confirm with vendor"} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"lanes",icon:"💳",label:"Terminal"},
-          options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
-        stationBuilder("lanes", true, {printer:true, scanner:true, drawer:true, scale:true, pinpad:true}),
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
-          options:[ {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
-      ],
-      toys: [
-        { id:"ecom", name:"Online ordering / ecommerce", calc:"per_location",
-          options:[ {label:"Shopify Basic — $49/mo", monthly:49, conf:"reported", note:"plus transaction fees"} ]},
-        { id:"loyalty", name:"Loyalty program", calc:"per_location",
-          options:[ {label:"Square Loyalty — ~$45/mo", monthly:45, conf:"reported", note:"third-party sources — confirm on squareup.com/ca"} ]}
-      ],
-      zones: [
-        {id:"lanes", label:"Checkout lanes", x:20, y:20, w:340, h:150},
-        {id:"deli", label:"Deli / prepared", x:20, y:190, w:340, h:120},
-        {id:"backoffice", label:"Back office / receiving", x:380, y:20, w:200, h:290}
-      ]
-    },
-    salon: {
-      label:"Services / salon", emoji:"💈",
-      needs: [
-        { id:"booking", name:"Booking & scheduling", calc:"per_location", map:{zone:"reception",icon:"📅",label:"Book"},
-          options:[
-            {label:"Square Appointments Plus — $35/mo", monthly:35, conf:"official", note:"squareup.com/ca"},
-            {label:"Jane App — $79/mo + $19/practitioner", monthly:79, conf:"official", note:"jane.app pricing; +$19 per extra practitioner"},
-            {label:"Vagaro — ~$30/mo per calendar", monthly:30, conf:"reported", note:"third-party sources"} ]},
-        { id:"pos", name:"POS software", calc:"per_location", map:{zone:"reception",icon:"🖥️",label:"POS"},
-          options:[ {label:"Square POS — free", monthly:0, conf:"official", note:"squareup.com/ca"} ]},
-        { id:"terminal", name:"Payment terminal", calc:"per_terminal", map:{zone:"reception",icon:"💳",label:"Terminal"},
-          options:[
-            {label:"Lease — $34.95/mo (Moneris Go)", monthly:34.95, conf:"official", note:"Moneris published lease"},
-            {label:"Buy outright — ~$13.86/mo equiv.", monthly:13.86, conf:"illus", note:"$499 ÷ 36 mo"} ]},
-        stationBuilder("reception", false, {printer:true, pinpad:true}),
-        { id:"payroll", name:"Payroll", calc:"per_employee", base:40, map:{zone:"backoffice",icon:"💰",label:"Pay"},
-          options:[ {label:"Wagepoint Unlimited — $40 + $6/employee", monthly:6, conf:"reported", note:"base $40/mo + $6 per employee"} ]},
-        { id:"acct", name:"Accounting", calc:"flat", map:{zone:"backoffice",icon:"📊",label:"Acctg"},
-          options:[ {label:"QuickBooks Essentials — $70/mo", monthly:70, conf:"official", note:"quickbooks.intuit.com/ca"} ]}
-      ],
-      toys: [
-        { id:"crm", name:"Marketing / CRM", calc:"per_location", info_only:true,
-          options:[ {label:"Not yet researched — varies", monthly:0, conf:"estimate", note:"email/SMS marketing tools vary widely; research pending"} ]}
-      ],
-      zones: [
-        {id:"reception", label:"Reception", x:20, y:20, w:300, h:150},
-        {id:"stations", label:"Service stations / chairs", x:340, y:20, w:240, h:150},
-        {id:"backoffice", label:"Back office", x:20, y:190, w:560, h:120}
-      ]
-    }
-  },
-  /* ---- Infrastructure tier: shared across sectors. upfront = one-time cost,
-     shown as monthly equivalent (÷ 36) and labeled. monthly = recurring. ---- */
-  infra: [
-    { id:"drops", name:"Network cable drops (Cat6, installed)", calc:"per_unit", unit:"drop",
-      options:[
-        {label:"Standard drop — $175", upfront:175, conf:"reported", note:"$125–300 band; fixr/monoprice 2026"},
-        {label:"Difficult drop — $300", upfront:300, conf:"reported", note:"finished walls, conduit, plenum"} ]},
-    { id:"ap", name:"Wi-Fi access point", calc:"per_unit", unit:"AP",
-      options:[
-        {label:"Mid-tier AP hardware — $175", upfront:175, conf:"reported", note:"e.g., Omada EAP772 $169.99, official store"},
-        {label:"AP installed — ~$325", upfront:325, conf:"reported", note:"Toronto installer ~$300/AP hardware + install"} ]},
-    { id:"switch", name:"PoE network switch", calc:"flat",
-      options:[
-        {label:"8-port smart-managed PoE — $110", upfront:110, conf:"reported", note:"VLAN-capable; the small-business sweet spot"},
-        {label:"16-port managed PoE — $285", upfront:285, conf:"reported", note:"growing sites, more APs/cameras"},
-        {label:"24-port managed PoE — $425", upfront:425, conf:"reported", note:"$400–450 band (infrastructure-costs.md, 2026-09-28)"},
-        {label:"48-port managed PoE — ~$850", upfront:850, conf:"estimate", note:"no published band — ~2× 24-port; get a vendor quote"} ]},
-    { id:"firewall", name:"Firewall / router", calc:"flat",
-      options:[
-        {label:"No-subscription tier — $400", upfront:400, conf:"reported", note:"UniFi/TP-Link class; $199–929 band"},
-        {label:"Subscription UTM — ~$1,700 / 3 yr", upfront:1700, conf:"reported", note:"Fortinet/SonicWall/Meraki + licenses"} ]},
-    { id:"internet", name:"Business internet", calc:"flat",
-      options:[ {label:"~500 Mbps — $95/mo", monthly:95, conf:"reported", note:"Bell/Rogers business 2026; $70–110 band"} ]},
-    { id:"ups", name:"UPS 1500VA (network + lanes)", calc:"flat",
-      options:[ {label:"$220 one-time", upfront:220, conf:"reported", note:"amazon.ca; covers firewall, switch, modem + lanes through blips"} ]},
-    { id:"guestwifi", name:"Guest Wi-Fi (separate SSID + VLAN)", calc:"flat", info_only:true,
-      options:[ {label:"$0 extra — built into AP/controller", monthly:0, conf:"official", note:"captive portal $0–300/yr optional; keep guests off the card network"} ]}
-  ],
-  infra_notes: {
-    retail: "Wire every checkout lane — reliability beats everything. 1–2 APs cover staff + guest.",
-    restaurant: "KDS and printers get WIRES (kitchens are Wi-Fi-hostile). Tableside terminals on a dedicated staff SSID.",
-    qsr: "Minimal: 1–2 APs, a few drops. Kiosks want wired Ethernet, not Wi-Fi.",
-    hotel: "The big one — an AP every 4–8 rooms, PMS on its own VLAN, more switches per floor. Cost scales with rooms, not revenue.",
-    grocery: "Large footprint = more APs (3–6). Every lane wired; size the PoE switch for cameras too.",
-    salon: "Minimal — 1 AP, 2–3 drops. The booking PC holds card-on-file data: segment it."
-  }
-};
-</script>
-<script>
-(function(){
-  "use strict";
-  const $ = id => document.getElementById(id);
-  const money = n => "$" + Math.round(n).toLocaleString("en-CA");
-  let sector = "retail";
-  const state = {}; // itemId -> {checked, optIdx, qty}
-
-  const CONF_LABEL = {official:"Official", reported:"Reported", estimate:"Estimate", illus:"Illustrative"};
-
-  // Sector norms for the % of revenue view (from _research/sector-it-cost-benchmarks.md, accessed 2026-09-28)
-  const SECTOR_WORD = {retail:"retailers", restaurant:"restaurants", qsr:"quick-service spots", hotel:"hotels", grocery:"grocers", salon:"salons"};
-  const BENCHMARKS = {
-    retail:     { it:"2–4%", proc:"1.7–2.5% (2.5–3.5% in Canada)", note:"On retail net margins of 8–15%, processing can consume up to a third of net profit." },
-    restaurant: { it:"~1–3%", proc:"2.0–3.5% (avg 2.35%)", note:"The average full-service restaurant margin is 2.8% — processing can cost more than the profit it leaves behind." },
-    qsr:        { it:"~1–3%", proc:"2.0–3.5%", note:"High volume + low tickets: the fixed per-transaction fee bites hardest here." },
-    hotel:      { it:"under 3%", proc:"2.5–3.5%", note:"Canadian card-accepting businesses routinely surrender 2.5–3.5% of gross sales to processing." },
-    grocery:    { it:"~1.9% (range 1–4%)", proc:"2.5–3.5%", note:"Enormous card volume on thin margins — every basis point is magnified." },
-    salon:      { it:"no published benchmark (often ~1–3%)", proc:"2.5–3.5%+", note:"Card-on-file bookings skew toward the high end of the band." }
-  };
-  const pct1 = n => (Math.round(n * 100) / 100).toFixed(n < 0.1 ? 2 : 1) + "%";
-
-  function getInputs(){
-    return {
-      locations: Math.max(1, +$("in-locations").value || 1),
-      stations: Math.max(0, +$("in-stations").value || 0),
-      terminals: Math.max(0, +$("in-terminals").value || 0),
-      employees: Math.max(0, +$("in-employees").value || 0),
-      volume: Math.max(0, +$("in-volume").value || 0),
-      rate: Math.max(0, +$("in-rate").value || 0),
-      revenue: Math.max(0, +$("in-revenue").value || 0),
-      marketplace: Math.max(0, +$("in-marketplace").value || 0),
-      tables: Math.max(0, +$("in-tables").value || 0)
-    };
-  }
-
-  /* ---- Validated derivation rules: _research/simulator-derivation-rules.md (2026-09-28).
-     Exact port of the Python model behind the 18 passing small/medium/large simulations.
-     Python's round() rounds half to even — pyRound replicates it (JS Math.round does not). ---- */
-  /* DERIVATION-START */
-  function pyRound(x){
-    const f = Math.floor(x), d = x - f;
-    if(d < 0.5) return f;
-    if(d > 0.5) return f + 1;
-    return (f % 2 === 0) ? f : f + 1;
-  }
-  function clampN(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
-  function switchFor(wired, aps){
-    const need = wired + aps + 4;
-    for(const s of [8, 16, 24, 48]) if(s >= need) return s;
-    return 48;
-  }
-  const RULES = {
-    restaurant(q){
-      const T = q.tables, B = q.bar;
-      const handhelds = T <= 10 ? 1 : (T <= 30 ? 2 : 3);
-      const fixed = clampN(1 + (B ? 1 : 0) + Math.max(0, Math.ceil((T - 15) / 20)), 1, 6);
-      const kds = T <= 30 ? 2 : (T <= 60 ? 3 : 4);
-      const kprint = T <= 30 ? 1 : 2;
-      const aps = Math.max(1, pyRound(T * 60 / 2000));
-      const wired = fixed + kds + kprint + fixed;
-      return { handhelds, fixed, kds, kprint, aps, wired_drops: wired, switch: switchFor(wired, aps),
-               stations: fixed, terminals: fixed + handhelds };
-    },
-    qsr(q){
-      const S = q.seats, Dr = q.drivethru;
-      const counters = S === 0 ? 1 : (S <= 30 ? 2 : (S <= 80 ? 3 : 4));
-      const kds = (S <= 40 ? 1 : 2) + (Dr ? 1 : 0);
-      const kiosks = (q.kiosks === "have" || q.kiosks === "want") ? (S > 0 ? Math.max(2, pyRound(S / 40)) : 2) : 0;
-      const aps = S === 0 ? 1 : Math.max(1, pyRound(S / 50));
-      const wired = counters + kds + (Dr ? 1 : 0);
-      return { counters, kds, dt_terms: Dr ? 1 : 0, kiosks, aps, wired_drops: wired, switch: switchFor(wired, aps),
-               stations: counters, terminals: counters + (Dr ? 1 : 0) };
-    },
-    retail(q){
-      const F = q.sqft;
-      const lanes = clampN(pyRound(Math.sqrt(F / 800)), 1, 10);
-      const backoffice = F < 3000 ? 1 : (F <= 15000 ? 2 : 3);
-      const scale = q.weigh ? 1 : 0;
-      const sco = q.sco === "want" ? Math.max(2, pyRound(lanes / 2)) : (q.sco === "have" ? 2 : 0);
-      const aps = Math.max(1, pyRound(F / 5000));
-      const wired = lanes + scale + sco + backoffice;
-      return { lanes, backoffice, scale, sco, aps, wired_drops: wired, switch: switchFor(wired, aps),
-               stations: lanes, terminals: lanes };
-    },
-    hotel(q){
-      const R = q.rooms, N = q.floors, Fb = q.fb;
-      const aps = Math.max(N, Math.ceil(R / 25)) + 1 + (Fb ? 1 : 0);
-      const frontdesk = clampN(1 + Math.ceil(R / 75), 1, 5);
-      const wired = aps + frontdesk + (Fb ? 4 : 0) + 2;
-      return { aps, frontdesk, fb_pos: Fb ? 2 : 0, fb_kds: Fb ? 2 : 0, wired_drops: wired,
-               switch: switchFor(wired, aps),
-               stations: frontdesk + (Fb ? 2 : 0), terminals: frontdesk + (Fb ? 2 : 0) };
-    },
-    grocery(q){
-      const F = q.sqft;
-      const lanes = Math.max(1, pyRound(F / 3000));
-      const aps = Math.max(1, pyRound(F / 5000));
-      const wired = lanes + (q.deli ? 1 : 0) + (q.lottery ? 1 : 0);
-      return { lanes, deli_pos: q.deli ? 1 : 0, deli_scale: q.deli ? 1 : 0, lottery: q.lottery ? 1 : 0,
-               aps, wired_drops: wired, switch: switchFor(wired, aps),
-               stations: lanes + (q.deli ? 1 : 0), terminals: lanes + (q.deli ? 1 : 0) };
-    },
-    salon(q){
-      const C = q.chairs;
-      const reception = C <= 10 ? 1 : 2;
-      const aps = Math.max(1, pyRound(C / 12));
-      return { reception, calendars: C, room_tablet: q.trooms > 0 ? 1 : 0, scanner: q.retailct ? 1 : 0,
-               aps, wired_drops: reception, switch: switchFor(reception, aps),
-               stations: reception, terminals: reception };
-    }
-  };
-  /* DERIVATION-END */
-
-  function getQuestions(){
-    const num = id => Math.max(0, +$(id).value || 0);
-    const yn = id => $(id).value === "yes";
-    return {
-      tables: num("in-tables"), bar: yn("in-bar"), takeout: $("in-takeout").value,
-      drivethru: yn("in-drivethru"), seats: num("in-seats"), kiosks: $("in-kiosks").value,
-      sqft: sector === "grocery" ? num("in-sqft-g") : num("in-sqft-r"),
-      weigh: yn("in-weigh"), sco: $("in-sco").value,
-      rooms: num("in-rooms"), floors: Math.max(1, num("in-floors")), fb: yn("in-fb"),
-      deli: yn("in-deli"), lottery: yn("in-lottery"),
-      chairs: num("in-chairs"), trooms: num("in-trooms"), retailct: yn("in-retailct")
-    };
-  }
-
-  function itemQty(item, inp){
-    switch(item.calc){
-      case "per_location": return inp.locations;
-      case "per_station": return inp.stations;
-      case "per_terminal": return inp.terminals;
-      case "per_employee": return inp.employees;
-      case "per_unit": return (state[item.id] && state[item.id].qty) || 0;
-      default: return 1;
-    }
-  }
-
-  function builderPerStation(item, st){
-    if(st.path === "aio") return item.aio.upfront / 36;
-    let per = 0;
-    item.addons.forEach(a => { if(st.reqs && st.reqs[a.id] && a.upfront) per += a.upfront / 36; });
-    return per;
-  }
-
-  function itemMonthly(item, inp){
-    const st = state[item.id]; if(!st || !st.checked) return 0;
-    if(item.builder) return builderPerStation(item, st) * itemQty(item, inp);
-    const opt = item.options[st.optIdx || 0];
-    if(opt.info_only) return 0;
-    const q = itemQty(item, inp);
-    let m = 0;
-    if(item.calc === "percent_marketplace") m = inp.marketplace * (item.rate || 0);
-    else if(opt.upfront && !opt.monthly) m = (opt.upfront / 36) * q; // amortized monthly equivalent
-    else m = opt.monthly * q;
-    if(item.base) m += item.base * (item.calc === "per_location" ? inp.locations : 1);
-    return m;
-  }
-
-  function itemUpfront(item, inp){
-    const st = state[item.id]; if(!st || !st.checked) return 0;
-    const opt = item.options[st.optIdx || 0];
-    if(opt.info_only || !opt.upfront) return 0;
-    return opt.upfront * itemQty(item, inp);
-  }
-
-  function allItems(){
-    const s = SIM_PRICES.sectors[sector];
-    return s.needs.concat(SIM_PRICES.infra, s.toys);
-  }
-
-  function perLabel(item){
-    return {flat:"/mo flat", per_location:"/mo per location", per_station:"/mo per station",
-      per_terminal:"/mo per terminal", per_employee:"/mo per employee + base",
-      per_unit:"/mo per " + (item.unit || "unit"), percent_marketplace:"of delivery sales"}[item.calc] || "/mo";
-  }
-
-  function renderSectors(){
-    const g = $("sector-grid"); g.innerHTML = "";
-    Object.keys(SIM_PRICES.sectors).forEach(k => {
-      const s = SIM_PRICES.sectors[k];
-      const d = document.createElement("div");
-      d.className = "sector-card" + (k === sector ? " selected" : "");
-      d.innerHTML = '<span class="emoji">' + s.emoji + "</span><strong>" + s.label + "</strong>";
-      d.setAttribute("role", "button");
-      d.setAttribute("tabindex", "0");
-      d.setAttribute("aria-pressed", k === sector ? "true" : "false");
-      const pick = () => { sector = k; renderSectors(); applySectorInfraDefaults(); loadTypical(); };
-      d.onclick = pick;
-      d.onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(); } };
-      g.appendChild(d);
-    });
-    // sector-specific question blocks (3 questions each drive the auto-build)
-    ["restaurant","qsr","retail","hotel","grocery","salon"].forEach(k => {
-      const el = $("q-" + k); if(el) el.style.display = (k === sector) ? "" : "none";
-    });
-  }
-
-  /* ---- Infrastructure auto-derive: the owner answers business questions,
-     the simulator does the engineering. ---- */
-  let guestWifi = false, terminalsTouched = false, pinSync = false;
-  // Guest Wi-Fi default per sector — inferred, never asked. Still toggleable in the list below.
-  const INFRA_DEFAULTS = {
-    retail:{guest:false}, restaurant:{guest:true},
-    qsr:{guest:true}, hotel:{guest:true},
-    grocery:{guest:false}, salon:{guest:true}
-  };
-  const INFRA_WARNS = {
-    drops:"⚠️ Wired devices each need a cable run. Without these, there's no wire from the device back to the switch.",
-    ap:"⚠️ With guest Wi-Fi on, skipping access points means no customer coverage.",
-    switch:"⚠️ Without a switch, your wired devices and access points have nothing to plug into."
-  };
-
-  function applySectorInfraDefaults(){
-    const d = INFRA_DEFAULTS[sector] || {guest:false};
-    guestWifi = d.guest; terminalsTouched = false; pinSync = false;
-    SIM_PRICES.infra.forEach(item => { const st = state[item.id]; if(st) st.auto = true; });
-  }
-
-  /* ---- Auto-build: the 3 questions drive every derived number (see RULES above).
-     Manual overrides stick via the auto flags; changing sector resets everything. ---- */
-  let D = null;
-  let stationsAuto = true, terminalsAuto = true;
-  let reqsAuto = { scale: true, scanner: true };
-
-  function derive(){
-    const q = getQuestions();
-    D = RULES[sector](q);
-    // Derived station / terminal counts fill the editable inputs (manual edits stick).
-    if(stationsAuto){
-      const el = $("in-stations");
-      if(el && String(D.stations) !== el.value) el.value = D.stations;
-    }
-    if(terminalsAuto){
-      const el = $("in-terminals");
-      if(el && String(D.terminals) !== el.value) el.value = D.terminals;
-    }
-    const inp = getInputs();
-    const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
-    // Derived catalog item: set qty/checked while still auto, always refresh the why-line.
-    const setAuto = (id, qty, why) => {
-      const st = state[id]; if(!st) return;
-      st.why = why || "";
-      st.rec = qty > 0;
-      if(st.auto){ st.qty = qty; st.checked = qty > 0; }
-    };
-    const noteWhy = (id, why) => { const st = state[id]; if(st) st.why = why; };
-    const sst = state["station"];
-
-    /* ---- per-sector derived items ---- */
-    if(sector === "restaurant"){
-      setAuto("kds", D.kds, "Auto-added: " + plural(D.kds, "kitchen screen") + " for " + q.tables + " tables (cold line, hot line" + (D.kds > 2 ? ", expo" : "") + ").");
-      setAuto("kprinter", D.kprint, "Auto-added: " + plural(D.kprint, "kitchen printer") + " — the backup when a screen goes dark.");
-      const apps = q.takeout === "apps" || q.takeout === "both";
-      setAuto("tablets", apps ? 2 : 0, apps ? "Auto-added: 2 aggregator tablets — one per delivery app. They rarely integrate with your POS, and they're wireless (no cable run)." : "");
-      const mst = state["marketplace"];
-      if(mst){
-        mst.why = apps ? "Auto-added: you sell through delivery apps — commissions run ~25% off those sales. Enter your app sales above." : "";
-        mst.rec = apps;
-        if(mst.auto) mst.checked = apps;
-      }
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per fixed station + " + plural(D.handhelds, "pay-at-table handheld") + ".");
-    }
-    if(sector === "qsr"){
-      setAuto("kds", D.kds, "Auto-added: " + plural(D.kds, "kitchen screen") + " (make-line" + (D.kds > 1 ? " + expo" : "") + (q.drivethru ? " + drive-thru" : "") + ").");
-      setAuto("kiosk", D.kiosks, D.kiosks > 0 ? "Auto-added: " + plural(D.kiosks, "self-order kiosk") + " — about 1 per 40 seats." : "");
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per counter" + (q.drivethru ? " + drive-thru" : "") + ".");
-    }
-    if(sector === "retail"){
-      setAuto("selfcheckout", D.sco, D.sco > 0 ? "Auto-added: " + plural(D.sco, "self-checkout unit") + " — priced by vendor quote." : "");
-      if(sst && sst.reqs && reqsAuto.scale) sst.reqs.scale = q.weigh;
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per lane.");
-    }
-    if(sector === "hotel"){
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per front-desk station" + (q.fb ? " + F&B outlet" : "") + ".");
-    }
-    if(sector === "grocery"){
-      if(sst && sst.reqs && reqsAuto.scale) sst.reqs.scale = q.deli;
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per lane" + (q.deli ? " + deli" : "") + ".");
-    }
-    if(sector === "salon"){
-      if(sst && sst.reqs && reqsAuto.scanner) sst.reqs.scanner = q.retailct;
-      noteWhy("booking", "Auto-added: " + plural(D.calendars, "booking calendar") + " — 1 per chair (software seats, not hardware).");
-      noteWhy("terminal", "Auto-added: " + plural(D.terminals, "terminal") + " — 1 per reception station.");
-    }
-
-    /* ---- infrastructure: 1 cable run per wired device; switch = smallest of
-       8/16/24/48 covering wired drops + APs + 4 spare ports ---- */
-    const apSt = state["ap"], dSt = state["drops"], swSt = state["switch"];
-    // Guest Wi-Fi toggle (play mode): the infra-list item mirrors the guestWifi state.
-    const gwSt = state["guestwifi"];
-    if(gwSt){ gwSt.checked = guestWifi; gwSt.rec = true; }
-    if(apSt){
-      apSt.why = "Auto-added: " + plural(D.aps, "access point") + " — " + apWhy(q) + " Adjust the count with +/−.";
-      apSt.rec = true;
-      if(apSt.auto){ apSt.qty = D.aps; apSt.checked = true; }
-    }
-    if(dSt){
-      dSt.why = "Auto-added: 1 cable run per wired device — " + dropsWhy(q) + ".";
-      dSt.rec = true;
-      if(dSt.auto){ dSt.qty = D.wired_drops; dSt.checked = D.wired_drops > 0; }
-    }
-    if(swSt){
-      const need = D.wired_drops + D.aps + 4;
-      swSt.why = "Auto-added: " + D.wired_drops + " drops + " + D.aps + " APs + 4 spare = " + need + " ports → " + D.switch + "-port PoE switch. Access points draw power through the network cable — no electrician needed at the ceiling.";
-      swSt.rec = true;
-      if(swSt.auto){ swSt.checked = true; swSt.optIdx = { 8: 0, 16: 1, 24: 2, 48: 3 }[D.switch]; }
-    }
-
-    // Delivery-app sales input only matters when apps are in play.
-    $("wrap-marketplace").style.display =
-      (sector === "qsr" || (sector === "restaurant" && (q.takeout === "apps" || q.takeout === "both"))) ? "" : "none";
-
-    // PIN pad sync: station builder drives the payment-terminal count (+ handhelds for restaurants)
-    pinSync = !!(sst && sst.checked && sst.path !== "aio" && sst.reqs && sst.reqs.pinpad);
-    if(pinSync && !terminalsTouched){
-      const tEl = $("in-terminals");
-      const want = inp.stations + (D.handhelds || 0);
-      if(tEl && document.activeElement !== tEl && String(want) !== tEl.value) tEl.value = want;
-    }
-    const sumEl = $("autobuild-summary");
-    if(sumEl) sumEl.innerHTML = "<strong>Auto-build:</strong> " + summaryText(q);
-    $("infra-sub").innerHTML = SIM_PRICES.infra_notes[sector] +
-      (guestWifi ? " <strong>Guest Wi-Fi runs on its own separate lane</strong> — customers never touch your payment network; the firewall keeps the lanes apart." : "");
-  }
-
-  function apWhy(q){
-    switch(sector){
-      case "restaurant": return "about 1 per 2,000 sq ft (~" + (q.tables * 60).toLocaleString("en-CA") + " sq ft est. from " + q.tables + " tables × 60).";
-      case "qsr": return "about 1 per 50 eat-in seats.";
-      case "retail":
-      case "grocery": return "about 1 per 5,000 sq ft (staff coverage).";
-      case "hotel": return "about 1 per 25 rooms + lobby" + (q.fb ? " + F&B" : "") + ", min 1 per floor.";
-      case "salon": return "about 1 per 12 chairs (waiting-area guest Wi-Fi).";
-    }
-    return "";
-  }
-
-  function dropsWhy(q){
-    const p = (n, w) => n + " " + w + (n === 1 ? "" : "s");
-    switch(sector){
-      case "restaurant": return p(D.fixed, "fixed station") + " + " + p(D.kds, "KDS") + " + " + p(D.kprint, "kitchen printer") + " + " + p(D.fixed, "receipt printer");
-      case "qsr": return p(D.counters, "counter") + " + " + p(D.kds, "KDS") + (q.drivethru ? " + 1 drive-thru terminal" : "");
-      case "retail": return p(D.lanes, "lane") + (D.scale ? " + 1 scale" : "") + (D.sco ? " + " + p(D.sco, "self-checkout") : "") + " + " + p(D.backoffice, "back-office PC");
-      case "hotel": return p(D.aps, "AP") + " + " + p(D.frontdesk, "front-desk station") + (q.fb ? " + 2 F&B POS + 2 F&B KDS" : "") + " + 2 back-office drops";
-      case "grocery": return p(D.lanes, "lane") + (q.deli ? " + 1 deli POS" : "") + (q.lottery ? " + 1 lottery terminal" : "");
-      case "salon": return p(D.reception, "reception station");
-    }
-    return "";
-  }
-
-  function summaryText(q){
-    const p = (n, w) => n + " " + w + (n === 1 ? "" : "s");
-    switch(sector){
-      case "restaurant":
-        return "From " + p(q.tables, "table") + (q.bar ? " + bar" : "") + ": " +
-          p(D.fixed, "fixed POS station") + ", " + p(D.handhelds, "pay-at-table handheld") + ", " +
-          p(D.kds, "kitchen screen") + ", " + p(D.kprint, "kitchen printer") + ", " +
-          p(D.aps, "Wi-Fi AP") + ", " + p(D.wired_drops, "cable run") + " → " + D.switch + "-port PoE switch." +
-          ((q.takeout === "apps" || q.takeout === "both") ? " Delivery apps: 2 aggregator tablets + ~25% commissions." : "") +
-          (q.takeout === "none" ? " No takeout." : "");
-      case "qsr":
-        return "From " + p(q.seats, "seat") + (q.drivethru ? " + drive-thru" : "") + ": " +
-          p(D.counters, "order counter") + ", " + p(D.kds, "kitchen screen") +
-          (q.drivethru ? ", 1 drive-thru terminal" : "") +
-          (D.kiosks ? ", " + p(D.kiosks, "self-order kiosk") : "") + ", " +
-          p(D.aps, "Wi-Fi AP") + ", " + p(D.wired_drops, "cable run") + " → " + D.switch + "-port PoE switch.";
-      case "retail":
-        return "From " + q.sqft.toLocaleString("en-CA") + " sq ft" + (q.weigh ? " + weighed goods" : "") + ": " +
-          p(D.lanes, "checkout lane") + ", " + p(D.backoffice, "back-office PC") +
-          (D.scale ? ", 1 produce scale" : "") + (D.sco ? ", " + p(D.sco, "self-checkout") : "") + ", " +
-          p(D.aps, "staff Wi-Fi AP") + ", " + p(D.wired_drops, "cable run") + " → " + D.switch + "-port PoE switch.";
-      case "hotel":
-        return "From " + p(q.rooms, "room") + " / " + p(q.floors, "floor") + (q.fb ? " + F&B" : "") + ": " +
-          p(D.frontdesk, "front-desk station") +
-          (q.fb ? ", F&B outlet: 2 POS stations + 2 kitchen screens" : "") + ", " +
-          p(D.aps, "Wi-Fi AP") + ", " + p(D.wired_drops, "cable run") + " → " + D.switch + "-port PoE switch.";
-      case "grocery":
-        return "From " + q.sqft.toLocaleString("en-CA") + " sq ft: " + p(D.lanes, "checkout lane") +
-          (q.deli ? ", deli: 1 POS + 1 scale" : "") + (q.lottery ? ", 1 lottery terminal" : "") + ", " +
-          p(D.aps, "staff Wi-Fi AP") + ", " + p(D.wired_drops, "cable run") + " → " + D.switch + "-port PoE switch.";
-      case "salon":
-        return "From " + p(q.chairs, "chair") + ": " + p(D.reception, "reception POS station") + ", " +
-          p(D.calendars, "booking calendar") + " (software seats)" +
-          (D.room_tablet ? ", 1 wireless room tablet" : "") + (D.scanner ? ", 1 retail barcode scanner" : "") + ", " +
-          p(D.aps, "Wi-Fi AP") + ", " + p(D.wired_drops, "cable run") + " → " + D.switch + "-port PoE switch.";
-    }
-    return "";
-  }
-
-  /* ---- POS station builder rendering ---- */
-  function renderBuilder(d, item, st){
-    const inp = getInputs();
-    const perStation = builderPerStation(item, st);
-    const q = Math.max(0, inp.stations);
-    let inner = '<div><div class="name">' + item.name + ' <span class="conf reported">Reported</span></div>' +
-      '<div class="detail">Tick what each station needs — we assemble the station and price it. Applies to every station you add in step 2.</div>' +
-      '<div class="path-pick" role="radiogroup" aria-label="Station path">' +
-      '<label><input type="radio" name="station-path" value="build"' + (st.path !== "aio" ? " checked" : "") + '> 🧩 <strong>Build your own</strong> — mix and match</label>' +
-      '<label><input type="radio" name="station-path" value="aio"' + (st.path === "aio" ? " checked" : "") + '> 📦 <strong>All-in-one</strong> — one box does it all</label></div>';
-    if(st.path === "aio"){
-      inner += '<div class="aio-note">All-in-one (like the Square Register, ~$900 CAD): screen, card reader, POS software and customer display in one box — <strong>' + money(item.aio.upfront / 36) + '/mo equiv.</strong> ($900 upfront ÷ 36).<br>' +
-        '✅ Simpler — one thing to plug in, one vendor to call.<br>' +
-        '⚠️ Trade-offs: you\'re locked to that processor\'s rates, and if one part dies the whole box goes for repair. Printer and cash drawer are usually sold separately.<br>' +
-        '💡 It has its own card reader, so you can uncheck the separate payment terminal above.</div>';
-    } else {
-      inner += '<div class="reqs">';
-      item.addons.forEach(a => {
-        const on = !!(st.reqs && st.reqs[a.id]);
-        const cost = a.upfront ? " — <strong>" + money(a.upfront / 36) + "/mo equiv.</strong>" : "";
-        inner += '<label class="sim-check"><input type="checkbox" data-req="' + a.id + '"' + (on ? " checked" : "") + '> <span>' + a.label + cost +
-          '<br><span style="opacity:.75;font-size:.95em">' + (a.note || "") + "</span></span></label>";
-      });
-      inner += "</div>";
-    }
-    inner += "</div>";
-    inner += '<div class="price"><label class="sim-check" style="margin:0 0 6px;justify-content:flex-end"><input type="checkbox" data-item="' + item.id + '" aria-label="Include ' + item.name + '"' + (st.checked ? " checked" : "") + '></label>' +
-      '<span class="amt">' + money(perStation * q) + '/mo</span><span class="per">' + money(perStation) + " per station × " + q + "</span></div>";
-    d.innerHTML = inner;
-  }
-
-  /* ---- One-click typical setups: answers to the 3 questions + business basics.
-     The auto-build derives everything else. A starting point, not a recommendation. ---- */
-  const TYPICAL = {
-    retail: { label:"Typical independent retail store",
-      q:{sqft:1800, weigh:"no", sco:"no"},
-      basics:{locations:1, employees:5, volume:60000, rate:2.65},
-      check:["pos","station","terminal","acct","internet","ups"],
-      station:{path:"build", reqs:{printer:true, scanner:true, drawer:true, pinpad:true}},
-      guest:false },
-    restaurant: { label:"Typical independent full-service restaurant",
-      q:{tables:20, bar:"yes", takeout:"both"},
-      basics:{locations:1, employees:15, volume:120000, rate:2.65, marketplace:8000},
-      check:["pos","station","terminal","sched","payroll","acct","internet","ups"],
-      station:{path:"build", reqs:{printer:true, pinpad:true}},
-      guest:true },
-    qsr: { label:"Typical quick-service café",
-      q:{drivethru:"no", seats:30, kiosks:"no"},
-      basics:{locations:1, employees:8, volume:80000, rate:2.65, marketplace:12000},
-      check:["pos","station","terminal","acct","internet","ups"],
-      station:{path:"build", reqs:{printer:true, pinpad:true}},
-      guest:true },
-    hotel: { label:"Typical small hotel",
-      q:{rooms:40, floors:3, fb:"no"},
-      basics:{locations:1, employees:20, volume:150000, rate:2.65},
-      check:["pms","terminal","acct","internet","ups","firewall"],
-      optIdx:{pms:1},
-      guest:true, firewall:true },
-    grocery: { label:"Typical independent grocery / convenience store",
-      q:{sqft:8000, deli:"yes", lottery:"no"},
-      basics:{locations:1, employees:12, volume:200000, rate:2.65},
-      check:["pos","station","terminal","acct","internet","ups"],
-      station:{path:"build", reqs:{printer:true, scanner:true, drawer:true, scale:true, pinpad:true}},
-      guest:false },
-    salon: { label:"Typical salon / services shop",
-      q:{chairs:6, trooms:0, retailct:"no"},
-      basics:{locations:1, employees:4, volume:35000, rate:2.65},
-      check:["booking","station","terminal","payroll","acct","internet"],
-      station:{path:"build", reqs:{printer:true, pinpad:true}},
-      guest:true }
-  };
-
-  // question input ids per sector, in TYPICAL.q key order
-  const Q_IDS = {
-    restaurant:["in-tables","in-bar","in-takeout"],
-    qsr:["in-drivethru","in-seats","in-kiosks"],
-    retail:["in-sqft-r","in-weigh","in-sco"],
-    hotel:["in-rooms","in-floors","in-fb"],
-    grocery:["in-sqft-g","in-deli","in-lottery"],
-    salon:["in-chairs","in-trooms","in-retailct"]
-  };
-
-  function loadTypical(){
-    const t = TYPICAL[sector]; if(!t) return;
-    const set = (id, v) => { const el = $(id); if(el && v !== undefined) el.value = v; };
-    Object.values(t.q).forEach((v, i) => set(Q_IDS[sector][i], v));
-    set("in-locations", t.basics.locations); set("in-employees", t.basics.employees);
-    set("in-volume", t.basics.volume); set("in-rate", t.basics.rate);
-    set("in-marketplace", t.basics.marketplace);
-    Object.keys(state).forEach(k => delete state[k]);
-    stationsAuto = terminalsAuto = true;
-    reqsAuto = { scale: true, scanner: true };
-    guestWifi = t.guest; terminalsTouched = false; pinSync = false;
-    renderCatalog(); // fresh state + auto-build from the questions
-    (t.check || []).forEach(id => { if(state[id]) state[id].checked = true; });
-    Object.entries(t.optIdx || {}).forEach(([id, i]) => { if(state[id]) state[id].optIdx = i; });
-    if(state["station"] && t.station){
-      state["station"].path = t.station.path;
-      state["station"].reqs = Object.assign({}, state["station"].reqs, t.station.reqs);
-    }
-    if(state["firewall"] && t.firewall) state["firewall"].checked = true;
-    const note = $("typical-note");
-    if(note) note.textContent = t.label + " loaded — a starting point, not a recommendation. Adjust to match yours.";
-    renderCatalog();
-  }
-
-  // Items whose qty/checked follow the 3 questions until the user overrides them.
-  const DERIVED_AUTO = {kds:1, kprinter:1, kiosk:1, tablets:1, selfcheckout:1, marketplace:1, ap:1, drops:1, switch:1};
-
-  function renderCatalog(){
-    // make sure every item has state, then auto-build from the questions
-    allItems().forEach(item => {
-      if(!state[item.id]){
-        const inNeeds = SIM_PRICES.sectors[sector].needs.indexOf(item) !== -1;
-        const base = {checked:false, optIdx:0, qty: inNeeds ? 1 : 0, auto: DERIVED_AUTO[item.id] ? true : SIM_PRICES.infra.indexOf(item) !== -1};
-        if(item.builder){ base.path = "build"; base.reqs = Object.assign({}, item.defaultReqs); }
-        state[item.id] = base;
-      }
-    });
-    derive();
-    [["needs","needs-list"],["infra","infra-list"],["toys","toys-list"]].forEach(([tier, listId]) => {
-      const list = $(listId);
-      list.innerHTML = "";
-      const items = tier === "infra" ? SIM_PRICES.infra : SIM_PRICES.sectors[sector][tier];
-      items.forEach(item => {
-        if(!state[item.id]){
-          const base = {checked:false, optIdx:0, qty: tier === "needs" ? 1 : 0, auto: DERIVED_AUTO[item.id] ? true : tier === "infra"};
-          if(item.builder){ base.path = "build"; base.reqs = Object.assign({}, item.defaultReqs); }
-          state[item.id] = base;
-        }
-        const st = state[item.id];
-        const d = document.createElement("div");
-        d.className = "sim-item";
-        if(item.builder){ renderBuilder(d, item, st); list.appendChild(d); return; }
-        const opt = item.options[st.optIdx];
-        let inner = '<div><div class="name">' + item.name +
-          (tier === "infra" && st.auto ? '<span class="auto-badge">auto</span>' : "") +
-          '<span class="conf ' + opt.conf + '">' + CONF_LABEL[opt.conf] + "</span></div>" +
-          '<div class="detail">' + (opt.note || "") + "</div>";
-        if(st.why && st.checked) inner += '<div class="why-line">' + st.why + "</div>";
-        if(tier === "infra" && st.rec && !st.checked) inner += '<div class="warn-line">' + (INFRA_WARNS[item.id] || "") + "</div>";
-        if(item.options.length > 1){
-          inner += '<select data-item="' + item.id + '">';
-          item.options.forEach((o,i) => {
-            inner += '<option value="' + i + '"' + (i === st.optIdx ? " selected" : "") + ">" + o.label + "</option>";
-          });
-          inner += "</select>";
-        } else {
-          inner += '<div class="detail" style="margin-top:6px">' + opt.label + "</div>";
-        }
-        if(item.calc === "per_unit"){
-          inner += '<div class="qty"><button data-q="-1" data-item="' + item.id + '">−</button><span>' + st.qty + " " + (item.unit || "unit") + (st.qty === 1 ? "" : "s") + '</span><button data-q="1" data-item="' + item.id + '">+</button></div>';
-        }
-        if(item.calc === "percent_marketplace"){
-          inner += '<div class="detail" style="margin-top:6px">Enter delivery-app sales in step 2 — cost = sales × ' + Math.round((item.rate||0)*100) + "%.</div>";
-        }
-        inner += "</div>";
-        const priceTxt = opt.info_only ? "—" : money(itemMonthlyPreview(item, opt)) + "/mo" + ((opt.upfront && !opt.monthly) ? " equiv." : "");
-        const perTxt = opt.info_only ? "excluded from total"
-          : (opt.upfront && !opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront ÷ 36")
-          : perLabel(item);
-        inner += '<div class="price"><label class="sim-check" style="margin:0 0 6px;justify-content:flex-end"><input type="checkbox" data-item="' + item.id + '" aria-label="Include ' + item.name + '"' + (st.checked ? " checked" : "") + '></label>' +
-          '<span class="amt">' + priceTxt + '</span><span class="per">' + perTxt + "</span></div>";
-        d.innerHTML = inner;
-        list.appendChild(d);
-      });
-    });
-    listEvents();
-    recalc();
-  }
-
-  // preview monthly for one item using current inputs (for the per-item figure)
-  function itemMonthlyPreview(item, opt){
-    const inp = getInputs();
-    const keep = state[item.id];
-    const st = {checked:true, optIdx: item.options.indexOf(opt), qty: keep.qty};
-    const real = state[item.id]; state[item.id] = st;
-    const m = itemMonthly(item, inp);
-    state[item.id] = real;
-    return m;
-  }
-
-  function listEvents(){
-    document.querySelectorAll("#needs-list select, #infra-list select, #toys-list select").forEach(sel => {
-      sel.onchange = () => {
-        const st = state[sel.dataset.item];
-        st.optIdx = +sel.value;
-        if(SIM_PRICES.infra.some(i => i.id === sel.dataset.item)) st.auto = false; // manual override
-        renderCatalog();
-      };
-    });
-    document.querySelectorAll('#needs-list input[type="checkbox"][data-item], #infra-list input[type="checkbox"][data-item], #toys-list input[type="checkbox"][data-item]').forEach(cb => {
-      cb.onchange = () => {
-        const it = findItem(cb.dataset.item);
-        const st = state[cb.dataset.item];
-        st.checked = cb.checked;
-        if(cb.dataset.item === "guestwifi") guestWifi = cb.checked; // play-mode toggle drives AP derivation
-        if(cb.checked && it.calc === "per_unit" && st.qty < 1) st.qty = 1;
-        if(SIM_PRICES.infra.some(i => i.id === cb.dataset.item)) st.auto = false; // manual override
-        renderCatalog();
-      };
-    });
-    document.querySelectorAll('input[name="station-path"]').forEach(r => {
-      r.onchange = () => { const st = state["station"]; if(st) st.path = r.value; renderCatalog(); };
-    });
-    document.querySelectorAll('input[data-req]').forEach(cb => {
-      cb.onchange = () => {
-        const st = state["station"]; if(!st || !st.reqs) return;
-        st.reqs[cb.dataset.req] = cb.checked;
-        if(cb.dataset.req === "scale") reqsAuto.scale = false; // manual override sticks
-        if(cb.dataset.req === "scanner") reqsAuto.scanner = false;
-        if(cb.dataset.req === "pinpad") terminalsTouched = false;
-        if(cb.checked) st.checked = true;
-        renderCatalog();
-      };
-    });
-    document.querySelectorAll(".qty button").forEach(b => {
-      b.onclick = () => {
-        const id = b.dataset.item;
-        state[id].qty = Math.max(0, state[id].qty + (+b.dataset.q));
-        if(state[id].qty > 0) state[id].checked = true;
-        if(SIM_PRICES.infra.some(i => i.id === id)) state[id].auto = false; // manual override
-        renderCatalog();
-      };
-    });
-  }
-
-  function findItem(id){
-    return allItems().find(i => i.id === id);
-  }
-
-  function drawMap(){
-    const svg = $("floorplan");
-    const s = SIM_PRICES.sectors[sector];
-    const inp = getInputs();
-    let html = "";
-    const wiredPts = [];
-    const WIRED_ICONS = {Station:1, Terminal:1, KDS:1, Printer:1, Kiosk:1, SCO:1, "Label printer":1};
-    s.zones.forEach(z => {
-      html += '<rect x="' + z.x + '" y="' + z.y + '" width="' + z.w + '" height="' + z.h +
-        '" rx="8" fill="#f4f8f6" stroke="#c9d8d2"/>' +
-        '<text x="' + (z.x + 10) + '" y="' + (z.y + 24) + '" font-size="15" font-weight="700" fill="#5a6b66">' + z.label + "</text>";
-    });
-    // collect icons per zone
-    const icons = {};
-    s.zones.forEach(z => icons[z.id] = []);
-    const push = (zone, icon, label, n) => {
-      n = Math.min(n, 8);
-      for(let i = 0; i < n; i++) icons[zone] && icons[zone].push({icon, label});
-    };
-    allItems().forEach(item => {
-      const st = state[item.id]; if(!st || !st.checked || !item.map) return;
-      if(item.builder){
-        const q = itemQty(item, inp); if(q <= 0) return;
-        push(item.map.zone, item.map.icon, item.map.label, q);
-        if(st.path !== "aio" && st.reqs){
-          if(st.reqs.printer) push(item.map.zone, "🧾", "Printer", q);
-          if(st.reqs.scanner) push(item.map.zone, "🔫", "Scanner", q);
-        }
-        return;
-      }
-      const q = itemQty(item, inp);
-      if(q <= 0) return;
-      push(item.map.zone, item.map.icon, item.map.label, q);
-    });
-    // sector extras: tables for restaurant, chairs for salon
-    if(sector === "restaurant" && inp.tables > 0) push("dining", "🪑", "Table", inp.tables);
-    if(sector === "salon"){
-      const chairs = Math.max(0, +$("in-chairs").value || 0);
-      if(chairs > 0) push("stations", "💺", "Chair", chairs);
-    }
-    s.zones.forEach(z => {
-      const list = icons[z.id];
-      list.forEach((ic, i) => {
-        const col = i % 4, row = Math.floor(i / 4);
-        const x = z.x + 24 + col * 72, y = z.y + 54 + row * 62;
-        html += '<text x="' + x + '" y="' + y + '" font-size="30">' + ic.icon + "</text>" +
-          '<text x="' + x + '" y="' + (y + 22) + '" font-size="13" fill="#5a6b66">' + ic.label + "</text>";
-        if(WIRED_ICONS[ic.label]) wiredPts.push({x:x + 11, y:y - 8});
-      });
-    });
-    // ---- network layer: switch + firewall in the back office, APs on the plan, cable runs as lines ----
-    const bo = s.zones.filter(z => z.id === "backoffice")[0] || s.zones[s.zones.length - 1];
-    const rackX = bo.x + bo.w - 46, rackY = bo.y + 46;
-    const swSt = state["switch"], fwSt = state["firewall"], apSt = state["ap"], dSt = state["drops"];
-    const netOn = (swSt && swSt.checked) || (fwSt && fwSt.checked) || (apSt && apSt.checked) || (dSt && dSt.checked);
-    if(netOn){
-      if(fwSt && fwSt.checked)
-        html += '<text x="' + (rackX - 58) + '" y="' + rackY + '" font-size="30">🧱</text>' +
-          '<text x="' + (rackX - 58) + '" y="' + (rackY + 22) + '" font-size="13" fill="#5a6b66">Firewall</text>';
-      if(swSt && swSt.checked)
-        html += '<text x="' + rackX + '" y="' + rackY + '" font-size="30">🔀</text>' +
-          '<text x="' + rackX + '" y="' + (rackY + 22) + '" font-size="13" fill="#5a6b66">Switch</text>';
-      // cable runs: dashed lines from wired devices back to the switch
-      if(dSt && dSt.checked && dSt.qty > 0){
-        wiredPts.slice(0, 8).forEach(p => {
-          html += '<line x1="' + p.x + '" y1="' + p.y + '" x2="' + rackX + '" y2="' + rackY + '" stroke="#2a9d8f" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>';
-        });
-        html += '<text x="' + (bo.x + 12) + '" y="' + (bo.y + bo.h - 12) + '" font-size="14" fill="#0f766e">🔌 ' + dSt.qty + ' cable run' + (dSt.qty === 1 ? "" : "s") + ' → switch</text>';
-      }
-      // access points spread across zones, each wired back to the switch
-      if(apSt && apSt.checked && apSt.qty > 0){
-        const n = Math.min(apSt.qty, 8);
-        for(let i = 0; i < n; i++){
-          const z = s.zones[i % s.zones.length];
-          const x = z.x + 44 + ((i * 127) % Math.max(z.w - 88, 40)), y = z.y + 38;
-          html += '<line x1="' + x + '" y1="' + y + '" x2="' + rackX + '" y2="' + rackY + '" stroke="#2a9d8f" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>' +
-            '<text x="' + x + '" y="' + y + '" font-size="28">📶</text>' +
-            '<text x="' + x + '" y="' + (y + 21) + '" font-size="13" fill="#0f766e">AP</text>';
-        }
-      }
-    }
-    if(!Object.values(icons).some(a => a.length) && !netOn)
-      html += '<text x="300" y="215" text-anchor="middle" font-size="18" fill="#9aa8a3">Tick items in your stack — they\'ll appear here.</text>';
-    svg.innerHTML = '<g transform="scale(2)">' + html + "</g>";
-  }
-
-  function recalc(){
-    const inp = getInputs();
-    const s = SIM_PRICES.sectors[sector];
-    let total = 0;
-    allItems().forEach(item => { total += itemMonthly(item, inp); });
-    // processing line
-    const proc = inp.volume * (inp.rate / 100);
-    const save = inp.volume * 0.005;
-    $("proc-cost").textContent = money(proc) + " / month";
-    $("proc-save").innerHTML = "A 0.5% saving on that volume would be worth <strong>" + money(save) + "/month</strong> — " +
-      "illustrative only; your statements decide the real number.";
-    // % of revenue view (optional revenue input)
-    const bm = BENCHMARKS[sector] || BENCHMARKS.retail;
-    const sw = SECTOR_WORD[sector] || "businesses";
-    if(inp.revenue > 0){
-      const techPct = (total * 12) / inp.revenue * 100;
-      $("rev-lines").innerHTML = '<div class="row grand" style="font-size:1.1rem"><span>Your tech stack as % of revenue</span><span>' + pct1(techPct) + '</span></div>' +
-        '<p class="fine" style="margin:.3em 0 0">Typical for ' + sw + ': <strong>' + bm.it + '</strong> of revenue on IT. (Processing fees sit outside published IT benchmarks — so your true tech-adjacent spend is higher than this line.)</p>';
-      const procPct = (proc * 12) / inp.revenue * 100;
-      $("proc-rev").innerHTML = "That's <strong>" + pct1(procPct) + " of your revenue</strong> going to processing " +
-        "(typical " + sw + ": " + bm.proc + "). " + bm.note +
-        ' <a href="contact.html">Find out your real processing % — free audit</a>.';
-    } else {
-      $("rev-lines").innerHTML = "";
-      $("proc-rev").innerHTML = "";
-    }
-    drawMap();
-    updateTotalBar(total);
-  }
-
-  function updateTotalBar(total){
-    if(total === undefined){
-      const inp = getInputs(); const s = SIM_PRICES.sectors[sector]; total = 0;
-      allItems().forEach(item => { total += itemMonthly(item, inp); });
-    }
-    const inp = getInputs();
-    const s = SIM_PRICES.sectors[sector];
-    let lines = "";
-    allItems().forEach(item => {
-      const m = itemMonthly(item, inp);
-      if(m > 0){
-        const conf = item.builder ? "Reported" : CONF_LABEL[item.options[state[item.id].optIdx].conf];
-        lines += '<div class="row"><span>' + item.name + ' <span style="opacity:.65;font-size:.9em">(' + conf + ")</span></span><span>" + money(m) + "/mo</span></div>";
-      }
-    });
-    if(!lines) lines = '<div class="row"><span>No items selected yet</span><span>—</span></div>';
-    $("total-lines").innerHTML = lines;
-    $("grand-total").textContent = money(total) + "/mo";
-  }
-
-  ["in-locations","in-stations","in-terminals","in-employees","in-volume","in-rate","in-revenue","in-marketplace",
-   "in-tables","in-bar","in-takeout","in-drivethru","in-seats","in-kiosks","in-sqft-r","in-weigh","in-sco",
-   "in-rooms","in-floors","in-fb","in-sqft-g","in-deli","in-lottery","in-chairs","in-trooms","in-retailct"]
-    .forEach(id => {
-      const el = $(id); if(!el) return;
-      const h = () => {
-        if(id === "in-stations") stationsAuto = false; // manual override sticks
-        if(id === "in-terminals"){ terminalsAuto = false; terminalsTouched = true; }
-        renderCatalog();
-      };
-      el.addEventListener("input", h);
-      el.addEventListener("change", h);
-    });
-
-  $("btn-typical").addEventListener("click", loadTypical);
-
-  applySectorInfraDefaults();
-  renderSectors();
-  loadTypical(); // auto-build a typical setup on load — instant first result, zero questions
-})();
-</script>
+  <script type="module" src="assets/js/site-auth.cc128bd0.js"></script>
 </body>
 </html>

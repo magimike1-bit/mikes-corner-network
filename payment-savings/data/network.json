@@ -1,0 +1,60 @@
+[
+  {
+    "id": "tills",
+    "label": "Till stations — POS + payment terminals",
+    "pay": true,
+    "def": "wired",
+    "dev": [
+      "station",
+      "terminal"
+    ]
+  },
+  {
+    "id": "printers",
+    "label": "Printers — receipt + kitchen + label",
+    "pay": false,
+    "def": "wired",
+    "dev": [
+      "printer",
+      "kprinter",
+      "labelprinter"
+    ]
+  },
+  {
+    "id": "kds",
+    "label": "Kitchen screens",
+    "pay": false,
+    "def": "wired",
+    "dev": [
+      "kds"
+    ]
+  },
+  {
+    "id": "kiosks",
+    "label": "Self-serve kiosks / self-checkout",
+    "pay": true,
+    "def": "wired",
+    "dev": [
+      "kiosk",
+      "selfcheckout"
+    ]
+  },
+  {
+    "id": "tablets",
+    "label": "Tablets + handhelds",
+    "pay": true,
+    "def": "wifi",
+    "dev": [
+      "tablets"
+    ]
+  },
+  {
+    "id": "backoffice",
+    "label": "Back office — PC",
+    "pay": false,
+    "def": "wired",
+    "dev": [
+      "bopc"
+    ]
+  }
+]

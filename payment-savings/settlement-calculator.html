@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flat-Rate Settlement Trap — Free Calculator | FairRate Audit</title>
+<meta name="description" content="The Visa/Mastercard interchange settlement could cut interchange by 0.10 points — but only interchange-plus merchants see it. Calculate what the settlement is worth to you based on your pricing model.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense: ad code goes here -->
+<style>
+.status-banner{background:#fff8e6;border:2px solid #d9a400;border-radius:14px;padding:20px 24px;margin:26px 0;font-size:.97rem}
+.status-banner .tag{display:inline-block;background:#d9a400;color:#fff;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:6px;margin-bottom:.7em}
+.status-banner p{margin:.4em 0}
+.status-banner .sources{font-size:.86rem;color:#6b5d2e}
+.tool-form{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;max-width:700px}
+.tool-field{margin-bottom:1.3em}
+.tool-field label{display:block;font-weight:700;color:var(--navy);margin-bottom:.45em}
+.tool-field input[type=number]{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:1rem;font-family:inherit}
+.tool-radio{display:block;padding:11px 15px;border:1px solid var(--line);border-radius:10px;margin-bottom:.6em;cursor:pointer}
+.tool-radio:hover{background:var(--accent-soft)}
+.tool-radio input{margin-right:10px;accent-color:var(--accent-dark)}
+.tool-radio small{display:block;color:var(--muted);margin-left:28px}
+.tool-result{margin-top:1.8em}
+.tool-err{color:#a33;font-weight:700}
+.kicker-row{margin-top:0}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="section" style="padding-bottom:8px">
+  <div class="wrap">
+    <div class="status-banner" role="note" aria-label="Settlement status">
+      <span class="tag">Status as of 2026-09-28</span>
+      <p><strong>The revised Visa/Mastercard settlement</strong> (0.10-point interchange cut for five years, 1.25% cap on standard consumer cards for eight years) <strong>received preliminary approval in April 2026 — it is NOT final. Do not make operational changes in anticipation.</strong></p>
+      <p class="sources">Sources: <a href="https://www.eposnow.com/ca/resources/what-rising-card-fees-mean-for-small-businesses/">EPOS Now</a> · <a href="https://www.morningstar.com/news/marketwatch/2025111041/visa-mastercard-reach-new-settlement-with-merchants-will-it-shake-up-credit-card-rewards">Morningstar</a> · <a href="https://intellipay.com/big-changes-coming-to-visa-interchange-fees/">IntelliPay</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:8px">
+  <div class="wrap">
+    <p class="kicker">Free tool · settlement math</p>
+    <h1>The flat-rate settlement trap</h1>
+    <p class="section-sub">Headlines say interchange is getting cheaper. But whether <em>you</em> see any of that depends entirely on how your processor prices you — and for most small businesses on bundled flat-rate plans, the answer is: you won't. Not automatically.</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">How the pass-through actually works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Interchange is the wholesale cost</h3>
+        <p>The card networks set interchange — the biggest slice of every card transaction's cost. Your processor adds its own markup on top. This is true for every plan, no matter how it's priced.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Flat-rate = bundled</h3>
+        <p>A flat-rate processor charges one bundled percentage regardless of the underlying interchange. When wholesale interchange drops, your rate doesn't move — the difference widens your processor's margin, not your savings.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Interchange-plus = transparent</h3>
+        <p>On interchange-plus, wholesale interchange passes through at cost with a fixed processor markup beside it. An interchange cut flows to you automatically, line by line, on your next statement.</p>
+      </div>
+    </div>
+    <p class="section-sub" style="margin-top:1.6em">That's the whole trap: the settlement lowers the <em>wholesale</em> cost. Only merchants whose pricing passes wholesale costs through will see it. Everyone else's processor keeps it — quietly, on every transaction, for five years. This is a general mechanic of bundled pricing, true of any flat-rate plan. And a reminder: the settlement isn't final, so treat the numbers below as what <em>would</em> happen, not what will.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">What is the settlement worth to you?</h2>
+    <p class="section-sub">Enter your monthly card volume and pricing model. The calculator applies the settlement's proposed 0.10-point (0.10%) interchange cut to your numbers.</p>
+    <form class="tool-form" id="settlement-form">
+      <div class="tool-field">
+        <label for="in-volume">Monthly card volume ($)</label>
+        <input type="number" id="in-volume" min="0" step="1" inputmode="decimal" placeholder="e.g. 40000">
+      </div>
+      <div class="tool-field">
+        <label>Your pricing model</label>
+        <label class="tool-radio"><input type="radio" name="pricing-model" value="flat" checked> Flat-rate / bundled
+          <small>One percentage for everything, e.g. 2.6% + 10¢ on every transaction.</small></label>
+        <label class="tool-radio"><input type="radio" name="pricing-model" value="plus"> Interchange-plus
+          <small>Interchange passes through at cost, plus a separate fixed markup.</small></label>
+        <label class="tool-radio"><input type="radio" name="pricing-model" value="unsure"> Not sure
+          <small>We'll show you how to check your statement.</small></label>
+      </div>
+      <button class="btn" type="submit">Calculate my settlement value</button>
+      <div class="tool-result" id="settlement-result" hidden></div>
+      <div id="settlement-note"></div>
+    </form>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="section-title">How to check your statement</h2>
+    <p class="section-sub">Don't guess — it takes one look at your monthly statement.</p>
+    <div class="faq">
+      <details open>
+        <summary>You're on flat-rate / bundled if…</summary>
+        <div class="answer"><p>Your statement shows a single percentage applied to nearly every transaction — something like "2.65% + 10¢" — with no breakdown of card types. One rate, one line, done. The simplicity is the point — and the trap.</p></div>
+      </details>
+      <details>
+        <summary>You're on interchange-plus if…</summary>
+        <div class="answer"><p>Your statement itemizes interchange categories (standard, premium, commercial, foreign…) at their individual rates, with a separate processor markup line — often a small basis-point fee plus a per-transaction fee. More lines, more transparency.</p></div>
+      </details>
+      <details>
+        <summary>Still can't tell?</summary>
+        <div class="answer"><p>That's exactly what the free audit is for. Send 3–6 months of statements and we'll tell you your pricing model, your true effective rate, and what's actually worth negotiating — at no cost and no obligation.</p></div>
+      </details>
+    </div>
+    <div class="cta-band">
+      <h2>On flat-rate? This is what the audit fixes.</h2>
+      <p>We renegotiate your pricing model or move you to one where wholesale cuts reach you. If there's nothing to find, you owe us nothing.</p>
+      <a class="btn" href="contact.html">Start your free audit</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+  <script type="module" src="assets/js/site-auth.cc128bd0.js"></script>
+  <script type="module" src="assets/js/settlement.e5860d5e.js"></script>
+</body>
+</html>

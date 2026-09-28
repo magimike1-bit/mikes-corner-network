@@ -1,0 +1,2316 @@
+{
+  "meta": {
+    "currency": "CAD",
+    "updated": "2026-09-28",
+    "amortize_months": 36
+  },
+  "sectors": {
+    "retail": {
+      "label": "Retail",
+      "emoji": "🏬",
+      "needs": [
+        {
+          "id": "pos",
+          "name": "POS software",
+          "calc": "per_location",
+          "map": {
+            "zone": "lanes",
+            "icon": "🖥️",
+            "label": "POS"
+          },
+          "options": [
+            {
+              "label": "Square POS — free",
+              "monthly": 0,
+              "conf": "official",
+              "bundled": true,
+              "note": "squareup.com/ca"
+            },
+            {
+              "label": "Shopify POS Lite — free with plan",
+              "monthly": 0,
+              "conf": "reported",
+              "bundled": true,
+              "note": "included with Shopify plan"
+            },
+            {
+              "label": "Lightspeed Retail — ~$179/mo typical",
+              "monthly": 179,
+              "conf": "estimate",
+              "note": "third-party pricing guides; confirm with vendor"
+            },
+            {
+              "label": "Helcim — $0/mo software",
+              "monthly": 0,
+              "conf": "official",
+              "note": "helcim.com/pricing — interchange-plus processing; POS locked to Helcim"
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "sub": "Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. All-in-one (Square Register class) = simpler — screen, reader and software in one box — but processor-locked, and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.",
+          "name": "Payment terminal",
+          "calc": "per_terminal",
+          "map": {
+            "zone": "lanes",
+            "icon": "💳",
+            "label": "Terminal"
+          },
+          "options": [
+            {
+              "label": "Countertop — lease $34.95/mo (Moneris Go)",
+              "monthly": 34.95,
+              "conf": "official",
+              "lease": true,
+              "note": "Moneris published lease"
+            },
+            {
+              "label": "Countertop — buy ~$499",
+              "upfront": 499,
+              "conf": "reported",
+              "note": "$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"
+            },
+            {
+              "label": "Mobile/handheld — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "tableside + line-busting; price varies by model — get a quote"
+            },
+            {
+              "label": "All-in-one — ~$900 (Square Register)",
+              "upfront": 900,
+              "conf": "reported",
+              "bundled": true,
+              "note": "Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."
+            }
+          ]
+        },
+        {
+          "id": "station",
+          "name": "POS station — build each lane",
+          "calc": "per_station",
+          "builder": true,
+          "map": {
+            "zone": "lanes",
+            "icon": "🖥️",
+            "label": "Station"
+          },
+          "addons": [
+            {
+              "id": "printer",
+              "label": "Receipt printer (USB)",
+              "upfront": 300,
+              "conf": "reported",
+              "note": "~$300 new — benchmark CA$200–500 (research). Where a dead printer stops sales, keep one spare on the shelf — a $300 printer beats a closed lane."
+            },
+            {
+              "id": "scanner",
+              "label": "Barcode scanner (Bluetooth)",
+              "upfront": 330,
+              "conf": "reported",
+              "note": "~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"
+            },
+            {
+              "id": "drawer",
+              "label": "Cash drawer",
+              "upfront": 80,
+              "conf": "reported",
+              "note": "~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"
+            },
+            {
+              "id": "scale",
+              "label": "Price-computing scale",
+              "upfront": 425,
+              "conf": "reported",
+              "note": "~$424 (amazon.ca); deli/produce — simple scales cost less"
+            },
+            {
+              "id": "pinpad",
+              "label": "PIN pad (card reader) at each station",
+              "pinsync": true,
+              "note": "sets your payment-terminal count to match the station count (plus pay-at-table handhelds for restaurants)"
+            }
+          ],
+          "defaultReqs": {
+            "printer": true,
+            "scanner": true,
+            "drawer": true,
+            "pinpad": true
+          },
+          "aio": {
+            "upfront": 900,
+            "conf": "reported",
+            "note": "Square Register ~$900 CAD (amazon.ca / square.ca)"
+          }
+        },
+        {
+          "id": "ecom",
+          "name": "Online store",
+          "calc": "per_location",
+          "map": {
+            "zone": "backoffice",
+            "icon": "🌐",
+            "label": "Web"
+          },
+          "options": [
+            {
+              "label": "Shopify Basic — $49/mo",
+              "monthly": 49,
+              "conf": "reported",
+              "note": "shopify.com/ca pricing via third-party check 2026-09"
+            }
+          ]
+        },
+        {
+          "id": "acct",
+          "name": "Accounting",
+          "calc": "flat",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📊",
+            "label": "Acctg"
+          },
+          "options": [
+            {
+              "label": "QuickBooks Essentials — $70/mo",
+              "monthly": 70,
+              "conf": "official",
+              "note": "quickbooks.intuit.com/ca"
+            },
+            {
+              "label": "Xero Standard — $60/mo",
+              "monthly": 60,
+              "conf": "official",
+              "note": "xero.com/ca"
+            }
+          ]
+        },
+        {
+          "id": "loyalty",
+          "name": "Loyalty program",
+          "calc": "per_location",
+          "options": [
+            {
+              "label": "Square Loyalty — ~$45/mo",
+              "monthly": 45,
+              "conf": "reported",
+              "note": "third-party sources — confirm on squareup.com/ca"
+            }
+          ]
+        }
+      ],
+      "toys": [
+        {
+          "id": "labelprinter",
+          "name": "Label printer",
+          "calc": "per_unit",
+          "unit": "printer",
+          "map": {
+            "zone": "backoffice",
+            "icon": "🏷️",
+            "label": "Labels"
+          },
+          "options": [
+            {
+              "label": "DYMO LabelWriter 550 — $159.68",
+              "upfront": 159.68,
+              "conf": "reported",
+              "note": "BestBuy Canada, 2026-09-28"
+            },
+            {
+              "label": "DYMO LabelWriter 550 Turbo — $200",
+              "upfront": 200,
+              "conf": "reported",
+              "note": "Uline Canada, 2026-09-28 ($186 at 2+)"
+            }
+          ]
+        },
+        {
+          "id": "custdisplay",
+          "name": "Customer-facing display",
+          "calc": "per_unit",
+          "unit": "display",
+          "map": {
+            "zone": "lanes",
+            "icon": "🖥️",
+            "label": "Display"
+          },
+          "options": [
+            {
+              "label": "SkyTab add-on — $39.99/mo",
+              "monthly": 39.99,
+              "conf": "official",
+              "note": "skytab.com/en-CA — sold as a POS bundle add-on"
+            },
+            {
+              "label": "POS-X pole display — ~$144 USD",
+              "upfront": 144.29,
+              "cur": "USD",
+              "conf": "reported",
+              "note": "barcodesinc.com; USD — plus exchange"
+            },
+            {
+              "label": "Standalone — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"
+            }
+          ]
+        },
+        {
+          "id": "pinpad",
+          "name": "Spare PIN pad / mobile reader",
+          "calc": "per_unit",
+          "unit": "reader",
+          "map": {
+            "zone": "lanes",
+            "icon": "💳",
+            "label": "PIN pad"
+          },
+          "options": [
+            {
+              "label": "Processor-supplied — bundled / quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "Ingenico/Verifone/PAX pads come through your processor with the merchant account — no standalone published price"
+            },
+            {
+              "label": "Square Reader (contactless + chip) — $59",
+              "upfront": 59,
+              "conf": "official",
+              "note": "squareup.com — official CAD price (2nd gen ~$53.98 on amazon.ca), 2026-09-28"
+            }
+          ]
+        },
+        {
+          "id": "scanner",
+          "name": "Barcode scanner — fixed",
+          "calc": "per_unit",
+          "unit": "scanner",
+          "map": {
+            "zone": "lanes",
+            "icon": "🔍",
+            "label": "Scanner"
+          },
+          "options": [
+            {
+              "label": "Presentation — Zebra DS9308 ~$416.99",
+              "upfront": 416.99,
+              "conf": "reported",
+              "note": "Insight Canada CAD, 2026-09-28"
+            },
+            {
+              "label": "In-counter — Zebra MP7000 ~$3,222",
+              "upfront": 3222,
+              "conf": "reported",
+              "note": "DirectDial CAD, 2026-09-28 (listed backordered — confirm stock)"
+            },
+            {
+              "label": "Handheld — per-lane",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "per-lane Bluetooth handhelds live in the station builder (~$330); this item is for fixed scanners"
+            }
+          ]
+        },
+        {
+          "id": "signage",
+          "name": "Digital signage screen",
+          "calc": "per_unit",
+          "unit": "screen",
+          "map": {
+            "zone": "floor",
+            "icon": "📺",
+            "label": "Sign"
+          },
+          "options": [
+            {
+              "label": "~$25/mo equiv.",
+              "monthly": 25,
+              "conf": "estimate",
+              "note": "estimate incl. hardware + software"
+            }
+          ]
+        },
+        {
+          "id": "selfcheckout",
+          "name": "Self-checkout kiosk",
+          "calc": "per_unit",
+          "unit": "kiosk",
+          "info_only": true,
+          "map": {
+            "zone": "lanes",
+            "icon": "🤖",
+            "label": "SCO"
+          },
+          "options": [
+            {
+              "label": "Quote-based — varies widely",
+              "monthly": 0,
+              "conf": "estimate",
+              "note": "no published benchmark; get a vendor quote"
+            }
+          ]
+        }
+      ],
+      "zones": [
+        {
+          "id": "lanes",
+          "label": "Checkout lanes",
+          "x": 20,
+          "y": 20,
+          "w": 340,
+          "h": 150
+        },
+        {
+          "id": "floor",
+          "label": "Sales floor",
+          "x": 20,
+          "y": 190,
+          "w": 340,
+          "h": 120
+        },
+        {
+          "id": "backoffice",
+          "label": "Back office",
+          "x": 380,
+          "y": 20,
+          "w": 200,
+          "h": 290
+        }
+      ]
+    },
+    "restaurant": {
+      "label": "Full-service restaurant",
+      "emoji": "🍽️",
+      "needs": [
+        {
+          "id": "pos",
+          "name": "POS software",
+          "calc": "per_location",
+          "map": {
+            "zone": "bar",
+            "icon": "🖥️",
+            "label": "POS"
+          },
+          "options": [
+            {
+              "label": "TouchBistro — $69/mo",
+              "monthly": 69,
+              "conf": "official",
+              "note": "touchbistro.com (currency unstated on page)"
+            },
+            {
+              "label": "Moneris Go Restaurant — $64.94/mo",
+              "monthly": 64.94,
+              "conf": "official",
+              "note": "includes Go terminal"
+            },
+            {
+              "label": "Toast — quote-based (Canada)",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "bundled": true,
+              "note": "Canadian pricing unpublished — get a quote"
+            },
+            {
+              "label": "Lightspeed Restaurant — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "Canadian pricing unpublished — get a quote"
+            },
+            {
+              "label": "Helcim — $0/mo software",
+              "monthly": 0,
+              "conf": "official",
+              "note": "helcim.com/pricing — interchange-plus processing; POS locked to Helcim"
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "sub": "Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. All-in-one (Square Register class) = simpler — screen, reader and software in one box — but processor-locked, and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.",
+          "name": "Payment terminal",
+          "calc": "per_terminal",
+          "map": {
+            "zone": "dining",
+            "icon": "💳",
+            "label": "Terminal"
+          },
+          "options": [
+            {
+              "label": "Countertop — lease $34.95/mo (Moneris Go)",
+              "monthly": 34.95,
+              "conf": "official",
+              "lease": true,
+              "note": "Moneris published lease"
+            },
+            {
+              "label": "Countertop — buy ~$499",
+              "upfront": 499,
+              "conf": "reported",
+              "note": "$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"
+            },
+            {
+              "label": "Mobile/handheld — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "tableside + line-busting; price varies by model — get a quote"
+            },
+            {
+              "label": "All-in-one — ~$900 (Square Register)",
+              "upfront": 900,
+              "conf": "reported",
+              "bundled": true,
+              "note": "Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."
+            }
+          ]
+        },
+        {
+          "id": "kds",
+          "name": "Kitchen display screen",
+          "calc": "per_unit",
+          "unit": "screen",
+          "map": {
+            "zone": "kitchen",
+            "icon": "🍳",
+            "label": "KDS"
+          },
+          "options": [
+            {
+              "label": "Budget — tablet as KDS (~$250 + $20/mo)",
+              "upfront": 250,
+              "monthly": 20,
+              "conf": "reported",
+              "life": 3.5,
+              "lifeSrc": "estimate — Apple vintage/obsolete policy; Asurion",
+              "lifeConf": "Low",
+              "note": "Midpoints of the reported $200–300/tablet hardware and $10–30/mo software ranges (loman.ai KDS guide; fresh.technology, accessed 2026-09-28). Square-style — the small-business default."
+            },
+            {
+              "label": "Purpose-built — commercial screen (~$550 + $25/mo)",
+              "upfront": 550,
+              "monthly": 25,
+              "conf": "reported",
+              "note": "Midpoint of the reported $400–700/screen hardware range + monthly software (loman.ai, accessed 2026-09-28). Epson/Toast class; 22in touchscreens ~$700 (techryde.com, accessed 2026-09-28)."
+            },
+            {
+              "label": "TouchBistro KDS — ~$89/mo",
+              "monthly": 89,
+              "conf": "reported",
+              "note": "third-party review sites; bring your own screen"
+            },
+            {
+              "label": "Wall/pole mount — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "mounts vary by screen size — price with the screen"
+            }
+          ]
+        },
+        {
+          "id": "kprinter",
+          "name": "Kitchen / bar printer",
+          "calc": "per_unit",
+          "unit": "printer",
+          "map": {
+            "zone": "kitchen",
+            "icon": "🧾",
+            "label": "Printer"
+          },
+          "options": [
+            {
+              "label": "Used/refurb thermal — ~$300",
+              "upfront": 300,
+              "conf": "reported",
+              "life": 5,
+              "lifeSrc": "FavorPOS (printers 3–5 yrs); Epson TM-T88VI (MTBF 360k hrs)",
+              "lifeConf": "Medium",
+              "note": "$225–375 band (Kijiji, reported); ≈$5/mo over 5-yr expected life"
+            },
+            {
+              "label": "New thermal (Epson class) — ~$575",
+              "upfront": 575,
+              "conf": "reported",
+              "life": 5,
+              "lifeSrc": "FavorPOS (printers 3–5 yrs); Epson TM-T88VI (MTBF 360k hrs)",
+              "lifeConf": "Medium",
+              "note": "~$575 new; ≈$9.58/mo over 5-yr expected life. Epson Spare-in-the-Air advance replacement available — see Support."
+            },
+            {
+              "label": "Impact (Epson TM-U220B) — $774",
+              "upfront": 774,
+              "conf": "reported",
+              "note": "DirectDial CAD, 2026-09-28 (MSRP $1,140) — kitchen-rated, survives heat and grease. Onsite install ~US$99/printer (pointofsalepos.com, within 25 mi of major markets, with bundles)."
+            }
+          ]
+        },
+        {
+          "id": "station",
+          "name": "POS station — build each lane",
+          "calc": "per_station",
+          "builder": true,
+          "map": {
+            "zone": "bar",
+            "icon": "🖥️",
+            "label": "Station"
+          },
+          "addons": [
+            {
+              "id": "printer",
+              "label": "Receipt printer (USB)",
+              "upfront": 300,
+              "conf": "reported",
+              "note": "~$300 new — benchmark CA$200–500 (research). Where a dead printer stops sales, keep one spare on the shelf — a $300 printer beats a closed lane."
+            },
+            {
+              "id": "scanner",
+              "label": "Barcode scanner (Bluetooth)",
+              "upfront": 330,
+              "conf": "reported",
+              "note": "~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"
+            },
+            {
+              "id": "drawer",
+              "label": "Cash drawer",
+              "upfront": 80,
+              "conf": "reported",
+              "note": "~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"
+            },
+            {
+              "id": "pinpad",
+              "label": "PIN pad (card reader) at each station",
+              "pinsync": true,
+              "note": "sets your payment-terminal count to match the station count (plus pay-at-table handhelds for restaurants)"
+            }
+          ],
+          "defaultReqs": {
+            "printer": true,
+            "pinpad": true
+          },
+          "aio": {
+            "upfront": 900,
+            "conf": "reported",
+            "note": "Square Register ~$900 CAD (amazon.ca / square.ca)"
+          }
+        },
+        {
+          "id": "sched",
+          "name": "Staff scheduling",
+          "calc": "per_location",
+          "options": [
+            {
+              "label": "7shifts — ~$90/mo typical",
+              "monthly": 89.99,
+              "conf": "reported",
+              "note": "entry $40–$45, Pro ~$90; third-party"
+            }
+          ]
+        },
+        {
+          "id": "payroll",
+          "name": "Payroll",
+          "calc": "per_employee",
+          "base": 40,
+          "map": {
+            "zone": "backoffice",
+            "icon": "💰",
+            "label": "Pay"
+          },
+          "options": [
+            {
+              "label": "Wagepoint Unlimited — $40 + $6/employee",
+              "monthly": 6,
+              "conf": "reported",
+              "note": "base $40/mo + $6 per employee"
+            }
+          ]
+        },
+        {
+          "id": "inventory",
+          "name": "Inventory management",
+          "calc": "per_location",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📦",
+            "label": "Inv"
+          },
+          "manualDef": {
+            "hours": 5,
+            "unit": "manager hours/month",
+            "freq": "mo",
+            "why": "Manual counts run 4–6 manager hrs/month (QSR Web citing SynergySuite research, Sep 2025)."
+          },
+          "options": [
+            {
+              "label": "Inventory software — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "perpetual inventory tied to POS (MarketMan, BevSpot class) — price per location; get the vendor quote"
+            }
+          ]
+        },
+        {
+          "id": "acct",
+          "name": "Accounting",
+          "calc": "flat",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📊",
+            "label": "Acctg"
+          },
+          "options": [
+            {
+              "label": "QuickBooks Essentials — $70/mo",
+              "monthly": 70,
+              "conf": "official",
+              "note": "quickbooks.intuit.com/ca"
+            },
+            {
+              "label": "Xero Standard — $60/mo",
+              "monthly": 60,
+              "conf": "official",
+              "note": "xero.com/ca"
+            }
+          ]
+        }
+      ],
+      "toys": [
+        {
+          "id": "pinpad",
+          "name": "Spare PIN pad / mobile reader",
+          "calc": "per_unit",
+          "unit": "reader",
+          "map": {
+            "zone": "bar",
+            "icon": "💳",
+            "label": "PIN pad"
+          },
+          "options": [
+            {
+              "label": "Processor-supplied — bundled / quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "Ingenico/Verifone/PAX pads come through your processor with the merchant account — no standalone published price"
+            },
+            {
+              "label": "Square Reader (contactless + chip) — $59",
+              "upfront": 59,
+              "conf": "official",
+              "note": "squareup.com — official CAD price (2nd gen ~$53.98 on amazon.ca), 2026-09-28"
+            }
+          ]
+        },
+        {
+          "id": "handheld",
+          "name": "Handheld ordering device",
+          "calc": "per_unit",
+          "unit": "device",
+          "map": {
+            "zone": "dining",
+            "icon": "📱",
+            "label": "Handheld"
+          },
+          "options": [
+            {
+              "label": "Zebra TC26 — ~$882.53",
+              "upfront": 882.53,
+              "conf": "reported",
+              "note": "SELECA Distribution CAD, 2026-09-28 (listed 0 available — confirm stock)"
+            },
+            {
+              "label": "Enterprise config — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "distributor/login pricing (e.g., OCR/Levata MSRP $1,450.70)"
+            }
+          ]
+        },
+        {
+          "id": "mprinter",
+          "name": "Mobile receipt printer",
+          "calc": "per_unit",
+          "unit": "printer",
+          "map": {
+            "zone": "dining",
+            "icon": "🧾",
+            "label": "Mobile printer"
+          },
+          "options": [
+            {
+              "label": "Star SM-L200 — $700.42 MSRP",
+              "upfront": 700.42,
+              "conf": "reported",
+              "note": "OCR/Levata CAD MSRP, 2026-09-28 (web pricing login-gated — actual buy price varies)"
+            },
+            {
+              "label": "Star SM-L200 — from $345.34 USD",
+              "upfront": 345.34,
+              "cur": "USD",
+              "conf": "reported",
+              "note": "barcodesinc.com USD starting price, 2026-09-28 — plus exchange"
+            }
+          ]
+        },
+        {
+          "id": "aiphone",
+          "name": "AI phone answering",
+          "calc": "per_location",
+          "options": [
+            {
+              "label": "~$399/mo per location",
+              "monthly": 399,
+              "conf": "reported",
+              "note": "e.g., Slang.ai; third-party reporting"
+            }
+          ]
+        },
+        {
+          "id": "reserv",
+          "name": "Reservation system",
+          "calc": "per_location",
+          "options": [
+            {
+              "label": "OpenTable — ~$249/mo",
+              "monthly": 249,
+              "conf": "reported",
+              "note": "third-party figure + per-cover fees; unverified"
+            }
+          ]
+        },
+        {
+          "id": "tablets",
+          "name": "Ordering tablets (tableside / line-busting)",
+          "calc": "per_unit",
+          "unit": "tablet",
+          "map": {
+            "zone": "dining",
+            "icon": "📱",
+            "label": "Tablet"
+          },
+          "options": [
+            {
+              "label": "Generic 10-inch tablet — ~$250",
+              "upfront": 250,
+              "conf": "estimate",
+              "note": "generic 10-inch tablet ~$250; ≈$5.21/mo over 4-yr expected life (iPadOS/app minimum-version creep); wireless — no cable run needed"
+            },
+            {
+              "label": "Heckler WindFall stand — $155.99",
+              "upfront": 155.99,
+              "conf": "reported",
+              "note": "Insight Canada CAD, 2026-09-28 — countertop tablet stand"
+            }
+          ]
+        }
+      ],
+      "zones": [
+        {
+          "id": "dining",
+          "label": "Dining room",
+          "x": 20,
+          "y": 20,
+          "w": 280,
+          "h": 170
+        },
+        {
+          "id": "bar",
+          "label": "Bar",
+          "x": 320,
+          "y": 20,
+          "w": 260,
+          "h": 170
+        },
+        {
+          "id": "kitchen",
+          "label": "Kitchen",
+          "x": 20,
+          "y": 210,
+          "w": 280,
+          "h": 150
+        },
+        {
+          "id": "backoffice",
+          "label": "Office",
+          "x": 320,
+          "y": 210,
+          "w": 260,
+          "h": 150
+        }
+      ]
+    },
+    "qsr": {
+      "label": "Quick-service / café",
+      "emoji": "☕",
+      "needs": [
+        {
+          "id": "pos",
+          "name": "POS software",
+          "calc": "per_location",
+          "map": {
+            "zone": "counter",
+            "icon": "🖥️",
+            "label": "POS"
+          },
+          "options": [
+            {
+              "label": "Square POS — free",
+              "monthly": 0,
+              "conf": "official",
+              "bundled": true,
+              "note": "squareup.com/ca"
+            },
+            {
+              "label": "Toast POS — ~US$69/mo",
+              "monthly": 95,
+              "cur": "CAD",
+              "conf": "reported",
+              "bundled": true,
+              "note": "US pricing page; Canadian pricing quote-based — CAD approx. (pre-converted at research time; stored as CAD)"
+            },
+            {
+              "label": "Helcim — $0/mo software",
+              "monthly": 0,
+              "conf": "official",
+              "note": "helcim.com/pricing — interchange-plus processing; POS locked to Helcim"
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "sub": "Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. All-in-one (Square Register class) = simpler — screen, reader and software in one box — but processor-locked, and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.",
+          "name": "Payment terminal",
+          "calc": "per_terminal",
+          "map": {
+            "zone": "counter",
+            "icon": "💳",
+            "label": "Terminal"
+          },
+          "options": [
+            {
+              "label": "Countertop — lease $34.95/mo (Moneris Go)",
+              "monthly": 34.95,
+              "conf": "official",
+              "lease": true,
+              "note": "Moneris published lease"
+            },
+            {
+              "label": "Countertop — buy ~$499",
+              "upfront": 499,
+              "conf": "reported",
+              "note": "$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"
+            },
+            {
+              "label": "Mobile/handheld — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "tableside + line-busting; price varies by model — get a quote"
+            },
+            {
+              "label": "All-in-one — ~$900 (Square Register)",
+              "upfront": 900,
+              "conf": "reported",
+              "bundled": true,
+              "note": "Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."
+            }
+          ]
+        },
+        {
+          "id": "station",
+          "name": "POS station — build each lane",
+          "calc": "per_station",
+          "builder": true,
+          "map": {
+            "zone": "counter",
+            "icon": "🖥️",
+            "label": "Station"
+          },
+          "addons": [
+            {
+              "id": "printer",
+              "label": "Receipt printer (USB)",
+              "upfront": 300,
+              "conf": "reported",
+              "note": "~$300 new — benchmark CA$200–500 (research). Where a dead printer stops sales, keep one spare on the shelf — a $300 printer beats a closed lane."
+            },
+            {
+              "id": "scanner",
+              "label": "Barcode scanner (Bluetooth)",
+              "upfront": 330,
+              "conf": "reported",
+              "note": "~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"
+            },
+            {
+              "id": "drawer",
+              "label": "Cash drawer",
+              "upfront": 80,
+              "conf": "reported",
+              "note": "~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"
+            },
+            {
+              "id": "pinpad",
+              "label": "PIN pad (card reader) at each station",
+              "pinsync": true,
+              "note": "sets your payment-terminal count to match the station count (plus pay-at-table handhelds for restaurants)"
+            }
+          ],
+          "defaultReqs": {
+            "printer": true,
+            "pinpad": true
+          },
+          "aio": {
+            "upfront": 900,
+            "conf": "reported",
+            "note": "Square Register ~$900 CAD (amazon.ca / square.ca)"
+          }
+        },
+        {
+          "id": "kds",
+          "name": "Kitchen display / KDS-lite",
+          "calc": "per_unit",
+          "unit": "screen",
+          "map": {
+            "zone": "kitchen",
+            "icon": "🍳",
+            "label": "KDS"
+          },
+          "options": [
+            {
+              "label": "Budget — tablet as KDS (~$250 + $20/mo)",
+              "upfront": 250,
+              "monthly": 20,
+              "conf": "reported",
+              "life": 3.5,
+              "lifeSrc": "estimate — Apple vintage/obsolete policy; Asurion",
+              "lifeConf": "Low",
+              "note": "Midpoints of the reported $200–300/tablet hardware and $10–30/mo software ranges (loman.ai KDS guide; fresh.technology, accessed 2026-09-28)."
+            },
+            {
+              "label": "KDS software only — ~$30/mo per screen",
+              "monthly": 30,
+              "conf": "reported",
+              "note": "third-party pricing guides; bring your own tablet ($200–300)"
+            },
+            {
+              "label": "Wall/pole mount — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "mounts vary by screen size — price with the screen"
+            }
+          ]
+        },
+        {
+          "id": "inventory",
+          "name": "Inventory management",
+          "calc": "per_location",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📦",
+            "label": "Inv"
+          },
+          "manualDef": {
+            "hours": 5,
+            "unit": "manager hours/month",
+            "freq": "mo",
+            "why": "Manual counts run 4–6 manager hrs/month (QSR Web citing SynergySuite research, Sep 2025)."
+          },
+          "options": [
+            {
+              "label": "Inventory software — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "perpetual inventory tied to POS (MarketMan, BevSpot class) — price per location; get the vendor quote"
+            }
+          ]
+        },
+        {
+          "id": "acct",
+          "name": "Accounting",
+          "calc": "flat",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📊",
+            "label": "Acctg"
+          },
+          "options": [
+            {
+              "label": "QuickBooks Essentials — $70/mo",
+              "monthly": 70,
+              "conf": "official",
+              "note": "quickbooks.intuit.com/ca"
+            }
+          ]
+        }
+      ],
+      "toys": [
+        {
+          "id": "pinpad",
+          "name": "Spare PIN pad / mobile reader",
+          "calc": "per_unit",
+          "unit": "reader",
+          "map": {
+            "zone": "counter",
+            "icon": "💳",
+            "label": "PIN pad"
+          },
+          "options": [
+            {
+              "label": "Processor-supplied — bundled / quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "Ingenico/Verifone/PAX pads come through your processor with the merchant account — no standalone published price"
+            },
+            {
+              "label": "Square Reader (contactless + chip) — $59",
+              "upfront": 59,
+              "conf": "official",
+              "note": "squareup.com — official CAD price (2nd gen ~$53.98 on amazon.ca), 2026-09-28"
+            }
+          ]
+        },
+        {
+          "id": "custdisplay",
+          "name": "Customer-facing display",
+          "calc": "per_unit",
+          "unit": "display",
+          "map": {
+            "zone": "counter",
+            "icon": "🖥️",
+            "label": "Display"
+          },
+          "options": [
+            {
+              "label": "SkyTab add-on — $39.99/mo",
+              "monthly": 39.99,
+              "conf": "official",
+              "note": "skytab.com/en-CA — sold as a POS bundle add-on"
+            },
+            {
+              "label": "POS-X pole display — ~$144 USD",
+              "upfront": 144.29,
+              "cur": "USD",
+              "conf": "reported",
+              "note": "barcodesinc.com; USD — plus exchange"
+            },
+            {
+              "label": "Standalone — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"
+            }
+          ]
+        },
+        {
+          "id": "mprinter",
+          "name": "Mobile receipt printer",
+          "calc": "per_unit",
+          "unit": "printer",
+          "map": {
+            "zone": "counter",
+            "icon": "🧾",
+            "label": "Mobile printer"
+          },
+          "options": [
+            {
+              "label": "Star SM-L200 — $700.42 MSRP",
+              "upfront": 700.42,
+              "conf": "reported",
+              "note": "OCR/Levata CAD MSRP, 2026-09-28 (web pricing login-gated — actual buy price varies)"
+            },
+            {
+              "label": "Star SM-L200 — from $345.34 USD",
+              "upfront": 345.34,
+              "cur": "USD",
+              "conf": "reported",
+              "note": "barcodesinc.com USD starting price, 2026-09-28 — plus exchange"
+            }
+          ]
+        },
+        {
+          "id": "kiosk",
+          "name": "Self-order kiosk",
+          "calc": "per_unit",
+          "unit": "kiosk",
+          "map": {
+            "zone": "counter",
+            "icon": "🤖",
+            "label": "Kiosk"
+          },
+          "options": [
+            {
+              "label": "Quote-based — varies widely",
+              "monthly": 0,
+              "conf": "estimate",
+              "note": "no published benchmark; get a vendor quote",
+              "info_only": true
+            }
+          ]
+        },
+        {
+          "id": "menuboard",
+          "name": "Digital menu boards",
+          "calc": "per_unit",
+          "unit": "screen",
+          "options": [
+            {
+              "label": "~$25/mo equiv. per screen",
+              "monthly": 25,
+              "conf": "estimate",
+              "note": "estimate incl. hardware + software"
+            }
+          ]
+        },
+        {
+          "id": "tablets",
+          "name": "Ordering tablets (line-busting / tableside)",
+          "calc": "per_unit",
+          "unit": "tablet",
+          "map": {
+            "zone": "counter",
+            "icon": "📱",
+            "label": "Tablet"
+          },
+          "options": [
+            {
+              "label": "Generic 10-inch tablet — ~$250",
+              "upfront": 250,
+              "conf": "estimate",
+              "note": "generic 10-inch tablet ~$250; ≈$5.21/mo over 4-yr expected life (iPadOS/app minimum-version creep); wireless — no cable run needed"
+            },
+            {
+              "label": "Heckler WindFall stand — $155.99",
+              "upfront": 155.99,
+              "conf": "reported",
+              "note": "Insight Canada CAD, 2026-09-28 — countertop tablet stand"
+            }
+          ]
+        }
+      ],
+      "zones": [
+        {
+          "id": "counter",
+          "label": "Counter",
+          "x": 20,
+          "y": 20,
+          "w": 360,
+          "h": 150
+        },
+        {
+          "id": "kitchen",
+          "label": "Kitchen",
+          "x": 20,
+          "y": 190,
+          "w": 360,
+          "h": 150
+        },
+        {
+          "id": "pickup",
+          "label": "Pickup shelf",
+          "x": 400,
+          "y": 20,
+          "w": 180,
+          "h": 150
+        },
+        {
+          "id": "backoffice",
+          "label": "Office",
+          "x": 400,
+          "y": 190,
+          "w": 180,
+          "h": 150
+        }
+      ]
+    },
+    "hotel": {
+      "label": "Hotel & hospitality",
+      "emoji": "🏨",
+      "needs": [
+        {
+          "id": "pms",
+          "name": "Property management system",
+          "calc": "per_location",
+          "map": {
+            "zone": "frontdesk",
+            "icon": "🏨",
+            "label": "PMS"
+          },
+          "options": [
+            {
+              "label": "Cloudbeds — from ~$600/mo",
+              "monthly": 600,
+              "conf": "reported",
+              "note": "hoteltechreport; currency unverified; quote-based in practice"
+            },
+            {
+              "label": "MiniHotel — from ~$200/mo",
+              "monthly": 200,
+              "conf": "reported",
+              "note": "hoteltechreport; currency unverified"
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "sub": "Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. All-in-one (Square Register class) = simpler — screen, reader and software in one box — but processor-locked, and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.",
+          "name": "Payment terminal (front desk + outlets)",
+          "calc": "per_terminal",
+          "map": {
+            "zone": "frontdesk",
+            "icon": "💳",
+            "label": "Terminal"
+          },
+          "options": [
+            {
+              "label": "Countertop — lease $34.95/mo (Moneris Go)",
+              "monthly": 34.95,
+              "conf": "official",
+              "lease": true,
+              "note": "Moneris published lease"
+            },
+            {
+              "label": "Countertop — buy ~$499",
+              "upfront": 499,
+              "conf": "reported",
+              "note": "$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"
+            },
+            {
+              "label": "Mobile/handheld — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "tableside + line-busting; price varies by model — get a quote"
+            },
+            {
+              "label": "All-in-one — ~$900 (Square Register)",
+              "upfront": 900,
+              "conf": "reported",
+              "bundled": true,
+              "note": "Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."
+            }
+          ]
+        },
+        {
+          "id": "station",
+          "name": "POS station — build each lane",
+          "calc": "per_station",
+          "builder": true,
+          "map": {
+            "zone": "frontdesk",
+            "icon": "🖥️",
+            "label": "Station"
+          },
+          "addons": [
+            {
+              "id": "printer",
+              "label": "Receipt printer (USB)",
+              "upfront": 300,
+              "conf": "reported",
+              "note": "~$300 new — benchmark CA$200–500 (research). Where a dead printer stops sales, keep one spare on the shelf — a $300 printer beats a closed lane."
+            },
+            {
+              "id": "scanner",
+              "label": "Barcode scanner (Bluetooth)",
+              "upfront": 330,
+              "conf": "reported",
+              "note": "~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"
+            },
+            {
+              "id": "drawer",
+              "label": "Cash drawer",
+              "upfront": 80,
+              "conf": "reported",
+              "note": "~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"
+            },
+            {
+              "id": "pinpad",
+              "label": "PIN pad (card reader) at each station",
+              "pinsync": true,
+              "note": "sets your payment-terminal count to match the station count (plus pay-at-table handhelds for restaurants)"
+            }
+          ],
+          "defaultReqs": {
+            "printer": true,
+            "pinpad": true
+          },
+          "aio": {
+            "upfront": 900,
+            "conf": "reported",
+            "note": "Square Register ~$900 CAD (amazon.ca / square.ca)"
+          }
+        },
+        {
+          "id": "acct",
+          "name": "Accounting",
+          "calc": "flat",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📊",
+            "label": "Acctg"
+          },
+          "options": [
+            {
+              "label": "QuickBooks Plus — $110/mo",
+              "monthly": 110,
+              "conf": "official",
+              "note": "quickbooks.intuit.com/ca"
+            }
+          ]
+        }
+      ],
+      "toys": [
+        {
+          "id": "guestmsg",
+          "name": "AI guest messaging",
+          "calc": "per_location",
+          "options": [
+            {
+              "label": "HiJiffy — ~$200/mo",
+              "monthly": 200,
+              "conf": "reported",
+              "note": "Hotel Tech Report"
+            },
+            {
+              "label": "Asksuite — ~$300/mo",
+              "monthly": 300,
+              "conf": "reported",
+              "note": "Hotel Tech Report"
+            }
+          ]
+        }
+      ],
+      "zones": [
+        {
+          "id": "frontdesk",
+          "label": "Front desk",
+          "x": 20,
+          "y": 20,
+          "w": 300,
+          "h": 150
+        },
+        {
+          "id": "rooms",
+          "label": "Rooms (PMS-managed)",
+          "x": 340,
+          "y": 20,
+          "w": 240,
+          "h": 150
+        },
+        {
+          "id": "restaurant",
+          "label": "On-site restaurant",
+          "x": 20,
+          "y": 190,
+          "w": 300,
+          "h": 150
+        },
+        {
+          "id": "backoffice",
+          "label": "Back office",
+          "x": 340,
+          "y": 190,
+          "w": 240,
+          "h": 150
+        }
+      ]
+    },
+    "grocery": {
+      "label": "Grocery / convenience",
+      "emoji": "🛒",
+      "needs": [
+        {
+          "id": "pos",
+          "name": "POS software",
+          "calc": "per_location",
+          "map": {
+            "zone": "lanes",
+            "icon": "🖥️",
+            "label": "POS"
+          },
+          "options": [
+            {
+              "label": "Square POS — free",
+              "monthly": 0,
+              "conf": "official",
+              "bundled": true,
+              "note": "squareup.com/ca"
+            },
+            {
+              "label": "Lightspeed Retail — ~$179/mo typical",
+              "monthly": 179,
+              "conf": "estimate",
+              "note": "third-party guides; confirm with vendor"
+            },
+            {
+              "label": "Helcim — $0/mo software",
+              "monthly": 0,
+              "conf": "official",
+              "note": "helcim.com/pricing — interchange-plus processing; POS locked to Helcim"
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "sub": "Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. All-in-one (Square Register class) = simpler — screen, reader and software in one box — but processor-locked, and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.",
+          "name": "Payment terminal",
+          "calc": "per_terminal",
+          "map": {
+            "zone": "lanes",
+            "icon": "💳",
+            "label": "Terminal"
+          },
+          "options": [
+            {
+              "label": "Countertop — lease $34.95/mo (Moneris Go)",
+              "monthly": 34.95,
+              "conf": "official",
+              "lease": true,
+              "note": "Moneris published lease"
+            },
+            {
+              "label": "Countertop — buy ~$499",
+              "upfront": 499,
+              "conf": "reported",
+              "note": "$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"
+            },
+            {
+              "label": "Mobile/handheld — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "tableside + line-busting; price varies by model — get a quote"
+            },
+            {
+              "label": "All-in-one — ~$900 (Square Register)",
+              "upfront": 900,
+              "conf": "reported",
+              "bundled": true,
+              "note": "Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."
+            }
+          ]
+        },
+        {
+          "id": "station",
+          "name": "POS station — build each lane",
+          "calc": "per_station",
+          "builder": true,
+          "map": {
+            "zone": "lanes",
+            "icon": "🖥️",
+            "label": "Station"
+          },
+          "addons": [
+            {
+              "id": "printer",
+              "label": "Receipt printer (USB)",
+              "upfront": 300,
+              "conf": "reported",
+              "note": "~$300 new — benchmark CA$200–500 (research). Where a dead printer stops sales, keep one spare on the shelf — a $300 printer beats a closed lane."
+            },
+            {
+              "id": "scanner",
+              "label": "Barcode scanner (Bluetooth)",
+              "upfront": 330,
+              "conf": "reported",
+              "note": "~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"
+            },
+            {
+              "id": "drawer",
+              "label": "Cash drawer",
+              "upfront": 80,
+              "conf": "reported",
+              "note": "~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"
+            },
+            {
+              "id": "scale",
+              "label": "Price-computing scale",
+              "upfront": 425,
+              "conf": "reported",
+              "note": "~$424 (amazon.ca); deli/produce — simple scales cost less"
+            },
+            {
+              "id": "pinpad",
+              "label": "PIN pad (card reader) at each station",
+              "pinsync": true,
+              "note": "sets your payment-terminal count to match the station count (plus pay-at-table handhelds for restaurants)"
+            }
+          ],
+          "defaultReqs": {
+            "printer": true,
+            "scanner": true,
+            "drawer": true,
+            "scale": true,
+            "pinpad": true
+          },
+          "aio": {
+            "upfront": 900,
+            "conf": "reported",
+            "note": "Square Register ~$900 CAD (amazon.ca / square.ca)"
+          }
+        },
+        {
+          "id": "inventory",
+          "name": "Inventory management",
+          "calc": "per_location",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📦",
+            "label": "Inv"
+          },
+          "manualDef": {
+            "hours": 5,
+            "unit": "manager hours/month",
+            "freq": "mo",
+            "why": "Manual counts run 4–6 manager hrs/month (QSR Web citing SynergySuite research, Sep 2025)."
+          },
+          "options": [
+            {
+              "label": "Inventory software — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "perpetual inventory tied to POS (MarketMan, BevSpot class) — price per location; get the vendor quote"
+            }
+          ]
+        },
+        {
+          "id": "acct",
+          "name": "Accounting",
+          "calc": "flat",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📊",
+            "label": "Acctg"
+          },
+          "options": [
+            {
+              "label": "QuickBooks Essentials — $70/mo",
+              "monthly": 70,
+              "conf": "official",
+              "note": "quickbooks.intuit.com/ca"
+            }
+          ]
+        }
+      ],
+      "toys": [
+        {
+          "id": "ecom",
+          "name": "Online ordering / ecommerce",
+          "calc": "per_location",
+          "options": [
+            {
+              "label": "Shopify Basic — $49/mo",
+              "monthly": 49,
+              "conf": "reported",
+              "note": "plus transaction fees"
+            }
+          ]
+        },
+        {
+          "id": "labelprinter",
+          "name": "Label printer",
+          "calc": "per_unit",
+          "unit": "printer",
+          "map": {
+            "zone": "backoffice",
+            "icon": "🏷️",
+            "label": "Labels"
+          },
+          "options": [
+            {
+              "label": "DYMO LabelWriter 550 — $159.68",
+              "upfront": 159.68,
+              "conf": "reported",
+              "note": "BestBuy Canada, 2026-09-28"
+            },
+            {
+              "label": "DYMO LabelWriter 550 Turbo — $200",
+              "upfront": 200,
+              "conf": "reported",
+              "note": "Uline Canada, 2026-09-28 ($186 at 2+)"
+            }
+          ]
+        },
+        {
+          "id": "custdisplay",
+          "name": "Customer-facing display",
+          "calc": "per_unit",
+          "unit": "display",
+          "map": {
+            "zone": "lanes",
+            "icon": "🖥️",
+            "label": "Display"
+          },
+          "options": [
+            {
+              "label": "SkyTab add-on — $39.99/mo",
+              "monthly": 39.99,
+              "conf": "official",
+              "note": "skytab.com/en-CA — sold as a POS bundle add-on"
+            },
+            {
+              "label": "POS-X pole display — ~$144 USD",
+              "upfront": 144.29,
+              "cur": "USD",
+              "conf": "reported",
+              "note": "barcodesinc.com; USD — plus exchange"
+            },
+            {
+              "label": "Standalone — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"
+            }
+          ]
+        },
+        {
+          "id": "pinpad",
+          "name": "Spare PIN pad / mobile reader",
+          "calc": "per_unit",
+          "unit": "reader",
+          "map": {
+            "zone": "lanes",
+            "icon": "💳",
+            "label": "PIN pad"
+          },
+          "options": [
+            {
+              "label": "Processor-supplied — bundled / quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "Ingenico/Verifone/PAX pads come through your processor with the merchant account — no standalone published price"
+            },
+            {
+              "label": "Square Reader (contactless + chip) — $59",
+              "upfront": 59,
+              "conf": "official",
+              "note": "squareup.com — official CAD price (2nd gen ~$53.98 on amazon.ca), 2026-09-28"
+            }
+          ]
+        },
+        {
+          "id": "scanner",
+          "name": "Barcode scanner — fixed",
+          "calc": "per_unit",
+          "unit": "scanner",
+          "map": {
+            "zone": "lanes",
+            "icon": "🔍",
+            "label": "Scanner"
+          },
+          "options": [
+            {
+              "label": "Presentation — Zebra DS9308 ~$416.99",
+              "upfront": 416.99,
+              "conf": "reported",
+              "note": "Insight Canada CAD, 2026-09-28"
+            },
+            {
+              "label": "In-counter — Zebra MP7000 ~$3,222",
+              "upfront": 3222,
+              "conf": "reported",
+              "note": "DirectDial CAD, 2026-09-28 (listed backordered — confirm stock)"
+            },
+            {
+              "label": "Handheld — per-lane",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "per-lane Bluetooth handhelds live in the station builder (~$330); this item is for fixed scanners"
+            }
+          ]
+        },
+        {
+          "id": "loyalty",
+          "name": "Loyalty program",
+          "calc": "per_location",
+          "options": [
+            {
+              "label": "Square Loyalty — ~$45/mo",
+              "monthly": 45,
+              "conf": "reported",
+              "note": "third-party sources — confirm on squareup.com/ca"
+            }
+          ]
+        }
+      ],
+      "zones": [
+        {
+          "id": "lanes",
+          "label": "Checkout lanes",
+          "x": 20,
+          "y": 20,
+          "w": 340,
+          "h": 150
+        },
+        {
+          "id": "deli",
+          "label": "Deli / prepared",
+          "x": 20,
+          "y": 190,
+          "w": 340,
+          "h": 120
+        },
+        {
+          "id": "backoffice",
+          "label": "Back office / receiving",
+          "x": 380,
+          "y": 20,
+          "w": 200,
+          "h": 290
+        }
+      ]
+    },
+    "salon": {
+      "label": "Services / salon",
+      "emoji": "💈",
+      "needs": [
+        {
+          "id": "booking",
+          "name": "Booking & scheduling",
+          "calc": "per_location",
+          "map": {
+            "zone": "reception",
+            "icon": "📅",
+            "label": "Book"
+          },
+          "options": [
+            {
+              "label": "Square Appointments Plus — $35/mo",
+              "monthly": 35,
+              "conf": "official",
+              "bundled": true,
+              "note": "squareup.com/ca"
+            },
+            {
+              "label": "Jane App — $79/mo + $19/practitioner",
+              "monthly": 79,
+              "conf": "official",
+              "note": "jane.app pricing; +$19 per extra practitioner"
+            },
+            {
+              "label": "Vagaro — ~$30/mo per calendar",
+              "monthly": 30,
+              "conf": "reported",
+              "note": "third-party sources"
+            }
+          ]
+        },
+        {
+          "id": "pos",
+          "name": "POS software",
+          "calc": "per_location",
+          "map": {
+            "zone": "reception",
+            "icon": "🖥️",
+            "label": "POS"
+          },
+          "options": [
+            {
+              "label": "Square POS — free",
+              "monthly": 0,
+              "conf": "official",
+              "bundled": true,
+              "note": "squareup.com/ca"
+            },
+            {
+              "label": "Helcim — $0/mo software",
+              "monthly": 0,
+              "conf": "official",
+              "note": "helcim.com/pricing — interchange-plus processing; POS locked to Helcim"
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "sub": "Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. All-in-one (Square Register class) = simpler — screen, reader and software in one box — but processor-locked, and if one part dies the whole box goes for repair. Modular (separate tablet + reader) = swap any piece.",
+          "name": "Payment terminal",
+          "calc": "per_terminal",
+          "map": {
+            "zone": "reception",
+            "icon": "💳",
+            "label": "Terminal"
+          },
+          "options": [
+            {
+              "label": "Countertop — lease $34.95/mo (Moneris Go)",
+              "monthly": 34.95,
+              "conf": "official",
+              "lease": true,
+              "note": "Moneris published lease"
+            },
+            {
+              "label": "Countertop — buy ~$499",
+              "upfront": 499,
+              "conf": "reported",
+              "note": "$499 — Moneris Go starter bundle; ≈$6.93/mo over 6-yr expected life (FavorPOS; PCI PTS refresh cycle)"
+            },
+            {
+              "label": "Mobile/handheld — quote-based",
+              "monthly": 0,
+              "conf": "estimate",
+              "info_only": true,
+              "note": "tableside + line-busting; price varies by model — get a quote"
+            },
+            {
+              "label": "All-in-one — ~$900 (Square Register)",
+              "upfront": 900,
+              "conf": "reported",
+              "bundled": true,
+              "note": "Square Register ~$900 CAD (amazon.ca / square.ca); ≈$12.50/mo over 6-yr life. One part dies = whole box goes for repair."
+            }
+          ]
+        },
+        {
+          "id": "station",
+          "name": "POS station — build each lane",
+          "calc": "per_station",
+          "builder": true,
+          "map": {
+            "zone": "reception",
+            "icon": "🖥️",
+            "label": "Station"
+          },
+          "addons": [
+            {
+              "id": "printer",
+              "label": "Receipt printer (USB)",
+              "upfront": 300,
+              "conf": "reported",
+              "note": "~$300 new — benchmark CA$200–500 (research). Where a dead printer stops sales, keep one spare on the shelf — a $300 printer beats a closed lane."
+            },
+            {
+              "id": "scanner",
+              "label": "Barcode scanner (Bluetooth)",
+              "upfront": 330,
+              "conf": "reported",
+              "note": "~$331 CAD Bluetooth handheld (pc-canada.com); budget models less"
+            },
+            {
+              "id": "drawer",
+              "label": "Cash drawer",
+              "upfront": 80,
+              "conf": "reported",
+              "note": "~$80 — $54–128 band (amazon.ca, vevor.ca); kicks via the printer's cable"
+            },
+            {
+              "id": "pinpad",
+              "label": "PIN pad (card reader) at each station",
+              "pinsync": true,
+              "note": "sets your payment-terminal count to match the station count (plus pay-at-table handhelds for restaurants)"
+            }
+          ],
+          "defaultReqs": {
+            "printer": true,
+            "pinpad": true
+          },
+          "aio": {
+            "upfront": 900,
+            "conf": "reported",
+            "note": "Square Register ~$900 CAD (amazon.ca / square.ca)"
+          }
+        },
+        {
+          "id": "payroll",
+          "name": "Payroll",
+          "calc": "per_employee",
+          "base": 40,
+          "map": {
+            "zone": "backoffice",
+            "icon": "💰",
+            "label": "Pay"
+          },
+          "options": [
+            {
+              "label": "Wagepoint Unlimited — $40 + $6/employee",
+              "monthly": 6,
+              "conf": "reported",
+              "note": "base $40/mo + $6 per employee"
+            }
+          ]
+        },
+        {
+          "id": "acct",
+          "name": "Accounting",
+          "calc": "flat",
+          "map": {
+            "zone": "backoffice",
+            "icon": "📊",
+            "label": "Acctg"
+          },
+          "options": [
+            {
+              "label": "QuickBooks Essentials — $70/mo",
+              "monthly": 70,
+              "conf": "official",
+              "note": "quickbooks.intuit.com/ca"
+            }
+          ]
+        }
+      ],
+      "toys": [
+        {
+          "id": "crm",
+          "name": "Marketing / CRM",
+          "calc": "per_location",
+          "info_only": true,
+          "options": [
+            {
+              "label": "Not yet researched — varies",
+              "monthly": 0,
+              "conf": "estimate",
+              "note": "email/SMS marketing tools vary widely; research pending"
+            }
+          ]
+        }
+      ],
+      "zones": [
+        {
+          "id": "reception",
+          "label": "Reception",
+          "x": 20,
+          "y": 20,
+          "w": 300,
+          "h": 150
+        },
+        {
+          "id": "stations",
+          "label": "Service stations / chairs",
+          "x": 340,
+          "y": 20,
+          "w": 240,
+          "h": 150
+        },
+        {
+          "id": "backoffice",
+          "label": "Back office",
+          "x": 20,
+          "y": 190,
+          "w": 560,
+          "h": 120
+        }
+      ]
+    }
+  },
+  "infra": [
+    {
+      "id": "drops",
+      "name": "Network cable drops (Cat6, installed)",
+      "calc": "per_unit",
+      "unit": "drop",
+      "noSupport": true,
+      "options": [
+        {
+          "label": "Standard drop — $175",
+          "upfront": 175,
+          "conf": "reported",
+          "note": "$125–300 band; aligns with US$150–250 commercial per-drop research (datawiresolutions.com, 2026-09-28). Building asset: 10–20+ yr life. Also listed under Installation & setup — use one, not both."
+        },
+        {
+          "label": "Difficult drop — $300",
+          "upfront": 300,
+          "conf": "reported",
+          "note": "finished walls, conduit, plenum"
+        }
+      ]
+    },
+    {
+      "id": "ap",
+      "name": "Wi-Fi access point",
+      "calc": "per_unit",
+      "unit": "AP",
+      "options": [
+        {
+          "label": "Mid-tier AP hardware — $175",
+          "upfront": 175,
+          "conf": "reported",
+          "note": "e.g., Omada EAP772 $169.99, official store"
+        },
+        {
+          "label": "AP installed — ~$325",
+          "upfront": 325,
+          "conf": "reported",
+          "note": "Toronto installer ~$300/AP hardware + install"
+        }
+      ]
+    },
+    {
+      "id": "switch",
+      "name": "PoE network switch",
+      "calc": "flat",
+      "options": [
+        {
+          "label": "8-port smart-managed PoE — $110",
+          "upfront": 110,
+          "conf": "reported",
+          "note": "VLAN-capable; the small-business sweet spot"
+        },
+        {
+          "label": "16-port managed PoE — $285",
+          "upfront": 285,
+          "conf": "reported",
+          "note": "growing sites, more APs/cameras"
+        },
+        {
+          "label": "24-port managed PoE — $425",
+          "upfront": 425,
+          "conf": "reported",
+          "note": "$400–450 band (infrastructure-costs.md, 2026-09-28)"
+        },
+        {
+          "label": "48-port managed PoE — ~$850",
+          "upfront": 850,
+          "conf": "estimate",
+          "note": "no published band — ~2× 24-port; get a vendor quote"
+        }
+      ]
+    },
+    {
+      "id": "firewall",
+      "name": "Firewall / router",
+      "calc": "flat",
+      "options": [
+        {
+          "label": "No-subscription tier — $400",
+          "upfront": 400,
+          "conf": "reported",
+          "note": "UniFi/TP-Link class; $199–929 band"
+        },
+        {
+          "label": "Subscription UTM — ~$1,700 / 3 yr",
+          "upfront": 1700,
+          "conf": "reported",
+          "note": "Fortinet/SonicWall/Meraki + licenses"
+        }
+      ]
+    },
+    {
+      "id": "internet",
+      "name": "Business internet",
+      "calc": "flat",
+      "options": [
+        {
+          "label": "~500 Mbps — $95/mo",
+          "monthly": 95,
+          "conf": "reported",
+          "note": "Bell/Rogers business 2026; $70–110 band"
+        }
+      ]
+    },
+    {
+      "id": "ups",
+      "name": "UPS 1500VA (network + lanes)",
+      "calc": "flat",
+      "options": [
+        {
+          "label": "$220 one-time",
+          "upfront": 220,
+          "conf": "reported",
+          "note": "amazon.ca; covers firewall, switch, modem + lanes through blips"
+        }
+      ]
+    },
+    {
+      "id": "guestwifi",
+      "name": "Guest Wi-Fi (separate SSID + VLAN)",
+      "calc": "flat",
+      "info_only": true,
+      "options": [
+        {
+          "label": "$0 extra — built into AP/controller",
+          "monthly": 0,
+          "conf": "official",
+          "note": "captive portal $0–300/yr optional; keep guests off the card network"
+        }
+      ]
+    },
+    {
+      "id": "failover",
+      "name": "Cellular internet failover",
+      "calc": "flat",
+      "options": [
+        {
+          "label": "Cradlepoint COR + Rogers plan — $2,076 + $104.99/mo",
+          "upfront": 2076,
+          "monthly": 104.99,
+          "conf": "reported",
+          "note": "Cradlepoint COR Wi-Fi 5 $2,076 CAD (DirectDial); Rogers Wireless Business Internet $104.99/mo (official PDF) — 2026-09-28. When the main line drops, cards still go through."
+        },
+        {
+          "label": "Hardware only — Cradlepoint COR ~$2,076",
+          "upfront": 2076,
+          "conf": "reported",
+          "note": "DirectDial CAD, 2026-09-28 — add your own data plan"
+        }
+      ]
+    },
+    {
+      "id": "bopc",
+      "name": "Back-office PC",
+      "calc": "flat",
+      "info_only": true,
+      "map": {
+        "zone": "backoffice",
+        "icon": "🖥️",
+        "label": "PC"
+      },
+      "options": [
+        {
+          "label": "Quote-based — a refurb office PC does the job",
+          "monthly": 0,
+          "conf": "estimate",
+          "note": "no published benchmark; price a refurb locally — it never touches cards"
+        }
+      ]
+    }
+  ],
+  "infra_notes": {
+    "retail": "Wire every checkout lane — reliability beats everything. 1–2 APs cover staff + guest.",
+    "restaurant": "KDS and printers get WIRES (kitchens are Wi-Fi-hostile). Tableside terminals on a dedicated staff SSID.",
+    "qsr": "Minimal: 1–2 APs, a few drops. Kiosks want wired Ethernet, not Wi-Fi.",
+    "hotel": "The big one — an AP every 4–8 rooms, PMS on its own VLAN, more switches per floor. Cost scales with rooms, not revenue.",
+    "grocery": "Large footprint = more APs (3–6). Every lane wired; size the PoE switch for cameras too.",
+    "salon": "Minimal — 1 AP, 2–3 drops. The booking PC holds card-on-file data: segment it."
+  },
+  "install": [
+    {
+      "id": "inst-mountkit",
+      "name": "Mounting kits / brackets — materials",
+      "calc": "per_unit",
+      "unit": "kit",
+      "options": [
+        {
+          "label": "Quote-based — varies by mount type",
+          "monthly": 0,
+          "conf": "estimate",
+          "info_only": true,
+          "note": "Mount HARDWARE is retail (e.g. POS wall mount ~£33.60 ex VAT, printdesigns.com); install LABOR is the quote part — no published per-device install-labor price found. Ask your local POS installer."
+        }
+      ]
+    },
+    {
+      "id": "inst-cabledrop",
+      "name": "Cable drops — per run",
+      "calc": "per_unit",
+      "unit": "run",
+      "sub": "Pulled by a low-voltage contractor — one-time, paid at install, never monthly. Building asset: outlives the POS by 10–20+ yrs.",
+      "options": [
+        {
+          "label": "US$150–250 per Cat6 drop — midpoint US$200",
+          "upfront": 200,
+          "cur": "USD",
+          "conf": "reported",
+          "note": "US$150–250 commercial per drop (datawiresolutions.com); US$175–285 tested/certified (Rx Technology); harder Cat6A/plenum/after-hours runs US$200–350+. USD — plus exchange. Same work as Infrastructure → Network cable drops above — use one, not both."
+        },
+        {
+          "label": "Quote-based — varies by site",
+          "monthly": 0,
+          "conf": "estimate",
+          "info_only": true,
+          "note": "New build with open ceilings is cheap; retrofit through finished walls costs more. Get per-run pricing."
+        }
+      ]
+    },
+    {
+      "id": "inst-netconfig",
+      "name": "Network config — VLAN + business Wi-Fi",
+      "calc": "flat",
+      "options": [
+        {
+          "label": "Quote-based — per site",
+          "monthly": 0,
+          "conf": "estimate",
+          "info_only": true,
+          "note": "No standalone published price — usually bundled with the install. Context: full Wi-Fi install US$2,500–15,000+ depending on coverage; general IT labor US$75–200/hr as proxy (thenetworkinstallers.com). Config survives hardware refresh if documented."
+        }
+      ]
+    },
+    {
+      "id": "inst-possetup",
+      "name": "POS software setup & configuration",
+      "calc": "per_location",
+      "options": [
+        {
+          "label": "US$500–1,500 professional install — midpoint US$1,000",
+          "upfront": 1000,
+          "cur": "USD",
+          "conf": "reported",
+          "note": "US$500–1,500 professional POS installation per location (theposexchange.com); US$200–1,000 one-time setup/onboarding (swyftpos.com); Toast-era US$300–500. USD — plus exchange. Industry benchmark: US$1,000–5,000 total hidden implementation on top of hardware + software quotes."
+        },
+        {
+          "label": "Quote-based — per location",
+          "monthly": 0,
+          "conf": "estimate",
+          "info_only": true,
+          "note": "Taxes, tenders, receipts, users and permissions. Bigger catalog = more hours."
+        }
+      ]
+    },
+    {
+      "id": "inst-menubuild",
+      "name": "Menu / product catalog build",
+      "calc": "per_location",
+      "options": [
+        {
+          "label": "Quote-based — per location",
+          "monthly": 0,
+          "conf": "estimate",
+          "info_only": true,
+          "note": "No standalone published price — usually bundled with implementation (Toast onboarding does menu build; Rezku includes one-on-one training + custom menu build). A 20-item café menu is an afternoon; a 10,000-SKU grocery catalog is a project."
+        }
+      ]
+    },
+    {
+      "id": "inst-training",
+      "name": "Staff training — per session",
+      "calc": "per_unit",
+      "unit": "session",
+      "options": [
+        {
+          "label": "US$100–500 per session — midpoint US$300",
+          "upfront": 300,
+          "cur": "USD",
+          "conf": "reported",
+          "note": "US$100–500 per session (theposexchange.com); Toast-era US$100–200; software proxy RetailEdge US$30/15 min. USD — plus exchange. This is the installer's fee — your staff's paid time is costed in the Training section below."
+        },
+        {
+          "label": "Quote-based — per session",
+          "monthly": 0,
+          "conf": "estimate",
+          "info_only": true,
+          "note": "Usually 1–2 sessions at go-live; complex setups (KDS, inventory) need more."
+        }
+      ]
+    }
+  ],
+  "training": [
+    {
+      "id": "tr-initial",
+      "name": "Go-live training — staff time",
+      "calc": "training_init"
+    },
+    {
+      "id": "tr-ongoing",
+      "name": "New-hire training — ongoing",
+      "calc": "training_ongoing"
+    }
+  ]
+}

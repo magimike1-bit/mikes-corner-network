@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://flipping-finds-profit-guide-ej76m.kinsta.page/sitemap.xml

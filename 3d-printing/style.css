@@ -1,11 +1,11 @@
-/* Hard Drive Health — clean, simple, readable */
+/* 3D Printing at Home — clean, simple, readable */
 :root {
   --ink: #1a1a1a;
   --muted: #5c5c5c;
-  --accent: #0d7a5f;
+  --accent: #c2410c;
   --bg: #ffffff;
-  --wash: #f2f8f5;
-  --line: #dfe8e3;
+  --wash: #f4f7fa;
+  --line: #e2e8f0;
 }
 * { box-sizing: border-box; }
 body {
@@ -86,14 +86,13 @@ main { padding: 32px 0 48px; }
   .intro h1 { font-size: 1.6rem; }
 }
 
+.network-link { font-size: 0.8rem; margin-top: 6px; }
+.network-link a { color: var(--muted); }
+
 .site-footer .ai-disclosure{font-size:.85em;opacity:.85}
 
-/* site nav */
-.site-nav{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-size:.95rem}
-.site-nav a{color:var(--accent);text-decoration:none;font-weight:600}
-.site-nav a:hover{text-decoration:underline}
-.site-nav a.active{color:var(--ink);border-bottom:2px solid var(--accent);padding-bottom:2px}
-@media (max-width: 600px) {
-  .intro h1 { font-size: 1.6rem; }
-  .hero-plain h1{font-size:1.6rem}
-}
+/* Site nav (home + calculator) */
+.site-nav{margin-top:12px;font-size:.92rem}
+.site-nav a{color:var(--muted);text-decoration:none;margin-right:18px;padding:2px 0}
+.site-nav a:hover{color:var(--accent)}
+.site-nav a.active{color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent)}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://d-printing-cost-guide-2czme.kinsta.page/sitemap.xml

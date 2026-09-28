@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>True Cost of Ownership Simulator — What a Car Really Costs Over 5 Years</title>
+<meta name="description" content="Interactive simulator: pick a vehicle class, answer 3 questions, and see a sourced 5-year total cost of ownership — depreciation, fuel, insurance, maintenance, and financing — with every figure adjustable.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+<style>
+/* ===== Ownership simulator (scoped) ===== */
+.sim-step{margin:2.2em 0}
+.sim-step h2{font-size:1.35rem;margin:0 0 .3em}
+.sim-step .hint{color:var(--muted);font-size:.95rem;margin:0 0 1em}
+.veh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.veh-card{border:2px solid var(--line);border-radius:8px;background:#fff;padding:16px 12px;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.veh-card:hover{border-color:var(--accent)}
+.veh-card.selected{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,65,12,.15)}
+.veh-card .emoji{font-size:1.8rem;display:block;margin-bottom:6px}
+.veh-card strong{display:block;font-size:.98rem}
+.veh-card .rep{font-size:.78rem;color:var(--muted);display:block;margin-top:4px}
+.cond-pick{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.cond-pick button{border:2px solid var(--line);background:#fff;border-radius:8px;padding:10px 22px;font-size:1rem;cursor:pointer;color:var(--ink)}
+.cond-pick button.selected{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,65,12,.15);font-weight:700}
+.q-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.q-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px}
+.q-card label.q-label{display:block;font-size:.85rem;font-weight:700;margin-bottom:8px}
+.q-card input[type=number],.q-card input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:1rem}
+.q-card .q-note{font-size:.8rem;color:var(--muted);margin-top:6px}
+.radio-row{display:flex;flex-direction:column;gap:8px}
+.radio-row label{display:flex;gap:8px;align-items:flex-start;font-size:.95rem;cursor:pointer}
+.radio-row input{margin-top:5px}
+.fin-inputs{background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:16px;margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.fin-inputs label{font-size:.85rem;font-weight:700;display:block;margin-bottom:6px}
+.fin-inputs input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:1rem}
+.src-tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.03em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+.src-tag.sourced{background:#e6f6ec;color:#157a3a}
+.src-tag.estimate{background:#fff4e0;color:#9a6a00}
+.src-tag.yours{background:#eef2ff;color:#3b4fd8}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 1em;font-size:.82rem;color:var(--muted)}
+.sim-columns{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:960px){.sim-columns{grid-template-columns:1.35fr .65fr;align-items:start}}
+.total-bar{background:#2b2118;color:#fff;border-radius:8px;padding:22px;margin-top:1.4em}
+.total-bar .row{display:flex;justify-content:space-between;padding:6px 0;font-size:.95rem;border-bottom:1px solid rgba(255,255,255,.14)}
+.total-bar .row.grand{border-bottom:none;font-size:1.35rem;font-weight:800;padding-top:12px}
+.total-bar .fine{font-size:.8rem;opacity:.75;margin-top:10px}
+@media(min-width:960px){.sim-side{position:sticky;top:16px}}
+.year-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.88rem}
+.year-table th,.year-table td{border:1px solid var(--line);padding:7px 9px;text-align:right}
+.year-table th:first-child,.year-table td:first-child{text-align:left}
+.year-table th{background:var(--wash)}
+.year-table tr.total-row td{font-weight:800;background:var(--wash)}
+.cat-bars{margin:1em 0}
+.cat-row{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;margin-bottom:8px;font-size:.88rem}
+.cat-row .bar{height:14px;background:var(--wash);border-radius:7px;overflow:hidden}
+.cat-row .bar i{display:block;height:100%;background:var(--accent);border-radius:7px}
+.cat-row .amt{text-align:right;font-weight:700}
+@media(max-width:600px){.cat-row{grid-template-columns:104px 1fr 86px;font-size:.8rem}}
+.sim-main{max-width:1020px}
+.sources{font-size:.85rem;color:var(--muted)}
+.sources li{margin-bottom:8px}
+.cta-band{background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:24px;margin:2.4em 0}
+.cta-band h2{margin:0 0 .4em;font-size:1.2rem}
+.cta-band p{margin:0 0 1em;color:var(--muted)}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;padding:12px 24px;font-weight:700}
+.btn:hover{background:#a03408}
+.site-nav{margin-top:10px;font-size:.95rem}
+.site-nav a{color:var(--accent);text-decoration:none;margin-right:18px}
+.site-nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">True Cost of a Car</a>
+    <p class="tagline">The sticker price is only the beginning</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Guides</a><a href="/ownership-simulator.html" aria-current="page">Ownership simulator</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap sim-main">
+  <section class="intro">
+    <h1>What will this car really cost you?</h1>
+    <p>Pick a vehicle type, answer three questions, and get a 5-year total cost of ownership —
+    depreciation, fuel, insurance, maintenance, and financing — built from published Canadian
+    figures. Every number is sourced, dated, and adjustable.</p>
+  </section>
+
+  <section class="sim-step">
+    <h2>1 &middot; Pick your vehicle</h2>
+    <p class="hint">The fuel and price defaults below reconfigure for each class. Everything stays editable in step 3.</p>
+    <div class="veh-grid" id="veh-grid"></div>
+    <div class="cond-pick" role="group" aria-label="New or used">
+      <button type="button" id="cond-new" class="selected">New</button>
+      <button type="button" id="cond-used">Used</button>
+    </div>
+    <p class="hint" id="cond-note" style="margin-top:8px"></p>
+  </section>
+
+  <section class="sim-step">
+    <h2>2 &middot; Answer 3 quick questions</h2>
+    <p class="hint">We build your cost breakdown from your answers — every figure stays adjustable below.</p>
+    <div class="q-grid">
+      <div class="q-card">
+        <label class="q-label" for="in-km">Annual kilometres driven</label>
+        <input type="number" id="in-km" min="0" max="200000" step="500" value="20000">
+        <p class="q-note">Natural Resources Canada uses 20,000 km/year as its standard annual distance.<span class="src-tag sourced">Sourced</span></p>
+      </div>
+      <div class="q-card">
+        <span class="q-label">How are you paying?</span>
+        <div class="radio-row" role="radiogroup" aria-label="Financing">
+          <label><input type="radio" name="fin" value="cash" checked> Cash — full price up front</label>
+          <label><input type="radio" name="fin" value="financed"> Financed — loan with interest</label>
+          <label><input type="radio" name="fin" value="lease"> Leased — monthly payments</label>
+        </div>
+        <p class="q-note">Financing adds the interest cost; the loan principal is equity in a car you own.</p>
+      </div>
+      <div class="q-card">
+        <span class="q-label">Primary use</span>
+        <div class="radio-row" role="radiogroup" aria-label="Primary use">
+          <label><input type="radio" name="use" value="city"> Mostly city / stop-and-go commute</label>
+          <label><input type="radio" name="use" value="mixed" checked> Mixed city + highway</label>
+          <label><input type="radio" name="use" value="highway"> Mostly highway</label>
+        </div>
+        <p class="q-note">Blends the published city/highway ratings below. NRCan's combined rating assumes 55% city / 45% highway.<span class="src-tag sourced">Sourced</span></p>
+      </div>
+    </div>
+    <div class="fin-inputs" id="fin-box" style="display:none">
+      <div><label for="in-down">Down payment (%)</label><input type="number" id="in-down" min="0" max="100" step="1" value="10"><p class="q-note">Your choice — no published "typical".<span class="src-tag yours">Yours</span></p></div>
+      <div><label for="in-rate">Loan rate (APR %)</label><input type="number" id="in-rate" min="0" max="30" step="0.01"><p class="q-note" id="rate-note"></p></div>
+      <div><label for="in-term">Loan term (months)</label><input type="number" id="in-term" min="12" max="96" step="6" value="60"><p class="q-note">60 months is a common term.<span class="src-tag estimate">Estimate</span></p></div>
+    </div>
+    <div class="fin-inputs" id="lease-box" style="display:none">
+      <div><label for="in-lease">Monthly lease payment ($)</label><input type="number" id="in-lease" min="0" step="10" placeholder="e.g. 550"><p class="q-note">Enter your lease quote — rates vary too widely for a default.<span class="src-tag yours">Yours</span></p></div>
+    </div>
+  </section>
+
+  <section class="sim-step">
+    <h2>3 &middot; Your cost breakdown</h2>
+    <div class="legend">
+      <span><span class="src-tag sourced">Sourced</span> published figure</span>
+      <span><span class="src-tag estimate">Estimate</span> our reasonable estimate, labeled</span>
+      <span><span class="src-tag yours">Yours</span> your input — overrides the default</span>
+    </div>
+    <div class="sim-columns">
+      <div>
+        <div class="q-card" style="margin-bottom:18px">
+          <span class="q-label">Adjust any assumption — totals update live</span>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:10px">
+            <div><label class="q-label" for="in-years">Years of ownership</label><input type="number" id="in-years" min="1" max="10" step="1" value="5"><p class="q-note">1–10 years.<span class="src-tag yours">Yours</span></p></div>
+            <div><label class="q-label" for="in-gas">Gas price ($/L)</label><input type="number" id="in-gas" min="0" step="0.01"><p class="q-note" id="gas-note"></p></div>
+            <div><label class="q-label" for="in-elec">Electricity ($/kWh)</label><input type="number" id="in-elec" min="0" step="0.001"><p class="q-note" id="elec-note"></p></div>
+            <div><label class="q-label" for="in-ins">Insurance ($/yr)</label><input type="number" id="in-ins" min="0" step="10"><p class="q-note" id="ins-note"></p></div>
+            <div><label class="q-label" for="in-maint">Maintenance ($/yr)</label><input type="number" id="in-maint" min="0" step="10"><p class="q-note" id="maint-note"></p></div>
+            <div><label class="q-label" for="in-price">Purchase price ($)</label><input type="number" id="in-price" min="0" step="500"><p class="q-note" id="price-note"></p></div>
+            <div><label class="q-label" for="in-cons">Fuel consumption <span id="cons-unit"></span></label><input type="number" id="in-cons" min="0" step="0.1"><p class="q-note" id="cons-note"></p></div>
+          </div>
+        </div>
+
+        <h3 style="font-size:1.1rem;margin:1.4em 0 .2em">Where the money goes</h3>
+        <p class="hint">Share of total ownership cost over your ownership period.</p>
+        <div class="cat-bars" id="cat-bars"></div>
+
+        <h3 style="font-size:1.1rem;margin:1.4em 0 .2em">Year by year</h3>
+        <div style="overflow-x:auto">
+        <table class="year-table" id="year-table">
+          <thead><tr><th>Year</th><th>Depreciation</th><th id="th-fuel">Fuel</th><th>Insurance</th><th>Maintenance</th><th id="th-fin">Interest</th><th>Total</th></tr></thead>
+          <tbody id="year-body"></tbody>
+          <tfoot><tr class="total-row"><td>Total</td><td id="t-depr"></td><td id="t-fuel"></td><td id="t-ins"></td><td id="t-maint"></td><td id="t-fin"></td><td id="t-all"></td></tr></tfoot>
+        </table>
+        </div>
+        <p class="hint" id="depr-note"></p>
+      </div>
+      <div class="sim-side">
+        <div class="total-bar">
+          <div class="row"><span>Ownership period</span><span id="tb-years">5 years</span></div>
+          <div class="row"><span>Depreciation</span><span id="tb-depr">$0</span></div>
+          <div class="row"><span id="tb-fuel-label">Fuel</span><span id="tb-fuel">$0</span></div>
+          <div class="row"><span>Insurance</span><span id="tb-ins">$0</span></div>
+          <div class="row"><span>Maintenance &amp; repairs</span><span id="tb-maint">$0</span></div>
+          <div class="row"><span id="tb-fin-label">Financing interest</span><span id="tb-fin">$0</span></div>
+          <div class="row grand"><span>Total cost</span><span id="tb-total">$0</span></div>
+          <div class="row"><span>Cost per km</span><span id="tb-cpkm">$0</span></div>
+          <div class="row"><span>Cost per month</span><span id="tb-cpmo">$0</span></div>
+          <p class="fine" id="tb-fine">Estimates from published Canadian figures (see sources). Excludes taxes on purchase, registration, parking, tolls, and tires.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sim-step">
+    <h2>Every number, traced</h2>
+    <p class="hint">All figures researched and accessed 2026-09-28. Defaults are starting points — your own numbers always win.</p>
+    <ul class="sources">
+      <li><strong>Fuel consumption</strong> — Natural Resources Canada, 2026 Fuel Consumption Guide (50th Anniversary Edition), 5-cycle lab ratings. Representative models: Mini Cooper Convertible 8.8 city / 6.4 hwy / 7.7 combined L/100km (compact); Honda CR-V 1.5L 8.4 / 7.1 / 7.8 (SUV); Ram 1500 4X4 13.2 / 9.9 / 11.7 (pickup); Hyundai Kona Electric 16.3 / 20.3 / 18.1 kWh/100km (EV). Combined rating = 55% city / 45% highway per NRCan methodology.</li>
+      <li><strong>Gas price: $1.81/L</strong> — Ontario regular unleaded average, week of September 21, 2026 (Ontario Ministry of Energy motor fuel prices, Kalibrate survey data).</li>
+      <li><strong>Electricity: $0.098/kWh</strong> — Ontario Energy Board regulated price, time-of-use off-peak, effective May 1 – October 31, 2026. Energy charge only; HST and delivery charges extra. New RPP prices effective November 1, 2026 had not been announced as of late September 2026.</li>
+      <li><strong>Depreciation curve</strong> — CAA Driving Costs data (Vincentric): ~30% value loss in year one; 60–70% over the first five years. Model residual by vehicle age: 70%, 60%, 52%, 46%, 40% for ages 1–5; ages 9+ are an extrapolated ~7%/yr decline (labeled estimate).</li>
+      <li><strong>Insurance: $2,164/yr</strong> — Financial Services Regulatory Authority of Ontario (FSRA), Ontario-wide average annual premium for private passenger vehicles, 12 months ending October 2025. FSRA publishes only this overall average — your class, record, and postal code move your real quote.</li>
+      <li><strong>Maintenance: $600/yr</strong> — midpoint of CAA's $500–$700/year range for routine scheduled maintenance (excludes tires and winter tires).</li>
+      <li><strong>New purchase price: $53,400</strong> — DesRosiers Automotive Consultants, average transaction price for new light vehicles in Canada, 2025 (DesRosiers also reported $49,500 for Q1 2026).</li>
+      <li><strong>Used purchase price: $36,690</strong> — AutoHebdo Q2 2026 price index (DesRosiers data, July 2026), average used-vehicle price in Canada. Modeled as a ~3-year-old vehicle for the depreciation curve.</li>
+      <li><strong>Loan rates</strong> — new 6.57% (Bank of Canada, average chartered-bank auto loan rate, April 2026); used 10.49% (2026 FCAC lender disclosures via industry reporting). Adjust to your actual offer.</li>
+      <li><strong>20,000 km/year</strong> — NRCan's standard annual driving distance used across the Fuel Consumption Guide.</li>
+      <li><strong>Use blends</strong> — mostly city 80/20, mixed 55/45 (NRCan combined definition), mostly highway 20/80. The blends are simulator assumptions; the underlying city/highway ratings are NRCan's.</li>
+    </ul>
+  </section>
+
+  <section class="sim-step">
+    <div class="cta-band">
+      <h2>Want the reasoning behind these numbers?</h2>
+      <p>The guides below explain each cost category in plain language — what drives it and what you can do about it.</p>
+      <a class="btn" href="/posts/depreciation-explained.html">Read the depreciation guide</a>
+      <p style="margin:1em 0 0"><a href="/posts/fuel-insurance-and-maintenance-math.html" style="color:var(--accent)">Fuel, insurance &amp; maintenance math</a> &middot; <a href="/posts/new-vs-used-cost-comparison.html" style="color:var(--accent)">New vs used comparison</a></p>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>True Cost of a Car — practical guides to the real cost of car ownership. Content is for information only and is not financial advice.</p>
+  <p class="footer-nav"><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+<script>
+(function(){
+"use strict";
+const $ = id => document.getElementById(id);
+const money = n => "$" + Math.round(n).toLocaleString("en-CA");
+const ACCESS = "2026-09-28";
+
+/* Residual value by vehicle age (fraction of original MSRP).
+   Ages 0-8 follow the CAA/Vincentric curve (30% yr-1; 60-70% over 5 yrs);
+   ages 9+ are an extrapolated ~7%/yr decline (labeled estimate). */
+const R = [1.00,0.70,0.60,0.52,0.46,0.40,0.365,0.335,0.305,0.285,0.265,0.245,0.225,0.205];
+
+const VEHICLES = {
+  compact:{name:"Compact car",emoji:"\u{1F697}",rep:"Mini Cooper Convertible (NRCAN)",city:8.8,hwy:6.4,unit:"L/100 km",fuel:"gas"},
+  suv:{name:"SUV",emoji:"\u{1F699}",rep:"Honda CR-V 1.5L (NRCAN)",city:8.4,hwy:7.1,unit:"L/100 km",fuel:"gas"},
+  pickup:{name:"Pickup",emoji:"\u{1F6FB}",rep:"Ram 1500 4X4 (NRCAN)",city:13.2,hwy:9.9,unit:"L/100 km",fuel:"gas"},
+  ev:{name:"Electric (EV)",emoji:"\u26A1",rep:"Hyundai Kona Electric (NRCAN)",city:16.3,hwy:20.3,unit:"kWh/100 km",fuel:"ev"}
+};
+/* Use blends: [city share, hwy share]. Mixed = NRCan combined definition. */
+const BLENDS = {city:[0.80,0.20],mixed:[0.55,0.45],highway:[0.20,0.80]};
+
+const state = {veh:"compact", cond:"new", fin:"cash", use:"mixed", touched:{}};
+
+function def(key){
+  const t = state.touched;
+  switch(key){
+    case "km": return t.km!==undefined?t.km:20000;
+    case "years": return t.years!==undefined?t.years:5;
+    case "gas": return t.gas!==undefined?t.gas:1.81;
+    case "elec": return t.elec!==undefined?t.elec:0.098;
+    case "ins": return t.ins!==undefined?t.ins:2164;
+    case "maint": return t.maint!==undefined?t.maint:600;
+    case "price": return t.price!==undefined?t.price:(state.cond==="new"?53400:36690);
+    case "cons": {
+      if(t.cons!==undefined) return t.cons;
+      const v=VEHICLES[state.veh], b=BLENDS[state.use];
+      return +(b[0]*v.city+b[1]*v.hwy).toFixed(1);
+    }
+    case "rate": return t.rate!==undefined?t.rate:(state.cond==="new"?6.57:10.49);
+    case "down": return t.down!==undefined?t.down:10;
+    case "term": return t.term!==undefined?t.term:60;
+    case "lease": return t.lease!==undefined?t.lease:0;
+  }
+}
+
+function syncInputs(){
+  const set=(id,v)=>{const el=$(id); if(document.activeElement!==el) el.value=v;};
+  set("in-km",def("km")); set("in-years",def("years")); set("in-gas",def("gas"));
+  set("in-elec",def("elec")); set("in-ins",def("ins")); set("in-maint",def("maint"));
+  set("in-price",def("price")); set("in-cons",def("cons"));
+  set("in-down",def("down")); set("in-rate",def("rate")); set("in-term",def("term"));
+  if(def("lease")) set("in-lease",def("lease"));
+  $("cons-unit").textContent = "("+VEHICLES[state.veh].unit+")";
+  $("cons-note").innerHTML = "Blended from NRCAN city/highway ratings for the "+VEHICLES[state.veh].rep+'.<span class="src-tag sourced">Sourced</span>';
+  $("gas-note").innerHTML = 'Ontario avg, week of Sep 21, 2026 (ontario.ca).<span class="src-tag sourced">Sourced</span>';
+  $("elec-note").innerHTML = 'OEB TOU off-peak, May\u2013Oct 2026. Energy only.<span class="src-tag sourced">Sourced</span>';
+  $("ins-note").innerHTML = 'FSRA Ontario avg, 12 mo to Oct 2025.<span class="src-tag sourced">Sourced</span>';
+  $("maint-note").innerHTML = 'CAA $500\u2013$700/yr range, midpoint.<span class="src-tag estimate">Estimate</span>';
+  $("price-note").innerHTML = state.cond==="new"
+    ? 'DesRosiers 2025 avg new-vehicle price.<span class="src-tag sourced">Sourced</span>'
+    : 'AutoHebdo/DesRosiers Q2 2026 avg used price.<span class="src-tag sourced">Sourced</span>';
+  $("rate-note").innerHTML = state.cond==="new"
+    ? 'BoC avg chartered-bank rate, Apr 2026.<span class="src-tag sourced">Sourced</span>'
+    : 'Avg used-vehicle rate, 2026 disclosures.<span class="src-tag sourced">Sourced</span>';
+  $("cond-note").textContent = state.cond==="new"
+    ? "New: depreciation follows the CAA curve from full price (steepest in year 1)."
+    : "Used: priced as a ~3-year-old vehicle; depreciation follows the flatter part of the curve.";
+  $("th-fuel").textContent = VEHICLES[state.veh].fuel==="ev" ? "Charging" : "Fuel";
+  $("tb-fuel-label").textContent = VEHICLES[state.veh].fuel==="ev" ? "Charging" : "Fuel";
+  $("th-fin").textContent = state.fin==="lease" ? "Lease" : "Interest";
+  $("tb-fin-label").textContent = state.fin==="lease" ? "Lease payments" : "Financing interest";
+}
+
+function loanInterestByYear(P, annualRate, termMo, years){
+  const out = new Array(years).fill(0);
+  if(P<=0||annualRate<0||termMo<=0) return out;
+  const r = annualRate/1200;
+  const pmt = r>0 ? P*r/(1-Math.pow(1+r,-termMo)) : P/termMo;
+  let bal = P;
+  for(let m=1;m<=Math.min(termMo,years*12);m++){
+    const interest = bal*r, princ = Math.min(pmt-interest, bal);
+    out[Math.ceil(m/12)-1]+=interest; bal-=princ;
+    if(bal<=0.01) break;
+  }
+  return out;
+}
+
+function calc(){
+  const years=def("years"), km=def("km"), price=def("price");
+  const v=VEHICLES[state.veh];
+  const unitPrice = v.fuel==="ev" ? def("elec") : def("gas");
+  const cons = def("cons");
+  const fuelPerYr = km/100*cons*unitPrice;
+  const ins = def("ins"), maint = def("maint");
+  const rows=[];
+  let finAnnual;
+  if(state.fin==="lease"){
+    finAnnual = new Array(years).fill(def("lease")*12);
+  }else if(state.fin==="financed"){
+    const P = price*(1-def("down")/100);
+    finAnnual = loanInterestByYear(P, def("rate"), def("term"), years);
+  }else{
+    finAnnual = new Array(years).fill(0);
+  }
+  for(let y=1;y<=years;y++){
+    let depr;
+    if(state.fin==="lease") depr=0;
+    else if(state.cond==="new") depr=price*(R[y-1]-R[y]);
+    else depr=price*(R[y+2]-R[y+3])/R[3]; /* bought at age 3 */
+    rows.push({y:y,depr:depr,fuel:fuelPerYr,ins:ins,maint:maint,fin:finAnnual[y-1]});
+    rows[y-1].total=depr+fuelPerYr+ins+maint+finAnnual[y-1];
+  }
+  return rows;
+}
+
+function render(){
+  syncInputs();
+  const rows=calc(), years=def("years"), km=def("km");
+  const sums={depr:0,fuel:0,ins:0,maint:0,fin:0,total:0};
+  const tb=$("year-body"); tb.innerHTML="";
+  rows.forEach(r=>{
+    sums.depr+=r.depr;sums.fuel+=r.fuel;sums.ins+=r.ins;sums.maint+=r.maint;sums.fin+=r.fin;sums.total+=r.total;
+    const tr=document.createElement("tr");
+    const finCell = (state.fin==="lease"&&!def("lease")) ? '<em style="color:var(--muted)">enter payment</em>' : money(r.fin);
+    tr.innerHTML="<td>Year "+r.y+"</td><td>"+(state.fin==="lease"?"\u2014":money(r.depr))+"</td><td>"+money(r.fuel)+"</td><td>"+money(r.ins)+"</td><td>"+money(r.maint)+"</td><td>"+finCell+"</td><td><strong>"+money(r.total)+"</strong></td>";
+    tb.appendChild(tr);
+  });
+  $("t-depr").textContent=state.fin==="lease"?"\u2014":money(sums.depr);
+  $("t-fuel").textContent=money(sums.fuel);$("t-ins").textContent=money(sums.ins);
+  $("t-maint").textContent=money(sums.maint);$("t-fin").textContent=money(sums.fin);
+  $("t-all").textContent=money(sums.total);
+
+  $("tb-years").textContent=years+(years===1?" year":" years");
+  $("tb-depr").textContent=state.fin==="lease"?"\u2014 (leased)":money(sums.depr);
+  $("tb-fuel").textContent=money(sums.fuel);$("tb-ins").textContent=money(sums.ins);
+  $("tb-maint").textContent=money(sums.maint);$("tb-fin").textContent=money(sums.fin);
+  $("tb-total").textContent=money(sums.total);
+  $("tb-cpkm").textContent="$"+(km*years>0?(sums.total/(km*years)).toFixed(2):"0.00")+"/km";
+  $("tb-cpmo").textContent=money(sums.total/(years*12))+"/mo";
+
+  /* category bars */
+  const cats=[
+    {label:"Depreciation",v:state.fin==="lease"?0:sums.depr},
+    {label:VEHICLES[state.veh].fuel==="ev"?"Charging":"Fuel",v:sums.fuel},
+    {label:"Insurance",v:sums.ins},
+    {label:"Maintenance",v:sums.maint},
+    {label:state.fin==="lease"?"Lease":"Financing interest",v:sums.fin}
+  ].filter(c=>c.v>0.5);
+  const max=Math.max.apply(null,cats.map(c=>c.v).concat([1]));
+  const cb=$("cat-bars"); cb.innerHTML="";
+  cats.forEach(c=>{
+    const d=document.createElement("div");d.className="cat-row";
+    d.innerHTML='<span>'+c.label+'</span><div class="bar"><i style="width:'+(100*c.v/max).toFixed(1)+'%"></i></div><span class="amt">'+money(c.v)+'</span>';
+    cb.appendChild(d);
+  });
+  $("depr-note").textContent = state.fin==="lease"
+    ? "Leased vehicles show no depreciation line — you return the car, so value loss is the lessor's. Your lease payments above are the cost of using it."
+    : (state.cond==="new"
+      ? "Depreciation follows the CAA/Vincentric curve (30% in year 1). It is the difference between price paid and residual value — no cash changes hands until you sell."
+      : "Depreciation for a used car follows the flatter part of the curve (vehicle modeled at ~3 years old at purchase).");
+
+  /* vehicle cards + toggles */
+  const g=$("veh-grid"); g.innerHTML="";
+  Object.keys(VEHICLES).forEach(k=>{
+    const v=VEHICLES[k];
+    const d=document.createElement("div");
+    d.className="veh-card"+(k===state.veh?" selected":"");
+    d.innerHTML='<span class="emoji">'+v.emoji+"</span><strong>"+v.name+"</strong>"+'<span class="rep">'+v.rep+"</span>";
+    d.setAttribute("role","button");d.setAttribute("tabindex","0");
+    d.setAttribute("aria-pressed",k===state.veh?"true":"false");
+    const pick=()=>{state.veh=k;delete state.touched.cons;delete state.touched.price;render();};
+    d.addEventListener("click",pick);
+    d.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick();}});
+    g.appendChild(d);
+  });
+  $("cond-new").classList.toggle("selected",state.cond==="new");
+  $("cond-used").classList.toggle("selected",state.cond==="used");
+  document.querySelectorAll('input[name="fin"]').forEach(r=>{r.checked=r.value===state.fin;});
+  document.querySelectorAll('input[name="use"]').forEach(r=>{r.checked=r.value===state.use;});
+  $("fin-box").style.display=state.fin==="financed"?"grid":"none";
+  $("lease-box").style.display=state.fin==="lease"?"grid":"none";
+}
+
+function bindNum(id,key,parse){
+  $(id).addEventListener("input",e=>{
+    const v=parseFloat(e.target.value);
+    if(!isNaN(v)&&v>=0) state.touched[key]=v; else delete state.touched[key];
+    if(key==="use") delete state.touched.cons;
+    render();
+  });
+}
+bindNum("in-km","km");bindNum("in-years","years");bindNum("in-gas","gas");
+bindNum("in-elec","elec");bindNum("in-ins","ins");bindNum("in-maint","maint");
+bindNum("in-price","price");bindNum("in-cons","cons");
+bindNum("in-down","down");bindNum("in-rate","rate");bindNum("in-term","term");
+$("in-lease").addEventListener("input",e=>{
+  const v=parseFloat(e.target.value);
+  if(!isNaN(v)&&v>=0) state.touched.lease=v; else delete state.touched.lease;
+  render();
+});
+$("cond-new").addEventListener("click",()=>{state.cond="new";delete state.touched.price;delete state.touched.rate;render();});
+$("cond-used").addEventListener("click",()=>{state.cond="used";delete state.touched.price;delete state.touched.rate;render();});
+document.querySelectorAll('input[name="fin"]').forEach(r=>r.addEventListener("change",e=>{state.fin=e.target.value;render();}));
+document.querySelectorAll('input[name="use"]').forEach(r=>r.addEventListener("change",e=>{state.use=e.target.value;delete state.touched.cons;render();}));
+
+render();
+})();
+</script>
+</body>
+</html>

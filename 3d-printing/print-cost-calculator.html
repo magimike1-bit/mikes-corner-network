@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print Cost Calculator — What Does This Print Really Cost? | 3D Printing at Home</title>
+<meta name="description" content="Interactive true-cost-per-print calculator: pick your printer class, filament, and print time — get filament, electricity, wear, and failed-print costs with every number sourced.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense: ad code goes here -->
+<style>
+/* ===== Print cost calculator (scoped) ===== */
+.calc-step{margin:2em 0}
+.calc-step h2{font-size:1.3rem;margin:0 0 .25em}
+.calc-step .hint{color:var(--muted);font-size:.95rem;margin:0 0 1em}
+.pick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.pick-card{border:2px solid var(--line);border-radius:8px;background:#fff;padding:14px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.pick-card:hover{border-color:var(--accent)}
+.pick-card.selected{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,65,12,.15)}
+.pick-card strong{display:block;font-size:.98rem;margin-bottom:4px}
+.pick-card .spec{font-size:.86rem;color:var(--muted)}
+.pick-card .src{font-size:.75rem;color:var(--muted);margin-top:6px}
+.calc-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px}
+.calc-inputs label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px}
+.calc-inputs input,.calc-inputs select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:1rem;background:#fff;color:var(--ink)}
+.input-note{font-size:.8rem;color:var(--muted);margin-top:4px}
+.badge{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.04em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.badge.official{background:#e6f6ec;color:#157a3a}
+.badge.reported{background:#fff4e0;color:#9a6a00}
+.badge.estimate{background:#f1f1f4;color:#5a5a66}
+.badge.user{background:#eef2ff;color:#3b4fd8}
+.breakdown{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.bd-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);align-items:center}
+.bd-row:last-child{border-bottom:none}
+.bd-row .name{font-weight:700;font-size:.98rem}
+.bd-row .math{font-size:.83rem;color:var(--muted);margin-top:3px}
+.bd-row .amt{text-align:right;font-weight:800;font-size:1.05rem;white-space:nowrap}
+.total-panel{background:var(--ink);color:#fff;border-radius:8px;padding:22px;margin-top:18px}
+.total-panel .row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:.98rem;border-bottom:1px solid rgba(255,255,255,.15);flex-wrap:wrap}
+.total-panel .row.grand{border-bottom:none;font-size:1.4rem;font-weight:800;padding-top:14px}
+.total-panel .fine{font-size:.8rem;opacity:.75;margin:12px 0 0}
+.compare-line{margin-top:14px;padding:14px 16px;border-radius:8px;font-weight:700}
+.compare-line.save{background:#e6f6ec;color:#157a3a;border:1px solid #bfe3c9}
+.compare-line.lose{background:#fef3e8;color:#9a3412;border:1px solid #f5d7b8}
+.src-list{font-size:.85rem;color:var(--muted)}
+.src-list li{margin-bottom:6px}
+.toggle-row{display:flex;align-items:flex-start;gap:10px;margin-top:4px}
+.toggle-row input{margin-top:5px}
+.sticky-total{position:sticky;bottom:12px;background:var(--ink);color:#fff;border-radius:8px;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;font-weight:800;margin-top:16px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media(max-width:600px){
+  .bd-row{grid-template-columns:1fr}
+  .bd-row .amt{text-align:left}
+  .total-panel .row.grand{font-size:1.15rem}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">3D Printing at Home</a>
+    <p class="tagline">Practical 3D printing know-how for beginners — plain language, no hype</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="print-cost-calculator.html" class="active" aria-current="page">Cost calculator</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb" style="font-size:.85rem;color:var(--muted);padding-top:4px"><a href="index.html" style="color:var(--accent);text-decoration:none">Home</a> › <span>Print cost calculator</span></nav>
+
+  <section class="intro">
+    <h1>What does this print really cost?</h1>
+    <p>Filament is only part of the story. Pick your printer, tell us about the print,
+    and the calculator works out filament, electricity, wear, and the failed prints you'll
+    inevitably have — every number labeled with its source or marked as an estimate. Adjust anything.</p>
+  </section>
+
+  <section class="calc-step" id="step-printer">
+    <h2>1 · Pick your printer</h2>
+    <p class="hint">Power draw drives the electricity line. Rated power is the manufacturer's maximum; the "typical average" is what printing actually draws most of the time — both stay adjustable below.</p>
+    <div class="pick-grid" id="printer-grid"></div>
+  </section>
+
+  <section class="calc-step" id="step-print">
+    <h2>2 · Tell us about the print</h2>
+    <p class="hint">Your slicer tells you both of these: filament used (grams) and print time (hours).</p>
+    <div class="pick-grid" id="filament-grid" style="margin-bottom:16px"></div>
+    <div class="calc-inputs">
+      <div>
+        <label for="in-grams">Filament for this print (grams)</label>
+        <input type="number" id="in-grams" min="0" step="1" value="50">
+        <div class="input-note">From your slicer estimate — includes supports and brim.</div>
+      </div>
+      <div>
+        <label for="in-hours">Print time (hours)</label>
+        <input type="number" id="in-hours" min="0" step="0.5" value="6">
+        <div class="input-note">From your slicer estimate. Heat-up time is included.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="calc-step" id="step-tune">
+    <h2>3 · Fine-tune the numbers</h2>
+    <p class="hint">Everything below starts from sourced defaults. Change any of them — the totals update live.</p>
+    <div class="calc-inputs">
+      <div>
+        <label for="in-watts">Average power draw while printing (watts)</label>
+        <input type="number" id="in-watts" min="1" step="1" value="120">
+        <div class="input-note" id="watts-note">Prefilled from your printer pick. Brief heat-up spikes reach near rated power, then the heaters cycle down.</div>
+      </div>
+      <div>
+        <label for="in-rate">Electricity rate (Ontario residential)</label>
+        <select id="in-rate">
+          <option value="0.120" selected>Tiered — 12.0¢/kWh (first 1,000 kWh/mo)</option>
+          <option value="0.098">Time-of-use off-peak — 9.8¢/kWh</option>
+          <option value="0.157">Time-of-use mid-peak — 15.7¢/kWh</option>
+          <option value="0.203">Time-of-use on-peak — 20.3¢/kWh</option>
+          <option value="0.039">Ultra-low overnight — 3.9¢/kWh (11pm–7am)</option>
+        </select>
+        <div class="input-note">Ontario Energy Board Regulated Price Plan, effective Nov 1, 2025 – Oct 31, 2026 (accessed 2026-09-28). Off-peak / overnight printing is the cheapest window.</div>
+      </div>
+      <div>
+        <label for="in-kgprice">Filament price ($/kg)</label>
+        <input type="number" id="in-kgprice" min="0" step="0.01" value="19.99">
+        <div class="input-note" id="kgprice-note">Prefilled from the filament you picked. Use your actual spool price for the real number.</div>
+      </div>
+      <div>
+        <label for="in-wear">Wear &amp; maintenance allowance ($/print-hour)</label>
+        <input type="number" id="in-wear" min="0" step="0.05" value="0.25">
+        <div class="input-note">Our estimate — nozzles, build plates, belts, and fans wear out. At $0.25/hr, 100 print-hours sets aside $25.</div>
+      </div>
+      <div>
+        <label for="in-store">Store price of the same item ($, optional)</label>
+        <input type="number" id="in-store" min="0" step="0.01" placeholder="e.g. 12.99">
+        <div class="input-note">What would this cost to just buy? We compare it against your print cost.</div>
+      </div>
+      <div>
+        <label>Failed-print risk adder</label>
+        <div class="toggle-row">
+          <input type="checkbox" id="in-fail-toggle" checked>
+          <span class="toggle-label">Add
+            <input type="number" id="in-fail-pct" min="0" max="100" step="1" value="15" style="width:64px;display:inline-block;padding:6px 8px" aria-label="Failed-print risk percent">%
+            of (filament + electricity) as expected waste</span>
+        </div>
+        <div class="input-note">Our estimate: roughly 1 in 7 prints fails or needs a reprint. Set it to your own track record — or uncheck to skip it.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="calc-step" id="step-results">
+    <h2>4 · Your true cost</h2>
+    <p class="hint">Every line carries its source or is labeled an estimate. Nothing is a quote.</p>
+    <div class="breakdown" id="breakdown"></div>
+    <div class="total-panel">
+      <div class="row"><span>Cost per print</span><span id="t-per-print">$0.00</span></div>
+      <div class="row"><span>Cost per gram of filament</span><span id="t-per-gram">$0.00/g</span></div>
+      <div class="row grand"><span>Total true cost</span><span id="t-total">$0.00</span></div>
+      <div id="compare-slot"></div>
+      <p class="fine">Estimates from published pricing and manufacturer specs (see sources below). Your real cost depends on your actual filament price, electricity plan, and how often your prints fail.</p>
+    </div>
+  </section>
+
+  <section class="calc-step">
+    <h2>Sources</h2>
+    <ul class="src-list">
+      <li><strong>Creality Ender-3 V3 — rated power 350W.</strong> Creality official product specs, creality.com (accessed 2026-09-28). <span class="badge official">Official</span></li>
+      <li><strong>Bambu Lab A1 — rated power 350W.</strong> Retailer technical data sheet from Bambu's spec data (digitec.ch, accessed 2026-09-28). <span class="badge reported">Reported</span></li>
+      <li><strong>Bambu Lab P1S — max power 1000W@220V, 350W@110V.</strong> Bambu Lab official tech specs, bambulab.com (accessed 2026-09-28). Canada runs on ~110V, so the 350W figure applies. <span class="badge official">Official</span></li>
+      <li><strong>Ender-5 Plus class — rated power 504W.</strong> Third-party comparison spec table, 3dfila.com (accessed 2026-09-28). <span class="badge reported">Reported</span></li>
+      <li><strong>Bambu A1 / P1 average draw — 70W / 100W.</strong> Third-party power-consumption measurements: 0.07 kWh/h (A1), 0.10 kWh/h (P1) reported by call-3d.com (accessed 2026-09-28). <span class="badge reported">Reported</span></li>
+      <li><strong>Ender-3 class / large-format average draw — 120W / 180W.</strong> Our estimates: open-frame printers with 60–100°C beds typically average well under rated power once heat-up spikes pass. Adjustable. <span class="badge estimate">Estimate</span></li>
+      <li><strong>PLA $19.99/kg, PETG $19.99/kg.</strong> 3D Printing Canada "Budget PLA / Budget PETG Filament (with spool), 1.75mm, 1kg" — regular price, 3dprintingcanada.com (accessed 2026-09-28; page crawled 2026-09-27). <span class="badge reported">Reported</span></li>
+      <li><strong>ABS $25.99/kg.</strong> Polymaker PolyLite ABS 1.75mm 1kg, amazon.ca listing snapshot (accessed 2026-09-28; crawl ~2026-05). <span class="badge reported">Reported</span></li>
+      <li><strong>TPU $29.99/kg.</strong> DURAMIC 3D TPU 95A 1.75mm 1kg, amazon.ca listing snapshot (accessed 2026-09-28; crawl ~2026-04). <span class="badge reported">Reported</span></li>
+      <li><strong>Ontario electricity rates.</strong> Ontario Energy Board Regulated Price Plan via thecanadianwire.com, npei.ca, tillsonburghydro.ca — tiered 12.0¢/14.2¢, TOU 9.8¢/15.7¢/20.3¢, ULO overnight 3.9¢ (accessed 2026-09-28). New rates are announced mid-October 2026. <span class="badge reported">Reported</span></li>
+      <li><strong>Wear allowance $0.25/print-hour and 15% failed-print adder.</strong> Our estimates — labeled, adjustable, and toggleable. <span class="badge estimate">Estimate</span></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>3D Printing at Home — beginner guides to desktop 3D printing. Content is for
+    general information only. 3D printers involve hot surfaces (nozzle and heated bed),
+    moving parts, and sometimes fumes: follow your printer's manual, print in a
+    ventilated space, and keep children and pets clear of the machine.</p>
+  <p class="footer-nav"><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+
+<script>
+/* ============================================================================
+   PRINT-COST ENGINE — EDIT DEFAULTS HERE
+   All figures in CAD. Confidence: "official" (manufacturer's own spec),
+   "reported" (reputable third-party / retailer listing), "estimate" (our
+   reasonable estimate), "user" (entered by the visitor). Access dates in
+   the Sources section. Nothing here is a quote.
+   ============================================================================ */
+const PRINTERS = [
+  { id:"ender3", name:"Budget bed-slinger — Ender-3 class",
+    desc:"Creality Ender-3 V3 and similar open-frame printers",
+    ratedW:350, ratedConf:"official", ratedNote:"Creality official spec (creality.com), accessed 2026-09-28",
+    avgW:120, avgConf:"estimate", avgNote:"Estimate: heaters cycle down after warm-up" },
+  { id:"a1", name:"Fast bed-slinger — Bambu A1 class",
+    desc:"Bambu Lab A1 and similar fast open-frame printers",
+    ratedW:350, ratedConf:"reported", ratedNote:"Retailer tech sheet from Bambu spec data (digitec.ch), accessed 2026-09-28",
+    avgW:70, avgConf:"reported", avgNote:"Third-party measurement: 0.07 kWh/h average (call-3d.com), accessed 2026-09-28" },
+  { id:"p1", name:"Enclosed CoreXY — Bambu P1 class",
+    desc:"Bambu Lab P1S / P1P and similar enclosed printers",
+    ratedW:350, ratedConf:"official", ratedNote:"Bambu official spec: 350W@110V (bambulab.com), accessed 2026-09-28",
+    avgW:100, avgConf:"reported", avgNote:"Third-party measurement: 0.10 kWh/h average (call-3d.com), accessed 2026-09-28" },
+  { id:"large", name:"Large format — Ender-5 Plus class",
+    desc:"350mm+ beds: Ender-5 Plus, Neptune 4 Max and similar",
+    ratedW:504, ratedConf:"reported", ratedNote:"Third-party spec table (3dfila.com), accessed 2026-09-28",
+    avgW:180, avgConf:"estimate", avgNote:"Estimate: bigger heated bed draws more" }
+];
+const FILAMENTS = [
+  { id:"pla", name:"PLA", desc:"Easiest to print — most beginner prints",
+    price:19.99, conf:"reported", note:"3D Printing Canada budget PLA 1kg, $19.99 regular, accessed 2026-09-28" },
+  { id:"petg", name:"PETG", desc:"Stronger than PLA, still beginner-friendly",
+    price:19.99, conf:"reported", note:"3D Printing Canada budget PETG 1kg, $19.99 regular, accessed 2026-09-28" },
+  { id:"abs", name:"ABS", desc:"Strong and heat-resistant; needs ventilation",
+    price:25.99, conf:"reported", note:"Polymaker PolyLite ABS 1kg, amazon.ca snapshot, accessed 2026-09-28" },
+  { id:"tpu", name:"TPU", desc:"Flexible, rubber-like; slow and fiddly",
+    price:29.99, conf:"reported", note:"DURAMIC 3D TPU 95A 1kg, amazon.ca snapshot, accessed 2026-09-28" }
+];
+const CONF_LABEL = {official:"Official", reported:"Reported", estimate:"Estimate", user:"Your input"};
+
+(function(){
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const cad = n => "$" + n.toFixed(2);
+  let printer = PRINTERS[0], filament = FILAMENTS[0];
+  let wattsTouched = false, priceTouched = false;
+
+  function badge(conf){ return '<span class="badge ' + conf + '">' + CONF_LABEL[conf] + '</span>'; }
+
+  function renderPickers(){
+    const pg = $("printer-grid"); pg.innerHTML = "";
+    PRINTERS.forEach(p => {
+      const d = document.createElement("div");
+      d.className = "pick-card" + (p === printer ? " selected" : "");
+      d.setAttribute("role","button"); d.setAttribute("tabindex","0");
+      d.setAttribute("aria-pressed", p === printer ? "true" : "false");
+      d.innerHTML = "<strong>" + p.name + "</strong>" +
+        '<div class="spec">' + p.desc + '</div>' +
+        '<div class="spec">Rated: <strong>' + p.ratedW + 'W</strong> ' + badge(p.ratedConf) + '</div>' +
+        '<div class="spec">Typical average: <strong>' + p.avgW + 'W</strong> ' + badge(p.avgConf) + '</div>' +
+        '<div class="src">' + p.ratedNote + '</div>';
+      const pick = () => {
+        printer = p;
+        if(!wattsTouched) $("in-watts").value = p.avgW;
+        renderPickers(); recalc();
+      };
+      d.addEventListener("click", pick);
+      d.addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(); } });
+      pg.appendChild(d);
+    });
+
+    const fg = $("filament-grid"); fg.innerHTML = "";
+    FILAMENTS.forEach(f => {
+      const d = document.createElement("div");
+      d.className = "pick-card" + (f === filament ? " selected" : "");
+      d.setAttribute("role","button"); d.setAttribute("tabindex","0");
+      d.setAttribute("aria-pressed", f === filament ? "true" : "false");
+      d.innerHTML = "<strong>" + f.name + " — " + cad(f.price) + "/kg</strong>" +
+        '<div class="spec">' + f.desc + ' ' + badge(f.conf) + '</div>' +
+        '<div class="src">' + f.note + '</div>';
+      const pick = () => {
+        filament = f;
+        if(!priceTouched) $("in-kgprice").value = f.price.toFixed(2);
+        renderPickers(); recalc();
+      };
+      d.addEventListener("click", pick);
+      d.addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(); } });
+      fg.appendChild(d);
+    });
+  }
+
+  function recalc(){
+    const grams = Math.max(0, +$("in-grams").value || 0);
+    const hours = Math.max(0, +$("in-hours").value || 0);
+    const watts = Math.max(0, +$("in-watts").value || 0);
+    const rate = +$("in-rate").value || 0;
+    const kgPrice = Math.max(0, +$("in-kgprice").value || 0);
+    const wearHr = Math.max(0, +$("in-wear").value || 0);
+    const failOn = $("in-fail-toggle").checked;
+    const failPct = Math.min(100, Math.max(0, +$("in-fail-pct").value || 0));
+    const store = Math.max(0, +$("in-store").value || 0);
+
+    const filCost = (grams / 1000) * kgPrice;
+    const kwh = (watts * hours) / 1000;
+    const elecCost = kwh * rate;
+    const wearCost = wearHr * hours;
+    const failCost = failOn ? (filCost + elecCost) * (failPct / 100) : 0;
+    const total = filCost + elecCost + wearCost + failCost;
+    const perGram = grams > 0 ? total / grams : 0;
+
+    const rows = [
+      { name:"Filament — " + filament.name,
+        math: grams + " g ÷ 1000 × " + cad(kgPrice) + "/kg",
+        amt: filCost,
+        conf: priceTouched ? "user" : filament.conf,
+        note: priceTouched ? "You adjusted the price" : filament.note },
+      { name:"Electricity",
+        math: watts + " W × " + hours + " h ÷ 1000 × $" + rate.toFixed(3) + "/kWh = " + kwh.toFixed(3) + " kWh",
+        amt: elecCost,
+        conf: "user",
+        note: "Your draw + rate × hours — adjust both above" },
+      { name:"Wear &amp; maintenance allowance",
+        math: cad(wearHr) + "/hr × " + hours + " h",
+        amt: wearCost,
+        conf: "estimate",
+        note: "Our estimate: nozzles, plates, belts, fans over time" },
+    ];
+    if(failOn){
+      rows.push({ name:"Failed-print risk adder",
+        math: failPct + "% × (" + cad(filCost) + " filament + " + cad(elecCost) + " electricity)",
+        amt: failCost,
+        conf: "estimate",
+        note: "Our estimate: roughly 1 in 7 prints fails or needs a reprint" });
+    }
+
+    const bd = $("breakdown"); bd.innerHTML = "";
+    rows.forEach(r => {
+      const div = document.createElement("div");
+      div.className = "bd-row";
+      div.innerHTML = '<div><div class="name">' + r.name + ' ' + badge(r.conf) + '</div>' +
+        '<div class="math">' + r.math + ' — ' + r.note + '</div></div>' +
+        '<div class="amt">' + cad(r.amt) + '</div>';
+      bd.appendChild(div);
+    });
+
+    $("t-per-print").textContent = cad(total);
+    $("t-per-gram").textContent = cad(perGram) + "/g";
+    $("t-total").textContent = cad(total);
+
+    const slot = $("compare-slot"); slot.innerHTML = "";
+    if(store > 0){
+      const diff = store - total;
+      const d = document.createElement("div");
+      d.className = "compare-line " + (diff >= 0 ? "save" : "lose");
+      d.textContent = diff >= 0
+        ? "Printing saves you " + cad(diff) + " vs buying it for " + cad(store) + "."
+        : "Buying it for " + cad(store) + " is " + cad(-diff) + " cheaper than printing.";
+      slot.appendChild(d);
+    }
+  }
+
+  ["in-grams","in-hours","in-rate","in-wear","in-fail-toggle","in-fail-pct","in-store"].forEach(id => {
+    $(id).addEventListener("input", recalc);
+    $(id).addEventListener("change", recalc);
+  });
+  $("in-watts").addEventListener("input", () => { wattsTouched = true; recalc(); });
+  $("in-kgprice").addEventListener("input", () => { priceTouched = true; recalc(); });
+
+  renderPickers();
+  recalc();
+})();
+</script>
+</body>
+</html>

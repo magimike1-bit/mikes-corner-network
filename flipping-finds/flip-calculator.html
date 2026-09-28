@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will This Flip Make Money? — Flip Profit Calculator | Flipping Auction Finds</title>
+<meta name="description" content="Interactive flip profit calculator: enter what you paid at auction, pick your selling platform, and see fees, costs, profit, margin and break-even price — with every fee sourced.">
+<link rel="stylesheet" href="style.css">
+<!--
+  ADS: paste your Google AdSense code below (replace UA-XXXXX with your publisher ID),
+  then remove the comment markers.
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script>
+-->
+<!-- AdSense: ad code goes here -->
+<style>
+/* ===== Flip calculator (scoped) ===== */
+.calc-wrap{max-width:900px;margin:0 auto;padding:0 20px}
+.calc-step{margin:2.2em 0}
+.calc-step h2{font-size:1.3rem;margin:0 0 .3em}
+.calc-step .hint{color:var(--muted);font-size:.95rem;margin:0 0 1em}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.cat-card{border:2px solid var(--line);border-radius:8px;background:#fff;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.cat-card:hover{border-color:var(--accent)}
+.cat-card.selected{border-color:var(--accent);box-shadow:0 0 0 3px rgba(11,92,173,.15)}
+.cat-card .emoji{font-size:1.8rem;display:block;margin-bottom:6px}
+.cat-card strong{display:block;font-size:.95rem}
+.cat-card span.sub{font-size:.78rem;color:var(--muted)}
+.input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px}
+.input-grid .full{grid-column:1/-1}
+.input-grid label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px}
+.input-grid input,.input-grid select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:6px;font-size:1rem;background:#fff}
+.input-note{font-size:.8rem;color:var(--muted);margin-top:4px}
+.radio-row{display:flex;gap:10px;flex-wrap:wrap}
+.radio-pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;background:#fff;font-size:.92rem}
+.radio-pill input{margin-right:6px}
+.radio-pill.on{border-color:var(--accent);background:rgba(11,92,173,.06);font-weight:700}
+.fee-lines{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
+.fee-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:center}
+.fee-row:last-child{border-bottom:none}
+.fee-row .fname{font-weight:700;font-size:.95rem}
+.fee-row .fsrc{font-size:.76rem;color:var(--muted);margin-top:2px;line-height:1.45}
+.fee-row .fval{text-align:right;white-space:nowrap}
+.fee-row .fval .amt{font-weight:800;font-size:1.02rem}
+.fee-row .fval input{width:86px;text-align:right;padding:5px 8px;border:1px solid var(--line);border-radius:6px;font-size:.9rem;margin-top:4px;display:block;margin-left:auto}
+.fee-row.subtotal{background:var(--wash)}
+.fee-row.subtotal .amt{color:var(--accent)}
+.verdict{border-radius:10px;padding:22px;margin-top:1.4em;border:2px solid}
+.verdict.good{border-color:#15803d;background:#f0fdf4}
+.verdict.bad{border-color:#b91c1c;background:#fef2f2}
+.verdict h3{margin:0 0 .4em;font-size:1.25rem}
+.verdict.good h3{color:#15803d}
+.verdict.bad h3{color:#b91c1c}
+.verdict .big{font-size:1.7rem;font-weight:800}
+.verdict .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.verdict .stat{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.verdict .stat .k{font-size:.78rem;color:var(--muted)}
+.verdict .stat .v{font-size:1.15rem;font-weight:800}
+.fee-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.88rem}
+.fee-table th,.fee-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.fee-table th{background:var(--wash)}
+.src-tag{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.03em;padding:2px 8px;border-radius:20px;vertical-align:middle;margin-left:6px}
+.src-tag.official{background:#e6f6ec;color:#157a3a}
+.src-tag.reported{background:#fff4e0;color:#9a6a00}
+.src-tag.estimate{background:#f1f1f4;color:#5a5a66}
+@media(max-width:600px){.fee-row{grid-template-columns:1fr}.fee-row .fval{text-align:left}.fee-row .fval input{margin-left:0}}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.cat-card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Flipping Auction Finds</a>
+    <p class="tagline">Auction lots in, resale profit out</p>
+    <nav class="main-nav" aria-label="Site navigation">
+      <a href="index.html">Home</a>
+      <a href="flip-calculator.html" aria-current="page">Flip calculator</a>
+    </nav>
+  </div>
+</header>
+
+<div class="calc-wrap">
+  <p class="crumbs" style="font-size:.85rem;color:var(--muted);padding:16px 0 0"><a href="index.html" style="color:var(--accent);text-decoration:none">Home</a> <span aria-hidden="true">&rsaquo;</span> <span aria-current="page">Flip profit calculator</span></p>
+
+  <section class="calc-step">
+    <h1 style="font-size:1.9rem;margin:.4em 0 .4em">Will this flip make money?</h1>
+    <p class="hint">Pick a category, answer a few questions, and the calculator builds your real cost stack — platform fees, shipping, gas, your time — then shows profit, margin and the break-even sale price. Every fee is labeled with its source and the date it was checked; every number stays adjustable.</p>
+  </section>
+
+  <section class="calc-step" id="step-category">
+    <h2>1 &middot; What kind of item is it?</h2>
+    <p class="hint">This tunes the guidance (what ships, what moves locally) — the math is yours to adjust.</p>
+    <div class="cat-grid" id="cat-grid"></div>
+    <div class="input-note" id="cat-note" style="margin-top:10px;font-size:.9rem"></div>
+  </section>
+
+  <section class="calc-step">
+    <h2>2 &middot; Answer a few questions</h2>
+    <p class="hint">Estimates are fine — every figure stays editable in step 3.</p>
+    <div class="input-grid">
+      <div class="full"><label for="in-buy">What did you pay at auction? (CAD)</label>
+        <input type="number" id="in-buy" min="0" step="0.01" placeholder="e.g. 40">
+        <div class="input-note">Your winning bid — before the auction house's fees, if any.</div></div>
+      <div><label for="in-premium">Auction fees on top (%)</label>
+        <input type="number" id="in-premium" min="0" step="0.5" value="0">
+        <div class="input-note">Buyer's premium / handling the auction charges on top of your bid. 0 if your bid was all-in.</div></div>
+      <div><label for="in-sale">Expected sale price (CAD)</label>
+        <input type="number" id="in-sale" min="0" step="0.01" placeholder="e.g. 120">
+        <div class="input-note">What you expect the item to sell for, based on sold listings.</div></div>
+      <div><label>Selling platform</label>
+        <div class="radio-row" id="platform-pick">
+          <label class="radio-pill on"><input type="radio" name="platform" value="fb" checked> Facebook Marketplace</label>
+          <label class="radio-pill"><input type="radio" name="platform" value="ebay"> eBay</label>
+          <label class="radio-pill"><input type="radio" name="platform" value="kijiji"> Kijiji</label>
+        </div>
+        <div class="input-note">Current fees are auto-applied below and labeled with sources.</div></div>
+      <div><label>Fulfillment</label>
+        <div class="radio-row" id="fulfill-pick">
+          <label class="radio-pill on"><input type="radio" name="fulfill" value="pickup" checked> Local pickup</label>
+          <label class="radio-pill"><input type="radio" name="fulfill" value="ship"> Shipped</label>
+        </div>
+        <div class="input-note" id="fulfill-note">Local pickup carries no platform fee on any of the three platforms.</div></div>
+      <div id="ship-wrap" style="display:none">
+        <label for="in-shipcost">Shipping cost you pay (CAD)</label>
+        <input type="number" id="in-shipcost" min="0" step="0.01" placeholder="e.g. 15">
+        <div class="input-note">What the carrier charges you for this item.</div>
+      </div>
+      <div id="ship-charge-wrap" style="display:none">
+        <label for="in-shipcharge">Shipping you charge the buyer (CAD)</label>
+        <input type="number" id="in-shipcharge" min="0" step="0.01" placeholder="e.g. 15">
+        <div class="input-note">Platform fees apply to item price + shipping charged. Match it to your cost unless you offer free shipping.</div>
+      </div>
+      <div><label>How the buyer pays</label>
+        <div class="radio-row" id="pay-pick">
+          <label class="radio-pill on"><input type="radio" name="pay" value="cash" checked> Cash / e-transfer</label>
+          <label class="radio-pill"><input type="radio" name="pay" value="card"> Card processed</label>
+        </div>
+        <div class="input-note">Cash or Interac e-transfer has no processing cost. Card processing is an estimate — adjust it.</div></div>
+      <div><label for="in-gas">Gas / transport to pick up &amp; deliver (CAD)</label>
+        <input type="number" id="in-gas" min="0" step="0.01" placeholder="e.g. 10">
+        <div class="input-note">Driving to the auction pickup and meeting the buyer. Your real cost — no default.</div></div>
+      <div><label for="in-hours">Your time on this flip (hours)</label>
+        <input type="number" id="in-hours" min="0" step="0.25" placeholder="e.g. 2">
+        <div class="input-note">Pickup, cleaning, photos, listing, messaging, handoff.</div></div>
+      <div><label for="in-hourly">What an hour of your time is worth (CAD)</label>
+        <input type="number" id="in-hourly" min="0" step="0.5" placeholder="e.g. 20">
+        <div class="input-note">If you'd rather not price your time, leave it at 0.</div></div>
+      <div><label for="in-days">Days you expect it to take to sell</label>
+        <input type="number" id="in-days" min="0" step="1" placeholder="e.g. 14">
+        <div class="input-note">Used only for the profit-per-day figure.</div></div>
+    </div>
+  </section>
+
+  <section class="calc-step">
+    <h2>3 &middot; Your cost stack — check every line</h2>
+    <p class="hint">Auto-filled from the fee tables below. Change any rate or amount; totals update live. Sources and check dates are on each line.</p>
+    <div class="fee-lines" id="fee-lines"></div>
+
+    <div class="verdict good" id="verdict" style="display:none">
+      <h3 id="verdict-title">Worth flipping</h3>
+      <div class="big" id="verdict-profit"></div>
+      <div class="stats">
+        <div class="stat"><div class="k">Total cost</div><div class="v" id="stat-cost"></div></div>
+        <div class="stat"><div class="k">Revenue</div><div class="v" id="stat-rev"></div></div>
+        <div class="stat"><div class="k">Margin</div><div class="v" id="stat-margin"></div></div>
+        <div class="stat"><div class="k">Break-even sale price</div><div class="v" id="stat-breakeven"></div></div>
+        <div class="stat"><div class="k">Profit per day</div><div class="v" id="stat-perday"></div></div>
+        <div class="stat"><div class="k">Flips/week for $200</div><div class="v" id="stat-flips"></div></div>
+      </div>
+      <p class="input-note" id="verdict-note" style="margin-top:12px"></p>
+    </div>
+  </section>
+
+  <section class="calc-step">
+    <h2>Fee reference — every number, with its source</h2>
+    <p class="hint">Checked 2026-09-28. Platforms change their fees; if a figure below looks stale, update the matching field in step 3.</p>
+    <table class="fee-table">
+      <thead><tr><th>Fee</th><th>Figure used</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Facebook Marketplace — local pickup</td><td>$0 selling fee <span class="src-tag reported">Reported</span></td><td>No selling fee on local-pickup sales; payment arranged directly with the buyer (multiple 2026 guides; Meta Help Center).</td></tr>
+        <tr><td>Facebook Marketplace — shipped</td><td>10% of buyer-paid total (item + shipping charged + tax Meta collects), min $0.80/order <span class="src-tag reported">Reported</span></td><td>Meta seller notice Mar 2024, effective 15 Apr 2024 — reported by SaleHoo (2026) and Wix (2026). Older guides still print the pre-2024 rate of 5%.</td></tr>
+        <tr><td>eBay Canada — final value fee, most categories</td><td>13.6% of item + shipping (+ tax) up to C$7,500, then 2.35% <span class="src-tag reported">Reported</span></td><td>Data EDE eBay.ca fee calculator, last reviewed 2026-03-26. Rates increased up to 0.35% on 3 Mar 2025. Category exceptions: e.g. books/movies/music 15.3%; consumer electronics 13.6% (no Store).</td></tr>
+        <tr><td>eBay Canada — per-order fee</td><td>C$0.30 (orders ≤ C$10) / C$0.40 (orders &gt; C$10) <span class="src-tag reported">Reported</span></td><td>Data EDE (2026-03); Plugbooks fee guide (2026-09). Payment processing is rolled into the final value fee under eBay Managed Payments.</td></tr>
+        <tr><td>Kijiji — basic listing/selling</td><td>$0 <span class="src-tag reported">Reported</span></td><td>Basic listings are free for general merchandise; optional paid visibility upgrades (Top Ad, Bump Up). Motors and real estate categories have their own paid fees (2026 guides).</td></tr>
+        <tr><td>Interac e-transfer</td><td>$0 <span class="src-tag estimate">Estimate</span></td><td>Free at most Canadian banks for personal accounts; some plans charge ~$1–$1.50 — adjust if yours does.</td></tr>
+        <tr><td>Card processing (typical flat rate)</td><td>2.65% <span class="src-tag estimate">Estimate</span></td><td>Typical flat-rate card processing; your processor may differ — adjust.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="calc-step">
+    <h2>Before you bid</h2>
+    <p class="hint">This calculator runs the arithmetic; the auction still needs judgment. Our guides cover <a href="posts/how-liquidation-auctions-work.html" style="color:var(--accent)">how liquidation auctions work</a>, <a href="posts/spotting-undervalued-lots.html" style="color:var(--accent)">spotting undervalued lots</a>, <a href="posts/avoiding-duds-and-fakes.html" style="color:var(--accent)">avoiding duds and fakes</a>, and <a href="posts/pricing-for-quick-resale.html" style="color:var(--accent)">pricing for quick resale</a>.</p>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>Flipping Auction Finds — guides about buying liquidation lots and reselling for personal use. Content is for information only and is not financial advice; resale results vary and no income or profit is promised or guaranteed. Auction rules, fees, and payment terms differ by auction house — always read the terms of the sale before bidding.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> &middot; <a href="flip-calculator.html">Flip calculator</a> &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+<script>
+(function(){
+  "use strict";
+  /* FEES — EDIT RATES HERE. All figures CAD. Sources checked 2026-09-28.
+     See the fee reference table on the page for full citations. */
+  const FB_SHIP_RATE = 0.10, FB_SHIP_MIN = 0.80;
+  const EBAY_FVF = 0.136, EBAY_TIER = 7500, EBAY_FVF_OVER = 0.0235;
+  const EBAY_ORD_LOW = 0.30, EBAY_ORD_HIGH = 0.40, EBAY_ORD_AT = 10;
+  const CARD_RATE = 0.0265;
+
+  const CATS = {
+    electronics: {label:"Electronics", emoji:"🔌", sub:"TVs, consoles, audio, small tech",
+      note:"Electronics move fast on all three platforms, but test before you list — non-working tech sells for parts money only. eBay's most-categories rate (13.6%) applies to consumer electronics for non-Store sellers."},
+    furniture: {label:"Furniture", emoji:"🛋️", sub:"Chairs, tables, shelving, decor",
+      note:"Furniture is a local-pickup game — shipping a couch costs more than the couch. Stick with Facebook Marketplace or Kijiji and price in your drive time."},
+    tools: {label:"Tools", emoji:"🔧", sub:"Power tools, hand tools, shop gear",
+      note:"Tools hold value well and small hand tools ship cheaply; big shop gear sells locally. Buyers check brands — no-name tools discount hard."},
+    collectibles: {label:"Collectibles", emoji:"🎨", sub:"Cards, figures, vintage, memorabilia",
+      note:"Collectibles have the widest price spreads — sold listings are everything. eBay reaches the specialist buyers; local buyers lowball."},
+    appliances: {label:"Appliances", emoji:"🧊", sub:"Small kitchen, vacuums, laundry",
+      note:"Small appliances ship fine; anything with a motor is heavy. Test it, photograph it running — 'untested' prices like 'broken'."},
+    bikes: {label:"Bikes", emoji:"🚲", sub:"Bicycles, e-bikes, parts",
+      note:"Bikes are seasonal and almost always local pickup. Spring listings move; winter listings sit. Factor the wait into your days-to-sell."}
+  };
+  let category = null;
+
+  const $ = id => document.getElementById(id);
+  const money = n => (n < 0 ? "-$" : "$") + Math.abs(n).toFixed(2);
+  const pct = n => (n * 100).toFixed(1) + "%";
+  const num = id => { const v = parseFloat($(id).value); return isNaN(v) || v < 0 ? 0 : v; };
+  const radio = name => { const el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : null; };
+
+  /* ---- category cards ---- */
+  const grid = $("cat-grid");
+  Object.keys(CATS).forEach(k => {
+    const c = CATS[k], d = document.createElement("div");
+    d.className = "cat-card"; d.setAttribute("role","button"); d.setAttribute("tabindex","0");
+    d.setAttribute("aria-pressed","false");
+    d.innerHTML = '<span class="emoji">' + c.emoji + "</span><strong>" + c.label + "</strong><span class=\"sub\">" + c.sub + "</span>";
+    const pick = () => {
+      category = k;
+      grid.querySelectorAll(".cat-card").forEach(x => { x.classList.remove("selected"); x.setAttribute("aria-pressed","false"); });
+      d.classList.add("selected"); d.setAttribute("aria-pressed","true");
+      $("cat-note").textContent = c.note;
+      if(["furniture","appliances","bikes"].indexOf(k) !== -1){
+        setRadio("fulfill","pickup");
+        $("fulfill-note").textContent = c.label + " almost always sells as local pickup — shipping rarely pencils out.";
+      } else {
+        $("fulfill-note").textContent = "Local pickup carries no platform fee on any of the three platforms.";
+      }
+      recalc();
+    };
+    d.addEventListener("click", pick);
+    d.addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(); } });
+    grid.appendChild(d);
+  });
+
+  function setRadio(name, val){
+    document.querySelectorAll('input[name="' + name + '"]').forEach(r => {
+      r.checked = (r.value === val);
+      r.closest(".radio-pill").classList.toggle("on", r.checked);
+    });
+    syncShipVisibility();
+  }
+  document.querySelectorAll(".radio-pill input").forEach(r => {
+    r.addEventListener("change", () => {
+      document.querySelectorAll('input[name="' + r.name + '"]').forEach(x => x.closest(".radio-pill").classList.toggle("on", x.checked));
+      syncShipVisibility(); recalc();
+    });
+  });
+  function syncShipVisibility(){
+    const shipped = radio("fulfill") === "ship";
+    $("ship-wrap").style.display = shipped ? "" : "none";
+    $("ship-charge-wrap").style.display = shipped ? "" : "none";
+  }
+
+  /* ---- overrides: payment-processing rate stays user-editable ---- */
+  const ov = { cardRate: CARD_RATE };
+
+  /* ---- math ---- */
+  function platformFee(platform, fulfill, salePrice, shipCharged){
+    const total = salePrice + shipCharged;
+    if(platform === "fb"){
+      if(fulfill === "pickup") return {amt: 0, desc: "No selling fee — local pickup"};
+      return {amt: Math.max(total * FB_SHIP_RATE, FB_SHIP_MIN),
+              desc: (FB_SHIP_RATE*100).toFixed(0) + "% of buyer-paid total (min $" + FB_SHIP_MIN.toFixed(2) + ")"};
+    }
+    if(platform === "ebay"){
+      const base = salePrice + shipCharged;
+      const fvf = base <= EBAY_TIER ? base * EBAY_FVF
+        : EBAY_TIER * EBAY_FVF + (base - EBAY_TIER) * EBAY_FVF_OVER;
+      const order = total > EBAY_ORD_AT ? EBAY_ORD_HIGH : EBAY_ORD_LOW;
+      return {amt: fvf + order,
+              desc: (EBAY_FVF*100).toFixed(1) + "% final value fee" + (base > EBAY_TIER ? " (tiered above $" + EBAY_TIER.toLocaleString() + ")" : "") + " + $" + order.toFixed(2) + " per-order fee"};
+    }
+    return {amt: 0, desc: "No selling fee — free basic listing"};
+  }
+
+  function calc(){
+    const buy = num("in-buy"), premium = num("in-premium") / 100;
+    const sale = num("in-sale"), platform = radio("platform"), fulfill = radio("fulfill");
+    const pay = radio("pay");
+    const shipCost = fulfill === "ship" ? num("in-shipcost") : 0;
+    const shipCharged = fulfill === "ship" ? num("in-shipcharge") : 0;
+    const gas = num("in-gas"), hours = num("in-hours"), hourly = num("in-hourly");
+    const days = num("in-days");
+
+    const revenue = sale + shipCharged;
+    const auctionFees = buy * premium;
+    const pf = platformFee(platform, fulfill, sale, shipCharged);
+    const payFee = (pay === "card") ? revenue * ov.cardRate : 0;
+    const timeCost = hours * hourly;
+    const totalCost = buy + auctionFees + pf.amt + payFee + shipCost + gas + timeCost;
+    const profit = revenue - totalCost;
+    const margin = revenue > 0 ? profit / revenue : 0;
+
+    // break-even sale price: solve P for profit = 0.
+    // revenue = P + S; pctFees = effRate*(P+S); orderFixed = ebay per-order fee.
+    let effRate = 0, orderFixed = 0;
+    if(platform === "fb" && fulfill === "ship") effRate = FB_SHIP_RATE;
+    if(platform === "ebay"){
+      const base = sale + shipCharged;
+      effRate = base <= EBAY_TIER ? EBAY_FVF : (EBAY_TIER * EBAY_FVF + (base - EBAY_TIER) * EBAY_FVF_OVER) / base;
+      orderFixed = (sale + shipCharged) > EBAY_ORD_AT ? EBAY_ORD_HIGH : EBAY_ORD_LOW;
+    }
+    if(pay === "card") effRate += ov.cardRate;
+    const other = buy + auctionFees + shipCost + gas + timeCost;
+    let breakeven = null;
+    if(1 - effRate > 0){
+      breakeven = (orderFixed + other - shipCharged * (1 - effRate)) / (1 - effRate);
+      if(platform === "fb" && fulfill === "ship" && breakeven + shipCharged < FB_SHIP_MIN / FB_SHIP_RATE)
+        // flat minimum-fee regime: the fee is a fixed $0.80, so break-even is linear
+        breakeven = other + orderFixed + FB_SHIP_MIN - shipCharged;
+      if(breakeven < 0) breakeven = 0;
+    }
+    return {buy, premium: premium*100, sale, platform, fulfill, pay, shipCost, shipCharged, gas, hours, hourly, days,
+            revenue, auctionFees, pf, payFee, timeCost, totalCost, profit, margin, breakeven};
+  }
+
+  function render(r){
+    const L = $("fee-lines");
+    const srcTag = t => ' <span class="src-tag ' + t[0] + '">' + t[1] + "</span>";
+    const platName = {fb:"Facebook Marketplace", ebay:"eBay", kijiji:"Kijiji"}[r.platform];
+    let h = "";
+    h += '<div class="fee-row"><div><div class="fname">Buy price</div><div class="fsrc">Your winning bid at auction.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.buy) + '</span></div></div>';
+    h += '<div class="fee-row"><div><div class="fname">Auction fees on top (' + r.premium.toFixed(1) + '%)</div><div class="fsrc">Buyer\u2019s premium / handling charged by the auction house.' + srcTag(["estimate","Your auction"]) + '</div></div><div class="fval"><span class="amt">' + money(r.auctionFees) + '</span></div></div>';
+    h += '<div class="fee-row"><div><div class="fname">Platform fee — ' + platName + '</div><div class="fsrc">' + r.pf.desc + '. Checked 2026-09-28 — see fee reference below.' + srcTag(["reported","Reported"]) + '</div></div><div class="fval"><span class="amt">' + money(r.pf.amt) + '</span></div></div>';
+    h += '<div class="fee-row"><div><div class="fname">Payment processing</div><div class="fsrc">' + (r.pay === "card" ? "Card processed at " + (ov.cardRate*100).toFixed(2) + "% (typical flat rate — estimate, adjust below)." : "Cash / Interac e-transfer — no processing cost (most Canadian banks; some plans charge ~$1\u2013$1.50).") + srcTag(["estimate","Estimate"]) + '</div></div><div class="fval"><span class="amt">' + money(r.payFee) + '</span>'
+      + (r.pay === "card" ? '<input type="number" step="0.05" min="0" id="ov-cardRate" value="' + (ov.cardRate*100) + '" aria-label="Override card rate percent"><div class="input-note">% — override the rate</div>' : "") + '</div></div>';
+    if(r.fulfill === "ship")
+      h += '<div class="fee-row"><div><div class="fname">Shipping — what you pay</div><div class="fsrc">Carrier cost for this item.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.shipCost) + '</span></div></div>';
+    h += '<div class="fee-row"><div><div class="fname">Gas / transport</div><div class="fsrc">Driving to auction pickup and meeting the buyer — your number.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.gas) + '</span></div></div>';
+    h += '<div class="fee-row"><div><div class="fname">Your time (' + r.hours + 'h \u00D7 ' + money(r.hourly) + '/h)</div><div class="fsrc">Pickup, cleaning, photos, listing, messaging, handoff — your valuation.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.timeCost) + '</span></div></div>';
+    h += '<div class="fee-row subtotal"><div><div class="fname">Total cost</div><div class="fsrc">Everything above, added up.</div></div><div class="fval"><span class="amt">' + money(r.totalCost) + '</span></div></div>';
+    h += '<div class="fee-row subtotal"><div><div class="fname">Revenue (sale + shipping charged)</div><div class="fsrc">What the buyer pays you.</div></div><div class="fval"><span class="amt">' + money(r.revenue) + '</span></div></div>';
+    L.innerHTML = h;
+
+    const ovCard = $("ov-cardRate");
+    if(ovCard) ovCard.addEventListener("input", () => { const v = parseFloat(ovCard.value); ov.cardRate = (isNaN(v) || v < 0 ? 0 : v) / 100; recalc(); });
+
+    const v = $("verdict"), hasNumbers = r.sale > 0;
+    v.style.display = hasNumbers ? "" : "none";
+    if(hasNumbers){
+      const good = r.profit > 0;
+      v.className = "verdict " + (good ? "good" : "bad");
+      $("verdict-title").textContent = good ? "\u2705 Worth flipping" : "\u274C Skip it — this flip loses money";
+      $("verdict-profit").textContent = (good ? "+" : "") + money(r.profit) + " profit";
+      $("stat-cost").textContent = money(r.totalCost);
+      $("stat-rev").textContent = money(r.revenue);
+      $("stat-margin").textContent = pct(r.margin);
+      $("stat-breakeven").textContent = r.breakeven === null ? "n/a" : money(r.breakeven);
+      $("stat-perday").textContent = r.days > 0 ? money(r.profit / r.days) : "—";
+      $("stat-flips").textContent = r.profit > 0 ? Math.ceil(200 / r.profit) + " / week" : "—";
+      $("verdict-note").textContent = good
+        ? "At " + money(r.profit) + " per flip, you'd need about " + Math.ceil(200 / r.profit) + " like this every week to clear $200. " + (r.margin < 0.3 ? "Margin is under 30% — one surprise cost (return, no-show, repair) can wipe it out." : "Healthy margin for a flip.")
+        : "You'd need to sell at " + (r.breakeven === null ? "n/a" : money(r.breakeven)) + " just to break even. Either the bid was too high or the fees eat it — walk away or lower your bid ceiling.";
+    }
+  }
+
+  function recalc(){ render(calc()); }
+  document.querySelectorAll(".input-grid input, .input-grid select").forEach(el => el.addEventListener("input", recalc));
+  syncShipVisibility();
+  recalc();
+})();
+</script>
+</body>
+</html>

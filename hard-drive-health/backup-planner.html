@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build My Backup Plan — Interactive 3-2-1 Planner | Hard Drive Health</title>
+<meta name="description" content="Answer 3 questions and build a real 3-2-1 backup plan with current Canadian prices: local drive, cloud offsite, and optional extras. Every price sourced and dated.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== Backup planner (scoped) ===== */
+.sim-wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.crumbs{font-size:.85rem;color:var(--muted);padding:16px 0 0}
+.crumbs a{color:var(--accent);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.sim-step{margin:2.2em 0}
+.sim-step h2{font-size:1.35rem;margin:0 0 .3em}
+.sim-step .hint{color:var(--muted);font-size:.95rem;margin:0 0 1em}
+.q-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.q-card{border:2px solid var(--line);border-radius:8px;background:#fff;padding:16px 12px;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.q-card:hover{border-color:var(--accent)}
+.q-card.selected{border-color:var(--accent);box-shadow:0 0 0 3px #d6ece5}
+.q-card .emoji{font-size:1.8rem;display:block;margin-bottom:6px}
+.q-card strong{display:block;font-size:.98rem}
+.q-card .sub{display:block;font-size:.8rem;color:var(--muted);margin-top:4px}
+.typical-wrap{text-align:center;margin:0 0 18px;padding:16px;background:var(--wash);border:2px dashed var(--accent);border-radius:12px}
+.typical-btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:12px 26px;font-size:1.05em;font-weight:700;cursor:pointer}
+.typical-btn:hover{background:#0a6450}
+.why-line{font-size:.9em;background:#e9f5f0;border-radius:6px;padding:10px 12px;margin-top:12px;color:#0b4a3d;line-height:1.55}
+.sim-columns{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:960px){.sim-columns{grid-template-columns:1.15fr .85fr;align-items:start}}
+.tier{margin:1.6em 0}
+.tier>h3{font-size:1.15rem;margin:0 0 .2em;display:flex;align-items:center;gap:8px}
+.tier .tier-sub{font-size:.88rem;color:var(--muted);margin:0 0 1em}
+.tier.nice .sim-item{background:#fbfdfc;border-style:dashed}
+.sim-item{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px 16px;margin-bottom:10px}
+.sim-item .row-top{display:flex;gap:10px;align-items:flex-start}
+.sim-item .row-top input{margin-top:5px;flex:0 0 auto}
+.sim-item .name{font-weight:700;font-size:.98rem}
+.copy-tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.05em;background:#1a1a1a;color:#fff;border-radius:4px;padding:2px 7px;margin-right:6px;vertical-align:middle}
+.sim-item .detail{font-size:.83rem;color:var(--muted);margin-top:3px;line-height:1.5}
+.sim-item .detail a{color:var(--accent)}
+.sim-item select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:.9rem;margin-top:8px;background:#fff}
+.sim-item .price-line{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.sim-item .price .amt{font-weight:800;font-size:1.1rem;color:#0a6450}
+.sim-item .price .per{font-size:.78rem;color:var(--muted);display:block}
+.opt-note{font-size:.78rem;color:var(--muted);margin-top:6px}
+.conf{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.04em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+.conf.official{background:#e6f6ec;color:#157a3a}
+.conf.reported{background:#fff4e0;color:#9a6a00}
+.conf.illus{background:#eef2ff;color:#3b4fd8}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:1em 0;font-size:.8rem;color:var(--muted)}
+.total-bar{background:#10312b;color:#fff;border-radius:10px;padding:22px;margin-top:1.4em}
+.total-bar .row{display:flex;justify-content:space-between;padding:6px 0;font-size:.95rem;border-bottom:1px solid rgba(255,255,255,.14)}
+.total-bar .row.grand{border-bottom:none;font-size:1.25rem;font-weight:800;padding-top:12px}
+.total-bar .fine{font-size:.8rem;opacity:.75;margin-top:10px;line-height:1.5}
+.risk-box{background:#fff;border:2px solid var(--accent);border-radius:10px;padding:16px 18px;margin-top:1.2em}
+.risk-box h3{margin:0 0 .5em;font-size:1.05rem}
+.risk-box p{font-size:.92rem;margin:.5em 0;line-height:1.6}
+.risk-box .src{font-size:.8rem;color:var(--muted)}
+.risk-box .src a{color:var(--accent)}
+.src-list{font-size:.85rem;color:var(--muted);line-height:1.7}
+.src-list li{margin-bottom:6px}
+.src-list a{color:var(--accent);word-break:break-word}
+.checklist-note{background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:.92rem}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.q-card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media(min-width:960px){.sim-side{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}}
+@media (max-width:600px){
+  .q-grid{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+  .total-bar .row.grand{font-size:1.1rem}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="backup-planner.html" class="active">Backup planner</a>
+    </nav>
+  </div>
+</header>
+
+<div class="sim-wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span aria-hidden="true">›</span> <span aria-current="page">Backup planner</span></nav>
+</div>
+
+<section class="hero-plain">
+  <div class="sim-wrap">
+    <h1>Build my backup plan</h1>
+    <p class="lead">Answer 3 questions and get a concrete 3-2-1 setup — a local copy, a second local copy, one offsite — with real, current Canadian prices. Toggle items on and off and watch the totals update. Based on <a href="posts/the-3-2-1-backup-rule.html">the 3-2-1 backup rule</a>.</p>
+  </div>
+</section>
+
+<main>
+<div class="sim-wrap">
+
+<section class="sim-step" id="sim-start">
+  <h2>1 · How much data are you protecting?</h2>
+  <p class="hint">Count everything you'd be upset to lose — photos, documents, music, projects.</p>
+  <div class="q-grid" id="q-band" role="group" aria-label="How much data"></div>
+</section>
+
+<section class="sim-step">
+  <h2>2 · How many devices hold that data?</h2>
+  <p class="hint">This decides whether a per-computer or a multi-device cloud plan fits.</p>
+  <div class="q-grid" id="q-devices" role="group" aria-label="How many devices"></div>
+</section>
+
+<section class="sim-step">
+  <h2>3 · How much is the data worth to you?</h2>
+  <p class="hint">This sets how thorough the plan needs to be — and how fast you'd need to recover.</p>
+  <div class="q-grid" id="q-worth" role="group" aria-label="Data worth"></div>
+  <div class="why-line" id="derive-note">Answer the three questions above and a starter setup builds itself below. Every item stays adjustable.</div>
+</section>
+
+<section class="sim-step">
+  <h2>4 · Build your plan</h2>
+  <p class="hint">Tick what you'll actually do. Prices are one-time (upfront) and monthly — sourced, dated, and labeled below.</p>
+  <div class="legend">
+    <span><span class="conf official">Official</span> vendor's own price page</span>
+    <span><span class="conf reported">Reported</span> current retailer / review listing</span>
+    <span><span class="conf illus">Illustrative</span> yearly price ÷ 12, US$→CA$ conversion, or arithmetic from a published figure</span>
+  </div>
+  <div class="sim-columns">
+    <div>
+      <div class="typical-wrap">
+        <button id="btn-typical" class="typical-btn">Load a typical setup</button>
+        <div class="hint" style="margin:8px 0 0">One click: a family PC, 500GB–2TB of photos and documents, 2–3 devices, irreplaceable data. A starting point — not a recommendation.</div>
+      </div>
+      <div class="tier" id="tier-essential"><h3>✅ Essentials — the 3-2-1 core</h3><p class="tier-sub">The minimum that counts as a real backup plan: original + local copy + offsite copy.</p><div id="essential-list"></div></div>
+      <div class="tier nice" id="tier-nice"><h3>🧸 Nice to have — stronger and faster recovery</h3><p class="tier-sub">Genuinely useful, not required. A NAS gives you a second local copy that's always on; an offsite drive replaces the cloud subscription.</p><div id="nice-list"></div></div>
+    </div>
+    <div class="sim-side">
+      <div class="total-bar">
+        <div id="total-lines"></div>
+        <div class="fine">Prices checked 2026-09-28 (see sources below) — retailers change them often, so verify before you buy. All prices in Canadian dollars; US$ list prices converted at the Bank of Canada rate on 2026-09-25. This planner is educational, not a vendor recommendation.</div>
+      </div>
+      <div class="risk-box">
+        <h3>What you risk without it</h3>
+        <p>Drives fail. <strong>Backblaze's 2025 Drive Stats</strong> — 344,196 hard drives tracked — recorded a <strong>1.36% annualized failure rate</strong> (down from 1.57% in 2024; lifetime AFR 1.30%). That's roughly <strong>1 in 74 drives failing each year</strong>.</p>
+        <p>Over five years, a single drive's cumulative chance of failing is roughly <strong>6–7% — about 1 in 15</strong> (illustrative arithmetic from the published 1.36% AFR, not a separate study).</p>
+        <p>A backup plan doesn't change the odds. It changes what a failure costs you.</p>
+        <p class="src">Source: Backblaze 2025 Year-End Drive Stats report, published Feb 12, 2026 — <a href="https://www.businesswire.com/news/home/20260212236512/en/Backblaze-Publishes-2025-Drive-Stats-Report-13-Years-of-Data-Show-a-Growing-Healthier-Drive-Fleet">Business Wire release</a>. The stat describes data-center drives; your odds may differ, which is exactly why redundancy exists.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sim-step">
+  <h2>5 · Make it real</h2>
+  <div class="checklist-note">
+    <strong>Free steps that matter more than any purchase:</strong>
+    <ol style="margin:.6em 0 0;padding-left:1.4em">
+      <li><strong>Automate it.</strong> Use your OS's built-in backup (File History / Time Machine) or your cloud app's scheduler — backups you have to remember don't happen.</li>
+      <li><strong>Test a restore.</strong> Pick a random file, restore it, confirm it opens. Repeat every few months.</li>
+      <li><strong>Unplug the local drive</strong> between scheduled backups — an offline copy can't be hit by ransomware or a power surge.</li>
+      <li><strong>Keep recovery info somewhere safe.</strong> Cloud login, encryption key, and the drive itself should all be findable by you (or family) in an emergency.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="sim-step">
+  <h2>Sources — every price, dated</h2>
+  <ul class="src-list">
+    <li>Seagate Expansion 2TB portable USB 3.0 (STKM2000400) — <strong>CA$189.99</strong> at Best Buy Canada (bestbuy.ca). Page accessed 2026-09-28.</li>
+    <li>Seagate Expansion 4TB portable USB 3.0 (STKM4000400) — <strong>CA$264.99</strong> at Best Buy Canada (bestbuy.ca). Page accessed 2026-09-28.</li>
+    <li>Synology DiskStation DS223j 2-bay NAS, diskless — <strong>CA$304.99</strong> at PC-Canada (pc-canada.com). Page accessed 2026-09-28.</li>
+    <li>WD Red Plus 4TB NAS HDD (WD40EFPX) — <strong>CA$299.99</strong> at Canada Computers (canadacomputers.com). Page accessed 2026-09-28.</li>
+    <li>Backblaze Computer Backup — <strong>CA$12.73/mo</strong> (or CA$140.04/yr), unlimited storage, one computer. Published price US$9/mo (US$99/yr), converted at the Bank of Canada daily rate US$1=CA$1.4145 on 2026-09-25. Third-party reviews Sept 2026; confirm on backblaze.com.</li>
+    <li>iDrive Personal 5TB — <strong>CA$11.73/mo</strong> (CA$140.74/yr renewal; first year often US$69.65 promo), multiple computers + NAS. Published price US$99.50/yr (PCWorld online backup review, 2026), converted at the Bank of Canada daily rate US$1=CA$1.4145 on 2026-09-25. Confirm on idrive.com.</li>
+    <li>Backblaze B2 cloud storage — <strong>CA$9.83/TB/month</strong> pay-as-you-go, first 10GB free. Published US$6.95/TB/mo on <a href="https://www.backblaze.com/cloud-storage/pricing">backblaze.com/cloud-storage/pricing</a> — vendor's own page, fetched 2026-09-28; converted at the Bank of Canada daily rate US$1=CA$1.4145 on 2026-09-25.</li>
+    <li>US$→CA$ conversion rate: <a href="https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/">Bank of Canada daily exchange rates</a> — US dollar 1.4145 on 2026-09-25 (last published business day). Converted figures are marked "Illustrative" in the planner.</li>
+    <li>Google AI Plus (400GB storage) — <strong>CA$6.99/mo</strong> in Canada. iPhone in Canada, 2026-06-08. Google's storage plans change — confirm on one.google.com.</li>
+    <li>Drive failure stat — Backblaze 2025 Year-End Drive Stats: 1.36% AFR across 344,196 drives, published Feb 12, 2026 (<a href="https://www.businesswire.com/news/home/20260212236512/en/Backblaze-Publishes-2025-Drive-Stats-Report-13-Years-of-Data-Show-a-Growing-Healthier-Drive-Fleet">Business Wire</a>).</li>
+  </ul>
+</section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p><a href="index.html">Home</a> &middot; <a href="privacy-policy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+const $ = id => document.getElementById(id);
+const money = n => "$" + n.toLocaleString("en-CA", {minimumFractionDigits:2, maximumFractionDigits:2});
+
+/* ================================================================
+   PRICE BOOK — EDIT PRICES HERE
+   All figures in Canadian dollars. US$-published cloud prices are converted
+   at the Bank of Canada daily rate US$1=CA$1.4145 (2026-09-25) and marked
+   "illus" (Illustrative). Every figure verified on a retailer / vendor /
+   reputable review page on 2026-09-28 (see the Sources section on the page).
+   Confidence: "official" (vendor's own page, fetched today), "reported"
+   (current retailer or review listing), "illus" (yearly price shown ÷ 12,
+   US$→CA$ conversion, or arithmetic from a published stat).
+   ================================================================ */
+/* US$ prices below are converted to CAD at the Bank of Canada daily rate
+   US$1 = CA$1.4145 (2026-09-25, the last published business day):
+   https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/
+   Converted figures are marked "illus" (Illustrative) in the UI. */
+const FX_USD_CAD = 1.4145;
+const BANDS = {
+  lt500: {label:"Under 500 GB", sub:"Photos, documents, light use", tb:0.25, hdd:"hdd2"},
+  to2:   {label:"500 GB – 2 TB", sub:"Family photos, music, projects", tb:1.25, hdd:"hdd2"},
+  to5:   {label:"2 TB – 5 TB", sub:"Big photo/video libraries", tb:3.5, hdd:"hdd4"},
+  gt5:   {label:"Over 5 TB", sub:"Video creators, archivists", tb:8, hdd:"hdd4"}
+};
+const DEVICES = {
+  d1:  {label:"1", sub:"One computer"},
+  d23: {label:"2–3", sub:"A couple of computers + phones"},
+  d4:  {label:"4+", sub:"Household or home office"}
+};
+const WORTH = {
+  irrep: {label:"Irreplaceable", sub:"Family photos, work you can't redo", emoji:"📸"},
+  impor: {label:"Important", sub:"Would hurt to lose, mostly rebuildable", emoji:"🗂️"},
+  nice:  {label:"Nice to have", sub:"Convenience copies", emoji:"🎲"}
+};
+
+const ITEMS = {
+  local_drive: {
+    name:"External USB drive — your local backup copy",
+    tag:"COPY 2 · LOCAL",
+    conf:"reported",
+    detail:"Plugged in on a schedule (or a NAS). Seagate Expansion portable drives, Best Buy Canada. Prices accessed 2026-09-28.",
+    options:{
+      hdd2:{label:"Seagate Expansion 2TB portable USB 3.0 — CA$189.99", upfront:189.99, cur:"CAD", note:"Best Buy Canada, accessed 2026-09-28"},
+      hdd4:{label:"Seagate Expansion 4TB portable USB 3.0 — CA$264.99", upfront:264.99, cur:"CAD", note:"Best Buy Canada, accessed 2026-09-28"}
+    }
+  },
+  cloud: {
+    name:"Cloud backup — your offsite copy",
+    tag:"COPY 3 · OFFSITE",
+    conf:"reported",
+    detail:"Runs continuously in the background. This is the copy that survives fire, flood, and theft.",
+    options:{
+      bb_personal:{label:"Backblaze Computer Backup — CA$12.73/mo (or CA$140.04/yr), unlimited, 1 computer", monthly:9*FX_USD_CAD, cur:"CAD", monthlyConf:"illus", note:"Published price US$9/mo or US$99/yr (third-party reviews Sept 2026); converted at Bank of Canada daily rate US$1=CA$1.4145 on 2026-09-25; confirm on backblaze.com"},
+      idrive:{label:"iDrive Personal 5TB — CA$11.73/mo (CA$140.74/yr), multiple computers + NAS", monthly:(99.50/12)*FX_USD_CAD, cur:"CAD", monthlyConf:"illus", note:"US$99.50/yr renewal (PCWorld 2026 review); first year often US$69.65 promo; converted at Bank of Canada rate 1.4145 on 2026-09-25; confirm on idrive.com"},
+      b2:{label:"Backblaze B2 — CA$9.83/TB/mo, pay for what you use", per_tb:6.95*FX_USD_CAD, cur:"CAD", note:"backblaze.com/cloud-storage/pricing — vendor's own page, fetched 2026-09-28 (official); published US$6.95/TB/mo converted at Bank of Canada rate 1.4145 on 2026-09-25"},
+      gplus:{label:"Google AI Plus 400GB — CA$6.99/mo", monthly:6.99, cur:"CAD", note:"iPhone in Canada, 2026-06-08; Google's plans change — confirm on one.google.com"}
+    }
+  },
+  rotation_drive: {
+    name:"Second external drive, kept somewhere else",
+    tag:"COPY 3 · OFFSITE (no subscription)",
+    conf:"reported",
+    detail:"A no-subscription offsite copy: back up to it monthly, then keep it at a relative's house or your office. Swap on a schedule.",
+    options:{
+      hdd2:{label:"Seagate Expansion 2TB — CA$189.99", upfront:189.99, cur:"CAD", note:"Best Buy Canada, accessed 2026-09-28"},
+      hdd4:{label:"Seagate Expansion 4TB — CA$264.99", upfront:264.99, cur:"CAD", note:"Best Buy Canada, accessed 2026-09-28"}
+    }
+  },
+  nas: {
+    name:"NAS — always-on second local copy with drive redundancy",
+    tag:"COPY 2 · LOCAL (redundant)",
+    conf:"reported",
+    detail:"Synology DS223j (CA$304.99, PC-Canada) + 2× WD Red Plus 4TB NAS drives (CA$299.99 each, Canada Computers). RAID 1 = ~4TB usable; one drive can die without data loss. Prices accessed 2026-09-28.",
+    options:{
+      nas4:{label:"DS223j + 2× 4TB drives (~4TB usable in RAID 1) — CA$904.97 upfront", upfront:304.99 + 2*299.99, cur:"CAD", note:"PC-Canada + Canada Computers, accessed 2026-09-28"}
+    }
+  }
+};
+
+const CONF_LABEL = {official:"Official", reported:"Reported", illus:"Illustrative"};
+
+let band = null, devices = null, worth = null;
+const state = {}; // itemId -> {checked, optKey}
+
+/* ---------- question pickers ---------- */
+function card(parentId, key, spec, current, onPick){
+  const d = document.createElement("div");
+  d.className = "q-card" + (key === current ? " selected" : "");
+  d.setAttribute("role","button"); d.setAttribute("tabindex","0");
+  d.setAttribute("aria-pressed", key === current ? "true" : "false");
+  d.innerHTML = (spec.emoji ? '<span class="emoji">'+spec.emoji+"</span>" : "") +
+    "<strong>" + spec.label + "</strong>" +
+    (spec.sub ? '<span class="sub">' + spec.sub + "</span>" : "");
+  const pick = () => onPick(key);
+  d.addEventListener("click", pick);
+  d.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); pick(); } });
+  $(parentId).appendChild(d);
+}
+function renderQuestions(){
+  ["q-band","q-devices","q-worth"].forEach(id => $(id).innerHTML = "");
+  Object.keys(BANDS).forEach(k => card("q-band", k, BANDS[k], band, key => { band = key; derive(); renderQuestions(); }));
+  Object.keys(DEVICES).forEach(k => card("q-devices", k, DEVICES[k], devices, key => { devices = key; derive(); renderQuestions(); }));
+  Object.keys(WORTH).forEach(k => card("q-worth", k, WORTH[k], worth, key => { worth = key; derive(); renderQuestions(); }));
+}
+
+/* ---------- derivation: answers -> default setup ---------- */
+function defaultOpt(itemId){
+  const it = ITEMS[itemId];
+  if(itemId === "local_drive" || itemId === "rotation_drive") return band ? BANDS[band].hdd : "hdd2";
+  if(itemId === "cloud"){
+    if(!devices) return "idrive";
+    if(devices === "d1") return "bb_personal";
+    if(devices === "d23") return "idrive";
+    return "b2";
+  }
+  if(itemId === "nas") return "nas4";
+  return Object.keys(it.options)[0];
+}
+function ensureState(itemId){
+  if(!state[itemId]) state[itemId] = {checked:false, optKey:defaultOpt(itemId)};
+  else {
+    // re-derive option when answers changed and user hasn't manually changed it
+    if(!state[itemId].touched) state[itemId].optKey = defaultOpt(itemId);
+  }
+}
+function derive(){
+  ["local_drive","cloud","rotation_drive","nas"].forEach(ensureState);
+  if(band && devices && worth){
+    state.local_drive.checked = true;
+    state.cloud.checked = true;
+    state.rotation_drive.checked = (worth !== "nice") || (band === "gt5");
+    state.nas.checked = (band === "gt5") && (worth !== "nice");
+    const d = BANDS[band].label, dev = DEVICES[devices].label, w = WORTH[worth].label.toLowerCase();
+    $("derive-note").innerHTML = "Your starter setup for <strong>" + d + "</strong> across <strong>" + dev + "</strong> device" +
+      (devices === "d1" ? "" : "s") + " (" + w + " data): local drive + cloud offsite" +
+      (state.rotation_drive.checked ? " + offsite rotation drive" : "") +
+      (state.nas.checked ? " + NAS" : "") + ". Adjust anything below — the totals update live.";
+  } else {
+    $("derive-note").textContent = "Answer the three questions above and a starter setup builds itself below. Every item stays adjustable.";
+  }
+  renderItems(); renderTotals();
+}
+
+/* ---------- item list ---------- */
+function optMonthly(opt){
+  if(opt.monthly) return opt.monthly;
+  if(opt.per_tb) return opt.per_tb * (band ? BANDS[band].tb : 1.25);
+  return 0;
+}
+function optUpfront(opt){ return opt.upfront || 0; }
+function priceLineHTML(opt){
+  const up = optUpfront(opt), mo = optMonthly(opt);
+  let s = "";
+  if(up > 0) s += '<span class="amt">CA' + money(up) + '</span><span class="per">one-time</span>';
+  if(mo > 0) s += '<span class="amt">CA' + money(mo) + '</span><span class="per">/month' + (opt.monthlyConf === "illus" ? " (converted — see note)" : "") + (opt.per_tb ? " at your data size" : "") + "</span>";
+  return s;
+}
+function renderItem(itemId, container){
+  const it = ITEMS[itemId], st = state[itemId] || {checked:false, optKey:defaultOpt(itemId)};
+  state[itemId] = st;
+  const wrap = document.createElement("div");
+  wrap.className = "sim-item";
+  const opts = Object.keys(it.options);
+  const sel = document.createElement("select");
+  sel.setAttribute("aria-label", it.name + " option");
+  opts.forEach(k => {
+    const o = document.createElement("option");
+    o.value = k; o.textContent = it.options[k].label;
+    if(k === st.optKey) o.selected = true;
+    sel.appendChild(o);
+  });
+  sel.addEventListener("change", () => { st.optKey = sel.value; st.touched = true; renderTotals(); renderItemNote(); });
+  const opt = it.options[st.optKey];
+
+  const top = document.createElement("div");
+  top.className = "row-top";
+  const cb = document.createElement("input");
+  cb.type = "checkbox"; cb.checked = !!st.checked;
+  cb.setAttribute("aria-label", "Include: " + it.name);
+  cb.addEventListener("change", () => { st.checked = cb.checked; renderTotals(); });
+  const head = document.createElement("div");
+  head.innerHTML = '<div class="name"><span class="copy-tag">' + it.tag + "</span>" + it.name + "</div>" +
+    '<div class="detail">' + it.detail + "</div>";
+  top.appendChild(cb); top.appendChild(head);
+
+  const noteEl = document.createElement("div");
+  noteEl.className = "opt-note";
+  const priceRow = document.createElement("div");
+  priceRow.className = "price-line";
+  const priceCell = document.createElement("div");
+  priceCell.className = "price";
+  priceRow.appendChild(document.createElement("div"));
+  priceRow.appendChild(priceCell);
+
+  wrap.appendChild(top);
+  wrap.appendChild(sel);
+  wrap.appendChild(priceRow);
+  wrap.appendChild(noteEl);
+  container.appendChild(wrap);
+
+  function renderItemNote(){
+    const o = it.options[st.optKey];
+    const mconf = o.monthlyConf === "illus" ? "illus" : null;
+    noteEl.innerHTML = o.note + (mconf ? ' <span class="conf illus">Illustrative</span>' : "") + ' <span class="conf ' + it.conf + '">' + CONF_LABEL[it.conf] + "</span>";
+    priceCell.innerHTML = priceLineHTML(o);
+  }
+  renderItemNote();
+}
+function renderItems(){
+  const e = $("essential-list"), n = $("nice-list");
+  e.innerHTML = ""; n.innerHTML = "";
+  renderItem("local_drive", e);
+  renderItem("cloud", e);
+  renderItem("rotation_drive", n);
+  renderItem("nas", n);
+}
+
+/* ---------- totals ---------- */
+function renderTotals(){
+  let upCAD = 0, moCAD = 0, n = 0;
+  Object.keys(ITEMS).forEach(id => {
+    const st = state[id];
+    if(!st || !st.checked) return;
+    const opt = ITEMS[id].options[st.optKey];
+    if(!opt) return;
+    n++;
+    if(opt.upfront) upCAD += opt.upfront;
+    if(opt.monthly || opt.per_tb) moCAD += optMonthly(opt);
+  });
+  let html = '<div class="row"><span>Items in your plan</span><span>' + n + "</span></div>" +
+    '<div class="row"><span>Upfront (one-time)</span><span>' + (upCAD > 0 ? "CA" + money(upCAD) : "—") + "</span></div>";
+  html += '<div class="row grand"><span>Recurring</span><span>' + (moCAD > 0 ? "CA" + money(moCAD) + "/mo" : "—") + "</span></div>";
+  $("total-lines").innerHTML = html;
+}
+
+/* ---------- typical setup ---------- */
+$("btn-typical").addEventListener("click", () => {
+  band = "to2"; devices = "d23"; worth = "irrep";
+  Object.keys(state).forEach(k => delete state[k]);
+  derive(); renderQuestions();
+  document.querySelector(".sim-columns").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+/* init */
+renderQuestions();
+["local_drive","cloud","rotation_drive","nas"].forEach(id => { state[id] = {checked:false, optKey:defaultOpt(id)}; });
+renderItems(); renderTotals();
+})();
+</script>
+</body>
+</html>

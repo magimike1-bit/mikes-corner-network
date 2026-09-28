@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixing Failed Prints: The Usual Suspects — 3D Printing at Home</title>
+<meta name="description" content="Warping, stringing, layer shifts, spaghetti, and poor adhesion: what each common 3D printing failure looks like and what usually causes it.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">3D Printing at Home</a>
+    <p class="tagline">Practical 3D printing know-how for beginners — plain language, no hype</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Fixing failed prints: the usual suspects</h1>
+  <p class="meta">Troubleshooting &middot; 8 min read</p>
+
+  <p>Every 3D printer owner has a small museum of failures: the warped coaster, the
+  stringy ghost, the sad tangle of "spaghetti." Failures aren't a sign your printer
+  is bad — they're how you learn what the machine wants. Here are the common ones,
+  what they look like, and what usually causes them.</p>
+
+  <h2>Poor first-layer adhesion</h2>
+  <p><strong>Looks like:</strong> the print peels up, shifts, or drags around the bed
+  during the first few layers. <strong>Usually caused by:</strong> the nozzle being
+  too far from the bed, a dirty or greasy print surface (fingerprints are the classic
+  culprit), or the bed being too cool for the filament. <strong>Fix:</strong> clean
+  the bed (soap and water for most surfaces, then avoid touching it), re-check the
+  nozzle distance, and make sure the bed is actually hot before the print starts.
+  For stubborn filaments, a brim — a few extra outlines around the part's base — adds
+  grip cheaply.</p>
+
+  <h2>Warping: corners lifting off the bed</h2>
+  <p><strong>Looks like:</strong> the corners of a flat part curl upward, sometimes
+  pulling the whole base off the bed. <strong>Usually caused by:</strong> uneven
+  cooling — the lower layers contract as they cool while the upper layers are still
+  warm, and the part pulls itself off. <strong>Fix:</strong> reduce drafts around
+  the printer, use a brim or raft, and make sure the bed temperature suits the
+  filament. Large, flat parts in warpy materials are the hardest case; an enclosure
+  is the real answer there. With PLA this is usually a bed-cleanliness or cooling
+  issue, not a crisis.</p>
+
+  <h2>Stringing: spiderwebs between parts</h2>
+  <p><strong>Looks like:</strong> thin wisps of plastic connecting separate parts of
+  the print, like a tiny haunted house. <strong>Usually caused by:</strong> molten
+  plastic oozing from the nozzle while it travels between print locations.
+  <strong>Fix:</strong> enable or tune retraction (the nozzle pulls the filament
+  back slightly when traveling), and check that the temperature isn't higher than
+  the filament needs — hotter plastic is runnier plastic. PETG strings more than
+  PLA by nature; a little stringing there is normal and can be trimmed off with a
+  heat gun or a quick pass with a blade.</p>
+
+  <h2>Layer shifts: the print jumps sideways</h2>
+  <p><strong>Looks like:</strong> the print suddenly steps sideways partway up, so
+  layers no longer line up. <strong>Usually caused by:</strong> something physically
+  blocking the print head — a warped-up edge the nozzle catches on, a loose belt,
+  or printing so fast the motors skip. <strong>Fix:</strong> slow down, check that
+  belts are snug (they should twang slightly, like a guitar string), and make sure
+  nothing on the bed can collide with the nozzle. One-off small shifts often trace
+  to a single curled corner; repeatable shifts at the same height suggest a
+  mechanical issue like a binding lead screw.</p>
+
+  <h2>Under-extrusion: thin, gappy layers</h2>
+  <p><strong>Looks like:</strong> layers that are thin, separated, or full of tiny
+  gaps; weak parts that crumble. <strong>Usually caused by:</strong> a partial clog
+  in the nozzle, filament that can't feed smoothly (tangled on the spool, or wet and
+  rough), or the print temperature being too low for the speed. <strong>Fix:</strong>
+  check the spool feeds freely, try a slightly higher temperature, and inspect for
+  a clog — a "cold pull" (heating the nozzle, pushing filament in, cooling, then
+  yanking it out) clears many partial clogs without disassembly. Wet filament is a
+  frequent hidden cause; if a spool that worked fine a month ago now prints badly,
+  suspect moisture.</p>
+
+  <h2>Spaghetti: total detachment</h2>
+  <p><strong>Looks like:</strong> the print came off the bed entirely and the nozzle
+  is happily extruding plastic into thin air. <strong>Usually caused by:</strong>
+  whatever killed adhesion — bad first layer, a knock, warping that popped the part
+  free. <strong>Fix:</strong> it's already too late for this print; cancel it and
+  diagnose it as an adhesion failure (see the top of this list). The real lesson of
+  spaghetti is supervision: check the first few layers of every print before
+  walking away. Ten minutes of watching saves hours of wasted plastic.</p>
+
+  <h2>Elephant's foot and zits</h2>
+  <p><strong>Elephant's foot</strong> — the bottom layers bulging outward — comes
+  from the nozzle being slightly too close to the bed or the bed being hot enough
+  to keep the lowest layers soft. <strong>Zits and blobs</strong> (small pimples on
+  the surface) usually mean the printer pauses at layer changes, letting plastic
+  ooze. Both are cosmetic fixes: adjust first-layer height for the foot, and tune
+  retraction and layer-change behavior for the zits.</p>
+
+  <h2>The troubleshooting method</h2>
+  <p>When a print fails, resist the urge to change five settings at once. Photograph
+  the failure. Identify which symptom above it matches. Change one thing, reprint
+  something small, and compare. Keep notes on what you changed and what happened —
+  after a month, that notebook is a personalized repair manual no forum can match.
+  And remember: even experienced owners get failed prints. The skill isn't avoiding
+  failures forever; it's recognizing them quickly and knowing what to adjust.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>3D Printing at Home — beginner guides to desktop 3D printing. Content is for
+    general information only. 3D printers involve hot surfaces (nozzle and heated bed),
+    moving parts, and sometimes fumes: follow your printer's manual, print in a
+    ventilated space, and keep children and pets clear of the machine. Let the nozzle
+    and bed cool before reaching into the printer or clearing a clog.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

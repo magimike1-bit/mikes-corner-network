@@ -1,11 +1,11 @@
-/* Hard Drive Health — clean, simple, readable */
+/* BC Retail Tips — clean, simple, readable */
 :root {
   --ink: #1a1a1a;
   --muted: #5c5c5c;
-  --accent: #0d7a5f;
+  --accent: #0b5cad;
   --bg: #ffffff;
-  --wash: #f2f8f5;
-  --line: #dfe8e3;
+  --wash: #f4f7fa;
+  --line: #e2e8f0;
 }
 * { box-sizing: border-box; }
 body {
@@ -28,6 +28,11 @@ body {
   text-decoration: none;
 }
 .tagline { color: var(--muted); margin: 4px 0 0; }
+.main-nav { margin-top: 12px; font-size: 0.95rem; }
+.main-nav a { color: var(--accent); text-decoration: none; margin-right: 18px; }
+.main-nav a:hover { text-decoration: underline; }
+.main-nav a[aria-current="page"] { font-weight: 700; color: var(--ink); }
+.tool-card { border-left: 4px solid var(--accent); background: #f8fbff; }
 main { padding: 32px 0 48px; }
 .intro h1 { font-size: 2rem; margin: 0 0 12px; }
 .intro p { color: var(--muted); font-size: 1.05rem; }
@@ -86,14 +91,7 @@ main { padding: 32px 0 48px; }
   .intro h1 { font-size: 1.6rem; }
 }
 
-.site-footer .ai-disclosure{font-size:.85em;opacity:.85}
+.network-link { font-size: 0.8rem; margin-top: 6px; }
+.network-link a { color: var(--muted); }
 
-/* site nav */
-.site-nav{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-size:.95rem}
-.site-nav a{color:var(--accent);text-decoration:none;font-weight:600}
-.site-nav a:hover{text-decoration:underline}
-.site-nav a.active{color:var(--ink);border-bottom:2px solid var(--accent);padding-bottom:2px}
-@media (max-width: 600px) {
-  .intro h1 { font-size: 1.6rem; }
-  .hero-plain h1{font-size:1.6rem}
-}
+.site-footer .ai-disclosure{font-size:.85em;opacity:.85}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hard-drive-health.pages.dev/sitemap.xml
+Sitemap: https://hard-drive-health-7r09c.kinsta.page/sitemap.xml

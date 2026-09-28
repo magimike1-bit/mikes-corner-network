@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://payment-savings-audit-l45hh.kinsta.page/sitemap.xml

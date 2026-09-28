@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<base href="https://payments.flswarehouse.com/simulator.html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Stack Cost Simulator — What Should It Cost? | FairRate Audit</title>
+<meta name="description" content="Estimate what your business's tech stack should cost per month — POS, terminals, software and more — by sector. Illustrative estimates from published pricing. Then get a free audit of your real numbers.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense: ad code goes here -->
+<!-- __SIM_CSS__ -->
+<link rel="stylesheet" href="assets/simulator.eb75f123.css">
+  <script>document.documentElement.classList.add("wf")</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html" class="active">Cost simulator</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="contact.html">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span aria-hidden="true">›</span> <a href="resources.html">Resources</a> <span aria-hidden="true">›</span> <span aria-current="page">Cost simulator</span></nav>
+  <div class="sector-switch"><span class="ss-label">I run a:</span><a href="sector-retail.html">Retail store</a><a href="sector-restaurant-full-service.html">Restaurant</a><a href="sector-quick-service-cafe.html">Quick-service / caf&eacute;</a><a href="sector-hotel-hospitality.html">Hotel</a><a href="sector-grocery-convenience.html">Grocery / convenience</a><a href="sector-services-salon.html">Services / salon</a></div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Interactive tool · Canadian small business</p>
+    <h1>What should your tech stack cost?</h1>
+    <p class="lead">Pick your sector, tell us about your business, and build your stack item by item. Every figure comes from published pricing and is labeled by confidence — then see what the numbers say and get a free audit of your real costs.</p>
+    <div class="btn-row"><a class="btn ghost" href="#sim-start">Start building your stack</a></div>
+  </div>
+</section>
+
+<main>
+<div class="sim-wrap">
+
+<div id="wf-chrome"></div>
+
+<section class="sim-step wf-step active" id="sim-start" data-step="1">
+  <h2>1 · Pick your sector</h2>
+  <p class="hint">The catalog, suggestions, and floor-plan map reconfigure for each sector.</p>
+  <div class="sector-grid" id="sector-grid"></div>
+  <div style="margin-top:1.2em;max-width:420px">
+    <div><label for="in-subsector">What kind of <span id="subsector-sector-name">retail store</span>?</label><select id="in-subsector"></select><div class="input-note" id="subsector-margin-note"></div></div>
+  </div>
+  <div style="margin-top:1.2em;max-width:420px">
+    <div><label for="in-revenue">Approximate annual revenue (CAD) — optional</label><input type="number" id="in-revenue" min="0" step="1000" placeholder="e.g. 1200000"><div class="input-note">Estimate is fine — or skip it. If you enter it, every cost below is also shown as a % of revenue, benchmarked against sector norms.</div></div>
+  </div>
+</section>
+
+<section class="sim-step wf-step" id="sim-questions" data-step="2">
+  <h2>2 · Answer 3 quick questions</h2>
+  <p class="hint">We build a realistic starting setup from your answers — every number stays adjustable below.</p>
+
+  <div id="q-restaurant">
+    <div class="input-grid">
+      <div><label for="in-tables">Dining tables</label><input type="number" id="in-tables" min="0" value="20"><div class="input-note">Drives handhelds, POS stations, kitchen screens.</div></div>
+      <div><label for="in-bar">Bar on site?</label><select id="in-bar"><option value="yes" selected>Yes</option><option value="no">No</option></select><div class="input-note">Adds a bar POS station.</div></div>
+      <div><label for="in-takeout">Takeout / delivery</label><select id="in-takeout"><option value="inhouse">In-house online ordering</option><option value="apps">Delivery apps</option><option value="both" selected>Both</option><option value="none">No takeout</option></select><div class="input-note">Apps add aggregator tablets + commission math.</div></div>
+    </div>
+  </div>
+
+  <div id="q-qsr" style="display:none">
+    <div class="input-grid">
+      <div><label for="in-drivethru">Drive-thru?</label><select id="in-drivethru"><option value="no" selected>No</option><option value="yes">Yes</option></select><div class="input-note">Adds a drive-thru terminal + kitchen screen.</div></div>
+      <div><label for="in-seats">Eat-in seats</label><input type="number" id="in-seats" min="0" value="30"><div class="input-note">0 = takeout-only. Drives counters, screens, kiosks.</div></div>
+      <div><label for="in-kiosks">Self-order kiosks</label><select id="in-kiosks"><option value="no" selected>None</option><option value="have">Have them</option><option value="want">Want them</option></select></div>
+    </div>
+  </div>
+
+  <div id="q-retail" style="display:none">
+    <div class="input-grid">
+      <div><label for="in-sqft-r">Store size (sq ft)</label><input type="number" id="in-sqft-r" min="0" value="1800" step="100"><div class="input-note">Drives checkout lanes and Wi-Fi coverage.</div></div>
+      <div><label for="in-weigh">Sell by weight?</label><select id="in-weigh"><option value="no" selected>No</option><option value="yes">Yes — produce / bulk</option></select><div class="input-note">Adds a price-computing scale.</div></div>
+      <div><label for="in-sco">Self-checkouts</label><select id="in-sco"><option value="no" selected>None</option><option value="have">Have them</option><option value="want">Want them</option></select></div>
+    </div>
+  </div>
+
+  <div id="q-hotel" style="display:none">
+    <div class="input-grid">
+      <div><label for="in-rooms">Guest rooms</label><input type="number" id="in-rooms" min="0" value="40"><div class="input-note">Drives Wi-Fi access points (~1 per 25 rooms, min 1 per floor).</div></div>
+      <div><label for="in-floors">Floors</label><input type="number" id="in-floors" min="1" value="3"><div class="input-note">At least one access point per floor.</div></div>
+      <div><label for="in-fb">Food &amp; beverage on site?</label><select id="in-fb"><option value="no" selected>No</option><option value="yes">Yes</option></select><div class="input-note">Adds a 2-station F&amp;B outlet + kitchen screens.</div></div>
+    </div>
+  </div>
+
+  <div id="q-grocery" style="display:none">
+    <div class="input-grid">
+      <div><label for="in-sqft-g">Store size (sq ft)</label><input type="number" id="in-sqft-g" min="0" value="8000" step="100"><div class="input-note">Drives checkout lanes and Wi-Fi coverage.</div></div>
+      <div><label for="in-deli">Deli / prepared counter?</label><select id="in-deli"><option value="no" selected>No</option><option value="yes">Yes</option></select><div class="input-note">Adds a deli POS + scale.</div></div>
+      <div><label for="in-lottery">Lottery terminal?</label><select id="in-lottery"><option value="no" selected>No</option><option value="yes">Yes</option></select><div class="input-note">Wired drop at the counter.</div></div>
+    </div>
+  </div>
+
+  <div id="q-salon" style="display:none">
+    <div class="input-grid">
+      <div><label for="in-chairs">Chairs / service stations</label><input type="number" id="in-chairs" min="0" value="6"><div class="input-note">Drives reception stations and booking calendars.</div></div>
+      <div><label for="in-trooms">Treatment rooms</label><input type="number" id="in-trooms" min="0" value="0"><div class="input-note">Adds a wireless room tablet for consultations.</div></div>
+      <div><label for="in-retailct">Sell retail at reception?</label><select id="in-retailct"><option value="no" selected>No</option><option value="yes">Yes</option></select><div class="input-note">Adds a barcode scanner.</div></div>
+    </div>
+  </div>
+
+  <div class="input-note" id="autobuild-summary" style="margin:10px 2px 0;font-size:.92rem"></div>
+
+  <h3 style="margin:1.4em 0 .3em;font-size:1.4rem">Your business basics</h3>
+  <p class="hint">These drive per-location / per-employee pricing — not the auto-build above.</p>
+  <div class="input-grid">
+    <div><label for="in-locations">Locations</label><input type="number" id="in-locations" min="1" value="1"></div>
+    <div><label for="in-stations">POS stations</label><input type="number" id="in-stations" min="0" value="1"><div class="input-note">Auto-set from your answers — editable.</div></div>
+    <div><label for="in-terminals">Payment terminals</label><input type="number" id="in-terminals" min="0" value="1"><div class="input-note">Auto-set from your answers — editable.</div></div>
+    <div><label for="in-employees">Employees on payroll</label><input type="number" id="in-employees" min="0" value="5"></div>
+    <div><label for="in-volume">Monthly card volume (CAD)</label><input type="number" id="in-volume" min="0" value="40000" step="1000"><div class="input-note">From your processor statements if you have them.</div></div>
+    <div><label for="in-ticket">Average card ticket (CAD)</label><input type="number" id="in-ticket" min="1" value="50" step="1"><div class="input-note">Your typical card transaction. Volume ÷ ticket = transactions/month, shown in your numbers.</div></div>
+    <div><label for="in-rate">Current processing rate (%)</label><input type="number" id="in-rate" min="0" max="10" step="0.05" value="2.65"><div class="input-note">Your effective rate. Don't know it? 2.65% is a typical flat rate — an estimate, not your number.</div></div>
+    <div id="wrap-marketplace" style="display:none"><label for="in-marketplace">Monthly delivery-app sales (CAD)</label><input type="number" id="in-marketplace" min="0" value="0" step="500"><div class="input-note">Sales through DoorDash, Uber Eats, Skip.</div></div>
+  </div>
+</section>
+
+
+
+<section class="sim-step wf-step" id="sim-catalog" data-step="3">
+  <h2>3 · Build your stack</h2>
+  <p class="hint">Tick what you have (or plan to get). Quantities adjust per item.</p>
+  <div class="legend">
+    <span><span class="conf official">Official</span> vendor's own price</span>
+    <span><span class="conf reported">Reported</span> reputable third-party</span>
+    <span><span class="conf estimate">Estimate</span> our reasonable estimate</span>
+    <span><span class="conf illus">Illustrative</span> purchase ÷ expected life</span>
+  </div>
+  <div class="typical-wrap">
+    <button id="btn-typical" class="typical-btn">✨ Load a typical setup for my sector</button>
+    <div class="input-note" id="typical-note">Zero-effort path: fills in a normal configuration for your sector. A starting point — not a recommendation. Adjust to match yours.</div>
+  </div>
+  <div class="tier" id="tier-needs"><h3>✅ What you actually need</h3><p class="tier-sub">The core stack — real, verified, useful. Start here.</p><div id="needs-list"></div></div>
+  <div class="tier" id="tier-infra"><h3>🔌 Infrastructure — the network layer</h3><p class="tier-sub" id="infra-sub">Wires, Wi-Fi, firewall, internet. Upfront costs shown as monthly equivalents (purchase ÷ expected life in years), clearly labeled.</p>
+  <div id="infra-list"></div></div>
+  <div class="tier" id="tier-install"><h3>🔧 Installation &amp; setup — paid up front, never monthly</h3><p class="tier-sub">One-time work, due at install. Cable drops and setup are paid once — they never belong in a monthly column. Tick what your installer will do; the labor estimate below comes from the install hours on each hardware item × your tech's rate.</p><div id="install-labor-line"></div><div id="install-list"></div></div>
+  <div class="tier toys" id="tier-toys"><h3>🧸 Toys — nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="toys-list"></div></div>
+</section>
+
+<section class="sim-step wf-step map-section" id="sim-map-section" data-step="3">
+  <h2>Your setup, visualized</h2>
+  <p class="hint">Every device you tick below appears here, in the zone where it lives — with how it's paid for, how it connects, and how long it should last. Schematic, not to scale. It updates live as you change your stack.</p>
+  <div class="map-toolbar">
+    <div class="map-view-toggle" role="group" aria-label="Choose map or list view">
+      <button type="button" id="map-view-svg" class="map-toggle" aria-pressed="true">🗺️ Map view</button>
+      <button type="button" id="map-view-list" class="map-toggle" aria-pressed="false">📋 List view</button>
+    </div>
+    <div class="map-legend" aria-label="Map legend">
+      <span class="lg"><i class="lg-line wired" aria-hidden="true"></i>wired</span>
+      <span class="lg"><i class="lg-line wifi" aria-hidden="true"></i>Wi-Fi</span>
+      <span class="lg"><i class="lg-sq up" aria-hidden="true"></i>paid up front</span>
+      <span class="lg"><i class="lg-sq mo" aria-hidden="true"></i>monthly</span>
+      <span class="lg"><i class="lg-sq free" aria-hidden="true"></i>free / included</span>
+      <span class="lg"><i class="lg-sq quote" aria-hidden="true"></i>quote-based</span>
+      <span class="lg">⚠️ payment device on Wi-Fi</span>
+    </div>
+  </div>
+  <div id="map-alert"></div>
+  <div id="sim-map">
+    <svg id="floorplan" role="group" aria-label="Schematic floor plan of selected equipment. Each device is a button: Tab to move between devices, Enter to jump to it in your stack."></svg>
+  </div>
+  <div id="map-table-wrap" hidden>
+    <table id="map-table">
+      <caption>Your setup as a list — the same data as the map</caption>
+      <thead><tr><th scope="col">Device</th><th scope="col">Zone</th><th scope="col">Qty</th><th scope="col">Link</th><th scope="col">Paid</th><th scope="col">Expected life</th><th scope="col">Support</th><th scope="col">Install</th></tr></thead>
+      <tbody id="map-tbody"></tbody>
+    </table>
+  </div>
+  <p class="map-note" id="map-install-line"></p>
+  <p class="map-note">Link types follow your <a href="#net-plan">network plan</a> (wired / Wi-Fi per zone) — change the plan and the map updates. Money figures are CAD, converted at the stated rates where originally priced in US$ or £.</p>
+</section>
+
+<section class="sim-step wf-step" id="sim-network" data-step="4">
+  <h2>4 · Network + training</h2>
+  <p class="hint">How your sites connect, and what it costs to get your team fluent. Both feed your totals.</p>
+  <div class="infra-ask">
+    <div class="ask"><span class="ask-q">How things connect — handled for you</span>
+      <div class="input-note" style="margin:0">There's no single right answer — so choose per zone in the network plan below. The default is <strong>hybrid</strong>: the devices that take money get cables; the devices that move get Wi-Fi. Guest Wi-Fi is on or off depending on what's normal for your sector (toggle it below). Cable runs and switch ports follow your plan automatically — every auto-added item tells you why it's there.</div>
+    </div>
+  </div>
+  <div id="net-plan"></div>
+  <div class="tier" id="tier-training"><h3>🎓 Training — the cost nobody budgets</h3><p class="tier-sub">A new system isn't live when it's installed — it's live when your people can run it at rush without thinking. Training is paid time, and turnover means you pay it again every year.</p><div id="training-list"></div></div>
+</section>
+
+<section class="sim-step wf-step" id="margin-eaters" data-step="5">
+  <h2>5 · 🦈 Margin eaters — cost of sales, not IT</h2>
+  <p class="hint">Commissions and platform cuts scale with your revenue — they’re <strong>cost-of-sales</strong>, not technology. They’re kept out of your IT stack total on purpose: mixing them in hides how much damage they do.</p>
+  <div class="me-grid">
+    <div class="me-card">
+      <h3>🛵 Delivery-app commissions</h3>
+      <label>Platform<select id="me-platform"></select></label>
+      <label>Plan<select id="me-plan"></select></label>
+      <div class="input-note" id="me-plan-src"></div>
+      <label>Monthly sales through delivery apps (CA$)<input id="me-sales" type="number" min="0" step="100"></label>
+      <label>Roughly what share of sales comes through delivery apps?<input id="me-share" type="range" min="0" max="60" step="1"> <b id="me-share-v"></b></label>
+      <div class="me-result" id="me-comm-result"></div>
+    </div>
+    <div class="me-card">
+      <h3>🏠 Your own ordering instead</h3>
+      <label>Ordering website<select id="me-site"><option value="49">Shopify Basic — $49/mo</option><option value="0">Already have a site — $0</option></select></label>
+      <label>Your delivery cost per order (CA$)<input id="me-fee" type="number" min="0" step="0.5" placeholder="e.g., 6.99"></label>
+      <div class="input-note">Flat-fee courier or your own driver — enter <em>your</em> number. No guesswork.<br>Published flat-fee options (2026-09-28): Uber Direct from <strong>CA$7.99</strong>/delivery (official); DoorDash Drive <strong>$6.99–$10.99</strong>/order (official, currency as printed); SkipGo ~<strong>CA$7–9</strong> (reported).</div>
+      <label>Average delivery ticket (CA$)<input id="me-ticket" type="number" min="1" step="1" value="40"></label>
+      <div class="me-result" id="me-compare-result"></div>
+    </div>
+    <div class="me-card">
+      <h3>🧾 Other platform cut</h3>
+      <p class="input-note">Booking platforms, marketplaces, app stores — anything that takes a % of your revenue. Name it and price it.</p>
+      <label>What is it?<input id="me-other-name" type="text" placeholder="e.g., booking-platform commission"></label>
+      <label>Their cut (%)<input id="me-other-pct" type="number" min="0" max="100" step="0.5" placeholder="e.g., 20"></label>
+      <label>Monthly revenue it applies to (CA$)<input id="me-other-base" type="number" min="0" step="100"></label>
+      <div class="me-result" id="me-other-result"></div>
+    </div>
+  </div>
+  <div class="me-total" id="me-total"></div>
+</section>
+
+<section class="sim-step wf-step" id="sim-results" data-step="6">
+  <h2>6 · Your numbers</h2>
+  <p class="hint">Everything added up — install cost, monthly stack, and processing savings in one place.</p>
+  <div class="input-note" id="me-skipped-note" hidden></div>
+  <div class="proc-line">
+    <span class="tag" style="display:inline-block;background:var(--accent);color:#fff;font-size:.95rem;font-weight:800;letter-spacing:.08em;padding:6px 14px;border-radius:6px;margin-bottom:.8em">Illustrative — not a promise</span>
+    <h3>What you're paying in processing fees right now</h3>
+    <p class="big" id="proc-cost">$0 / month</p>
+    <p style="margin:.4em 0" id="proc-tickets"></p>
+    <p style="margin:.4em 0" id="proc-save"></p>
+    <p style="margin:.4em 0" id="proc-rev"></p>
+    <p style="margin:.4em 0" id="proc-margin"></p>
+    <p class="input-note">Based on the volume and rate you entered above. A 0.5% saving is a common audit finding used here only to show the math — your statements decide the real number.</p>
+  </div>
+  <div class="total-bar">
+    <div id="total-lines"></div>
+    <div class="row grand"><span>Estimated total</span><span id="grand-total">$0/mo</span></div>
+    <div id="rev-lines"></div>
+    <p style="margin:.4em 0" id="labor-line"></p>
+    <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ its expected life — a 5-year terminal costs less per month than a 2-year printer at the same price). Not quotes — your free audit measures your real numbers.</p>
+    <div id="pay-breakout"></div>
+  </div>
+  <div class="save-row">
+    <button id="btn-save-setup" class="typical-btn" style="background:#fff;color:var(--navy);border:2px solid var(--navy)">💾 Save this setup</button>
+    <a href="account.html" class="input-note" style="margin:0">My saved setups →</a>
+    <a href="simulator.html" class="input-note" style="margin:0">↺ Start over</a>
+  </div>
+  <div class="input-note" id="save-note" style="margin-top:10px"></div>
+</section>
+
+<section class="sim-step">
+  <div class="cta-band">
+    <h2>Know your real numbers?</h2>
+    <p>This simulator runs on published prices and estimates. Your statements tell the true story — send us 3–6 months and we'll measure exactly what you're paying, free.</p>
+    <a class="btn" href="contact.html">Get your free processing audit</a>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Simulator figures are estimates from published pricing — your costs will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a> · <a href="pos-services.html">POS services</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+<!-- __SIM_JS__ -->
+<script type="module" src="assets/js/sim-core.6921bad0.js"></script>
+<script type="module" src="assets/js/sim-save.2c8498fb.js"></script>
+<script type="module" src="assets/js/stepper.7f9bc200.js"></script>
+
+  <script type="module" src="assets/js/site-auth.b25b5fe2.js"></script>
+<script type="module">import {S} from "./assets/js/session.d6748862.js"; window.__S = S; setTimeout(()=>{var d=document.getElementById("boot-errors"); d.style.display="block"; d.textContent="S.totals="+JSON.stringify(window.__S.totals)+"\n"+"errors="+(window.__errors.join(" | ")||"none");},12000);</script></body>
+</html>

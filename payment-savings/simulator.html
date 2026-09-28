@@ -891,8 +891,17 @@ const ELOCARE_AUR = {
   breakfix:{label:"Per-visit — quote-based", quote:true, note:"ask Elo reseller"},
   hybrid:{label:"EloCare AUR 3-yr — ~£33/yr", upfront:98.60, years:3, adv:true, note:"replacement shipped next business day if phone support can't fix it; return dead unit in 15 days — advance replacement. £98.60/3-yr (qual.co.uk, UK reseller) — confirm Canada pricing"},
   src:"barcodefactory.com (EloCare onepager); online.qual.co.uk (accessed 2026-09-28)"};
-const SQUARE_SUPPORT = {
-  contract:{label:"No monthly plan published — quote-based", quote:true, note:"no Square-sold monthly hardware support plan found — ask Square Canada support"},
+const STAR_SUPPORT = {
+  contract:{label:"Monthly on-site — quote-based", quote:true, note:"no monthly plan published for Star printers — ask Star reseller (e.g. POSGuys)"},
+  breakfix:{label:"Per-visit — quote-based", quote:true, note:"no published per-visit price — ask reseller"},
+  hybrid:{label:"Swap-A-Star 3-yr — ~US$165 total", upfront:165, years:3, adv:true, note:"next-business-day replacement via 2nd Day Air — ADVANCE REPLACEMENT; buy within 30 days. Example: TSP100III US$165/3-yr (~US$55/yr, posguys.com) — confirm price for your model. Cheaper carry-in alternative: Extend-A-Star 3-yr US$47.50 (no advance replacement)"},
+  src:"posguys.com (accessed 2026-09-28)"};
+const DYMO_SUPPORT = {
+  contract:{label:"No paid plan published — quote-based", quote:true, note:"no paid DYMO manufacturer plan found — ask DYMO support/reseller"},
+  breakfix:{label:"Per-incident — quote-based", quote:true, note:"quote-based at reseller; included warranty is return-to-base with lifetime tech support — not advance replacement"},
+  hybrid:{label:"No hybrid tier — buy a spare", quote:true, note:"DYMO is register-to-extend-and-forget: included 2-yr extends FREE to 3-yr on registration. Price a spare unit instead of a contract"},
+  src:"dymo-label-printers.co.uk (accessed 2026-09-28)"};
+const SQUARE_SUPPORT = {  contract:{label:"No monthly plan published — quote-based", quote:true, note:"no Square-sold monthly hardware support plan found — ask Square Canada support"},
   breakfix:{label:"Per-incident — quote-based", quote:true, note:"under included warranty Square ships a replacement and you return the dead unit in 14 days (advance-replacement-like, defects only)"},
   hybrid:{label:"Buy a spare — no Square hybrid tier", quote:true, note:"Square gear is cheap and self-installed — the real 'hybrid' for an owner-operator is a spare reader/printer on the shelf, not a contract"},
   src:"stocktitan.com (Square Register Canada launch); Amazon warranty PDF (accessed 2026-09-28)"};
@@ -908,7 +917,11 @@ const SUPPORT_BY_LABEL = {
   "Zebra TC26 — ~$882.53": ZEBRA_ONECARE,
   "Countertop — lease $34.95/mo (Moneris Go)": MONERIS_SUPPORT,
   "Moneris Go Restaurant — $64.94/mo": MONERIS_SUPPORT,
-  "Purpose-built — commercial screen (~$550 + $25/mo)": ELOCARE_AUR
+  "Purpose-built — commercial screen (~$550 + $25/mo)": ELOCARE_AUR,
+  "Star SM-L200 — $700.42 MSRP": STAR_SUPPORT,
+  "Star SM-L200 — from $345.34 USD": STAR_SUPPORT,
+  "DYMO LabelWriter 550 — $159.68": DYMO_SUPPORT,
+  "DYMO LabelWriter 550 Turbo — $200": DYMO_SUPPORT
 };
 const SUPPORT_BY_ADDON = {
   "station:printer": EPSON_SITA,

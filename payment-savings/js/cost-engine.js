@@ -8,27 +8,109 @@ function dispAmt(v, cur){ const c = cadOf(v, cur);
 
   function manualDef(item){ return S.DATA.manual.hours[item.id] || null; }
 
+  /* Period label for the labor notes: hoisted so it isn't re-allocated on every call. */
+  const PER_LABEL = {week:"week", payperiod:"pay period", month:"month"};
+
   function ensureManual(st, item){
     const md = manualDef(item); if(!md) return;
     if(st.mhrs === undefined) st.mhrs = (md.hrs[0] + md.hrs[1]) / 2;
     if(st.mwage === undefined) st.mwage = S.DATA.manual.wageDefault;
   }
 
+  /* ---- Labor-time savings (P2): software shrinks the manual hours but never
+     eliminates them. Each manual.json entry carries `residual`: the human
+     hours still required WITH the software (same period), researched where
+     possible, otherwise a clearly-labeled conservative estimate. The savings
+     math always subtracts residual labor — never a 100%-elimination fantasy. ---- */
+
+  function manualLaborMonthly(item, st, md){
+    // Full manual-labor cost of doing it by hand — regardless of the manual toggle.
+    // md is resolved once by the caller when already in hand; resolved here otherwise.
+    if(md === undefined) md = manualDef(item);
+    if(!md) return 0;
+    const mhrs = st && st.mhrs != null ? st.mhrs : (md.hrs[0] + md.hrs[1]) / 2;
+    const wage = st && st.mwage != null ? st.mwage : S.DATA.manual.wageDefault;
+    return mhrs * wage * (S.DATA.manual.perFactor[md.per] || 4.33);
+  }
+
+  function residualMid(md){ return md && md.residual ? (md.residual.hrs[0] + md.residual.hrs[1]) / 2 : 0; }
+
+  function residualMonthly(item, st, md){
+    // Residual labor cost with the software: the hours you still spend in it.
+    if(md === undefined) md = manualDef(item);
+    if(!md || !md.residual) return 0;
+    const wage = st && st.mwage != null ? st.mwage : S.DATA.manual.wageDefault;
+    return residualMid(md) * wage * (S.DATA.manual.perFactor[md.per] || 4.33);
+  }
+
+  function hrsPerWeek(hrs, per){
+    // Convert hours per period to hours per week (for the labor-value lines).
+    return hrs * ((S.DATA.manual.perFactor[per] || 4.33) / 4.33);
+  }
+
+  function laborValueMonthly(item, st, md){
+    // Net monthly labor value of running the software: manual cost minus
+    // residual labor cost. The subscription price is separate — this is the
+    // time side of the ledger.
+    return manualLaborMonthly(item, st, md) - residualMonthly(item, st, md);
+  }
+
   function manualMonthly(item, st){
     const md = manualDef(item); if(!md || !st.manual) return 0;
-    return st.mhrs * st.mwage * (S.DATA.manual.perFactor[md.per] || 4.33);
+    return manualLaborMonthly(item, st);
   }
 
   function manualNetNote(item, opt){
     const st = S.state[item.id];
-    const labor = manualMonthly(item, st);
+    const md = manualDef(item);
+    const labor = manualLaborMonthly(item, st, md);
     const soft = itemMonthlyPreview(item, opt);
-    const net = labor - soft;
-    const per = {week:"week", payperiod:"pay period", month:"month"}[manualDef(item).per];
+    const res = residualMonthly(item, st, md);
+    const net = labor - soft - res; // true comparison: manual vs (software + residual labor)
+    const per = PER_LABEL[md.per];
+    const resHrs = residualMid(md);
     let t = "Going manual saves you " + money(soft) + "/mo in software but costs ~" + money(labor) +
-      "/mo in manager time (" + st.mhrs + " hrs/" + per + " \u00d7 CA$" + st.mwage + "/hr) \u2014 ";
+      "/mo in manager time (" + st.mhrs + " hrs/" + per + " \u00d7 CA$" + st.mwage + "/hr). " +
+      "With the software you'd still spend ~" + resHrs + " hrs/" + per + " in it (~" + money(res) +
+      "/mo of your time) — so the real comparison is " + money(labor) + " manual vs " +
+      money(soft + res) + " (software + your time) \u2014 ";
     t += net >= 0 ? "net: you lose " + money(net) + "/mo." : "net: you come out " + money(-net) + "/mo ahead on paper \u2014 double-check the hours before believing it.";
+    if(md.est || (md.residual && md.residual.est)) t += " (estimates \u2014 your hours win)";
     return t;
+  }
+
+  /* ---- Software-mode labor line: shown on a checked software item so the
+     labor value is visible without flipping to manual. Never claims the
+     software eliminates the work — residual hours are stated up front. ---- */
+  function softwareLaborNote(item, st){
+    const md = manualDef(item); if(!md) return "";
+    const manWk = hrsPerWeek(st.mhrs != null ? st.mhrs : (md.hrs[0] + md.hrs[1]) / 2, md.per);
+    const resWk = hrsPerWeek(residualMid(md), md.per);
+    const val = laborValueMonthly(item, st, md);
+    if(val <= 0) return "";
+    const est = (md.est || (md.residual && md.residual.est)) ? " (estimate)" : "";
+    const per = PER_LABEL[md.per];
+    return '<div class="detail labor-line">💪 vs fully manual: saves ~' + (Math.round((manWk - resWk) * 10) / 10) +
+      " hrs/" + per + " (" + (Math.round(manWk * 10) / 10) + " by hand − " +
+      (Math.round(resWk * 10) / 10) + " you still spend in the software) — net labor value ~" +
+      money(val) + "/mo at CA$" + (st.mwage != null ? st.mwage : S.DATA.manual.wageDefault) + "/hr" + est + ".</div>";
+  }
+
+  /* ---- Stack-wide labor value: summed over every checked software item that
+     has a manual-labor definition (manual-mode items are excluded — no
+     software, no labor value). Feeds the results-step labor line. ---- */
+  function stackLaborValue(){
+    let saveWk = 0, resWk = 0, valMo = 0, est = false;
+    allItems().forEach(item => {
+      const md = manualDef(item); if(!md) return;
+      const st = S.state[item.id]; if(!st || !st.checked || st.manual) return;
+      const manH = st.mhrs != null ? st.mhrs : (md.hrs[0] + md.hrs[1]) / 2;
+      saveWk += hrsPerWeek(manH - residualMid(md), md.per);
+      resWk += hrsPerWeek(residualMid(md), md.per);
+      valMo += laborValueMonthly(item, st, md);
+      if(md.est || (md.residual && md.residual.est)) est = true;
+    });
+    return { saveWk, resWk, valMo, est };
   }
 
   // Sector norms for the % of revenue view (from _research/sector-it-cost-benchmarks.md, accessed 2026-09-28)
@@ -250,7 +332,7 @@ function lifeDataFor(opt){
   return (opt._item && S.DATA.lifecycle[opt._item]) || null;
 }
 
-export { cadOf, dispAmt, lifeDataFor, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, switchFor, perLabel };
+export { cadOf, dispAmt, lifeDataFor, itemMonthlyPreview, itemMonthlyPreviewNoSupport, findItem, lifeMonths, lifeLabel, builderPerStation, supportMonthlyFor, supportBaseMonthly, supportIncidentMonthly, leaseMonthly, supportPlanPriced, itemMonthly, itemUpfront, allItems, itemQty, installHrsMid, installHrsLabel, installHoursTotal, trainEmps, trainingInitCost, trainingOngoingMonthly, manualDef, ensureManual, manualMonthly, manualNetNote, manualLaborMonthly, residualMonthly, laborValueMonthly, softwareLaborNote, stackLaborValue, switchFor, perLabel };
 
   function itemMonthlyPreviewNoSupport(item, opt){
     const inp = S.getInputs();

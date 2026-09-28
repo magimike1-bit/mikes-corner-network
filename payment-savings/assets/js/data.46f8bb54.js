@@ -19,10 +19,11 @@ const FILES = {
   manual: "manual.json",
   sim: "sim.json",
   network: "network.json",
+  subsectors: "subsectors.json",
 };
 
 // __DATA_VERSIONS__ (build rewrites this line)
-const DATA_VERSIONS = {"benchmarks.json":"407dc674","fx.json":"17364eea","hardware.json":"2cae3605","install.json":"8d1e0f33","lifecycle.json":"21ca534f","manual.json":"5e431e4c","network.json":"7b3c69d9","rec-tiers.json":"113c24fe","sim.json":"32c73b5b","support.json":"9bc86229","surcharge-rules.json":"0dde07aa","training.json":"e181cba5","typical.json":"38ff6d8f"};
+const DATA_VERSIONS = {"benchmarks.json":"407dc674","fx.json":"17364eea","hardware.json":"2cae3605","install.json":"8d1e0f33","lifecycle.json":"21ca534f","manual.json":"4c977195","network.json":"7b3c69d9","rec-tiers.json":"113c24fe","sim.json":"32c73b5b","subsectors.json":"bbe646e9","support.json":"9bc86229","surcharge-rules.json":"0dde07aa","training.json":"e181cba5","typical.json":"15ef7fcb"};
 
 function dataUrl(file) {
   const v = DATA_VERSIONS[file];
@@ -30,12 +31,13 @@ function dataUrl(file) {
 }
 
 export async function loadData() {
-  const out = {};
-  for (const [key, file] of Object.entries(FILES)) {
+  const entries = await Promise.all(Object.entries(FILES).map(async ([key, file]) => {
     const res = await fetch(dataUrl(file));
     if (!res.ok) throw new Error("simulator data failed to load: " + file + " (" + res.status + ")");
-    out[key] = await res.json();
-  }
+    return [key, await res.json()];
+  }));
+  const out = {};
+  for (const [key, data] of entries) out[key] = data;
   stampCatalog(out);
   return out;
 }

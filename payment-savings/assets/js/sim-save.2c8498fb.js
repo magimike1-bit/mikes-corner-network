@@ -4,14 +4,14 @@
  * Loaded as a second module on simulator.html; sim-core is already booted
  * by the time this module's top-level code runs (import ordering).
  */
-import { S } from './session.babf8dd5.js';
+import { S } from './session.d6748862.js';
 import {
   loadTypical, renderCatalog, renderSectors, recalc, applySectorInfraDefaults,
-} from './sim-core.18b35d49.js';
+} from './sim-core.6921bad0.js';
 import { saveSimState, loadSimState, isConfigured, guestNudge } from './db.786d07d3.js';
 
 const INPUT_IDS = ["in-locations", "in-stations", "in-terminals", "in-employees",
-  "in-volume", "in-rate", "in-revenue", "in-marketplace", "in-tables", "in-bar",
+  "in-volume", "in-ticket", "in-subsector", "in-rate", "in-revenue", "in-marketplace", "in-tables", "in-bar",
   "in-takeout", "in-drivethru", "in-seats", "in-kiosks", "in-sqft-r", "in-weigh",
   "in-sco", "in-rooms", "in-floors", "in-fb", "in-sqft-g", "in-deli", "in-lottery",
   "in-chairs", "in-trooms", "in-retailct"];
@@ -22,7 +22,7 @@ export function captureSetup() {
   const inputs = {};
   INPUT_IDS.forEach((id) => { const el = document.getElementById(id); if (el) inputs[id] = el.value; });
   return {
-    v: 1, savedAt: new Date().toISOString(), sector: S.sector, inputs,
+    v: 1, savedAt: new Date().toISOString(), sector: S.sector, subsector: S.subsector, inputs,
     state: clone(S.state), TRAIN: clone(S.TRAIN),
     techRate: S.techRate, guestWifi: S.guestWifi,
     terminalsTouched: S.terminalsTouched, pinSync: S.pinSync,
@@ -34,6 +34,7 @@ export function captureSetup() {
 export function applySetup(saved) {
   if (!saved || saved.v !== 1 || !saved.state) throw new Error("incompatible-saved-setup");
   S.sector = saved.sector || "retail";
+  S.subsector = saved.subsector || null; // P3: null = sector default (first listed sub-sector)
   renderSectors(); applySectorInfraDefaults(); loadTypical();
   Object.entries(saved.inputs || {}).forEach(([id, v]) => {
     const el = document.getElementById(id); if (el && v !== undefined) el.value = v;

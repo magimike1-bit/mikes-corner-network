@@ -1,4 +1,4 @@
-import { S } from './session.babf8dd5.js';
+import { S } from './session.d6748862.js';
 import { money } from './util.03612f15.js';
 /* stepper.js — guided 6-step workflow shell for the cost simulator.
    Owns: sticky chrome (progress bar + "Your numbers" strip), hash routing
@@ -36,7 +36,7 @@ function renderStrip(){
   const el = document.getElementById("wf-strip");
   if(!el) return;
   if(!t){
-    /* sim-core is still loading its data (sequential JSON fetches) — show a
+    /* sim-core is still loading its data (parallel JSON fetch) — show a
        neutral loading state, never misleading $0s. sim-core's recalc() calls
        S.renderStrip() as soon as the first real totals exist. */
     el.innerHTML =

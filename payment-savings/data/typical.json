@@ -10,8 +10,9 @@
       "basics": {
         "locations": 1,
         "employees": 5,
-        "volume": 60000,
-        "rate": 2.65
+        "volume": 40000,
+        "rate": 2.65,
+        "ticket": 50
       },
       "check": [
         "pos",
@@ -42,9 +43,10 @@
       "basics": {
         "locations": 1,
         "employees": 15,
-        "volume": 120000,
+        "volume": 50000,
         "rate": 2.65,
-        "marketplace": 8000
+        "marketplace": 8000,
+        "ticket": 55
       },
       "check": [
         "pos",
@@ -75,9 +77,10 @@
       "basics": {
         "locations": 1,
         "employees": 8,
-        "volume": 80000,
+        "volume": 30000,
         "rate": 2.65,
-        "marketplace": 12000
+        "marketplace": 12000,
+        "ticket": 12
       },
       "check": [
         "pos",
@@ -106,8 +109,9 @@
       "basics": {
         "locations": 1,
         "employees": 20,
-        "volume": 150000,
-        "rate": 2.65
+        "volume": 80000,
+        "rate": 2.65,
+        "ticket": 175
       },
       "check": [
         "pms",
@@ -133,8 +137,9 @@
       "basics": {
         "locations": 1,
         "employees": 12,
-        "volume": 200000,
-        "rate": 2.65
+        "volume": 150000,
+        "rate": 2.65,
+        "ticket": 30
       },
       "check": [
         "pos",
@@ -166,8 +171,9 @@
       "basics": {
         "locations": 1,
         "employees": 4,
-        "volume": 35000,
-        "rate": 2.65
+        "volume": 28000,
+        "rate": 2.65,
+        "ticket": 75
       },
       "check": [
         "booking",

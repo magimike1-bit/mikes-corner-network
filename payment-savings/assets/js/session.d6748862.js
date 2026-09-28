@@ -9,12 +9,11 @@
 export const S = {
   DATA: null,            // catalog data from data/*.json (set by sim-core at boot)
   sector: "retail",
+  subsector: null,       // sub-sector id within the sector (P3 picker; null = sector default, first listed)
   state: {},             // itemId -> {checked, optIdx, qty, ...}
   TRAIN: { wage: 18, hrsPerEmp: 6, emps: null, empsTouched: false,
     trainerMode: "self", trainerHrs: 4, turnover: 0.75, hireHrs: 4 },
   techRate: 125,
-  leaseTerm: 36,      // lease configurator default term (months)
-  leaseBuyout: "one", // "one" ($1 buyout) | "ten" (10% option) | "fmv"
   guestWifi: false,
   terminalsTouched: false,
   pinSync: false,

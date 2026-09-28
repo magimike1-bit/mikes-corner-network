@@ -11,11 +11,11 @@
  */
 import {
   getUser, signUp, signIn, signInMagic, resetPassword, signOut, onAuthChange,
-} from './sb.07f755e1.js';
+} from './sb.c957517c.js';
 import {
   listSimStates, deleteSimState, listRateRuns, listFeeEntries, detectCreep,
   listAlertSubs, referralLink, claimPendingReferral, getReferralStats, guestNudge,
-} from './db.e09aae23.js';
+} from './db.786d07d3.js';
 import { lineChart, fmtBp } from './chart.42f77134.js';
 
 /* ---------- tiny DOM helpers (browser only, called after boot) ---------- */
@@ -167,15 +167,15 @@ function guestBanner() {
     <br><a class="btn outline" style="margin-top:10px" href="#auth-card">Sign in</a></div>`);
 }
 
-async function setupsSection() {
+/* Sections take pre-fetched data (renderDashboard fetches everything in
+   parallel). A null dataset means the fetch failed → friendly error state. */
+function setupsSection(states) {
   const sec = el(`<section class="acct-block">
     <h2 class="section-title">Saved simulator setups</h2>
     <p class="section-sub">Reopen a saved configuration in the cost simulator, or remove one you no longer need.</p>
     <div class="acct-body"></div></section>`);
   const body = sec.querySelector(".acct-body");
-  let states = [];
-  try { states = await listSimStates(); }
-  catch (e) {
+  if (states === null) {
     body.innerHTML = `<p class="acct-msg">Couldn't load your saved setups — try refreshing the page.</p>`;
     return sec;
   }
@@ -205,7 +205,7 @@ async function setupsSection() {
       if (!window.confirm(`Delete “${delBtn.dataset.name}”? This can't be undone.`)) return;
       try {
         await deleteSimState(delBtn.dataset.del);
-        const fresh = await setupsSection();
+        const fresh = setupsSection(await listSimStates().catch(() => null));
         sec.replaceWith(fresh);
       } catch (err) {
         window.alert("Couldn't delete that setup — try again.");
@@ -215,15 +215,13 @@ async function setupsSection() {
   return sec;
 }
 
-async function rateSection() {
+function rateSection(runs) {
   const sec = el(`<section class="acct-block">
     <h2 class="section-title">Effective-rate history</h2>
     <p class="section-sub">What you actually paid per dollar processed — from the effective-rate calculator.</p>
     <div class="acct-body"></div></section>`);
   const body = sec.querySelector(".acct-body");
-  let runs = [];
-  try { runs = await listRateRuns(50); }
-  catch (e) { body.innerHTML = `<p class="acct-msg">Couldn't load your rate history — try refreshing the page.</p>`; return sec; }
+  if (runs === null) { body.innerHTML = `<p class="acct-msg">Couldn't load your rate history — try refreshing the page.</p>`; return sec; }
   if (!runs.length) {
     body.innerHTML = `<p>No runs yet. <a href="rate-calculator.html">Run the effective-rate calculator</a> and your history will land here.</p>`;
     return sec;
@@ -244,15 +242,13 @@ async function rateSection() {
   return sec;
 }
 
-async function feeSection() {
+function feeSection(entries) {
   const sec = el(`<section class="acct-block">
     <h2 class="section-title">Fee-creep tracker</h2>
     <p class="section-sub">Month by month, from the fee-creep tracker. We flag it when your latest rate drifts meaningfully above your median.</p>
     <div class="acct-body"></div></section>`);
   const body = sec.querySelector(".acct-body");
-  let entries = [];
-  try { entries = await listFeeEntries(); }
-  catch (e) { body.innerHTML = `<p class="acct-msg">Couldn't load your fee entries — try refreshing the page.</p>`; return sec; }
+  if (entries === null) { body.innerHTML = `<p class="acct-msg">Couldn't load your fee entries — try refreshing the page.</p>`; return sec; }
   if (!entries.length) {
     body.innerHTML = `<p>No months logged yet. <a href="fee-tracker.html">Log a month in the fee-creep tracker</a> and we'll watch for drift.</p>`;
     return sec;
@@ -280,7 +276,7 @@ async function feeSection() {
   return sec;
 }
 
-async function alertsSection(creepActive) {
+function alertsSection(creepActive, subs) {
   const sec = el(`<section class="acct-block">
     <h2 class="section-title">Alert center</h2>
     <p class="section-sub">What we've flagged for you, and which rate-change topics you're subscribed to.</p>
@@ -290,8 +286,7 @@ async function alertsSection(creepActive) {
     body.appendChild(el(`<div class="acct-alert"><strong>Fee creep</strong> — your latest month came in above your median rate.
       <a href="fee-tracker.html">Review the months</a> or <a href="contact.html">ask for a free audit</a>.</div>`));
   }
-  let subs = [];
-  try { subs = await listAlertSubs(); } catch (e) { /* treat as none */ }
+  subs = Array.isArray(subs) ? subs : [];
   if (subs.length) {
     const list = el(`<div></div>`);
     list.appendChild(el(`<h3>Your alert subscriptions</h3>`));
@@ -310,7 +305,7 @@ async function alertsSection(creepActive) {
   return sec;
 }
 
-async function referralsSection(guest) {
+function referralsSection(guest, stats, link) {
   const sec = el(`<section class="acct-block">
     <h2 class="section-title">Referrals</h2>
     <p class="section-sub">Share your link with a business owner who'd benefit from an audit.</p>
@@ -320,10 +315,8 @@ async function referralsSection(guest) {
     body.innerHTML = `<p>Your personal referral link appears here once you <a href="#auth-card">sign in</a>. <a href="referrals.html">Read the referral terms</a>.</p>`;
     return sec;
   }
-  let stats = { clicks: 0, signups: 0, audits: 0 };
-  let link = "";
-  try { stats = await getReferralStats(); } catch (e) { /* zeros */ }
-  try { link = await referralLink(); } catch (e) { link = ""; }
+  stats = stats || { clicks: 0, signups: 0, audits: 0 };
+  link = link || "";
   body.appendChild(el(`<div class="acct-stat-grid">
       <div class="acct-stat"><div class="n">${esc(stats.clicks)}</div><div class="l">link clicks</div></div>
       <div class="acct-stat"><div class="n">${esc(stats.signups)}</div><div class="l">sign-ups</div></div>
@@ -355,19 +348,27 @@ async function renderDashboard(app, user) {
     dash.appendChild(el(`<p class="acct-email">Signed in as ${email}</p>`));
   }
 
-  // fee data first: the alerts section needs to know whether creep is active
+  // Fetch all independent datasets in parallel. Fee entries are fetched once
+  // and shared: creep detection and the fee table use the same data.
+  const [states, runs, entries, subs, refStats, refLink] = await Promise.all([
+    listSimStates().catch(() => null),
+    listRateRuns(50).catch(() => null),
+    listFeeEntries().catch(() => null),
+    listAlertSubs().catch(() => null),
+    guest ? { clicks: 0, signups: 0, audits: 0 } : getReferralStats().catch(() => null),
+    guest ? "" : referralLink().catch(() => ""),
+  ]);
   let creepActive = false;
   try {
-    const entries = await listFeeEntries();
-    const r = detectCreep(entries, 15);
+    const r = detectCreep(entries || [], 15);
     creepActive = !!(r && r.creepBp > 0);
   } catch (e) { /* alerts section handles its own data */ }
 
-  dash.appendChild(await setupsSection());
-  dash.appendChild(await rateSection());
-  dash.appendChild(await feeSection());
-  dash.appendChild(await alertsSection(creepActive));
-  dash.appendChild(await referralsSection(guest));
+  dash.appendChild(setupsSection(states));
+  dash.appendChild(rateSection(runs));
+  dash.appendChild(feeSection(entries));
+  dash.appendChild(alertsSection(creepActive, subs));
+  dash.appendChild(referralsSection(guest, refStats, refLink));
 
   const signout = el(`<section class="acct-block"><button type="button" class="btn outline" id="acct-signout">Sign out</button></section>`);
   dash.appendChild(signout);
@@ -386,25 +387,48 @@ function claimOnce() {
 }
 
 let authWatching = false;
+// Guards the double-render race: boot() runs on DOMContentLoaded AND again
+// when onAuthStateChange fires INITIAL_SESSION, and sign-out triggers both
+// the button and the SIGNED_OUT event. A superseded boot bails before it can
+// append a second dashboard (duplicated IDs, doubled handlers).
+let bootSeq = 0;
+let bootDoneSeq = 0;  // seq of the last boot that finished rendering
 
 async function boot() {
+  const my = ++bootSeq;
   const app = document.getElementById("account-app");
   if (!app) return;
-  // Re-render on every auth state change (sign in / out / token refresh).
+  // Re-render only on real session changes. TOKEN_REFRESHED fires roughly
+  // hourly and must not re-run the whole dashboard fetch waterfall.
   if (!authWatching) {
     authWatching = true;
-    try { onAuthChange((event, session) => { if (session) claimOnce(); boot(); }); }
+    try {
+      onAuthChange((event, session) => {
+        if (session) claimOnce();
+        if (event === "SIGNED_IN" || event === "SIGNED_OUT" ||
+            event === "INITIAL_SESSION" || event === "LOCAL_MODE") boot();
+      });
+    }
     catch (e) { /* local mode */ }
   }
   app.innerHTML = "";
   let user = null;
   try { user = await getUser(); } catch (e) { user = null; }
+  if (my !== bootSeq) return;
   if (user) {
     claimOnce();
     await renderDashboard(app, user);
   } else {
     renderAuthCard(app);
     await renderDashboard(app, null);
+  }
+  // Superseded while rendering: clear only if no newer boot has finished
+  // since (a newer boot that already rendered owns the DOM; a newer boot
+  // still fetching will fill it).
+  if (my !== bootSeq) {
+    if (bootDoneSeq < my) app.innerHTML = "";
+  } else {
+    bootDoneSeq = my;
   }
 }
 

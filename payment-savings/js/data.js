@@ -19,6 +19,7 @@ const FILES = {
   manual: "manual.json",
   sim: "sim.json",
   network: "network.json",
+  subsectors: "subsectors.json",
 };
 
 // __DATA_VERSIONS__ (build rewrites this line)
@@ -30,12 +31,13 @@ function dataUrl(file) {
 }
 
 export async function loadData() {
-  const out = {};
-  for (const [key, file] of Object.entries(FILES)) {
+  const entries = await Promise.all(Object.entries(FILES).map(async ([key, file]) => {
     const res = await fetch(dataUrl(file));
     if (!res.ok) throw new Error("simulator data failed to load: " + file + " (" + res.status + ")");
-    out[key] = await res.json();
-  }
+    return [key, await res.json()];
+  }));
+  const out = {};
+  for (const [key, data] of entries) out[key] = data;
   stampCatalog(out);
   return out;
 }

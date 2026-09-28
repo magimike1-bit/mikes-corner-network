@@ -38,6 +38,7 @@ globalThis.addEventListener = () => {}; globalThis.removeEventListener = () => {
 globalThis.innerWidth = 1440;
 globalThis.location = { hash: "", href: "http://localhost/simulator.html", search: "" };
 globalThis.localStorage = { _m: {}, getItem(k) { return this._m[k] ?? null; }, setItem(k, v) { this._m[k] = String(v); }, removeItem(k) { delete this._m[k]; } };
+globalThis.sessionStorage = { _m: {}, getItem(k) { return this._m[k] ?? null; }, setItem(k, v) { this._m[k] = String(v); }, removeItem(k) { delete this._m[k]; } };
 globalThis.alert = () => {};
 globalThis.fetch = async (url) => {
   const m = String(url).match(/data\/([a-z-]+\.json)/);
@@ -109,6 +110,64 @@ console.log(`   map wifi warning for ${payZone.id}: ${svgAfter !== svgBefore ? "
 let installMonthly = 0;
 for (const it of S.DATA.hardware.install) installMonthly += ce.itemMonthly(it, inp);
 eq("install-tier monthly = 0", installMonthly, 0);
+
+// 6. P1: ticket default flows loadTypical -> getInputs for all six sectors; transactions line renders
+{
+  let allTick = true;
+  for (const sec of ["retail","restaurant","qsr","hotel","grocery","salon"]) {
+    S.sector = sec; core.loadTypical();
+    const got = S.getInputs().ticket;
+    const want = S.DATA.typical.setups[sec].basics.ticket;
+    if (!(got > 0) || got !== want) { allTick = false; console.log(`FAIL P1 ticket ${sec}: got ${got}, want ${want}`); }
+  }
+  allTick ? pass++ : fail++;
+  console.log("   P1 tickets:", ["retail","restaurant","qsr","hotel","grocery","salon"].map(s => s + "=" + S.DATA.typical.setups[s].basics.ticket).join(" "));
+  S.sector = "retail"; core.loadTypical(); core.recalc();
+  /card transactions\/month/.test(ids["proc-tickets"].innerHTML) ? pass++ : (fail++, console.log("FAIL P1 proc-tickets line missing: " + ids["proc-tickets"].innerHTML));
+}
+
+// 7. P2: residual labor never exceeds manual; stack labor value is positive; card line renders
+{
+  let ok = true;
+  for (const it of ce.allItems()) {
+    const md = ce.manualDef(it); if (!md) continue;
+    const st = S.state[it.id];
+    const man = ce.manualLaborMonthly(it, st);
+    const res = ce.residualMonthly(it, st);
+    if (!(res >= 0 && res <= man)) { ok = false; console.log(`FAIL P2 residual > manual for ${it.id}: ${res} > ${man}`); }
+    if (!(ce.laborValueMonthly(it, st) >= 0)) { ok = false; console.log(`FAIL P2 negative labor value for ${it.id}`); }
+  }
+  ok ? pass++ : fail++;
+  const stack = ce.stackLaborValue();
+  (stack.valMo > 0 && stack.saveWk > 0) ? pass++ : (fail++, console.log(`FAIL P2 stackLaborValue: ${JSON.stringify(stack)}`));
+  console.log(`   P2 stack labor: saves ${stack.saveWk.toFixed(1)} hrs/wk (~$${stack.valMo.toFixed(0)}/mo), residual ${stack.resWk.toFixed(1)} hrs/wk`);
+  const manualItem = ce.allItems().find(it => ce.manualDef(it));
+  const note = manualItem ? ce.softwareLaborNote(manualItem, S.state[manualItem.id] || {}) : "";
+  /vs fully manual/.test(note) ? pass++ : (fail++, console.log("FAIL P2 softwareLaborNote empty: " + note.slice(0, 80)));
+}
+
+// 8. P3: sub-sectors load for all six sectors; picker defaults + persists through save/restore
+{
+  const subs = S.DATA.subsectors.sectors;
+  const all6 = ["retail","restaurant","qsr","hotel","grocery","salon"].every(k =>
+    Array.isArray(subs[k]) && subs[k].length > 0 && subs[k].every(s => s.margin > 0 && s.margin < 50 && s.label && s.src));
+  all6 ? pass++ : (fail++, console.log("FAIL P3 subsectors missing/invalid for a sector"));
+  S.sector = "restaurant"; S.subsector = null; core.renderSubsectors();
+  const dflt = core.subsectorDef();
+  (dflt && typeof dflt.margin === "number") ? pass++ : (fail++, console.log("FAIL P3 subsectorDef default"));
+  console.log(`   P3 restaurant default: ${dflt && dflt.label} @ ${dflt && dflt.margin}% net margin`);
+  // margin-as-share-of-margin line renders when revenue is present
+  ids["in-revenue"].value = "600000";
+  core.recalc();
+  /of that margin/.test(ids["proc-margin"].innerHTML) ? pass++ : (fail++, console.log("FAIL P3 proc-margin line missing: " + ids["proc-margin"].innerHTML.slice(0, 100)));
+  // sub-sector survives a save/restore round-trip
+  const save = await import(ROOT + "/js/sim-save.js");
+  const cap = save.captureSetup();
+  (cap.subsector === S.subsector) ? pass++ : (fail++, console.log(`FAIL P3 captureSetup subsector: ${cap.subsector}`));
+  S.subsector = null;
+  save.applySetup(cap);
+  (S.subsector === cap.subsector) ? pass++ : (fail++, console.log(`FAIL P3 applySetup subsector: ${S.subsector}`));
+}
 
 console.log(`\nINTEGRATION: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

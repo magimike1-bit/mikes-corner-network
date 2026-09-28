@@ -1,71 +1,259 @@
-/* Hard Drive Health — clean, simple, readable */
+/* Hard Drive Health — clean, technical, trustworthy.
+   Palette: deep teal + dark slate hero + amber warning accent. */
 :root {
-  --ink: #1a1a1a;
-  --muted: #5c5c5c;
-  --accent: #0d7a5f;
+  --ink: #12211d;
+  --muted: #5a6b66;
+  --accent: #0d7a5f;       /* teal */
+  --accent-deep: #0a5f4b;
+  --alert: #c26a1b;        /* amber — warnings */
+  --alert-bg: #fdf3e7;
   --bg: #ffffff;
-  --wash: #f2f8f5;
+  --wash: #f0f7f4;
   --line: #dfe8e3;
+  --hero1: #0f2a26;
+  --hero2: #15534a;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--body);
   color: var(--ink);
   background: var(--bg);
   line-height: 1.65;
 }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- header / nav ---------- */
 .site-header {
-  background: var(--wash);
+  background: var(--card, #fff);
   border-bottom: 1px solid var(--line);
-  padding: 28px 0 20px;
-}
-.brand {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--ink);
-  text-decoration: none;
-}
-.tagline { color: var(--muted); margin: 4px 0 0; }
-main { padding: 32px 0 48px; }
-.intro h1 { font-size: 2rem; margin: 0 0 12px; }
-.intro p { color: var(--muted); font-size: 1.05rem; }
-.posts h2 { font-size: 1.25rem; margin: 36px 0 16px; }
-.card {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 18px 20px;
-  margin-bottom: 14px;
+  padding: 18px 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
   background: #fff;
 }
-.card h3 { margin: 0 0 8px; font-size: 1.1rem; }
-.card h3 a { color: var(--accent); text-decoration: none; }
-.card h3 a:hover { text-decoration: underline; }
-.card p { margin: 0; color: var(--muted); }
-.post h1 { font-size: 1.8rem; margin-bottom: 4px; }
-.post .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
-.post h2 { font-size: 1.25rem; margin-top: 32px; }
-.post code {
+.brand {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.brand::before { content: "💾 "; }
+.tagline { color: var(--muted); margin: 2px 0 0; font-size: 0.92rem; }
+.site-nav { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 12px; font-size: 0.95rem; }
+.site-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  padding-bottom: 12px;
+  border-bottom: 3px solid transparent;
+}
+.site-nav a:hover { color: var(--accent-deep); }
+.site-nav a.active { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* ---------- hero ---------- */
+.hero {
+  margin: 26px 0 10px;
+  padding: 46px 36px 40px;
+  border-radius: 18px;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.025) 0 12px, transparent 12px 24px),
+    linear-gradient(135deg, var(--hero1) 0%, var(--hero2) 100%);
+  color: #eef6f3;
+  box-shadow: 0 12px 32px rgba(15, 42, 38, .30);
+}
+.hero .hero-kicker {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9fe0cb;
+  border: 1px solid rgba(159, 224, 203, .35);
+  border-radius: 6px;
+  padding: 5px 12px;
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-size: 2.3rem;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+.hero h1 .hl { color: #7fe0ba; }
+.hero p.lead { color: #c3d8d1; font-size: 1.05rem; max-width: 38em; margin: 0 0 24px; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 12px 26px;
+  border-radius: 10px;
+  transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.btn:hover { background: #128a6c; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(13, 122, 95, .45); }
+.btn.ghost {
+  background: transparent;
+  color: #eef6f3;
+  border: 1px solid rgba(238, 246, 243, .4);
+}
+.btn.ghost:hover { border-color: #7fe0ba; color: #7fe0ba; background: rgba(255,255,255,.05); }
+.hero-chips { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-chips span {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: #c3d8d1;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  padding: 4px 13px;
+}
+.hero-chips .dot { color: #7fe0ba; margin-right: 6px; }
+
+/* ---------- guide cards ---------- */
+main { padding: 22px 0 48px; }
+.posts h2 {
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+  margin: 38px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.posts h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.cards { display: grid; gap: 14px; }
+@media (min-width: 640px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+  .card.featured { grid-column: 1 / -1; }
+}
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 6px rgba(18, 33, 29, .04);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(13, 122, 95, .14);
+  border-color: #b9dccf;
+}
+.card.featured {
+  border-left: 4px solid var(--accent);
+  background: linear-gradient(180deg, #fbfdfc 0%, #fff 100%);
+}
+.card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.card-emoji {
+  font-size: 1.55rem;
+  width: 50px; height: 50px;
+  display: inline-flex; align-items: center; justify-content: center;
   background: var(--wash);
   border: 1px solid var(--line);
+  border-radius: 12px;
+  flex: 0 0 auto;
+}
+.badge {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: #e3f3ed;
+  border-radius: 6px;
+  padding: 3px 9px;
+  margin-left: auto;
+}
+.badge.alert { color: var(--alert); background: var(--alert-bg); }
+.card h3 { margin: 0 0 8px; font-size: 1.12rem; letter-spacing: -0.01em; }
+.card h3 a { color: var(--ink); text-decoration: none; }
+.card h3 a:hover { color: var(--accent-deep); text-decoration: underline; text-decoration-thickness: 2px; }
+.card p { margin: 0; color: var(--muted); font-size: 0.96rem; }
+
+/* ---------- trust strip ---------- */
+.trust {
+  margin: 42px 0 8px;
+  padding: 24px 28px;
+  background: var(--wash);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.trust .trust-icon { font-size: 1.8rem; line-height: 1.2; }
+.trust p { margin: 0; font-size: 0.98rem; color: var(--ink); }
+.trust p strong { display: block; margin-bottom: 4px; font-size: 1.02rem; }
+
+/* ---------- article pages ---------- */
+.post h1 { font-size: 1.9rem; margin-bottom: 4px; letter-spacing: -0.02em; line-height: 1.25; }
+.post .meta {
+  color: var(--accent-deep);
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: var(--mono);
+  letter-spacing: 0.03em;
+  margin-bottom: 24px;
+}
+.post h2 {
+  font-size: 1.32rem;
+  margin-top: 36px;
+  letter-spacing: -0.01em;
+  padding-left: 12px;
+  border-left: 4px solid var(--accent);
+}
+.post p, .post li { font-size: 1.02rem; }
+.post li { margin-bottom: 0.5em; }
+.post a { color: var(--accent-deep); }
+.post a:hover { color: var(--accent); }
+.post code {
+  font-family: var(--mono);
+  background: #0f2a26;
+  color: #9fe0cb;
   border-radius: 4px;
-  padding: 1px 6px;
-  font-size: 0.92em;
+  padding: 2px 7px;
+  font-size: 0.9em;
 }
 .post pre {
-  background: var(--wash);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 14px 16px;
+  background: #0f2a26;
+  color: #d7efe7;
+  border-radius: 8px;
+  padding: 16px 18px;
   overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.92rem;
 }
-.post pre code { background: none; border: none; padding: 0; }
-.post table { border-collapse: collapse; width: 100%; margin: 16px 0; }
-.post th, .post td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; }
-.post th { background: var(--wash); }
-.back { display: inline-block; margin-bottom: 20px; color: var(--accent); text-decoration: none; }
-.back:hover { text-decoration: underline; }
+.post pre code { background: none; color: inherit; border: none; padding: 0; }
+.post table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.96rem; }
+.post th, .post td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; }
+.post th { background: var(--wash); font-weight: 700; }
+.alert {
+  border: 1px solid #eec27f;
+  border-left: 4px solid var(--alert);
+  background: var(--alert-bg);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 22px 0;
+  font-size: 0.97rem;
+}
+.alert strong { color: var(--alert); }
+.back {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--accent-deep);
+  text-decoration: none;
+  font-weight: 700;
+}
+.back:hover { color: var(--accent); }
 /* Ad slot placeholder — style only applies once you paste real ad code */
 .ad-slot {
   border: 1px dashed var(--line);
@@ -78,12 +266,23 @@ main { padding: 32px 0 48px; }
 }
 .site-footer {
   border-top: 1px solid var(--line);
-  padding: 20px 0 32px;
+  padding: 20px 0 34px;
   color: var(--muted);
   font-size: 0.9rem;
+  background: #fafcfb;
 }
+.hero-plain{padding:8px 0 0}
+.hero-plain h1{font-size:2rem;margin:0 0 12px;letter-spacing:-0.02em}
+.hero-plain .lead{color:var(--muted);font-size:1.05rem}
+.hero-plain .lead a{color:var(--accent)}
+
 @media (max-width: 600px) {
-  .intro h1 { font-size: 1.6rem; }
+  .hero { padding: 32px 22px 28px; border-radius: 14px; margin-top: 18px; }
+  .hero h1 { font-size: 1.75rem; }
+  .hero-cta .btn { flex: 1 1 100%; text-align: center; }
+  .trust { flex-direction: column; gap: 10px; }
+  .post h1 { font-size: 1.6rem; }
+  .hero-plain h1{font-size:1.6rem}
 }
 
 .site-footer .ai-disclosure{font-size:.85em;opacity:.85}

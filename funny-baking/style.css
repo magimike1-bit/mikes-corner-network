@@ -1,51 +1,205 @@
-/* Funny Baking Ideas — warm, playful, frosting-pink accent */
+/* Funny Baking Ideas — warm, playful, frosting-pink accent.
+   Palette: cream + cocoa + frosting pink + golden crumb. */
 :root {
-  --ink: #1a1a1a;
-  --muted: #5c5c5c;
-  --accent: #c2447c;
-  --bg: #ffffff;
-  --wash: #f4f7fa;
-  --line: #e2e8f0;
+  --ink: #3a2a2a;          /* cocoa */
+  --muted: #7d6360;
+  --accent: #c2447c;       /* frosting pink */
+  --accent-deep: #9c2f5f;
+  --gold: #e8a13d;         /* golden crumb */
+  --bg: #fffaf3;           /* warm cream */
+  --card: #ffffff;
+  --wash: #fdeef4;         /* blush */
+  --line: #f0dddf;
+  --display: Georgia, "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+  --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--body);
   color: var(--ink);
   background: var(--bg);
   line-height: 1.65;
 }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- header ---------- */
 .site-header {
-  background: var(--wash);
-  border-bottom: 1px solid var(--line);
-  padding: 28px 0 20px;
+  background: var(--card);
+  border-bottom: 3px solid var(--accent);
+  padding: 18px 0 14px;
 }
 .brand {
-  font-size: 1.6rem;
+  font-family: var(--display);
+  font-size: 1.7rem;
   font-weight: 700;
   color: var(--ink);
   text-decoration: none;
+  letter-spacing: 0.01em;
 }
-.tagline { color: var(--muted); margin: 4px 0 0; }
-main { padding: 32px 0 48px; }
-.intro h1 { font-size: 2rem; margin: 0 0 12px; }
-.intro p { color: var(--muted); font-size: 1.05rem; }
-.posts h2 { font-size: 1.25rem; margin: 36px 0 16px; }
-.card {
+.brand::before { content: "🧁 "; }
+.tagline { color: var(--muted); margin: 2px 0 0; font-size: 0.95rem; font-style: italic; }
+
+/* ---------- hero ---------- */
+.hero {
+  margin: 28px 0 8px;
+  padding: 44px 32px 40px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,255,255,.55) 0 7px, transparent 8px),
+    radial-gradient(circle at 82% 18%, rgba(255,255,255,.55) 0 5px, transparent 6px),
+    radial-gradient(circle at 72% 78%, rgba(255,255,255,.55) 0 6px, transparent 7px),
+    radial-gradient(circle at 30% 82%, rgba(255,255,255,.55) 0 5px, transparent 6px),
+    linear-gradient(135deg, #ffe9f1 0%, #fff6e8 55%, #fdebd3 100%);
+  border: 1px solid #f6e3e6;
+  box-shadow: 0 10px 30px rgba(194, 68, 124, .10);
+  text-align: center;
+}
+.hero .hero-kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: rgba(255,255,255,.75);
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 18px 20px;
+  border-radius: 999px;
+  padding: 6px 16px;
   margin-bottom: 14px;
-  background: #fff;
 }
-.card h3 { margin: 0 0 8px; font-size: 1.1rem; }
-.card h3 a { color: var(--accent); text-decoration: none; }
-.card h3 a:hover { text-decoration: underline; }
-.card p { margin: 0; color: var(--muted); }
-.post h1 { font-size: 1.8rem; margin-bottom: 4px; }
-.post .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
-.post h2 { font-size: 1.25rem; margin-top: 32px; }
+.hero h1 {
+  font-family: var(--display);
+  font-size: 2.5rem;
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+.hero h1 .tilt { display: inline-block; transform: rotate(-3deg); color: var(--accent-deep); }
+.hero p.lead {
+  color: var(--muted);
+  font-size: 1.08rem;
+  max-width: 34em;
+  margin: 0 auto 22px;
+}
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.02rem;
+  text-decoration: none;
+  padding: 13px 30px;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(194, 68, 124, .35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn:hover { background: var(--accent-deep); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(194, 68, 124, .42); }
+.hero-chips { margin-top: 18px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.hero-chips span {
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: rgba(255,255,255,.8);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 14px;
+}
+
+/* ---------- post cards ---------- */
+main { padding: 24px 0 48px; }
+.posts h2 {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  margin: 40px 0 18px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--gold);
+  display: inline-block;
+}
+.cards { display: grid; gap: 16px; }
+@media (min-width: 640px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+  .card.featured { grid-column: 1 / -1; }
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 8px rgba(58, 42, 42, .05);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  position: relative;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(194, 68, 124, .16);
+  border-color: #e7b7c8;
+}
+.card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.card-emoji {
+  font-size: 1.7rem;
+  width: 52px; height: 52px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--wash);
+  border-radius: 14px;
+  flex: 0 0 auto;
+}
+.badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--wash);
+  border: 1px solid #ecc7d6;
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-left: auto;
+}
+.badge.gold { color: #8a5a12; background: #fdf1dc; border-color: #f3d9a4; }
+.card h3 { margin: 0 0 8px; font-size: 1.15rem; font-family: var(--display); }
+.card h3 a { color: var(--ink); text-decoration: none; }
+.card h3 a:hover { color: var(--accent-deep); }
+.card h3 a::after { content: " →"; color: var(--accent); }
+.card p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+
+/* ---------- promise band ---------- */
+.promise {
+  margin: 44px 0 8px;
+  padding: 28px 30px;
+  background: var(--ink);
+  color: #fdf3e7;
+  border-radius: 16px;
+  text-align: center;
+}
+.promise blockquote {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-style: italic;
+  margin: 0 0 8px;
+}
+.promise p { margin: 0; color: #d9c4b2; font-size: 0.92rem; }
+
+/* ---------- article pages ---------- */
+.post h1 { font-family: var(--display); font-size: 2rem; margin-bottom: 4px; line-height: 1.25; }
+.post .meta {
+  color: var(--accent-deep);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+.post h2 {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  margin-top: 36px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--gold);
+  display: inline-block;
+}
+.post p, .post li { font-size: 1.02rem; }
+.post li { margin-bottom: 0.55em; }
+.post li::marker { color: var(--accent); }
+.post a { color: var(--accent-deep); }
+.post a:hover { color: var(--accent); }
 .post code {
   background: var(--wash);
   border: 1px solid var(--line);
@@ -56,7 +210,7 @@ main { padding: 32px 0 48px; }
 .post pre {
   background: var(--wash);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 14px 16px;
   overflow-x: auto;
 }
@@ -64,8 +218,14 @@ main { padding: 32px 0 48px; }
 .post table { border-collapse: collapse; width: 100%; margin: 16px 0; }
 .post th, .post td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; }
 .post th { background: var(--wash); }
-.back { display: inline-block; margin-bottom: 20px; color: var(--accent); text-decoration: none; }
-.back:hover { text-decoration: underline; }
+.back {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--accent-deep);
+  text-decoration: none;
+  font-weight: 700;
+}
+.back:hover { color: var(--accent); }
 /* Ad slot placeholder — style only applies once you paste real ad code */
 .ad-slot {
   border: 1px dashed var(--line);
@@ -77,16 +237,20 @@ main { padding: 32px 0 48px; }
   display: none; /* shown automatically once ad code is pasted */
 }
 .site-footer {
-  border-top: 1px solid var(--line);
-  padding: 20px 0 32px;
+  border-top: 3px solid var(--accent);
+  padding: 22px 0 36px;
   color: var(--muted);
   font-size: 0.9rem;
+  background: #fffdf9;
 }
-@media (max-width: 600px) {
-  .intro h1 { font-size: 1.6rem; }
-}
-
 .network-link { font-size: 0.8rem; margin-top: 6px; }
 .network-link a { color: var(--muted); }
 
 .site-footer .ai-disclosure{font-size:.85em;opacity:.85}
+
+@media (max-width: 600px) {
+  .hero { padding: 32px 20px 30px; border-radius: 14px; margin-top: 20px; }
+  .hero h1 { font-size: 1.85rem; }
+  .btn { display: block; text-align: center; }
+  .post h1 { font-size: 1.6rem; }
+}

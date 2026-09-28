@@ -1,84 +1,277 @@
-/* Dealing With a Cranky Teenager — clean, simple, readable */
+/* Dealing With a Cranky Teenager — warm "sticker book" theme: playful, irreverent, supportive */
 :root {
-  --ink: #1a1a1a;
-  --muted: #5c5c5c;
-  --accent: #b3502a;
-  --accent-dark: #8f3d1e;
-  --bg: #ffffff;
-  --wash: #faf5f1;
-  --line: #e8ddd4;
+  --ink: #2c231a;
+  --muted: #6d5c4d;
+  --accent: #e2572b;      /* burnt-orange coral */
+  --accent-dark: #b8431f;
+  --teal: #12876f;        /* secondary pop */
+  --sun: #ffd23f;         /* sticker yellow */
+  --bg: #fff8ef;
+  --wash: #ffefd9;
+  --card: #ffffff;
+  --line: #f0dcc4;
+  --radius: 18px;
 }
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--ink);
   background: var(--bg);
   line-height: 1.65;
+  font-size: 18px;
 }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+h1, h2, h3, .brand, .btn, .sticker, .card-num {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+main.wrap.post { max-width: 740px; }
+img { max-width: 100%; height: auto; }
+
+/* ---------- header ---------- */
 .site-header {
-  background: var(--wash);
-  border-bottom: 1px solid var(--line);
-  padding: 28px 0 20px;
+  background: linear-gradient(180deg, var(--wash), var(--bg));
+  border-bottom: 3px solid var(--ink);
+  padding: 22px 0 18px;
 }
 .brand {
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
   color: var(--ink);
   text-decoration: none;
 }
-.tagline { color: var(--muted); margin: 4px 0 0; }
-main { padding: 32px 0 48px; }
-.intro h1 { font-size: 2rem; margin: 0 0 12px; }
-.intro p { color: var(--muted); font-size: 1.05rem; }
-.posts h2 { font-size: 1.25rem; margin: 36px 0 16px; }
-.card {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 18px 20px;
-  margin-bottom: 14px;
-  background: #fff;
+.brand-hi {
+  background: linear-gradient(transparent 55%, var(--sun) 55%, var(--sun) 95%, transparent 95%);
+  padding: 0 4px;
 }
-.card h3 { margin: 0 0 8px; font-size: 1.1rem; }
-.card h3 a { color: var(--accent-dark); text-decoration: none; }
-.card h3 a:hover { text-decoration: underline; }
-.card p { margin: 0; color: var(--muted); }
-.post h1 { font-size: 1.8rem; margin-bottom: 4px; }
-.post .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
-.post h2 { font-size: 1.25rem; margin-top: 32px; }
-.post blockquote {
-  border-left: 4px solid var(--line);
-  margin: 20px 0;
-  padding: 8px 18px;
+.tagline { color: var(--muted); margin: 6px 0 0; font-size: 1rem; }
+
+/* ---------- hero ---------- */
+.hero {
+  padding: 56px 0 60px;
+  border-bottom: 3px solid var(--ink);
+  background:
+    radial-gradient(circle, rgba(226, 87, 43, 0.14) 3px, transparent 3.6px),
+    radial-gradient(circle, rgba(18, 135, 111, 0.12) 2.5px, transparent 3.1px),
+    radial-gradient(circle, rgba(255, 210, 63, 0.55) 2px, transparent 2.6px),
+    linear-gradient(180deg, var(--wash), var(--bg));
+  background-size: 48px 48px, 64px 64px, 40px 40px, cover;
+  background-position: 0 0, 14px 22px, 26px 8px, 0 0;
+}
+.sticker {
+  display: inline-block;
+  background: var(--sun);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 8px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-2deg);
+  margin: 0 0 18px;
+}
+.hero h1 {
+  font-size: 2.6rem;
+  line-height: 1.12;
+  letter-spacing: -1px;
+  margin: 0 0 14px;
+  max-width: 16em;
+}
+.hero h1 .wavy {
+  text-decoration: underline wavy var(--accent) 3px;
+  text-underline-offset: 9px;
+}
+.hero-sub {
   color: var(--muted);
-  font-style: italic;
-  background: var(--wash);
-  border-radius: 0 6px 6px 0;
+  font-size: 1.1rem;
+  max-width: 40em;
 }
-.post table { border-collapse: collapse; width: 100%; margin: 16px 0; }
-.post th, .post td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; }
-.post th { background: var(--wash); }
-.back { display: inline-block; margin-bottom: 20px; color: var(--accent-dark); text-decoration: none; }
-.back:hover { text-decoration: underline; }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 13px 24px;
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn:hover {
+  background: var(--accent-dark);
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+.btn.ghost { background: var(--card); color: var(--ink); }
+.btn.ghost:hover { background: var(--sun); }
+
+/* ---------- post cards ---------- */
+main { padding: 44px 0 56px; }
+.posts-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 0 0 20px; }
+.posts h2 { font-size: 1.5rem; margin: 0; letter-spacing: -0.5px; }
+.posts .kicker-line { color: var(--muted); margin: 0; font-size: 1rem; }
+.card {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 5px 5px 0 rgba(44, 35, 26, 0.9);
+  padding: 22px 24px 22px 84px;
+  margin-bottom: 18px;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.card:nth-of-type(odd) { transform: rotate(-0.5deg); }
+.card:nth-of-type(even) { transform: rotate(0.5deg); }
+.card:hover { transform: rotate(0deg) translateY(-3px); box-shadow: 8px 10px 0 rgba(44, 35, 26, 0.9); }
+.card-num {
+  position: absolute;
+  left: 20px;
+  top: 22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+  transform: rotate(-6deg);
+}
+.card h3 { margin: 0 0 6px; font-size: 1.15rem; letter-spacing: -0.3px; }
+.card h3 a { color: var(--ink); text-decoration: none; }
+.card h3 a:hover { color: var(--accent-dark); text-decoration: underline wavy var(--accent) 2px; text-underline-offset: 4px; }
+.card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+
+/* reassurance strip */
+.reassure {
+  background: #e7f5f1;
+  border: 2px dashed var(--teal);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-top: 28px;
+  color: var(--ink);
+  font-size: 1.02rem;
+}
+.reassure strong { color: var(--teal); }
+
+/* ---------- post pages ---------- */
+.post .back {
+  display: inline-block;
+  margin-bottom: 22px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 18px;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.post .back:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); background: var(--sun); }
+.post h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  margin: 0 0 12px;
+  background: linear-gradient(transparent 62%, var(--sun) 62%, var(--sun) 96%, transparent 96%);
+  display: inline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.post .meta {
+  display: inline-block;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin: 14px 0 6px;
+}
+.post h2 {
+  font-size: 1.45rem;
+  letter-spacing: -0.4px;
+  margin: 40px 0 12px;
+  padding-left: 16px;
+  position: relative;
+}
+.post h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.28em;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  transform: rotate(12deg);
+}
+.post a { color: var(--accent-dark); font-weight: 600; }
+.post a:hover { color: var(--accent); }
+.post ul li { margin: 0.5em 0; }
+.post ul li::marker { color: var(--accent); }
+.post blockquote {
+  border: 2px solid var(--ink);
+  border-left: 8px solid var(--accent);
+  margin: 24px 0;
+  padding: 18px 22px;
+  color: var(--ink);
+  font-style: italic;
+  font-size: 1.08rem;
+  background: var(--wash);
+  border-radius: 0 14px 14px 0;
+  box-shadow: 4px 4px 0 rgba(44, 35, 26, 0.15);
+}
+.post table { border-collapse: separate; border-spacing: 0; width: 100%; margin: 20px 0; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden; }
+.post th, .post td { padding: 10px 14px; text-align: left; font-size: 0.95rem; }
+.post th { background: var(--accent); color: #fff; font-weight: 800; }
+.post tr:nth-child(even) td { background: var(--wash); }
+.post td { border-top: 1px solid var(--line); }
+
 /* Ad slot placeholder — style only applies once you paste real ad code */
 .ad-slot {
-  border: 1px dashed var(--line);
+  border: 2px dashed var(--line);
   color: var(--muted);
   text-align: center;
   padding: 12px;
   margin: 24px 0;
   font-size: 0.85rem;
+  border-radius: 12px;
   display: none; /* shown automatically once ad code is pasted */
 }
+
+/* ---------- footer ---------- */
 .site-footer {
-  border-top: 1px solid var(--line);
-  padding: 20px 0 32px;
+  border-top: 3px solid var(--ink);
+  background: linear-gradient(180deg, var(--wash), var(--bg));
+  padding: 28px 0 40px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
-@media (max-width: 600px) {
-  .intro h1 { font-size: 1.6rem; }
-}
+.site-footer strong { color: var(--ink); }
 
 .site-footer .ai-disclosure{font-size:.85em;opacity:.85}
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .hero { padding: 40px 0 44px; }
+  .hero h1 { font-size: 2rem; }
+  .post h1 { font-size: 1.7rem; }
+  .card { padding: 20px 18px 20px 76px; }
+  .card-num { left: 16px; }
+  .post table { display: block; overflow-x: auto; }
+}

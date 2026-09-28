@@ -311,6 +311,189 @@ import { netZoneDevices, netDevCounts, netWiredDrops, ensureNET } from './net-pl
     return h + "</g>";
   }
 
+  /* ---- P9: template-driven floor plans ----
+     The floor is drawn from per-sector room templates (rows of abutting rooms
+     with wall strokes, a door gap + entrance marker in the building wall, and
+     subtle fixture sketches per room). Node cards are flowed INSIDE their
+     room's rect — the item-placement overlay logic (zones, edges, hub,
+     wi-fi markers, toggle, list view) is unchanged; only the floor itself
+     was redesigned. Templates live in normalized 1000x640 space and scale to
+     the SVG width. */
+
+  const SIZE_SQFT = { // typical footprint labels per sector x size variant
+    retail:    {small:"~1,000 sq ft", medium:"~2,000 sq ft", large:"~4,500 sq ft"},
+    restaurant:{small:"~1,200 sq ft", medium:"~2,800 sq ft", large:"~5,000 sq ft"},
+    qsr:       {small:"~800 sq ft",   medium:"~1,500 sq ft", large:"~3,000 sq ft"},
+    grocery:   {small:"~1,500 sq ft", medium:"~4,000 sq ft", large:"~10,000 sq ft"},
+    hotel:     {small:"~15,000 sq ft",medium:"~40,000 sq ft",large:"~120,000 sq ft"},
+    salon:     {small:"~600 sq ft",   medium:"~1,200 sq ft", large:"~2,500 sq ft"},
+    other:     {small:"~800 sq ft",   medium:"~1,800 sq ft", large:"~4,000 sq ft"}
+  };
+
+  function mapSizeInfo(){
+    // Which size variant to draw. Retail/grocery ask for real square footage;
+    // other sectors derive it from their characteristic count input. In the
+    // headless smoke DOM inputs have no values -> falls back to "medium".
+    let variant = "medium", sqftNote = null;
+    const num = id => {
+      try {
+        const el = document.getElementById(id);
+        const v = el && el.value !== "" ? parseFloat(el.value) : NaN;
+        return isFinite(v) ? v : 0;
+      } catch(e){ return 0; }
+    };
+    if(S.sector === "retail" || S.sector === "grocery"){
+      const q = num(S.sector === "retail" ? "in-sqft-r" : "in-sqft-g");
+      if(q > 0){
+        variant = q < 1200 ? "small" : q < 3000 ? "medium" : "large";
+        sqftNote = Math.round(q).toLocaleString("en-US") + " sq ft (your store size)";
+      }
+    } else {
+      const spec = {restaurant:["in-seats",25,80], qsr:["in-seats",15,40],
+                    hotel:["in-rooms",20,80], salon:["in-chairs",4,10],
+                    other:["in-stations",2,5]}[S.sector] || ["in-stations",2,5];
+      const q = num(spec[0]);
+      variant = q < spec[1] ? "small" : q < spec[2] ? "medium" : "large";
+    }
+    return {variant:variant, sqftNote:sqftNote};
+  }
+
+  const FIX_ICON = {counter:"🧾", host:"🛎️", tables:"🍽️", bar:"🍸", kitchen:"👨‍🍳",
+                    deli:"🥩", pickup:"🛍️", aisles:"🛒", office:"📦", hatch:"🏢"};
+  const ZONE_FIX = {lanes:"counter", counter:"counter", frontdesk:"counter",
+                    reception:"host", dining:"tables", restaurant:"tables",
+                    bar:"bar", kitchen:"kitchen", deli:"deli", pickup:"pickup",
+                    floor:"aisles", rooms:"hatch", stations:"hatch", field:"hatch",
+                    backoffice:"office"};
+
+  function floorTemplate(){
+    // rows of rooms; room = {zone, w (fraction), title, icon, fix, sub?}
+    // zone:null -> decorative room with fixtures only (no item nodes).
+    const R = (zone, w, title, fix, sub) => ({zone:zone, w:w, title:title,
+      icon:FIX_ICON[fix] || "🏢", fix:fix, sub:sub || null});
+    switch(S.sector){
+      case "retail":
+        return {entrance:0.5, rows:[
+          {h:150, rooms:[R("lanes", 1, "Checkout counter", "counter", "near the entrance")]},
+          {h:330, rooms:[R("floor", 1, "Sales floor", "aisles", "aisles & shelving")]},
+          {h:160, rooms:[R("backoffice", 1, "Office & stock room", "office")]}
+        ]};
+      case "restaurant":
+        return {entrance:0.30, rows:[
+          {h:300, rooms:[R("dining", .68, "Dining room", "tables", "host stand by the door"),
+                         R("bar", .32, "Bar", "bar")]},
+          {h:220, rooms:[R("kitchen", .58, "Kitchen", "kitchen"),
+                         R("backoffice", .42, "Office", "office")]}
+        ]};
+      case "qsr":
+        return {entrance:0.5, rows:[
+          {h:170, rooms:[R("counter", .62, "Order counter", "counter", "near the entrance"),
+                         R("pickup", .38, "Pickup area", "pickup")]},
+          {h:230, rooms:[R("kitchen", .6, "Kitchen", "kitchen"),
+                         R("backoffice", .4, "Office & storage", "office")]}
+        ]};
+      case "grocery":
+        return {entrance:0.82, rows:[
+          {h:150, rooms:[R("lanes", 1, "Checkout lanes", "counter", "near the entrance")]},
+          {h:300, rooms:[R("deli", .42, "Deli & fresh", "deli"),
+                         R(null, .58, "Grocery aisles", "aisles")]},
+          {h:170, rooms:[R("backoffice", 1, "Back office & receiving", "office")]}
+        ]};
+      default: { // hotel, salon, other: generic front -> work area -> back office
+        const zs = S.DATA.hardware.sectors[S.sector].zones;
+        const front = zs[0], back = zs[zs.length - 1];
+        const mid = zs.slice(1, -1);
+        const rows = [{h:150, rooms:[R(front.id, 1, front.label, ZONE_FIX[front.id] || "hatch", "near the entrance")]}];
+        if(mid.length)
+          rows.push({h:300, rooms:mid.map(z => R(z.id, 1 / mid.length, z.label, ZONE_FIX[z.id] || "hatch"))});
+        rows.push({h:170, rooms:[R(back.id, 1, back.label, "office")]});
+        return {entrance:0.5, rows:rows};
+      }
+    }
+  }
+
+  // Subtle fixture sketches, drawn behind the node cards and clipped to the
+  // room rect. kind from ZONE_FIX; size = small|medium|large (fixture density).
+  function fixSvg(kind, rx, ry, rw, rh, size, doorX){
+    const top = ry + 52, bot = ry + rh - 12;
+    if(bot - top < 28 || rw < 90) return "";
+    let h = "";
+    const n = (sm, md, lg) => size === "small" ? sm : size === "large" ? lg : md;
+    if(kind === "counter"){
+      const bw = rw - 36;
+      h += '<rect x="' + (rx + 18) + '" y="' + top + '" width="' + bw + '" height="26" rx="6" fill="#dbe4ee" stroke="#9fb3c8"/>';
+      for(let i = 0; i < 3; i++){
+        const px = rx + 18 + bw * (0.18 + i * 0.32);
+        h += '<rect x="' + px + '" y="' + (top - 12) + '" width="15" height="15" rx="3" fill="#f4f7fb" stroke="#9fb3c8"/>';
+      }
+    } else if(kind === "aisles"){
+      const cnt = Math.max(1, Math.min(n(2, 3, 4), Math.floor((rw - 40) / 80)));
+      const sw = 52, gap = (rw - 40 - cnt * sw) / (cnt + 1);
+      for(let i = 0; i < cnt; i++){
+        const sx = rx + 20 + gap + i * (sw + gap);
+        h += '<rect x="' + sx + '" y="' + (top + 4) + '" width="' + sw + '" height="' + (bot - top - 8) +
+          '" rx="5" fill="#ece7d8" stroke="#c9bfa8"/>' +
+          '<line x1="' + (sx + sw / 2) + '" y1="' + (top + 12) + '" x2="' + (sx + sw / 2) + '" y2="' + (bot - 12) +
+          '" stroke="#c9bfa8" stroke-dasharray="5,4"/>';
+      }
+    } else if(kind === "office"){
+      h += '<rect x="' + (rx + 18) + '" y="' + (bot - 52) + '" width="' + Math.min(150, rw * 0.42) + '" height="40" rx="5" fill="#e2e8f0" stroke="#a8b8cc"/>';
+      h += '<circle cx="' + (rx + 34) + '" cy="' + (bot - 62) + '" r="9" fill="#eef2f7" stroke="#a8b8cc"/>';
+      h += '<path d="M ' + (rx + rw - 60) + ' ' + top + ' A 34 34 0 0 1 ' + (rx + rw - 26) + ' ' + (top + 34) +
+        '" fill="none" stroke="#a8b8cc" stroke-dasharray="4,3"/>';
+    } else if(kind === "tables"){
+      const cnt = n(6, 12, 20);
+      const cols = Math.max(2, Math.round(Math.sqrt(cnt * rw / Math.max(60, bot - top))));
+      const rowsN = Math.ceil(cnt / cols);
+      const gx = (rw - 60) / Math.max(1, cols - 1 || 1), gy = (bot - top - 40) / Math.max(1, rowsN - 1 || 1);
+      let ti = 0;
+      for(let r2 = 0; r2 < rowsN && ti < cnt; r2++) for(let c = 0; c < cols && ti < cnt; c++, ti++){
+        const cx = rx + 30 + c * gx, cy = top + 24 + r2 * gy;
+        h += '<circle cx="' + cx + '" cy="' + cy + '" r="15" fill="#f5eedd" stroke="#cbb98f"/>';
+        for(let a = 0; a < 4; a++){
+          const ang = a * Math.PI / 2 + Math.PI / 4;
+          h += '<circle cx="' + (cx + 21 * Math.cos(ang)).toFixed(1) + '" cy="' + (cy + 21 * Math.sin(ang)).toFixed(1) +
+            '" r="4" fill="#e3d9c2"/>';
+        }
+      }
+      if(doorX > rx + 60 && doorX < rx + rw - 40){ // host stand by the door
+        h += '<rect x="' + (doorX - 66) + '" y="' + top + '" width="36" height="22" rx="4" fill="#dbe4ee" stroke="#9fb3c8"/>' +
+          '<text x="' + (doorX - 48) + '" y="' + (top + 36) + '" font-size="10.5" text-anchor="middle" fill="#8a9a94">HOST</text>';
+      }
+    } else if(kind === "bar"){
+      const bx = rx + rw - 74;
+      h += '<rect x="' + bx + '" y="' + top + '" width="54" height="' + (bot - top) + '" rx="6" fill="#e5dcc8" stroke="#c0a97e"/>';
+      for(let sy = top + 26; sy < bot - 8; sy += 36)
+        h += '<circle cx="' + (bx - 16) + '" cy="' + sy + '" r="8" fill="#f0e9d8" stroke="#c0a97e"/>';
+    } else if(kind === "kitchen"){
+      h += '<rect x="' + (rx + 14) + '" y="' + top + '" width="' + (rw - 28) + '" height="30" fill="#e8edf2" stroke="#aeb9c7"/>';
+      for(let lx = rx + 14; lx < rx + rw - 14; lx += 22)
+        h += '<line x1="' + lx + '" y1="' + (top + 30) + '" x2="' + (lx + 14) + '" y2="' + top + '" stroke="#c3ccd8"/>';
+      for(let i = 0; i < 3; i++){
+        const ex = rx + 24 + i * ((rw - 48) / 3);
+        h += '<rect x="' + ex + '" y="' + (top + 44) + '" width="' + ((rw - 48) / 3 - 12) + '" height="34" rx="5" fill="#dfe5ec" stroke="#aeb9c7"/>';
+      }
+    } else if(kind === "host"){
+      h += '<rect x="' + (rx + 22) + '" y="' + top + '" width="40" height="24" rx="4" fill="#dbe4ee" stroke="#9fb3c8"/>' +
+        '<text x="' + (rx + 42) + '" y="' + (top + 40) + '" font-size="10.5" text-anchor="middle" fill="#8a9a94">HOST</text>';
+    } else if(kind === "deli"){
+      h += '<rect x="' + (rx + 18) + '" y="' + top + '" width="' + (rw - 36) + '" height="44" rx="6" fill="#e8f1f8" stroke="#9fb9d4"/>' +
+        '<line x1="' + (rx + 30) + '" y1="' + (top + 22) + '" x2="' + (rx + rw - 30) + '" y2="' + (top + 22) + '" stroke="#9fb9d4"/>' +
+        '<text x="' + (rx + 30) + '" y="' + (top + 15) + '" font-size="10.5" fill="#7d94ad">DELI CASE</text>';
+    } else if(kind === "pickup"){
+      for(let i = 0; i < 3; i++){
+        const ly = top + 12 + i * 30;
+        h += '<line x1="' + (rx + 20) + '" y1="' + ly + '" x2="' + (rx + rw - 20) + '" y2="' + ly + '" stroke="#b9a98a" stroke-width="4"/>';
+        for(let dx = rx + 44; dx < rx + rw - 20; dx += 46)
+          h += '<line x1="' + dx + '" y1="' + ly + '" x2="' + dx + '" y2="' + (ly + 22) + '" stroke="#d3c5a5" stroke-width="3"/>';
+      }
+    } else { // hatch: generic work-area texture
+      for(let lx = rx - (bot - top); lx < rx + rw; lx += 26)
+        h += '<line x1="' + lx + '" y1="' + bot + '" x2="' + (lx + (bot - top)) + '" y2="' + top + '" stroke="#e6ebf1"/>';
+    }
+    return h;
+  }
+
   function renderMap(){
     const svg = $("floorplan");
     if(!svg) return;
@@ -321,59 +504,94 @@ import { netZoneDevices, netDevCounts, netWiredDrops, ensureNET } from './net-pl
     renderMapAlert(built.nodes);
     renderMapInstallLine();
     if(S.mapViewPref !== "svg"){ svg.innerHTML = ""; svg.setAttribute("viewBox", "0 0 640 80"); return; }
+    const CW = 196, CH = 140, CG = 14, ZP = 16, ZT = 52;
+    const W = S.mapNarrow ? 640 : 1180;
+    const SX = W / 1000;
+    const size = mapSizeInfo();
+    const tpl = floorTemplate();
     const s = S.DATA.hardware.sectors[S.sector];
-    const CW = 196, CH = 140, CG = 14, ZP = 16, ZT = 38, ZGAP = 18;
-    const MAXW = S.mapNarrow ? 640 : 1180;
+    const boZone = s.zones.filter(z => z.id === "backoffice")[0] || s.zones[s.zones.length - 1];
+
+    // group node cards by room; stray zones fall back to the back-office room
+    const tplZones = {};
+    tpl.rows.forEach(row => row.rooms.forEach(r => { if(r.zone) tplZones[r.zone] = 1; }));
     const byZone = {};
-    s.zones.forEach(z => byZone[z.id] = []);
-    const lastZone = s.zones[s.zones.length - 1];
-    built.nodes.forEach(n => { (byZone[n.zoneId] || byZone[lastZone.id]).push(n); });
-    const boxes = s.zones.map(z => ({z:z, list:byZone[z.id]})).filter(b => b.list.length);
-    if(!boxes.length){
-      svg.setAttribute("viewBox", "0 0 640 80");
-      svg.innerHTML = '<text x="16" y="46" font-size="17" fill="#9aa8a3">Tick items in your stack \u2014 they\u2019ll appear here.</text>';
-      return;
-    }
-    boxes.forEach(b => {
-      const n = b.list.length;
-      b.cols = n === 1 ? 1 : n <= 4 ? 2 : 3;
-      b.rowsN = Math.ceil(n / b.cols);
-      b.w = b.cols * (CW + CG) - CG + ZP * 2;
-      b.h = ZT + b.rowsN * (CH + CG) - CG + ZP + 4;
+    built.nodes.forEach(n => {
+      const zid = tplZones[n.zoneId] ? n.zoneId : boZone.id;
+      (byZone[zid] = byZone[zid] || []).push(n);
     });
-    let x = 0, y = 0, rowH = 0, W = 0;
-    boxes.forEach(b => {
-      if(x > 0 && x + b.w > MAXW){ x = 0; y += rowH + ZGAP; rowH = 0; }
-      b.x = x; b.y = y; x += b.w + ZGAP; rowH = Math.max(rowH, b.h);
-      W = Math.max(W, b.x + b.w);
+
+    // lay out rows: each room keeps its template fraction of the width; a row
+    // grows past its template height when its node cards need more space.
+    const rooms = [];
+    let y = 0;
+    tpl.rows.forEach(row => {
+      let x = 0;
+      const rr = [];
+      row.rooms.forEach(r => {
+        const rw = r.w * W;
+        const list = r.zone ? (byZone[r.zone] || []) : [];
+        const cols = Math.max(1, Math.floor((rw - ZP * 2) / (CW + CG)));
+        const rowsN = Math.ceil(list.length / cols);
+        rr.push({r:r, x:x, w:rw, list:list, cols:cols,
+                 need:list.length ? ZT + rowsN * (CH + CG) - CG + ZP : 0});
+        x += rw;
+      });
+      const rowH = Math.max(row.h * SX, 90, ...rr.map(o => o.need));
+      rr.forEach(o => {
+        o.y = y; o.h = rowH;
+        o.list.forEach((n, i) => {
+          n._x = o.x + ZP + (i % o.cols) * (CW + CG);
+          n._y = y + ZT + Math.floor(i / o.cols) * (CH + CG);
+        });
+        rooms.push(o);
+      });
+      y += rowH;
     });
-    const H = y + rowH + 10;
+    const capH = 34, H = y + capH;
     const byId = {};
-    boxes.forEach(b => b.list.forEach((n, i) => {
-      n._x = b.x + ZP + (i % b.cols) * (CW + CG);
-      n._y = b.y + ZT + Math.floor(i / b.cols) * (CH + CG);
-      byId[n.itemId] = n;
-    }));
+    built.nodes.forEach(n => { byId[n.itemId] = n; });
+
     // network hub: the switch node, else a ghost marker in the back office
     const swNode = byId["switch"];
-    const boBox = boxes.filter(b => b.z.id === "backoffice")[0] || boxes[boxes.length - 1];
+    const boRoom = rooms.filter(o => o.r.zone === boZone.id)[0] || rooms[rooms.length - 1];
     const hub = swNode ? {x:swNode._x + CW / 2, y:swNode._y + CH / 2}
-                       : {x:boBox.x + boBox.w - 46, y:boBox.y + boBox.h - 36};
+                       : {x:boRoom.x + boRoom.w - 46, y:boRoom.y + boRoom.h - 36};
     // Wired-run callout uses the single authoritative count shared with the network plan
     // (netWiredDrops) — never a separate node tally, so the two views always agree.
     const wiredN = netWiredDrops();
     svg.setAttribute("viewBox", "0 0 " + W + " " + H);
     const apOn = !!(S.state["ap"] && S.state["ap"].checked);
-    const wifiAt = {};
-    boxes.forEach(b => {
-      if(b.list.some(n => n.kind === "hw" && n.link === "wifi")) wifiAt[b.z.id] = {x:b.x + b.w - 32, y:b.y + 22};
-    });
+    const doorX = tpl.entrance * W, doorW = 96;
+
     let h = "";
-    boxes.forEach(b => {
-      h += '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h +
-        '" rx="10" fill="#f4f8f6" stroke="#c9d8d2"/>' +
-        '<text x="' + (b.x + 14) + '" y="' + (b.y + 25) + '" font-size="15" font-weight="700" fill="#5a6b66">' +
-        esc(b.z.label) + "</text>";
+    // building shell: walls with a door gap in the front wall + entrance marker
+    const wall = (x1, y1, x2, y2) =>
+      '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#64748b" stroke-width="5" stroke-linecap="round"/>';
+    h += wall(2, 2, doorX - doorW / 2, 2) + wall(doorX + doorW / 2, 2, W - 2, 2) +
+         wall(2, 2, 2, y - 2) + wall(W - 2, 2, W - 2, y - 2) + wall(2, y - 2, W - 2, y - 2);
+    h += '<path d="M ' + (doorX - 34) + ' 3 A 34 34 0 0 1 ' + (doorX + 34) + ' 37" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,3"/>' +
+      '<text x="' + doorX + '" y="26" font-size="12.5" font-weight="700" text-anchor="middle" fill="#475569" letter-spacing="2">▼ ENTRANCE</text>';
+
+    // rooms: wall rect, title, fixtures (clipped), then nodes on top
+    rooms.forEach((o, ri) => {
+      const r = o.r;
+      h += '<rect x="' + o.x + '" y="' + o.y + '" width="' + o.w + '" height="' + o.h +
+        '" fill="#fbfdfc" stroke="#94a3b8" stroke-width="2.5"/>';
+      h += '<text x="' + (o.x + 14) + '" y="' + (o.y + 26) + '" font-size="15" font-weight="700" fill="#475569">' +
+        esc(r.icon + " " + r.title) + "</text>";
+      if(r.sub)
+        h += '<text x="' + (o.x + 14) + '" y="' + (o.y + 42) + '" font-size="11.5" fill="#8a9a94">' + esc(r.sub) + "</text>";
+      h += '<clipPath id="roomclip' + ri + '"><rect x="' + (o.x + 3) + '" y="' + (o.y + 3) +
+        '" width="' + (o.w - 6) + '" height="' + (o.h - 6) + '" rx="4"/></clipPath>' +
+        '<g clip-path="url(#roomclip' + ri + ')">' + fixSvg(r.fix, o.x, o.y, o.w, o.h, size.variant, doorX) + "</g>";
+      if(!o.list.length && built.nodes.length === 0 && ri === 0)
+        h += '<text x="' + (o.x + ZP) + '" y="' + (o.y + ZT + 24) + '" font-size="16" fill="#9aa8a3">Tick items in your stack \u2014 they\u2019ll appear here.</text>';
+    });
+
+    const wifiAt = {};
+    rooms.forEach(o => {
+      if(o.list.some(n => n.kind === "hw" && n.link === "wifi")) wifiAt[o.r.zone || "room"] = {x:o.x + o.w - 32, y:o.y + 24};
     });
     // edges, drawn under the nodes
     built.nodes.forEach(n => {
@@ -383,17 +601,20 @@ import { netZoneDevices, netDevCounts, netWiredDrops, ensureNET } from './net-pl
         h += '<line x1="' + cx + '" y1="' + (n._y + CH) + '" x2="' + hub.x + '" y2="' + hub.y +
           '" stroke="#0f766e" stroke-width="2" opacity="0.5"/>';
       } else {
-        const m = wifiAt[n.zoneId];
+        const zid = tplZones[n.zoneId] ? n.zoneId : boZone.id;
+        const m = wifiAt[zid];
         if(m) h += '<line x1="' + cx + '" y1="' + n._y + '" x2="' + m.x + '" y2="' + m.y +
           '" stroke="' + (n.payWarn ? "#dc2626" : "#b45309") + '" stroke-width="2" stroke-dasharray="7,5" opacity="0.75"/>';
       }
     });
-    // wi-fi markers (link targets)
+    // wi-fi markers (link targets); the back-office marker shifts left when the
+    // wired-run callout occupies that room's top-right corner
     Object.keys(wifiAt).forEach(zid => {
       const m = wifiAt[zid];
+      if(zid === boZone.id && wiredN > 0) m.x -= 250;
       h += '<g><title>' + (apOn ? "Wi-Fi access point" : "Wi-Fi here \u2014 no access point in your stack yet (see Infrastructure)") + "</title>" +
         '<text x="' + m.x + '" y="' + m.y + '" font-size="24" text-anchor="middle"' + (apOn ? "" : ' opacity="0.4"') + ">\ud83d\udcf6</text>" +
-        '<text x="' + m.x + '" y="' + (m.y + 18) + '" font-size="11" text-anchor="middle" fill="#8a9a94">wi-fi</text></g>';
+        '<text x="' + m.x + '" y="' + (m.y + 20) + '" font-size="11" text-anchor="middle" fill="#8a9a94">wi-fi</text></g>';
     });
     if(!swNode){
       h += '<g><title>No switch in your stack yet \u2014 wired devices need one (see Infrastructure)</title>' +
@@ -402,9 +623,17 @@ import { netZoneDevices, netDevCounts, netWiredDrops, ensureNET } from './net-pl
     }
     // wired-run callout lives in the back-office header's empty top-right: never clips, never overlaps nodes
     if(wiredN > 0)
-      h += '<text x="' + (boBox.x + boBox.w - 12) + '" y="' + (boBox.y + 25) + '" font-size="12" fill="#0f766e" text-anchor="end">\ud83d\udd0c ' +
+      h += '<text x="' + (boRoom.x + boRoom.w - 12) + '" y="' + (boRoom.y + 26) + '" font-size="12" fill="#0f766e" text-anchor="end">\ud83d\udd0c ' +
         wiredN + " wired run" + (wiredN === 1 ? "" : "s") + " shown</text>";
     built.nodes.forEach((n, ni) => { h += mapNodeSvg(n, ni, CW, CH); });
+
+    // floor caption: size variant + square footage + illustrative disclaimer
+    const sqftLabel = size.sqftNote ||
+      ((SIZE_SQFT[S.sector] || SIZE_SQFT.other)[size.variant]);
+    const vLabel = size.variant.charAt(0).toUpperCase() + size.variant.slice(1);
+    h += '<text x="' + (W - 12) + '" y="' + (H - 10) + '" font-size="12" fill="#64748b" text-anchor="end">' +
+      esc(vLabel + " floor plan · " + sqftLabel + " — illustrative, not to scale") + "</text>";
+
     svg.innerHTML = h;
   }
 

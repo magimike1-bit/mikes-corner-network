@@ -589,7 +589,7 @@ const SIM_PRICES = {
         { id:"pos", name:"POS software", calc:"per_location", map:{zone:"counter",icon:"🖥️",label:"POS"},
           options:[
             {label:"Square POS — free", monthly:0, conf:"official", bundled:true, note:"squareup.com/ca"},
-            {label:"Toast POS — ~US$69/mo", monthly:95, conf:"reported", bundled:true, note:"US pricing page; Canadian pricing quote-based — CAD approx."},
+            {label:"Toast POS — ~US$69/mo", monthly:95, cur:"CAD", conf:"reported", bundled:true, note:"US pricing page; Canadian pricing quote-based — CAD approx. (pre-converted at research time; stored as CAD)"},
             {label:"Helcim — $0/mo software", monthly:0, conf:"official", note:"helcim.com/pricing — interchange-plus processing; POS locked to Helcim"} ]},
         { id:"terminal", sub:"Countertop = one job, does it well. Mobile/handheld = tableside and line-busting. " +
           "All-in-one (Square Register class) = simpler \u2014 screen, reader and software in one box \u2014 but processor-locked, " +
@@ -847,10 +847,6 @@ const FX = { USD:1.416, GBP:1.72, date:"2026-09-28",
   src:"US$1 = C$1.416 (Finnhub/OANDA, 2026-09-28); £1 = C$1.72 (exchangerates.org.uk, 2026-09-28)" };
 function cadOf(v, cur){ v = +v || 0; if(!cur || cur === "CAD") return v;
   const r = FX[cur]; if(!r) throw new Error("Unknown currency on priced option: " + cur); return v * r; }
-/* Display: converted CAD amount, with the original foreign figure beside it. */
-function dispAmt(v, cur){ const c = cadOf(v, cur);
-  if(cur && cur !== "CAD") return money(c) + ' <span class="fx-src">(orig. ' + (cur === "USD" ? "US$" : "£") + v + " @ " + FX[cur] + ", " + FX.date + ")<\/span>";
-  return money(c); }
 const LIFECYCLE = {
   terminal:  {yrs:6,  range:"5–7",   conf:"Medium",      src:"FavorPOS lifespan guide; merchantequip.com", note:"PCI PTS version expiry usually retires terminals before they wear out"},
   "station:printer": {yrs:5, range:"3–5", conf:"Medium", src:"FavorPOS (printers 3–5 yrs); Epson TM-T88VI spec", note:"thermal receipt printer class"},
@@ -1102,6 +1098,10 @@ const REC_TIERS = {
   "use strict";
   const $ = id => document.getElementById(id);
   const money = n => "$" + Math.round(n).toLocaleString("en-CA");
+  /* Display: converted CAD amount, with the original foreign figure beside it. */
+function dispAmt(v, cur){ const c = cadOf(v, cur);
+  if(cur && cur !== "CAD") return money(c) + ' <span class="fx-src">(orig. ' + (cur === "USD" ? "US$" : "£") + v + " @ " + FX[cur] + ", " + FX.date + ")<\/span>";
+  return money(c); }
   let sector = "retail";
   const state = {}; // itemId -> {checked, optIdx, qty}
 

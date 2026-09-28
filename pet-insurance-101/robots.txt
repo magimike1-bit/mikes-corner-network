@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pet-insurance-101-9cjco.kinsta.page/sitemap.xml

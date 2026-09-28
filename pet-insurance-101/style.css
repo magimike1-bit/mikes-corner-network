@@ -1,0 +1,158 @@
+/* Pet Insurance 101 — clean money-guide look, teal accent */
+:root {
+  --ink: #1c2b2a;
+  --muted: #55605f;
+  --accent: #0e7c7b;
+  --accent-dark: #0a5f5e;
+  --accent-soft: #e2f2f1;
+  --gold: #d9a62e;
+  --bg: #ffffff;
+  --wash: #f5fafa;
+  --line: #dbe7e6;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.68;
+}
+.wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.site-header {
+  background: var(--wash);
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0 18px;
+}
+.brand {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.brand .brand-accent { color: var(--accent); }
+.tagline { color: var(--muted); margin: 4px 0 0; font-size: 0.95rem; }
+nav.crumb a { color: var(--accent); text-decoration: none; font-size: 0.92rem; }
+nav.crumb a:hover { text-decoration: underline; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 60%, #14a3a2 100%);
+  color: #fff;
+  padding: 56px 0 52px;
+}
+.hero .wrap { max-width: 900px; }
+.hero h1 { font-size: 2.5rem; line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.02em; }
+.hero p.lede { font-size: 1.12rem; margin: 0 0 28px; opacity: 0.95; max-width: 640px; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; }
+.hero img {
+  width: 100%; height: auto; border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  aspect-ratio: 16/10; object-fit: cover;
+}
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-block; background: #fff; color: var(--accent-dark);
+  font-weight: 700; padding: 12px 22px; border-radius: 999px;
+  text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+.btn-ghost {
+  display: inline-block; border: 2px solid rgba(255,255,255,0.7); color: #fff;
+  font-weight: 600; padding: 10px 20px; border-radius: 999px; text-decoration: none;
+  transition: background 0.15s ease;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.14); }
+
+/* Intro sections */
+.intro { padding: 44px 0 8px; }
+.intro h2, .posts h2 { font-size: 1.45rem; letter-spacing: -0.01em; }
+.intro p { color: var(--muted); font-size: 1.04rem; }
+
+/* Article cards */
+.posts { padding: 12px 0 56px; }
+.card {
+  display: grid; grid-template-columns: 220px 1fr; gap: 22px;
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px; margin-bottom: 18px; background: #fff;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+.card:hover { box-shadow: 0 12px 28px rgba(14,124,123,0.14); transform: translateY(-3px); }
+.card img { width: 100%; height: 100%; min-height: 130px; object-fit: cover; border-radius: 10px; }
+.card h3 { margin: 0 0 8px; font-size: 1.18rem; letter-spacing: -0.01em; }
+.card h3 a { color: var(--accent-dark); text-decoration: none; }
+.card h3 a:hover { color: var(--accent); text-decoration: underline; }
+.card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+.card .badge {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--accent-dark); background: var(--accent-soft);
+  padding: 3px 10px; border-radius: 999px; margin-bottom: 8px;
+}
+
+/* Article pages */
+main { padding: 34px 0 56px; }
+.post h1 { font-size: 2rem; line-height: 1.25; margin: 14px 0 6px; letter-spacing: -0.02em; }
+.post .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 22px; }
+.post h2 { font-size: 1.35rem; margin: 38px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-soft); letter-spacing: -0.01em; }
+.post h3 { font-size: 1.1rem; margin: 26px 0 8px; color: var(--accent-dark); }
+.post ul, .post ol { padding-left: 22px; }
+.post li { margin-bottom: 8px; }
+.post figure.post-image { margin: 0 0 28px; }
+.post figure.post-image img { width: 100%; height: auto; border-radius: 14px; aspect-ratio: 16/9; object-fit: cover; box-shadow: 0 10px 26px rgba(14,124,123,0.12); }
+.post figcaption { font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+
+/* Callouts */
+.take {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px; margin: 26px 0;
+}
+.take strong.take-label { color: var(--accent-dark); display: block; margin-bottom: 4px; }
+.checklist { list-style: none; padding-left: 0; }
+.checklist li { padding-left: 32px; position: relative; margin-bottom: 12px; }
+.checklist li::before {
+  content: "✓"; position: absolute; left: 0; top: 0;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: #fff; font-weight: 700; font-size: 0.8rem;
+  display: flex; align-items: center; justify-content: center; line-height: 22px; text-align: center;
+}
+.warn {
+  background: #fdf6e7; border: 1px solid #f0dcab; border-radius: 10px;
+  padding: 14px 18px; margin: 26px 0;
+}
+.warn strong { color: #8a6414; }
+
+.back { display: inline-block; margin-bottom: 20px; color: var(--accent); text-decoration: none; font-weight: 600; }
+.back:hover { text-decoration: underline; }
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--wash);
+  padding: 26px 0 36px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.site-footer .disclaimer { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 16px; }
+.site-footer .ai-disclosure { font-size: .85em; opacity: .85; }
+.footer-nav { margin-top: 12px; }
+.footer-nav a { color: var(--accent-dark); text-decoration: none; }
+.footer-nav a:hover { text-decoration: underline; }
+
+/* Ad slot placeholder — shown once real ad code is pasted */
+.ad-slot {
+  border: 1px dashed var(--line); color: var(--muted); text-align: center;
+  padding: 12px; margin: 24px 0; font-size: 0.85rem; display: none;
+}
+
+@media (max-width: 680px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.9rem; }
+  .card { grid-template-columns: 1fr; }
+  .card img { max-height: 200px; }
+  .post h1 { font-size: 1.6rem; }
+}

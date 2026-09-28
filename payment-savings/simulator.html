@@ -196,7 +196,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
 @media(min-width:960px){.sim-side{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}}
 .ask input[type=radio],.ask input[type=checkbox]{width:20px;height:20px;vertical-align:middle;margin-right:6px;accent-color:#0f766e}
 .map-section{margin:2.4em 0}
-#sim-map svg{min-height:420px}
+#sim-map svg{width:100%;height:auto;display:block}
+.map-toolbar{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;margin:0 0 14px}
+.map-view-toggle{display:flex;gap:8px}
+.map-toggle{border:2px solid var(--line);background:#fff;border-radius:999px;padding:8px 18px;font-size:.95rem;font-weight:700;color:var(--ink);cursor:pointer}
+.map-toggle:hover{border-color:var(--accent)}
+.map-toggle[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-dark)}
+.map-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted)}
+.map-legend .lg{white-space:nowrap}
+.lg-line{display:inline-block;width:26px;height:0;border-top:3px solid #0f766e;vertical-align:middle;margin-right:6px}
+.lg-line.wifi{border-top:3px dashed #b45309}
+.lg-sq{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:6px}
+.lg-sq.up{background:#2563eb}.lg-sq.mo{background:#1b9e57}.lg-sq.quote{background:#9ca3af}
+#map-alert{margin:0 0 4px}
+#map-alert:empty{margin:0}
+.map-warn{background:#fef2f2;border:2px solid #dc2626;border-radius:10px;padding:12px 16px;color:#7f1d1d;font-size:.95rem;margin-bottom:12px}
+.map-warn a{color:#7f1d1d;font-weight:700}
+#map-table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 12px 12px}
+#map-table{width:100%;border-collapse:collapse;font-size:.9rem}
+#map-table caption{text-align:left;font-weight:700;padding:10px 4px;color:var(--navy);font-size:1rem}
+#map-table th,#map-table td{border-top:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+#map-table thead th{background:#f4f8f6;color:var(--navy);border-top:none;white-space:nowrap}
+#map-table .warn-cell{color:#b91c1c;font-weight:700}
+.map-note{font-size:.88rem;color:var(--muted);margin:.9em 0 0}
+.map-note a{color:var(--accent-dark);font-weight:700}
+/* SVG nodes: keyboard-focusable cards */
+#floorplan .map-node{cursor:pointer}
+#floorplan .map-node:focus{outline:none}
+#floorplan .focus-ring{display:none}
+#floorplan .map-node:focus-visible .focus-ring{display:block}
+#floorplan text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+@media(max-width:640px){.map-toolbar{flex-direction:column;align-items:stretch}.map-view-toggle{justify-content:center}}
 </style>
 </head>
 <body>
@@ -310,6 +340,38 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
   </div>
 </section>
 
+<section class="sim-step map-section" id="sim-map-section">
+  <h2>Your setup, visualized</h2>
+  <p class="hint">Every device you tick below appears here, in the zone where it lives — with how it's paid for, how it connects, and how long it should last. Schematic, not to scale. It updates live as you change your stack.</p>
+  <div class="map-toolbar">
+    <div class="map-view-toggle" role="group" aria-label="Choose map or list view">
+      <button type="button" id="map-view-svg" class="map-toggle" aria-pressed="true">🗺️ Map view</button>
+      <button type="button" id="map-view-list" class="map-toggle" aria-pressed="false">📋 List view</button>
+    </div>
+    <div class="map-legend" aria-label="Map legend">
+      <span class="lg"><i class="lg-line wired" aria-hidden="true"></i>wired</span>
+      <span class="lg"><i class="lg-line wifi" aria-hidden="true"></i>Wi-Fi</span>
+      <span class="lg"><i class="lg-sq up" aria-hidden="true"></i>paid up front</span>
+      <span class="lg"><i class="lg-sq mo" aria-hidden="true"></i>monthly</span>
+      <span class="lg"><i class="lg-sq quote" aria-hidden="true"></i>quote-based</span>
+      <span class="lg">⚠️ payment device on Wi-Fi</span>
+    </div>
+  </div>
+  <div id="map-alert"></div>
+  <div id="sim-map">
+    <svg id="floorplan" role="img" aria-label="Schematic floor plan of selected equipment"></svg>
+  </div>
+  <div id="map-table-wrap" hidden>
+    <table id="map-table">
+      <caption>Your setup as a list — the same data as the map</caption>
+      <thead><tr><th scope="col">Device</th><th scope="col">Zone</th><th scope="col">Qty</th><th scope="col">Link</th><th scope="col">Paid</th><th scope="col">Expected life</th><th scope="col">Support</th><th scope="col">Install</th></tr></thead>
+      <tbody id="map-tbody"></tbody>
+    </table>
+  </div>
+  <p class="map-note" id="map-install-line"></p>
+  <p class="map-note">Link types follow your <a href="#net-plan">network plan</a> (wired / Wi-Fi per zone) — change the plan and the map updates. Money figures are CAD, converted at the stated rates where originally priced in US$ or £.</p>
+</section>
+
 <section class="sim-step">
   <h2>3 · Build your stack</h2>
   <p class="hint">Tick what you have (or plan to get). Quantities adjust per item.</p>
@@ -381,14 +443,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
     </div>
   </div>
   <div class="me-total" id="me-total"></div>
-</section>
-
-<section class="sim-step map-section" id="sim-map-section">
-  <h2>Your floor plan</h2>
-  <p class="hint">Schematic — icons appear as you add items. Not to scale.</p>
-  <div id="sim-map">
-    <svg id="floorplan" viewBox="0 0 1200 860" role="img" aria-label="Schematic floor plan of selected equipment"></svg>
-  </div>
 </section>
 
 <section class="sim-step">

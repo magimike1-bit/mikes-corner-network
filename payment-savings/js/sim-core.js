@@ -1,3 +1,7 @@
+/* sim-core.js — simulator boot + catalog + totals.
+ * Rebuilt 2026-09-28 to force a fresh asset hash: the edge was serving a stale
+ * same-name copy of the built bundle (old import generation), leaving the
+ * totals strip stuck on "…". No behavior change in this rebuild. */
 import { S } from './session.js';
 import { $, money, esc, pyRound, clampN, pct1 } from './util.js';
 import { loadData } from './data.js';

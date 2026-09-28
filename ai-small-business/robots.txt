@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://REPLACE-WITH-LIVE-HOST/sitemap.xml
+Sitemap: https://ai-for-small-business-tince.kinsta.page/sitemap.xml

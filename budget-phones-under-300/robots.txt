@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://budget-phones-under-00-lg6bo.kinsta.page/sitemap.xml

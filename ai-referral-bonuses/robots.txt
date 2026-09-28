@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-referral-bonuses.pages.dev/sitemap.xml
+Sitemap: https://ai-referral-bonuses-zpjyo.kinsta.page/sitemap.xml

@@ -11,7 +11,7 @@
  */
 import {
   getUser, signUp, signIn, signInMagic, resetPassword, signOut, onAuthChange,
-} from "./sb.js";
+} from './sb.c957517c.js';
 import {
   listSimStates, importSimStates, deleteSimState, renameSimState, setupStatus,
   listGuestSimStates, clearGuestSimStates,
@@ -19,8 +19,8 @@ import {
   listAlertSubs, referralLink, claimPendingReferral, getReferralStats, guestNudge,
   getProfile, updateDisplayName, logActivity, listActivity, getActivityCounts,
   listAuditRequests, listAudits, adoptAuditRequests,
-} from "./db.js";
-import { lineChart, fmtBp } from "./chart.js";
+} from './db.fd18dc7a.js';
+import { lineChart, fmtBp } from './chart.42f77134.js';
 
 /* ---------- tiny DOM helpers (browser only, called after boot) ---------- */
 function esc(s) {

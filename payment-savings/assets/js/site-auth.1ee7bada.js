@@ -14,8 +14,8 @@
  * stashes setup info in sessionStorage fra_resume_setup when it loads a
  * setup (sim-save.js runs before this module — its script tag is earlier —
  * so the stash is in place before this write). */
-import { getUser, signOut, onAuthChange } from "./sb.js";
-import { logActivity, saveResumeState } from "./db.js";
+import { getUser, signOut, onAuthChange } from './sb.c957517c.js';
+import { logActivity, saveResumeState } from './db.fd18dc7a.js';
 
 function mount() {
   const nav = document.querySelector(".main-nav");

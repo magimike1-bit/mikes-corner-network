@@ -13,7 +13,7 @@
 import { getUser } from './sb.c957517c.js';
 import {
   getProfile, referralLink, recordReferralClick, getReferralStats, guestNudge,
-} from './db.786d07d3.js';
+} from './db.fd18dc7a.js';
 
 function $(id) { return document.getElementById(id); }
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")

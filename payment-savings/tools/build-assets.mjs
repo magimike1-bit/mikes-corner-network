@@ -19,7 +19,9 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { buildSearchIndex } from "./build-search-index.mjs";
 
-const ROOT = "/home/hatch/workspace/sites/github-network/payment-savings";
+/* Derive the repo root from this script's location — the canonical checkout
+   is ~/workspace/payment-savings/site (NOT the old github-network monorepo). */
+const ROOT = path.dirname(path.dirname(new URL(import.meta.url).pathname));
 const hash8 = buf => crypto.createHash("sha1").update(buf).digest("hex").slice(0, 8);
 
 // clean previous build
@@ -70,6 +72,7 @@ for (const f of cssFiles) {
 const PAGES = {
   "simulator.html":             { js: ["sim-core.js", "sim-save.js", "stepper.js"], css: ["simulator.css"] },
   "account.html":               { js: ["account.js"], css: [] },
+  "audit.html":                 { js: ["audit.js"], css: [] },
   "rate-calculator.html":       { js: ["rate-calculator.js"], css: [] },
   "fee-tracker.html":           { js: ["fee-tracker.js"], css: [] },
   "alerts.html":                { js: ["alerts.js"], css: [] },

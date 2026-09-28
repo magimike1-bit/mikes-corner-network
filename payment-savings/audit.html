@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free statement audit — FairRate Audit</title>
+<meta name="description" content="Request a free payment statement audit. Tell us about your business in under a minute — we reply within 2–5 business days.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* audit intake — scoped additions to style.css */
+.audit-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+@media(max-width:860px){.audit-grid{grid-template-columns:1fr}}
+.audit-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px;box-shadow:0 8px 24px rgba(14,42,71,.08)}
+.audit-card label{display:block;margin:0 0 1.2em;font-weight:600;color:var(--navy)}
+.audit-card input,.audit-card select,.audit-card textarea{display:block;width:100%;margin-top:6px;padding:12px 14px;font-size:1rem;border:1px solid var(--line);border-radius:10px;font-family:inherit;background:#fff}
+.audit-card textarea{min-height:110px;resize:vertical}
+.audit-card input:focus,.audit-card select:focus,.audit-card textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.audit-card input[aria-invalid="true"],.audit-card select[aria-invalid="true"]{border-color:#c0392b}
+.field-err{font-size:.9rem;color:#a33;margin:.4em 0 0;font-weight:500}
+.audit-req{color:#a33}
+.audit-hint{font-weight:400;color:var(--muted);font-size:.9rem}
+.audit-submit-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:1.6em}
+.audit-eta{color:var(--muted);font-size:.95rem}
+.audit-note{background:#f7faf9;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-top:1.4em;font-size:.95rem;color:var(--navy)}
+#audit-form-msg{font-size:.95rem;margin:1em 0}
+#audit-form-msg.err{color:#a33}
+.audit-hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.audit-success{background:#f0f7f4;border:1px solid #bfe0d2;border-left:6px solid var(--accent);border-radius:10px;padding:28px}
+.audit-success h2{margin-top:0}
+.audit-side{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.audit-side h2{font-size:1.2rem;margin-top:0}
+.audit-side ol{margin:0;padding-left:1.3em}
+.audit-side li{margin-bottom:.8em}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">$</span> FairRate Audit</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a>
+      <a href="simulator.html">Cost simulator</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="search.html">Search</a>
+      <a class="btn" href="audit.html" aria-current="page">Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Free audit · No obligation</p>
+    <h1>Get your free statement audit</h1>
+    <p class="lead">Tell us about your business in under a minute. If your statements show real savings, we'll show you exactly where — and what it would cost you (nothing up front).</p>
+  </div>
+</section>
+
+<main class="section">
+  <div class="wrap">
+    <div class="audit-grid">
+      <div class="audit-card" id="audit-form-wrap">
+        <form id="audit-form" novalidate>
+          <label>Full name <span class="audit-req" aria-hidden="true">*</span>
+            <input type="text" name="name" id="audit-name" autocomplete="name" maxlength="80" required>
+            <p class="field-err" data-err-for="name" hidden></p>
+          </label>
+          <label>Email <span class="audit-req" aria-hidden="true">*</span>
+            <input type="email" name="email" id="audit-email" autocomplete="email" maxlength="254" required>
+            <p class="field-err" data-err-for="email" hidden></p>
+          </label>
+          <label>Business name <span class="audit-req" aria-hidden="true">*</span>
+            <input type="text" name="business_name" id="audit-business" autocomplete="organization" maxlength="120" required>
+            <p class="field-err" data-err-for="business_name" hidden></p>
+          </label>
+          <label>Monthly card volume <span class="audit-req" aria-hidden="true">*</span>
+            <select name="volume_band" id="audit-volume" required>
+              <option value="">Choose a range…</option>
+              <option value="under-10k">Under $10,000</option>
+              <option value="10k-25k">$10,000 – $25,000</option>
+              <option value="25k-50k">$25,000 – $50,000</option>
+              <option value="50k-100k">$50,000 – $100,000</option>
+              <option value="100k-250k">$100,000 – $250,000</option>
+              <option value="over-250k">Over $250,000</option>
+            </select>
+            <p class="field-err" data-err-for="volume_band" hidden></p>
+          </label>
+          <label>Business type <span class="audit-hint">(optional)</span>
+            <select name="business_type" id="audit-type">
+              <option value="">Choose…</option>
+              <option value="retail">Retail</option>
+              <option value="restaurant">Restaurant</option>
+              <option value="qsr">Quick-service restaurant</option>
+              <option value="hotel">Hotel / hospitality</option>
+              <option value="grocery">Grocery</option>
+              <option value="salon">Salon / personal care</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>Current processor <span class="audit-hint">(optional — e.g. Moneris, Square, Chase)</span>
+            <input type="text" name="current_processor" id="audit-processor" maxlength="80" autocomplete="off">
+          </label>
+          <label>Phone <span class="audit-hint">(optional — only if you'd rather we call)</span>
+            <input type="tel" name="phone" id="audit-phone" autocomplete="tel" maxlength="40">
+          </label>
+          <label>Anything else? <span class="audit-hint">(optional)</span>
+            <textarea name="message" id="audit-message" maxlength="2000" placeholder="Anything about your setup you think we should know."></textarea>
+          </label>
+          <div class="audit-hp" aria-hidden="true">
+            <label>Website <input type="text" name="website" id="audit-website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <p id="audit-form-msg" role="status" aria-live="polite"></p>
+          <div class="audit-submit-row">
+            <button type="submit" class="btn primary" id="audit-submit">Request my free audit</button>
+            <span class="audit-eta">We reply within <strong>2–5 business days</strong>.</span>
+          </div>
+          <div class="audit-note">Don't send banking details until we ask — we'll tell you exactly what's needed if we move forward.</div>
+        </form>
+        <noscript>
+          <p>JavaScript is off, so the form can't send from this page. Email us instead at
+          <a href="mailto:contact@flswarehouse.com?subject=Free%20audit%20request">contact@flswarehouse.com</a>
+          with your name, business name, and monthly card volume — we reply within 2–5 business days.</p>
+        </noscript>
+      </div>
+      <aside class="audit-side">
+        <h2>What happens next</h2>
+        <ol>
+          <li><strong>You send this form</strong> — about a minute of your time.</li>
+          <li><strong>We reply within 2–5 business days</strong> with what we'd need to see (usually one recent processing statement).</li>
+          <li><strong>You get a plain-English breakdown</strong> of what you're paying, what looks high, and what you'd keep — before you commit to anything.</li>
+        </ol>
+        <p>No obligation, no pushy sales calls. If there's nothing to save, we'll tell you that too.</p>
+        <p><a href="how-we-get-paid.html">How we get paid</a> · <a href="faq.html">Audit FAQ</a></p>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
+      <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>
+    <p class="copyright">© 2026 FairRate Audit</p>
+  </div>
+</footer>
+  <script type="module" src="assets/js/site-auth.1ee7bada.js"></script>
+  <script type="module" src="assets/js/audit.73e8de8d.js"></script>
+</body>
+</html>

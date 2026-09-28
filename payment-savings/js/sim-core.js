@@ -582,8 +582,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
     const t = S.DATA.typical.setups[S.sector]; if(!t) return;
     const set = (id, v) => { const el = $(id); if(el && v !== undefined) el.value = v; };
     // Processing rate is always shown with at most 2 decimals — never a float artifact like 2.6500000953674316.
-    // Use toFixed(2) string formatting (not number assignment) to guarantee clean display.
-    const setRate = v => { const el = $("in-rate"); if(el && v !== undefined && v !== null && v !== "") el.value = (+v).toFixed(2); };
+    const setRate = v => { const el = $("in-rate"); if(el && v !== undefined && v !== null && v !== "") el.value = Math.round(+v * 100) / 100; };
     Object.values(t.q).forEach((v, i) => set(S.DATA.typical.qIds[S.sector][i], v));
     set("in-locations", t.basics.locations); set("in-employees", t.basics.employees);
     set("in-volume", t.basics.volume); setRate(t.basics.rate);
@@ -1011,7 +1010,7 @@ import { ensureME, meSales, renderMarginEaters, meEvents } from './margin-eaters
   const rateEl = $("in-rate");
   if(rateEl) rateEl.addEventListener("change", () => {
     const v = parseFloat(rateEl.value);
-    if(isFinite(v)) rateEl.value = v.toFixed(2);
+    if(isFinite(v)) rateEl.value = Math.round(v * 100) / 100;
   });
 
   $("btn-typical").addEventListener("click", loadTypical);

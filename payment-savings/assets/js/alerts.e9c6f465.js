@@ -10,7 +10,7 @@
  * (c) ?unsub=<token> → Supabase `unsubscribe` RPC via getClient(),
  *     guarded when accounts are not configured.
  */
-import { subscribeAlerts, isConfigured } from './db.786d07d3.js';
+import { subscribeAlerts, isConfigured } from './db.fd18dc7a.js';
 import { emailSendingEnabled } from './email.40dca101.js';
 import { getClient } from './sb.c957517c.js';
 

@@ -15,6 +15,7 @@ const ok = (m) => console.log("ok: " + m);
 
 const PAGES = {
   "account.html": "account.js",
+  "audit.html": "audit.js",
   "rate-calculator.html": "rate-calculator.js",
   "fee-tracker.html": "fee-tracker.js",
   "alerts.html": "alerts.js",

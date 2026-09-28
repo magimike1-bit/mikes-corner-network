@@ -23,7 +23,7 @@ const FILES = {
 };
 
 // __DATA_VERSIONS__ (build rewrites this line)
-const DATA_VERSIONS = {"benchmarks.json":"407dc674","fx.json":"17364eea","hardware.json":"3c1e8f33","install.json":"8d1e0f33","lifecycle.json":"21ca534f","manual.json":"4c977195","network.json":"7b3c69d9","rec-tiers.json":"113c24fe","search-index.json":"7b15095e","sim.json":"5bb8ab50","subsectors.json":"a9068efa","support.json":"9bc86229","surcharge-rules.json":"0dde07aa","training.json":"c1acd9e4","typical.json":"5ba0b6b4"};
+const DATA_VERSIONS = {"benchmarks.json":"407dc674","fx.json":"17364eea","hardware.json":"3c1e8f33","install.json":"8d1e0f33","lifecycle.json":"21ca534f","manual.json":"4c977195","network.json":"7b3c69d9","rec-tiers.json":"113c24fe","search-index.json":"7c3450fe","sim.json":"5bb8ab50","subsectors.json":"a9068efa","support.json":"9bc86229","surcharge-rules.json":"0dde07aa","training.json":"c1acd9e4","typical.json":"5ba0b6b4"};
 
 function dataUrl(file) {
   const v = DATA_VERSIONS[file];

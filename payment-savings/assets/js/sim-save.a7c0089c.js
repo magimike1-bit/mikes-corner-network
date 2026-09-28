@@ -4,11 +4,11 @@
  * Loaded as a second module on simulator.html; sim-core is already booted
  * by the time this module's top-level code runs (import ordering).
  */
-import { S } from "./session.js";
+import { S } from './session.d6748862.js';
 import {
   loadTypical, renderCatalog, renderSectors, recalc, applySectorInfraDefaults,
-} from "./sim-core.js";
-import { saveSimState, loadSimState, updateSimState, logActivity, isConfigured, guestNudge } from "./db.js";
+} from './sim-core.11b52452.js';
+import { saveSimState, loadSimState, updateSimState, logActivity, isConfigured, guestNudge } from './db.fd18dc7a.js';
 
 const INPUT_IDS = ["in-locations", "in-stations", "in-terminals", "in-employees",
   "in-volume", "in-ticket", "in-subsector", "in-rate", "in-revenue", "in-marketplace", "in-tables", "in-bar",

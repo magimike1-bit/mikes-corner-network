@@ -6,8 +6,8 @@
  * Alert subscriptions and transparency-wall submissions accept anonymous
  * rows by design (RLS allows anon INSERT only).
  */
-import { isConfigured } from "./config.js";
-import { getClient, getUser } from "./sb.js";
+import { isConfigured } from './config.0aae547a.js';
+import { getClient, getUser } from './sb.c957517c.js';
 
 export { isConfigured };
 

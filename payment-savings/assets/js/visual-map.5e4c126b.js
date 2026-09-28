@@ -1,7 +1,7 @@
-import { S } from './session.7a9a6abf.js';
+import { S } from './session.babf8dd5.js';
 import { $, esc, money } from './util.03612f15.js';
-import { dispAmt, lifeLabel, installHoursTotal, allItems, cadOf, installHrsLabel, installHrsMid, itemQty, itemUpfront, lifeDataFor, manualDef, manualMonthly } from './cost-engine.33998d54.js';
-import { netZoneDevices, netDevCounts, netWiredDrops, ensureNET } from './net-plan.1332075a.js';
+import { dispAmt, lifeLabel, installHoursTotal, allItems, cadOf, installHrsLabel, installHrsMid, itemQty, itemUpfront, lifeDataFor, manualDef, manualMonthly } from './cost-engine.85cce070.js';
+import { netZoneDevices, netDevCounts, netWiredDrops, ensureNET } from './net-plan.a1631221.js';
 /* map.js — generated module. Source of truth: js/ (edit here, then run tools/build-assets.mjs). */
 
   const MAP_NETZONE = { // item id -> S.NET zone id: how each device reaches the network

@@ -490,7 +490,7 @@ const SIM_PRICES = {
         { id:"custdisplay", name:"Customer-facing display", calc:"per_unit", unit:"display", map:{zone:"lanes",icon:"🖥️",label:"Display"},
           options:[
             {label:"SkyTab add-on — $39.99/mo", monthly:39.99, conf:"official", note:"skytab.com/en-CA — sold as a POS bundle add-on"},
-            {label:"POS-X pole display — ~$144 USD", upfront:144.29, conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
+            {label:"POS-X pole display — ~$144 USD", upfront:144.29, cur:"USD", conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
             {label:"Standalone — quote-based", monthly:0, conf:"estimate", info_only:true, note:"Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"} ]},
         { id:"pinpad", name:"Spare PIN pad / mobile reader", calc:"per_unit", unit:"reader", map:{zone:"lanes",icon:"💳",label:"PIN pad"},
           options:[
@@ -567,7 +567,7 @@ const SIM_PRICES = {
         { id:"mprinter", name:"Mobile receipt printer", calc:"per_unit", unit:"printer", map:{zone:"dining",icon:"🧾",label:"Mobile printer"},
           options:[
             {label:"Star SM-L200 — $700.42 MSRP", upfront:700.42, conf:"reported", note:"OCR/Levata CAD MSRP, 2026-09-28 (web pricing login-gated — actual buy price varies)"},
-            {label:"Star SM-L200 — from $345.34 USD", upfront:345.34, conf:"reported", note:"barcodesinc.com USD starting price, 2026-09-28 — plus exchange"} ]},
+            {label:"Star SM-L200 — from $345.34 USD", upfront:345.34, cur:"USD", conf:"reported", note:"barcodesinc.com USD starting price, 2026-09-28 — plus exchange"} ]},
 { id:"aiphone", name:"AI phone answering", calc:"per_location",
           options:[ {label:"~$399/mo per location", monthly:399, conf:"reported", note:"e.g., Slang.ai; third-party reporting"} ]},
         { id:"reserv", name:"Reservation system", calc:"per_location",
@@ -620,12 +620,12 @@ const SIM_PRICES = {
         { id:"custdisplay", name:"Customer-facing display", calc:"per_unit", unit:"display", map:{zone:"counter",icon:"🖥️",label:"Display"},
           options:[
             {label:"SkyTab add-on — $39.99/mo", monthly:39.99, conf:"official", note:"skytab.com/en-CA — sold as a POS bundle add-on"},
-            {label:"POS-X pole display — ~$144 USD", upfront:144.29, conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
+            {label:"POS-X pole display — ~$144 USD", upfront:144.29, cur:"USD", conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
             {label:"Standalone — quote-based", monthly:0, conf:"estimate", info_only:true, note:"Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"} ]},
         { id:"mprinter", name:"Mobile receipt printer", calc:"per_unit", unit:"printer", map:{zone:"counter",icon:"🧾",label:"Mobile printer"},
           options:[
             {label:"Star SM-L200 — $700.42 MSRP", upfront:700.42, conf:"reported", note:"OCR/Levata CAD MSRP, 2026-09-28 (web pricing login-gated — actual buy price varies)"},
-            {label:"Star SM-L200 — from $345.34 USD", upfront:345.34, conf:"reported", note:"barcodesinc.com USD starting price, 2026-09-28 — plus exchange"} ]},
+            {label:"Star SM-L200 — from $345.34 USD", upfront:345.34, cur:"USD", conf:"reported", note:"barcodesinc.com USD starting price, 2026-09-28 — plus exchange"} ]},
 { id:"kiosk", name:"Self-order kiosk", calc:"per_unit", unit:"kiosk", map:{zone:"counter",icon:"🤖",label:"Kiosk"},
           options:[ {label:"Quote-based — varies widely", monthly:0, conf:"estimate", note:"no published benchmark; get a vendor quote", info_only:true} ]},
         { id:"menuboard", name:"Digital menu boards", calc:"per_unit", unit:"screen",
@@ -707,7 +707,7 @@ const SIM_PRICES = {
         { id:"custdisplay", name:"Customer-facing display", calc:"per_unit", unit:"display", map:{zone:"lanes",icon:"🖥️",label:"Display"},
           options:[
             {label:"SkyTab add-on — $39.99/mo", monthly:39.99, conf:"official", note:"skytab.com/en-CA — sold as a POS bundle add-on"},
-            {label:"POS-X pole display — ~$144 USD", upfront:144.29, conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
+            {label:"POS-X pole display — ~$144 USD", upfront:144.29, cur:"USD", conf:"reported", note:"barcodesinc.com; USD — plus exchange"},
             {label:"Standalone — quote-based", monthly:0, conf:"estimate", info_only:true, note:"Canadian POS parts catalogues list displays as 'contact for pricing' — no published standalone price"} ]},
         { id:"pinpad", name:"Spare PIN pad / mobile reader", calc:"per_unit", unit:"reader", map:{zone:"lanes",icon:"💳",label:"PIN pad"},
           options:[
@@ -814,17 +814,17 @@ const SIM_PRICES = {
       options:[ {label:"Quote-based — varies by mount type", monthly:0, conf:"estimate", info_only:true, note:"Mount HARDWARE is retail (e.g. POS wall mount ~£33.60 ex VAT, printdesigns.com); install LABOR is the quote part — no published per-device install-labor price found. Ask your local POS installer."} ]},
     { id:"inst-cabledrop", name:"Cable drops — per run", calc:"per_unit", unit:"run",
       sub:"Pulled by a low-voltage contractor — one-time, paid at install, never monthly. Building asset: outlives the POS by 10–20+ yrs.",
-      options:[ {label:"US$150–250 per Cat6 drop — midpoint US$200", upfront:200, conf:"reported", note:"US$150–250 commercial per drop (datawiresolutions.com); US$175–285 tested/certified (Rx Technology); harder Cat6A/plenum/after-hours runs US$200–350+. USD — plus exchange. Same work as Infrastructure → Network cable drops above — use one, not both."},
+      options:[ {label:"US$150–250 per Cat6 drop — midpoint US$200", upfront:200, cur:"USD", conf:"reported", note:"US$150–250 commercial per drop (datawiresolutions.com); US$175–285 tested/certified (Rx Technology); harder Cat6A/plenum/after-hours runs US$200–350+. USD — plus exchange. Same work as Infrastructure → Network cable drops above — use one, not both."},
         {label:"Quote-based — varies by site", monthly:0, conf:"estimate", info_only:true, note:"New build with open ceilings is cheap; retrofit through finished walls costs more. Get per-run pricing."} ]},
     { id:"inst-netconfig", name:"Network config — VLAN + business Wi-Fi", calc:"flat",
       options:[ {label:"Quote-based — per site", monthly:0, conf:"estimate", info_only:true, note:"No standalone published price — usually bundled with the install. Context: full Wi-Fi install US$2,500–15,000+ depending on coverage; general IT labor US$75–200/hr as proxy (thenetworkinstallers.com). Config survives hardware refresh if documented."} ]},
     { id:"inst-possetup", name:"POS software setup & configuration", calc:"per_location",
-      options:[ {label:"US$500–1,500 professional install — midpoint US$1,000", upfront:1000, conf:"reported", note:"US$500–1,500 professional POS installation per location (theposexchange.com); US$200–1,000 one-time setup/onboarding (swyftpos.com); Toast-era US$300–500. USD — plus exchange. Industry benchmark: US$1,000–5,000 total hidden implementation on top of hardware + software quotes."},
+      options:[ {label:"US$500–1,500 professional install — midpoint US$1,000", upfront:1000, cur:"USD", conf:"reported", note:"US$500–1,500 professional POS installation per location (theposexchange.com); US$200–1,000 one-time setup/onboarding (swyftpos.com); Toast-era US$300–500. USD — plus exchange. Industry benchmark: US$1,000–5,000 total hidden implementation on top of hardware + software quotes."},
         {label:"Quote-based — per location", monthly:0, conf:"estimate", info_only:true, note:"Taxes, tenders, receipts, users and permissions. Bigger catalog = more hours."} ]},
     { id:"inst-menubuild", name:"Menu / product catalog build", calc:"per_location",
       options:[ {label:"Quote-based — per location", monthly:0, conf:"estimate", info_only:true, note:"No standalone published price — usually bundled with implementation (Toast onboarding does menu build; Rezku includes one-on-one training + custom menu build). A 20-item café menu is an afternoon; a 10,000-SKU grocery catalog is a project."} ]},
     { id:"inst-training", name:"Staff training — per session", calc:"per_unit", unit:"session",
-      options:[ {label:"US$100–500 per session — midpoint US$300", upfront:300, conf:"reported", note:"US$100–500 per session (theposexchange.com); Toast-era US$100–200; software proxy RetailEdge US$30/15 min. USD — plus exchange. This is the installer's fee — your staff's paid time is costed in the Training section below."},
+      options:[ {label:"US$100–500 per session — midpoint US$300", upfront:300, cur:"USD", conf:"reported", note:"US$100–500 per session (theposexchange.com); Toast-era US$100–200; software proxy RetailEdge US$30/15 min. USD — plus exchange. This is the installer's fee — your staff's paid time is costed in the Training section below."},
         {label:"Quote-based — per session", monthly:0, conf:"estimate", info_only:true, note:"Usually 1–2 sessions at go-live; complex setups (KDS, inventory) need more."} ]}
   ],
   /* ---- Training: the human cost of a new system. tr-initial is one-time (pay-now);
@@ -838,6 +838,19 @@ const SIM_PRICES = {
    _research/equipment-lifecycles.md — every row carries source + confidence.
    est:true = thin evidence, rendered as an explicit "(estimate)" tag, never a fact.
    Midpoint (yrs) feeds the math: monthly equivalent = upfront ÷ (yrs × 12). ---- */
+/* ---- Currency conversion (Joseph's rule: no mixed-currency math, ever).
+   Research prices quoted in US$ or £ are tagged cur:"USD"/"GBP" and converted to
+   Canadian dollars at these STATED rates before entering ANY total. Rates are
+   market snapshots dated below — approximate; a buyer's bank/card rate will differ
+   slightly. Never add a foreign-currency number into a total unconverted. ---- */
+const FX = { USD:1.416, GBP:1.72, date:"2026-09-28",
+  src:"US$1 = C$1.416 (Finnhub/OANDA, 2026-09-28); £1 = C$1.72 (exchangerates.org.uk, 2026-09-28)" };
+function cadOf(v, cur){ v = +v || 0; if(!cur || cur === "CAD") return v;
+  const r = FX[cur]; if(!r) throw new Error("Unknown currency on priced option: " + cur); return v * r; }
+/* Display: converted CAD amount, with the original foreign figure beside it. */
+function dispAmt(v, cur){ const c = cadOf(v, cur);
+  if(cur && cur !== "CAD") return money(c) + ' <span class="fx-src">(orig. ' + (cur === "USD" ? "US$" : "£") + v + " @ " + FX[cur] + ", " + FX.date + ")<\/span>";
+  return money(c); }
 const LIFECYCLE = {
   terminal:  {yrs:6,  range:"5–7",   conf:"Medium",      src:"FavorPOS lifespan guide; merchantequip.com", note:"PCI PTS version expiry usually retires terminals before they wear out"},
   "station:printer": {yrs:5, range:"3–5", conf:"Medium", src:"FavorPOS (printers 3–5 yrs); Epson TM-T88VI spec", note:"thermal receipt printer class"},
@@ -874,12 +887,12 @@ const LIFECYCLE = {
 const EPSON_SITA = {
   contract:{label:"Monthly on-site — quote-based", quote:true, note:"Epson's advance options are annual, not monthly; true on-site is VAR-quoted — ask Epson Preferred Plus / reseller"},
   breakfix:{label:"Per-visit — quote-based", quote:true, note:"no published per-incident price — ask Epson reseller / authorized service"},
-  hybrid:{label:"Spare-in-the-Air 1-yr — US$24.78", upfront:24.78, years:1, adv:true, note:"next-business-day whole-unit exchange — advance replacement (order by 1pm Pacific; geographic limits). US$24.78 reseller retail (barcodesinc.com); flyer MSRP US$16; 3-yr US$43.54–44, 5-yr US$77.84–78"},
+  hybrid:{label:"Spare-in-the-Air 1-yr — US$24.78", upfront:24.78, cur:"USD", years:1, adv:true, note:"next-business-day whole-unit exchange — advance replacement (order by 1pm Pacific; geographic limits). US$24.78 reseller retail (barcodesinc.com); flyer MSRP US$16; 3-yr US$43.54–44, 5-yr US$77.84–78"},
   src:"barcodesinc.com; Epson Extended Service Plans flyer CPD-61012R4 (accessed 2026-09-28)"};
 const ZEBRA_ONECARE = {
   contract:{label:"Monthly on-site — quote-based", quote:true, note:"Zebra sells multi-year annual contracts, not monthly on-site; any monthly on-site deal is a VAR custom SLA — ask a Zebra partner (ScanSource/BlueStar)"},
   breakfix:{label:"Depot repair — quote-based", quote:true, note:"out-of-contract repairs quoted case-by-case at a Zebra authorized depot"},
-  hybrid:{label:"OneCare Select 3-yr — ~US$37.80", upfront:37.80, years:3, adv:true, note:"comprehensive incl. accidental damage + 24×7 support; Select = same-day exchange tier (advance-replacement-style). Example DS2208 Select 3-yr US$37.80 (barcodediscount.com) — confirm price for your model; must buy within 30 days of device"},
+  hybrid:{label:"OneCare Select 3-yr — ~US$37.80", upfront:37.80, cur:"USD", years:3, adv:true, note:"comprehensive incl. accidental damage + 24×7 support; Select = same-day exchange tier (advance-replacement-style). Example DS2208 Select 3-yr US$37.80 (barcodediscount.com) — confirm price for your model; must buy within 30 days of device"},
   src:"barcodediscount.com; atlasrfidstore.com (accessed 2026-09-28)"};
 const MONERIS_SUPPORT = {
   contract:{label:"Included in rental — 24/7 Canadian support", included:true, note:"rental includes 24/7 Canadian support + Moneris right to substitute equivalent gear (PAYD agreement) — no published advance-swap timing; accidental breakage not confirmed free"},
@@ -889,12 +902,12 @@ const MONERIS_SUPPORT = {
 const ELOCARE_AUR = {
   contract:{label:"EloCare On-Site Exchange — quote-based", quote:true, note:"next-business-day on-site swap, up to 5 yrs — the true monthly-contract shape, but price is quote-based; ask Elo reseller"},
   breakfix:{label:"Per-visit — quote-based", quote:true, note:"ask Elo reseller"},
-  hybrid:{label:"EloCare AUR 3-yr — ~£33/yr", upfront:98.60, years:3, adv:true, note:"replacement shipped next business day if phone support can't fix it; return dead unit in 15 days — advance replacement. £98.60/3-yr (qual.co.uk, UK reseller) — confirm Canada pricing"},
+  hybrid:{label:"EloCare AUR 3-yr — ~£33/yr", upfront:98.60, cur:"GBP", years:3, adv:true, note:"replacement shipped next business day if phone support can't fix it; return dead unit in 15 days — advance replacement. £98.60/3-yr (qual.co.uk, UK reseller) — confirm Canada pricing"},
   src:"barcodefactory.com (EloCare onepager); online.qual.co.uk (accessed 2026-09-28)"};
 const STAR_SUPPORT = {
   contract:{label:"Monthly on-site — quote-based", quote:true, note:"no monthly plan published for Star printers — ask Star reseller (e.g. POSGuys)"},
   breakfix:{label:"Per-visit — quote-based", quote:true, note:"no published per-visit price — ask reseller"},
-  hybrid:{label:"Swap-A-Star 3-yr — ~US$165 total", upfront:165, years:3, adv:true, note:"next-business-day replacement via 2nd Day Air — ADVANCE REPLACEMENT; buy within 30 days. Example: TSP100III US$165/3-yr (~US$55/yr, posguys.com) — confirm price for your model. Cheaper carry-in alternative: Extend-A-Star 3-yr US$47.50 (no advance replacement)"},
+  hybrid:{label:"Swap-A-Star 3-yr — ~US$165 total", upfront:165, cur:"USD", years:3, adv:true, note:"next-business-day replacement via 2nd Day Air — ADVANCE REPLACEMENT; buy within 30 days. Example: TSP100III US$165/3-yr (~US$55/yr, posguys.com) — confirm price for your model. Cheaper carry-in alternative: Extend-A-Star 3-yr US$47.50 (no advance replacement)"},
   src:"posguys.com (accessed 2026-09-28)"};
 const DYMO_SUPPORT = {
   contract:{label:"No paid plan published — quote-based", quote:true, note:"no paid DYMO manufacturer plan found — ask DYMO support/reseller"},
@@ -1295,7 +1308,7 @@ const REC_TIERS = {
   function builderPerStation(item, st){
     const inc = st.reqInc == null ? 1 : st.reqInc;
     if(st.path === "aio"){
-      let per = item.aio.upfront / lifeMonths(item.aio);
+      let per = cadOf(item.aio.upfront, item.aio.cur) / lifeMonths(item.aio);
       if(st.aioSupport && st.aioSupport !== "none" && item.aio.support)
         per += supportMonthlyFor(item.aio, st.aioSupport, inc);
       return per;
@@ -1303,7 +1316,7 @@ const REC_TIERS = {
     let per = 0;
     item.addons.forEach(a => {
       if(!(st.reqs && st.reqs[a.id])) return;
-      if(a.upfront) per += a.upfront / lifeMonths(a);
+      if(a.upfront) per += cadOf(a.upfront, a.cur) / lifeMonths(a);
       const sp = st.reqSupport && st.reqSupport[a.id];
       if(sp && sp !== "none" && a.support) per += supportMonthlyFor(a, sp, inc);
     });
@@ -1321,10 +1334,10 @@ const REC_TIERS = {
     if(!s) return 0;
     const inc = Math.max(0, +incidentsPerYear || 0);
     const termMonths = Math.max(1, Math.round((s.years || 1) * 12));
-    const base = (s.upfront ? s.upfront / termMonths : 0) + (s.monthly || 0);
+    const base = (s.upfront ? cadOf(s.upfront, s.cur) / termMonths : 0) + cadOf(s.monthly, s.cur);
     if(plan === "contract") return base;
-    if(plan === "breakfix") return ((s.perIncident || 0) * inc) / 12;
-    if(plan === "hybrid") return base + ((s.perIncident || 0) * inc) / 12;
+    if(plan === "breakfix") return (cadOf(s.perIncident, s.cur) * inc) / 12;
+    if(plan === "hybrid") return base + (cadOf(s.perIncident, s.cur) * inc) / 12;
     return 0;
   }
   function supportPlanPriced(opt, plan){
@@ -1346,7 +1359,7 @@ const REC_TIERS = {
     const q = itemQty(item, inp);
     let m = 0;
     if(item.calc === "percent_marketplace") m = inp.marketplace * (item.rate || 0);
-    else m = ((opt.upfront ? opt.upfront / lifeMonths(opt) : 0) + (opt.monthly || 0)) * q; // amortized hardware over its expected life + recurring
+    else m = ((opt.upfront ? cadOf(opt.upfront, opt.cur) / lifeMonths(opt) : 0) + cadOf(opt.monthly, opt.cur)) * q; // amortized hardware (CAD-converted) over its expected life + recurring
     if(st.support && st.support !== "none" && opt.support) m += supportMonthlyFor(opt, st.support, st.incidents == null ? 1 : st.incidents) * q;
     if(item.base) m += item.base * (item.calc === "per_location" ? inp.locations : 1);
     return m;
@@ -1362,13 +1375,13 @@ const REC_TIERS = {
     if(item.builder){
       const q = Math.max(0, inp.stations);
       let u = 0;
-      if(st.path === "aio"){ if(item.aio.upfront) u += item.aio.upfront; }
-      else item.addons.forEach(a => { if(st.reqs && st.reqs[a.id] && a.upfront) u += a.upfront; });
+      if(st.path === "aio"){ if(item.aio.upfront) u += cadOf(item.aio.upfront, item.aio.cur); }
+      else item.addons.forEach(a => { if(st.reqs && st.reqs[a.id] && a.upfront) u += cadOf(a.upfront, a.cur); });
       return u * q;
     }
     const opt = item.options[st.optIdx || 0];
     if(!opt || opt.info_only || !opt.upfront) return 0;
-    return opt.upfront * itemQty(item, inp);
+    return cadOf(opt.upfront, opt.cur) * itemQty(item, inp);
   }
 
   function allItems(){
@@ -1645,7 +1658,7 @@ const REC_TIERS = {
       '<label><input type="radio" name="station-path" value="build"' + (st.path !== "aio" ? " checked" : "") + '> 🧩 <strong>Build your own</strong> — mix and match</label>' +
       '<label><input type="radio" name="station-path" value="aio"' + (st.path === "aio" ? " checked" : "") + '> 📦 <strong>All-in-one</strong> — one box does it all</label></div>';
     if(st.path === "aio"){
-      inner += '<div class="aio-note">All-in-one (like the Square Register, ~$900 CAD): screen, card reader, POS software and customer display in one box — <strong>' + money(item.aio.upfront / lifeMonths(item.aio)) + '/mo equiv.</strong> ($900 upfront ÷ ' + lifeLabel(item.aio) + ').<br>' +
+      inner += '<div class="aio-note">All-in-one (like the Square Register, ~$900 CAD): screen, card reader, POS software and customer display in one box — <strong>' + money(cadOf(item.aio.upfront, item.aio.cur) / lifeMonths(item.aio)) + '/mo equiv.</strong> ($900 upfront ÷ ' + lifeLabel(item.aio) + ').<br>' +
         '✅ Simpler — one thing to plug in, one vendor to call.<br>' +
         '⚠️ Trade-offs: you\'re locked to that processor\'s rates, and if one part dies the whole box goes for repair. Printer and cash drawer are usually sold separately.<br>' +
         '💡 It has its own card reader \u2014 but don\u2019t drop to a single payment path. If this box dies mid-rush, sales stop: keep a backup terminal.</div>';
@@ -1657,7 +1670,7 @@ const REC_TIERS = {
       inner += '<div class="reqs">';
       item.addons.forEach(a => {
         const on = !!(st.reqs && st.reqs[a.id]);
-        const cost = a.upfront ? " — <strong>" + money(a.upfront / lifeMonths(a)) + "/mo equiv.</strong> <span class=\"life-badge\">" + lifeLabel(a) + " life</span>" +
+        const cost = a.upfront ? " — <strong>" + money(cadOf(a.upfront, a.cur) / lifeMonths(a)) + "/mo equiv.</strong> <span class=\"life-badge\">" + lifeLabel(a) + " life</span>" +
           (installHrsLabel(a) ? ' <span class="life-badge" title="Average tech install time">🔧 ' + installHrsLabel(a) + " install</span>" : "") : "";
         inner += '<label class="sim-check"><input type="checkbox" data-req="' + a.id + '"' + (on ? " checked" : "") + '> <span>' + a.label + cost +
           '<br><span style="opacity:.75;font-size:.95em">' + (a.note || "") + "</span></span></label>";
@@ -1790,9 +1803,9 @@ const REC_TIERS = {
       const opt = item.options[st.optIdx || 0];
       if(!opt || opt.info_only){ if(isInstall) installQuoted++; return; }
       const q = itemQty(item, inp);
-      if(isInstall){ installUpfront += opt.upfront * q; return; }
-      if(opt.upfront) hwUpfront += opt.upfront * q;
-      if(opt.monthly){ if(opt.lease) leaseMo += opt.monthly * q; else saasMo += opt.monthly * q; }
+      if(isInstall){ installUpfront += cadOf(opt.upfront, opt.cur) * q; return; }
+      if(opt.upfront) hwUpfront += cadOf(opt.upfront, opt.cur) * q;
+      if(opt.monthly){ const mc = cadOf(opt.monthly, opt.cur); if(opt.lease) leaseMo += mc * q; else saasMo += mc * q; }
       if(item.base) saasMo += item.base * (item.calc === "per_location" ? inp.locations : 1);
       if(st.support && st.support !== "none" && opt.support){
         const m = supportMonthlyFor(opt, st.support, st.incidents == null ? 1 : st.incidents) * q;
@@ -1826,7 +1839,8 @@ const REC_TIERS = {
       "</div></div>" +
       '<p class="fine">Bought hardware is due in full at install — the monthly total above spreads it over its expected life for comparison only. ' +
       "Cable drops and setup are one-time: they never appear in the monthly column. " +
-      "Leasing converts hardware to a real monthly bill — lease terms are quote-based, ask your reseller.</p></div>";
+      "Leasing converts hardware to a real monthly bill — lease terms are quote-based, ask your reseller.<br>" +
+      "Foreign-currency research prices are converted to CAD at US$1 = C$1.416 and £1 = C$1.72 (market rates, 2026-09-28) — approximate; your bank\u2019s rate will differ slightly. No foreign-currency amount ever enters a total unconverted.</p></div>";
   }
 
   /* ---- Training materials: genuinely usable starter content, per sector.
@@ -2217,17 +2231,17 @@ const REC_TIERS = {
     if(plan === "contract"){
       if(s.included) return "included";
       const bits = [];
-      if(s.monthly) bits.push(money(s.monthly) + "/mo");
-      if(s.upfront) bits.push("$" + s.upfront.toLocaleString("en-CA") + " upfront");
+      if(s.monthly) bits.push(dispAmt(s.monthly, s.cur) + "/mo");
+      if(s.upfront) bits.push(dispAmt(s.upfront, s.cur) + " upfront");
       if(s.years) bits.push(s.years + "-yr term");
       return bits.length ? bits.join(" · ") : "quote-based";
     }
-    if(plan === "breakfix") return s.perIncident ? ("~$" + s.perIncident.toLocaleString("en-CA") + " per visit") : "quote-based";
+    if(plan === "breakfix") return s.perIncident ? ("~" + dispAmt(s.perIncident, s.cur) + " per visit") : "quote-based";
     if(plan === "hybrid"){
       const bits = [];
-      if(s.monthly) bits.push(money(s.monthly) + "/mo");
-      if(s.upfront) bits.push("$" + s.upfront.toLocaleString("en-CA") + " upfront");
-      if(s.perIncident) bits.push("$" + s.perIncident.toLocaleString("en-CA") + "/visit");
+      if(s.monthly) bits.push(dispAmt(s.monthly, s.cur) + "/mo");
+      if(s.upfront) bits.push(dispAmt(s.upfront, s.cur) + " upfront");
+      if(s.perIncident) bits.push(dispAmt(s.perIncident, s.cur) + "/visit");
       return bits.length ? bits.join(" + ") : "quote-based";
     }
     return "quote-based";
@@ -2358,13 +2372,13 @@ const REC_TIERS = {
         const isManual = md && st.manual;
         const isInstall = tier === "install";
         const priceTxt = isManual ? money(manualMonthly(item, st)) + "/mo"
-          : isInstall ? (opt.info_only ? "quote-based" : "$" + opt.upfront.toLocaleString("en-CA") + " one-time")
+          : isInstall ? (opt.info_only ? "quote-based" : dispAmt(opt.upfront, opt.cur) + " one-time")
           : opt.info_only ? "—" : money(itemMonthlyPreview(item, opt)) + "/mo" + ((opt.upfront && !opt.monthly) ? " equiv." : "");
         const perTxt = isManual ? "/mo manual labor"
           : isInstall ? (opt.info_only ? "get installer pricing" : "paid at install · never monthly")
           : opt.info_only ? "excluded from total"
-          : (opt.upfront && opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront + " + perLabel(item))
-          : (opt.upfront && !opt.monthly) ? ("$" + opt.upfront.toLocaleString("en-CA") + " upfront ÷ " + lifeLabel(opt))
+          : (opt.upfront && opt.monthly) ? (dispAmt(opt.upfront, opt.cur) + " upfront + " + perLabel(item))
+          : (opt.upfront && !opt.monthly) ? (dispAmt(opt.upfront, opt.cur) + " upfront ÷ " + lifeLabel(opt))
           : perLabel(item);
         inner += '<div class="price"><label class="sim-check" style="margin:0 0 6px;justify-content:flex-end"><input type="checkbox" data-item="' + item.id + '" aria-label="Include ' + item.name + '"' + (st.checked ? " checked" : "") + '></label>' +
           '<span class="amt">' + priceTxt + '</span><span class="per">' + perTxt + "</span></div>";
@@ -2656,7 +2670,7 @@ const REC_TIERS = {
   }
   function dropUnitCost(){
     const item = findItem("drops"), st = state["drops"];
-    if(item && st){ const opt = item.options[st.optIdx || 0]; if(opt && opt.upfront) return opt.upfront; }
+    if(item && st){ const opt = item.options[st.optIdx || 0]; if(opt && opt.upfront) return cadOf(opt.upfront, opt.cur); }
     return 175;
   }
   function renderNetPlan(){

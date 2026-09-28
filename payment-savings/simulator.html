@@ -129,6 +129,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
   <h2>1 · Pick your sector</h2>
   <p class="hint">The catalog, suggestions, and floor-plan map reconfigure for each sector.</p>
   <div class="sector-grid" id="sector-grid"></div>
+  <div style="margin-top:1.2em;max-width:420px">
+    <div><label for="in-revenue">Approximate annual revenue (CAD) — optional</label><input type="number" id="in-revenue" min="0" step="1000" placeholder="e.g. 1200000"><div class="input-note">Estimate is fine — or skip it. If you enter it, every cost below is also shown as a % of revenue, benchmarked against sector norms.</div></div>
+  </div>
 </section>
 
 <section class="sim-step">
@@ -232,6 +235,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
       <div class="total-bar">
         <div id="total-lines"></div>
         <div class="row grand"><span>Estimated total</span><span id="grand-total">$0/mo</span></div>
+        <div id="rev-lines"></div>
         <p class="fine">Estimates from published pricing (see confidence labels). Hardware shown as illustrative monthly equivalents (purchase ÷ 36). Not quotes — your free audit measures your real numbers.</p>
       </div>
     </div>
@@ -244,6 +248,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.s
     <h3>What you're paying in processing fees right now</h3>
     <p class="big" id="proc-cost">$0 / month</p>
     <p style="margin:.4em 0" id="proc-save"></p>
+    <p style="margin:.4em 0" id="proc-rev"></p>
     <p class="input-note">Based on the volume and rate you entered above. A 0.5% saving is a common audit finding used here only to show the math — your statements decide the real number.</p>
   </div>
 </section>
@@ -545,6 +550,18 @@ const SIM_PRICES = {
 
   const CONF_LABEL = {official:"Official", reported:"Reported", estimate:"Estimate", illus:"Illustrative"};
 
+  // Sector norms for the % of revenue view (from _research/sector-it-cost-benchmarks.md, accessed 2026-09-28)
+  const SECTOR_WORD = {retail:"retailers", restaurant:"restaurants", qsr:"quick-service spots", hotel:"hotels", grocery:"grocers", salon:"salons"};
+  const BENCHMARKS = {
+    retail:     { it:"2–4%", proc:"1.7–2.5% (2.5–3.5% in Canada)", note:"On retail net margins of 8–15%, processing can consume up to a third of net profit." },
+    restaurant: { it:"~1–3%", proc:"2.0–3.5% (avg 2.35%)", note:"The average full-service restaurant margin is 2.8% — processing can cost more than the profit it leaves behind." },
+    qsr:        { it:"~1–3%", proc:"2.0–3.5%", note:"High volume + low tickets: the fixed per-transaction fee bites hardest here." },
+    hotel:      { it:"under 3%", proc:"2.5–3.5%", note:"Canadian card-accepting businesses routinely surrender 2.5–3.5% of gross sales to processing." },
+    grocery:    { it:"~1.9% (range 1–4%)", proc:"2.5–3.5%", note:"Enormous card volume on thin margins — every basis point is magnified." },
+    salon:      { it:"no published benchmark (often ~1–3%)", proc:"2.5–3.5%+", note:"Card-on-file bookings skew toward the high end of the band." }
+  };
+  const pct1 = n => (Math.round(n * 100) / 100).toFixed(n < 0.1 ? 2 : 1) + "%";
+
   function getInputs(){
     return {
       locations: Math.max(1, +$("in-locations").value || 1),
@@ -553,6 +570,7 @@ const SIM_PRICES = {
       employees: Math.max(0, +$("in-employees").value || 0),
       volume: Math.max(0, +$("in-volume").value || 0),
       rate: Math.max(0, +$("in-rate").value || 0),
+      revenue: Math.max(0, +$("in-revenue").value || 0),
       marketplace: Math.max(0, +$("in-marketplace").value || 0),
       tables: Math.max(0, +$("in-tables").value || 0)
     };
@@ -1241,6 +1259,21 @@ const SIM_PRICES = {
     $("proc-cost").textContent = money(proc) + " / month";
     $("proc-save").innerHTML = "A 0.5% saving on that volume would be worth <strong>" + money(save) + "/month</strong> — " +
       "illustrative only; your statements decide the real number.";
+    // % of revenue view (optional revenue input)
+    const bm = BENCHMARKS[sector] || BENCHMARKS.retail;
+    const sw = SECTOR_WORD[sector] || "businesses";
+    if(inp.revenue > 0){
+      const techPct = (total * 12) / inp.revenue * 100;
+      $("rev-lines").innerHTML = '<div class="row grand" style="font-size:.92rem"><span>Your tech stack as % of revenue</span><span>' + pct1(techPct) + '</span></div>' +
+        '<p class="fine" style="margin:.3em 0 0">Typical for ' + sw + ': <strong>' + bm.it + '</strong> of revenue on IT. (Processing fees sit outside published IT benchmarks — so your true tech-adjacent spend is higher than this line.)</p>';
+      const procPct = (proc * 12) / inp.revenue * 100;
+      $("proc-rev").innerHTML = "That's <strong>" + pct1(procPct) + " of your revenue</strong> going to processing " +
+        "(typical " + sw + ": " + bm.proc + "). " + bm.note +
+        ' <a href="contact.html">Find out your real processing % — free audit</a>.';
+    } else {
+      $("rev-lines").innerHTML = "";
+      $("proc-rev").innerHTML = "";
+    }
     drawMap();
     updateTotalBar(total);
   }
@@ -1265,7 +1298,7 @@ const SIM_PRICES = {
     $("grand-total").textContent = money(total) + "/mo";
   }
 
-  ["in-locations","in-stations","in-terminals","in-employees","in-volume","in-rate","in-marketplace",
+  ["in-locations","in-stations","in-terminals","in-employees","in-volume","in-rate","in-revenue","in-marketplace",
    "in-tables","in-bar","in-takeout","in-drivethru","in-seats","in-kiosks","in-sqft-r","in-weigh","in-sco",
    "in-rooms","in-floors","in-fb","in-sqft-g","in-deli","in-lottery","in-chairs","in-trooms","in-retailct"]
     .forEach(id => {

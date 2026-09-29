@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File-Naming Conventions That Make Files Findable — Data Management Basics</title>
+<meta name="description" content="A simple file-naming scheme: dates that sort, honest version numbers, characters to avoid, and how to get everyone naming files the same way.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Data Management Basics</a>
+    <p class="tagline">Practical guides to keeping your files safe, organized, and findable</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>File-naming conventions that make files findable</h1>
+  <p class="meta">File organization &middot; 5 min read</p>
+
+  <p>Most file chaos is not a storage problem — it's a naming problem. When filenames are
+  vague, inconsistent, or full of "final" and "final2," the only search strategy left is
+  opening things one by one. A simple naming convention fixes most of it, and it costs nothing.</p>
+
+  <h2>What a good filename does</h2>
+  <p>A good filename answers three questions at a glance: <strong>what is this</strong>,
+  <strong>when is it from</strong>, and <strong>which version is it</strong>. If you can
+  answer those without opening the file, your naming is working.</p>
+
+  <h2>The anatomy of a solid filename</h2>
+  <p>Pick an order for the parts and keep it the same everywhere. A pattern that works well
+  for most documents:</p>
+  <pre><code>YYYY-MM-DD_project_description_v01.pdf</code></pre>
+  <ul>
+    <li><strong>Date first (YYYY-MM-DD):</strong> files sort chronologically in every file
+    browser, no custom sorting needed. Never use MM-DD-YYYY or DD-MM-YYYY — they sort wrong
+    and confuse people across regions.</li>
+    <li><strong>Project or topic:</strong> one or two words that say what the file belongs to.</li>
+    <li><strong>Short description:</strong> what the file actually is. Be specific enough
+    that you don't have to open it.</li>
+    <li><strong>Version number:</strong> <code>v01</code>, <code>v02</code>, and so on.
+    Numbers beat words — everyone knows <code>v03</code> is newer than <code>v02</code>,
+    while "final" vs. "final_v2" vs. "final_FINAL" tells you nothing.</li>
+  </ul>
+  <p>A real example: <code>2026-09-20_garage-sale_inventory_v03.xlsx</code> is instantly
+  understandable. <code>Book1 (2).xlsx</code> is not.</p>
+
+  <h2>Versioning rules that actually hold</h2>
+  <p>Decide one versioning scheme and use it for everything:</p>
+  <ul>
+    <li>Use <code>v01</code>, <code>v02</code> (two digits, leading zero, so files sort correctly).</li>
+    <li>Only the newest version keeps the version number if you prefer — some teams rename
+    the current draft without a version and only number the milestones. Either way, pick one.</li>
+    <li>Never use "final" in a filename. There will always be another final.</li>
+    <li>When a version is superseded, either move it to an <code>archive</code> subfolder or
+    mark it clearly — don't leave five competing versions in the same folder.</li>
+  </ul>
+
+  <h2>Characters to avoid</h2>
+  <p>Stick to letters, numbers, hyphens, and underscores. Avoid:</p>
+  <ul>
+    <li><strong>Spaces:</strong> they work on modern systems but still break older tools and
+    make command-line work annoying. Use hyphens or underscores instead.</li>
+    <li><strong>Slashes, backslashes, colons, asterisks, question marks, quotes:</strong>
+    these are reserved or problematic on some operating systems.</li>
+    <li><strong>Special characters and emoji:</strong> they don't survive every transfer
+    method and they break search in unexpected ways.</li>
+    <li><strong>Excessive length:</strong> some systems and cloud sync tools struggle with
+    very long paths. Keep names descriptive but compact — under 60 characters is a safe habit.</li>
+  </ul>
+
+  <h2>Folders carry the big structure; names carry the detail</h2>
+  <p>Don't repeat the folder name in every filename — that's what the folder is for. If the
+  folder is <code>2026-taxes</code>, the file doesn't need to be
+  <code>2026-taxes_2026-09-20_receipt.pdf</code>. It can just be
+  <code>2026-09-20_receipt.pdf</code>. The folder provides the context; the filename
+  provides the specifics.</p>
+
+  <h2>Write it down, then actually use it</h2>
+  <p>A convention nobody can see isn't a convention. Write your scheme in one short document —
+  a few lines with two or three examples — and put it somewhere people will find it:</p>
+  <ul>
+    <li>For a household: tape it to the inside of the file cabinet, or pin it in a shared note.</li>
+    <li>For a team: put it in the shared drive's top-level folder as a readme.</li>
+    <li>Include examples for the file types you actually use: invoices, photos, contracts,
+    receipts.</li>
+  </ul>
+  <p>Then the harder part: rename new files as you create them. Don't try to rename ten
+  years of backlog in one weekend — apply the scheme going forward, and rename old files
+  only when you touch them. Consistency from today onward beats a perfect archive.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>Data Management Basics — practical guides to everyday data organization. Content is general information only, not legal, tax, or professional advice.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

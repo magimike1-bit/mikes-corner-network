@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access and Permissions: Who Should See What — Data Management Basics</title>
+<meta name="description" content="Simple access control: default-private folders, role-based sharing, sharing-link hygiene, and a regular cleanup of who can see what.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Data Management Basics</a>
+    <p class="tagline">Practical guides to keeping your files safe, organized, and findable</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Access and permissions: who should see what</h1>
+  <p class="meta">Security basics &middot; 5 min read</p>
+
+  <p>Most access problems come from the same root cause: sharing that was generous when
+  it was set up and never reviewed. An ex-contractor still in the shared folder, a
+  "anyone with the link" document floating around, a whole team with edit access to a
+  folder where they only ever read. None of this needs security software to fix — it
+  needs simple rules and a regular look.</p>
+
+  <h2>Start default-private</h2>
+  <p>The simplest policy that works: new folders and documents start private, and access
+  is granted deliberately. It's much easier to open things up as needed than to discover
+  later that something sensitive was visible to everyone. When someone asks "why can't
+  I see this folder?", the answer should be "let me add you" — not "I didn't know you
+  could."</p>
+
+  <h2>Share by role, not by person</h2>
+  <p>Give access based on what someone needs to do, not who they are:</p>
+  <ul>
+    <li><strong>Viewers</strong> can read and download. This is the right level for most
+    people, most of the time — reports, reference documents, policies.</li>
+    <li><strong>Editors</strong> can change things. Reserve this for the people who
+    actually produce the content in that folder.</li>
+    <li><strong>Owners or admins</strong> can change permissions and the structure.
+    Keep this group tiny — one or two people per area.</li>
+  </ul>
+  <p>If your tool supports sharing with groups (a mailing list, a team group), use groups
+  instead of naming individuals. When someone joins or leaves, you update the group once
+  instead of hunting through dozens of shared folders.</p>
+
+  <h2>Sharing links need hygiene</h2>
+  <p>Links are convenient and also the most common way access leaks. A few habits:</p>
+  <ul>
+    <li>Prefer links that require sign-in over "anyone with the link" links, especially
+    for anything internal or sensitive.</li>
+    <li>Set expiration dates on links shared with outsiders when your tool supports it.
+    A link that dies in 30 days can't be forwarded around forever.</li>
+    <li>Before forwarding an "anyone with the link" document further, stop and ask
+    whether it should be one — switch to a named share first if it matters.</li>
+  </ul>
+
+  <h2>Audit access twice a year</h2>
+  <p>Access decays: people change roles, contractors finish, projects end. Twice a year,
+  go through your main shared areas and ask three questions:</p>
+  <ol>
+    <li><strong>Who has access?</strong> Look at the actual sharing list, not who you
+    think has access.</li>
+    <li><strong>Do they still need it?</strong> Former employees, finished contractors,
+    and people who moved teams come off the list.</li>
+    <li><strong>Is the level right?</strong> Anyone with edit access who only ever reads
+    goes down to viewer.</li>
+  </ol>
+  <p>This takes less time than it sounds, and it catches the slow accumulation that
+  turns "the finance folder" into "the folder half the company can edit."</p>
+
+  <h2>Offboarding is part of access control</h2>
+  <p>When someone leaves — employee, contractor, volunteer — removing their access should
+  be a checklist item on their last day, not a "we'll get to it." The list:</p>
+  <ul>
+    <li>Remove them from shared drives and folders.</li>
+    <li>Remove them from groups that grant access automatically.</li>
+    <li>Transfer ownership of anything they owned (documents, forms, automations) to
+    someone staying.</li>
+    <li>Check for personal accounts used for work sharing and move the data first.</li>
+  </ul>
+
+  <h2>Keep the model simple enough to explain</h2>
+  <p>The final test of any permissions setup: can you explain it to a new person in two
+  minutes? "Everyone sees their team's folder, editors are the content owners, the
+  admin group is just the two of us, and we review access every six months" is a complete
+  access policy for most small teams. If your setup needs a diagram, it's too complicated
+  — and complicated permissions are the ones nobody maintains.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>Data Management Basics — practical guides to everyday data organization. Content is general information only, not legal, tax, or professional advice.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

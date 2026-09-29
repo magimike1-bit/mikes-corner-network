@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn It Into a Media Server: Give the Old Laptop a Second Job — Old Laptop Revival</title>
+<meta name="description" content="Don't scrap a working old laptop — turn it into a home media server that streams your movies, shows, and music to every TV, phone, and computer in the house.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Turn it into a media server: give the old laptop a second job</h1>
+  <p class="meta">Repurposing &middot; 8 min read</p>
+
+  <p>Here's a thought: the laptop you're replacing might not be fit to be your
+  daily computer anymore, but it's still a perfectly good <em>dedicated</em>
+  computer. It has a processor, storage, networking, and it sips power
+  compared to a desktop. One of the best second jobs for an old laptop is a
+  home media server — a machine that sits quietly somewhere and streams your
+  movies, shows, and music to every TV, phone, tablet, and computer in the
+  house.</p>
+
+  <p>The idea is simple. Instead of your video files living on one computer
+  that has to be awake and nearby, they live on the old laptop, which stays
+  on and serves them over your home network. You browse your collection from
+  the couch, hit play, and the laptop does the work. It's your own private
+  streaming service, built from hardware you already own.</p>
+
+  <h2>Is your laptop up to it?</h2>
+
+  <p>Media serving is a forgiving workload. The laptop doesn't need to be
+  fast — it mostly needs to read files from its drive and push them over the
+  network, which even a decade-old machine handles easily. Two things matter:</p>
+
+  <ul>
+    <li><strong>Storage.</strong> Video files are big. The laptop's internal
+    drive might hold your music and a few movies, but for a real collection
+    you'll want an external USB hard drive — the old internal drive you
+    pulled out during your SSD upgrade makes a fine start.</li>
+    <li><strong>Network connection.</strong> Wired Ethernet is the most
+    reliable for streaming, but Wi-Fi works fine for most use as long as the
+    signal is decent. If the laptop has a wired port, use it — one less
+    variable.</li>
+  </ul>
+
+  <p>One honest caveat: <em>transcoding</em> — converting video on the fly to
+  a format the player understands — is the one task that can overwhelm old
+  hardware. Most modern players handle common formats directly, so transcoding
+  rarely kicks in, but if your files are in exotic formats, either convert
+  them once ahead of time or stick to formats your players handle natively.</p>
+
+  <h2>Picking the software</h2>
+
+  <p>Media server software organizes your files into a browsable library with
+  cover art, descriptions, and resume-from-where-you-left-off — the
+  streaming-service experience, but with your own files. The well-known
+  options all follow the same pattern: you install the server on the laptop,
+  point it at your folders of movies and music, and then use an app or web
+  browser on your other devices to watch. Choose one that:</p>
+
+  <ul>
+    <li>Runs on the operating system your laptop will use (a lightweight
+    Linux setup from our OS guide is ideal here — the laptop needs nothing
+    but the server).</li>
+    <li>Has player apps for the devices you own — smart TV, streaming stick,
+    phone, tablet.</li>
+    <li>Is actively maintained. As with the OS itself, unmaintained software
+    facing your home network is a risk not worth taking.</li>
+  </ul>
+
+  <h2>Setting it up: the general shape</h2>
+
+  <ol>
+    <li><strong>Prepare the laptop.</strong> Do a fresh, minimal install of
+    your chosen OS. Apply all updates. This machine has one job now — strip
+    out everything that isn't the job.</li>
+    <li><strong>Set up storage.</strong> Connect your external drive and make
+    sure it mounts automatically when the laptop reboots — otherwise a power
+    outage means the server comes back up with an empty library.</li>
+    <li><strong>Install the media server software</strong> and point it at
+    your media folders. Give it time to scan and fetch cover art; the first
+    scan of a big collection takes a while.</li>
+    <li><strong>Organize your files.</strong> Name things sensibly —
+    <code>Movies/Title (Year)/</code> and <code>TV/Show/Season 1/</code> —
+    because the server matches files to its database by name. Ten minutes of
+    renaming saves hours of fixing mismatched entries.</li>
+    <li><strong>Set power options.</strong> Configure the laptop to stay on
+    when the lid is closed, never sleep, and power back on after a power
+    failure if the BIOS offers that option. A server that sleeps isn't
+    serving.</li>
+    <li><strong>Test from your couch.</strong> Install the player app on your
+    TV or phone, connect to the server on your home network, and play
+    something. Check a movie, a show, and some music.</li>
+  </ol>
+
+  <h2>Keep it legal and keep it private</h2>
+
+  <p>Two rules that aren't optional. First, only serve media you actually own
+  or have the right to use — your ripped DVDs, your purchased downloads,
+  your own recordings, freely licensed content. Second, keep the server on
+  your home network. Most media server software can be opened to the internet
+  for remote access, but exposing an old laptop to the public internet is
+  asking for trouble. Enjoy it at home; that's what it's for.</p>
+
+  <h2>Living with your server</h2>
+
+  <p>A few practical notes for the long term:</p>
+
+  <ul>
+    <li><strong>Placement.</strong> Put the laptop somewhere with airflow and
+    out of the way — a shelf, a closet with ventilation. It'll run for long
+    stretches, so don't cook it.</li>
+    <li><strong>Updates.</strong> Keep the OS and server software updated.
+    An always-on machine is exactly the kind you want patched.</li>
+    <li><strong>Backups.</strong> If your media collection matters to you,
+    the laptop's drive isn't a backup — it's the only copy. Keep a second
+    copy of anything irreplaceable on another drive.</li>
+    <li><strong>Power.</strong> An old laptop uses far less electricity than
+    a desktop, but it still adds up running around the clock. If you only
+    watch in the evenings, a scheduled shutdown and wake can trim the
+    bill.</li>
+  </ul>
+
+  <p>When it's all working, you'll wonder why you didn't do it sooner. The
+  laptop you were about to recycle is now the hardest-working computer in the
+  house — quietly serving movies every night while asking for nothing but a
+  shelf and a power outlet. That's a revival.</p>
+
+  <p><a href="/posts/ssd-upgrade-walkthrough.html">Back to: SSD upgrade walkthrough &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job. Only serve media you own or have the right to use, and keep the server on your home network.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

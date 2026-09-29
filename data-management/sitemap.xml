@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://__HOST__/</loc><lastmod>2026-09-29</lastmod></url>
+  <url><loc>https://__HOST__/posts/access-and-permissions.html</loc><lastmod>2026-09-29</lastmod></url>
+  <url><loc>https://__HOST__/posts/backups-that-actually-happen.html</loc><lastmod>2026-09-29</lastmod></url>
+  <url><loc>https://__HOST__/posts/data-retention-basics.html</loc><lastmod>2026-09-29</lastmod></url>
+  <url><loc>https://__HOST__/posts/file-naming-so-you-can-find-things.html</loc><lastmod>2026-09-29</lastmod></url>
+  <url><loc>https://__HOST__/posts/organizing-shared-drives.html</loc><lastmod>2026-09-29</lastmod></url>
+  <url><loc>https://__HOST__/privacy-policy.html</loc><lastmod>2026-09-29</lastmod></url>
+  <url><loc>https://__HOST__/terms.html</loc><lastmod>2026-09-29</lastmod></url>
+</urlset>

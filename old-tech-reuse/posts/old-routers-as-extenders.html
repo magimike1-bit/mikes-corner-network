@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Give an Old Router a Second Job Extending Wi-Fi — Old Tech, New Life</title>
+<meta name="description" content="Reconfigure a retired router as a wired access point or Wi-Fi extender to fix dead spots in your home — step-by-step, with the mistakes to avoid.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Give an old router a second job extending Wi-Fi</h1>
+  <p class="meta">Repurpose &middot; 6 min read</p>
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>When you upgrade your home Wi-Fi, the old router doesn't stop working — it just stops
+  being your main router. That old box is still a perfectly good Wi-Fi access point, and
+  with about twenty minutes of configuration it can wipe out a dead spot in the basement,
+  the garage, or the far bedroom. Here's how to do it properly.</p>
+
+  <h2>The right job: wired access point</h2>
+  <p>The best use for an old router is as a wired access point: you run an Ethernet cable
+  (or use powerline or a MoCA adapter) from your main router to the old router in the
+  dead zone, and the old router broadcasts Wi-Fi there at full speed. This works great
+  because the old router isn't doing any of the hard jobs — your main router still
+  handles the internet connection, device addresses, and routing. The old router just
+  shouts Wi-Fi into a room it couldn't reach before.</p>
+
+  <h2>Before you start: reset and update it</h2>
+  <p>Dig the old router out, find its power supply (using the wrong adapter is how
+  routers die — check the voltage and plug match the label on the router), and do a
+  factory reset with the little button on the back. Hold it for ten seconds or so with a
+  paperclip while it's powered on. Then, before anything else, update its firmware to
+  the latest version the manufacturer offers. An old router with old firmware is a
+  security liability; a current one is a fine piece of network gear.</p>
+
+  <h2>Step 1: Give it the same network identity</h2>
+  <p>Connect a laptop to the old router with a cable (not Wi-Fi yet — that gets
+  confusing), open its admin page in a browser, and change three things. First, set its
+  Wi-Fi network name (SSID) and password to <em>exactly</em> match your main network —
+  same name, same password, same security type. That way your devices roam between the
+  two access points without you managing two networks. Second, change the old router's
+  admin password to something unique. Third, turn off its DHCP server: your main router
+  must be the only device handing out addresses, or devices will randomly get broken
+  network settings. Give the old router a static IP address on your network (something
+  outside your main router's automatic range) so you can reach its admin page later.</p>
+
+  <h2>Step 2: Pick the right channel</h2>
+  <p>Two routers shouting on the same Wi-Fi channel step on each other's toes. Set the old
+  router to a different channel than your main router — on the 2.4 GHz band, channels 1,
+  6, and 11 are the ones that don't overlap. If your main router picks its channel
+  automatically, you may occasionally want to check and adjust; a free Wi-Fi analyzer
+  app on your phone shows you what's crowded around you.</p>
+
+  <h2>Step 3: Plug it in and place it</h2>
+  <p>Connect the cable from your main router's LAN port to a LAN port on the old router
+  (not the WAN/Internet port — that's the single most common mistake, and it creates a
+  second, broken network). Place the old router in the dead zone but within cable
+  reach: high up and central beats low and behind furniture. Plug it in, give it a
+  minute, and check from your phone that you're on Wi-Fi with a strong signal.</p>
+
+  <h2>What about wireless repeating?</h2>
+  <p>Some old routers can also act as wireless repeaters — receiving your Wi-Fi and
+  re-broadcasting it with no cable. It's tempting, but treat it as a last resort: it
+  halves your available speed on that leg and adds lag, because the router spends half
+  its time listening and half talking. If you can't run a cable, it's better than
+  nothing for browsing and email, but don't expect it to fix video calls or gaming.</p>
+
+  <h2>Know when to let go</h2>
+  <p>Not every old router deserves a second job. If the manufacturer stopped firmware
+  updates years ago, retire it — unpatched routers are one of the easiest targets on a
+  home network. Same if it only supports ancient, slow wireless standards: a router
+  from the flip-phone era will bottleneck everything that connects through it. Those
+  belong in e-waste recycling, which our last guide covers.</p>
+
+  <p><a href="/posts/old-pcs-as-media-servers.html">Next: old PC as a media server &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>Old Tech, New Life — DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

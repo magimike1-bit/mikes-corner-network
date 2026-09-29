@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai-agents-guide.pages.dev/sitemap.xml

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://slow-cooker-dinners.pages.dev/sitemap.xml

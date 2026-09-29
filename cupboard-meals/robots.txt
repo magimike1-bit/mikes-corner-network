@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cupboard-meals.pages.dev/sitemap.xml

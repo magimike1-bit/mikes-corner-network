@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dad-jokes.pages.dev/sitemap.xml

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teen-money.pages.dev/sitemap.xml

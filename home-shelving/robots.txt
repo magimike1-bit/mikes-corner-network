@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://home-shelving.pages.dev/sitemap.xml
+Sitemap: https://home-shelving-j6hyg.kinsta.page/sitemap.xml

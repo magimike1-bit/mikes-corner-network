@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://retail-inventory.pages.dev/sitemap.xml
+Sitemap: https://retail-inventory-w4sgm.kinsta.page/sitemap.xml

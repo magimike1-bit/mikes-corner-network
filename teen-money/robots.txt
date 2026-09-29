@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://teen-money.pages.dev/sitemap.xml
+Sitemap: https://teen-money-fkz88.kinsta.page/sitemap.xml

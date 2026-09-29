@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://family-game-nights.pages.dev/sitemap.xml
+Sitemap: https://family-game-nights-3d1du.kinsta.page/sitemap.xml

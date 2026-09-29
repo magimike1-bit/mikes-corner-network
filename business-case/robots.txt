@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://business-case.pages.dev/sitemap.xml
+Sitemap: https://business-case-qlg2m.kinsta.page/sitemap.xml

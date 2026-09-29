@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://garage-organization.pages.dev/sitemap.xml
+Sitemap: https://garage-organization-wlq5j.kinsta.page/sitemap.xml

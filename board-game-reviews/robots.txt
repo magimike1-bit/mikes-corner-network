@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://board-game-reviews.pages.dev/sitemap.xml
+Sitemap: https://board-game-reviews-l387i.kinsta.page/sitemap.xml

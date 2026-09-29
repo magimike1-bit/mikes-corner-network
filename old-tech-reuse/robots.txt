@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://old-tech-reuse.pages.dev/sitemap.xml
+Sitemap: https://old-tech-reuse-n305z.kinsta.page/sitemap.xml

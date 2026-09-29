@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-agents-guide.pages.dev/sitemap.xml
+Sitemap: https://ai-agents-guide-rqmos.kinsta.page/sitemap.xml

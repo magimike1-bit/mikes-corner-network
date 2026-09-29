@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://metal-detecting.pages.dev/sitemap.xml
+Sitemap: https://metal-detecting-kmw8z.kinsta.page/sitemap.xml

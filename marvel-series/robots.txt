@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://marvel-series.pages.dev/sitemap.xml
+Sitemap: https://marvel-series-igsfo.kinsta.page/sitemap.xml

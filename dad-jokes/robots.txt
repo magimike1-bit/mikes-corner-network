@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dad-jokes.pages.dev/sitemap.xml
+Sitemap: https://dad-jokes-ffwk6.kinsta.page/sitemap.xml

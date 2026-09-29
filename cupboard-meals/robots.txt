@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cupboard-meals.pages.dev/sitemap.xml
+Sitemap: https://cupboard-meals-dqafh.kinsta.page/sitemap.xml

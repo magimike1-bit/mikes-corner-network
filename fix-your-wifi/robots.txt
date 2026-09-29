@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fix-your-wi-fi-a171y.kinsta.page/sitemap.xml

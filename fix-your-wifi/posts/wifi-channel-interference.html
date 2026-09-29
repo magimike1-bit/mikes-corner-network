@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi Channel Interference &amp; How to Fix It — Fix Your Wi-Fi</title>
+<meta name="description" content="Why the 2.4 GHz band is a crowded hallway, why only channels 1, 6, and 11 don't overlap, and how to pick a quiet channel on 2.4, 5, and 6 GHz.">
+<!-- AdSense: ad code goes here -->
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Wi-Fi channel interference &amp; how to fix it</h1>
+  <p class="meta">Troubleshooting &middot; 7 min read</p>
+  <img class="post-image" src="../images/wifi-channel-interference.jpg" alt="Overlapping Wi-Fi signal waves from neighboring routers crowding the same radio channels" loading="lazy">
+
+  <p>Wi-Fi is a shared medium: your router and your neighbors' routers all shout
+  over the same radio frequencies. When too many networks use the same channel,
+  they take turns — and your connection slows down even though nothing is
+  "broken." The fix is picking a channel your neighbors aren't crowding. Here's
+  how that works, band by band.</p>
+
+  <h2>What a channel actually is</h2>
+  <p>Each Wi-Fi band is a stretch of radio spectrum divided into channels.
+  Think of a band as a hallway and channels as conversations inside it: two
+  conversations can share a hallway if they're far enough apart, but neighbors
+  talking over each other makes everything unintelligible. Your router picks a
+  channel (often automatically, often badly), and everything you do online runs
+  through it.</p>
+
+  <h2>2.4 GHz: only three channels don't overlap</h2>
+  <p>The 2.4 GHz band has about a dozen channels, but they're packed so tightly
+  that most of them overlap. Only <strong>channels 1, 6, and 11</strong> are
+  fully non-overlapping — choosing any other channel means you're interfering
+  with (and being interfered with by) your neighbors on two adjacent channels
+  at once. This is why guides everywhere repeat 1, 6, and 11: overlapping
+  channels create noise that corrupts data and triggers retransmissions, while
+  same-channel neighbors at least politely take turns.</p>
+  <p>Practical steps: if your router lets you set the channel manually, look at
+  which of 1, 6, or 11 your neighbors use least (a free Wi-Fi analyzer app on
+  your phone shows this) and pick the emptiest. Keep the channel width at 20 MHz
+  on 2.4 GHz — wider channels sound faster but overlap more neighbors, which
+  usually makes things worse on this crowded band.</p>
+
+  <h2>5 GHz: many more channels, different trade-offs</h2>
+  <p>The 5 GHz band has roughly two dozen non-overlapping channels, so
+  interference is a much smaller problem — apartments that are a war zone on
+  2.4 GHz are often peaceful on 5 GHz. Common starting points are channels 36,
+  40, 44, and 48, or the higher 149–165 range, depending on what's allowed in
+  your region.</p>
+  <p>Some 5 GHz channels are shared with radar systems (these are called DFS
+  channels). Routers on a DFS channel must vacate it if they detect radar,
+  which can cause a brief dropout. Many consumer routers avoid DFS channels by
+  default, which is why everyone crowds onto the same handful — if your router
+  supports DFS and your area has no radar interference, those channels are
+  often nearly empty.</p>
+  <p>On 5 GHz, wider channel widths (40 or 80 MHz) genuinely help when the
+  spectrum is quiet, because wider channels carry more data. In a dense
+  apartment building, narrower is still the safer choice.</p>
+
+  <h2>6 GHz: the quiet new highway</h2>
+  <p>If your router and devices support Wi-Fi 6E or newer, the 6 GHz band adds a
+  large stretch of spectrum — about 1,200 MHz in regions that opened the full
+  band — with no older devices in it at all. That means no legacy interference
+  and plenty of wide channels. The trade-off: higher frequencies don't travel
+  as far or penetrate walls as well, so 6 GHz is best in the same room as the
+  router.</p>
+
+  <h2>The fix, in order</h2>
+  <ol>
+    <li>Use 5 GHz (or 6 GHz) whenever your device supports it — leave 2.4 GHz
+    for smart-home gadgets and devices far from the router, since 2.4 GHz
+    travels farther through walls.</li>
+    <li>On 2.4 GHz, lock the channel to whichever of 1, 6, or 11 is least used
+    around you, at 20 MHz width.</li>
+    <li>Check that your router's "auto channel" feature isn't making things
+    worse — some routers pick poorly or switch channels at annoying moments.
+    If performance is inconsistent, manual selection usually wins.</li>
+    <li>Re-scan after big changes: new neighbors move in, new routers appear.
+    A channel that was perfect last year may be crowded today.</li>
+  </ol>
+
+  <div class="callout">
+    <p><strong>Remember:</strong> channel changes only help with interference
+    from other Wi-Fi networks. If your internet connection itself is slow, no
+    channel change will fix it — see the <a href="diagnosing-isp-speed-problems.html">ISP
+    speed diagnosis guide</a> first.</p>
+  </div>
+
+  <p><a href="mesh-vs-extender-vs-access-point.html">Next: Mesh vs extender vs access point &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p class="footer-nav"><a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

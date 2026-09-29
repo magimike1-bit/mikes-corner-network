@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mike&#8217;s Corner &#8212; Every Site in the Network, in One Place</title>
 <meta name="description" content="Mike's Corner: a directory of every site in the network — parenting, food, tech how-tos, money-saving guides, and just-for-fun projects.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mike&#8217;s Corner — Every Site in the Network, in One Place">
+<meta property="og:description" content="65 sites and counting — practical how-to guides, money-saving tips, and a few purely ridiculous projects.">
 <link rel="stylesheet" href="/style.css">
 <!--
   ADS: paste your Google AdSense code below (replace ca-pub-XXXX with your publisher ID),
@@ -13,421 +16,432 @@
 -->
 </head>
 <body>
+<a class="skip" href="#grid">Skip to the sites</a>
 <header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="/">Mike&#8217;s Corner</a>
-    <p class="tagline">Every site in the network, in one place.</p>
+  <div class="wrap hero">
+    <p class="kicker"><span class="pulse" aria-hidden="true"></span>65 sites &middot; 7 categories &middot; all free starter guides</p>
+    <h1>Mike&#8217;s <span class="hl">Corner</span></h1>
+    <p class="lede">Every site in the network, in one place &#8212; practical how-to guides,
+    money-saving tips, and a few purely ridiculous projects. Pick a category or just wander.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#grid">Browse the network <span aria-hidden="true">&darr;</span></a>
+      <button class="btn btn-ghost" id="surprise" type="button"><span aria-hidden="true">&#127922;</span> Surprise me</button>
+    </div>
+    <dl class="stats">
+      <div class="stat"><dt>Sites</dt><dd>65</dd></div>
+      <div class="stat"><dt>Live now</dt><dd>63</dd></div>
+      <div class="stat"><dt>On the way</dt><dd>2</dd></div>
+    </dl>
   </div>
 </header>
 <main class="wrap">
-  <section class="intro">
-    <h1>Browse the whole network</h1>
-    <p>Sixty-five sites and counting — practical how-to guides, money-saving tips, and a few
-    purely ridiculous projects. Pick a category or just wander.</p>
-  </section>
-  <div class="filters" role="group" aria-label="Filter sites by category">
-  <button class="filter-btn active" data-filter="all" aria-pressed="true">All <span class="count">65</span></button>
-  <button class="filter-btn" data-filter="parenting" aria-pressed="false">Parenting &amp; Family <span class="count">8</span></button>
-  <button class="filter-btn" data-filter="food" aria-pressed="false">Food &amp; Cooking <span class="count">6</span></button>
-  <button class="filter-btn" data-filter="tech" aria-pressed="false">Tech &amp; How-To <span class="count">13</span></button>
-  <button class="filter-btn" data-filter="money" aria-pressed="false">Money &amp; Deals <span class="count">15</span></button>
-  <button class="filter-btn" data-filter="home" aria-pressed="false">Home &amp; Auto <span class="count">7</span></button>
-  <button class="filter-btn" data-filter="work" aria-pressed="false">Work &amp; Business <span class="count">6</span></button>
-  <button class="filter-btn" data-filter="fun" aria-pressed="false">Just for Fun <span class="count">10</span></button>
+  <div class="toolbar" id="toolbar">
+    <div class="filters" role="group" aria-label="Filter sites by category">
+      <button class="filter-btn active" data-filter="all" aria-pressed="true">All <span class="count">65</span></button>
+      <button class="filter-btn" data-filter="parenting" aria-pressed="false">Parenting &amp; Family <span class="count">8</span></button>
+      <button class="filter-btn" data-filter="food" aria-pressed="false">Food &amp; Cooking <span class="count">6</span></button>
+      <button class="filter-btn" data-filter="tech" aria-pressed="false">Tech &amp; How-To <span class="count">13</span></button>
+      <button class="filter-btn" data-filter="money" aria-pressed="false">Money &amp; Deals <span class="count">15</span></button>
+      <button class="filter-btn" data-filter="home" aria-pressed="false">Home &amp; Auto <span class="count">7</span></button>
+      <button class="filter-btn" data-filter="work" aria-pressed="false">Work &amp; Business <span class="count">6</span></button>
+      <button class="filter-btn" data-filter="fun" aria-pressed="false">Just for Fun <span class="count">10</span></button>
+    </div>
+    <label class="search"><span class="sr">Search sites</span><input id="q" type="search" placeholder="Search 65 sites&#8230;" autocomplete="off"></label>
   </div>
-  <p class="showing" id="showing">Showing 65 of 65 sites</p>
-  <section class="grid" id="grid">
-    <article class="card" data-category="parenting">
-      <span class="tag">Parenting &amp; Family</span>
+  <p class="showing" id="showing" role="status">Showing 65 of 65 sites</p>
+  <section class="grid" id="grid" aria-label="Network sites">
+    <article class="card" data-category="parenting" data-search="life with four kids real-world survival tips for big, busy families.">
+      <div class="card-top"><span class="icon" aria-hidden="true">👪</span><span class="tag">Parenting &amp; Family</span></div>
       <h3>Life With Four Kids</h3>
       <p>Real-world survival tips for big, busy families.</p>
-      <a class="visit" href="https://dealing-with-four-kids.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://dealing-with-four-kids.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="parenting">
-      <span class="tag">Parenting &amp; Family</span>
+    <article class="card" data-category="parenting" data-search="raising independent kids age-by-age steps toward self-reliant kids.">
+      <div class="card-top"><span class="icon" aria-hidden="true">👪</span><span class="tag">Parenting &amp; Family</span></div>
       <h3>Raising Independent Kids</h3>
       <p>Age-by-age steps toward self-reliant kids.</p>
-      <a class="visit" href="https://kids-independence-guide.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://kids-independence-guide.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="parenting">
-      <span class="tag">Parenting &amp; Family</span>
+    <article class="card" data-category="parenting" data-search="getting kids ready for university applications, money, and life skills.">
+      <div class="card-top"><span class="icon" aria-hidden="true">👪</span><span class="tag">Parenting &amp; Family</span></div>
       <h3>Getting Kids Ready for University</h3>
       <p>Applications, money, and life skills.</p>
-      <a class="visit" href="https://kids-university-prep.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://kids-university-prep.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="parenting">
-      <span class="tag">Parenting &amp; Family</span>
+    <article class="card" data-category="parenting" data-search="dealing with a cranky teenager what’s behind the mood, and what actually helps.">
+      <div class="card-top"><span class="icon" aria-hidden="true">👪</span><span class="tag">Parenting &amp; Family</span></div>
       <h3>Dealing With a Cranky Teenager</h3>
       <p>What&#8217;s behind the mood, and what actually helps.</p>
-      <a class="visit" href="https://cranky-teenager-vb6if.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://cranky-teenager-vb6if.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="parenting">
-      <span class="tag">Parenting &amp; Family</span>
+    <article class="card" data-category="parenting" data-search="pretending to listen to drama practice a parent’s comedic survival guide.">
+      <div class="card-top"><span class="icon" aria-hidden="true">👪</span><span class="tag">Parenting &amp; Family</span></div>
       <h3>Pretending to Listen to Drama Practice</h3>
       <p>A parent&#8217;s comedic survival guide.</p>
-      <a class="visit" href="https://pretend-listening-x20qi.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://pretend-listening-x20qi.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="parenting">
-      <span class="tag">Parenting &amp; Family</span>
+    <article class="card" data-category="parenting" data-search="napping through kids’ presentations shh. a tongue-in-cheek guide.">
+      <div class="card-top"><span class="icon" aria-hidden="true">👪</span><span class="tag">Parenting &amp; Family</span></div>
       <h3>Napping Through Kids&#8217; Presentations</h3>
       <p>Shh. A tongue-in-cheek guide.</p>
-      <a class="visit" href="https://nap-while-listening-q847q.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://nap-while-listening-q847q.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="parenting">
-      <span class="tag">Parenting &amp; Family</span>
+    <article class="card" data-category="parenting" data-search="kids’ jokes (ages 9-12) clean jokes, riddles, and puns.">
+      <div class="card-top"><span class="icon" aria-hidden="true">👪</span><span class="tag">Parenting &amp; Family</span></div>
       <h3>Kids&#8217; Jokes (Ages 9-12)</h3>
       <p>Clean jokes, riddles, and puns.</p>
-      <a class="visit" href="https://kids-jokes-fn1ut.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://kids-jokes-fn1ut.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="parenting">
-      <span class="tag">Parenting &amp; Family</span>
+    <article class="card" data-category="parenting" data-search="teen money lessons allowance, first jobs, and budgeting.">
+      <div class="card-top"><span class="icon" aria-hidden="true">👪</span><span class="tag">Parenting &amp; Family</span> <span class="badge-new">New</span></div>
       <h3>Teen Money Lessons</h3>
       <p>Allowance, first jobs, and budgeting.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://teen-money-fkz88.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="food">
-      <span class="tag">Food &amp; Cooking</span>
+    <article class="card" data-category="food" data-search="pizza cooking homemade pizza, done right.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🍳</span><span class="tag">Food &amp; Cooking</span></div>
       <h3>Pizza Cooking</h3>
       <p>Homemade pizza, done right.</p>
-      <a class="visit" href="https://pizza-cooking.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://pizza-cooking.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="food">
-      <span class="tag">Food &amp; Cooking</span>
+    <article class="card" data-category="food" data-search="baking tips measure right, bake better.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🍳</span><span class="tag">Food &amp; Cooking</span></div>
       <h3>Baking Tips</h3>
       <p>Measure right, bake better.</p>
-      <a class="visit" href="https://baking-tips.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://baking-tips.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="food">
-      <span class="tag">Food &amp; Cooking</span>
+    <article class="card" data-category="food" data-search="funny baking ideas glorious baking fails and funny creations.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🍳</span><span class="tag">Food &amp; Cooking</span></div>
       <h3>Funny Baking Ideas</h3>
       <p>Glorious baking fails and funny creations.</p>
-      <a class="visit" href="https://funny-baking-2ns2e.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://funny-baking-2ns2e.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="food">
-      <span class="tag">Food &amp; Cooking</span>
+    <article class="card" data-category="food" data-search="things to make out of toast exactly what it sounds like.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🍳</span><span class="tag">Food &amp; Cooking</span></div>
       <h3>Things to Make Out of Toast</h3>
       <p>Exactly what it sounds like.</p>
-      <a class="visit" href="https://toast-creations-ixlkr.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://toast-creations-ixlkr.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="food">
-      <span class="tag">Food &amp; Cooking</span>
+    <article class="card" data-category="food" data-search="slow cooker dinners feed the family with 10 minutes of prep.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🍳</span><span class="tag">Food &amp; Cooking</span> <span class="badge-new">New</span></div>
       <h3>Slow Cooker Dinners</h3>
       <p>Feed the family with 10 minutes of prep.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://slow-cooker-dinners-yl4l3.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="food">
-      <span class="tag">Food &amp; Cooking</span>
+    <article class="card" data-category="food" data-search="cupboard meals dinners from what’s already on the shelf.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🍳</span><span class="tag">Food &amp; Cooking</span> <span class="badge-new">New</span></div>
       <h3>Cupboard Meals</h3>
       <p>Dinners from what&#8217;s already on the shelf.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://cupboard-meals-dqafh.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="robot vacuum repair fix it yourself before replacing it.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span></div>
       <h3>Robot Vacuum Repair</h3>
       <p>Fix it yourself before replacing it.</p>
-      <a class="visit" href="https://robot-vacuum-repair.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://robot-vacuum-repair.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="home lab setup build a home server lab step by step.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span></div>
       <h3>Home Lab Setup</h3>
       <p>Build a home server lab step by step.</p>
-      <a class="visit" href="https://home-lab-setup.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://home-lab-setup.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="hard drive health check your drives before they die.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span></div>
       <h3>Hard Drive Health</h3>
       <p>Check your drives before they die.</p>
-      <a class="visit" href="https://hard-drive-health-7r09c.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://hard-drive-health-7r09c.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="typing 101 type faster without looking down.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span></div>
       <h3>Typing 101</h3>
       <p>Type faster without looking down.</p>
-      <a class="visit" href="https://typing-101-ii06i.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://typing-101-ii06i.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="bc retail tips business central and ls retail tips from the trenches.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span></div>
       <h3>BC Retail Tips</h3>
       <p>Business Central and LS Retail tips from the trenches.</p>
-      <a class="visit" href="https://bc-retail-tips.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://bc-retail-tips.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="metal detecting for beginners gear, permissions, and where to hunt.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span> <span class="badge-new">New</span></div>
       <h3>Metal Detecting for Beginners</h3>
       <p>Gear, permissions, and where to hunt.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://metal-detecting-kmw8z.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="3d printing at home first prints to fixing failed ones.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span></div>
       <h3>3D Printing at Home</h3>
       <p>First prints to fixing failed ones.</p>
-      <a class="visit" href="https://d-printing-cost-guide-2czme.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://d-printing-cost-guide-2czme.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="old laptop revival upgrades that make old laptops useful again.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span> <span class="badge-new">New</span></div>
       <h3>Old Laptop Revival</h3>
       <p>Upgrades that make old laptops useful again.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://old-laptop-revival-y907e.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="old tech, new life new jobs for old phones, tablets, and pcs.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span> <span class="badge-new">New</span></div>
       <h3>Old Tech, New Life</h3>
       <p>New jobs for old phones, tablets, and PCs.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://old-tech-reuse-n305z.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card soon-card" data-category="tech" data-search="fix your wi-fi dead zones, placement, and extenders.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span></div>
       <h3>Fix Your Wi-Fi</h3>
       <p>Dead zones, placement, and extenders.</p>
       <span class="soon">Coming soon</span>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="ai starter guide what ai chatbots can and can’t do.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span> <span class="badge-new">New</span></div>
       <h3>AI Starter Guide</h3>
       <p>What AI chatbots can and can&#8217;t do.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://ai-starter-guide-gdq0a.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="using ai agents give clear instructions, check the work.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span> <span class="badge-new">New</span></div>
       <h3>Using AI Agents</h3>
       <p>Give clear instructions, check the work.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://ai-agents-guide-rqmos.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="tech">
-      <span class="tag">Tech &amp; How-To</span>
+    <article class="card" data-category="tech" data-search="budget phones under $300 smart buying advice for affordable phones.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💻</span><span class="tag">Tech &amp; How-To</span></div>
       <h3>Budget Phones Under $300</h3>
       <p>Smart buying advice for affordable phones.</p>
-      <a class="visit" href="https://budget-phones-under-00-lg6bo.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://budget-phones-under-00-lg6bo.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="grocery saving tips cut the food bill without eating sad meals.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Grocery Saving Tips</h3>
       <p>Cut the food bill without eating sad meals.</p>
-      <a class="visit" href="https://grocery-saving-tips.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://grocery-saving-tips.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="reward card reviews how reward cards actually work.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Reward Card Reviews</h3>
       <p>How reward cards actually work.</p>
-      <a class="visit" href="https://reward-card-reviews.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://reward-card-reviews.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="discount stacking stack sales, coupons, and cashback.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Discount Stacking</h3>
       <p>Stack sales, coupons, and cashback.</p>
-      <a class="visit" href="https://discount-stacking.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://discount-stacking.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="crypto investing the basics, minus the hype.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Crypto Investing</h3>
       <p>The basics, minus the hype.</p>
-      <a class="visit" href="https://crypto-investing.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://crypto-investing.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="crypto mining guide what mining is, and whether it’s worth it.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Crypto Mining Guide</h3>
       <p>What mining is, and whether it&#8217;s worth it.</p>
-      <a class="visit" href="https://crypto-mining.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://crypto-mining.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="play-to-earn games games with crypto rewards, honestly reviewed.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Play-to-Earn Games</h3>
       <p>Games with crypto rewards, honestly reviewed.</p>
-      <a class="visit" href="https://play-to-earn-games.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://play-to-earn-games.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="play-to-earn sites sites and apps that pay you to play.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Play-to-Earn Sites</h3>
       <p>Sites and apps that pay you to play.</p>
-      <a class="visit" href="https://play-to-earn-sites.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://play-to-earn-sites.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="career specialization go deep, get paid.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Career Specialization</h3>
       <p>Go deep, get paid.</p>
-      <a class="visit" href="https://career-specialization.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://career-specialization.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="work from home setups build a workspace that works.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Work From Home Setups</h3>
       <p>Build a workspace that works.</p>
-      <a class="visit" href="https://work-from-home-setups.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://work-from-home-setups.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="flipping auction finds how liquidation auctions work, and spotting value.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Flipping Auction Finds</h3>
       <p>How liquidation auctions work, and spotting value.</p>
-      <a class="visit" href="https://flipping-finds-profit-guide-ej76m.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://flipping-finds-profit-guide-ej76m.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="true cost of a car ownership cost over time, honestly added up.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>True Cost of a Car</h3>
       <p>Ownership cost over time, honestly added up.</p>
-      <a class="visit" href="https://car-cost-ownership-guide-al7c1.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://car-cost-ownership-guide-al7c1.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="ai referral bonuses every verified ai referral bonus in one filterable list — including my own muse invite.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>AI Referral Bonuses</h3>
       <p>Every verified AI referral bonus in one filterable list — including my own Muse invite.</p>
-      <a class="visit" href="https://ai-referral-bonuses-zpjyo.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://ai-referral-bonuses-zpjyo.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="pet insurance 101 is pet insurance worth it? how plans work and what to compare.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Pet Insurance 101</h3>
       <p>Is pet insurance worth it? How plans work and what to compare.</p>
-      <a class="visit" href="https://pet-insurance-101-9cjco.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://pet-insurance-101-9cjco.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="side hustles that fit a full-time job evening-and-weekend hustles that respect your 9-to-5.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Side Hustles That Fit a Full-Time Job</h3>
       <p>Evening-and-weekend hustles that respect your 9-to-5.</p>
-      <a class="visit" href="https://side-hustles-that-fit-a-ful-jg2ed.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://side-hustles-that-fit-a-ful-jg2ed.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="money">
-      <span class="tag">Money &amp; Deals</span>
+    <article class="card" data-category="money" data-search="black friday deal strategy timing, prep checklists, and return-policy traps — strategy, not a deals feed.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💰</span><span class="tag">Money &amp; Deals</span></div>
       <h3>Black Friday Deal Strategy</h3>
       <p>Timing, prep checklists, and return-policy traps — strategy, not a deals feed.</p>
-      <a class="visit" href="https://black-friday-deal-strategy-2nlcu.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://black-friday-deal-strategy-2nlcu.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="home">
-      <span class="tag">Home &amp; Auto</span>
+    <article class="card" data-category="home" data-search="home renovation guides plan it right before you swing a hammer.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🏠</span><span class="tag">Home &amp; Auto</span></div>
       <h3>Home Renovation Guides</h3>
       <p>Plan it right before you swing a hammer.</p>
-      <a class="visit" href="https://home-renovation-guides.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://home-renovation-guides.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="home">
-      <span class="tag">Home &amp; Auto</span>
+    <article class="card" data-category="home" data-search="dodge grand caravan diy repairs common fixes you can do yourself.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🏠</span><span class="tag">Home &amp; Auto</span></div>
       <h3>Dodge Grand Caravan DIY Repairs</h3>
       <p>Common fixes you can do yourself.</p>
-      <a class="visit" href="https://dodge-caravan-repairs.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://dodge-caravan-repairs.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="home">
-      <span class="tag">Home &amp; Auto</span>
+    <article class="card" data-category="home" data-search="garage organization storage that survives a family.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🏠</span><span class="tag">Home &amp; Auto</span> <span class="badge-new">New</span></div>
       <h3>Garage Organization</h3>
       <p>Storage that survives a family.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://garage-organization-wlq5j.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="home">
-      <span class="tag">Home &amp; Auto</span>
+    <article class="card" data-category="home" data-search="home shelving options from floating shelves to garage racks.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🏠</span><span class="tag">Home &amp; Auto</span> <span class="badge-new">New</span></div>
       <h3>Home Shelving Options</h3>
       <p>From floating shelves to garage racks.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://home-shelving-j6hyg.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="home">
-      <span class="tag">Home &amp; Auto</span>
+    <article class="card" data-category="home" data-search="winter home heating savings cut heating costs: drafts, thermostats, tune-ups, and rebates.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🏠</span><span class="tag">Home &amp; Auto</span></div>
       <h3>Winter Home Heating Savings</h3>
       <p>Cut heating costs: drafts, thermostats, tune-ups, and rebates.</p>
-      <a class="visit" href="https://winter-home-heating-savings-nls9b.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://winter-home-heating-savings-nls9b.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="home">
-      <span class="tag">Home &amp; Auto</span>
+    <article class="card" data-category="home" data-search="winter car care basics tires, batteries, emergency kits, and calm winter driving.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🏠</span><span class="tag">Home &amp; Auto</span></div>
       <h3>Winter Car Care Basics</h3>
       <p>Tires, batteries, emergency kits, and calm winter driving.</p>
-      <a class="visit" href="https://winter-car-care-basics-2s56k.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://winter-car-care-basics-2s56k.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="home">
-      <span class="tag">Home &amp; Auto</span>
+    <article class="card" data-category="home" data-search="fall yard cleanup diy october and november yard reset: leaves, gutters, lawn.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🏠</span><span class="tag">Home &amp; Auto</span></div>
       <h3>Fall Yard Cleanup DIY</h3>
       <p>October and November yard reset: leaves, gutters, lawn.</p>
-      <a class="visit" href="https://fall-yard-cleanup-diy-z2nde.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://fall-yard-cleanup-diy-z2nde.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="work">
-      <span class="tag">Work &amp; Business</span>
+    <article class="card" data-category="work" data-search="retail inventory management stock counts, reorders, and shrinkage.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💼</span><span class="tag">Work &amp; Business</span> <span class="badge-new">New</span></div>
       <h3>Retail Inventory Management</h3>
       <p>Stock counts, reorders, and shrinkage.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://retail-inventory-w4sgm.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="work">
-      <span class="tag">Work &amp; Business</span>
+    <article class="card" data-category="work" data-search="data management basics files, backups, and shared drives that make sense.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💼</span><span class="tag">Work &amp; Business</span> <span class="badge-new">New</span></div>
       <h3>Data Management Basics</h3>
       <p>Files, backups, and shared drives that make sense.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://data-management-lxmoz.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="work">
-      <span class="tag">Work &amp; Business</span>
+    <article class="card" data-category="work" data-search="how to write a business case costs, benefits, and getting to yes.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💼</span><span class="tag">Work &amp; Business</span> <span class="badge-new">New</span></div>
       <h3>How to Write a Business Case</h3>
       <p>Costs, benefits, and getting to yes.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://business-case-qlg2m.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="work">
-      <span class="tag">Work &amp; Business</span>
+    <article class="card soon-card" data-category="work" data-search="what to focus on at work priorities, deep work, and managing up.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💼</span><span class="tag">Work &amp; Business</span></div>
       <h3>What to Focus On at Work</h3>
       <p>Priorities, deep work, and managing up.</p>
       <span class="soon">Coming soon</span>
     </article>
-    <article class="card" data-category="work">
-      <span class="tag">Work &amp; Business</span>
+    <article class="card" data-category="work" data-search="ai for small business top ai uses, honest roi math, and setup guides — plus an roi calculator.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💼</span><span class="tag">Work &amp; Business</span></div>
       <h3>AI for Small Business</h3>
       <p>Top AI uses, honest ROI math, and setup guides — plus an ROI calculator.</p>
-      <a class="visit" href="https://ai-for-small-business-tince.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://ai-for-small-business-tince.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="work">
-      <span class="tag">Work &amp; Business</span>
+    <article class="card" data-category="work" data-search="small business year-end money moves q4 bookkeeping, receipts, and tax-prep checklists.">
+      <div class="card-top"><span class="icon" aria-hidden="true">💼</span><span class="tag">Work &amp; Business</span></div>
       <h3>Small Business Year-End Money Moves</h3>
       <p>Q4 bookkeeping, receipts, and tax-prep checklists.</p>
-      <a class="visit" href="https://year-end-money-moves-yeqfe.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://year-end-money-moves-yeqfe.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="the trend roast outrageous sarcasm on trending topics.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span></div>
       <h3>The Trend Roast</h3>
       <p>Outrageous sarcasm on trending topics.</p>
-      <a class="visit" href="https://trend-roast-cavqs.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://trend-roast-cavqs.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="ridiculous old-textbook uses 25 uses that have nothing to do with reading.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span></div>
       <h3>Ridiculous Old-Textbook Uses</h3>
       <p>25 uses that have nothing to do with reading.</p>
-      <a class="visit" href="https://old-textbooks-1qzrm.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://old-textbooks-1qzrm.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="brick builds lego fan guides and build ideas.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span></div>
       <h3>Brick Builds</h3>
       <p>LEGO fan guides and build ideas.</p>
-      <a class="visit" href="https://brick-builds.pages.dev">Visit &rarr;</a>
+      <a class="visit" href="https://brick-builds.pages.dev">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="dad jokes vault classics, puns, and groaners.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span> <span class="badge-new">New</span></div>
       <h3>Dad Jokes Vault</h3>
       <p>Classics, puns, and groaners.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://dad-jokes-ffwk6.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="family game nights games that work for mixed ages.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span> <span class="badge-new">New</span></div>
       <h3>Family Game Nights</h3>
       <p>Games that work for mixed ages.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://family-game-nights-3d1du.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="board game reviews find your next table favorite.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span> <span class="badge-new">New</span></div>
       <h3>Board Game Reviews</h3>
       <p>Find your next table favorite.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://board-game-reviews-l387i.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="marvel series reviews what to watch, and what to skip.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span> <span class="badge-new">New</span></div>
       <h3>Marvel Series Reviews</h3>
       <p>What to watch, and what to skip.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://marvel-series-igsfo.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="campsite reviews picking the right campground.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span> <span class="badge-new">New</span></div>
       <h3>Campsite Reviews</h3>
       <p>Picking the right campground.</p>
-      <span class="soon">Coming soon</span>
+      <a class="visit" href="https://camping-reviews-o3wkr.kinsta.page/">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="budget gaming gear what to look for in budget mice, keyboards, headsets, and monitors.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span></div>
       <h3>Budget Gaming Gear</h3>
       <p>What to look for in budget mice, keyboards, headsets, and monitors.</p>
-      <a class="visit" href="https://budget-gaming-gear-ev4md.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://budget-gaming-gear-ev4md.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
-    <article class="card" data-category="fun">
-      <span class="tag">Just for Fun</span>
+    <article class="card" data-category="fun" data-search="christmas gift guide 2026 gift ideas by category — including thriftmas.">
+      <div class="card-top"><span class="icon" aria-hidden="true">🎲</span><span class="tag">Just for Fun</span></div>
       <h3>Christmas Gift Guide 2026</h3>
       <p>Gift ideas by category — including Thriftmas.</p>
-      <a class="visit" href="https://christmas-gift-guide-2026-470a3.kinsta.page">Visit &rarr;</a>
+      <a class="visit" href="https://christmas-gift-guide-2026-470a3.kinsta.page">Visit <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </article>
   </section>
+  <p class="empty" id="empty" hidden>No sites match that search &#8212; try a different word, or browse a category instead.</p>
   <section class="about">
     <h2>About the author</h2>
     <p>I&#8217;m Mike &#8212; a Toronto-based dad and IT professional. By day I work with
@@ -447,31 +461,77 @@
     <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
     <p>Mike&#8217;s Corner &#8212; a directory of personal projects. Each site&#8217;s content is a
     starter guide for general information only, not professional advice.</p>
-  <p class="footer-nav"><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+  <p class="footer-nav"><a href="privacy-policy.html">Privacy Policy</a> &#183; <a href="terms.html">Terms of Use</a></p>
 </div>
 </footer>
 <script>
 (function () {
-  var buttons = document.querySelectorAll('.filter-btn');
-  var cards = document.querySelectorAll('.card');
+  document.documentElement.className += ' js-anim';
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var q = document.getElementById('q');
   var showing = document.getElementById('showing');
+  var empty = document.getElementById('empty');
+  var active = 'all';
+
+  function apply() {
+    var term = q.value.trim().toLowerCase();
+    var n = 0;
+    cards.forEach(function (card) {
+      var okCat = (active === 'all' || card.getAttribute('data-category') === active);
+      var okTerm = (!term || card.getAttribute('data-search').indexOf(term) !== -1);
+      var show = okCat && okTerm;
+      card.classList.toggle('hidden', !show);
+      if (show) { n++; }
+    });
+    showing.textContent = 'Showing ' + n + ' of ' + cards.length + ' sites';
+    empty.hidden = (n !== 0);
+  }
+
   buttons.forEach(function (btn) {
     btn.addEventListener('click', function () {
       buttons.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('active');
       btn.setAttribute('aria-pressed', 'true');
-      var f = btn.getAttribute('data-filter');
-      var n = 0;
-      cards.forEach(function (card) {
-        var show = (f === 'all' || card.getAttribute('data-category') === f);
-        card.style.display = show ? '' : 'none';
-        if (show) { n++; }
-      });
-      showing.textContent = 'Showing ' + n + ' of ' + cards.length + ' sites';
+      active = btn.getAttribute('data-filter');
+      apply();
     });
   });
+  q.addEventListener('input', apply);
+
+  // Whole-card click-through for live sites (the Visit link stays keyboard-accessible).
+  cards.forEach(function (card) {
+    var link = card.querySelector('a.visit');
+    if (!link) { return; }
+    card.classList.add('clickable');
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('a')) { return; }
+      link.click();
+    });
+  });
+
+  // Surprise-me: open a random live site.
+  document.getElementById('surprise').addEventListener('click', function () {
+    var live = cards.filter(function (c) { return c.querySelector('a.visit'); });
+    if (!live.length) { return; }
+    var pick = live[Math.floor(Math.random() * live.length)];
+    window.open(pick.querySelector('a.visit').href, '_blank', 'noopener');
+  });
+
+  // Staggered reveal on scroll; show everything if IntersectionObserver is missing.
+  function revealAll() { cards.forEach(function (c) { c.classList.add('in'); }); }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -32px 0px' });
+    cards.forEach(function (c) { io.observe(c); });
+  } else {
+    revealAll();
+  }
 })();
 </script>
-<!-- deploy-verify 2026-09-28 -->
+<!-- deploy-verify 2026-09-29 -->
 </body>
 </html>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://site-hub.pages.dev/sitemap.xml
+Sitemap: https://mikes-corner-hub-ebjyr.kinsta.page/sitemap.xml

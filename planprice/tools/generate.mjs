@@ -262,6 +262,7 @@ function filterBlock() {
           </select>
         </label>
         <label class="filter-check"><input type="checkbox" id="f-deals" name="deals-only"> Deals only</label>
+        <label class="filter-check"><input type="checkbox" id="f-canadian" name="canadian-only"> 🇨🇦 Canadian only</label>
         <label class="filter-field">Sort by
           <select id="f-sort" name="sort">
             <option value="featured">Featured</option>
@@ -747,6 +748,7 @@ write(
         priceText: startPriceText(p),
         priceSort: startPriceNumeric(p),
         dealHeadline: p.deal && !isExpiredDeal(p) ? p.deal.headline : null,
+        country: p.canadian ? "CA" : null,
         url: `/deals/${p.slug}.html`,
       })),
     },

@@ -6,10 +6,9 @@
  * is left exactly as-is.
  *
  * Facets are declarative: each entry names the control that drives it and a
- * predicate over the index product. To add a new facet (e.g. a "Canadian
- * only" toggle), add the control's markup to the filter form in
- * tools/generate.mjs and one entry to FACETS below — no other UI or logic
- * changes needed.
+ * predicate over the index product. To add a new facet, add the control's
+ * markup to the filter form in tools/generate.mjs and one entry to FACETS
+ * below — no other UI or logic changes needed.
  */
 (function () {
   "use strict";
@@ -36,6 +35,7 @@
 
     var catSel = document.getElementById("f-category");
     var dealsBox = document.getElementById("f-deals");
+    var canadianBox = document.getElementById("f-canadian");
     var sortSel = document.getElementById("f-sort");
     var countEl = document.getElementById("f-count");
 
@@ -54,9 +54,13 @@
           return !dealsBox.checked || p.dealHeadline != null;
         },
       },
-      // FUTURE: { id: "canadianOnly",
-      //   control: document.getElementById("f-canadian"),
-      //   matches: function (p) { return p.canadian === true; } },
+      {
+        id: "canadianOnly",
+        control: canadianBox,
+        matches: function (p) {
+          return !canadianBox.checked || p.country === "CA";
+        },
+      },
     ];
 
     // Scope strictly to the homepage directory: deal-page "related" rows and
@@ -133,7 +137,7 @@
       }
     }
 
-    [catSel, dealsBox, sortSel].forEach(function (el) {
+    [catSel, dealsBox, canadianBox, sortSel].forEach(function (el) {
       el.addEventListener("change", apply);
     });
     form.hidden = false;

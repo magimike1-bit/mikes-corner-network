@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Listing Draft Tool — Photo to Marketplace Listing | Flipping Auction Finds</title>
+<meta name="description" content="Free tool for resellers: upload a photo of your item and get an AI-written listing title, description, and a comps-backed price estimate range for Facebook Marketplace, Craigslist, or Kijiji.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== Listing AI tool (scoped) ===== */
+.tool-wrap{max-width:900px;margin:0 auto;padding:0 20px}
+.tool-step{margin:2em 0}
+.tool-step h2{font-size:1.3rem;margin:0 0 .3em}
+.tool-step .hint{color:var(--muted);font-size:.95rem;margin:0 0 1em}
+.notice{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;background:#fff;padding:14px 18px;font-size:.92rem;margin:1.2em 0}
+.notice strong{display:block;margin-bottom:4px}
+.upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px}
+.upload-grid .full{grid-column:1/-1}
+.upload-grid label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px}
+.upload-grid input[type="text"],.upload-grid select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:6px;font-size:1rem;background:#fff}
+.drop{border:2px dashed var(--line);border-radius:8px;padding:26px;text-align:center;cursor:pointer;background:var(--wash)}
+.drop:hover{border-color:var(--accent)}
+.drop input{display:none}
+#preview{display:none;max-width:100%;max-height:280px;border-radius:8px;border:1px solid var(--line);margin-top:12px}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:13px 30px;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:6px}
+.btn:disabled{background:#9db6d2;cursor:not-allowed}
+.btn.secondary{background:#fff;color:var(--accent);border:2px solid var(--accent);padding:8px 18px;font-size:.92rem}
+.copy-btn{background:#fff;border:1px solid var(--line);border-radius:6px;padding:6px 14px;font-size:.85rem;font-weight:700;cursor:pointer;color:var(--accent)}
+.copy-btn:hover{border-color:var(--accent)}
+.result-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px;margin:1.2em 0}
+.result-card h3{font-size:1rem;margin:1.2em 0 .4em;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.result-card h3:first-child{margin-top:0}
+.result-title{font-size:1.35rem;font-weight:800;margin:.2em 0 .6em}
+.result-desc{white-space:pre-wrap;line-height:1.6;margin:.2em 0 .6em}
+.meta-row{display:flex;gap:10px;flex-wrap:wrap;margin:.4em 0}
+.meta-pill{background:var(--wash);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:.85rem}
+.price-box{border:2px solid var(--accent);border-radius:10px;padding:18px 22px;background:rgba(11,92,173,.04);margin:1em 0}
+.price-box .est-tag{display:inline-block;background:var(--accent);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.06em;padding:3px 10px;border-radius:4px;margin-bottom:8px}
+.price-box .range{font-size:1.9rem;font-weight:800}
+.price-box .disclaimer{font-size:.85rem;color:var(--muted);margin-top:8px;line-height:1.5}
+.comp-links{display:flex;gap:10px;flex-wrap:wrap;margin:.8em 0}
+.comp-links a{display:inline-block;border:1px solid var(--accent);color:var(--accent);border-radius:8px;padding:9px 18px;font-weight:700;text-decoration:none;font-size:.92rem}
+.comp-links a:hover{background:rgba(11,92,173,.06)}
+.affiliate-section{border-top:1px solid var(--line);margin-top:1.6em;padding-top:1.2em}
+.affiliate-section .disclosure{font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:10px}
+.gear-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.gear-card{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:#fff}
+.gear-card strong{display:block;margin-bottom:4px}
+.gear-card p{font-size:.85rem;color:var(--muted);margin:.2em 0 .8em}
+.gear-card a{color:var(--accent);font-weight:700;font-size:.9rem}
+.state-box{border:1px solid var(--line);border-radius:10px;background:#fff;padding:26px;text-align:center;margin:1.4em 0}
+.state-box h2{margin-top:0}
+.state-box p{color:var(--muted)}
+.spinner{width:44px;height:44px;border:4px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 14px;animation:spin 0.9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{border-color:#b91c1c;background:#fef2f2}
+.err h2{color:#b91c1c}
+.tips{text-align:left;max-width:560px;margin:1em auto;font-size:.92rem}
+.tips li{margin:.4em 0}
+.hidden{display:none!important}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.drop:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media(max-width:640px){.upload-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Flipping Auction Finds</a>
+    <p class="tagline">Auction lots in, resale profit out</p>
+    <nav class="main-nav" aria-label="Site navigation">
+      <a href="index.html">Home</a>
+      <a href="flip-calculator.html">Flip calculator</a>
+      <a href="listing-ai.html" aria-current="page">Listing AI tool</a>
+    </nav>
+  </div>
+</header>
+
+<div class="tool-wrap">
+  <p class="crumbs" style="font-size:.85rem;color:var(--muted);padding:16px 0 0"><a href="index.html" style="color:var(--accent);text-decoration:none">Home</a> <span aria-hidden="true">&rsaquo;</span> <span aria-current="page">Listing AI tool</span></p>
+
+  <section class="tool-step">
+    <h1 style="font-size:1.9rem;margin:.4em 0 .4em">Listing AI: photo &rarr; listing draft</h1>
+    <p class="hint">Upload one photo of your item and get an AI-written listing title, a plain-facts description, and a price <strong>estimate</strong> range with links to check real sold comps — tuned for Facebook Marketplace, Craigslist, and Kijiji sellers. Free, no account.</p>
+    <div class="notice" id="privacy-notice"><strong>Your photo stays yours.</strong><span id="privacy-notice-text">Your photo is processed in memory to generate this draft and is never stored.</span></div>
+  </section>
+
+  <section class="tool-step hidden" id="not-configured">
+    <div class="state-box">
+      <h2>Almost ready</h2>
+      <p>The AI generation behind this tool isn't connected yet — we're finishing the setup. The tool will go live here as soon as it's wired up. Nothing is broken; check back soon.</p>
+    </div>
+  </section>
+
+  <section class="tool-step" id="tool-app">
+    <h2>1 &middot; Your item</h2>
+    <div class="upload-grid">
+      <div class="full">
+        <label id="drop-label">Item photo</label>
+        <div class="drop" id="drop" role="button" tabindex="0" aria-labelledby="drop-label">
+          <input type="file" id="photo" accept="image/*">
+          <div id="drop-text"><strong>Tap to choose a photo</strong><br><span style="font-size:.85rem;color:var(--muted)">JPG, PNG, or WebP &middot; up to 15MB &middot; one clear, well-lit photo works best</span></div>
+          <img id="preview" alt="Photo preview">
+        </div>
+      </div>
+      <div>
+        <label for="hint">Anything the photo doesn't show? (optional)</label>
+        <input type="text" id="hint" maxlength="200" placeholder="e.g. powers on, no remote, small scratch on lid">
+      </div>
+      <div>
+        <label for="marketplace">Selling on</label>
+        <select id="marketplace">
+          <option value="facebook" selected>Facebook Marketplace</option>
+          <option value="craigslist">Craigslist</option>
+          <option value="kijiji">Kijiji</option>
+        </select>
+      </div>
+      <div class="full">
+        <button class="btn" id="generate" disabled>Generate listing draft</button>
+        <p class="hint" id="gen-hint" style="margin-top:8px">Choose a photo above to enable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-step hidden" id="progress">
+    <div class="state-box">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2>Writing your draft&hellip;</h2>
+      <p>Analyzing the photo and drafting your listing. Usually under 30 seconds.</p>
+    </div>
+  </section>
+
+  <section class="tool-step hidden" id="result"></section>
+
+  <section class="tool-step hidden" id="qc-fail">
+    <div class="state-box">
+      <h2>Couldn't use that photo</h2>
+      <p id="qc-reason">The photo didn't show a saleable item clearly.</p>
+      <ul class="tips">
+        <li>Use one clear, well-lit photo of the item on its own</li>
+        <li>Fill the frame — avoid tiny, distant, or blurry shots</li>
+        <li>No screenshots, people, or heavily edited images</li>
+      </ul>
+      <button class="btn secondary" id="retry-photo">Try another photo</button>
+    </div>
+  </section>
+
+  <section class="tool-step hidden" id="error-box">
+    <div class="state-box err">
+      <h2 id="error-title">Something went wrong</h2>
+      <p id="error-detail">Please try again.</p>
+      <button class="btn secondary" id="retry-gen">Try again</button>
+    </div>
+  </section>
+
+  <section class="tool-step">
+    <h2>How the price estimate works</h2>
+    <p class="hint">The price shown is always a labeled <strong>estimate range</strong> — never a promise of what your item will sell for. It's a starting point based on the item the AI identifies. Before you list, open the sold-comps links in your result and check what identical items actually sold for recently. Condition, brand, included accessories, and local demand move real prices more than any estimate can.</p>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>Flipping Auction Finds — guides about buying liquidation lots and reselling for personal use. Content is for information only and is not financial advice; resale results vary and no income or profit is promised or guaranteed. Auction rules, fees, and payment terms differ by auction house — always read the terms of the sale before bidding.</p>
+    <p class="footer-nav"><a href="index.html">Home</a> &middot; <a href="flip-calculator.html">Flip calculator</a> &middot; <a href="listing-ai.html">Listing AI tool</a> &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var CLIENT_VERSION = "1.0";
+  var RAW_MAX_MB = 15, DOWNSCALE_MAX_PX = 1024, JPEG_Q = 0.8, SEND_MAX_MB = 2;
+  var TIMEOUT_MS = 60000;
+  var cfg = null, imageDataUrl = null, inFlight = false, inFlightId = null;
+
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function show(id){ $(id).classList.remove("hidden"); }
+  function hide(id){ $(id).classList.add("hidden"); }
+  function hideAll(){ ["tool-app","progress","result","qc-fail","error-box","not-configured"].forEach(hide); }
+
+  function uuid(){
+    if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c){
+      var r = Math.random()*16|0, v = c === "x" ? r : (r&0x3|0x8); return v.toString(16);
+    });
+  }
+
+  function loadConfig(){
+    return fetch("config/listing-ai.json", {cache:"no-store"}).then(function(r){
+      if(!r.ok) throw new Error("config " + r.status);
+      return r.json();
+    }).then(function(c){ cfg = c; return c; }).catch(function(){
+      cfg = {tool_enabled:false, proxy_url:"", affiliate_slots:[],
+             disclosure_text:"", estimate_label_text:"ESTIMATE",
+             estimate_disclaimer_text:"Price estimates are AI-generated, not appraisals. Check sold comps before listing.",
+             no_storage_notice:"Your photo is processed in memory and never stored."};
+      return cfg;
+    });
+  }
+
+  function boot(){
+    $("privacy-notice-text").textContent = " " + cfg.no_storage_notice;
+    if(!cfg.tool_enabled || !cfg.proxy_url){
+      hideAll(); show("not-configured"); return;
+    }
+    hideAll(); show("tool-app");
+  }
+
+  function handleFile(file){
+    hide("error-box");
+    // Reset: a rejected file must not leave a stale photo behind the enabled button.
+    imageDataUrl = null;
+    $("generate").disabled = true;
+    $("gen-hint").textContent = "Choose a photo above to enable.";
+    if(!file) return;
+    if(!file.type || file.type.indexOf("image/") !== 0){ fail("Please choose an image file (JPG, PNG, or WebP)."); return; }
+    if(file.size > RAW_MAX_MB*1024*1024){ fail("That photo is over " + RAW_MAX_MB + "MB. Please pick a smaller file."); return; }
+    downscale(file).then(function(dataUrl){
+      if(dataUrl.length > SEND_MAX_MB*1024*1024*1.37){ fail("That photo is still too large after shrinking. Try a smaller or simpler image."); return; }
+      imageDataUrl = dataUrl;
+      var pv = $("preview"); pv.src = dataUrl; pv.style.display = "block";
+      $("drop-text").style.display = "none";
+      $("generate").disabled = false;
+      $("gen-hint").textContent = "Ready — tap Generate when you're happy with the photo.";
+    }).catch(function(){ fail("Couldn't read that photo. Try a different file."); });
+  }
+
+  function downscale(file){
+    return new Promise(function(resolve, reject){
+      var img = new Image();
+      var objUrl = URL.createObjectURL(file);
+      img.onload = function(){
+        try{
+          var w = img.naturalWidth, h = img.naturalHeight;
+          var scale = Math.min(1, DOWNSCALE_MAX_PX / Math.max(w, h));
+          var cw = Math.max(1, Math.round(w*scale)), ch = Math.max(1, Math.round(h*scale));
+          var canvas = document.createElement("canvas"); canvas.width = cw; canvas.height = ch;
+          var ctx = canvas.getContext("2d"); ctx.drawImage(img, 0, 0, cw, ch);
+          URL.revokeObjectURL(objUrl);
+          canvas.toBlob(function(blob){
+            if(!blob){ reject(new Error("encode")); return; }
+            var fr = new FileReader();
+            fr.onload = function(){ resolve(fr.result); };
+            fr.onerror = function(){ reject(new Error("read")); };
+            fr.readAsDataURL(blob);
+          }, "image/jpeg", JPEG_Q);
+        }catch(e){ URL.revokeObjectURL(objUrl); reject(e); }
+      };
+      img.onerror = function(){ URL.revokeObjectURL(objUrl); reject(new Error("load")); };
+      img.src = objUrl;
+    });
+  }
+
+  function fail(msg){
+    $("error-title").textContent = "Photo problem";
+    $("error-detail").textContent = msg;
+    hideAll(); show("tool-app"); show("error-box");
+    window.scrollTo(0, $("error-box").offsetTop - 20);
+  }
+
+  function keywordsFrom(title){
+    var stop = {for:1,and:1,the:1,with:1,a:1,an:1,in:1,on:1,of:1,to:1,new:1,used:1};
+    return String(title||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/)
+      .filter(function(w){ return w.length > 1 && !stop[w]; }).slice(0,6).join(" ");
+  }
+  function compLinks(keywords){
+    var q = encodeURIComponent(keywords);
+    return [
+      {label:"eBay Canada sold listings", url:"https://www.ebay.ca/sch/i.html?_nkw="+q+"&LH_Sold=1&LH_Complete=1"},
+      {label:"Facebook Marketplace (Toronto)", url:"https://www.facebook.com/marketplace/toronto/search/?query="+q}
+    ];
+  }
+
+  function copyText(btn, text){
+    function done(){ var o = btn.textContent; btn.textContent = "Copied!"; setTimeout(function(){ btn.textContent = o; }, 1500); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallback(); });
+    } else fallback();
+    function fallback(){
+      var ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta);
+      ta.select(); try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(ta); done();
+    }
+  }
+
+  function generate(){
+    if(inFlight || !imageDataUrl || !cfg.proxy_url) return;
+    inFlight = true; inFlightId = uuid();
+    var btn = $("generate"); btn.disabled = true;
+    hideAll(); show("progress");
+    var ctrl = new AbortController();
+    var timer = setTimeout(function(){ ctrl.abort(); }, TIMEOUT_MS);
+    var body = {
+      request_id: inFlightId,
+      image_data_url: imageDataUrl,
+      hint: ($("hint").value || "").slice(0,200) || null,
+      marketplace: $("marketplace").value,
+      client_version: CLIENT_VERSION
+    };
+    fetch(cfg.proxy_url.replace(/\/$/,"") + "/generate", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(body), signal: ctrl.signal
+    }).then(function(r){
+      clearTimeout(timer);
+      return r.json().then(function(d){ return {status:r.status, data:d}; });
+    }).then(function(res){
+      inFlight = false; btn.disabled = false;
+      handleResponse(res.status, res.data);
+    }).catch(function(err){
+      clearTimeout(timer); inFlight = false; btn.disabled = false;
+      if(err && err.name === "AbortError") showError("Timed out", "The request took longer than 60 seconds. Your photo was not stored — try again.");
+      else if(!navigator.onLine) showError("You're offline", "Check your connection and try again.");
+      else showError("Connection problem", "Couldn't reach the generation service. Try again in a moment.");
+    });
+  }
+
+  function handleResponse(status, d){
+    d = d || {};
+    if(status === 200 && d.photo_qc && d.photo_qc.status === "fail"){
+      $("qc-reason").textContent = d.photo_qc.reason || "The photo didn't show a saleable item clearly.";
+      hideAll(); show("tool-app"); show("qc-fail");
+      window.scrollTo(0, $("qc-fail").offsetTop - 20); return;
+    }
+    if(status === 200 && d.item){ renderResult(d); return; }
+    if(status === 429){
+      var wait = d.retry_after_seconds ? " Try again in about " + Math.ceil(d.retry_after_seconds/60) + " minutes." : "";
+      showError("Daily limit reached", "This tool allows a limited number of free generations per day to keep it free for everyone." + wait); return;
+    }
+    if(status === 503){ hideAll(); show("not-configured"); return; }
+    showError("Something went wrong", "The service couldn't generate a draft right now. Your photo was not stored — try again in a moment.");
+  }
+
+  function showError(title, detail){
+    $("error-title").textContent = title;
+    $("error-detail").textContent = detail;
+    hideAll(); show("tool-app"); show("error-box");
+    window.scrollTo(0, $("error-box").offsetTop - 20);
+  }
+
+  function renderResult(d){
+    var item = d.item || {}, price = d.price || {};
+    var kw = keywordsFrom(item.title);
+    var links = compLinks(kw);
+    var est = cfg.estimate_label_text || "ESTIMATE";
+    var h = '<div class="result-card">';
+    h += '<h3>Listing title</h3><p class="result-title">' + esc(item.title) + '</p>';
+    h += '<button class="copy-btn" data-copy="title">Copy title</button>';
+    h += '<h3>Description</h3><p class="result-desc">' + esc(item.description) + '</p>';
+    h += '<button class="copy-btn" data-copy="desc">Copy description</button>';
+    h += '<h3>Details</h3><div class="meta-row">';
+    h += '<span class="meta-pill">Category: ' + esc(item.category_guess || "—") + '</span>';
+    h += '<span class="meta-pill">' + esc(item.condition_note || "") + '</span></div>';
+    var low = Number(price.low), high = Number(price.high);
+    var range = (isFinite(low) && isFinite(high)) ? ("$" + low.toFixed(2) + " – $" + high.toFixed(2) + " CAD") : "—";
+    h += '<div class="price-box"><span class="est-tag">' + esc(est) + '</span><div class="range">' + esc(range) + '</div>';
+    h += '<p class="disclaimer">' + esc(price.disclaimer || cfg.estimate_disclaimer_text) + '</p></div>';
+    h += '<h3>Verify with real sold comps</h3><p class="hint">Estimates are a starting point — check what identical items actually sold for:</p><div class="comp-links">';
+    links.forEach(function(l){ h += '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>'; });
+    h += '</div>';
+    var slots = cfg.affiliate_slots || [];
+    if(slots.length){
+      h += '<div class="affiliate-section"><p class="disclosure">' + esc(cfg.disclosure_text) + '</p><h3>Gear resellers use</h3><div class="gear-grid">';
+      slots.forEach(function(s){
+        h += '<div class="gear-card"><strong>' + esc(s.label) + '</strong><p>' + esc(s.blurb || "") + '</p><a href="' + esc(s.url) + '" target="_blank" rel="noopener sponsored">Check price</a></div>';
+      });
+      h += '</div></div>';
+    }
+    h += '<p class="hint" style="margin-top:1em">Generated ' + esc(d.generated_at || "") + ' &middot; AI draft — review before posting. Never invent details the photo doesn\'t show.</p></div>';
+    var R = $("result"); R.innerHTML = h;
+    R.querySelectorAll("[data-copy]").forEach(function(b){
+      b.addEventListener("click", function(){
+        copyText(b, b.getAttribute("data-copy") === "title" ? (item.title||"") : (item.description||""));
+      });
+    });
+    hideAll(); show("tool-app"); show("result");
+    window.scrollTo(0, R.offsetTop - 20);
+  }
+
+  $("drop").addEventListener("click", function(){ $("photo").click(); });
+  $("drop").addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); $("photo").click(); } });
+  $("photo").addEventListener("change", function(e){ handleFile(e.target.files[0]); });
+  $("generate").addEventListener("click", generate);
+  $("retry-gen").addEventListener("click", function(){ hide("error-box"); });
+  $("retry-photo").addEventListener("click", function(){ hide("qc-fail"); $("photo").click(); });
+
+  loadConfig().then(boot);
+})();
+</script>
+</body>
+</html>

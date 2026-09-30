@@ -1,0 +1,151 @@
+/* PlanPrice — mobile-first static theme. Brand palette: deep navy, teal accent, warm gold for deal badges. */
+:root {
+  --navy: #10243e;
+  --navy-dark: #0a1729;
+  --teal: #0e7c7b;
+  --teal-dark: #0a5f5e;
+  --gold: #b8860b;
+  --gold-bg: #fdf3dc;
+  --bg: #f7f9fb;
+  --card: #ffffff;
+  --text: #1c2b3a;
+  --muted: #5b6b7d;
+  --line: #dfe7ef;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+/* Disclosure bar — present on every page */
+.disclosure-bar {
+  background: var(--navy-dark);
+  color: #e8eef5;
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 0.45rem 1rem;
+}
+.disclosure-bar a { color: #ffd98a; }
+
+/* Header */
+.site-header { background: var(--card); border-bottom: 1px solid var(--line); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem; padding: 0.8rem 1rem;
+}
+.brand {
+  font-weight: 800; font-size: 1.35rem; color: var(--navy);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.brand-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; border-radius: 8px;
+  background: var(--teal); color: #fff; font-size: 1.1rem;
+}
+.main-nav { display: flex; gap: 1.25rem; }
+.main-nav a { color: var(--muted); text-decoration: none; font-weight: 600; }
+.main-nav a:hover, .main-nav a.active { color: var(--teal-dark); }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3a5f 100%);
+  color: #fff; padding: 3rem 0;
+}
+.hero h1 { margin: 0.4rem 0 0.8rem; font-size: 2.1rem; line-height: 1.2; }
+.hero .lead { color: #cfdce9; max-width: 46rem; font-size: 1.08rem; }
+.kicker {
+  text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
+  color: #ffd98a; margin: 0; font-weight: 700;
+}
+
+/* Sections */
+.section { padding: 2.5rem 0 0.5rem; }
+.section-title { margin: 0 0 0.25rem; font-size: 1.6rem; color: var(--navy); }
+.section-sub { color: var(--muted); margin: 0 0 1.5rem; }
+.count { font-size: 1rem; font-weight: 400; color: var(--muted); }
+
+/* Cards */
+.card-grid {
+  display: grid; gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  padding-bottom: 2rem;
+}
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem;
+}
+.card h3 { margin: 0; font-size: 1.15rem; }
+.card h3 a { color: var(--navy); text-decoration: none; }
+.card h3 a:hover { color: var(--teal-dark); text-decoration: underline; }
+.card-cat {
+  text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.07em;
+  color: var(--teal-dark); font-weight: 700; margin: 0;
+}
+.card-tag { color: var(--muted); margin: 0; font-size: 0.95rem; flex: 1; }
+.card-price { margin: 0.4rem 0; }
+.badge {
+  display: inline-block; align-self: flex-start; font-size: 0.8rem; font-weight: 700;
+  border-radius: 999px; padding: 0.2rem 0.75rem; margin: 0.25rem 0 0.6rem;
+}
+.badge.deal { background: var(--gold-bg); color: var(--gold); border: 1px solid #ecd79a; }
+.badge.none { background: #eef1f5; color: var(--muted); border: 1px solid var(--line); }
+
+/* Buttons */
+.btn {
+  display: inline-block; background: var(--teal); color: #fff; font-weight: 700;
+  padding: 0.65rem 1.4rem; border-radius: 8px; text-decoration: none;
+}
+.btn:hover { background: var(--teal-dark); color: #fff; }
+.btn.small { padding: 0.45rem 1rem; font-size: 0.9rem; }
+
+/* Product page */
+.breadcrumbs { font-size: 0.85rem; color: var(--muted); margin: 1.5rem 0 0.5rem; }
+.breadcrumbs a { color: var(--teal-dark); }
+.product h1 { color: var(--navy); margin: 0.25rem 0 0.5rem; font-size: 2rem; }
+.lead { font-size: 1.08rem; color: var(--muted); max-width: 44rem; }
+.page-title { color: var(--navy); margin: 2rem 0 0.5rem; }
+
+/* Pricing table */
+.tiers { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; font-size: 0.95rem; }
+.tiers caption { text-align: left; padding: 0.75rem 1rem; font-weight: 700; color: var(--navy); background: #eef4f8; }
+.tiers th, .tiers td { text-align: left; padding: 0.65rem 0.9rem; border-top: 1px solid var(--line); vertical-align: top; }
+.tiers thead th { border-top: 0; background: #f3f7fa; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.tiers .price { font-weight: 800; color: var(--navy); white-space: nowrap; }
+
+/* Deal verification box */
+.verify {
+  border-left: 4px solid var(--teal); background: #eef6f6;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.1rem 1.25rem; margin: 1.75rem 0;
+}
+.verify h2 { margin: 0 0 0.4rem; font-size: 1.05rem; color: var(--navy); }
+.verify p { margin: 0.3rem 0; }
+.verify-headline { font-weight: 700; }
+.verify-src, .verify-note { font-size: 0.9rem; color: var(--muted); }
+
+.cta-block { margin: 1.75rem 0; }
+.related ul { padding-left: 1.2rem; }
+.related li { margin: 0.4rem 0; }
+
+/* Footer */
+.site-footer {
+  background: var(--navy-dark); color: #c4d2e0; margin-top: 3rem;
+  padding: 2rem 0; font-size: 0.9rem;
+}
+.footer-brand { color: #fff; font-weight: 700; margin: 0 0 0.75rem; }
+.footer-nav { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.footer-nav a { color: #ffd98a; text-decoration: none; }
+.footer-nav a:hover { text-decoration: underline; }
+.fine { font-size: 0.82rem; color: var(--muted); }
+
+/* Desktop tweaks */
+@media (min-width: 760px) {
+  .hero h1 { font-size: 2.7rem; }
+  .header-inner { padding: 1rem 1.5rem; }
+}

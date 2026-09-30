@@ -21,7 +21,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "hubspot-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "freshbooks",
@@ -42,7 +44,9 @@
         "verified_date": "2026-09-30"
       },
       "affiliate": { "program": "freshbooks-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "monday",
@@ -61,7 +65,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "monday-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "semrush",
@@ -78,7 +84,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "semrush-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     }
     ,
     {
@@ -98,7 +106,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "shopify-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "wave",
@@ -115,7 +125,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "wave-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "quickbooks",
@@ -137,7 +149,9 @@
         "verified_date": "2026-09-30"
       },
       "affiliate": { "program": "quickbooks-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "xero",
@@ -154,7 +168,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "xero-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "square",
@@ -172,7 +188,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "square-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "calendly",
@@ -190,7 +208,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "calendly-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     }
     ,
     {
@@ -210,7 +230,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "jobber-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     },
     {
       "slug": "humi",
@@ -227,7 +249,9 @@
       ],
       "deal": null,
       "affiliate": { "program": "humi-affiliate", "network": "pending", "status": "pending-approval" },
-      "last_verified": "2026-09-30"
+      "last_verified": "2026-09-30",
+      "spotlight": false,
+      "sort_priority": 999
     }
   ]
 }

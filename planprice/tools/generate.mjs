@@ -369,6 +369,7 @@ function head(title, description, path, extraHead = "") {
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(SITE_URL + path)}">
 <link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
 <!-- AdSense: ad code goes here -->${extraHead}
 </head>`;}
 
@@ -383,7 +384,7 @@ function header(active) {
 <div class="disclosure-bar">PlanPrice may earn a commission if you buy through links on this page. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="/"><span class="brand-mark">P</span> PlanPrice</a>
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
     <nav class="main-nav">
       ${nav("/", "Deals")}
       ${nav("/disclosure.html", "Disclosure")}

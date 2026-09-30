@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 220" role="img" aria-label="PlanPrice">
+  <g transform="rotate(-18 115 110)">
+    <path d="M55 62 H128 L178 110 L128 158 H55 Q45 158 45 148 V72 Q45 62 55 62 Z"
+          fill="#0e7c7b"/>
+    <circle cx="80" cy="88" r="11" fill="#ffd98a"/>
+    <text x="112" y="140" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
+          font-weight="800" font-size="62" fill="#ffffff">P</text>
+  </g>
+  <text x="205" y="140" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
+        font-weight="800" font-size="76" letter-spacing="-1" fill="#10243e">PlanPrice</text>
+</svg>

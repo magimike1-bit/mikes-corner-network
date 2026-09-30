@@ -21,6 +21,7 @@ const products = data.products;
  * The moment a product flips to "live", its deal page gets the blunt live
  * disclosure plus a real affiliate link. */
 const affiliateLive = (p) => !!(p.affiliate && p.affiliate.status === "live");
+const affiliateNone = (p) => !!(p.affiliate && p.affiliate.status === "none");
 const anyAffiliateLive = products.some(affiliateLive);
 
 const AFFILIATE_BLUNT =
@@ -99,6 +100,49 @@ function spotlightProduct() {
   if (cands.length === 0) return null;
   cands.sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
   return cands[0].p;
+}
+
+/* ---- Vendor reviews (PP-VENDOR-REVIEWS) ----
+ * Optional per-product `reviews` object in products.json: {strengths, weaknesses}.
+ * Rendered as a "What users report" section on deal pages only when present
+ * and non-empty. Kept off the compare table (stays scannable). */
+const hasReviews = (p) =>
+  !!(
+    p.reviews &&
+    ((p.reviews.strengths || []).length || (p.reviews.weaknesses || []).length)
+  );
+
+function reviewsSection(p) {
+  if (!hasReviews(p)) return "";
+  const list = (items) =>
+    items.map((x) => `      <li>${esc(x)}</li>`).join("\n");
+  const strengths = p.reviews.strengths || [];
+  const weaknesses = p.reviews.weaknesses || [];
+  return `<section class="section reviews">
+      <h2>What users report</h2>
+      ${strengths.length ? `<h3>Commonly praised</h3>\n      <ul class="review-list pros">\n${list(strengths)}\n      </ul>` : ""}
+      ${weaknesses.length ? `<h3>Commonly criticized</h3>\n      <ul class="review-list cons">\n${list(weaknesses)}\n      </ul>` : ""}
+      <p class="fine">Summarized from user reviews on G2 and Capterra; not a PlanPrice rating.</p>
+    </section>`;
+}
+
+/* ---- Canadian vendors (PP-CANADIAN-VENDORS) ----
+ * Optional per-product `canadian` object: {founded?, founded_place, hq}.
+ * The framing is about the VENDOR being Canadian, never "for Canadian customers".
+ * Full sentence on deal pages; a small badge on directory rows. Kept off the
+ * compare table (stays scannable). */
+function canadianLine(p) {
+  if (!p.canadian) return "";
+  const c = p.canadian;
+  const founded = c.founded
+    ? `founded in ${esc(c.founded_place)} (${esc(c.founded)})`
+    : `founded in ${esc(c.founded_place)}`;
+  return `<p class="canadian-note">🇨🇦 Canadian company — ${founded}, headquartered in ${esc(c.hq)}.</p>`;
+}
+
+function canadianBadge(p) {
+  if (!p.canadian) return "";
+  return ` <span class="badge canadian">🇨🇦 Canadian company</span>`;
 }
 
 function esc(s) {
@@ -185,7 +229,7 @@ function dirRow(p) {
     </div>
     <div class="dir-row-side">
       <p class="dir-row-price">${fromPrice(p)}</p>
-      <p class="dir-row-badge">${dealBadge(p)}${flags ? " " + flags : ""} <span class="verified-pill">✓ Verified ${esc(p.last_verified)}</span></p>
+      <p class="dir-row-badge">${dealBadge(p)}${flags ? " " + flags : ""}${canadianBadge(p)} <span class="verified-pill">✓ Verified ${esc(p.last_verified)}</span></p>
     </div>
   </li>`;
 }
@@ -314,7 +358,9 @@ function expiredSection() {
 function indexPage() {
   return `${head(
     "PlanPrice — Verified B2B Software Deals & Pricing",
-    "PlanPrice tracks verified list prices and current promotions for 12 essential B2B software products — accounting, CRM, ecommerce, POS, and more. Every deal is checked against the vendor's own site.",
+    "PlanPrice tracks verified list prices and current promotions for " +
+    products.length +
+    " essential B2B software products — accounting, CRM, ecommerce, POS, and more. Every deal is checked against the vendor's own site.",
     "/",
     "\n" + IMPACT_TAG + '\n<script src="/filter.js" defer></script>'
   )}
@@ -416,6 +462,9 @@ function pricingTable(p) {
     </section>`;
 }
 
+/* PP-NON-AFFILIATE-VENDORS: products with affiliate status "none" get a
+ * plain outbound button — never "sponsored", never an affiliate URL — plus a
+ * blunt no-relationship line. Pending-approval behavior below is unchanged. */
 function cta(p) {
   if (affiliateLive(p)) {
     if (p.affiliate.url) {
@@ -423,6 +472,10 @@ function cta(p) {
     <p class="fine">${AFFILIATE_BLUNT} See our <a href="/disclosure.html">affiliate disclosure</a>.</p>`;
     }
     console.warn(`WARN: ${p.slug} has a live affiliate status but no affiliate URL in data — rendering the placeholder CTA.`);
+  }
+  if (affiliateNone(p)) {
+    return `<a href="${esc(p.vendor_homepage)}" class="btn vendor-cta" rel="noopener">Visit ${esc(p.name)} →</a>
+    <p class="fine no-affiliate">PlanPrice has no affiliate relationship with ${esc(p.name)} — we earn nothing if you choose them.</p>`;
   }
   return `<!-- AFFILIATE PLACEHOLDER: light when Joseph approves -->
     <a href="#" class="btn affiliate-cta" data-program="${esc(p.affiliate.program)}" data-status="pending-approval">Check the current price</a>
@@ -465,6 +518,7 @@ ${header("/")}
       <p class="card-cat">${esc(p.category)}</p>
       <h1>${esc(p.name)}</h1>
       <p class="lead">${esc(p.tagline)}</p>
+      ${canadianLine(p)}
       <div class="facts-wrap">
         ${factsStrip(p)}
       </div>
@@ -474,6 +528,7 @@ ${header("/")}
         <p><strong>Best for:</strong> ${esc(p.best_for)}</p>
       </section>
       ${pricingTable(p)}
+      ${reviewsSection(p)}
       ${verificationBox(p)}
       ${claimBlock(p)}
       <section class="section cta-block">
@@ -574,7 +629,7 @@ function disclosureBody() {
     : `<p><strong>Current status: no affiliate links are live yet.</strong> PlanPrice is reader-supported: our plan is to fund the site through affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors — no commissions are being earned. When affiliate links go live, this page will say so, and buying through them will never cost you extra.</p>`;
   const statusBullet = anyAffiliateLive
     ? `<li>We label affiliate links as affiliate links. If a link earns us a commission, the page says so.</li>`
-    : `<li>Right now, zero commissions are being earned. The buttons on deal pages are inert placeholders marked "Affiliate link pending approval", and outbound links go straight to the vendor.</li>`;
+    : `<li>Right now, zero commissions are being earned. Deal-page buttons are either inert placeholders marked "Affiliate link pending approval" or plain outbound links to vendors we have no affiliate relationship with — either way, no commissions are earned, and outbound links go straight to the vendor.</li>`;
   return `<section class="section"><div class="wrap">
       ${status}
       <p><strong>What this means in practice:</strong></p>

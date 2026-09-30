@@ -86,6 +86,34 @@
       "start_price_numeric": null,
       "deal_headline": null,
       "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "ahrefs",
+      "start_price_text": "From $29 per month",
+      "start_price_numeric": 29,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "plausible",
+      "start_price_text": "From $9 per month",
+      "start_price_numeric": 9,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "stripe",
+      "start_price_text": "From 2.9% + 30¢ per transaction",
+      "start_price_numeric": 2.9,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "big-cartel",
+      "start_price_text": "From $0 free",
+      "start_price_numeric": 0,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
     }
   ]
 }

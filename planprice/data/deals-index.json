@@ -108,6 +108,42 @@
       "priceSort": null,
       "dealHeadline": null,
       "url": "/deals/humi.html"
+    },
+    {
+      "slug": "ahrefs",
+      "name": "Ahrefs",
+      "category": "SEO & Marketing",
+      "priceText": "From $29 per month",
+      "priceSort": 29,
+      "dealHeadline": null,
+      "url": "/deals/ahrefs.html"
+    },
+    {
+      "slug": "plausible",
+      "name": "Plausible",
+      "category": "SEO & Marketing",
+      "priceText": "From $9 per month",
+      "priceSort": 9,
+      "dealHeadline": null,
+      "url": "/deals/plausible.html"
+    },
+    {
+      "slug": "stripe",
+      "name": "Stripe",
+      "category": "Payments & POS",
+      "priceText": "From 2.9% + 30¢ per transaction",
+      "priceSort": 2.9,
+      "dealHeadline": null,
+      "url": "/deals/stripe.html"
+    },
+    {
+      "slug": "big-cartel",
+      "name": "Big Cartel",
+      "category": "Ecommerce",
+      "priceText": "From $0 free",
+      "priceSort": 0,
+      "dealHeadline": null,
+      "url": "/deals/big-cartel.html"
     }
   ]
 }

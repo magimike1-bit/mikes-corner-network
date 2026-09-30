@@ -47,7 +47,20 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Consistently rated easy to use and intuitive by a large base of marketing users.",
+          "Email marketing automation is a standout, with automated workflows cited as a top reason buyers choose it.",
+          "Workflows, lead scoring, and campaign automation are among its most-cited pros.",
+          "Integrates tightly with HubSpot's CRM and a large ecosystem of third-party apps."
+        ],
+        "weaknesses": [
+          "New users report a steep learning curve from the platform's breadth and configuration options.",
+          "Pricing is frequently called expensive, especially the contact-tier model where costs climb as lists grow.",
+          "Key capabilities are locked behind higher-tier plans."
+        ]
+      }
     },
     {
       "slug": "freshbooks",
@@ -89,7 +102,24 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Designed to be usable by non-accountants; ease of use is its most-cited pro.",
+          "Customer support is repeatedly praised for responsiveness.",
+          "Invoicing is simple and fast, including recurring invoices.",
+          "Built-in time tracking lets freelancers log hours and convert them to invoices."
+        ],
+        "weaknesses": [
+          "Payment-processing fees over 3% are called high relative to alternatives.",
+          "Reporting and customization are limited versus more advanced accounting platforms."
+        ]
+      },
+      "canadian": {
+        "founded": "2004",
+        "founded_place": "Toronto",
+        "hq": "Toronto, Ontario"
+      }
     },
     {
       "slug": "monday",
@@ -139,7 +169,20 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Ease of use is its dominant pro; intuitive interface.",
+          "Team collaboration features — shared boards, updates, communication.",
+          "Strong project management with visual Kanban and Gantt boards.",
+          "Automations reduce manual work across boards."
+        ],
+        "weaknesses": [
+          "Simple tasks can require paid add-on apps, so basic functionality feels gated.",
+          "Steep learning curve for advanced configuration.",
+          "Gets expensive as teams grow; essentials locked behind Pro/Enterprise tiers."
+        ]
+      }
     },
     {
       "slug": "semrush",
@@ -177,7 +220,20 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Reviewer-valued competitor analysis.",
+          "In-depth SEO insights.",
+          "Actionable keyword tracking."
+        ],
+        "weaknesses": [
+          "Steep pricing.",
+          "Subscription complexity.",
+          "Limited trial utility.",
+          "Learning curve for small businesses."
+        ]
+      }
     },
     {
       "slug": "shopify",
@@ -227,7 +283,25 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Widely rated easy to use; no-code store setup for non-technical sellers.",
+          "App-store integrations with apps and sales channels are straightforward.",
+          "Stores can be launched quickly.",
+          "Regarded as reliable for uptime and checkout stability."
+        ],
+        "weaknesses": [
+          "Gets expensive: transaction fees plus paid apps add up beyond the base subscription.",
+          "Customization limited without coding (Liquid) or costly apps.",
+          "Plan pricing draws complaints; integrations occasionally break."
+        ]
+      },
+      "canadian": {
+        "founded": "2006",
+        "founded_place": "Ottawa",
+        "hq": "Ottawa, Ontario"
+      }
     },
     {
       "slug": "wave",
@@ -265,7 +339,25 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Quick, easy-to-navigate interface for small-business owners.",
+          "Recurring invoicing and automated payment reminders.",
+          "Long-term users praise the genuinely useful free plan.",
+          "Bank transaction syncing automates bookkeeping data entry."
+        ],
+        "weaknesses": [
+          "Customer support is poor — users report being unable to reach a human.",
+          "Lacks growth features: no 1099 filing without year-round payroll, no inventory, no time tracking.",
+          "Paid add-ons are priced high for businesses outgrowing the free tier."
+        ]
+      },
+      "canadian": {
+        "founded": "2009",
+        "founded_place": "Canada",
+        "hq": "Toronto, Ontario"
+      }
     },
     {
       "slug": "quickbooks",
@@ -313,7 +405,21 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Widely considered intuitive; ease of use among its most-cited pros.",
+          "Large integration ecosystem for payroll, payments, and industry apps.",
+          "Cloud-based anywhere access from any device.",
+          "Invoice creation, sending, and tracking is a core praised capability."
+        ],
+        "weaknesses": [
+          "Users report missing features versus expectations, especially advanced reporting and inventory.",
+          "Pricing called too expensive, with complaints about rising subscription costs.",
+          "Customer support frequently described as poor or hard to reach.",
+          "Processing fees considered high; report customization has a steep learning curve."
+        ]
+      }
     },
     {
       "slug": "xero",
@@ -351,7 +457,18 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Clean, easy-to-use interface with a dashboard that presents financial reports clearly.",
+          "Bank reconciliation is heavily automated through bank feeds.",
+          "Connects to many third-party tools including Stripe, PayPal, and payroll apps."
+        ],
+        "weaknesses": [
+          "Support is ticket/email-only with no phone line.",
+          "Pricing is seen as expensive for micro-businesses."
+        ]
+      }
     },
     {
       "slug": "square",
@@ -395,7 +512,19 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Simple setup, easy to learn even for staff with no POS experience.",
+          "Processes payments easily across counter, mobile, and online.",
+          "Built-in reporting gives useful sales and staff insights."
+        ],
+        "weaknesses": [
+          "Flat 2.6% processing fee adds up and is considered high at volume.",
+          "Depends on internet connectivity; outages can disrupt sales.",
+          "Free plan lacks features; customization limited without paid tiers."
+        ]
+      }
     },
     {
       "slug": "calendly",
@@ -439,7 +568,21 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Very easy to use; simple booking-link flow for hosts and guests.",
+          "Eliminates scheduling email back-and-forth.",
+          "Google/Outlook calendar integration syncs in real time to prevent double-booking.",
+          "Fast, straightforward initial setup."
+        ],
+        "weaknesses": [
+          "Free plan is limited, pushing users toward paid tiers.",
+          "Calendar sync issues occur, including missed or duplicated events.",
+          "Per-user pricing considered expensive for small businesses.",
+          "Lacks Apple/iCloud calendar support."
+        ]
+      }
     },
     {
       "slug": "jobber",
@@ -489,7 +632,27 @@
         "status": "pending-approval"
       },
       "last_verified": "2026-09-30",
-      "sort_priority": 999
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Intuitive interface.",
+          "Excellent mobile app (rated 4.7–4.8).",
+          "Professional quotes and invoices; Client Hub.",
+          "Automation features.",
+          "Responsive customer support."
+        ],
+        "weaknesses": [
+          "Per-user pricing beyond 10 users.",
+          "QuickBooks sync is unreliable (dropped line items, needs babysitting).",
+          "Basic reporting with no custom report builder.",
+          "No geofencing or automatic time tracking.",
+          "Manual dispatching; no real-time Google Calendar sync."
+        ]
+      },
+      "canadian": {
+        "founded_place": "Edmonton",
+        "hq": "Edmonton, Alberta"
+      }
     },
     {
       "slug": "humi",
@@ -525,6 +688,150 @@
         "program": "humi-affiliate",
         "network": "pending",
         "status": "pending-approval"
+      },
+      "last_verified": "2026-09-30",
+      "sort_priority": 999,
+      "reviews": {
+        "strengths": [
+          "Intuitive interface even for non-tech-savvy users.",
+          "Stellar customer support.",
+          "Automates CRA remittance and T4 generation.",
+          "Canadian payroll with direct deposit and tax calculations.",
+          "Benefits admin (health/dental, RRSPs) and onboarding workflows."
+        ],
+        "weaknesses": [
+          "Payroll year-end filing difficulties reported.",
+          "Inflexible time-off policies for multi-role employees.",
+          "Occasional bugs/glitches.",
+          "No published pricing — quote required."
+        ]
+      },
+      "canadian": {
+        "founded": "2016",
+        "founded_place": "Toronto",
+        "hq": "Toronto, Ontario"
+      }
+    },
+    {
+      "slug": "ahrefs",
+      "name": "Ahrefs",
+      "category": "SEO & Marketing",
+      "tagline": "SEO toolkit with one of the web's most active crawlers.",
+      "vendor_homepage": "https://ahrefs.com/",
+      "description": "Ahrefs is an SEO and marketing platform offering Site Explorer, Keywords Explorer, Site Audit, Rank Tracker, and Brand Radar, powered by one of the world's most active web crawlers. It is a bootstrapped company founded in 2010 by Dmitry Gerasimenko and headquartered in Singapore.",
+      "best_for": "Marketers and SEO specialists who need backlink analysis, keyword research, and site audits.",
+      "pricing_tiers": [
+        {
+          "name": "Starter",
+          "price": "$29",
+          "cadence": "per month",
+          "notes": "Entry tier; no discounts, no free trial."
+        },
+        {
+          "name": "Standard",
+          "price": "$249",
+          "cadence": "per month",
+          "notes": "Mid-tier plan."
+        },
+        {
+          "name": "Enterprise",
+          "price": "$1,499",
+          "cadence": "per month",
+          "notes": "Annual commitment."
+        }
+      ],
+      "deal": null,
+      "affiliate": {
+        "program": null,
+        "network": null,
+        "status": "none"
+      },
+      "last_verified": "2026-09-30",
+      "sort_priority": 999
+    },
+    {
+      "slug": "plausible",
+      "name": "Plausible",
+      "category": "SEO & Marketing",
+      "tagline": "Privacy-friendly web analytics without cookies.",
+      "vendor_homepage": "https://plausible.io/",
+      "description": "Plausible is an open-source, privacy-friendly web analytics platform — a lightweight Google Analytics alternative with a simple single-page dashboard. Its script is a fraction of the size of Google Analytics, processes no personal data, and needs no cookie banners.",
+      "best_for": "Site owners who want simple analytics without cookie banners or privacy headaches.",
+      "pricing_tiers": [
+        {
+          "name": "Starter",
+          "price": "$9",
+          "cadence": "per month",
+          "notes": "Up to 10,000 pageviews; free trial available."
+        }
+      ],
+      "deal": null,
+      "affiliate": {
+        "program": null,
+        "network": null,
+        "status": "none"
+      },
+      "last_verified": "2026-09-30",
+      "sort_priority": 999
+    },
+    {
+      "slug": "stripe",
+      "name": "Stripe",
+      "category": "Payments & POS",
+      "tagline": "Payment processing for online and in-person sales.",
+      "vendor_homepage": "https://stripe.com/",
+      "description": "Stripe is a payments platform offering payment-processing software and APIs for ecommerce websites and mobile apps, plus in-person payments through Stripe Terminal and dedicated card readers. Founded in 2010 by Patrick and John Collison; dual-headquartered in South San Francisco and Dublin.",
+      "best_for": "Businesses that need online and in-person card payments with developer-friendly APIs.",
+      "pricing_tiers": [
+        {
+          "name": "Pay as you go",
+          "price": "2.9% + 30¢",
+          "cadence": "per transaction",
+          "notes": "Domestic card transactions; no setup or monthly fees."
+        }
+      ],
+      "deal": null,
+      "affiliate": {
+        "program": null,
+        "network": null,
+        "status": "none"
+      },
+      "last_verified": "2026-09-30",
+      "sort_priority": 999
+    },
+    {
+      "slug": "big-cartel",
+      "name": "Big Cartel",
+      "category": "Ecommerce",
+      "tagline": "Simple online stores for independent artists and makers.",
+      "vendor_homepage": "https://www.bigcartel.com/",
+      "description": "Big Cartel is an ecommerce platform for independent artists, makers, and creatives to build unique online stores and sell their work. Founded in 2005; headquartered in Salt Lake City, Utah.",
+      "best_for": "Independent artists and makers selling a small catalog who want a cheap, simple storefront.",
+      "pricing_tiers": [
+        {
+          "name": "Gold",
+          "price": "$0",
+          "cadence": "free",
+          "notes": "5 products, 1 image per product."
+        },
+        {
+          "name": "Platinum",
+          "price": "$15",
+          "cadence": "per month",
+          "notes": "50 products."
+        },
+        {
+          "name": "Diamond",
+          "price": "$30",
+          "cadence": "per month",
+          "notes": "500 products."
+        }
+      ],
+      "deal": null,
+      "affiliate": {
+        "program": null,
+        "network": null,
+        "status": "none"
       },
       "last_verified": "2026-09-30",
       "sort_priority": 999

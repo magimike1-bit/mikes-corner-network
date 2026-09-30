@@ -343,3 +343,40 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .similar-to {
   font-size: 1.02rem;
 }
+
+/* ---- Vendor reviews (PP-VENDOR-REVIEWS) ---- */
+.reviews h3 {
+  font-size: 1.02rem;
+  margin: 1.1rem 0 0.35rem;
+}
+.review-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.review-list li {
+  margin: 0.28rem 0;
+}
+.review-list.pros li::marker {
+  color: #1c6b3a;
+  content: "✓ ";
+}
+.review-list.cons li::marker {
+  color: #a4342a;
+  content: "✕ ";
+}
+
+/* ---- Canadian vendor badge (PP-CANADIAN-VENDORS) ---- */
+.badge.canadian {
+  background: #eef6f1;
+  color: #166534;
+  border: 1px solid #bfe3cd;
+}
+.canadian-note {
+  font-weight: 700;
+  margin: 0.4rem 0 0;
+}
+
+/* ---- No-affiliate vendors (PP-NON-AFFILIATE-VENDORS) ---- */
+.no-affiliate {
+  font-style: italic;
+}

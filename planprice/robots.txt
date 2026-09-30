@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://planprice-qkj0y.kinsta.page/sitemap.xml
+Sitemap: https://planprice.ca/sitemap.xml

@@ -281,11 +281,13 @@ function pricingTable(p) {
     </tr>`).join("\n");
   return `<section class="section pricing">
       <h2>Pricing</h2>
+      <div class="table-scroll">
       <table class="tiers">
         <caption>${esc(p.name)} list prices, verified ${esc(p.last_verified)}.</caption>
         <thead><tr><th scope="col">Plan</th><th scope="col">Price</th><th scope="col">Cadence</th><th scope="col">Notes</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
+      </div>
       <p class="fine">Always confirm on the vendor's pricing page before purchasing — plans and prices change.</p>
     </section>`;
 }

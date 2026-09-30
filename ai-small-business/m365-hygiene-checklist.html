@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Microsoft 365 Hygiene Checklist — 12 Baseline Settings to Verify | AI for Small Business</title>
+<meta name="description" content="A free self-check checklist of 12 baseline Microsoft 365 settings — MFA, sign-in protection, email authentication, activity logging, and sharing. Check off what your tenant has switched on. Free, runs in your browser.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/m365-hygiene-checklist.html" class="active">M365 Checklist</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap calc-wrap">
+  <p class="breadcrumbs"><a href="/">Home</a> › M365 Hygiene Checklist</p>
+  <p class="kicker">Interactive checklist</p>
+  <h1 class="checklist-h">Microsoft 365 hygiene checklist: 12 baseline settings to verify.</h1>
+  <p class="lede">Most small businesses pay for Microsoft 365 and leave half the built-in protections switched off. This is a self-check list of the baseline settings Microsoft documents publicly — check off the ones your tenant already has on. Nothing you tick leaves your browser.</p>
+  <p class="lede"><strong>What this is:</strong> a checklist you answer yourself, so you can see which basics are switched on in your own tenant. <strong>What it isn't:</strong> a security audit, a risk rating, or professional advice. It can't see your tenant, and it doesn't replace an IT professional or a proper security review.</p>
+
+  <div class="checklist-progress" aria-live="polite">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <p class="progress-text"><span id="check-count">0</span> of <span id="check-total">12</span> checked</p>
+  </div>
+
+  <section class="checklist-group">
+    <h2 class="checklist-h">Sign-in protection</h2>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>Every user can complete multi-factor authentication (MFA).</strong>
+        <span class="check-where">Where to look: Microsoft 365 admin center → Users → Active users → Multi-factor authentication.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>Everyone with an admin role is required to use MFA.</strong>
+        <span class="check-where">Microsoft lists this as its own Secure Score action — admin accounts are the most valuable targets.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>Legacy sign-in methods are blocked.</strong>
+        <span class="check-where">Microsoft's security defaults block these automatically; if you use your own Conditional Access policies instead, confirm a block policy exists.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>One sign-in baseline is switched on: security defaults, <em>or</em> your own Conditional Access policies.</strong>
+        <span class="check-where">The two can't run together — Microsoft says pick one. If neither is on, start here.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>Admin roles are handed out sparingly.</strong>
+        <span class="check-where">Microsoft's guidance: people should hold only the admin role they actually need — not Global Admin for everyone in IT.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>Everyday work isn't done from a Global Admin account.</strong>
+        <span class="check-where">Use separate admin accounts for admin tasks; the account you open email with shouldn't be able to reconfigure the tenant.</span>
+      </span>
+    </label>
+  </section>
+
+  <section class="checklist-group">
+    <h2 class="checklist-h">Email authentication</h2>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>An SPF record is published for your domain.</strong>
+        <span class="check-where">Where to look: your DNS records; verify in the Microsoft 365 admin center → Settings → Domains. It should authorize Microsoft's mail servers.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>DKIM signing is turned on for your domain.</strong>
+        <span class="check-where">Where to look: Microsoft Defender portal → Email &amp; collaboration → Policies &amp; rules → Threat policies → DKIM.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>A DMARC record is published for your domain.</strong>
+        <span class="check-where">Where to look: a TXT record at _dmarc in your DNS. Even a monitoring-only policy (p=none) is a start.</span>
+      </span>
+    </label>
+  </section>
+
+  <section class="checklist-group">
+    <h2 class="checklist-h">Activity logging &amp; sharing</h2>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>Activity logging is turned on for the tenant.</strong>
+        <span class="check-where">Microsoft calls this "unified audit logging." Where to look: Microsoft Purview portal → Audit → Start recording user and admin activity. It's on by default for tenants created after 2019 — verify yours.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>External file-sharing settings were reviewed in the last 6 months.</strong>
+        <span class="check-where">Where to look: SharePoint admin center → Policies → Sharing. Anyone-with-the-link sharing is the loosest option.</span>
+      </span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="check-box">
+      <span class="check-body">
+        <strong>Guest accounts get a regular tidy-up.</strong>
+        <span class="check-where">Microsoft's Identity Secure Score lists removing dormant accounts from sensitive groups — guests who stopped working with you months ago shouldn't still have access.</span>
+      </span>
+    </label>
+  </section>
+
+  <div class="calc-results" aria-live="polite">
+    <h2>Your checklist result</h2>
+    <div class="result-row hero-result">
+      <span>Items checked</span>
+      <span class="val" id="out-score">0 of 12</span>
+    </div>
+    <p class="calc-note" id="out-band">Tick the boxes above — your result appears here.</p>
+    <p class="calc-note">This counts checklist coverage, nothing more. It is not a security rating of your tenant. For Microsoft's own scored view of your tenant, see <strong>Secure Score</strong> in the Microsoft Defender portal (security.microsoft.com) — that's Microsoft's data about your tenant, and it's free.</p>
+  </div>
+
+  <section class="section">
+    <h2 class="checklist-h">Sources</h2>
+    <p class="calc-note">Every item above comes from Microsoft's own documentation: the <strong>Microsoft Secure Score</strong> recommended actions (MFA for all users, MFA for admin roles, block legacy authentication), the <strong>Identity Secure Score</strong> recommendations (least-privileged admin roles, remove dormant accounts), the <strong>Conditional Access planning guide</strong> (security defaults and Conditional Access can't be combined), and the <strong>Purview audit-log documentation</strong> (turning on unified audit logging). Microsoft changes features and licensing over time — verify each setting's current location in your own admin portals before relying on it.</p>
+  </section>
+
+  <div class="checklist-actions">
+    <button class="btn ghost" id="btn-reset" type="button">Reset checklist</button>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p><strong>AI Small Business Playbook</strong> — practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice. This checklist is not a security audit and is not professional security advice.</p>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/#guides">All guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/m365-hygiene-checklist.html">M365 Checklist</a>
+      <a href="/about.html">About</a>
+    </nav>
+  <p class="footer-nav"><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+<script>
+(function () {
+  "use strict";
+
+  var ALL = Array.prototype.slice.call(document.querySelectorAll(".check-box"));
+  var TOTAL = ALL.length; /* single source of truth: the live checkbox count */
+
+  /* keep the displayed denominators in sync with the live count */
+  var dt = document.getElementById("check-total");
+  if (dt) { dt.textContent = TOTAL; }
+
+  function bandFor(n) {
+    if (n >= 10) {
+      return "The basics are covered. Re-run this checklist every 6 months — tenants drift as people join, leave, and change roles.";
+    }
+    if (n >= 6) {
+      return "Some gaps worth closing. Start at the top of the list and work down — the sign-in items carry the most weight.";
+    }
+    if (n >= 1) {
+      return "Start with items 1–3 (sign-in protection). They're the highest-leverage basics Microsoft lists first.";
+    }
+    return "Tick the boxes above — your result appears here.";
+  }
+
+  function update() {
+    var n = ALL.filter(function (b) { return b.checked; }).length;
+    document.getElementById("check-count").textContent = n;
+    document.getElementById("out-score").textContent = n + " of " + TOTAL;
+    document.getElementById("out-band").textContent = bandFor(n);
+    var fill = document.getElementById("progress-fill");
+    if (fill) {
+      fill.style.width = Math.round((n / TOTAL) * 100) + "%";
+    }
+  }
+
+  ALL.forEach(function (b) {
+    b.addEventListener("change", update);
+  });
+
+  var reset = document.getElementById("btn-reset");
+  if (reset) {
+    reset.addEventListener("click", function () {
+      ALL.forEach(function (b) { b.checked = false; });
+      update();
+    });
+  }
+
+  update();
+})();
+</script>
+</body>
+</html>

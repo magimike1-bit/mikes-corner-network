@@ -282,3 +282,18 @@ section[id]{scroll-margin-top:92px}
     repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 56px);
 }
 .hero .wrap{position:relative;z-index:1}
+
+/* ---------- interactive checklist ---------- */
+.checklist-h{color:var(--navy)}
+.checklist-progress{margin:24px 0 8px}
+.progress-bar{height:10px;border-radius:6px;background:#e8edf5;overflow:hidden}
+.progress-fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--amber),#f7c948);transition:width .25s ease}
+.progress-text{margin:8px 0 0;font-size:.9rem;color:#5a6b87}
+.checklist-group{margin:28px 0}
+.check-item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;margin:0 0 12px;background:#fff;border:1px solid #e2e8f2;border-radius:12px;cursor:pointer;transition:border-color .15s ease,box-shadow .15s ease}
+.check-item:hover{border-color:var(--amber);box-shadow:0 4px 14px rgba(14,31,56,.08)}
+.check-box{width:22px;height:22px;margin-top:2px;flex:none;accent-color:var(--navy);cursor:pointer}
+.check-body{display:block}
+.check-body strong{display:block;font-size:1.02rem;color:var(--navy);margin-bottom:4px}
+.check-where{display:block;font-size:.9rem;color:#5a6b87;line-height:1.5}
+.checklist-actions{margin:20px 0 40px}

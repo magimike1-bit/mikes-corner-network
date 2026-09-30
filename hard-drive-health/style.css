@@ -286,3 +286,9 @@ main { padding: 22px 0 48px; }
 }
 
 .site-footer .ai-disclosure{font-size:.85em;opacity:.85}
+
+/* Article visuals (NET-ARTICLE-IMAGES phase 1, 2026-09-30) */
+.hero-image { width: 100%; max-height: 220px; height: 220px; object-fit: cover; border-radius: 12px; margin: 16px 0 8px; display: block; }
+.card > img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; display: block; }
+.post .post-image { width: 100%; border-radius: 10px; margin: 8px 0 24px; display: block; }
+@media (max-width: 640px) { .hero-image { height: 150px; max-height: 150px; } }

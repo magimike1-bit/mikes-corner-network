@@ -60,6 +60,57 @@
 .hidden{display:none!important}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.drop:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 @media(max-width:640px){.upload-grid{grid-template-columns:1fr}}
+
+/* ===== Design refresh 2026-09-30 (design-reviewer): flipping energy, trustworthy ===== */
+html{scroll-behavior:smooth}
+#tool-app{scroll-margin-top:84px}
+.tool-step{margin:2.6em 0}
+.tool-step>h2{position:relative;padding-left:14px;font-size:1.35rem;letter-spacing:-.01em}
+.tool-step>h2::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:4px;border-radius:2px;background:linear-gradient(180deg,var(--accent),var(--profit))}
+/* Hero */
+.hero{background:linear-gradient(135deg,#0c63bd 0%,#084a8c 60%,#06325f 100%);border-radius:18px;color:#fff;padding:48px 40px;margin:1.4em 0 0;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,.32),rgba(251,191,36,0) 70%);pointer-events:none}
+.hero .eyebrow{display:inline-block;font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fde68a;background:rgba(0,0,0,.28);border:1px solid rgba(253,230,138,.55);padding:6px 14px;border-radius:999px;margin:0 0 18px}
+.hero h1{font-size:clamp(2.1rem,5vw,3rem);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em;color:#fff;position:relative;z-index:1}
+.hero .hero-sub{font-size:1.06rem;line-height:1.65;color:#dbeafe;max-width:640px;margin:0 0 26px;position:relative;z-index:1}
+.hero .hero-sub strong{color:#fff}
+.btn-cta{display:inline-block;background:linear-gradient(180deg,#fcd34d,#f59e0b);color:#1a1a1a;font-weight:800;font-size:1.05rem;padding:14px 36px;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.28);transition:transform .15s ease,box-shadow .15s ease;position:relative;z-index:1}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.34);color:#1a1a1a}
+.hero .notice{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.28);border-left:4px solid #fbbf24;color:#e0e7ff;margin:26px 0 0;max-width:660px;position:relative;z-index:1}
+.hero .notice strong{color:#fff}
+/* Examples */
+.examples{background:var(--wash);border:1px solid var(--line);border-radius:18px;padding:44px 34px;margin:3em 0}
+.section-head{max-width:660px;margin:0 auto 32px;text-align:center}
+.section-head .eyebrow{display:inline-block;font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(11,92,173,.08);border:1px solid rgba(11,92,173,.3);padding:6px 14px;border-radius:999px;margin:0 0 12px}
+.section-head h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 10px;letter-spacing:-.01em}
+.section-head .hint{color:var(--muted);font-size:1rem;margin:0}
+.example-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+.example-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+.example-card:hover{transform:translateY(-5px);box-shadow:0 14px 32px rgba(11,92,173,.15)}
+.example-card>img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#e8eef5}
+.card-eyebrow{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--profit-deep);background:var(--profit-wash);padding:10px 18px;margin:0;border-bottom:1px solid var(--line)}
+.before-block{background:#f1f5f9;padding:14px 18px}
+.block-label{font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.before-title{font-weight:700;color:#64748b;margin:0 0 4px}
+.before-desc{color:#94a3b8;margin:0;font-size:.92rem}
+.example-arrow{display:flex;justify-content:center;padding:10px 0;background:#fff}
+.example-arrow span{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--profit);color:#fff;font-size:1.05rem;font-weight:800;box-shadow:0 3px 8px rgba(217,119,6,.4)}
+.after-block{background:#f0f7ff;border-top:3px solid var(--accent);padding:16px 18px 20px;flex:1}
+.after-block .block-label{color:var(--accent)}
+.after-title{font-size:1.05rem;font-weight:800;margin:0 0 8px;line-height:1.35}
+.after-desc{font-size:.93rem;line-height:1.6;color:#334155;margin:0 0 14px}
+.est-pill{display:inline-block;background:var(--profit-wash);border:1.5px solid var(--profit);color:var(--profit-deep);font-weight:800;font-size:.78rem;letter-spacing:.03em;padding:7px 14px;border-radius:999px}
+/* Estimate explainer callout */
+.callout{background:var(--profit-wash);border:1px solid #fde68a;border-left:5px solid var(--profit);border-radius:12px;padding:22px 26px}
+.callout h2{margin-top:0;padding-left:0}
+.callout h2::before{display:none}
+.btn:hover:not(:disabled):not(.secondary){background:#094e93}
+.btn.secondary:hover{background:#e3eefb}
+@media(max-width:640px){
+  .hero{padding:36px 24px}
+  .examples{padding:32px 18px}
+  .tool-step{margin:2em 0}
+}
 </style>
 </head>
 <body>
@@ -78,9 +129,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.d
 <div class="tool-wrap">
   <p class="crumbs" style="font-size:.85rem;color:var(--muted);padding:16px 0 0"><a href="index.html" style="color:var(--accent);text-decoration:none">Home</a> <span aria-hidden="true">&rsaquo;</span> <span aria-current="page">Listing AI tool</span></p>
 
-  <section class="tool-step">
-    <h1 style="font-size:1.9rem;margin:.4em 0 .4em">Listing AI: photo &rarr; listing draft</h1>
-    <p class="hint">Upload one photo of your item and get an AI-written listing title, a plain-facts description, and a price <strong>estimate</strong> range with links to check real sold comps — tuned for Facebook Marketplace, Craigslist, and Kijiji sellers. Free, no account.</p>
+  <section class="hero">
+    <p class="eyebrow">Free AI tool for resellers</p>
+    <h1>Listing AI: photo &rarr; listing draft</h1>
+    <p class="hero-sub">Upload one photo of your item and get an AI-written listing title, a plain-facts description, and a price <strong>estimate</strong> range with links to check real sold comps — tuned for Facebook Marketplace, Craigslist, and Kijiji sellers. Free, no account.</p>
+    <a class="btn-cta" href="#tool-app">Draft my listing</a>
     <div class="notice" id="privacy-notice"><strong>Your photo stays yours.</strong><span id="privacy-notice-text">Your photo is processed in memory to generate this draft and is never stored.</span></div>
   </section>
 
@@ -88,6 +141,64 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.d
     <div class="state-box">
       <h2>Almost ready</h2>
       <p>The AI generation behind this tool isn't connected yet — we're finishing the setup. The tool will go live here as soon as it's wired up. Nothing is broken; check back soon.</p>
+    </div>
+  </section>
+
+  <section class="tool-step examples" id="examples">
+    <div class="section-head">
+      <p class="eyebrow">See it in action</p>
+      <h2>From a lazy two-word listing to a buyer-ready draft</h2>
+      <p class="hint">Illustrative example outputs — what a finished draft looks like before you upload your own photo.</p>
+    </div>
+    <div class="example-grid">
+      <article class="example-card">
+        <p class="card-eyebrow">Toys &amp; Games</p>
+        <img src="images/examples/anki-overdrive.jpg" alt="Anki OVERDRIVE: Fast &amp; Furious Edition starter set" loading="lazy">
+        <div class="before-block">
+          <p class="block-label">Before — what most sellers type</p>
+          <p class="before-title">anki overdrive</p>
+          <p class="before-desc">works good</p>
+        </div>
+        <div class="example-arrow" aria-hidden="true"><span>&darr;</span></div>
+        <div class="after-block">
+          <p class="block-label">After — the AI draft</p>
+          <p class="after-title">Anki OVERDRIVE: Fast &amp; Furious Edition starter set</p>
+          <p class="after-desc">Anki OVERDRIVE: Fast &amp; Furious Edition battle-racing set. App-controlled robotic supercars race on a snap-together track. Includes 2 cars; box and contents as shown.</p>
+          <span class="est-pill">ESTIMATE $35–55 CAD (example)</span>
+        </div>
+      </article>
+      <article class="example-card">
+        <p class="card-eyebrow">Jewelry &amp; Gemstones</p>
+        <img src="images/examples/zambian-emerald.jpg" alt="Natural Zambian emerald, pear cut, 10.30 ct" loading="lazy">
+        <div class="before-block">
+          <p class="block-label">Before — what most sellers type</p>
+          <p class="before-title">emerald</p>
+          <p class="before-desc">green stone 10 carat</p>
+        </div>
+        <div class="example-arrow" aria-hidden="true"><span>&darr;</span></div>
+        <div class="after-block">
+          <p class="block-label">After — the AI draft</p>
+          <p class="after-title">Natural Zambian emerald, pear cut, 10.30 ct</p>
+          <p class="after-desc">Natural Zambian emerald, pear cut, 10.30 ct as marked on the card. Deep green with natural inclusions visible in the photo. Sold loose, as shown.</p>
+          <span class="est-pill">ESTIMATE $180–260 CAD (example)</span>
+        </div>
+      </article>
+      <article class="example-card">
+        <p class="card-eyebrow">Sports &amp; Outdoors</p>
+        <img src="images/examples/crossnet.jpg" alt="CROSSNET H2O four-way volleyball net" loading="lazy">
+        <div class="before-block">
+          <p class="block-label">Before — what most sellers type</p>
+          <p class="before-title">volleyball net</p>
+          <p class="before-desc">crossnet</p>
+        </div>
+        <div class="example-arrow" aria-hidden="true"><span>&darr;</span></div>
+        <div class="after-block">
+          <p class="block-label">After — the AI draft</p>
+          <p class="after-title">CROSSNET H2O four-way volleyball net</p>
+          <p class="after-desc">CROSSNET H2O four-square volleyball net for pool setup. Box states setup within 5 minutes. Contents as shown on the box.</p>
+          <span class="est-pill">ESTIMATE $45–70 CAD (example)</span>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -152,7 +263,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.d
     </div>
   </section>
 
-  <section class="tool-step">
+  <section class="tool-step callout">
     <h2>How the price estimate works</h2>
     <p class="hint">The price shown is always a labeled <strong>estimate range</strong> — never a promise of what your item will sell for. It's a starting point based on the item the AI identifies. Before you list, open the sold-comps links in your result and check what identical items actually sold for recently. Condition, brand, included accessories, and local demand move real prices more than any estimate can.</p>
   </section>

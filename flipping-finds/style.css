@@ -3,6 +3,9 @@
   --ink: #1a1a1a;
   --muted: #5c5c5c;
   --accent: #0b5cad;
+  --profit: #d97706;
+  --profit-deep: #92400e;
+  --profit-wash: #fffbeb;
   --bg: #ffffff;
   --wash: #f4f7fa;
   --line: #e2e8f0;
@@ -20,6 +23,9 @@ body {
   background: var(--wash);
   border-bottom: 1px solid var(--line);
   padding: 28px 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 .brand {
   font-size: 1.6rem;

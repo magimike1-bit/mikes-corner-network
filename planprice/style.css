@@ -365,6 +365,15 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
   content: "✕ ";
 }
 
+/* ---- Review scores (PP-REVIEW-SCORES) ---- */
+.score-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.score-list li {
+  margin: 0.28rem 0;
+}
+
 /* ---- Canadian vendor badge (PP-CANADIAN-VENDORS) ---- */
 .badge.canadian {
   background: #eef6f1;

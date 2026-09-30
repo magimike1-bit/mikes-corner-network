@@ -1,5 +1,11 @@
 // tools/snapshot.mjs — PlanPrice monthly price-sweep snapshot.
 //
+// MONTHLY REVIEW-SCORE RE-CHECK (PP-REVIEW-SCORES): during each monthly
+// verification sweep, re-verify every score in data/review-scores.json
+// against its source URL (G2/Capterra product page); update score, reviews
+// count, and the top-level checked date; drop any source that can no longer
+// be verified (honest gap, never a guess); then regenerate the site.
+//
 // Usage: node tools/snapshot.mjs [YYYY-MM-DD]   (defaults to today)
 //
 // Reads data/products.json and writes data/sweeps/YYYY-MM.json: one record

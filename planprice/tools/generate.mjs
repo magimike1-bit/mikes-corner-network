@@ -13,6 +13,12 @@ const CHECKED = "2026-09-30";
 const data = JSON.parse(readFileSync(join(ROOT, "data", "products.json"), "utf8"));
 const products = data.products;
 
+/* ---- Third-party review scores (PP-REVIEW-SCORES) ----
+ * data/review-scores.json: {checked: "YYYY-MM-DD", scores: {<slug>: {g2?: {score, reviews, url}, capterra?: {...}}}}.
+ * A source object exists only when it was verified on a source page; a missing
+ * product or missing source renders nothing (honest gap, never a guess). */
+const reviewScores = JSON.parse(readFileSync(join(ROOT, "data", "review-scores.json"), "utf8"));
+
 /* ---- Affiliate state (PP-AFFILIATE-CLARITY) ----
  * affiliateLive(p) is true only when a product's affiliate status is "live".
  * Until programs are approved every product is "pending-approval", and the
@@ -123,6 +129,38 @@ function reviewsSection(p) {
       ${strengths.length ? `<h3>Commonly praised</h3>\n      <ul class="review-list pros">\n${list(strengths)}\n      </ul>` : ""}
       ${weaknesses.length ? `<h3>Commonly criticized</h3>\n      <ul class="review-list cons">\n${list(weaknesses)}\n      </ul>` : ""}
       <p class="fine">Summarized from user reviews on G2 and Capterra; not a PlanPrice rating.</p>
+    </section>`;
+}
+
+/* ---- Review scores (PP-REVIEW-SCORES) ----
+ * Per-product third-party aggregate ratings in data/review-scores.json.
+ * Rendered as a "Review scores" section on deal pages only when the product
+ * has at least one verified source. Each source line shows the score, the
+ * review count (when known), and links to the source's review page.
+ * Kept off the compare table and directory rows (stays scannable), like
+ * reviewsSection. Everything from the data file goes through esc(). */
+function scoreSection(p) {
+  const entry = reviewScores.scores[p.slug];
+  if (!entry) return "";
+  const sources = [
+    ["G2", entry.g2],
+    ["Capterra", entry.capterra],
+  ].filter(([, s]) => s && typeof s.score === "number" && typeof s.url === "string");
+  if (!sources.length) return "";
+  const reviewsText = (n) =>
+    typeof n === "number" ? ` (${n.toLocaleString("en-US")} reviews)` : "";
+  const lis = sources
+    .map(
+      ([label, s]) =>
+        `      <li><a href="${esc(s.url)}" rel="noopener">${esc(label)}</a>: <strong>${esc(String(s.score))}/5</strong>${esc(reviewsText(s.reviews))}</li>`
+    )
+    .join("\n");
+  return `<section class="section scores">
+      <h2>Review scores</h2>
+      <ul class="score-list">
+${lis}
+      </ul>
+      <p class="fine">Scores are aggregate user ratings from third-party review sites, checked ${esc(reviewScores.checked)}. They are not PlanPrice ratings.</p>
     </section>`;
 }
 
@@ -530,6 +568,7 @@ ${header("/")}
       </section>
       ${pricingTable(p)}
       ${reviewsSection(p)}
+      ${scoreSection(p)}
       ${verificationBox(p)}
       ${claimBlock(p)}
       <section class="section cta-block">
@@ -619,6 +658,7 @@ function aboutBody() {
   return `<section class="section"><div class="wrap">
       <p>PlanPrice is a deals directory for business software. We track list prices and current promotions for the tools small businesses actually buy — accounting, CRM, ecommerce, point of sale, scheduling, and more.</p>
       <p><strong>Our standard:</strong> every discount headline on this site links to the vendor's own page. If we couldn't find a public promotion, the page says so plainly instead of dressing up standard list prices as a deal.</p>
+      <p><strong>Review scores:</strong> deal pages show aggregate user ratings from third-party review sites (G2 and Capterra) — these are not PlanPrice's own ratings. We re-check every score during the monthly verification sweep; each score shows its source and the date it was last checked.</p>
       <p>Prices are checked by the PlanPrice research team and dated. Vendors change prices and promotions without notice, so always confirm on the vendor's pricing page before purchasing.</p>
       ${funding}
     </div></section>`;

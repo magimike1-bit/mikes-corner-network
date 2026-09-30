@@ -1,0 +1,113 @@
+{
+  "check_date": "2026-09-30",
+  "products": [
+    {
+      "slug": "hubspot",
+      "name": "HubSpot",
+      "category": "CRM & Marketing",
+      "priceText": "From $0 free",
+      "priceSort": 0,
+      "dealHeadline": null,
+      "url": "/deals/hubspot.html"
+    },
+    {
+      "slug": "freshbooks",
+      "name": "FreshBooks",
+      "category": "Accounting",
+      "priceText": "From C$26 per month",
+      "priceSort": 26,
+      "dealHeadline": "$1/month for your first year (Solopreneur offer)",
+      "url": "/deals/freshbooks.html"
+    },
+    {
+      "slug": "monday",
+      "name": "Monday.com",
+      "category": "Work Management",
+      "priceText": "From $0 free",
+      "priceSort": 0,
+      "dealHeadline": null,
+      "url": "/deals/monday.html"
+    },
+    {
+      "slug": "semrush",
+      "name": "Semrush",
+      "category": "SEO & Marketing",
+      "priceText": "From $139.95 per month",
+      "priceSort": 139.95,
+      "dealHeadline": null,
+      "url": "/deals/semrush.html"
+    },
+    {
+      "slug": "shopify",
+      "name": "Shopify",
+      "category": "Ecommerce",
+      "priceText": "From $5 per month",
+      "priceSort": 5,
+      "dealHeadline": null,
+      "url": "/deals/shopify.html"
+    },
+    {
+      "slug": "wave",
+      "name": "Wave",
+      "category": "Accounting",
+      "priceText": "From $0 free",
+      "priceSort": 0,
+      "dealHeadline": null,
+      "url": "/deals/wave.html"
+    },
+    {
+      "slug": "quickbooks",
+      "name": "QuickBooks Online",
+      "category": "Accounting",
+      "priceText": "From C$30 per month",
+      "priceSort": 30,
+      "dealHeadline": "90% off for 6 months for new subscribers (as low as C$3/month on EasyStart)",
+      "url": "/deals/quickbooks.html"
+    },
+    {
+      "slug": "xero",
+      "name": "Xero",
+      "category": "Accounting",
+      "priceText": "From $25 per month",
+      "priceSort": 25,
+      "dealHeadline": null,
+      "url": "/deals/xero.html"
+    },
+    {
+      "slug": "square",
+      "name": "Square",
+      "category": "Payments & POS",
+      "priceText": "From $0 free",
+      "priceSort": 0,
+      "dealHeadline": null,
+      "url": "/deals/square.html"
+    },
+    {
+      "slug": "calendly",
+      "name": "Calendly",
+      "category": "Scheduling",
+      "priceText": "From $0 free",
+      "priceSort": 0,
+      "dealHeadline": null,
+      "url": "/deals/calendly.html"
+    },
+    {
+      "slug": "jobber",
+      "name": "Jobber",
+      "category": "Field Service",
+      "priceText": "From C$49 per month",
+      "priceSort": 49,
+      "dealHeadline": null,
+      "url": "/deals/jobber.html"
+    },
+    {
+      "slug": "humi",
+      "name": "Humi",
+      "category": "HR & Payroll",
+      "priceText": "Custom",
+      "priceSort": null,
+      "dealHeadline": null,
+      "url": "/deals/humi.html"
+    }
+  ]
+}

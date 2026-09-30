@@ -10,9 +10,10 @@
 <link rel="icon" type="image/png" href="/favicon.png">
 <!-- AdSense: ad code goes here -->
 <meta name='impact-site-verification' value='d3933dd0-8d52-4dd7-b099-5f505aec37fa'>
+<script src="/filter.js" defer></script>
 </head>
 <body>
-<div class="disclosure-bar">PlanPrice may earn a commission if you buy through links on this page. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
@@ -51,12 +52,41 @@
   </div>
 </section>
   <section class="section directory">
+    <div class="wrap">
+    <form class="filter-ui" id="deal-filter" hidden aria-label="Filter and sort deals">
+      <div class="filter-controls">
+        <label class="filter-field">Category
+          <select id="f-category" name="category">
+          <option value="all">All categories</option>
+          <option value="Accounting">Accounting</option>
+          <option value="CRM &amp; Marketing">CRM &amp; Marketing</option>
+          <option value="Ecommerce">Ecommerce</option>
+          <option value="Field Service">Field Service</option>
+          <option value="HR &amp; Payroll">HR &amp; Payroll</option>
+          <option value="Payments &amp; POS">Payments &amp; POS</option>
+          <option value="SEO &amp; Marketing">SEO &amp; Marketing</option>
+          <option value="Scheduling">Scheduling</option>
+          <option value="Work Management">Work Management</option>
+          </select>
+        </label>
+        <label class="filter-check"><input type="checkbox" id="f-deals" name="deals-only"> Deals only</label>
+        <label class="filter-field">Sort by
+          <select id="f-sort" name="sort">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="name-asc">Name A–Z</option>
+          </select>
+        </label>
+      </div>
+      <p class="filter-count" id="f-count" aria-live="polite"></p>
+    </form>
+  </div>
     <div class="wrap" id="all-deals">
     <h2 class="section-title">Browse all deals</h2>
     <p class="section-sub">12 products, grouped by category. Every deal claim links to the vendor's own page.</p>
-    <section class="dir-cat" aria-label="Accounting">
+    <section class="dir-cat" id="cat-accounting" aria-label="Accounting">
     <h2 class="dir-cat-title">Accounting</h2>
-    <ul class="dir-rows"><li class="dir-row has-deal">
+    <ul class="dir-rows"><li class="dir-row has-deal" data-slug="freshbooks">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/freshbooks.html">FreshBooks</a></h3>
       <p class="dir-row-tag">Simple invoicing and accounting built for Canadian freelancers and small teams.</p>
@@ -67,7 +97,7 @@
       <p class="dir-row-badge"><span class="badge deal">$1/month for your first year</span> <span class="verified-pill">✓ Verified 2026-09-30</span></p>
     </div>
   </li>
-<li class="dir-row">
+<li class="dir-row" data-slug="wave">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/wave.html">Wave</a></h3>
       <p class="dir-row-tag">Free accounting and invoicing for Canadian small businesses.</p>
@@ -78,7 +108,7 @@
       <p class="dir-row-badge"><span class="badge none">No current promo</span> <span class="verified-pill">✓ Verified 2026-09-30</span></p>
     </div>
   </li>
-<li class="dir-row has-deal">
+<li class="dir-row has-deal" data-slug="quickbooks">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/quickbooks.html">QuickBooks Online</a></h3>
       <p class="dir-row-tag">The accounting suite most Canadian accountants already know.</p>
@@ -89,7 +119,7 @@
       <p class="dir-row-badge"><span class="badge deal">90% off for 6 months for new subscribers</span> <span class="verified-pill">✓ Verified 2026-09-30</span></p>
     </div>
   </li>
-<li class="dir-row">
+<li class="dir-row" data-slug="xero">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/xero.html">Xero</a></h3>
       <p class="dir-row-tag">Cloud accounting with unlimited users on every plan.</p>
@@ -101,9 +131,9 @@
     </div>
   </li></ul>
   </section>
-<section class="dir-cat" aria-label="CRM &amp; Marketing">
+<section class="dir-cat" id="cat-crm-marketing" aria-label="CRM &amp; Marketing">
     <h2 class="dir-cat-title">CRM &amp; Marketing</h2>
-    <ul class="dir-rows"><li class="dir-row">
+    <ul class="dir-rows"><li class="dir-row" data-slug="hubspot">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/hubspot.html">HubSpot</a></h3>
       <p class="dir-row-tag">Free-first CRM that grows into full sales and marketing suites.</p>
@@ -115,9 +145,9 @@
     </div>
   </li></ul>
   </section>
-<section class="dir-cat" aria-label="Ecommerce">
+<section class="dir-cat" id="cat-ecommerce" aria-label="Ecommerce">
     <h2 class="dir-cat-title">Ecommerce</h2>
-    <ul class="dir-rows"><li class="dir-row">
+    <ul class="dir-rows"><li class="dir-row" data-slug="shopify">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/shopify.html">Shopify</a></h3>
       <p class="dir-row-tag">The default storefront platform for selling online.</p>
@@ -129,9 +159,9 @@
     </div>
   </li></ul>
   </section>
-<section class="dir-cat" aria-label="Field Service">
+<section class="dir-cat" id="cat-field-service" aria-label="Field Service">
     <h2 class="dir-cat-title">Field Service</h2>
-    <ul class="dir-rows"><li class="dir-row">
+    <ul class="dir-rows"><li class="dir-row" data-slug="jobber">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/jobber.html">Jobber</a></h3>
       <p class="dir-row-tag">Job management for home-service businesses, priced in CAD.</p>
@@ -143,9 +173,9 @@
     </div>
   </li></ul>
   </section>
-<section class="dir-cat" aria-label="HR &amp; Payroll">
+<section class="dir-cat" id="cat-hr-payroll" aria-label="HR &amp; Payroll">
     <h2 class="dir-cat-title">HR &amp; Payroll</h2>
-    <ul class="dir-rows"><li class="dir-row">
+    <ul class="dir-rows"><li class="dir-row" data-slug="humi">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/humi.html">Humi</a></h3>
       <p class="dir-row-tag">Canadian HR and payroll from the company now known as Employment Hero.</p>
@@ -157,9 +187,9 @@
     </div>
   </li></ul>
   </section>
-<section class="dir-cat" aria-label="Payments &amp; POS">
+<section class="dir-cat" id="cat-payments-pos" aria-label="Payments &amp; POS">
     <h2 class="dir-cat-title">Payments &amp; POS</h2>
-    <ul class="dir-rows"><li class="dir-row">
+    <ul class="dir-rows"><li class="dir-row" data-slug="square">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/square.html">Square</a></h3>
       <p class="dir-row-tag">Free point-of-sale software; you pay when you take payments.</p>
@@ -171,9 +201,9 @@
     </div>
   </li></ul>
   </section>
-<section class="dir-cat" aria-label="SEO &amp; Marketing">
+<section class="dir-cat" id="cat-seo-marketing" aria-label="SEO &amp; Marketing">
     <h2 class="dir-cat-title">SEO &amp; Marketing</h2>
-    <ul class="dir-rows"><li class="dir-row">
+    <ul class="dir-rows"><li class="dir-row" data-slug="semrush">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/semrush.html">Semrush</a></h3>
       <p class="dir-row-tag">The heavy-duty SEO and competitive research toolkit.</p>
@@ -185,9 +215,9 @@
     </div>
   </li></ul>
   </section>
-<section class="dir-cat" aria-label="Scheduling">
+<section class="dir-cat" id="cat-scheduling" aria-label="Scheduling">
     <h2 class="dir-cat-title">Scheduling</h2>
-    <ul class="dir-rows"><li class="dir-row">
+    <ul class="dir-rows"><li class="dir-row" data-slug="calendly">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/calendly.html">Calendly</a></h3>
       <p class="dir-row-tag">Booking pages that kill the back-and-forth email.</p>
@@ -199,9 +229,9 @@
     </div>
   </li></ul>
   </section>
-<section class="dir-cat" aria-label="Work Management">
+<section class="dir-cat" id="cat-work-management" aria-label="Work Management">
     <h2 class="dir-cat-title">Work Management</h2>
-    <ul class="dir-rows"><li class="dir-row">
+    <ul class="dir-rows"><li class="dir-row" data-slug="monday">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/monday.html">Monday.com</a></h3>
       <p class="dir-row-tag">Visual project boards and workflows for teams of any size.</p>
@@ -332,7 +362,7 @@
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
     </nav>
-    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice may earn a commission on qualifying purchases.</p>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
   </div>
 </footer>
 </body>

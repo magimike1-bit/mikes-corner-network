@@ -1,8 +1,9 @@
 // PlanPrice static site generator — reads data/products.json, renders the whole site.
 // Idempotent: output depends only on data + SITE_HOST. No timestamps in output.
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { startPriceNumeric, startPriceText } from "./price-parse.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HOST = process.env.SITE_HOST || "staging.planprice.local";
@@ -11,6 +12,71 @@ const CHECKED = "2026-09-30";
 
 const data = JSON.parse(readFileSync(join(ROOT, "data", "products.json"), "utf8"));
 const products = data.products;
+
+/* ---- Affiliate state (PP-AFFILIATE-CLARITY) ----
+ * affiliateLive(p) is true only when a product's affiliate status is "live".
+ * Until programs are approved every product is "pending-approval", and the
+ * site renders the INTERIM disclosure wording: no affiliate links exist yet,
+ * deal-page CTAs are inert placeholders, and no commissions are being earned.
+ * The moment a product flips to "live", its deal page gets the blunt live
+ * disclosure plus a real affiliate link. */
+const affiliateLive = (p) => !!(p.affiliate && p.affiliate.status === "live");
+const anyAffiliateLive = products.some(affiliateLive);
+
+const AFFILIATE_BLUNT =
+  "The product links on PlanPrice are affiliate links: if you buy through them, we may earn a commission at no extra cost to you.";
+const AFFILIATE_INTERIM =
+  "PlanPrice is funded by affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors — when affiliate links go live, this page will say so, and buying through them will never cost you extra.";
+
+/* ---- Freshness flags (PP-PRICE-DROP-FLAGS) ----
+ * Diff current prices/deals against the most recent monthly sweep snapshot
+ * strictly BEFORE the current CHECKED month. The first-ever snapshot is the
+ * baseline: with no prior sweep there is nothing to diff, so no flags
+ * render — an honest "no flags" beats invented ones. */
+function loadPriorSweep() {
+  const dir = join(ROOT, "data", "sweeps");
+  if (!existsSync(dir)) return null;
+  const curMonth = CHECKED.slice(0, 7); // "2026-09"
+  const files = readdirSync(dir)
+    .filter((f) => /^\d{4}-\d{2}\.json$/.test(f) && f.slice(0, 7) < curMonth)
+    .sort();
+  if (!files.length) return null;
+  return JSON.parse(readFileSync(join(dir, files[files.length - 1]), "utf8"));
+}
+
+const priorSweep = loadPriorSweep();
+const priceFlags = {}; // slug -> array of "price-drop" | "new-deal"
+if (!priorSweep) {
+  console.log(
+    `Price-drop flags: no sweep snapshot before ${CHECKED.slice(0, 7)} — no flags rendered (first snapshot is the baseline).`
+  );
+} else {
+  const prev = new Map(priorSweep.products.map((s) => [s.slug, s]));
+  let flagged = 0;
+  for (const p of products) {
+    const s = prev.get(p.slug);
+    if (!s) continue;
+    const f = [];
+    const curNum = startPriceNumeric(p);
+    if (
+      typeof curNum === "number" &&
+      typeof s.start_price_numeric === "number" &&
+      curNum < s.start_price_numeric
+    )
+      f.push("price-drop");
+    const curDeal = p.deal ? p.deal.headline : null;
+    if (
+      (s.deal_headline == null && curDeal != null) ||
+      (s.deal_headline != null && curDeal != null && s.deal_headline !== curDeal)
+    )
+      f.push("new-deal");
+    if (f.length) {
+      priceFlags[p.slug] = f;
+      flagged++;
+    }
+  }
+  console.log(`Price-drop flags: ${flagged} product(s) flagged against ${priorSweep.sweep_month} sweep.`);
+}
 
 // Optional display fields (defaults per brief §5); all other fields are
 // read exactly as stored in products.json — never invented.
@@ -95,9 +161,23 @@ function spotlightBlock(p) {
 </section>`;
 }
 
+/* Price/freshness flag badges (PP-PRICE-DROP-FLAGS). Rendered only when the
+ * sweep diff actually produced a flag for the slug — never invented. */
+function flagBadges(p) {
+  const flags = priceFlags[p.slug] || [];
+  return flags
+    .map((f) =>
+      f === "price-drop"
+        ? `<span class="badge flag">Price dropped since last check</span>`
+        : `<span class="badge flag">New deal</span>`
+    )
+    .join(" ");
+}
+
 function dirRow(p) {
   const live = p.deal && !isExpiredDeal(p);
-  return `<li class="dir-row${live ? " has-deal" : ""}">
+  const flags = flagBadges(p);
+  return `<li class="dir-row${live ? " has-deal" : ""}" data-slug="${esc(p.slug)}">
     <div class="dir-row-main">
       <h3 class="dir-row-name"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></h3>
       <p class="dir-row-tag">${esc(p.tagline)}</p>
@@ -105,9 +185,50 @@ function dirRow(p) {
     </div>
     <div class="dir-row-side">
       <p class="dir-row-price">${fromPrice(p)}</p>
-      <p class="dir-row-badge">${dealBadge(p)} <span class="verified-pill">✓ Verified ${esc(p.last_verified)}</span></p>
+      <p class="dir-row-badge">${dealBadge(p)}${flags ? " " + flags : ""} <span class="verified-pill">✓ Verified ${esc(p.last_verified)}</span></p>
     </div>
   </li>`;
+}
+
+function slugify(s) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+/* ---- Deal filter UI (PP-DEAL-FILTER) ----
+ * Progressive enhancement only: the form ships with `hidden` so no-JS
+ * visitors (and crawlers) see the full static list untouched. filter.js
+ * fetches /data/deals-index.json, reveals the form, and shows/hides/reorders
+ * rows — it never adds deal content. All deal content stays in the static
+ * HTML for SEO; the JSON index just makes rows addressable by slug.
+ *
+ * The filter.js facets are declarative: to add a new facet (e.g. a
+ * "Canadian only" toggle), add the control's markup below and one entry in
+ * its FACETS array — the UI structure doesn't need rebuilding. */
+function filterBlock() {
+  const cats = [...new Set(products.map((p) => p.category))].sort();
+  const opts = [`<option value="all">All categories</option>`]
+    .concat(cats.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`))
+    .join("\n          ");
+  return `<div class="wrap">
+    <form class="filter-ui" id="deal-filter" hidden aria-label="Filter and sort deals">
+      <div class="filter-controls">
+        <label class="filter-field">Category
+          <select id="f-category" name="category">
+          ${opts}
+          </select>
+        </label>
+        <label class="filter-check"><input type="checkbox" id="f-deals" name="deals-only"> Deals only</label>
+        <label class="filter-field">Sort by
+          <select id="f-sort" name="sort">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="name-asc">Name A–Z</option>
+          </select>
+        </label>
+      </div>
+      <p class="filter-count" id="f-count" aria-live="polite"></p>
+    </form>
+  </div>`;
 }
 
 function directorySections() {
@@ -119,7 +240,7 @@ function directorySections() {
         .filter(({ p }) => p.category === c)
         .sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
       const rows = items.map(({ p }) => dirRow(p)).join("\n");
-      return `<section class="dir-cat" aria-label="${esc(c)}">
+      return `<section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
     <h2 class="dir-cat-title">${esc(c)}</h2>
     <ul class="dir-rows">${rows}</ul>
   </section>`;
@@ -195,7 +316,7 @@ function indexPage() {
     "PlanPrice — Verified B2B Software Deals & Pricing",
     "PlanPrice tracks verified list prices and current promotions for 12 essential B2B software products — accounting, CRM, ecommerce, POS, and more. Every deal is checked against the vendor's own site.",
     "/",
-    "\n" + IMPACT_TAG
+    "\n" + IMPACT_TAG + '\n<script src="/filter.js" defer></script>'
   )}
 ${header("/")}
 <section class="hero">
@@ -209,6 +330,7 @@ ${trustStrip()}
 <main>
   ${spotlightBlock(spotlightProduct())}
   <section class="section directory">
+    ${filterBlock()}
     ${directorySections()}
   </section>
   ${compareTable()}
@@ -226,12 +348,13 @@ function factsStrip(p) {
   const promo = p.deal && !isExpiredDeal(p)
     ? `<span class="badge deal">${esc(p.deal.headline)}</span>`
     : "No public promo — standard list prices";
+  const flags = flagBadges(p);
   const expiry = p.deal && p.deal.end_date
     ? `<div class="facts-item"><dt>Offer ends</dt><dd><time datetime="${esc(p.deal.end_date)}">${esc(p.deal.end_date)}</time></dd></div>`
     : "";
   return `<dl class="facts-strip">
     <div class="facts-item"><dt>Starting price</dt><dd>${fromPrice(p)}</dd></div>
-    <div class="facts-item"><dt>Current promo</dt><dd>${promo}</dd></div>
+    <div class="facts-item"><dt>Current promo</dt><dd>${promo}${flags ? " " + flags : ""}</dd></div>
     <div class="facts-item"><dt>Category</dt><dd>${esc(p.category)}</dd></div>
     <div class="facts-item"><dt>Verified</dt><dd><time datetime="${esc(p.last_verified)}">${esc(p.last_verified)}</time></dd></div>
     <div class="facts-item"><dt>Vendor</dt><dd><a href="${esc(p.vendor_homepage)}" rel="noopener">${vendorHost(p.vendor_homepage)}</a></dd></div>
@@ -294,6 +417,13 @@ function pricingTable(p) {
 }
 
 function cta(p) {
+  if (affiliateLive(p)) {
+    if (p.affiliate.url) {
+      return `<a href="${esc(p.affiliate.url)}" class="btn affiliate-cta" data-program="${esc(p.affiliate.program)}" rel="sponsored noopener">Check the current price</a>
+    <p class="fine">${AFFILIATE_BLUNT} See our <a href="/disclosure.html">affiliate disclosure</a>.</p>`;
+    }
+    console.warn(`WARN: ${p.slug} has a live affiliate status but no affiliate URL in data — rendering the placeholder CTA.`);
+  }
   return `<!-- AFFILIATE PLACEHOLDER: light when Joseph approves -->
     <a href="#" class="btn affiliate-cta" data-program="${esc(p.affiliate.program)}" data-status="pending-approval">Check the current price</a>
     <p class="fine">Affiliate link pending approval — this button is inert for now. See our <a href="/disclosure.html">affiliate disclosure</a>.</p>`;
@@ -339,6 +469,7 @@ ${header("/")}
         ${factsStrip(p)}
       </div>
       <section class="section overview">
+        ${p.similar_to ? `<p class="similar-to">Think of it as: <strong>${esc(p.similar_to)}</strong>.</p>` : ""}
         <p>${esc(p.description)}</p>
         <p><strong>Best for:</strong> ${esc(p.best_for)}</p>
       </section>
@@ -381,7 +512,11 @@ function header(active) {
   const nav = (href, label) =>
     `<a href="${href}"${active === href ? ' class="active"' : ""}>${label}</a>`;
   return `<body>
-<div class="disclosure-bar">PlanPrice may earn a commission if you buy through links on this page. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<div class="disclosure-bar">${
+  anyAffiliateLive
+    ? `PlanPrice may earn a commission if you buy through links on this page. <a href="/disclosure.html">Read our affiliate disclosure</a>.`
+    : `PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.`
+}</div>
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
@@ -404,7 +539,11 @@ function footer() {
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
     </nav>
-    <p class="fine">Prices verified ${CHECKED} by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice may earn a commission on qualifying purchases.</p>
+    <p class="fine">Prices verified ${CHECKED} by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. ${
+      anyAffiliateLive
+        ? "PlanPrice may earn a commission on qualifying purchases."
+        : "PlanPrice currently earns no affiliate commissions — partnerships are still being set up."
+    }</p>
   </div>
 </footer>
 </body>
@@ -412,35 +551,66 @@ function footer() {
 }
 
 // Static-page bodies are byte-identical to v1 (new CSS containers only).
+/* ---- Static-page bodies (PP-AFFILIATE-CLARITY) ----
+ * The funding paragraph on about.html and the disclosure.html body switch
+ * between the INTERIM wording (partnerships being set up, zero commissions
+ * being earned) and the LIVE wording (affiliate links exist) based on
+ * affiliate state, so rebuilds always keep the wording honest. */
+function aboutBody() {
+  const funding = anyAffiliateLive
+    ? `<p>PlanPrice is funded by affiliate commissions: when you buy through a link on this site, we may earn a commission at no extra cost to you. See our <a href="/disclosure.html">affiliate disclosure</a> for the full explanation.</p>`
+    : `<p>${AFFILIATE_INTERIM}</p>`;
+  return `<section class="section"><div class="wrap">
+      <p>PlanPrice is a deals directory for business software. We track list prices and current promotions for the tools small businesses actually buy — accounting, CRM, ecommerce, point of sale, scheduling, and more.</p>
+      <p><strong>Our standard:</strong> every discount headline on this site links to the vendor's own page. If we couldn't find a public promotion, the page says so plainly instead of dressing up standard list prices as a deal.</p>
+      <p>Prices are checked by the PlanPrice research team and dated. Vendors change prices and promotions without notice, so always confirm on the vendor's pricing page before purchasing.</p>
+      ${funding}
+    </div></section>`;
+}
+
+function disclosureBody() {
+  const status = anyAffiliateLive
+    ? `<p>PlanPrice is reader-supported. ${AFFILIATE_BLUNT}</p>`
+    : `<p><strong>Current status: no affiliate links are live yet.</strong> PlanPrice is reader-supported: our plan is to fund the site through affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors — no commissions are being earned. When affiliate links go live, this page will say so, and buying through them will never cost you extra.</p>`;
+  const statusBullet = anyAffiliateLive
+    ? `<li>We label affiliate links as affiliate links. If a link earns us a commission, the page says so.</li>`
+    : `<li>Right now, zero commissions are being earned. The buttons on deal pages are inert placeholders marked "Affiliate link pending approval", and outbound links go straight to the vendor.</li>`;
+  return `<section class="section"><div class="wrap">
+      ${status}
+      <p><strong>What this means in practice:</strong></p>
+      <ul>
+        ${statusBullet}
+        <li>Commissions never change the prices we list. The prices shown are the vendor's own list prices.</li>
+        <li>Commissions never create deals out of thin air. Every promotion we headline links to the vendor's own page, and pages with no public promotion say so explicitly.</li>
+        <li>Our verification standard (a live source link for every deal claim) applies whether or not we have an affiliate relationship with a vendor.</li>
+      </ul>
+      <p>As of our current check (${CHECKED}), ${
+        anyAffiliateLive
+          ? "affiliate partnerships are active and earning commissions."
+          : "affiliate partnerships are being established — buttons on deal pages are placeholders until programs are approved. No commissions are being earned yet."
+      }</p>
+      <p>If you have questions about how we make money: ${
+        anyAffiliateLive
+          ? "this page is the answer — affiliate commissions, fully disclosed, never at your expense."
+          : "the plan is affiliate commissions, fully disclosed, never at your expense. Until then, the site runs with no commission income at all."
+      }</p>
+    </div></section>`;
+}
+
 const STATIC_PAGES = {
   "about.html": {
     title: "About PlanPrice — PlanPrice",
     description: "What PlanPrice is: a B2B software deals directory where every price and promotion is verified against the vendor's own site.",
     path: "/about.html",
     h1: "About PlanPrice",
-    body: `<section class="section"><div class="wrap">
-      <p>PlanPrice is a deals directory for business software. We track list prices and current promotions for the tools small businesses actually buy — accounting, CRM, ecommerce, point of sale, scheduling, and more.</p>
-      <p><strong>Our standard:</strong> every discount headline on this site links to the vendor's own page. If we couldn't find a public promotion, the page says so plainly instead of dressing up standard list prices as a deal.</p>
-      <p>Prices are checked by the PlanPrice research team and dated. Vendors change prices and promotions without notice, so always confirm on the vendor's pricing page before purchasing.</p>
-      <p>PlanPrice is funded by affiliate commissions: when you buy through a link on this site, we may earn a commission at no extra cost to you. See our <a href="/disclosure.html">affiliate disclosure</a> for the full explanation.</p>
-    </div></section>`
+    body: aboutBody()
   },
   "disclosure.html": {
     title: "Affiliate Disclosure — PlanPrice",
     description: "PlanPrice's affiliate disclosure: how we earn money and what it means for our deal listings.",
     path: "/disclosure.html",
     h1: "Affiliate Disclosure",
-    body: `<section class="section"><div class="wrap">
-      <p>PlanPrice is reader-supported. When you buy through links on our site, we may earn an affiliate commission from the vendor — at no additional cost to you.</p>
-      <p><strong>What this means in practice:</strong></p>
-      <ul>
-        <li>Commissions never change the prices we list. The prices shown are the vendor's own list prices.</li>
-        <li>Commissions never create deals out of thin air. Every promotion we headline links to the vendor's own page, and pages with no public promotion say so explicitly.</li>
-        <li>Our verification standard (a live source link for every deal claim) applies whether or not we have an affiliate relationship with a vendor.</li>
-      </ul>
-      <p>As of our current check (${CHECKED}), affiliate partnerships are being established — buttons on deal pages are placeholders until programs are approved. No commissions are being earned yet.</p>
-      <p>If you have questions about how we make money, this page is the answer: affiliate commissions, fully disclosed, never at your expense.</p>
-    </div></section>`
+    body: disclosureBody()
   },
   "privacy-policy.html": {
     title: "Privacy Policy — PlanPrice",
@@ -506,4 +676,28 @@ for (const [file, cfg] of Object.entries(STATIC_PAGES)) write(file, staticPage(f
 write("sitemap.xml", sitemap());
 write("robots.txt", robots());
 
-console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length} HTML files + sitemap.xml + robots.txt for host ${HOST}`);
+/* Machine-readable deal index for the client-side directory filter
+ * (PP-DEAL-FILTER). Enhancement only — every field also exists in the
+ * static HTML; the index just makes rows addressable by slug so the
+ * filter can show/hide/reorder them without re-rendering content. */
+write(
+  "data/deals-index.json",
+  JSON.stringify(
+    {
+      check_date: CHECKED,
+      products: products.map((p) => ({
+        slug: p.slug,
+        name: p.name,
+        category: p.category,
+        priceText: startPriceText(p),
+        priceSort: startPriceNumeric(p),
+        dealHeadline: p.deal && !isExpiredDeal(p) ? p.deal.headline : null,
+        url: `/deals/${p.slug}.html`,
+      })),
+    },
+    null,
+    2
+  ) + "\n"
+);
+
+console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);

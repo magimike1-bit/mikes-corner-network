@@ -1,0 +1,91 @@
+{
+  "sweep_month": "2026-09",
+  "sweep_date": "2026-09-30",
+  "source": "products.json",
+  "products": [
+    {
+      "slug": "hubspot",
+      "start_price_text": "From $0 free",
+      "start_price_numeric": 0,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "freshbooks",
+      "start_price_text": "From C$26 per month",
+      "start_price_numeric": 26,
+      "deal_headline": "$1/month for your first year (Solopreneur offer)",
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "monday",
+      "start_price_text": "From $0 free",
+      "start_price_numeric": 0,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "semrush",
+      "start_price_text": "From $139.95 per month",
+      "start_price_numeric": 139.95,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "shopify",
+      "start_price_text": "From $5 per month",
+      "start_price_numeric": 5,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "wave",
+      "start_price_text": "From $0 free",
+      "start_price_numeric": 0,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "quickbooks",
+      "start_price_text": "From C$30 per month",
+      "start_price_numeric": 30,
+      "deal_headline": "90% off for 6 months for new subscribers (as low as C$3/month on EasyStart)",
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "xero",
+      "start_price_text": "From $25 per month",
+      "start_price_numeric": 25,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "square",
+      "start_price_text": "From $0 free",
+      "start_price_numeric": 0,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "calendly",
+      "start_price_text": "From $0 free",
+      "start_price_numeric": 0,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "jobber",
+      "start_price_text": "From C$49 per month",
+      "start_price_numeric": 49,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    },
+    {
+      "slug": "humi",
+      "start_price_text": "Custom",
+      "start_price_numeric": null,
+      "deal_headline": null,
+      "last_verified": "2026-09-30"
+    }
+  ]
+}

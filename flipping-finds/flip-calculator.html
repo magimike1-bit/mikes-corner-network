@@ -84,7 +84,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
 
   <section class="calc-step">
     <h1 style="font-size:1.9rem;margin:.4em 0 .4em">Will this flip make money?</h1>
-    <p class="hint">Pick a category, answer a few questions, and the calculator builds your real cost stack — platform fees, shipping, gas, your time — then shows profit, margin and the break-even sale price. Every fee is labeled with its source and the date it was checked; every number stays adjustable.</p>
+    <p class="hint">Enter your all-in cost, answer a few questions, and the calculator adds the selling-side fees — platform fees and payment processing — then shows profit, margin and the break-even sale price. Every fee is labeled with its source and the date it was checked; every number stays adjustable.</p>
   </section>
 
   <section class="calc-step" id="step-category">
@@ -98,12 +98,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
     <h2>2 &middot; Answer a few questions</h2>
     <p class="hint">Estimates are fine — every figure stays editable in step 3.</p>
     <div class="input-grid">
-      <div class="full"><label for="in-buy">What did you pay at auction? (CAD)</label>
-        <input type="number" id="in-buy" min="0" step="0.01" placeholder="e.g. 40">
-        <div class="input-note">Your winning bid — before the auction house's fees, if any.</div></div>
-      <div><label for="in-premium">Auction fees on top (%)</label>
-        <input type="number" id="in-premium" min="0" step="0.5" value="0">
-        <div class="input-note">Buyer's premium / handling the auction charges on top of your bid. 0 if your bid was all-in.</div></div>
+      <div class="full"><label for="in-allin">All-in cost (CAD)</label>
+        <input type="number" id="in-allin" min="0" step="0.01" placeholder="e.g. 65">
+        <div class="input-note"><strong>What counts as all-in:</strong> your hammer price, buyer's premium, gas/travel to pick up, your time, and shipping costs. One number — what the item truly cost you.</div></div>
       <div><label for="in-sale">Expected sale price (CAD)</label>
         <input type="number" id="in-sale" min="0" step="0.01" placeholder="e.g. 120">
         <div class="input-note">What you expect the item to sell for, based on sold listings.</div></div>
@@ -120,11 +117,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
           <label class="radio-pill"><input type="radio" name="fulfill" value="ship"> Shipped</label>
         </div>
         <div class="input-note" id="fulfill-note">Local pickup carries no platform fee on any of the three platforms.</div></div>
-      <div id="ship-wrap" style="display:none">
-        <label for="in-shipcost">Shipping cost you pay (CAD)</label>
-        <input type="number" id="in-shipcost" min="0" step="0.01" placeholder="e.g. 15">
-        <div class="input-note">What the carrier charges you for this item.</div>
-      </div>
       <div id="ship-charge-wrap" style="display:none">
         <label for="in-shipcharge">Shipping you charge the buyer (CAD)</label>
         <input type="number" id="in-shipcharge" min="0" step="0.01" placeholder="e.g. 15">
@@ -136,15 +128,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
           <label class="radio-pill"><input type="radio" name="pay" value="card"> Card processed</label>
         </div>
         <div class="input-note">Cash or Interac e-transfer has no processing cost. Card processing is an estimate — adjust it.</div></div>
-      <div><label for="in-gas">Gas / transport to pick up &amp; deliver (CAD)</label>
-        <input type="number" id="in-gas" min="0" step="0.01" placeholder="e.g. 10">
-        <div class="input-note">Driving to the auction pickup and meeting the buyer. Your real cost — no default.</div></div>
-      <div><label for="in-hours">Your time on this flip (hours)</label>
-        <input type="number" id="in-hours" min="0" step="0.25" placeholder="e.g. 2">
-        <div class="input-note">Pickup, cleaning, photos, listing, messaging, handoff.</div></div>
-      <div><label for="in-hourly">What an hour of your time is worth (CAD)</label>
-        <input type="number" id="in-hourly" min="0" step="0.5" placeholder="e.g. 20">
-        <div class="input-note">If you'd rather not price your time, leave it at 0.</div></div>
       <div><label for="in-days">Days you expect it to take to sell</label>
         <input type="number" id="in-days" min="0" step="1" placeholder="e.g. 14">
         <div class="input-note">Used only for the profit-per-day figure.</div></div>
@@ -273,7 +256,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
   });
   function syncShipVisibility(){
     const shipped = radio("fulfill") === "ship";
-    $("ship-wrap").style.display = shipped ? "" : "none";
     $("ship-charge-wrap").style.display = shipped ? "" : "none";
   }
 
@@ -300,20 +282,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
   }
 
   function calc(){
-    const buy = num("in-buy"), premium = num("in-premium") / 100;
+    const allin = num("in-allin");
     const sale = num("in-sale"), platform = radio("platform"), fulfill = radio("fulfill");
     const pay = radio("pay");
-    const shipCost = fulfill === "ship" ? num("in-shipcost") : 0;
     const shipCharged = fulfill === "ship" ? num("in-shipcharge") : 0;
-    const gas = num("in-gas"), hours = num("in-hours"), hourly = num("in-hourly");
     const days = num("in-days");
 
     const revenue = sale + shipCharged;
-    const auctionFees = buy * premium;
     const pf = platformFee(platform, fulfill, sale, shipCharged);
     const payFee = (pay === "card") ? revenue * ov.cardRate : 0;
-    const timeCost = hours * hourly;
-    const totalCost = buy + auctionFees + pf.amt + payFee + shipCost + gas + timeCost;
+    const totalCost = allin + pf.amt + payFee;
     const profit = revenue - totalCost;
     const margin = revenue > 0 ? profit / revenue : 0;
 
@@ -327,7 +305,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
       orderFixed = (sale + shipCharged) > EBAY_ORD_AT ? EBAY_ORD_HIGH : EBAY_ORD_LOW;
     }
     if(pay === "card") effRate += ov.cardRate;
-    const other = buy + auctionFees + shipCost + gas + timeCost;
+    const other = allin;
     let breakeven = null;
     if(1 - effRate > 0){
       breakeven = (orderFixed + other - shipCharged * (1 - effRate)) / (1 - effRate);
@@ -336,8 +314,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
         breakeven = other + orderFixed + FB_SHIP_MIN - shipCharged;
       if(breakeven < 0) breakeven = 0;
     }
-    return {buy, premium: premium*100, sale, platform, fulfill, pay, shipCost, shipCharged, gas, hours, hourly, days,
-            revenue, auctionFees, pf, payFee, timeCost, totalCost, profit, margin, breakeven};
+    return {allin, sale, platform, fulfill, pay, shipCharged, days,
+            revenue, pf, payFee, totalCost, profit, margin, breakeven};
   }
 
   function render(r){
@@ -345,15 +323,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
     const srcTag = t => ' <span class="src-tag ' + t[0] + '">' + t[1] + "</span>";
     const platName = {fb:"Facebook Marketplace", ebay:"eBay", kijiji:"Kijiji"}[r.platform];
     let h = "";
-    h += '<div class="fee-row"><div><div class="fname">Buy price</div><div class="fsrc">Your winning bid at auction.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.buy) + '</span></div></div>';
-    h += '<div class="fee-row"><div><div class="fname">Auction fees on top (' + r.premium.toFixed(1) + '%)</div><div class="fsrc">Buyer\u2019s premium / handling charged by the auction house.' + srcTag(["estimate","Your auction"]) + '</div></div><div class="fval"><span class="amt">' + money(r.auctionFees) + '</span></div></div>';
+    h += '<div class="fee-row"><div><div class="fname">All-in cost</div><div class="fsrc">Hammer price, buyer\u2019s premium, gas/travel, your time, shipping costs \u2014 everything it cost you to get the item in hand.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.allin) + '</span></div></div>';
     h += '<div class="fee-row"><div><div class="fname">Platform fee — ' + platName + '</div><div class="fsrc">' + r.pf.desc + '. Checked 2026-09-28 — see fee reference below.' + srcTag(["reported","Reported"]) + '</div></div><div class="fval"><span class="amt">' + money(r.pf.amt) + '</span></div></div>';
     h += '<div class="fee-row"><div><div class="fname">Payment processing</div><div class="fsrc">' + (r.pay === "card" ? "Card processed at " + (ov.cardRate*100).toFixed(2) + "% (typical flat rate — estimate, adjust below)." : "Cash / Interac e-transfer — no processing cost (most Canadian banks; some plans charge ~$1\u2013$1.50).") + srcTag(["estimate","Estimate"]) + '</div></div><div class="fval"><span class="amt">' + money(r.payFee) + '</span>'
       + (r.pay === "card" ? '<input type="number" step="0.05" min="0" id="ov-cardRate" value="' + (ov.cardRate*100) + '" aria-label="Override card rate percent"><div class="input-note">% — override the rate</div>' : "") + '</div></div>';
-    if(r.fulfill === "ship")
-      h += '<div class="fee-row"><div><div class="fname">Shipping — what you pay</div><div class="fsrc">Carrier cost for this item.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.shipCost) + '</span></div></div>';
-    h += '<div class="fee-row"><div><div class="fname">Gas / transport</div><div class="fsrc">Driving to auction pickup and meeting the buyer — your number.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.gas) + '</span></div></div>';
-    h += '<div class="fee-row"><div><div class="fname">Your time (' + r.hours + 'h \u00D7 ' + money(r.hourly) + '/h)</div><div class="fsrc">Pickup, cleaning, photos, listing, messaging, handoff — your valuation.' + srcTag(["estimate","You"]) + '</div></div><div class="fval"><span class="amt">' + money(r.timeCost) + '</span></div></div>';
     h += '<div class="fee-row subtotal"><div><div class="fname">Total cost</div><div class="fsrc">Everything above, added up.</div></div><div class="fval"><span class="amt">' + money(r.totalCost) + '</span></div></div>';
     h += '<div class="fee-row subtotal"><div><div class="fname">Revenue (sale + shipping charged)</div><div class="fsrc">What the buyer pays you.</div></div><div class="fval"><span class="amt">' + money(r.revenue) + '</span></div></div>';
     L.innerHTML = h;

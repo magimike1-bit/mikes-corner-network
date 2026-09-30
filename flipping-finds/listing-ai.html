@@ -84,7 +84,15 @@ html{scroll-behavior:smooth}
 .section-head .eyebrow{display:inline-block;font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(11,92,173,.08);border:1px solid rgba(11,92,173,.3);padding:6px 14px;border-radius:999px;margin:0 0 12px}
 .section-head h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 10px;letter-spacing:-.01em}
 .section-head .hint{color:var(--muted);font-size:1rem;margin:0}
-.example-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+/* Examples — data-driven rotator (one card at a time; add a 4th example by appending an object to EXAMPLES) */
+.example-rotator{max-width:560px;margin:0 auto}
+.rotator-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.rotator-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:2px solid var(--accent);background:#fff;color:var(--accent);font-size:1.15rem;font-weight:800;cursor:pointer;transition:background .15s,color .15s}
+.rotator-btn:hover{background:var(--accent);color:#fff}
+.rotator-dots{display:flex;gap:10px;align-items:center}
+.rotator-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--accent);background:#fff;cursor:pointer;padding:0}
+.rotator-dot.active{background:var(--accent)}
+.rotator-pos{font-size:.85rem;color:var(--muted);font-weight:700;min-width:56px;text-align:center}
 .example-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
 .example-card:hover{transform:translateY(-5px);box-shadow:0 14px 32px rgba(11,92,173,.15)}
 .example-card>img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#e8eef5}
@@ -148,57 +156,16 @@ html{scroll-behavior:smooth}
     <div class="section-head">
       <p class="eyebrow">See it in action</p>
       <h2>From a lazy two-word listing to a buyer-ready draft</h2>
-      <p class="hint">Illustrative example outputs — what a finished draft looks like before you upload your own photo.</p>
+      <p class="hint">Illustrative example outputs — what a finished draft looks like before you upload your own photo. Browse them with the arrows.</p>
     </div>
-    <div class="example-grid">
-      <article class="example-card">
-        <p class="card-eyebrow">Toys &amp; Games</p>
-        <img src="images/examples/anki-overdrive.jpg" alt="Anki OVERDRIVE: Fast &amp; Furious Edition starter set" loading="lazy">
-        <div class="before-block">
-          <p class="block-label">Before — what most sellers type</p>
-          <p class="before-title">anki overdrive</p>
-          <p class="before-desc">works good</p>
-        </div>
-        <div class="example-arrow" aria-hidden="true"><span>&darr;</span></div>
-        <div class="after-block">
-          <p class="block-label">After — the AI draft</p>
-          <p class="after-title">Anki OVERDRIVE: Fast &amp; Furious Edition starter set</p>
-          <p class="after-desc">Anki OVERDRIVE: Fast &amp; Furious Edition battle-racing set. App-controlled robotic supercars race on a snap-together track. Includes 2 cars; box and contents as shown.</p>
-          <span class="est-pill">ESTIMATE $35–55 CAD (example)</span>
-        </div>
-      </article>
-      <article class="example-card">
-        <p class="card-eyebrow">Jewelry &amp; Gemstones</p>
-        <img src="images/examples/zambian-emerald.jpg" alt="Natural Zambian emerald, pear cut, 10.30 ct" loading="lazy">
-        <div class="before-block">
-          <p class="block-label">Before — what most sellers type</p>
-          <p class="before-title">emerald</p>
-          <p class="before-desc">green stone 10 carat</p>
-        </div>
-        <div class="example-arrow" aria-hidden="true"><span>&darr;</span></div>
-        <div class="after-block">
-          <p class="block-label">After — the AI draft</p>
-          <p class="after-title">Natural Zambian emerald, pear cut, 10.30 ct</p>
-          <p class="after-desc">Natural Zambian emerald, pear cut, 10.30 ct as marked on the card. Deep green with natural inclusions visible in the photo. Sold loose, as shown.</p>
-          <span class="est-pill">ESTIMATE $180–260 CAD (example)</span>
-        </div>
-      </article>
-      <article class="example-card">
-        <p class="card-eyebrow">Sports &amp; Outdoors</p>
-        <img src="images/examples/crossnet.jpg" alt="CROSSNET H2O four-way volleyball net" loading="lazy">
-        <div class="before-block">
-          <p class="block-label">Before — what most sellers type</p>
-          <p class="before-title">volleyball net</p>
-          <p class="before-desc">crossnet</p>
-        </div>
-        <div class="example-arrow" aria-hidden="true"><span>&darr;</span></div>
-        <div class="after-block">
-          <p class="block-label">After — the AI draft</p>
-          <p class="after-title">CROSSNET H2O four-way volleyball net</p>
-          <p class="after-desc">CROSSNET H2O four-square volleyball net for pool setup. Box states setup within 5 minutes. Contents as shown on the box.</p>
-          <span class="est-pill">ESTIMATE $45–70 CAD (example)</span>
-        </div>
-      </article>
+    <div class="example-rotator" id="example-rotator">
+      <article class="example-card" id="rotator-slide" aria-live="polite"></article>
+      <div class="rotator-controls">
+        <button type="button" class="rotator-btn" id="rotator-prev" aria-label="Show previous example">&#8592;</button>
+        <div class="rotator-dots" id="rotator-dots"></div>
+        <span class="rotator-pos" id="rotator-pos" aria-hidden="true">1 of 3</span>
+        <button type="button" class="rotator-btn" id="rotator-next" aria-label="Show next example">&#8594;</button>
+      </div>
     </div>
   </section>
 
@@ -294,6 +261,71 @@ html{scroll-behavior:smooth}
   function show(id){ $(id).classList.remove("hidden"); }
   function hide(id){ $(id).classList.add("hidden"); }
   function hideAll(){ ["tool-app","progress","result","qc-fail","error-box","not-configured"].forEach(hide); }
+
+  /* ---- Examples rotator: data-driven; add a 4th example by appending one object ---- */
+  var EXAMPLES = [
+    {eyebrow:"Toys & Games", img:"images/examples/anki-overdrive.jpg",
+     alt:"Anki OVERDRIVE: Fast & Furious Edition starter set",
+     beforeTitle:"anki overdrive", beforeDesc:"works good",
+     afterTitle:"Anki OVERDRIVE: Fast & Furious Edition starter set",
+     afterDesc:"Anki OVERDRIVE: Fast & Furious Edition battle-racing set. App-controlled robotic supercars race on a snap-together track. Includes 2 cars; box and contents as shown.",
+     est:"ESTIMATE $35\u201355 CAD (example)"},
+    {eyebrow:"Jewelry & Gemstones", img:"images/examples/zambian-emerald.jpg",
+     alt:"Natural Zambian emerald, pear cut, 10.30 ct",
+     beforeTitle:"emerald", beforeDesc:"green stone 10 carat",
+     afterTitle:"Natural Zambian emerald, pear cut, 10.30 ct",
+     afterDesc:"Natural Zambian emerald, pear cut, 10.30 ct as marked on the card. Deep green with natural inclusions visible in the photo. Sold loose, as shown.",
+     est:"ESTIMATE $180\u2013260 CAD (example)"},
+    {eyebrow:"Sports & Outdoors", img:"images/examples/crossnet.jpg",
+     alt:"CROSSNET H2O four-way volleyball net",
+     beforeTitle:"volleyball net", beforeDesc:"crossnet",
+     afterTitle:"CROSSNET H2O four-way volleyball net",
+     afterDesc:"CROSSNET H2O four-square volleyball net for pool setup. Box states setup within 5 minutes. Contents as shown on the box.",
+     est:"ESTIMATE $45\u201370 CAD (example)"}
+  ];
+
+  function exampleCardHTML(e){
+    return '<p class="card-eyebrow">' + esc(e.eyebrow) + "</p>" +
+      '<img src="' + esc(e.img) + '" alt="' + esc(e.alt) + '" loading="lazy">' +
+      '<div class="before-block"><p class="block-label">Before \u2014 what most sellers type</p>' +
+      '<p class="before-title">' + esc(e.beforeTitle) + '</p><p class="before-desc">' + esc(e.beforeDesc) + "</p></div>" +
+      '<div class="example-arrow" aria-hidden="true"><span>&darr;</span></div>' +
+      '<div class="after-block"><p class="block-label">After \u2014 the AI draft</p>' +
+      '<p class="after-title">' + esc(e.afterTitle) + '</p><p class="after-desc">' + esc(e.afterDesc) + "</p>" +
+      '<span class="est-pill">' + esc(e.est) + "</span></div>";
+  }
+
+  function initRotator(){
+    var rot = $("example-rotator");
+    if(!rot) return;
+    var slide = $("rotator-slide"), dotsBox = $("rotator-dots"), pos = $("rotator-pos");
+    var idx = 0;
+    var dots = EXAMPLES.map(function(e, i){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "rotator-dot";
+      b.setAttribute("aria-label", "Show example " + (i + 1) + ": " + e.afterTitle);
+      b.addEventListener("click", function(){ show(i); });
+      dotsBox.appendChild(b);
+      return b;
+    });
+    function show(i){
+      idx = ((i % EXAMPLES.length) + EXAMPLES.length) % EXAMPLES.length;
+      slide.innerHTML = exampleCardHTML(EXAMPLES[idx]);
+      dots.forEach(function(d, j){
+        var on = (j === idx);
+        d.classList.toggle("active", on);
+        if(on){ d.setAttribute("aria-current", "true"); } else { d.removeAttribute("aria-current"); }
+      });
+      pos.textContent = (idx + 1) + " of " + EXAMPLES.length;
+    }
+    $("rotator-prev").addEventListener("click", function(){ show(idx - 1); });
+    $("rotator-next").addEventListener("click", function(){ show(idx + 1); });
+    rot.addEventListener("keydown", function(e){
+      if(e.key === "ArrowLeft"){ e.preventDefault(); show(idx - 1); }
+      else if(e.key === "ArrowRight"){ e.preventDefault(); show(idx + 1); }
+    });
+    show(0);
+  }
 
   function uuid(){
     if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
@@ -499,6 +531,7 @@ html{scroll-behavior:smooth}
   $("retry-gen").addEventListener("click", function(){ hide("error-box"); });
   $("retry-photo").addEventListener("click", function(){ hide("qc-fail"); $("photo").click(); });
 
+  initRotator();
   loadConfig().then(boot);
 })();
 </script>

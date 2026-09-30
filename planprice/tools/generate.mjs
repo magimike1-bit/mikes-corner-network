@@ -194,7 +194,8 @@ function indexPage() {
   return `${head(
     "PlanPrice — Verified B2B Software Deals & Pricing",
     "PlanPrice tracks verified list prices and current promotions for 12 essential B2B software products — accounting, CRM, ecommerce, POS, and more. Every deal is checked against the vendor's own site.",
-    "/"
+    "/",
+    "\n" + IMPACT_TAG
   )}
 ${header("/")}
 <section class="hero">
@@ -358,7 +359,7 @@ ${footer()}`;
 // Shared chrome — disclosure banner + footer text are byte-identical to v1.
 // ---------------------------------------------------------------------------
 
-function head(title, description, path) {
+function head(title, description, path, extraHead = "") {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -368,9 +369,12 @@ function head(title, description, path) {
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(SITE_URL + path)}">
 <link rel="stylesheet" href="/style.css">
-<!-- AdSense: ad code goes here -->
-</head>`;
-}
+<!-- AdSense: ad code goes here -->${extraHead}
+</head>`;}
+
+// Impact site-verification tag (Joseph's affiliate work, 2026-09-30).
+// Rendered on the homepage <head> only, byte-verbatim — do not alter.
+const IMPACT_TAG = `<meta name='impact-site-verification' value='d3933dd0-8d52-4dd7-b099-5f505aec37fa'>`;
 
 function header(active) {
   const nav = (href, label) =>

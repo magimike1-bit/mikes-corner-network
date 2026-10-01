@@ -1050,7 +1050,11 @@ function head(title, description, path, extraHead = "") {
 <link rel="canonical" href="${esc(SITE_URL + path)}">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" type="image/png" href="/favicon.png">
-<!-- AdSense: ad code goes here -->${extraHead}${beaconTag()}
+<!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>${extraHead}${beaconTag()}
 </head>`;}
 
 /* Cloudflare Web Analytics beacon (PP-ANALYTICS). Returns "" while

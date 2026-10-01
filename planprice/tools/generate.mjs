@@ -19,6 +19,54 @@ const products = data.products;
  * product or missing source renders nothing (honest gap, never a guess). */
 const reviewScores = JSON.parse(readFileSync(join(ROOT, "data", "review-scores.json"), "utf8"));
 
+/* ---- Head-to-head compare sets (PP-SECTIONS) ----
+ * data/compare.json: {sets: [{slug, title, products}]}. Membership is
+ * explicit and authorable; new products in products.json do NOT auto-join.
+ * Build FAILS on: unknown product slug, cross-category set, duplicate or
+ * non-kebab slug, wrong member count (2–4), or a title that is not the
+ * mechanical " vs "-join of the product names (no editorial wording). */
+const productBySlug = new Map(products.map((p) => [p.slug, p]));
+const compareSets = [];
+{
+  const cfg = JSON.parse(readFileSync(join(ROOT, "data", "compare.json"), "utf8"));
+  const seen = new Set();
+  for (const set of cfg.sets || []) {
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(set.slug || ""))
+      throw new Error(`compare.json: invalid set slug "${set.slug}"`);
+    if (seen.has(set.slug))
+      throw new Error(`compare.json: duplicate set slug "${set.slug}"`);
+    seen.add(set.slug);
+    const slugs = set.products || [];
+    if (slugs.length < 2 || slugs.length > 4)
+      throw new Error(`compare.json: set "${set.slug}" must list 2-4 products, got ${slugs.length}`);
+    const members = slugs.map((s) => {
+      const p = productBySlug.get(s);
+      if (!p)
+        throw new Error(`compare.json: set "${set.slug}" references unknown product slug "${s}"`);
+      return p;
+    });
+    const cats = [...new Set(members.map((p) => p.category))];
+    if (cats.length > 1)
+      throw new Error(`compare.json: set "${set.slug}" spans categories: ${cats.join(", ")}`);
+    const mechanicalTitle = members.map((p) => p.name).join(" vs ");
+    if (set.title !== mechanicalTitle)
+      throw new Error(
+        `compare.json: set "${set.slug}" title is not the mechanical vs-join of product names`
+      );
+    compareSets.push({
+      slug: set.slug,
+      title: set.title,
+      products: members,
+      category: members[0].category,
+    });
+  }
+}
+
+// Compare set containing the product slug, or null for non-participants.
+const setForSlug = (slug) => compareSets.find((s) => s.products.some((p) => p.slug === slug)) || null;
+// Compare sets whose members all belong to the category (banner lookup).
+const setsForCategory = (cat) => compareSets.filter((s) => s.category === cat);
+
 /* ---- Affiliate state (PP-AFFILIATE-CLARITY) ----
  * affiliateLive(p) is true only when a product's affiliate status is "live".
  * Until programs are approved every product is "pending-approval", and the
@@ -286,20 +334,25 @@ function slugify(s) {
  * The filter.js facets are declarative: to add a new facet (e.g. a
  * "Canadian only" toggle), add the control's markup below and one entry in
  * its FACETS array — the UI structure doesn't need rebuilding. */
-function filterBlock() {
+/* Category pages (PP-SECTIONS) pass includeCategory=false: a single-category
+ * page ships no #f-category control, and filter.js skips the missing facet
+ * instead of throwing (fail-safe rule). */
+function filterBlock(includeCategory = true) {
   const cats = [...new Set(products.map((p) => p.category))].sort();
   const opts = [`<option value="all">All categories</option>`]
     .concat(cats.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`))
     .join("\n          ");
-  return `<div class="wrap">
-    <form class="filter-ui" id="deal-filter" hidden aria-label="Filter and sort deals">
-      <div class="filter-controls">
-        <label class="filter-field">Category
+  const catField = includeCategory
+    ? `<label class="filter-field">Category
           <select id="f-category" name="category">
           ${opts}
           </select>
-        </label>
-        <label class="filter-check"><input type="checkbox" id="f-deals" name="deals-only"> Deals only</label>
+        </label>\n        `
+    : "";
+  return `<div class="wrap">
+    <form class="filter-ui" id="deal-filter" hidden aria-label="Filter and sort deals">
+      <div class="filter-controls">
+        ${catField}<label class="filter-check"><input type="checkbox" id="f-deals" name="deals-only"> Deals only</label>
         <label class="filter-check"><input type="checkbox" id="f-canadian" name="canadian-only"> 🇨🇦 Canadian only</label>
         <label class="filter-field">Sort by
           <select id="f-sort" name="sort">
@@ -324,7 +377,7 @@ function directorySections() {
         .sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
       const rows = items.map(({ p }) => dirRow(p)).join("\n");
       return `<section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
-    <h2 class="dir-cat-title">${esc(c)}</h2>
+    <h2 class="dir-cat-title"><a href="/categories/${slugify(c)}.html">${esc(c)}</a></h2>
     <ul class="dir-rows">${rows}</ul>
   </section>`;
     })
@@ -537,9 +590,15 @@ function relatedRows(p) {
     </div>
   </li>`)
     .join("\n");
+  // Head-to-head link (PP-SECTIONS): participants only — non-participants
+  // get nothing. Link copy is mechanical ("Head-to-head: <vs-join title>").
+  const set = setForSlug(p.slug);
+  const h2h = set
+    ? `<p class="h2h-link"><a href="/compare/${esc(set.slug)}.html">Head-to-head: ${esc(set.title)}</a></p>`
+    : "";
   return `<aside class="section related">
         <h2>Related deals</h2>
-        <ul class="dir-rows">${rel}</ul>
+        ${h2h}<ul class="dir-rows">${rel}</ul>
       </aside>`;
 }
 
@@ -582,6 +641,123 @@ ${footer()}`;
 }
 
 // ---------------------------------------------------------------------------
+// Category pages + head-to-head compare pages (PP-SECTIONS)
+// ---------------------------------------------------------------------------
+
+/* "Head-to-head" banner for a category page: rendered only when a compare
+ * set exists for the category (Accounting / Payments & POS / SEO &
+ * Marketing today). Categories with no set get no banner. */
+function h2hBannerLink(c) {
+  const sets = setsForCategory(c);
+  if (!sets.length) return "";
+  return `<p class="h2h-banner">${sets
+    .map((s) => `<a href="/compare/${esc(s.slug)}.html">Head-to-head: ${esc(s.title)}</a>`)
+    .join("\n")}</p>`;
+}
+
+/* One page per distinct products[].category. H1 is the category name
+ * verbatim; the intro line is a mechanical count/date — no category
+ * descriptions exist in the data, so none are written. Rows reuse dirRow()
+ * (with data-slug for no-JS addressability); the filter ships with only
+ * #f-deals, #f-canadian, #f-sort — no category facet. */
+function categoryPage(c) {
+  const items = products
+    .map((p, i) => ({ p, i }))
+    .filter(({ p }) => p.category === c)
+    .sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
+  const rows = items.map(({ p }) => dirRow(p)).join("\n");
+  const n = items.length;
+  const plural = n === 1 ? "" : "s";
+  return `${head(
+    `${c} Pricing & Deals — PlanPrice`,
+    `${c} software: verified pricing and current promotions. ${n} product${plural} tracked, checked ${CHECKED}.`,
+    `/categories/${slugify(c)}.html`,
+    '\n<script src="/filter.js" defer></script>'
+  )}
+${header("/")}
+<main>
+  <div class="wrap" id="all-deals">
+    <p class="breadcrumbs"><a href="/">All deals</a> › ${esc(c)}</p>
+    <h1 class="page-title">${esc(c)}</h1>
+    <p class="section-sub">${n} product${plural} tracked · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    ${h2hBannerLink(c)}
+    ${filterBlock(false)}
+    <section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
+      <ul class="dir-rows">${rows}</ul>
+    </section>
+  </div>
+</main>
+${footer()}`;
+}
+
+/* Compare index: mechanical list of the 3 sets. Set titles are the
+ * vs-joined product names (validated mechanical in the loader above). */
+function compareIndexPage() {
+  const items = compareSets
+    .map((s) => `<li class="compare-row">
+      <h2 class="compare-row-title"><a href="/compare/${esc(s.slug)}.html">${esc(s.title)}</a></h2>
+      <p class="compare-row-meta">${esc(s.category)} · ${s.products.length} products</p>
+    </li>`)
+    .join("\n");
+  return `${head(
+    "Compare — PlanPrice",
+    `Head-to-head comparisons of rival B2B software: verified pricing, current deals, and user feedback side by side. ${compareSets.length} comparisons tracked.`,
+    "/compare.html"
+  )}
+${header("/compare.html")}
+<main>
+  <div class="wrap">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Compare</p>
+    <h1 class="page-title">Compare</h1>
+    <p class="section-sub">${compareSets.length} head-to-head comparisons tracked</p>
+    <ul class="compare-rows">${items}</ul>
+  </div>
+</main>
+${footer()}`;
+}
+
+/* "Consider X if…" is the ONLY fit guidance on compare pages: the verbatim
+ * best_for string per product. No synthesis, no verdict, no winner language. */
+function fitBlock(p) {
+  return `<section class="section fit">
+      <h2>Consider ${esc(p.name)} if…</h2>
+      <p><strong>Best for:</strong> ${esc(p.best_for)}</p>
+    </section>`;
+}
+
+/* One page per compare set: per-product columns reusing factsStrip(),
+ * pricingTable(), reviewsSection() (only when hasReviews(p)) and
+ * scoreSection() (renders nothing on a missing entry) — the identical
+ * components and strings as the deal pages. */
+function compareSetPage(set) {
+  const cols = set.products
+    .map((p) => `<section class="compare-col" id="cmp-${esc(p.slug)}" aria-label="${esc(p.name)}">
+      <h2 class="compare-col-name"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></h2>
+      ${fitBlock(p)}
+      ${factsStrip(p)}
+      ${pricingTable(p)}
+      ${reviewsSection(p)}
+      ${scoreSection(p)}
+    </section>`)
+    .join("\n");
+  return `${head(
+    `${set.title} — PlanPrice`,
+    `${set.title}: compare verified pricing, current deals, and user feedback side by side. Prices checked ${CHECKED}.`,
+    `/compare/${set.slug}.html`
+  )}
+${header("/compare.html")}
+<main>
+  <div class="wrap">
+    <p class="breadcrumbs"><a href="/compare.html">Compare</a> › ${esc(set.title)}</p>
+    <h1 class="page-title">${esc(set.title)}</h1>
+    <p class="section-sub">${set.products.length} products, side by side · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    ${cols}
+  </div>
+</main>
+${footer()}`;
+}
+
+// ---------------------------------------------------------------------------
 // Shared chrome — disclosure banner + footer text are byte-identical to v1.
 // ---------------------------------------------------------------------------
 
@@ -596,12 +772,27 @@ function head(title, description, path, extraHead = "") {
 <link rel="canonical" href="${esc(SITE_URL + path)}">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" type="image/png" href="/favicon.png">
-<!-- AdSense: ad code goes here -->${extraHead}
+<!-- AdSense: ad code goes here -->${extraHead}${beaconTag()}
 </head>`;}
+
+/* Cloudflare Web Analytics beacon (PP-ANALYTICS). Returns "" while
+ * CF_BEACON_TOKEN is empty — the beacon is inert until Joseph pastes the
+ * token, and empty-token output stays byte-identical to pre-beacon builds. */
+function beaconTag() {
+  if (!CF_BEACON_TOKEN) return "";
+  return `\n<!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflare.com/beacon.min.js" data-cf-beacon='{"token": "${esc(CF_BEACON_TOKEN)}"}'></script>`;
+}
 
 // Impact site-verification tag (Joseph's affiliate work, 2026-09-30).
 // Rendered on the homepage <head> only, byte-verbatim — do not alter.
 const IMPACT_TAG = `<meta name='impact-site-verification' value='d3933dd0-8d52-4dd7-b099-5f505aec37fa'>`;
+
+/* ---- Cloudflare Web Analytics beacon (PP-ANALYTICS) ----
+ * CF_BEACON_TOKEN is the public-by-design token from the Cloudflare
+ * dashboard (Web Analytics → Add site → planprice.ca). Joseph pastes it
+ * here when he adds the site; until then it stays "" and head() renders
+ * no beacon tag at all (output stays byte-identical to pre-beacon builds). */
+const CF_BEACON_TOKEN = "";
 
 function header(active) {
   const nav = (href, label) =>
@@ -617,6 +808,7 @@ function header(active) {
     <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
     <nav class="main-nav">
       ${nav("/", "Deals")}
+      ${nav("/compare.html", "Compare")}
       ${nav("/disclosure.html", "Disclosure")}
       ${nav("/about.html", "About")}
     </nav>
@@ -693,6 +885,27 @@ function disclosureBody() {
     </div></section>`;
 }
 
+/* ---- Privacy policy analytics wording (PP-ANALYTICS) ----
+ * Conditional on CF_BEACON_TOKEN: while the token is empty the Cloudflare
+ * Web Analytics beacon is inert, so the page keeps the old "no analytics"
+ * wording. The new wording (naming Cloudflare Web Analytics) ships ONLY
+ * when a token is set — never ship it while the beacon is inert. */
+function privacyBody() {
+  const analytics = CF_BEACON_TOKEN
+    ? `<li><strong>No cookies set by us.</strong> We measure site visits with Cloudflare Web Analytics — a cookieless, privacy-first measurement tool that sets no cookies and collects no personal data.</li>`
+    : `<li><strong>No cookies set by us.</strong> Our pages do not use analytics cookies or tracking pixels.</li>`;
+  return `<section class="section"><div class="wrap">
+      <p><strong>Last updated: ${CHECKED}.</strong></p>
+      <p>PlanPrice is a static informational site. We collect almost nothing:</p>
+      <ul>
+        <li><strong>No accounts, no signups, no email capture.</strong> There is nothing to subscribe to and nothing to log into.</li>
+        ${analytics}
+        <li><strong>Third parties.</strong> Our hosting provider may log basic server data (IP address, pages requested) for security. When affiliate links go live, clicking one takes you to the vendor's site, which is governed by that vendor's privacy policy — not ours.</li>
+      </ul>
+      <p>We do not sell personal information because we do not collect any. If you contact us about the site, we use your message only to respond.</p>
+    </div></section>`;
+}
+
 const STATIC_PAGES = {
   "about.html": {
     title: "About PlanPrice — PlanPrice",
@@ -713,16 +926,7 @@ const STATIC_PAGES = {
     description: "PlanPrice privacy policy: what data we collect (almost nothing) and how we use it.",
     path: "/privacy-policy.html",
     h1: "Privacy Policy",
-    body: `<section class="section"><div class="wrap">
-      <p><strong>Last updated: ${CHECKED}.</strong></p>
-      <p>PlanPrice is a static informational site. We collect almost nothing:</p>
-      <ul>
-        <li><strong>No accounts, no signups, no email capture.</strong> There is nothing to subscribe to and nothing to log into.</li>
-        <li><strong>No cookies set by us.</strong> Our pages do not use analytics cookies or tracking pixels.</li>
-        <li><strong>Third parties.</strong> Our hosting provider may log basic server data (IP address, pages requested) for security. When affiliate links go live, clicking one takes you to the vendor's site, which is governed by that vendor's privacy policy — not ours.</li>
-      </ul>
-      <p>We do not sell personal information because we do not collect any. If you contact us about the site, we use your message only to respond.</p>
-    </div></section>`
+    body: privacyBody()
   },
   "terms.html": {
     title: "Terms of Use — PlanPrice",
@@ -751,7 +955,10 @@ ${footer()}`;
 
 function sitemap() {
   const paths = ["/", "/about.html", "/disclosure.html", "/privacy-policy.html", "/terms.html",
-    ...products.map(p => `/deals/${p.slug}.html`)];
+    ...products.map(p => `/deals/${p.slug}.html`),
+    ...[...new Set(products.map(p => `/categories/${slugify(p.category)}.html`))].sort(),
+    "/compare.html",
+    ...compareSets.map(s => `/compare/${s.slug}.html`)];
   const urls = paths.map(p => `  <url>\n    <loc>${SITE_URL}${p}</loc>\n    <lastmod>${CHECKED}</lastmod>\n  </url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
@@ -769,6 +976,13 @@ function write(path, content) {
 write("index.html", indexPage());
 for (const p of products) write(`deals/${p.slug}.html`, dealPage(p));
 for (const [file, cfg] of Object.entries(STATIC_PAGES)) write(file, staticPage(file, cfg));
+
+// Category browse pages (one per distinct products[].category), the compare
+// index, and the head-to-head set pages (PP-SECTIONS).
+const categories = [...new Set(products.map((p) => p.category))].sort();
+for (const c of categories) write(`categories/${slugify(c)}.html`, categoryPage(c));
+write("compare.html", compareIndexPage());
+for (const s of compareSets) write(`compare/${s.slug}.html`, compareSetPage(s));
 write("sitemap.xml", sitemap());
 write("robots.txt", robots());
 
@@ -797,4 +1011,4 @@ write(
   ) + "\n"
 );
 
-console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);
+console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length + categories.length + 1 + compareSets.length} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);

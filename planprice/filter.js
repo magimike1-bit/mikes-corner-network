@@ -61,7 +61,13 @@
           return !canadianBox.checked || p.country === "CA";
         },
       },
-    ];
+    ]
+      // Fail-safe (PP-SECTIONS): a facet whose control is absent from the
+      // page (e.g. the category dropdown on single-category pages) is
+      // skipped instead of throwing.
+      .filter(function (f) {
+        return f.control != null;
+      });
 
     // Scope strictly to the homepage directory: deal-page "related" rows and
     // the expired-deals section carry no data-slug and are never touched.
@@ -96,7 +102,7 @@
     }
 
     function apply() {
-      var mode = sortSel.value;
+      var mode = sortSel ? sortSel.value : "featured";
       var shown = 0;
       sections.forEach(function (sec) {
         var ul = sec.querySelector(".dir-rows");
@@ -137,9 +143,13 @@
       }
     }
 
-    [catSel, dealsBox, canadianBox, sortSel].forEach(function (el) {
-      el.addEventListener("change", apply);
-    });
+    [catSel, dealsBox, canadianBox, sortSel]
+      .filter(function (el) {
+        return el != null;
+      })
+      .forEach(function (el) {
+        el.addEventListener("change", apply);
+      });
     form.hidden = false;
     apply();
   }

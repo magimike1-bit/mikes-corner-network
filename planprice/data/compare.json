@@ -1,0 +1,30 @@
+{
+    "sets": [
+        {
+            "products": [
+                "freshbooks",
+                "quickbooks",
+                "wave",
+                "xero"
+            ],
+            "slug": "accounting",
+            "title": "FreshBooks vs QuickBooks Online vs Wave vs Xero"
+        },
+        {
+            "products": [
+                "square",
+                "stripe"
+            ],
+            "slug": "square-vs-stripe",
+            "title": "Square vs Stripe"
+        },
+        {
+            "products": [
+                "semrush",
+                "ahrefs"
+            ],
+            "slug": "semrush-vs-ahrefs",
+            "title": "Semrush vs Ahrefs"
+        }
+    ]
+}

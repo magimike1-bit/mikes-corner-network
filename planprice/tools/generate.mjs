@@ -74,6 +74,56 @@ const setForSlug = (slug) => setByProductSlug.get(slug) || null;
 // Compare sets whose members all belong to the category (banner lookup).
 const setsForCategory = (cat) => compareSets.filter((s) => s.category === cat);
 
+/* ---- Buyer's guides + glossary (PP-ADSENSE-READINESS) ----
+ * data/guides.json: [{category (exact match of products[].category),
+ * slug (kebab, MUST equal slugify(category)), title, meta_description,
+ * intro[1-3 paragraphs], sections[{h2, body[1-4 paragraphs]}],
+ * checklist[4-8 items], updated: "YYYY-MM-DD"}]. Copy is original prose
+ * written by the content-creator (verified, never invented by the
+ * developer) — the generator only validates and renders it.
+ * data/glossary.json: [{term, slug (kebab-case), definition (1-2
+ * sentences), why_it_matters (1 paragraph, pricing-comparison angle),
+ * related_slugs[] (product slugs from products.json, may be empty)}].
+ * Build FAILS on: unknown category, slug != slugify(category), duplicate
+ * slugs, empty intro/section body, short checklist, invalid term slug,
+ * unknown related_slug. A renamed category or product slug must break the
+ * build, not ship a dead link. */
+const guidesData = JSON.parse(readFileSync(join(ROOT, "data", "guides.json"), "utf8"));
+const glossaryData = JSON.parse(readFileSync(join(ROOT, "data", "glossary.json"), "utf8"));
+const guideBySlug = new Map();
+const termBySlug = new Map();
+{
+  const categorySet = new Set(products.map((p) => p.category));
+  for (const g of guidesData) {
+    if (!categorySet.has(g.category))
+      throw new Error(`guides.json: unknown category "${g.category}"`);
+    if (g.slug !== slugify(g.category))
+      throw new Error(`guides.json: slug "${g.slug}" != slugify("${g.category}")`);
+    if (guideBySlug.has(g.slug))
+      throw new Error(`guides.json: duplicate guide slug "${g.slug}"`);
+    if (!Array.isArray(g.intro) || !g.intro.length)
+      throw new Error(`guides.json: guide "${g.slug}" has empty intro`);
+    for (const s of g.sections || []) {
+      if (!Array.isArray(s.body) || !s.body.length)
+        throw new Error(`guides.json: guide "${g.slug}" section "${s.h2}" has empty body`);
+    }
+    if (!Array.isArray(g.checklist) || g.checklist.length < 4)
+      throw new Error(`guides.json: guide "${g.slug}" checklist needs 4+ items`);
+    guideBySlug.set(g.slug, g);
+  }
+  for (const t of glossaryData) {
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(t.slug || ""))
+      throw new Error(`glossary.json: invalid term slug "${t.slug}"`);
+    if (termBySlug.has(t.slug))
+      throw new Error(`glossary.json: duplicate term slug "${t.slug}"`);
+    for (const s of t.related_slugs || []) {
+      if (!productBySlug.has(s))
+        throw new Error(`glossary.json: term "${t.slug}" references unknown product slug "${s}"`);
+    }
+    termBySlug.set(t.slug, t);
+  }
+}
+
 /* ---- Affiliate state (PP-AFFILIATE-CLARITY) ----
  * affiliateLive(p) is true only when a product's affiliate status is "live".
  * Until programs are approved every product is "pending-approval", and the
@@ -703,6 +753,7 @@ ${header(null)}
     <p class="breadcrumbs"><a href="/">All deals</a> › ${esc(c)}</p>
     <h1 class="page-title">${esc(c)}</h1>
     <p class="section-sub">${n} product${plural} tracked · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <p class="guide-banner"><a href="/guides/${slugify(c)}.html">Buyer's guide: how to choose ${esc(c)} software</a></p>
     ${h2hBannerLink(c)}
     ${filterForm(false)}
     <section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
@@ -857,6 +908,133 @@ ${header("/canadian.html")}
 ${footer()}`;
 }
 
+/* ---- Buyer's guides + glossary (PP-ADSENSE-READINESS) ----
+ * All copy comes from data/guides.json and data/glossary.json (original
+ * prose, content-creator owned, validated at load). Every interpolated
+ * string is esc()'d. No prices, no verdicts, no vendor capability claims
+ * beyond what products.json already states. New pages go through the same
+ * head() + header() + footer() chrome — never forked. No JS on these
+ * pages (works with JS disabled). */
+
+function guidePage(g) {
+  const c = g.category;
+  const items = products
+    .map((p, i) => ({ p, i }))
+    .filter(({ p }) => p.category === c)
+    .sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
+  // Directory-not-ad-page rule: link ALL products in the category,
+  // regardless of affiliate status.
+  const productLinks = items
+    .map(({ p }) => `<li><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></li>`)
+    .join("\n");
+  const paras = (arr) => arr.map((t) => `<p>${esc(t)}</p>`).join("\n");
+  const sections = g.sections
+    .map((s) => `<h2>${esc(s.h2)}</h2>\n${paras(s.body)}`)
+    .join("\n");
+  return `${head(g.title, g.meta_description, `/guides/${g.slug}.html`)}
+${header("/guides.html")}
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › ${esc(c)}</p>
+    <h1 class="page-title">${esc(g.title)}</h1>
+    <p class="section-sub">Last updated <time datetime="${esc(g.updated)}">${esc(g.updated)}</time></p>
+    ${paras(g.intro)}
+    ${sections}
+    <h2>Quick checklist</h2>
+    <ul>
+      ${g.checklist.map((li) => `<li>${esc(li)}</li>`).join("\n")}
+    </ul>
+    <h2>${esc(c)} products on PlanPrice</h2>
+    <p>Every ${esc(c)} product we track — see verified pricing and current promotions on each deal page:</p>
+    <ul>
+      ${productLinks}
+    </ul>
+    <p><a href="/categories/${slugify(c)}.html">Browse all ${esc(c)} software →</a></p>
+  </div>
+</main>
+${footer()}`;
+}
+
+function guidesIndexPage() {
+  const items = guidesData
+    .map((g) => `<li class="guide-row">
+      <h2 class="guide-row-title"><a href="/guides/${esc(g.slug)}.html">${esc(g.title)}</a></h2>
+      <p>${esc(g.meta_description)}</p>
+    </li>`)
+    .join("\n");
+  return `${head(
+    "Buyer's Guides — PlanPrice",
+    `How to choose business software: ${guidesData.length} buyer's guides covering accounting, CRM, ecommerce, field service, HR, payments, SEO, scheduling, and work management.`,
+    "/guides.html"
+  )}
+${header("/guides.html")}
+<main>
+  <div class="wrap">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Buyer's guides</p>
+    <h1 class="page-title">Buyer's guides</h1>
+    <p class="section-sub">${guidesData.length} guides · how to choose, not what to buy</p>
+    <ul class="guide-rows">${items}</ul>
+  </div>
+</main>
+${footer()}`;
+}
+
+function glossaryTermPage(t) {
+  const related = (t.related_slugs || []).map((s) => productBySlug.get(s));
+  const relatedSection = related.length
+    ? `<h2>Related products</h2>
+    <p>PlanPrice tracks verified pricing for these products:</p>
+    <ul>
+      ${related.map((p) => `<li><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></li>`).join("\n")}
+    </ul>`
+    : "";
+  const metaDesc =
+    t.definition.length > 157 ? t.definition.slice(0, 157) + "…" : t.definition;
+  return `${head(
+    `${t.term} — Pricing glossary — PlanPrice`,
+    metaDesc,
+    `/glossary/${t.slug}.html`
+  )}
+${header("/glossary.html")}
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/glossary.html">Glossary</a> › ${esc(t.term)}</p>
+    <h1 class="page-title">${esc(t.term)}</h1>
+    <p class="glossary-definition"><strong>Definition:</strong> ${esc(t.definition)}</p>
+    <h2>Why it matters when comparing prices</h2>
+    <p>${esc(t.why_it_matters)}</p>
+    ${relatedSection}
+    <p><a href="/glossary.html">← All glossary terms</a></p>
+  </div>
+</main>
+${footer()}`;
+}
+
+function glossaryIndexPage() {
+  const terms = [...glossaryData].sort((a, b) => a.term.localeCompare(b.term));
+  const items = terms
+    .map((t) => `<li class="glossary-row">
+      <h2 class="glossary-row-title"><a href="/glossary/${esc(t.slug)}.html">${esc(t.term)}</a></h2>
+      <p>${esc(t.definition)}</p>
+    </li>`)
+    .join("\n");
+  return `${head(
+    "B2B Software Pricing Glossary — PlanPrice",
+    "Plain-English definitions of B2B software pricing terms: seat-based pricing, tiered pricing, usage-based pricing, freemium, SLAs, and more.",
+    "/glossary.html"
+  )}
+${header("/glossary.html")}
+<main>
+  <div class="wrap">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Glossary</p>
+    <h1 class="page-title">B2B software pricing glossary</h1>
+    <p class="section-sub">${glossaryData.length} terms · plain-English definitions</p>
+    <ul class="glossary-rows">${items}</ul>
+  </div>
+</main>
+${footer()}`;
+}
+
 // ---------------------------------------------------------------------------
 // Shared chrome — disclosure banner + footer text are byte-identical to v1.
 // ---------------------------------------------------------------------------
@@ -915,6 +1093,8 @@ function header(active) {
       ${nav("/deals.html", "Deals")}
       ${nav("/canadian.html", "Canadian")}
       ${nav("/compare.html", "Compare")}
+      ${nav("/guides.html", "Guides")}
+      ${nav("/glossary.html", "Glossary")}
       ${nav("/disclosure.html", "Disclosure")}
       ${nav("/about.html", "About")}
     </nav>
@@ -928,6 +1108,9 @@ function footer() {
     <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
     <nav class="footer-nav">
       <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
       <a href="/disclosure.html">Affiliate disclosure</a>
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -1012,6 +1195,23 @@ function privacyBody() {
     </div></section>`;
 }
 
+/* ---- Contact page (PP-ADSENSE-READINESS) ----
+ * Static page, mailto link only — no form, no email capture, no
+ * response-time promise (per brief open Q2/Q3). */
+function contactBody() {
+  return `<section class="section"><div class="wrap">
+      <p>The best way to reach the PlanPrice team is email: <a href="mailto:magimike4@gmail.com">magimike4@gmail.com</a>.</p>
+      <p><strong>Good reasons to write:</strong></p>
+      <ul>
+        <li>A price or promotion on the site looks wrong or out of date</li>
+        <li>A product or category you think we should track</li>
+        <li>Questions about how we verify prices and review scores</li>
+        <li>Feedback on the site itself</li>
+      </ul>
+      <p>We read every message. There is no contact form and no mailing list — just email.</p>
+    </div></section>`;
+}
+
 const STATIC_PAGES = {
   "about.html": {
     title: "About PlanPrice — PlanPrice",
@@ -1049,6 +1249,13 @@ const STATIC_PAGES = {
         <li><strong>Vendor trademarks</strong> belong to their respective owners. Mention of a product does not imply endorsement by the vendor.</li>
       </ul>
     </div></section>`
+  },
+  "contact.html": {
+    title: "Contact PlanPrice — PlanPrice",
+    description: "Contact the PlanPrice team by email.",
+    path: "/contact.html",
+    h1: "Contact PlanPrice",
+    body: contactBody()
   }
 };
 
@@ -1061,11 +1268,16 @@ ${footer()}`;
 
 function sitemap() {
   const paths = ["/", "/about.html", "/disclosure.html", "/privacy-policy.html", "/terms.html",
+    "/contact.html",
     "/deals.html", "/canadian.html",
     ...products.map(p => `/deals/${p.slug}.html`),
     ...[...new Set(products.map(p => `/categories/${slugify(p.category)}.html`))].sort(),
     "/compare.html",
-    ...compareSets.map(s => `/compare/${s.slug}.html`)];
+    ...compareSets.map(s => `/compare/${s.slug}.html`),
+    "/guides.html",
+    ...guidesData.map(g => `/guides/${g.slug}.html`),
+    "/glossary.html",
+    ...glossaryData.map(t => `/glossary/${t.slug}.html`)];
   const urls = paths.map(p => `  <url>\n    <loc>${SITE_URL}${p}</loc>\n    <lastmod>${CHECKED}</lastmod>\n  </url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
@@ -1093,6 +1305,12 @@ for (const s of compareSets) write(`compare/${s.slug}.html`, compareSetPage(s));
 // Phase-2 section pages (PP-SECTIONS-PHASE2).
 write("deals.html", dealsPage());
 write("canadian.html", canadianPage());
+// AdSense-readiness content (PP-ADSENSE-READINESS): contact page (via
+// STATIC_PAGES above), buyer's guides, and the pricing glossary.
+for (const g of guidesData) write(`guides/${g.slug}.html`, guidePage(g));
+write("guides.html", guidesIndexPage());
+for (const t of glossaryData) write(`glossary/${t.slug}.html`, glossaryTermPage(t));
+write("glossary.html", glossaryIndexPage());
 write("sitemap.xml", sitemap());
 write("robots.txt", robots());
 
@@ -1121,4 +1339,4 @@ write(
   ) + "\n"
 );
 
-console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length + categories.length + 1 + compareSets.length + 2} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);
+console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length + categories.length + 1 + compareSets.length + 2 + guidesData.length + 1 + glossaryData.length + 1} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);

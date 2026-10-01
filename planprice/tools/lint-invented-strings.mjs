@@ -158,6 +158,9 @@ const mechanical = [
   new RegExp(
     `^Canadian B2B software vendors: \\d+ verified Canadian (company|companies) — list prices and promos checked ${dateRe}\\.$`
   ),
+  // AdSense-readiness (PP-ADSENSE-READINESS): guide banner on category
+  // pages — mechanical "Buyer's guide: how to choose <category> software".
+  ...categories.map((c) => new RegExp(`^Buyer's guide: how to choose ${escRe(c)} software$`)),
   // Empty-state copy (renders only when zero promos; listed so a future
   // zero-promo build stays lint-clean — the sentence itself is mechanical).
   /^No active promos right now — check back after the next price sweep\.$/,

@@ -336,8 +336,13 @@ function slugify(s) {
  * its FACETS array — the UI structure doesn't need rebuilding. */
 /* Category pages (PP-SECTIONS) pass includeCategory=false: a single-category
  * page ships no #f-category control, and filter.js skips the missing facet
- * instead of throwing (fail-safe rule). */
-function filterBlock(includeCategory = true) {
+ * instead of throwing (fail-safe rule).
+ * Phase 2 (PP-SECTIONS-PHASE2) adds the `facets` option: {dealsOnly, canadian}
+ * booleans toggle the Deals-only and Canadian-only checkboxes, for pages
+ * where a facet would be vacuous (e.g. every row on /deals.html is a deal). */
+function filterBlock(includeCategory = true, facets = {}) {
+  const showDealsOnly = facets.dealsOnly !== false;
+  const showCanadian = facets.canadian !== false;
   const cats = [...new Set(products.map((p) => p.category))].sort();
   const opts = [`<option value="all">All categories</option>`]
     .concat(cats.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`))
@@ -349,12 +354,16 @@ function filterBlock(includeCategory = true) {
           </select>
         </label>\n        `
     : "";
+  const dealsField = showDealsOnly
+    ? `<label class="filter-check"><input type="checkbox" id="f-deals" name="deals-only"> Deals only</label>\n        `
+    : "";
+  const canadianField = showCanadian
+    ? `<label class="filter-check"><input type="checkbox" id="f-canadian" name="canadian-only"> 🇨🇦 Canadian only</label>\n        `
+    : "";
   return `<div class="wrap">
     <form class="filter-ui" id="deal-filter" hidden aria-label="Filter and sort deals">
       <div class="filter-controls">
-        ${catField}<label class="filter-check"><input type="checkbox" id="f-deals" name="deals-only"> Deals only</label>
-        <label class="filter-check"><input type="checkbox" id="f-canadian" name="canadian-only"> 🇨🇦 Canadian only</label>
-        <label class="filter-field">Sort by
+        ${catField}${dealsField}${canadianField}<label class="filter-field">Sort by
           <select id="f-sort" name="sort">
             <option value="featured">Featured</option>
             <option value="price-asc">Price: low to high</option>
@@ -758,6 +767,81 @@ ${footer()}`;
 }
 
 // ---------------------------------------------------------------------------
+// Deals + Canadian vendors pages (PP-SECTIONS-PHASE2)
+// ---------------------------------------------------------------------------
+
+/* /deals.html — "Current promos". Every product with a current, non-expired
+ * promo (reuses liveDeals() / isExpiredDeal()). Intro line is a mechanical
+ * count/date. Empty state (zero promos) is honest: no invented urgency, no
+ * placeholders. Facets: #f-canadian + #f-sort only (no category facet, no
+ * deals-only facet — every row is a deal). */
+function dealsPage() {
+  const items = liveDeals(products)
+    .map((p, i) => ({ p, i }))
+    .sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
+  const n = items.length;
+  const plural = n === 1 ? "" : "s";
+  const rows = items.map(({ p }) => dirRow(p)).join("\n");
+  const body = items.length
+    ? `<ul class="dir-rows">${rows}</ul>`
+    : `<p class="section-sub">No active promos right now — check back after the next price sweep.</p>`;
+  return `${head(
+    "Current promos — PlanPrice",
+    `Current promotions on B2B software: ${n} active promo${plural}, verified against vendor sites. Checked ${CHECKED}.`,
+    "/deals.html",
+    '\n<script src="/filter.js" defer></script>'
+  )}
+${header("/deals.html")}
+<main>
+  <div class="wrap" id="all-deals">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Current promos</p>
+    <h1 class="page-title">Current promos</h1>
+    <p class="section-sub">${n} active promo${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    ${filterBlock(false, { dealsOnly: false })}
+    <section class="dir-cat" id="cat-deals" aria-label="Current promos">
+      ${body}
+    </section>
+  </div>
+</main>
+${footer()}`;
+}
+
+/* /canadian.html — "Canadian vendors". Every product whose `country` field
+ * is "CA" in the data index (p.canadian ? "CA" : null — the same mapping the
+ * index and the 🇨🇦 badge use; nulls are excluded, never guessed). Filter
+ * view, not an essay: mechanical intro, no editorial claims. Facets:
+ * #f-deals + #f-sort (no category facet; the canadian-only facet would be
+ * vacuous on a page where every row is Canadian). */
+function canadianPage() {
+  const items = products
+    .map((p, i) => ({ p, i }))
+    .filter(({ p }) => p.canadian)
+    .sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
+  const n = items.length;
+  const plural = n === 1 ? "" : "s";
+  const rows = items.map(({ p }) => dirRow(p)).join("\n");
+  return `${head(
+    "Canadian vendors — PlanPrice",
+    `Canadian B2B software vendors: ${n} verified Canadian ${n === 1 ? "company" : "companies"} — list prices and promos checked ${CHECKED}.`,
+    "/canadian.html",
+    '\n<script src="/filter.js" defer></script>'
+  )}
+${header("/canadian.html")}
+<main>
+  <div class="wrap" id="all-deals">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Canadian vendors</p>
+    <h1 class="page-title">Canadian vendors</h1>
+    <p class="section-sub">${n} Canadian vendor${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    ${filterBlock(false, { canadian: false })}
+    <section class="dir-cat" id="cat-canadian" aria-label="Canadian vendors">
+      <ul class="dir-rows">${rows}</ul>
+    </section>
+  </div>
+</main>
+${footer()}`;
+}
+
+// ---------------------------------------------------------------------------
 // Shared chrome — disclosure banner + footer text are byte-identical to v1.
 // ---------------------------------------------------------------------------
 
@@ -794,6 +878,10 @@ const IMPACT_TAG = `<meta name='impact-site-verification' value='d3933dd0-8d52-4
  * no beacon tag at all (output stays byte-identical to pre-beacon builds). */
 const CF_BEACON_TOKEN = "";
 
+/* Header nav (PP-SECTIONS-PHASE2): "/" was labeled "Deals" in phase 1, which
+ * would collide with the new /deals.html "Deals" entry — so the homepage
+ * link is "All deals" (matching the existing breadcrumb copy), and the nav
+ * gains "Deals" → /deals.html and "Canadian" → /canadian.html. */
 function header(active) {
   const nav = (href, label) =>
     `<a href="${href}"${active === href ? ' class="active"' : ""}>${label}</a>`;
@@ -807,7 +895,9 @@ function header(active) {
   <div class="wrap header-inner">
     <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
     <nav class="main-nav">
-      ${nav("/", "Deals")}
+      ${nav("/", "All deals")}
+      ${nav("/deals.html", "Deals")}
+      ${nav("/canadian.html", "Canadian")}
       ${nav("/compare.html", "Compare")}
       ${nav("/disclosure.html", "Disclosure")}
       ${nav("/about.html", "About")}
@@ -955,6 +1045,7 @@ ${footer()}`;
 
 function sitemap() {
   const paths = ["/", "/about.html", "/disclosure.html", "/privacy-policy.html", "/terms.html",
+    "/deals.html", "/canadian.html",
     ...products.map(p => `/deals/${p.slug}.html`),
     ...[...new Set(products.map(p => `/categories/${slugify(p.category)}.html`))].sort(),
     "/compare.html",
@@ -983,6 +1074,9 @@ const categories = [...new Set(products.map((p) => p.category))].sort();
 for (const c of categories) write(`categories/${slugify(c)}.html`, categoryPage(c));
 write("compare.html", compareIndexPage());
 for (const s of compareSets) write(`compare/${s.slug}.html`, compareSetPage(s));
+// Phase-2 section pages (PP-SECTIONS-PHASE2).
+write("deals.html", dealsPage());
+write("canadian.html", canadianPage());
 write("sitemap.xml", sitemap());
 write("robots.txt", robots());
 
@@ -1011,4 +1105,4 @@ write(
   ) + "\n"
 );
 
-console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length + categories.length + 1 + compareSets.length} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);
+console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length + categories.length + 1 + compareSets.length + 2} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);

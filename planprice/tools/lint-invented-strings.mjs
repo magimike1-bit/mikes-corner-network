@@ -1,6 +1,7 @@
-// lint-invented-strings.mjs — PP-SECTIONS acceptance: zero invented strings.
+// lint-invented-strings.mjs — PP-SECTIONS + PP-SECTIONS-PHASE2 acceptance:
+// zero invented strings.
 // Extracts text nodes from the NEW generated pages (categories/*,
-// compare.html, compare/*), normalizes whitespace, and asserts every
+// compare.html, compare/*, deals.html, canadian.html), normalizes whitespace, and asserts every
 // sentence is either a substring of the verified corpus (products.json +
 // review-scores.json + compare.json + all pre-existing page text) or a
 // whitelisted mechanical string (counts, dates, vs-joined titles, nav
@@ -90,7 +91,8 @@ function listHtml(dir, out = []) {
 }
 for (const f of listHtml(ROOT)) {
   const rel = f.slice(ROOT.length + 1).replace(/\\/g, "/");
-  if (rel.startsWith("categories/") || rel.startsWith("compare/") || rel === "compare.html")
+  if (rel.startsWith("categories/") || rel.startsWith("compare/") || rel === "compare.html" ||
+      rel === "deals.html" || rel === "canadian.html")
     continue;
   corpusParts.push(extractText(readFileSync(f, "utf8")).text);
 }
@@ -135,13 +137,33 @@ const mechanical = [
   new RegExp(
     `^Head-to-head comparisons of rival B2B software: verified pricing, current deals, and user feedback side by side\\. \\d+ comparisons tracked\\.$`
   ),
+  // Phase-2 pages (PP-SECTIONS-PHASE2): mechanical counts/dates/titles only.
+  /^Current promos$/,
+  /^Canadian vendors$/,
+  /^Current promos — PlanPrice$/,
+  /^Canadian vendors — PlanPrice$/,
+  /^All deals › Current promos$/,
+  /^All deals › Canadian vendors$/,
+  new RegExp(`^\\d+ active promos? · prices checked ${dateRe}$`),
+  new RegExp(`^\\d+ Canadian vendors? · prices checked ${dateRe}$`),
+  new RegExp(
+    `^Current promotions on B2B software: \\d+ active promos?, verified against vendor sites\\. Checked ${dateRe}\\.$`
+  ),
+  new RegExp(
+    `^Canadian B2B software vendors: \\d+ verified Canadian (company|companies) — list prices and promos checked ${dateRe}\\.$`
+  ),
+  // Empty-state copy (renders only when zero promos; listed so a future
+  // zero-promo build stays lint-clean — the sentence itself is mechanical).
+  /^No active promos right now — check back after the next price sweep\.$/,
 ];
 
 const isMechanical = (s) => mechanical.some((re) => re.test(s));
 
-// ---- lint the 13 new pages ------------------------------------------------
+// ---- lint the 15 new pages ------------------------------------------------
 const newPages = [];
 for (const c of categories) newPages.push(`categories/${c.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}.html`);
+newPages.push("deals.html");
+newPages.push("canadian.html");
 newPages.push("compare.html");
 for (const s of compare.sets) newPages.push(`compare/${s.slug}.html`);
 

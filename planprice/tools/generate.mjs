@@ -343,7 +343,10 @@ function dirRow(p) {
  * Phase 2 (PP-SECTIONS-PHASE2) adds the `facets` option: {dealsOnly, canadian}
  * booleans toggle the Deals-only and Canadian-only checkboxes, for pages
  * where a facet would be vacuous (e.g. every row on /deals.html is a deal). */
-function filterBlock(includeCategory = true, facets = {}) {
+/* filterForm() is the bare filter form (no wrapper). The 11 filter pages
+ * (9 category pages, /deals.html, /canadian.html) drop it directly into
+ * their own <div class="wrap"> so it is never double-wrapped. */
+function filterForm(includeCategory = true, facets = {}) {
   const showDealsOnly = facets.dealsOnly !== false;
   const showCanadian = facets.canadian !== false;
   let catField = "";
@@ -364,8 +367,7 @@ function filterBlock(includeCategory = true, facets = {}) {
   const canadianField = showCanadian
     ? `<label class="filter-check"><input type="checkbox" id="f-canadian" name="canadian-only"> 🇨🇦 Canadian only</label>\n        `
     : "";
-  return `<div class="wrap">
-    <form class="filter-ui" id="deal-filter" hidden aria-label="Filter and sort deals">
+  return `<form class="filter-ui" id="deal-filter" hidden aria-label="Filter and sort deals">
       <div class="filter-controls">
         ${catField}${dealsField}${canadianField}<label class="filter-field">Sort by
           <select id="f-sort" name="sort">
@@ -376,7 +378,15 @@ function filterBlock(includeCategory = true, facets = {}) {
         </label>
       </div>
       <p class="filter-count" id="f-count" aria-live="polite"></p>
-    </form>
+    </form>`;
+}
+
+/* Homepage wrapper: the homepage filter sits in <section class="section">
+ * with no .wrap of its own, so it keeps the filterBlock() wrap (byte-stable
+ * output — index.html must not change beyond nav/CSS). */
+function filterBlock(includeCategory = true, facets = {}) {
+  return `<div class="wrap">
+    ${filterForm(includeCategory, facets)}
   </div>`;
 }
 
@@ -687,14 +697,14 @@ function categoryPage(c) {
     `/categories/${slugify(c)}.html`,
     '\n<script src="/filter.js" defer></script>'
   )}
-${header("/")}
+${header(null)}
 <main>
   <div class="wrap" id="all-deals">
     <p class="breadcrumbs"><a href="/">All deals</a> › ${esc(c)}</p>
     <h1 class="page-title">${esc(c)}</h1>
     <p class="section-sub">${n} product${plural} tracked · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
     ${h2hBannerLink(c)}
-    ${filterBlock(false)}
+    ${filterForm(false)}
     <section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
       <ul class="dir-rows">${rows}</ul>
     </section>
@@ -764,7 +774,9 @@ ${header("/compare.html")}
     <p class="breadcrumbs"><a href="/compare.html">Compare</a> › ${esc(set.title)}</p>
     <h1 class="page-title">${esc(set.title)}</h1>
     <p class="section-sub">${set.products.length} products, side by side · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
-    ${cols}
+    <div class="compare-cols">
+      ${cols}
+    </div>
   </div>
 </main>
 ${footer()}`;
@@ -801,7 +813,7 @@ ${header("/deals.html")}
     <p class="breadcrumbs"><a href="/">All deals</a> › Current promos</p>
     <h1 class="page-title">Current promos</h1>
     <p class="section-sub">${n} active promo${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
-    ${filterBlock(false, { dealsOnly: false })}
+    ${filterForm(false, { dealsOnly: false })}
     <section class="dir-cat" id="cat-deals" aria-label="Current promos">
       ${body}
     </section>
@@ -836,7 +848,7 @@ ${header("/canadian.html")}
     <p class="breadcrumbs"><a href="/">All deals</a> › Canadian vendors</p>
     <h1 class="page-title">Canadian vendors</h1>
     <p class="section-sub">${n} Canadian vendor${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
-    ${filterBlock(false, { canadian: false })}
+    ${filterForm(false, { canadian: false })}
     <section class="dir-cat" id="cat-canadian" aria-label="Canadian vendors">
       <ul class="dir-rows">${rows}</ul>
     </section>

@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { startPriceNumeric, startPriceText } from "./price-parse.mjs";
+import { slugify } from "./slugify.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HOST = process.env.SITE_HOST || "staging.planprice.local";
@@ -63,7 +64,13 @@ const compareSets = [];
 }
 
 // Compare set containing the product slug, or null for non-participants.
-const setForSlug = (slug) => compareSets.find((s) => s.products.some((p) => p.slug === slug)) || null;
+// Map built once at load (same pattern as productBySlug). Keep-first
+// semantics match the old compareSets.find() on overlapping membership.
+const setByProductSlug = new Map();
+for (const s of compareSets)
+  for (const p of s.products)
+    if (!setByProductSlug.has(p.slug)) setByProductSlug.set(p.slug, s);
+const setForSlug = (slug) => setByProductSlug.get(slug) || null;
 // Compare sets whose members all belong to the category (banner lookup).
 const setsForCategory = (cat) => compareSets.filter((s) => s.category === cat);
 
@@ -320,10 +327,6 @@ function dirRow(p) {
   </li>`;
 }
 
-function slugify(s) {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-}
-
 /* ---- Deal filter UI (PP-DEAL-FILTER) ----
  * Progressive enhancement only: the form ships with `hidden` so no-JS
  * visitors (and crawlers) see the full static list untouched. filter.js
@@ -343,17 +346,18 @@ function slugify(s) {
 function filterBlock(includeCategory = true, facets = {}) {
   const showDealsOnly = facets.dealsOnly !== false;
   const showCanadian = facets.canadian !== false;
-  const cats = [...new Set(products.map((p) => p.category))].sort();
-  const opts = [`<option value="all">All categories</option>`]
-    .concat(cats.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`))
-    .join("\n          ");
-  const catField = includeCategory
-    ? `<label class="filter-field">Category
+  let catField = "";
+  if (includeCategory) {
+    const cats = [...new Set(products.map((p) => p.category))].sort();
+    const opts = [`<option value="all">All categories</option>`]
+      .concat(cats.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`))
+      .join("\n          ");
+    catField = `<label class="filter-field">Category
           <select id="f-category" name="category">
           ${opts}
           </select>
-        </label>\n        `
-    : "";
+        </label>\n        `;
+  }
   const dealsField = showDealsOnly
     ? `<label class="filter-check"><input type="checkbox" id="f-deals" name="deals-only"> Deals only</label>\n        `
     : "";

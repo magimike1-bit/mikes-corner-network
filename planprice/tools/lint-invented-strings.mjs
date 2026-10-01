@@ -11,6 +11,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { slugify } from "./slugify.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "data");
@@ -72,9 +73,14 @@ function collectStrings(v, out) {
 }
 
 const corpusParts = [];
-for (const f of ["products.json", "review-scores.json", "compare.json"]) {
+// Read each data file exactly once; the parsed docs are reused for both the
+// corpus and the mechanical allowlist below.
+const productsDoc = JSON.parse(readFileSync(join(DATA, "products.json"), "utf8"));
+const reviewScoresDoc = JSON.parse(readFileSync(join(DATA, "review-scores.json"), "utf8"));
+const compareDoc = JSON.parse(readFileSync(join(DATA, "compare.json"), "utf8"));
+for (const doc of [productsDoc, reviewScoresDoc, compareDoc]) {
   const strings = [];
-  collectStrings(JSON.parse(readFileSync(join(DATA, f), "utf8")), strings);
+  collectStrings(doc, strings);
   corpusParts.push(strings.map(norm).join("\n"));
 }
 
@@ -99,8 +105,8 @@ for (const f of listHtml(ROOT)) {
 const corpus = norm(corpusParts.join("\n"));
 
 // ---- mechanical allowlist (no verdicts, no copy — counts/dates/titles) ----
-const products = JSON.parse(readFileSync(join(DATA, "products.json"), "utf8")).products;
-const compare = JSON.parse(readFileSync(join(DATA, "compare.json"), "utf8"));
+const products = productsDoc.products;
+const compare = compareDoc;
 const categories = [...new Set(products.map((p) => p.category))];
 const names = products.map((p) => p.name);
 const setTitles = compare.sets.map((s) => s.title);
@@ -161,7 +167,7 @@ const isMechanical = (s) => mechanical.some((re) => re.test(s));
 
 // ---- lint the 15 new pages ------------------------------------------------
 const newPages = [];
-for (const c of categories) newPages.push(`categories/${c.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}.html`);
+for (const c of categories) newPages.push(`categories/${slugify(c)}.html`);
 newPages.push("deals.html");
 newPages.push("canadian.html");
 newPages.push("compare.html");

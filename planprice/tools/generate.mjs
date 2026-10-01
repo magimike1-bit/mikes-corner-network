@@ -880,7 +880,7 @@ function head(title, description, path, extraHead = "") {
  * token, and empty-token output stays byte-identical to pre-beacon builds. */
 function beaconTag() {
   if (!CF_BEACON_TOKEN) return "";
-  return `\n<!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflare.com/beacon.min.js" data-cf-beacon='{"token": "${esc(CF_BEACON_TOKEN)}"}'></script>`;
+  return `\n<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "${esc(CF_BEACON_TOKEN)}"}'></script><!-- End Cloudflare Web Analytics -->`;
 }
 
 // Impact site-verification tag (Joseph's affiliate work, 2026-09-30).

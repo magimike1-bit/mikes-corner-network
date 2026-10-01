@@ -892,7 +892,7 @@ const IMPACT_TAG = `<meta name='impact-site-verification' value='d3933dd0-8d52-4
  * dashboard (Web Analytics → Add site → planprice.ca). Joseph pastes it
  * here when he adds the site; until then it stays "" and head() renders
  * no beacon tag at all (output stays byte-identical to pre-beacon builds). */
-const CF_BEACON_TOKEN = "";
+const CF_BEACON_TOKEN = "6ff87ae657ed400c827b091d871dc609";
 
 /* Header nav (PP-SECTIONS-PHASE2): "/" was labeled "Deals" in phase 1, which
  * would collide with the new /deals.html "Deals" entry — so the homepage

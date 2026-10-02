@@ -421,3 +421,67 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .no-affiliate {
   font-style: italic;
 }
+
+/* ---- Overnight-5 features (PP-OVERNIGHT-5) ---- */
+/* F1: annual-billing savings callout under a tier's notes. */
+.annual-callout {
+  margin: 0.3rem 0 0;
+  font-size: 0.92em;
+  color: #166534;
+  font-weight: 600;
+}
+/* F1: biggest-savers strip on /deals.html; rank numbers via CSS counters. */
+.savers-pointer {
+  margin: 1rem 0 0;
+}
+.saver-rows {
+  list-style: none;
+  counter-reset: saver;
+  padding: 0;
+  margin: 0;
+}
+.saver-row {
+  counter-increment: saver;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #eee;
+}
+.saver-row::before {
+  content: counter(saver) ". ";
+  font-weight: 700;
+  color: #555;
+}
+/* F2: free-tier cards. */
+.free-tier {
+  margin: 0.5rem 0 0;
+}
+.free-notes {
+  margin: 0.15rem 0 0;
+  color: #444;
+}
+/* F3: deal-verified line + staleness badge. */
+.deal-verified {
+  font-weight: 600;
+}
+.badge.stale {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  margin-left: 0.5rem;
+}
+/* F4: leaderboard rows; rank numbers via CSS counters (no rank text). */
+.rated-list {
+  list-style: none;
+  counter-reset: rated;
+  padding: 0;
+  margin: 0;
+}
+.rated-row {
+  counter-increment: rated;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #eee;
+}
+.rated-row::before {
+  content: counter(rated) ". ";
+  font-weight: 700;
+  color: #555;
+}

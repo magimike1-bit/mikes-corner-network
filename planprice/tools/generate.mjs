@@ -5,6 +5,9 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { startPriceNumeric, startPriceText } from "./price-parse.mjs";
 import { slugify } from "./slugify.mjs";
+import { tierSavings, allSavings, firstYear } from "./savings.mjs";
+import { rankByAvg, rankByReviews } from "./review-rank.mjs";
+import { fmtDate, isStale } from "./freshness.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HOST = process.env.SITE_HOST || "staging.planprice.local";
@@ -540,6 +543,7 @@ ${header("/")}
 ${trustStrip()}
 <main>
   ${spotlightBlock(spotlightProduct())}
+  <p class="savers-pointer wrap">See the <a href="/deals.html#biggest-savers">biggest annual-billing savings</a> across all tracked products.</p>
   <section class="section directory">
     ${filterBlock()}
     ${directorySections()}
@@ -555,7 +559,11 @@ ${footer()}`;
 // Deal pages
 // ---------------------------------------------------------------------------
 
-function factsStrip(p) {
+/* F3 verification-freshness (PP-OVERNIGHT-5): the Verified row renders the
+ * product's last_verified as an absolute date ("Sep 30, 2026" — idempotent,
+ * never "days ago"). The optional `extra` slot lets compare pages append
+ * the F5 first-year-cost item without touching deal pages. */
+function factsStrip(p, extra = "") {
   const promo = p.deal && !isExpiredDeal(p)
     ? `<span class="badge deal">${esc(p.deal.headline)}</span>`
     : "No public promo — standard list prices";
@@ -567,10 +575,32 @@ function factsStrip(p) {
     <div class="facts-item"><dt>Starting price</dt><dd>${fromPrice(p)}</dd></div>
     <div class="facts-item"><dt>Current promo</dt><dd>${promo}${flags ? " " + flags : ""}</dd></div>
     <div class="facts-item"><dt>Category</dt><dd>${esc(p.category)}</dd></div>
-    <div class="facts-item"><dt>Verified</dt><dd><time datetime="${esc(p.last_verified)}">${esc(p.last_verified)}</time></dd></div>
+    <div class="facts-item"><dt>Verified</dt><dd>Prices verified <time datetime="${esc(p.last_verified)}">${esc(fmtDate(p.last_verified))}</time></dd></div>
     <div class="facts-item"><dt>Vendor</dt><dd><a href="${esc(p.vendor_homepage)}" rel="noopener">${vendorHost(p.vendor_homepage)}</a></dd></div>
-    ${expiry}
+    ${expiry}${extra}
   </dl>`;
+}
+
+/* F3: "Deal verified <date>" for deals with a verified_date; when the deal
+ * is more than 45 days older than the build CHECKED date, a staleness badge
+ * renders instead of silent trust. isStale() is pure (freshness.mjs) so the
+ * comparator is unit-testable. */
+function dealVerifiedLine(p) {
+  if (!(p.deal && p.deal.verified_date)) return "";
+  const vd = p.deal.verified_date;
+  const badge = isStale(vd, CHECKED)
+    ? ` <span class="badge stale">Re-check before buying — last verified ${esc(fmtDate(vd))}</span>`
+    : "";
+  return `<p class="deal-verified">Deal verified <time datetime="${esc(vd)}">${esc(fmtDate(vd))}</time>${badge}</p>`;
+}
+
+/* F5 first-year cost (PP-OVERNIGHT-5): compare pages only — starting-tier
+ * price × 12, labeled. Returns "" (renders nothing) for quote/free/
+ * per-transaction starting tiers: an honest gap, never a guess. */
+function firstYearItem(p) {
+  const fy = firstYear(p);
+  if (!fy) return "";
+  return `<div class="facts-item"><dt>First-year cost (starting tier)</dt><dd>${esc(fy.text)}</dd></div>`;
 }
 
 function verificationBox(p) {
@@ -582,13 +612,15 @@ function verificationBox(p) {
       : "";
     return `${base}
       <p class="verify-headline">${esc(p.deal.headline)}</p>
-      <p class="verify-src">Source: <a href="${esc(p.deal.source_url)}" rel="noopener">${vendorHost(p.deal.source_url)}</a> — checked <time datetime="${esc(p.deal.verified_date)}">${esc(p.deal.verified_date)}</time>.</p>
+      ${dealVerifiedLine(p)}
+      <p class="verify-src">Source: <a href="${esc(p.deal.source_url)}" rel="noopener">${vendorHost(p.deal.source_url)}</a>.</p>
       ${expiry}<p class="verify-note">Promotions change. Confirm the current offer on the vendor's page before buying.</p>
     </aside>`;
   }
   if (p.deal && isExpiredDeal(p)) {
     return `${base}
       <p class="verify-headline">${esc(p.deal.headline)}</p>
+      ${dealVerifiedLine(p)}
       <p class="verify-note">This promotion ended <time datetime="${esc(p.deal.end_date)}">${esc(p.deal.end_date)}</time>. Prices below are standard list.</p>
     </aside>`;
   }
@@ -607,12 +639,23 @@ function claimBlock(p) {
     </section>`;
 }
 
+/* F1 annual-billing savings (PP-OVERNIGHT-5): a callout renders under a
+ * tier's notes ONLY when the notes match one of the P1–P4 shapes in
+ * tools/savings.mjs. No match → no callout (honest gap, never an estimate).
+ * `~N% off` notes (semrush) render verbatim with no dollar figure. The
+ * callout is derived in savings.mjs so the lint can pin the exact strings. */
+function annualCallout(t) {
+  const sv = tierSavings(t);
+  if (!sv) return "";
+  return `\n      <p class="annual-callout">${esc(sv.callout)}</p>`;
+}
+
 function pricingTable(p) {
   const rows = p.pricing_tiers.map(t => `<tr>
       <th scope="row">${esc(t.name)}</th>
       <td class="price">${esc(t.price)}</td>
       <td>${esc(t.cadence)}</td>
-      <td>${esc(t.notes)}</td>
+      <td>${esc(t.notes)}${annualCallout(t)}</td>
     </tr>`).join("\n");
   return `<section class="section pricing">
       <h2>Pricing</h2>
@@ -802,13 +845,14 @@ function fitBlock(p) {
 /* One page per compare set: per-product columns reusing factsStrip(),
  * pricingTable(), reviewsSection() (only when hasReviews(p)) and
  * scoreSection() (renders nothing on a missing entry) — the identical
- * components and strings as the deal pages. */
+ * components and strings as the deal pages. The F5 first-year-cost item is
+ * appended to each column's facts strip (compare pages only). */
 function compareSetPage(set) {
   const cols = set.products
     .map((p) => `<section class="compare-col" id="cmp-${esc(p.slug)}" aria-label="${esc(p.name)}">
       <h2 class="compare-col-name"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></h2>
       ${fitBlock(p)}
-      ${factsStrip(p)}
+      ${factsStrip(p, firstYearItem(p))}
       ${pricingTable(p)}
       ${reviewsSection(p)}
       ${scoreSection(p)}
@@ -837,6 +881,29 @@ ${footer()}`;
 // Deals + Canadian vendors pages (PP-SECTIONS-PHASE2)
 // ---------------------------------------------------------------------------
 
+/* F1 "biggest annual-billing savings" strip (PP-OVERNIGHT-5): the top 5
+ * tier-level savings site-wide, each "Product — Tier: save $X/yr (per
+ * seat)". Rendered on /deals.html (directory intent); the homepage carries
+ * a one-line pointer (see indexPage). Derived in savings.mjs. */
+function saversStrip() {
+  const top = allSavings(products).slice(0, 5);
+  const items = top
+    .map(
+      (s) =>
+        `<li class="saver-row"><a href="/deals/${esc(s.slug)}.html">${esc(s.name)}</a> — ${esc(s.tier)}: ${esc(s.saveText)}</li>`
+    )
+    .join("\n");
+  return `<section class="section savers" id="biggest-savers" aria-label="Biggest annual-billing savings">
+  <div class="wrap">
+    <h2 class="section-title">Biggest annual-billing savings</h2>
+    <p class="section-sub">Top 5 tier-level savings when billed annually, computed from verified list prices.</p>
+    <ol class="saver-rows">
+    ${items}
+    </ol>
+  </div>
+</section>`;
+}
+
 /* /deals.html — "Current promos". Every product with a current, non-expired
  * promo (reuses liveDeals() / isExpiredDeal()). Intro line is a mechanical
  * count/date. Empty state (zero promos) is honest: no invented urgency, no
@@ -864,6 +931,7 @@ ${header("/deals.html")}
     <p class="breadcrumbs"><a href="/">All deals</a> › Current promos</p>
     <h1 class="page-title">Current promos</h1>
     <p class="section-sub">${n} active promo${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    ${saversStrip()}
     ${filterForm(false, { dealsOnly: false })}
     <section class="dir-cat" id="cat-deals" aria-label="Current promos">
       ${body}
@@ -915,6 +983,97 @@ ${footer()}`;
  * beyond what products.json already states. New pages go through the same
  * head() + header() + footer() chrome — never forked. No JS on these
  * pages (works with JS disabled). */
+
+/* /free.html — "Free to start" (PP-OVERNIGHT-5, F2). The products with a
+ * $0 tier: one card each showing the product's name, its tagline verbatim,
+ * and each $0 tier's name + notes verbatim. No computed strings on the
+ * cards — anything not in the data renders as nothing. */
+function freePage() {
+  const items = products
+    .map((p, i) => ({ p, i }))
+    .filter(({ p }) => (p.pricing_tiers || []).some((t) => t.price === "$0"))
+    .sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
+  const n = items.length;
+  const cards = items
+    .map(({ p }) => {
+      const freeTiers = p.pricing_tiers.filter((t) => t.price === "$0");
+      const tierBlocks = freeTiers
+        .map(
+          (t) =>
+            `<p class="free-tier"><strong>${esc(t.name)}</strong> — ${esc(t.price)}</p>\n      <p class="free-notes">${esc(t.notes)}</p>`
+        )
+        .join("\n      ");
+      return `<li class="dir-row free-card" data-slug="${esc(p.slug)}">
+      <div class="dir-row-main">
+        <h3 class="dir-row-name"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></h3>
+        <p class="dir-row-tag">${esc(p.tagline)}</p>
+        ${tierBlocks}
+      </div>
+    </li>`;
+    })
+    .join("\n");
+  return `${head(
+    "Free to start — PlanPrice",
+    `Start free: ${n} products with a $0 tier — verified pricing, checked ${CHECKED}.`,
+    "/free.html"
+  )}
+${header("/free.html")}
+<main>
+  <div class="wrap" id="all-deals">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Free to start</p>
+    <h1 class="page-title">Free to start</h1>
+    <p class="section-sub">${n} products with a free tier · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <section class="dir-cat" id="cat-free" aria-label="Free to start">
+      <ul class="dir-rows">${cards}</ul>
+    </section>
+  </div>
+</main>
+${footer()}`;
+}
+
+/* /top-rated.html — leaderboard (PP-OVERNIGHT-5, F4). Products ranked by
+ * the average of their available G2/Capterra scores (rowFor in
+ * tools/review-rank.mjs), then a second list ranked by total review count.
+ * Products with no verified scores are excluded entirely — never
+ * zero-filled. Rank numbers come from CSS counters, not text. */
+function topRatedPage() {
+  const byAvg = rankByAvg(products, reviewScores);
+  const byReviews = rankByReviews(products, reviewScores);
+  const n = byAvg.length;
+  const avgRows = byAvg
+    .map((r) => `<li class="rated-row">${esc(r.line)}</li>`)
+    .join("\n      ");
+  const revRows = byReviews
+    .map((r) => `<li class="rated-row">${esc(r.mostLine)}</li>`)
+    .join("\n      ");
+  return `${head(
+    "Top rated — PlanPrice",
+    `The highest-rated B2B software by verified G2 and Capterra scores: ${n} products ranked. Scores checked ${CHECKED}.`,
+    "/top-rated.html"
+  )}
+${header("/top-rated.html")}
+<main>
+  <div class="wrap">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Top rated</p>
+    <h1 class="page-title">Top rated</h1>
+    <p class="section-sub">${n} products ranked by average G2/Capterra score · scores checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <section class="section rated" aria-label="Highest average score">
+      <h2 class="section-title">Highest average score</h2>
+      <ol class="rated-list">
+      ${avgRows}
+      </ol>
+    </section>
+    <section class="section rated" aria-label="Most reviewed">
+      <h2 class="section-title">Most reviewed</h2>
+      <ol class="rated-list">
+      ${revRows}
+      </ol>
+    </section>
+    <p class="fine">Averages are the mean of each product's available G2 and Capterra scores — not a PlanPrice rating. Scores checked ${CHECKED}.</p>
+  </div>
+</main>
+${footer()}`;
+}
 
 function guidePage(g) {
   const c = g.category;
@@ -1096,6 +1255,8 @@ function header(active) {
       ${nav("/", "All deals")}
       ${nav("/deals.html", "Deals")}
       ${nav("/canadian.html", "Canadian")}
+      ${nav("/free.html", "Free")}
+      ${nav("/top-rated.html", "Top rated")}
       ${nav("/compare.html", "Compare")}
       ${nav("/guides.html", "Guides")}
       ${nav("/glossary.html", "Glossary")}
@@ -1274,7 +1435,7 @@ ${footer()}`;
 function sitemap() {
   const paths = ["/", "/about.html", "/disclosure.html", "/privacy-policy.html", "/terms.html",
     "/contact.html",
-    "/deals.html", "/canadian.html",
+    "/deals.html", "/canadian.html", "/free.html", "/top-rated.html",
     ...products.map(p => `/deals/${p.slug}.html`),
     ...[...new Set(products.map(p => `/categories/${slugify(p.category)}.html`))].sort(),
     "/compare.html",
@@ -1310,6 +1471,9 @@ for (const s of compareSets) write(`compare/${s.slug}.html`, compareSetPage(s));
 // Phase-2 section pages (PP-SECTIONS-PHASE2).
 write("deals.html", dealsPage());
 write("canadian.html", canadianPage());
+// Overnight-5 collection pages (PP-OVERNIGHT-5): /free.html + /top-rated.html.
+write("free.html", freePage());
+write("top-rated.html", topRatedPage());
 // AdSense-readiness content (PP-ADSENSE-READINESS): contact page (via
 // STATIC_PAGES above), buyer's guides, and the pricing glossary.
 for (const g of guidesData) write(`guides/${g.slug}.html`, guidePage(g));
@@ -1344,4 +1508,4 @@ write(
   ) + "\n"
 );
 
-console.log(`Generated ${1 + products.length + Object.keys(STATIC_PAGES).length + categories.length + 1 + compareSets.length + 2 + guidesData.length + 1 + glossaryData.length + 1} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);
+console.log(`Generated ${3 + products.length + Object.keys(STATIC_PAGES).length + categories.length + 1 + compareSets.length + 2 + guidesData.length + 1 + glossaryData.length + 1} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);

@@ -12,6 +12,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { slugify } from "./slugify.mjs";
+import { tierSavings, allSavings, firstYear } from "./savings.mjs";
+import { rankByAvg, rankByReviews } from "./review-rank.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "data");
@@ -84,9 +86,13 @@ for (const doc of [productsDoc, reviewScoresDoc, compareDoc]) {
   corpusParts.push(strings.map(norm).join("\n"));
 }
 
-// All pre-existing page text (everything except the 13 new pages): the new
+// All pre-existing page text (everything except the linted pages): the new
 // pages reuse header/footer/dir-row/facts-strip/pricing/reviews/scores
 // components, so any sentence they render from those must already appear.
+// NOTE: deals/*.html are linted pages (PP-OVERNIGHT-5 extended the lint to
+// the modified deal pages), so they are EXCLUDED from the corpus — otherwise
+// they would self-pass and the check would be vacuous. Same for the two new
+// collection pages.
 function listHtml(dir, out = []) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, e.name);
@@ -98,7 +104,8 @@ function listHtml(dir, out = []) {
 for (const f of listHtml(ROOT)) {
   const rel = f.slice(ROOT.length + 1).replace(/\\/g, "/");
   if (rel.startsWith("categories/") || rel.startsWith("compare/") || rel === "compare.html" ||
-      rel === "deals.html" || rel === "canadian.html")
+      rel === "deals.html" || rel === "canadian.html" ||
+      rel === "free.html" || rel === "top-rated.html" || rel.startsWith("deals/"))
     continue;
   corpusParts.push(extractText(readFileSync(f, "utf8")).text);
 }
@@ -113,6 +120,7 @@ const setTitles = compare.sets.map((s) => s.title);
 const dateRe = String.raw`\d{4}-\d{2}-\d{2}`;
 
 const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const monthDateRe = String.raw`(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{1,2}, \d{4}`;
 const mechanical = [
   /^Compare$/,
   /^Compare — PlanPrice$/,
@@ -164,17 +172,165 @@ const mechanical = [
   // Empty-state copy (renders only when zero promos; listed so a future
   // zero-promo build stays lint-clean — the sentence itself is mechanical).
   /^No active promos right now — check back after the next price sweep\.$/,
+
+  // ---- PP-OVERNIGHT-5: deal-page template chrome + §4 mechanical templates.
+  // Deal pages are linted now, so their fixed-shape template sentences need
+  // allowlist entries (they previously passed via the corpus). Every entry
+  // below is either a fixed template string or an exact enumeration derived
+  // from the data by the shared tools/savings.mjs + tools/review-rank.mjs
+  // modules — the same code the generator uses, so the lint pins the exact
+  // numbers instead of trusting a shaped regex.
+  // Facts-strip / pricing-table / section chrome (fixed wording).
+  /^Starting price$/,
+  /^Current promo$/,
+  /^Verified$/,
+  /^Vendor$/,
+  /^Category$/,
+  /^Offer ends$/,
+  /^First-year cost \(starting tier\)$/,
+  /^Pricing$/,
+  /^Plan$/,
+  /^Price$/,
+  /^Cadence$/,
+  /^Notes$/,
+  /^Deal verification$/,
+  /^What users report$/,
+  /^Commonly praised$/,
+  /^Commonly criticized$/,
+  /^Review scores$/,
+  /^Related deals$/,
+  /^No current promo$/,
+  /^No public promo — standard list prices$/,
+  /^Always confirm on the vendor's pricing page before purchasing — plans and prices change\.$/,
+  /^Summarized from user reviews on G2 and Capterra; not a PlanPrice rating\.$/,
+  /^Promotions change\.$/,
+  /^Confirm the current offer on the vendor's page before buying\.$/,
+  /^Check the current price$/,
+  /^Affiliate link pending approval — this button is inert for now\.$/,
+  /^See our affiliate disclosure \.$/,
+  // F3 freshness sentences (§4: absolute dates only, idempotent).
+  new RegExp(`^Prices verified ${monthDateRe}$`),
+  new RegExp(`^Deal verified ${monthDateRe}$`),
+  new RegExp(`^Re-check before buying — last verified ${monthDateRe}$`),
+  new RegExp(`^No public promotion found \\(checked ${dateRe}\\)\\.$`),
+  /^Prices below are standard list\.$/,
+  new RegExp(`^This promotion ended ${dateRe}\\. Prices below are standard list\\.$`),
+  new RegExp(`^Vendor offer ends ${dateRe}\\.$`),
+  // Per-product deal-page templates (title/meta checked whole, not split).
+  ...products.map(
+    (p) => new RegExp(`^${escRe(p.name)} Pricing & Deals \\(Verified ${dateRe}\\) — PlanPrice$`)
+  ),
+  ...products.map(
+    (p) =>
+      new RegExp(
+        `^${escRe(p.name)} verified list pricing and current promotions\\. ${escRe(p.tagline)} Checked ${dateRe} by the PlanPrice research team\\.$`
+      )
+  ),
+  ...products.map((p) => new RegExp(`^All deals › ${escRe(p.name)}$`)),
+  ...products.map((p) => new RegExp(`^${escRe(p.name)} list prices, verified ${dateRe}\\.$`)),
+  ...products
+    .filter((p) => p.similar_to)
+    .map((p) => new RegExp(`^Think of it as: ${escRe(p.similar_to)} \\.$`)),
+  ...products
+    .filter((p) => p.canadian)
+    .map(() => new RegExp(`^🇨🇦 Canadian company — founded in .+, headquartered in .+\\.$`)),
+  ...products
+    .filter((p) => p.affiliate && p.affiliate.status === "none")
+    .map((p) => new RegExp(`^Visit ${escRe(p.name)} →$`)),
+  ...products
+    .filter((p) => p.affiliate && p.affiliate.status === "none")
+    .map(
+      (p) =>
+        new RegExp(
+          `^PlanPrice has no affiliate relationship with ${escRe(p.name)} — we earn nothing if you choose them\\.$`
+        )
+    ),
+  // Deal verify-src host line (host is a substring of the data's source_url;
+  // the stripped link leaves a space before the final period).
+  ...products
+    .filter((p) => p.deal)
+    .map((p) => new RegExp(`^Source: ${escRe(new URL(p.deal.source_url).hostname)} \\.$`)),
+  // Review-score source lines, exact from review-scores.json.
+  ...products.flatMap((p) => {
+    const entry = reviewScoresDoc.scores[p.slug];
+    if (!entry) return [];
+    return [
+      ["G2", entry.g2],
+      ["Capterra", entry.capterra],
+    ]
+      .filter(([, s]) => s && typeof s.score === "number")
+      .map(([label, s]) => {
+        const reviews =
+          typeof s.reviews === "number" ? ` \\(${s.reviews.toLocaleString("en-US")} reviews\\)` : "";
+        // The stripped <a> label leaves "G2 :" / "Capterra :" (space before colon).
+        return new RegExp(`^${label} : ${escRe(String(s.score))}/5${reviews}$`);
+      });
+  }),
+  new RegExp(
+    `^Scores are aggregate user ratings from third-party review sites, checked ${dateRe}\\.$`
+  ),
+  /^They are not PlanPrice ratings\.$/,
+  // F1 §4 template: exact callout strings, derived by tools/savings.mjs.
+  ...products.flatMap((p) =>
+    (p.pricing_tiers || [])
+      .map((t) => tierSavings(t))
+      .filter(Boolean)
+      .map((sv) => new RegExp(`^${escRe(sv.callout)}$`))
+  ),
+  // F5 §4 template: exact first-year cells, derived by tools/savings.mjs.
+  ...products
+    .map((p) => firstYear(p))
+    .filter(Boolean)
+    .map((fy) => new RegExp(`^${escRe(fy.text)}$`)),
+  // F1 biggest-savers strip: exact top-5 lines.
+  /^Biggest annual-billing savings$/,
+  /^Top 5 tier-level savings when billed annually, computed from verified list prices\.$/,
+  ...allSavings(products)
+    .slice(0, 5)
+    .map((s) => new RegExp(`^${escRe(s.line)}$`)),
+  // F2 /free.html.
+  /^Free to start — PlanPrice$/,
+  /^All deals › Free to start$/,
+  /^Free to start$/,
+  new RegExp(`^Start free: \\d+ products with a \\$0 tier — verified pricing, checked ${dateRe}\\.$`),
+  new RegExp(`^\\d+ products with a free tier · prices checked ${dateRe}$`),
+  ...products.flatMap((p) =>
+    (p.pricing_tiers || [])
+      .filter((t) => t.price === "$0")
+      .map((t) => new RegExp(`^${escRe(t.name)} — ${escRe(t.price)}$`))
+  ),
+  // F4 /top-rated.html.
+  /^Top rated — PlanPrice$/,
+  /^All deals › Top rated$/,
+  /^Top rated$/,
+  new RegExp(
+    `^The highest-rated B2B software by verified G2 and Capterra scores: \\d+ products ranked\\. Scores checked ${dateRe}\\.$`
+  ),
+  new RegExp(`^\\d+ products ranked by average G2/Capterra score · scores checked ${dateRe}$`),
+  /^Highest average score$/,
+  /^Most reviewed$/,
+  ...rankByAvg(products, reviewScoresDoc).map((r) => new RegExp(`^${escRe(r.line)}$`)),
+  ...rankByReviews(products, reviewScoresDoc).map((r) => new RegExp(`^${escRe(r.mostLine)}$`)),
+  /^Averages are the mean of each product's available G2 and Capterra scores — not a PlanPrice rating\.$/,
+  new RegExp(`^Scores checked ${dateRe}\\.$`),
 ];
 
 const isMechanical = (s) => mechanical.some((re) => re.test(s));
 
-// ---- lint the 15 new pages ------------------------------------------------
+// ---- lint the new + modified pages ----------------------------------------
+// PP-OVERNIGHT-5 extended the page list: the two new collection pages plus
+// every modified deal page (deals/*.html). Compare pages were already
+// covered. Every new sentence must be corpus-verbatim or a whitelisted
+// mechanical template from brief §4 (counts, SAVE values, dates).
 const newPages = [];
 for (const c of categories) newPages.push(`categories/${slugify(c)}.html`);
 newPages.push("deals.html");
 newPages.push("canadian.html");
+newPages.push("free.html");
+newPages.push("top-rated.html");
 newPages.push("compare.html");
 for (const s of compare.sets) newPages.push(`compare/${s.slug}.html`);
+for (const p of products) newPages.push(`deals/${p.slug}.html`);
 
 let failures = 0;
 for (const rel of newPages) {

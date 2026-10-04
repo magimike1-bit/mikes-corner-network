@@ -526,9 +526,9 @@ function expiredSection() {
 function indexPage() {
   return `${head(
     "PlanPrice — Verified B2B Software Deals & Pricing",
-    "PlanPrice tracks verified list prices and current promotions for " +
+    "PlanPrice tracks verified list prices and promotions for " +
     products.length +
-    " essential B2B software products — accounting, CRM, ecommerce, POS, and more. Every deal is checked against the vendor's own site.",
+    " essential B2B software products. Every deal is checked against the vendor's own site.",
     "/",
     "\n" + IMPACT_TAG + '\n<script src="/filter.js" defer></script>'
   )}

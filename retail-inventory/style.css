@@ -91,3 +91,9 @@ main { padding: 32px 0 48px; }
 /* Landing page imagery */
 .hero-img { width: 100%; height: auto; display: block; border-radius: 10px; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 20px; }
 .card-img { display: block; width: calc(100% + 40px); margin: -18px -20px 12px; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px 8px 0 0; }
+
+/* Article illustration figures — wired by the image pipeline (stage 6.5).
+   Constrains large generated images to fit inside the article column. */
+.post-figure { margin: 1.75rem auto; max-width: 100%; }
+.post-figure img { display: block; max-width: 100%; height: auto; border-radius: 8px; }
+.post-figure figcaption { margin-top: 0.5rem; font-size: 0.85em; color: #666; }

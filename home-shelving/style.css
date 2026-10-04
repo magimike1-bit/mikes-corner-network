@@ -89,3 +89,9 @@ main { padding: 32px 0 48px; }
 .safety-note { margin-top: 12px; font-size: 0.82rem; line-height: 1.5; }
 
 .site-footer .ai-disclosure{font-size:.85em;opacity:.85}
+
+/* Article illustration figures — wired by the image pipeline (stage 6.5).
+   Constrains large generated images to fit inside the article column. */
+.post-figure { margin: 1.75rem auto; max-width: 100%; }
+.post-figure img { display: block; max-width: 100%; height: auto; border-radius: 8px; }
+.post-figure figcaption { margin-top: 0.5rem; font-size: 0.85em; color: #666; }

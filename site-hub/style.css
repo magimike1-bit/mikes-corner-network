@@ -279,3 +279,38 @@ main { padding: 8px 0 56px; }
   .pulse { animation: none; }
   .btn, .visit .arrow { transition: none; }
 }
+
+/* ---------- Newsletter signup ---------- */
+.newsletter-signup {
+  background: var(--cream, #fff9f0);
+  border: 1px solid var(--line, #e9dfc9);
+  border-radius: 14px;
+  padding: 28px;
+  margin: 36px 0;
+}
+.newsletter-signup h2 { margin: 0 0 6px; font-size: 1.35rem; }
+.newsletter-signup .nl-sub { color: var(--muted, #6f6152); margin: 0 0 16px; }
+.nl-form { display: flex; flex-wrap: wrap; gap: 10px; }
+.nl-form input[type="email"], .nl-form select {
+  flex: 1 1 220px; padding: 12px 14px; font-size: 1rem;
+  border: 1px solid var(--line, #e9dfc9); border-radius: 999px;
+  background: #fff; color: var(--ink, #231a12);
+}
+.nl-form input[type="email"]:focus, .nl-form select:focus {
+  outline: none; border-color: var(--accent, #c2410c);
+}
+.nl-form button {
+  padding: 12px 26px; font-size: 1rem; font-weight: 700;
+  background: var(--accent, #c2410c); color: #fff;
+  border: none; border-radius: 999px; cursor: pointer;
+}
+.nl-form button:hover { background: var(--accent-dark, #9a3412); }
+.nl-privacy { font-size: .85rem; color: var(--muted, #6f6152); margin: 12px 0 0; }
+.nl-sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.newsletter-compact { padding: 22px; }
+@media (max-width: 560px) {
+  .nl-form input[type="email"], .nl-form select, .nl-form button { flex: 1 1 100%; }
+}

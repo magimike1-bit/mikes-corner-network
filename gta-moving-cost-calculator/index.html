@@ -129,7 +129,7 @@
             <option value="11">November</option>
             <option value="12">December</option>
           </select>
-          <p class="hint" style="margin-top:.8em;"><label class="option" style="margin-bottom:0;"><input type="checkbox" id="in-endofmonth"><span class="opt-label" style="font-weight:600;">Moving on the 28th–31st</span></label></p>
+          <p class="hint hint--roomy"><label class="option option--flush"><input type="checkbox" id="in-endofmonth"><span class="opt-label">Moving on the 28th–31st</span></label></p>
           <p class="hint">Peak season (June–September) and end-of-month dates are the busiest — we'll show booking guidance, not a markup.</p>
         </fieldset>
 
@@ -141,10 +141,11 @@
   </section>
 
   <section class="content" aria-labelledby="how-heading">
-    <div class="wrap" style="max-width:760px">
+    <div class="wrap wrap--narrow">
       <h2 id="how-heading">How we estimate</h2>
       <p>Every range on this page comes from one cost model, built from published 2026 GTA mover pricing (onthemove1.ca, vrmoving.ca citing HomeStars, moovy.ca, professionamover.ca). Nothing is invented: the calculator adds the ranges below, nothing more.</p>
 
+      <!-- Price ranges below: source of truth is BASE_RANGES / ADDON_RANGES in calculator.js — update both together on any refresh. -->
       <table class="cost">
         <caption>Base move ranges — local GTA, licensed/insured movers, pre-HST</caption>
         <thead><tr><th scope="col">Home size</th><th scope="col">Range</th></tr></thead>
@@ -176,13 +177,13 @@
 
       <div class="cta-box">
         <p><strong>Ready for firm numbers?</strong> Get written quotes from GTA movers and compare them against your estimate above.</p>
-        <!-- AFFILIATE: replace href with Joseph's Awin Bark CA tracking link after his application -->
-        <a class="cta-btn" href="https://www.bark.com/en/ca/" target="_blank" rel="sponsored nofollow noopener">Get exact quotes from GTA movers</a>
+        <!-- AFFILIATE: href synced from CTA_HREF in calculator.js on load; replace the constant (not this href) with Joseph's Awin Bark CA tracking link after his application -->
+        <a class="cta-btn" id="cta-quotes" href="https://www.bark.com/en/ca/" target="_blank" rel="sponsored nofollow noopener">Get exact quotes from GTA movers</a>
         <p class="affiliate-disclosure">We may earn a commission if you request quotes through this link. It doesn't change your price.</p>
       </div>
 
       <h2 id="faq">Moving cost FAQ</h2>
-      <div class="faq" style="max-width:none;padding:0">
+      <div class="faq faq--bare">
         <details>
           <summary>What affects the cost of a local GTA move?</summary>
           <p>The biggest factor is home size — bigger homes need a bigger crew and more truck time. Add-ons that raise the price include full packing service ($150–$400), stairs or walk-ups with no elevator ($50–$150), and long carries when the truck can't park close ($50–$150). Timing matters too: June–September and the 28th–31st of any month are the busiest periods, so book early. All figures are pre-HST; add 13% Ontario HST.</p>

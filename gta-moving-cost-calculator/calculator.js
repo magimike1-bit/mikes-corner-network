@@ -23,6 +23,10 @@
   };
 
   var HST_RATE = 0.13;
+  // AFFILIATE: single source for the quote CTA href. Replace with Joseph's
+  // Awin Bark CA tracking link after his application. The static CTA box in
+  // index.html (#cta-quotes) is synced from this constant on load (see init).
+  var CTA_HREF = "https://www.bark.com/en/ca/";
   // Peak moving season in the GTA: June, July, August, September.
   var PEAK_MONTHS = { "6": true, "7": true, "8": true, "9": true };
 
@@ -78,8 +82,7 @@
 
     html += '<div class="cta-box">';
     html += "<p><strong>This is a starting estimate.</strong> Your exact price depends on the company, distance, and timing — get firm written quotes before booking.</p>";
-    // AFFILIATE: replace href with Joseph's Awin Bark CA tracking link after his application
-    html += '<a class="cta-btn" href="https://www.bark.com/en/ca/" target="_blank" rel="sponsored nofollow noopener">Get exact quotes from GTA movers</a>';
+    html += '<a class="cta-btn" href="' + CTA_HREF + '" target="_blank" rel="sponsored nofollow noopener">Get exact quotes from GTA movers</a>';
     html += '<p class="affiliate-disclosure">We may earn a commission if you request quotes through this link. It doesn\'t change your price.</p>';
     html += "</div>";
 
@@ -103,6 +106,10 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("move-form").addEventListener("submit", onSubmit);
+    // Keep the static content-section CTA in sync with the single CTA_HREF
+    // constant, so a future tracking-link swap touches one place only.
+    var staticCta = document.getElementById("cta-quotes");
+    if (staticCta) { staticCta.href = CTA_HREF; }
   });
 
   // Export for testing / reuse.

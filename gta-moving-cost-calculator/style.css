@@ -185,6 +185,12 @@ table.cost tr:nth-child(even) td{background:#fbf8f3}
 .site-footer .disclaimer{font-size:.85rem;opacity:.8;max-width:720px;margin:0 0 14px}
 .footer-nav{font-size:.9rem;margin:0}
 
+/* ---------- review-fix utilities (2026-10-05): replace former inline styles ---------- */
+.hint--roomy{margin-top:.8em}
+.option--flush{margin-bottom:0}
+.wrap--narrow{max-width:760px}
+.faq--bare{max-width:none;padding:0}
+
 /* ---------- responsive ---------- */
 @media (max-width:700px){
   body{font-size:16px}

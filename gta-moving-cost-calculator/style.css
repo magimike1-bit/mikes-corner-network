@@ -1,0 +1,205 @@
+/* GTA Moving Cost Calculator — city-move palette
+   Paper, slate ink, mover-truck blue accent, amber support */
+:root{
+  --bg:#faf7f2;
+  --surface:#ffffff;
+  --ink:#2c2a28;
+  --ink-soft:#6f655c;
+  --accent:#1f5fa8;
+  --accent-dark:#174a86;
+  --accent-soft:#e8f1fb;
+  --amber:#b97a0e;
+  --amber-soft:#fbf1da;
+  --green:#3f7a45;
+  --green-soft:#eaf4ea;
+  --line:#e5ddd1;
+  --shadow:0 2px 10px rgba(40,50,70,.10);
+  --shadow-lift:0 8px 24px rgba(40,50,70,.16);
+  --radius:14px;
+  --font-body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-display:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-dark);text-decoration:underline}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+
+/* ---------- header ---------- */
+.site-header{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px;flex-wrap:wrap}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--ink);
+}
+.brand:hover{color:var(--accent);text-decoration:none}
+.brand-mark{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:42px;height:42px;border-radius:10px;flex:none;
+  background:var(--accent);color:#fff;font-size:1.35rem;
+}
+.site-nav{display:flex;gap:4px;flex-wrap:wrap}
+.site-nav a{
+  color:var(--ink-soft);font-weight:600;font-size:.92rem;
+  padding:8px 12px;border-radius:8px;transition:background .15s,color .15s;
+}
+.site-nav a:hover{background:var(--accent-soft);color:var(--accent-dark);text-decoration:none}
+
+/* ---------- hero ---------- */
+.hero{
+  background:linear-gradient(115deg,#16324f 0%,#1f5fa8 60%,#3a86c9 100%);
+  color:#fff;
+  border-radius:0 0 var(--radius) var(--radius);
+}
+.hero-inner{padding:64px 24px;max-width:1020px;margin:0 auto}
+.eyebrow{
+  display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#dcecff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
+  padding:6px 14px;border-radius:999px;margin-bottom:18px;
+}
+.hero h1{font-family:var(--font-display);font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.15;margin:0 0 16px;max-width:660px}
+.hero p.lede{font-size:1.12rem;max-width:620px;margin:0 0 14px;color:#e3effc}
+.scope-note{
+  display:inline-block;font-size:.9rem;color:#fff;background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 14px;margin-top:8px;
+}
+
+/* ---------- tool ---------- */
+.tool-section{padding:44px 0 8px}
+.tool-wrap{max-width:680px}
+.tool-form{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px;box-shadow:var(--shadow);margin:1.6em 0;
+}
+.tool-form fieldset{border:0;padding:0;margin:0 0 1.4em}
+.tool-form legend{font-weight:700;margin-bottom:.6em;font-size:1.02rem}
+.radio-list,.check-list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.radio-list li,.check-list li{margin:0}
+.option{
+  display:flex;gap:10px;align-items:flex-start;
+  border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;
+  transition:border-color .15s,background .15s;
+}
+.option:hover{border-color:var(--accent);background:var(--accent-soft)}
+.option input{margin-top:4px}
+.option .opt-label{font-weight:600}
+.option .opt-range{margin-left:auto;color:var(--ink-soft);font-size:.92rem;white-space:nowrap}
+.tool-form label{display:block;font-weight:700;margin-bottom:.4em}
+.tool-form select{
+  width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:8px;
+  font-size:1rem;background:#fff;color:var(--ink);
+}
+.hint{font-size:.88rem;color:var(--ink-soft);margin-top:.3em}
+.tool-btn{
+  display:inline-block;background:var(--accent);color:#fff;border:0;font-weight:700;
+  padding:13px 26px;border-radius:10px;font-size:1.02rem;cursor:pointer;
+  transition:background .15s,transform .15s,box-shadow .15s;
+}
+.tool-btn:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+
+/* ---------- result ---------- */
+.result{
+  background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);
+  padding:26px 28px;margin:1.6em 0;box-shadow:var(--shadow);
+}
+.result h2{font-family:var(--font-display);font-size:1.5rem;margin:0 0 4px}
+.result .range-line{font-size:1.35rem;font-weight:700;color:var(--accent-dark);margin:.6em 0 .2em}
+.result .range-hst{font-size:1.02rem;color:var(--ink-soft);margin:0 0 .8em}
+.result ul.breakdown{margin:.6em 0;padding-left:20px;font-size:.95rem;color:var(--ink)}
+.result ul.breakdown li{margin-bottom:.25em}
+.guide-note{
+  background:var(--amber-soft);border-left:4px solid var(--amber);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:.95rem;
+}
+.guide-note strong{color:#7d5207}
+.cta-box{
+  background:var(--green-soft);border:1px solid #cfe0d1;border-radius:10px;
+  padding:18px 20px;margin-top:18px;text-align:center;
+}
+.cta-box p{margin:0 0 12px}
+.cta-btn{
+  display:inline-block;background:var(--green);color:#fff;font-weight:700;
+  padding:13px 28px;border-radius:10px;
+  transition:background .15s,transform .15s;
+}
+.cta-btn:hover{background:#326539;color:#fff;text-decoration:none;transform:translateY(-2px)}
+.affiliate-disclosure{font-size:.85rem;color:var(--ink-soft);margin:12px 0 0}
+
+/* ---------- content sections ---------- */
+.content{padding:36px 0 8px}
+.content h2{font-family:var(--font-display);font-size:1.7rem;margin:1.8em 0 .6em}
+.content h2:first-child{margin-top:0}
+.content h3{font-size:1.12rem;margin:1.4em 0 .4em;color:var(--accent-dark)}
+.content p,.content li{color:var(--ink)}
+.content ul,.content ol{padding-left:24px}
+.content li{margin-bottom:.55em}
+table.cost{width:100%;border-collapse:collapse;margin:22px 0;font-size:.95rem}
+table.cost caption{caption-side:top;text-align:left;font-weight:700;margin-bottom:8px;color:var(--accent-dark)}
+table.cost th,table.cost td{border:1px solid var(--line);padding:10px 12px;text-align:left}
+table.cost th{background:var(--accent-soft);color:var(--ink)}
+table.cost tr:nth-child(even) td{background:#fbf8f3}
+.callout{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:26px 0;
+}
+.callout p{margin:.4em 0}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:760px;padding:36px 0 8px}
+.faq h2{font-family:var(--font-display);font-size:1.7rem;margin:0 0 6px}
+.faq details{
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:16px 20px;margin:12px 0;
+}
+.faq summary{font-weight:700;cursor:pointer;font-size:1.02rem}
+.faq summary:hover{color:var(--accent-dark)}
+.faq details p{margin:.6em 0 0;color:var(--ink)}
+
+/* ---------- article / legal pages ---------- */
+.article{max-width:760px;margin:0 auto;padding:40px 24px 24px}
+.article h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.2;margin:0 0 10px}
+.article h2{font-family:var(--font-display);font-size:1.4rem;margin:1.8em 0 .6em}
+.article p,.article li{color:var(--ink)}
+.article ul{padding-left:24px}
+.article li{margin-bottom:.5em}
+
+/* ---------- footer ---------- */
+.site-footer{background:#242e38;color:#d9e2ec;margin-top:56px;padding:36px 0 30px}
+.site-footer a{color:#9cc3ee}
+.site-footer a:hover{color:#c4dbf7}
+.site-footer .ai-disclosure{font-size:.85em;opacity:.85;margin:0 0 14px}
+.site-footer .disclaimer{font-size:.85rem;opacity:.8;max-width:720px;margin:0 0 14px}
+.footer-nav{font-size:.9rem;margin:0}
+
+/* ---------- review-fix utilities (2026-10-05): replace former inline styles ---------- */
+.hint--roomy{margin-top:.8em}
+.option--flush{margin-bottom:0}
+.wrap--narrow{max-width:760px}
+.faq--bare{max-width:none;padding:0}
+
+/* ---------- responsive ---------- */
+@media (max-width:700px){
+  body{font-size:16px}
+  .hero-inner{padding:48px 24px}
+  .header-inner{padding:10px 16px}
+  .site-nav{width:100%}
+  .site-nav a{padding:6px 8px;font-size:.85rem}
+  .tool-form{padding:20px}
+  .option .opt-range{display:none}
+  table.cost{font-size:.85rem}
+  table.cost th,table.cost td{padding:8px}
+}

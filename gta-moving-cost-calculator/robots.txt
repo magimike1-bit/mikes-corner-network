@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Live host: gta-moving-cost-calculator-8vbn4.kinsta.page (Sevalla site 3bb93b5e)
+Sitemap: https://gta-moving-cost-calculator-8vbn4.kinsta.page/sitemap.xml

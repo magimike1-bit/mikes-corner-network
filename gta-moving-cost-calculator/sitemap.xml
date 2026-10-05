@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NOTE: replace the host below with the real Sevalla/kinsta.page URL at deploy time (site not yet deployed) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://gta-moving-cost-calculator.local/index.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://gta-moving-cost-calculator.local/privacy-policy.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://gta-moving-cost-calculator.local/terms.html</loc><lastmod>2026-10-05</lastmod></url>
+</urlset>

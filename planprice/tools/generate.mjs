@@ -1207,6 +1207,17 @@ function head(title, description, path, extraHead = "") {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(SITE_URL + path)}">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:url" content="${esc(SITE_URL + path)}">
+<meta property="og:image" content="${esc(SITE_URL + '/og-image.jpg')}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(description)}">
+<meta name="twitter:image" content="${esc(SITE_URL + '/og-image.jpg')}">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" type="image/png" href="/favicon.png">
 <!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).

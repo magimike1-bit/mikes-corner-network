@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://life-insurance-basics-canad-6kt1t.kinsta.page/sitemap.xml

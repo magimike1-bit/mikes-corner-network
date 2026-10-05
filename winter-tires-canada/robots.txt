@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://winter-tires-canada-3w0mu.kinsta.page/sitemap.xml

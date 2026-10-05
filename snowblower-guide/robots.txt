@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://snowblower-buying-and-care-uc6hh.kinsta.page/sitemap.xml

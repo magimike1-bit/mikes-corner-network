@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Halloween 2026: Costumes &amp; Parties logo">
+  <title>Halloween 2026: Costumes &amp; Parties</title>
+  <!-- Jack-o'-lantern body -->
+  <ellipse cx="100" cy="128" rx="78" ry="62" fill="#f97316"/>
+  <ellipse cx="72" cy="128" rx="22" ry="58" fill="#fb923c" opacity="0.55"/>
+  <ellipse cx="128" cy="128" rx="22" ry="58" fill="#fb923c" opacity="0.55"/>
+  <path d="M100 66 q-6 10 2 16 l14 0 q8 -6 2 -16 z" fill="#4d7c0f"/>
+  <rect x="94" y="70" width="12" height="14" rx="3" fill="#3f6212"/>
+  <!-- Carved grin -->
+  <path d="M52 128 q14 34 48 34 q34 0 48 -34 q-12 6 -20 4 q-4 10 -14 10 q-6 0 -8 -8 q-6 2 -12 0 q-2 8 -8 8 q-10 0 -14 -10 q-8 2 -20 -4 z" fill="#3b0764"/>
+  <!-- Happy eyes -->
+  <path d="M62 108 q10 -14 22 -6 q-10 2 -12 12 q-6 0 -10 -6 z" fill="#3b0764"/>
+  <path d="M138 108 q-10 -14 -22 -6 q10 2 12 12 q6 0 10 -6 z" fill="#3b0764"/>
+  <!-- Witch hat -->
+  <g transform="rotate(14 118 60)">
+    <ellipse cx="118" cy="62" rx="58" ry="14" fill="#3b0764"/>
+    <path d="M78 60 L108 8 q4 -8 12 0 L148 60 q-30 12 -70 0 z" fill="#4c1d95"/>
+    <rect x="86" y="38" width="56" height="16" rx="4" fill="#7c3aed"/>
+    <rect x="106" y="38" width="16" height="16" rx="2" fill="#a78bfa"/>
+  </g>
+</svg>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://moving-on-a-budget-tcxeb.kinsta.page/sitemap.xml

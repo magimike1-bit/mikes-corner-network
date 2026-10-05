@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://halloween-2026-costumes-and-vfi4w.kinsta.page/sitemap.xml

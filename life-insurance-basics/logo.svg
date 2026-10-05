@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Life Insurance Basics Canada logo: an umbrella sheltering two people">
+  <!-- canopy -->
+  <path d="M32 132 C32 70, 80 38, 120 38 C160 38, 208 70, 208 132
+           Q190 122, 172 132 Q154 122, 136 132 Q120 123, 104 132
+           Q86 122, 68 132 Q50 122, 32 132 Z" fill="#0f766e"/>
+  <!-- canopy ribs -->
+  <path d="M120 38 L86 129 M120 38 L120 131 M120 38 L154 129" stroke="#fbf7ec" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- shaft -->
+  <rect x="116.5" y="132" width="7" height="20" rx="3.5" fill="#0f766e"/>
+  <!-- figures -->
+  <circle cx="99" cy="172" r="14" fill="#7fa88f"/>
+  <rect x="83" y="187" width="32" height="34" rx="15" fill="#7fa88f"/>
+  <circle cx="141" cy="180" r="12" fill="#a9c4ad"/>
+  <rect x="127" y="193" width="28" height="28" rx="13" fill="#a9c4ad"/>
+</svg>

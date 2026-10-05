@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://first-time-home-buyer-money-yvvpy.kinsta.page/sitemap.xml

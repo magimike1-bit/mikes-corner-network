@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://canadian-thanksgiving-hosti-qc2i1.kinsta.page/sitemap.xml

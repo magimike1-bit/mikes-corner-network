@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://christmas-budget-planner-mgqsi.kinsta.page/sitemap.xml

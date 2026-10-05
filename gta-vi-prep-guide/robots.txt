@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gta-vi-prep-guide-tqs8d.kinsta.page/sitemap.xml

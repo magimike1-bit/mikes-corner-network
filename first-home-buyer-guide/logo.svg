@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>First-Time Home Buyer Money Guide logo</title>
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="#146642"/>
+  <path d="M14 33 L32 16 L50 33" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 29.5 V50 H45 V29.5" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="26,36.5 30.5,41 39,31" fill="none" stroke="#f2c14e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

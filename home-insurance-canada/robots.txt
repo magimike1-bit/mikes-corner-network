@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://home-insurance-basics-canad-ux5ki.kinsta.page/sitemap.xml

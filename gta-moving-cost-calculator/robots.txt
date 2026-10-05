@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# NOTE: replace the sitemap host with the real Sevalla/kinsta.page URL at deploy time (site not yet deployed)
-Sitemap: https://gta-moving-cost-calculator.local/sitemap.xml
+# Live host: gta-moving-cost-calculator-8vbn4.kinsta.page (Sevalla site 3bb93b5e)
+Sitemap: https://gta-moving-cost-calculator-8vbn4.kinsta.page/sitemap.xml

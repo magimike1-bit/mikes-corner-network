@@ -297,3 +297,9 @@ main { padding: 0 0 56px; }
   .nav-links { margin-left: 0; }
   .posts h2 { margin: 36px 0 14px; }
 }
+
+/* AdSense-readiness: site navigation (added 2026-10-07) */
+.site-nav{margin-top:12px;font-size:.92rem}
+.site-nav a{color:var(--muted,#666);text-decoration:none;margin-right:18px;padding:2px 0}
+.site-nav a:hover{color:var(--accent,#c2410c)}
+.site-nav a.active{color:var(--accent,#c2410c);font-weight:700;border-bottom:2px solid var(--accent,#c2410c)}

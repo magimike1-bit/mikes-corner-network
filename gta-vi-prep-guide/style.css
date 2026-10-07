@@ -311,3 +311,9 @@ a { color: var(--accent-2); }
   .feature-strip { padding: 24px 22px; }
   .cta.secondary { margin-left: 0; margin-top: 10px; }
 }
+
+/* AdSense-readiness: site navigation (added 2026-10-07) */
+.site-nav{margin-top:12px;font-size:.92rem}
+.site-nav a{color:var(--muted,#666);text-decoration:none;margin-right:18px;padding:2px 0}
+.site-nav a:hover{color:var(--accent,#c2410c)}
+.site-nav a.active{color:var(--accent,#c2410c);font-weight:700;border-bottom:2px solid var(--accent,#c2410c)}

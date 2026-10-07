@@ -297,3 +297,11 @@ section[id]{scroll-margin-top:92px}
 .check-body strong{display:block;font-size:1.02rem;color:var(--navy);margin-bottom:4px}
 .check-where{display:block;font-size:.9rem;color:#5a6b87;line-height:1.5}
 .checklist-actions{margin:20px 0 40px}
+
+.hero-img { width: 100%; height: auto; display: block; border-radius: 10px; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 20px; }
+
+/* AdSense-readiness: site navigation (added 2026-10-07) */
+.site-nav{margin-top:12px;font-size:.92rem}
+.site-nav a{color:var(--muted,#666);text-decoration:none;margin-right:18px;padding:2px 0}
+.site-nav a:hover{color:var(--accent,#c2410c)}
+.site-nav a.active{color:var(--accent,#c2410c);font-weight:700;border-bottom:2px solid var(--accent,#c2410c)}

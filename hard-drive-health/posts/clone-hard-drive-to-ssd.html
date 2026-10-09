@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clone Your Hard Drive to an SSD Without Losing Your Weekend — Hard Drive Health</title>
+<meta name="description" content="Moving from a hard drive to an SSD? Decide clone vs clean install first, then follow a tool-agnostic pre-flight checklist, the cloning procedure, and the post-clone boot check.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Clone your hard drive to an SSD without losing your weekend</h1>
+  <p class="meta">Drive upgrades &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/clone-hard-drive-to-ssd.jpg" alt="Hard disk drive and slim solid-state drive side by side with a transfer arrow between them on a workbench" loading="lazy" width="1920" height="1280">
+  <figcaption>Clone a healthy system; clean-install a sick one.</figcaption>
+</figure>
+
+
+
+  <p>Moving from a spinning hard drive to an SSD is the single biggest speed upgrade
+  most older PCs can get — faster boots, faster everything, lower power draw and
+  better stability (PCWorld). The question is how to move your system over. Every
+  guide assumes the answer is cloning, but cloning isn't always the right call. So
+  this guide starts with the decision, then gives you a pre-flight checklist, a
+  tool-agnostic cloning procedure, and the post-clone boot check — including what
+  to do when Windows refuses to boot from the new drive.</p>
+
+  <h2>Clone or clean install? Decide first</h2>
+  <table>
+    <thead><tr><th>Clone the drive when</th><th>Clean-install Windows when</th></tr></thead>
+    <tbody>
+      <tr><td>Windows runs well and you just want speed</td><td>The system is a mess of old software, errors or malware</td></tr>
+      <tr><td>You have lots of programs you'd rather not reinstall</td><td>You suspect file-system corruption or bad sectors (fix those <em>before</em> cloning — a clone copies problems too)</td></tr>
+      <tr><td>The SSD is big enough for everything on the drive</td><td>You're moving to a smaller SSD and would have to ruthlessly delete first</td></tr>
+      <tr><td>You want it done in an afternoon</td><td>You want a fresh start and have your files backed up elsewhere</td></tr>
+    </tbody>
+  </table>
+  <p>Cloning keeps all your OS settings and installed programs with no reinstall
+  (PCWorld) — but it also keeps every problem. If the old system is unhealthy, a
+  clean install is the better weekend.</p>
+
+  <h2>The pre-flight checklist</h2>
+  <ol>
+    <li><strong>Back up.</strong> A full backup of anything you can't replace
+    (see <a href="/posts/the-3-2-1-backup-rule.html">the 3-2-1 backup rule</a>).
+    Cloning <em>shouldn't</em> touch the source drive, but "shouldn't" is not a
+    backup strategy.</li>
+    <li><strong>Do the sizing math.</strong> Check how much space is actually
+    <em>used</em> on the source drive (This PC &rarr; right-click &rarr;
+    Properties), not its total capacity. The used space must fit on the SSD —
+    cloning tools will refuse or fail otherwise, and one common gotcha is picking
+    a destination partition with insufficient capacity (PCWorld).</li>
+    <li><strong>Check the old drive's health.</strong> Run a quick SMART check
+    and a read-only scan first. If there are errors or bad sectors, fix those
+    issues before attempting to clone (UMA Technology).</li>
+    <li><strong>Connect the SSD</strong> via an internal slot (desktop) or a
+    USB-to-SATA/NVMe adapter (laptop). If it doesn't show up in Windows, open Disk
+    Management and initialize it.</li>
+    <li><strong>Pick a cloning tool.</strong> Any reputable disk-cloning tool
+    works — the steps below are the same across them. Well-known free options
+    include EaseUS Partition Master (free cloning feature, per EaseUS) and Macrium
+    Reflect.</li>
+  </ol>
+
+  <h2>The cloning procedure</h2>
+  <ol>
+    <li>Install and launch your cloning tool, and find its <strong>Disk
+    Clone</strong> (or "Clone this disk" / "OS Migration") option (PCWorld; UMA
+    Technology).</li>
+    <li>Select the <strong>source</strong>: the old hard drive.</li>
+    <li>Select the <strong>destination</strong>: the new SSD. Read the warning
+    carefully — everything on the destination will be erased (EaseUS).</li>
+    <li>Choose the layout mode: <strong>"autofit" / "fit to disk"</strong> if the
+    SSD is a different size than the source — it resizes partitions automatically
+    (EaseUS). If the tool leaves empty "free" space on the target, expand the
+    partition to fill it (DeltiasGaming).</li>
+    <li>Start the clone. It can take minutes to over an hour depending on how much
+    data is moving. Leave the PC alone while it works.</li>
+    <li>Verify the clone: the tool should show all source partitions present on
+    the SSD — including small system and recovery partitions. Missing partitions
+    are a classic cause of boot failures afterward (one user's clone skipped the
+    recovery partition and the new drive wouldn't boot — EaseUS forums).</li>
+  </ol>
+
+  <h2>Making it boot</h2>
+  <ol>
+    <li>Shut down. If your PC holds one drive, physically swap the SSD in;
+    otherwise leave both connected.</li>
+    <li>Power on and enter the BIOS/UEFI setup (<strong>F2, F8, F11</strong> or
+    <strong>Del</strong>, depending on the PC — PCWorld).</li>
+    <li>Go to the <strong>Boot</strong> tab and move the new SSD to the first boot
+    position. Save (usually F10) and restart (EaseUS).</li>
+    <li>Windows should boot from the SSD exactly as before — same programs, same
+    files, no reinstall (PCWorld).</li>
+  </ol>
+
+  <h2>When it won't boot</h2>
+  <ul>
+    <li><strong>Recheck the boot order</strong> — the BIOS may have silently
+    reverted to the old drive.</li>
+    <li><strong>Check that all partitions cloned.</strong> Boot from the old drive
+    (or recovery media) and compare partition counts; a missing EFI or recovery
+    partition is the usual suspect.</li>
+    <li><strong>SSD not detected at all?</strong> Reseat the connection, try a
+    different SATA port or adapter, and confirm the BIOS sees the drive before
+    blaming the clone.</li>
+  </ul>
+
+  <h2>What success looks like</h2>
+  <p>The PC boots from the SSD, everything works as before, and Disk Management
+  shows the SSD with its full capacity available (extend the main partition if
+  there's leftover unallocated space). Keep at least 10–20% of the SSD free for
+  best performance (UMA Technology). And the golden rule: don't format or wipe
+  the old drive until the SSD has booted successfully — then the old HDD makes an
+  excellent backup drive (DeltiasGaming).</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

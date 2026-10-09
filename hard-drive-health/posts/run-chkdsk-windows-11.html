@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Run CHKDSK on Windows 11 (and Read the Results) — Hard Drive Health</title>
+<meta name="description" content="Which CHKDSK switch for your symptom, the no-typing GUI check, the command-line scan and repair, and how to find the report after a restart wipes it away.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>How to run CHKDSK on Windows 11 (and read the results)</h1>
+  <p class="meta">Drive repair &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/run-chkdsk-windows-11.jpg" alt="Opened hard disk drive showing platters and read-write arm on a pink work mat with a screwdriver" loading="lazy" width="1920" height="1280">
+  <figcaption>CHKDSK fixes file-system errors — it cannot resurrect failing hardware.</figcaption>
+</figure>
+
+
+
+  <p>CHKDSK — Check Disk — is Windows' built-in tool for finding and fixing file
+  system problems. Health-monitoring programs are great at watching your drive over
+  time, but when something is actually wrong — files won't open, the drive is slow,
+  Windows reports errors — CHKDSK is the tool that goes in and fixes it. The
+  confusion is the switches: <code>/f</code>, <code>/r</code>, <code>/scan</code>,
+  <code>/spotfix</code>. This guide matches the symptom to the right scan, walks
+  through both methods, and shows you where the report hides after a restart
+  erases it from the screen.</p>
+
+  <h2>What CHKDSK fixes (and what it doesn't)</h2>
+  <p>CHKDSK repairs <em>logical</em> file system errors: bad file records, broken
+  indexes, cross-linked files. It can also scan the disk surface for bad sectors
+  and recover readable data from them — but it cannot repair a physically dying
+  drive. If your drive is clicking, disappearing, or your SMART readings are
+  deteriorating, back up first and treat CHKDSK as triage, not a cure. On that
+  point: a full <code>/r</code> scan can take a long time on large hard drives, and
+  if you suspect the drive is failing, back up your data before running it
+  (Windows101Tricks).</p>
+
+  <h2>Which scan for your symptom</h2>
+  <table>
+    <thead><tr><th>Your symptom</th><th>Run this</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Just a routine health check</td><td><code>chkdsk C: /scan</code></td><td>Online scan of an NTFS volume while Windows runs; makes no repairs, so it's safe for a cautious first look (Microsoft; HelpDeskGeek)</td></tr>
+      <tr><td>Windows or an app reports file system errors</td><td><code>chkdsk C: /f</code></td><td>Fixes errors on the disk; if the drive is in use you'll schedule it for the next restart (Microsoft)</td></tr>
+      <tr><td>Files won't open, bad sectors suspected</td><td><code>chkdsk C: /r</code></td><td>Locates bad sectors and recovers readable information; includes /f's functionality (Microsoft)</td></tr>
+      <tr><td>An online scan found problems, you want a targeted fix</td><td><code>chkdsk C: /spotfix</code></td><td>Applies targeted repairs identified during an online scan on modern NTFS volumes (HelpDeskGeek)</td></tr>
+      <tr><td>Windows won't boot at all</td><td>CHKDSK from the recovery environment</td><td>Automatic Repair &rarr; Troubleshoot &rarr; Command Prompt, then run with the correct letter (SolveYourTech)</td></tr>
+    </tbody>
+  </table>
+  <p>One repair method at a time — running every switch back-to-back wastes time
+  and makes the result harder to interpret (HelpDeskGeek). Note that
+  <code>/scan</code>, <code>/spotfix</code> and <code>/forceofflinefix</code> only
+  work on NTFS volumes (Microsoft).</p>
+
+  <h2>Method 1: the no-typing GUI check</h2>
+  <ol>
+    <li>Open <strong>File Explorer</strong> and select <strong>This PC</strong>.</li>
+    <li>Right-click the drive and choose <strong>Properties</strong>.</li>
+    <li>Open the <strong>Tools</strong> tab and click <strong>Check</strong> under
+    Error checking.</li>
+    <li>If Windows says "You don't need to scan this drive," you can still click
+    <strong>Scan drive</strong> to check anyway (TheWindowsClub).</li>
+    <li>If errors are found, you'll see "Restart your computer to repair the file
+    system" — restart to let Windows fix them (TheWindowsClub).</li>
+  </ol>
+
+  <h2>Method 2: the command-line scan and repair</h2>
+  <ol>
+    <li>Press <strong>Windows + X</strong> and select <strong>Terminal
+    (Admin)</strong> (or <strong>Windows PowerShell (Admin)</strong> on Windows
+    10). Click <strong>Yes</strong> at the User Account Control prompt.</li>
+    <li>For a safe first look, type <code>chkdsk C: /scan</code> and press Enter.
+    Replace <code>C:</code> with the affected drive's letter. This scans while
+    Windows runs and changes nothing (HelpDeskGeek).</li>
+    <li>Read the final lines. If it reports corruption, back up essential files
+    <em>before</em> continuing — repair changes the volume (HelpDeskGeek).</li>
+    <li>To repair, type <code>chkdsk C: /f</code> and press Enter.</li>
+    <li>If you see "Chkdsk cannot run because the volume is in use," press
+    <strong>Y</strong> to schedule the check, then restart. Don't press a key when
+    Windows offers to skip the disk check — let it run before the sign-in screen
+    (HelpDeskGeek).</li>
+  </ol>
+
+  <h2>Finding the results after a restart</h2>
+  <p>A restart-time check disappears when Windows loads. To read the report:</p>
+  <ol>
+    <li>Press <strong>Windows + R</strong>, type <code>eventvwr.msc</code>, and
+    press Enter.</li>
+    <li>Expand <strong>Windows Logs</strong>, right-click
+    <strong>Application</strong>, and choose <strong>Filter Current Log</strong>.</li>
+    <li>Under <strong>Event sources</strong>, check <strong>Chkdsk</strong> and
+    <strong>Wininit</strong>, then click OK.</li>
+    <li>Open the newest event to read the full report (SolveYourTech).</li>
+  </ol>
+  <p>PowerShell alternative: <code>Get-WinEvent -FilterHashtable
+  @{LogName="Application"} | Where-Object {$_.ProviderName -match "wininit"}</code>
+  shows the latest restart-time results (SolveYourTech).</p>
+
+  <h2>What success looks like</h2>
+  <p>A clean scan ends with "Windows has scanned the file system and found no
+  problems." After a repair, the report lists what was fixed — read it, and if the
+  same errors return on the next scan, the problem is recurring, not resolved.
+  Recurring errors, growing bad-sector counts, or a scan that never finishes are
+  stop signs: back up immediately and plan a replacement drive (see our guide to
+  <a href="/posts/signs-drive-failing.html">signs your drive is failing</a>).</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

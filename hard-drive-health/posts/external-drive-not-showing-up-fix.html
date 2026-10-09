@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>External Hard Drive Not Showing Up? Fix It by Where Windows Hides It — Hard Drive Health</title>
+<meta name="description" content="Your external drive isn't broken until proven otherwise. A diagnostic-first fix guide: find where Windows sees the drive, then follow the matched fix path — in data-safe order.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>External hard drive not showing up? Fix it by where Windows hides it</h1>
+  <p class="meta">Drive repair &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/external-drive-not-showing-up-fix.jpg" alt="External hard drive connected by a USB cable to a desktop computer tower, both with glowing indicator lights" loading="lazy" width="1920" height="1280">
+  <figcaption>If Windows cannot see the drive at all, start with power, ports and cables.</figcaption>
+</figure>
+
+
+
+  <p>A USB external drive that won't appear in File Explorer is almost never dead
+  on arrival — it usually comes down to one of three things: power, a missing
+  drive letter, or a driver problem (AllThings.How). The mistake most fix guides
+  make is listing a dozen steps in a flat pile, with the destructive ones
+  (formatting!) sitting innocently next to the harmless ones. This guide does it
+  differently: answer one branch question — <em>where does Windows see the
+  drive?</em> — then follow only the fix path that matches, in data-safe order.</p>
+
+  <h2>First: where does Windows see the drive?</h2>
+  <p>Right-click the <strong>Start</strong> button and choose <strong>Disk
+  Management</strong>. Wait a few seconds for the disks to load. The top section
+  lists volumes (like <code>C:</code>); the bottom shows physical disks labeled
+  Disk 0, Disk 1, and so on (TechBloat). Now place your drive on this map:</p>
+  <table>
+    <thead><tr><th>What you see</th><th>Branch</th><th>Likely cause</th></tr></thead>
+    <tbody>
+      <tr><td>Drive listed, but no letter (no <code>E:</code>, <code>F:</code>&hellip;)</td><td>A</td><td>Missing drive letter</td></tr>
+      <tr><td>Drive listed as Offline, Unallocated, or with an odd file system (RAW)</td><td>A</td><td>Partition or file-system problem</td></tr>
+      <tr><td>Drive not in Disk Management at all</td><td>B</td><td>Power, port, cable, or driver issue</td></tr>
+    </tbody>
+  </table>
+  <p>(A side note: a 2TB external may show as roughly 1.81TB — Windows reports
+  capacity differently from drive manufacturers, so that's normal, not a fault
+  (TechBloat).)</p>
+
+  <h2>The order that protects your data</h2>
+  <p>Before touching anything: if the drive holds files you can't replace, try to
+  copy them <em>first</em> — as soon as the drive becomes visible, before any
+  repair step. And never format, initialize, or "clean" a drive that contains data
+  you want to keep. The diskpart sequence <code>select disk &gt; clean &gt; create
+  partition &gt; format</code> deletes everything — it is a last resort for blank
+  or corrupted-beyond-repair drives only (CodingLap).</p>
+
+  <h2>Branch A: visible in Disk Management</h2>
+  <p>Windows can see the hardware; the problem is the partition, letter, status,
+  or file system (TechBloat). Work through these in order:</p>
+  <ol>
+    <li><strong>Assign a drive letter.</strong> Right-click the drive's partition
+    &rarr; <strong>Change Drive Letter and Paths</strong> &rarr;
+    <strong>Add</strong> &rarr; pick a letter (toward the end of the alphabet, like
+    X or Z, to avoid conflicts) &rarr; <strong>OK</strong>. The drive should appear
+    in File Explorer immediately (Acer Community).</li>
+    <li><strong>Bring it online.</strong> If the disk shows as Offline, right-click
+    the disk itself (left side, "Disk 1") and choose <strong>Online</strong>.</li>
+    <li><strong>Check for file-system errors.</strong> If the drive has a letter
+    but files won't open, run <code>chkdsk X: /f</code> (your letter) from an
+    admin Command Prompt — file-system corruption can hide a drive's contents even
+    when Windows sees it.</li>
+    <li><strong>Last resort: repartition.</strong> Only if the drive is
+    <em>unallocated</em> or <em>not initialized</em> and holds no data you need:
+    right-click &rarr; <strong>Initialize Disk</strong>, then right-click the
+    unallocated space &rarr; <strong>New Simple Volume</strong>, follow the wizard
+    to create a partition, format it (NTFS), and assign a letter.</li>
+  </ol>
+
+  <h2>Branch B: nowhere to be found</h2>
+  <p>Windows can't see the drive at all. Start with the physical layer — it solves
+  a surprising number of cases (AllThings.How):</p>
+  <ol>
+    <li><strong>Restart the PC</strong>, then plug the drive back in.</li>
+    <li><strong>Try a different USB port</strong> — rule out a dead or loose port.
+    Use a port directly on the PC, not a hub.</li>
+    <li><strong>Try a different cable.</strong> A damaged cable can stop a drive
+    from being recognized entirely.</li>
+    <li><strong>Check the power.</strong> Some externals have a physical power
+    switch or need their own power adapter; 2.5-inch drives on old or weak USB
+    ports may not get enough power — try a powered hub or a different machine
+    (AllThings.How).</li>
+    <li><strong>Test on a second computer.</strong> If it works there, the problem
+    is your PC, not the drive.</li>
+    <li><strong>Reinstall the drivers.</strong> Press <strong>Win + X</strong>
+    &rarr; <strong>Device Manager</strong> &rarr; expand <strong>Disk
+    drives</strong>, right-click the drive &rarr; <strong>Update driver</strong>
+    &rarr; <strong>Search automatically</strong>. If that fails, choose
+    <strong>Uninstall device</strong>, restart, and reconnect. For stubborn USB
+    issues, do the same under <strong>Universal Serial Bus controllers</strong>
+    for each USB Root Hub (AppleCorridor; CodingLap).</li>
+    <li><strong>Run the hardware troubleshooter.</strong> <strong>Settings</strong>
+    &rarr; <strong>System</strong> &rarr; <strong>Troubleshoot</strong> &rarr;
+    <strong>Other troubleshooters</strong> (AppleCorridor) — or press
+    <strong>Win + R</strong>, type <code>msdt.exe -id DeviceDiagnostic</code>, and
+    run it (CodingLap).</li>
+    <li><strong>Check the BIOS.</strong> Restart and enter the BIOS (F2, F12,
+    Delete or Esc at startup), and confirm USB ports and external storage are
+    enabled under Advanced or Storage settings (AppleCorridor; CodingLap).</li>
+  </ol>
+
+  <h2>What success looks like</h2>
+  <p>The drive appears under <strong>This PC</strong> in File Explorer with its
+  letter, and you can open it and browse files. That's the check — don't stop at
+  "it shows in Disk Management." Once it's visible, back up anything important
+  immediately. If the drive starts disappearing or throwing errors again, replace
+  it before the next failure rather than repeating the fixes.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

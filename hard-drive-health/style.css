@@ -292,3 +292,9 @@ main { padding: 22px 0 48px; }
 .card > img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; display: block; }
 .post .post-image { width: 100%; border-radius: 10px; margin: 8px 0 24px; display: block; }
 @media (max-width: 640px) { .hero-image { height: 150px; max-height: 150px; } }
+
+/* Article illustration figures — wired by the image pipeline (stage 6.5).
+   Constrains large generated images to fit inside the article column. */
+.post-figure { margin: 1.75rem auto; max-width: 100%; }
+.post-figure img { display: block; max-width: 100%; height: auto; border-radius: 8px; }
+.post-figure figcaption { margin-top: 0.5rem; font-size: 0.85em; color: #666; }

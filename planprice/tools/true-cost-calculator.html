@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>True Cost Calculator — Compare SaaS Pricing Models — PlanPrice</title>
+<meta name="description" content="Free calculator: compare per-seat vs flat-rate SaaS pricing for your team size, with CAD conversion and year-two projections.">
+<link rel="canonical" href="https://planprice.ca/tools/true-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="True Cost Calculator — PlanPrice">
+<meta property="og:description" content="Compare per-seat vs flat-rate SaaS pricing for your team size, with CAD conversion.">
+<meta property="og:url" content="https://planprice.ca/tools/true-cost-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+.calc-wrap { max-width: 640px; margin: 0 auto; }
+.calc-field { margin: 14px 0; }
+.calc-field label { display: block; font-weight: 700; margin-bottom: 4px; }
+.calc-field input, .calc-field select { width: 100%; padding: 10px 12px; font-size: 1rem; border: 1px solid var(--line, #e9dfc9); border-radius: 8px; }
+.calc-results { margin-top: 20px; padding: 18px; border: 1px solid var(--line, #e9dfc9); border-radius: 12px; background: #fffdf8; }
+.calc-results table { width: 100%; border-collapse: collapse; }
+.calc-results th, .calc-results td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line, #e9dfc9); }
+.calc-winner { font-weight: 700; color: #166534; }
+</style>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › True Cost Calculator</p>
+    <h1 class="page-title">True Cost Calculator</h1>
+    <p class="section-sub">Compare per-seat vs flat-rate pricing for your team — in CAD, with year-two projections.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-seats">Billable seats needed</label>
+        <input type="number" id="c-seats" value="8" min="1" max="500">
+      </div>
+      <div class="calc-field">
+        <label for="c-perseat">Option A: per-seat price (per seat/month)</label>
+        <input type="number" id="c-perseat" value="15" min="0" step="0.5">
+      </div>
+      <div class="calc-field">
+        <label for="c-perseat-cur">Option A billing currency</label>
+        <select id="c-perseat-cur">
+          <option value="1">CAD</option>
+          <option value="1.37" selected>USD (≈1.37 CAD)</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="c-flat">Option B: flat-rate price (per month, whole team)</label>
+        <input type="number" id="c-flat" value="99" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-flat-cur">Option B billing currency</label>
+        <select id="c-flat-cur">
+          <option value="1" selected>CAD</option>
+          <option value="1.37">USD (≈1.37 CAD)</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="c-growth">Expected team size in 12 months</label>
+        <input type="number" id="c-growth" value="12" min="1" max="500">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+    <p class="fine">Estimates only — for illustration. Always confirm actual pricing on the vendor's site. USD→CAD uses a typical card rate of 1.37; your card's rate may differ. See our <a href="/guides/per-seat-vs-flat-pricing.html">per-seat vs flat-rate guide</a> for the full framework.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  function calc() {
+    const seats = Math.max(1, +$('c-seats').value || 1);
+    const perSeat = Math.max(0, +$('c-perseat').value || 0);
+    const perSeatFx = +$('c-perseat-cur').value;
+    const flat = Math.max(0, +$('c-flat').value || 0);
+    const flatFx = +$('c-flat-cur').value;
+    const future = Math.max(1, +$('c-growth').value || seats);
+    const aNow = seats * perSeat * perSeatFx, bNow = flat * flatFx;
+    const aYr = future * perSeat * perSeatFx, bYr = flat * flatFx;
+    const cross = perSeat * perSeatFx > 0 ? (flat * flatFx) / (perSeat * perSeatFx) : Infinity;
+    const winNow = aNow < bNow ? 'A (per-seat)' : (bNow < aNow ? 'B (flat-rate)' : 'Tie');
+    const winYr = aYr < bYr ? 'A (per-seat)' : (bYr < aYr ? 'B (flat-rate)' : 'Tie');
+    $('c-results').innerHTML =
+      '<table><thead><tr><th></th><th>Today (' + seats + ' seats)</th><th>In 12 mo (' + future + ' seats)</th></tr></thead><tbody>' +
+      '<tr><td>A: per-seat</td><td>' + fmt(aNow) + '/mo</td><td>' + fmt(aYr) + '/mo</td></tr>' +
+      '<tr><td>B: flat-rate</td><td>' + fmt(bNow) + '/mo</td><td>' + fmt(bYr) + '/mo</td></tr>' +
+      '</tbody></table>' +
+      '<p>Cheaper today: <span class="calc-winner">' + winNow + '</span><br>' +
+      'Cheaper in 12 months: <span class="calc-winner">' + winYr + '</span></p>' +
+      (isFinite(cross) ? '<p class="fine">Crossover point: ' + cross.toFixed(1) + ' seats — above this, flat-rate wins.</p>' : '');
+  }
+  ['c-seats','c-perseat','c-perseat-cur','c-flat','c-flat-cur','c-growth'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

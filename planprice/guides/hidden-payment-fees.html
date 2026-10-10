@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidden Fees in Payment Processing (What Canadian Businesses Actually Pay)</title>
+<meta name="description" content="Beyond the headline rate: interchange, assessment fees, PCI charges, and cross-border markups that inflate what Canadian small businesses pay to accept cards.">
+<link rel="canonical" href="https://planprice.ca/guides/hidden-payment-fees.html">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Hidden Fees in Payment Processing (What Canadian Businesses Actually Pay)">
+<meta property="og:description" content="Beyond the headline rate: interchange, assessment fees, PCI charges, and cross-border markups that inflate what Canadian small businesses pay to accept cards.">
+<meta property="og:url" content="https://planprice.ca/guides/hidden-payment-fees.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hidden Fees in Payment Processing (What Canadian Businesses Actually Pay)">
+<meta name="twitter:description" content="Beyond the headline rate: interchange, assessment fees, PCI charges, and cross-border markups that inflate what Canadian small businesses pay to accept cards.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Should a small Canadian business use Square, Stripe, or a traditional processor?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Under ~$10K/month in card volume, flat-rate (Square/Stripe) wins on simplicity and total cost. Above that, get interchange-plus quotes from two traditional processors and compare effective rates."}
+        },
+        {
+          "@type": "Question",
+          "name": "Can I negotiate processing rates?",
+          "acceptedAnswer": {"@type": "Answer", "text": "With flat-rate processors, no. With interchange-plus processors, yes: the markup is negotiable, especially with competing quotes and 12+ months of volume history."}
+        },
+        {
+          "@type": "Question",
+          "name": "What's the single most avoidable fee?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Equipment leases. They turn a $300 terminal into a $2,000+ obligation. Buy hardware outright, always."}
+        }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › Hidden payment fees</p>
+    <h1 class="page-title">Hidden Fees in Payment Processing (What Canadian Businesses Actually Pay)</h1>
+    <p class="section-sub">Last updated <time datetime="2026-10-10">2026-10-10</time></p>
+    <p>"2.9% + 30¢" is the beginning of the story, not the end. Between interchange, card-brand assessments, PCI fees, cross-border markups, and monthly minimums, the effective rate most Canadian small businesses pay is meaningfully higher than the headline number. This guide names every layer so you can compute your true cost — and spot the processors padding it.</p>
+
+    <h2>The four layers of every card transaction</h2>
+    <ol>
+      <li><strong>Interchange.</strong> The fee your processor pays to the cardholder's bank — typically 1.4–2.4% in Canada depending on card type. Premium rewards cards cost more to accept than basic cards. You can't negotiate interchange; it's set by Visa and Mastercard. But your pricing model determines whether you see it.</li>
+      <li><strong>Card-brand assessments.</strong> Visa and Mastercard's own cut — roughly 0.08–0.13% per transaction. Small, non-negotiable, and often buried in the statement.</li>
+      <li><strong>Processor markup.</strong> What your processor (Square, Stripe, Moneris, Chase) adds on top. This is the only layer you can actually shop for — and the only one the headline rate describes.</li>
+      <li><strong>Ancillary fees.</strong> Monthly fees, PCI compliance charges, statement fees, batch fees, chargeback fees, cross-border markups. These are where "2.9%" quietly becomes 3.4%.</li>
+    </ol>
+
+    <h2>Flat-rate vs interchange-plus: which hides less</h2>
+    <p><strong>Flat-rate pricing</strong> (Square's 2.65% in-person / 2.9% + 30¢ online in Canada, Stripe's 2.9% + 30¢) bundles all four layers into one number. It's simple and predictable — but you're overpaying on every basic-card transaction to subsidize the premium-card ones. For businesses under ~$10K/month in card volume, the simplicity is usually worth it.</p>
+    <p><strong>Interchange-plus pricing</strong> (interchange + assessments + a fixed markup like 0.3%) shows you each layer separately. It's transparent and usually cheaper above ~$10–15K/month in volume — but the statements are harder to read, and some processors pad the "plus" or add junk fees around it. If a processor won't show you a sample interchange-plus statement, walk away.</p>
+    <p>See our <a href="/guides/square-fees-volume.html">Square's real cost at every sales volume</a> for a worked Canadian example, and our <a href="/deals/square.html">Square</a> and <a href="/deals/stripe.html">Stripe</a> deal pages for verified current rates.</p>
+
+    <h2>The fees nobody puts on the pricing page</h2>
+    <ul>
+      <li><strong>PCI compliance fees</strong> ($5–20/month, or $100+/year as a "non-compliance" penalty). Some processors charge you for the privilege of proving you're secure; others charge you more if you don't.</li>
+      <li><strong>Cross-border markups</strong> (0.4–1% extra). Accepting a US-issued card at your Canadian store? That's a cross-border transaction even though the customer is standing in front of you. Tourist-heavy businesses feel this most.</li>
+      <li><strong>Chargeback fees</strong> ($15–25 each, win or lose). Disputed transactions cost you the fee plus the held funds during the dispute — budget for a 0.5–1% dispute rate in card-not-present businesses.</li>
+      <li><strong>Monthly minimums</strong>. Some traditional processors require $25–50/month in processing fees; fall short and you pay the difference. Flat-rate processors (Square, Stripe) don't do this — it's a legacy-processor trap.</li>
+      <li><strong>Equipment leases.</strong> Never lease a terminal. A $1,500 terminal on a 48-month lease at $49/month costs $2,352 — buy it outright or use a processor that includes hardware.</li>
+    </ul>
+
+    <h2>How to compute your true effective rate</h2>
+    <p>Pull three months of processor statements. Add up <em>every</em> fee — processing charges, monthly fees, PCI, chargebacks, equipment — and divide by total card volume. That's your effective rate. Compare it against the headline rate you signed up for; a gap over 0.5 percentage points means junk fees or a bad pricing model for your mix.</p>
+    <p>Illustrative arithmetic: a café processing C$20,000/month at Square's 2.65% in-person rate pays C$530 in processing — but add a C$15/month PCI fee equivalent and two C$20 chargebacks and the true monthly cost is C$585, an effective rate of 2.93%. The headline said 2.65%.</p>
+
+    <h2>FAQ</h2>
+    <h3>Should a small Canadian business use Square, Stripe, or a traditional processor?</h3>
+    <p>Under ~$10K/month in card volume, flat-rate (Square/Stripe) wins on simplicity and total cost — no monthly minimums, no statement archaeology. Above that, get interchange-plus quotes from two traditional processors and compare effective rates, not headline rates.</p>
+    <h3>Can I negotiate processing rates?</h3>
+    <p>With flat-rate processors, no — the rate is the rate. With interchange-plus processors, yes: the markup is negotiable, especially with competing quotes and 12+ months of volume history. Never negotiate without a second quote in writing.</p>
+    <h3>What's the single most avoidable fee?</h3>
+    <p>Equipment leases. They turn a $300 terminal into a $2,000+ obligation. Buy hardware outright, always.</p>
+    <p class="fine">This guide is general business information, not financial advice. Processing rates and fees change — always confirm current terms with the processor before signing.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

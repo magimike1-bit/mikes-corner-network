@@ -1,165 +1,225 @@
 {
-  "check_date": "2026-09-30",
-  "products": [
-    {
-      "slug": "hubspot",
-      "name": "HubSpot",
-      "category": "CRM & Marketing",
-      "priceText": "From $0 free",
-      "priceSort": 0,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/hubspot.html"
-    },
-    {
-      "slug": "freshbooks",
-      "name": "FreshBooks",
-      "category": "Accounting",
-      "priceText": "From C$26 per month",
-      "priceSort": 26,
-      "dealHeadline": "$1/month for your first year (Solopreneur offer)",
-      "country": "CA",
-      "url": "/deals/freshbooks.html"
-    },
-    {
-      "slug": "monday",
-      "name": "Monday.com",
-      "category": "Work Management",
-      "priceText": "From $0 free",
-      "priceSort": 0,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/monday.html"
-    },
-    {
-      "slug": "semrush",
-      "name": "Semrush",
-      "category": "SEO & Marketing",
-      "priceText": "From $139.95 per month",
-      "priceSort": 139.95,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/semrush.html"
-    },
-    {
-      "slug": "shopify",
-      "name": "Shopify",
-      "category": "Ecommerce",
-      "priceText": "From $5 per month",
-      "priceSort": 5,
-      "dealHeadline": null,
-      "country": "CA",
-      "url": "/deals/shopify.html"
-    },
-    {
-      "slug": "wave",
-      "name": "Wave",
-      "category": "Accounting",
-      "priceText": "From $0 free",
-      "priceSort": 0,
-      "dealHeadline": null,
-      "country": "CA",
-      "url": "/deals/wave.html"
-    },
-    {
-      "slug": "quickbooks",
-      "name": "QuickBooks Online",
-      "category": "Accounting",
-      "priceText": "From C$30 per month",
-      "priceSort": 30,
-      "dealHeadline": "90% off for 6 months for new subscribers (as low as C$3/month on EasyStart)",
-      "country": null,
-      "url": "/deals/quickbooks.html"
-    },
-    {
-      "slug": "xero",
-      "name": "Xero",
-      "category": "Accounting",
-      "priceText": "From $25 per month",
-      "priceSort": 25,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/xero.html"
-    },
-    {
-      "slug": "square",
-      "name": "Square",
-      "category": "Payments & POS",
-      "priceText": "From $0 free",
-      "priceSort": 0,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/square.html"
-    },
-    {
-      "slug": "calendly",
-      "name": "Calendly",
-      "category": "Scheduling",
-      "priceText": "From $0 free",
-      "priceSort": 0,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/calendly.html"
-    },
-    {
-      "slug": "jobber",
-      "name": "Jobber",
-      "category": "Field Service",
-      "priceText": "From C$49 per month",
-      "priceSort": 49,
-      "dealHeadline": null,
-      "country": "CA",
-      "url": "/deals/jobber.html"
-    },
-    {
-      "slug": "humi",
-      "name": "Humi",
-      "category": "HR & Payroll",
-      "priceText": "Custom",
-      "priceSort": null,
-      "dealHeadline": null,
-      "country": "CA",
-      "url": "/deals/humi.html"
-    },
-    {
-      "slug": "ahrefs",
-      "name": "Ahrefs",
-      "category": "SEO & Marketing",
-      "priceText": "From $29 per month",
-      "priceSort": 29,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/ahrefs.html"
-    },
-    {
-      "slug": "plausible",
-      "name": "Plausible",
-      "category": "SEO & Marketing",
-      "priceText": "From $9 per month",
-      "priceSort": 9,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/plausible.html"
-    },
-    {
-      "slug": "stripe",
-      "name": "Stripe",
-      "category": "Payments & POS",
-      "priceText": "From 2.9% + 30¢ per transaction",
-      "priceSort": 2.9,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/stripe.html"
-    },
-    {
-      "slug": "big-cartel",
-      "name": "Big Cartel",
-      "category": "Ecommerce",
-      "priceText": "From $0 free",
-      "priceSort": 0,
-      "dealHeadline": null,
-      "country": null,
-      "url": "/deals/big-cartel.html"
-    }
-  ]
+ "check_date": "2026-09-30",
+ "products": [
+  {
+   "slug": "hubspot",
+   "name": "HubSpot",
+   "category": "CRM & Marketing",
+   "priceText": "From $0 free",
+   "priceSort": 0,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/hubspot.html"
+  },
+  {
+   "slug": "freshbooks",
+   "name": "FreshBooks",
+   "category": "Accounting",
+   "priceText": "From C$26 per month",
+   "priceSort": 26,
+   "dealHeadline": "$1/month for your first year (Solopreneur offer)",
+   "country": "CA",
+   "url": "/deals/freshbooks.html"
+  },
+  {
+   "slug": "monday",
+   "name": "Monday.com",
+   "category": "Work Management",
+   "priceText": "From $0 free",
+   "priceSort": 0,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/monday.html"
+  },
+  {
+   "slug": "semrush",
+   "name": "Semrush",
+   "category": "SEO & Marketing",
+   "priceText": "From $139.95 per month",
+   "priceSort": 139.95,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/semrush.html"
+  },
+  {
+   "slug": "shopify",
+   "name": "Shopify",
+   "category": "Ecommerce",
+   "priceText": "From $5 per month",
+   "priceSort": 5,
+   "dealHeadline": null,
+   "country": "CA",
+   "url": "/deals/shopify.html"
+  },
+  {
+   "slug": "wave",
+   "name": "Wave",
+   "category": "Accounting",
+   "priceText": "From $0 free",
+   "priceSort": 0,
+   "dealHeadline": null,
+   "country": "CA",
+   "url": "/deals/wave.html"
+  },
+  {
+   "slug": "quickbooks",
+   "name": "QuickBooks Online",
+   "category": "Accounting",
+   "priceText": "From C$30 per month",
+   "priceSort": 30,
+   "dealHeadline": "90% off for 6 months for new subscribers (as low as C$3/month on EasyStart)",
+   "country": null,
+   "url": "/deals/quickbooks.html"
+  },
+  {
+   "slug": "xero",
+   "name": "Xero",
+   "category": "Accounting",
+   "priceText": "From $25 per month",
+   "priceSort": 25,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/xero.html"
+  },
+  {
+   "slug": "square",
+   "name": "Square",
+   "category": "Payments & POS",
+   "priceText": "From $0 free",
+   "priceSort": 0,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/square.html"
+  },
+  {
+   "slug": "calendly",
+   "name": "Calendly",
+   "category": "Scheduling",
+   "priceText": "From $0 free",
+   "priceSort": 0,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/calendly.html"
+  },
+  {
+   "slug": "jobber",
+   "name": "Jobber",
+   "category": "Field Service",
+   "priceText": "From C$49 per month",
+   "priceSort": 49,
+   "dealHeadline": null,
+   "country": "CA",
+   "url": "/deals/jobber.html"
+  },
+  {
+   "slug": "humi",
+   "name": "Humi",
+   "category": "HR & Payroll",
+   "priceText": "Custom",
+   "priceSort": null,
+   "dealHeadline": null,
+   "country": "CA",
+   "url": "/deals/humi.html"
+  },
+  {
+   "slug": "ahrefs",
+   "name": "Ahrefs",
+   "category": "SEO & Marketing",
+   "priceText": "From $29 per month",
+   "priceSort": 29,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/ahrefs.html"
+  },
+  {
+   "slug": "plausible",
+   "name": "Plausible",
+   "category": "SEO & Marketing",
+   "priceText": "From $9 per month",
+   "priceSort": 9,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/plausible.html"
+  },
+  {
+   "slug": "stripe",
+   "name": "Stripe",
+   "category": "Payments & POS",
+   "priceText": "From 2.9% + 30\u00a2 per transaction",
+   "priceSort": 2.9,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/stripe.html"
+  },
+  {
+   "slug": "big-cartel",
+   "name": "Big Cartel",
+   "category": "Ecommerce",
+   "priceText": "From $0 free",
+   "priceSort": 0,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/big-cartel.html"
+  },
+  {
+   "slug": "pipedrive",
+   "name": "Pipedrive",
+   "category": "CRM & Marketing",
+   "priceText": "From $14 per user/month",
+   "priceSort": 14,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/pipedrive.html"
+  },
+  {
+   "slug": "zoho-crm",
+   "name": "Zoho CRM",
+   "category": "CRM & Marketing",
+   "priceText": "From $0 free",
+   "priceSort": 0,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/zoho-crm.html"
+  },
+  {
+   "slug": "wagepoint",
+   "name": "Wagepoint",
+   "category": "HR & Payroll",
+   "priceText": "From C$20 per month",
+   "priceSort": 20,
+   "dealHeadline": null,
+   "country": "CA",
+   "url": "/deals/wagepoint.html"
+  },
+  {
+   "slug": "knit-people",
+   "name": "Knit People",
+   "category": "HR & Payroll",
+   "priceText": "From C$39 per month",
+   "priceSort": 39,
+   "dealHeadline": null,
+   "country": "CA",
+   "url": "/deals/knit-people.html"
+  },
+  {
+   "slug": "acuity",
+   "name": "Acuity Scheduling",
+   "category": "Scheduling",
+   "priceText": "From $20 per month",
+   "priceSort": 20,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/acuity.html"
+  },
+  {
+   "slug": "setmore",
+   "name": "Setmore",
+   "category": "Scheduling",
+   "priceText": "From $0 free",
+   "priceSort": 0,
+   "dealHeadline": null,
+   "country": null,
+   "url": "/deals/setmore.html"
+  }
+ ]
 }

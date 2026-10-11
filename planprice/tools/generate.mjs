@@ -301,7 +301,12 @@ function esc(s) {
 
 // Starting-price line: "From $X per month" — or plain "Custom quote" for
 // quote-based pricing (no "From $").
+// PP-SERP-DESC-PAGES (2026-10-11): guard for products with no pricing_tiers
+// (6 new-vendor products added 2026-10-09 lack tiers) — previously the
+// generator CRASHED on these and the committed pages shipped a broken
+// "From " with no price. Honest "Pricing on request" instead of a guess.
 function fromPrice(p, strong = true) {
+  if (!p.pricing_tiers || !p.pricing_tiers.length) return "Pricing on request";
   const t = p.pricing_tiers[0];
   if (t.cadence === "quote") return esc(t.price);
   const price = strong ? `<strong>${esc(t.price)}</strong>` : esc(t.price);
@@ -650,7 +655,15 @@ function annualCallout(t) {
   return `\n      <p class="annual-callout">${esc(sv.callout)}</p>`;
 }
 
+// PP-SERP-DESC-PAGES (2026-10-11): products without pricing_tiers get an
+// honest "pricing on request" block instead of crashing the generator.
 function pricingTable(p) {
+  if (!p.pricing_tiers || !p.pricing_tiers.length) {
+    return `<section class="section pricing">
+      <h2>Pricing</h2>
+      <p>Pricing is not published on the vendor's site — contact the vendor for a quote.</p>
+    </section>`;
+  }
   const rows = p.pricing_tiers.map(t => `<tr>
       <th scope="row">${esc(t.name)}</th>
       <td class="price">${esc(t.price)}</td>
@@ -684,6 +697,14 @@ function cta(p) {
   if (affiliateNone(p)) {
     return `<a href="${esc(p.vendor_homepage)}" class="btn vendor-cta" rel="noopener">Visit ${esc(p.name)} →</a>
     <p class="fine no-affiliate">PlanPrice has no affiliate relationship with ${esc(p.name)} — we earn nothing if you choose them.</p>`;
+  }
+  // PP-SERP-DESC-PAGES (2026-10-11): products added by the AdSense remediation
+  // have no affiliate object at all — they shipped with this exact hand-patched
+  // pattern (see deals/pipedrive.html at 9d2e3c6), so the generator now emits it.
+  if (!p.affiliate) {
+    return `<!-- AFFILIATE PLACEHOLDER: light when Joseph approves -->
+    <a href="${esc(p.vendor_homepage)}" class="btn" target="_blank" rel="noopener">Check the current price</a>
+    <p class="fine">Direct link to the vendor site. See our <a href="/disclosure.html">affiliate disclosure</a>.</p>`;
   }
   return `<!-- AFFILIATE PLACEHOLDER: light when Joseph approves -->
     <a href="#" class="btn affiliate-cta" data-program="${esc(p.affiliate.program)}" data-status="pending-approval">Check the current price</a>
@@ -721,7 +742,10 @@ function relatedRows(p) {
 function dealPage(p) {
   return `${head(
     `${p.name} Pricing & Deals (Verified ${p.last_verified}) — PlanPrice`,
-    `${p.name} verified list pricing and current promotions. ${p.tagline} Checked ${p.last_verified} by the PlanPrice research team.`,
+    // PP-SERP-DESC-PAGES (2026-10-11): meta decoupled from the .lead tagline —
+    // the trailing "Checked {date}" sentence pushed 12 pages to 156-187 chars.
+    // New form lands at 103-136 chars; visible page copy is unchanged.
+    `${p.name} verified list pricing and current promotions. ${p.tagline}`,
     `/deals/${p.slug}.html`
   )}
 ${header("/")}
@@ -1147,8 +1171,9 @@ function glossaryTermPage(t) {
       ${related.map((p) => `<li><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></li>`).join("\n")}
     </ul>`
     : "";
-  const metaDesc =
-    t.definition.length > 157 ? t.definition.slice(0, 157) + "…" : t.definition;
+  // PP-SERP-DESC-PAGES (2026-10-11): word-boundary truncation (was a raw
+  // slice(0,157)+"…" = 158 chars, often mid-word).
+  const metaDesc = truncMeta(t.definition);
   return `${head(
     `${t.term} — Pricing glossary — PlanPrice`,
     metaDesc,
@@ -1198,7 +1223,20 @@ ${footer()}`;
 // Shared chrome — disclosure banner + footer text are byte-identical to v1.
 // ---------------------------------------------------------------------------
 
+// PP-SERP-DESC-PAGES (2026-10-11): SERP-safe truncation. Meta descriptions are
+// capped at 155 chars at a word boundary so no page can ever ship with an
+// over-long <meta name="description"> again (Google truncates ~155-160).
+function truncMeta(s, max = 155) {
+  s = String(s || "").trim().replace(/\s+/g, " ");
+  if (s.length <= max) return s;
+  let cut = s.slice(0, max - 1); // leave room for the ellipsis
+  const lastSpace = cut.lastIndexOf(" ");
+  if (lastSpace > 0) cut = cut.slice(0, lastSpace);
+  return cut + "…";
+}
+
 function head(title, description, path, extraHead = "") {
+  description = truncMeta(description);
   return `<!DOCTYPE html>
 <html lang="en">
 <head>

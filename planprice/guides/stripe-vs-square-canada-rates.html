@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stripe vs Square Canadian Rates: In-Person, Online, Invoicing, and the Crossover</title>
+<meta name="description" content="Stripe vs Square published Canadian rates head to head: Square Canada 2.5% in-person vs Stripe 2.9% + 30¢ online, invoicing fees, and the ticket-size math that decides the winner. Rates checked 2026-10-11.">
+<link rel="canonical" href="https://planprice.ca/guides/stripe-vs-square-canada-rates.html">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Stripe vs Square Canadian Rates: In-Person, Online, Invoicing, and the Crossover">
+<meta property="og:description" content="Stripe vs Square published Canadian rates head to head: Square Canada 2.5% in-person vs Stripe 2.9% + 30¢ online, invoicing fees, and the ticket-size math that decides the winner. Rates checked 2026-10-11.">
+<meta property="og:url" content="https://planprice.ca/guides/stripe-vs-square-canada-rates.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stripe vs Square Canadian Rates: In-Person, Online, Invoicing, and the Crossover">
+<meta name="twitter:description" content="Stripe vs Square published Canadian rates head to head: Square Canada 2.5% in-person vs Stripe 2.9% + 30¢ online, invoicing fees, and the ticket-size math that decides the winner. Rates checked 2026-10-11.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which is cheaper in Canada, Stripe or Square?",
+          "acceptedAnswer": {"@type": "Answer", "text": "On published rates, Square wins in person (2.5% vs Stripe Terminal's 2.7% + 5¢) and slightly online (2.8% + 30¢ vs 2.9% + 30¢). Stripe wins where developer tooling, subscriptions, or international payments matter more than the percentage point."}
+        },
+        {
+          "@type": "Question",
+          "name": "Does Square charge extra for international cards in Canada?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Yes — an additional 1.5% applies to transactions with cards issued outside of Canada, on top of the 2.5% in-person rate."}
+        },
+        {
+          "@type": "Question",
+          "name": "How much does Stripe Invoicing cost on top of processing?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Stripe Invoicing adds 0.4% per paid invoice on Starter or 0.5% on Plus, on top of the 2.9% + 30¢ processing fee."}
+        }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › Stripe vs Square Canada</p>
+    <h1 class="page-title">Stripe vs Square Canadian Rates: In-Person, Online, Invoicing, and the Crossover</h1>
+    <p class="section-sub">Last updated <time datetime="2026-10-11">2026-10-11</time></p><figure class="post-figure">
+  <img class="post-image" src="../images/stripe-vs-square-canada-rates.jpg" alt="A generic card payment terminal standing next to a smartphone on a white shop counter" loading="lazy" width="1920" height="1280">
+  <figcaption>The gap between the two is smaller than most merchants expect.</figcaption>
+</figure>
+
+
+    <p>Most Stripe-vs-Square comparisons quote US rates and call it a day. Canadian merchants face different numbers: Square Canada publishes 2.5% for in-person credit, and Stripe Canada publishes 2.9% + CA$0.30 for online domestic cards. This guide puts the published Canadian rates side by side — in-person, online, and invoicing — and works the ticket-size math.</p>
+
+    <h2>The Canadian published rates, side by side</h2>
+    <table>
+      <tr><th>Channel</th><th>Square (Canada)</th><th>Stripe (Canada)</th></tr>
+      <tr><td>In-person credit</td><td>2.5%</td><td>2.7% + 5¢ (Terminal)</td></tr>
+      <tr><td>In-person debit (chip/PIN/tap)</td><td>0.75% + 7¢</td><td>n/a (Terminal credit rates apply)</td></tr>
+      <tr><td>Online</td><td>2.8% + 30¢</td><td>2.9% + 30¢</td></tr>
+      <tr><td>Manually entered</td><td>3.3% + 15¢</td><td>not published separately for CA</td></tr>
+      <tr><td>Monthly fee</td><td>$0</td><td>$0</td></tr>
+    </table>
+    <p>Rates checked 2026-10-11: Square's Canadian point-of-sale and appointments pricing pages; Stripe's Canadian payments pricing. Two surcharges to know: Square adds 1.5% for cards issued outside of Canada, and Stripe adds about 1% for international cards plus 1% if currency conversion is required.</p>
+
+    <h2>In-person: Square wins at every ticket size</h2>
+    <p>This one is not close. Square Canada charges a flat 2.5% with no fixed cents on in-person credit; Stripe Terminal charges 2.7% plus 5¢. There is no crossover — Square is cheaper by 0.2 percentage points plus 5¢ on every ticket. On Interac debit, Square's 0.75% + 7¢ is in a different league from credit-card pricing entirely. If your business is a counter, a market stall, or a service van, the rate card favors Square.</p>
+
+    <h2>Online: nearly a tie, slight Square edge</h2>
+    <p>Online, the fixed fee is identical (30¢) and the percentage differs by a tenth of a point: Square 2.8%, Stripe 2.9%. On $100 of online volume, that is a 10¢ difference — real but tiny. The deciding factor online is rarely the rate card: it is whether you need Stripe's developer tooling, subscription billing (0.7% of billing volume on Stripe Billing), and international payment methods, or Square's no-code setup with a free online store.</p>
+
+    <h2>Invoicing and the extras</h2>
+    <p>Stripe Invoicing is not free: Starter adds 0.4% per paid invoice and Plus adds 0.5%, each on top of the 2.9% + 30¢ processing fee. A $2,000 invoice on Stripe Invoicing Starter costs roughly $58 in processing plus $8 in invoicing fees. Square does not publish a separate per-invoice percentage on its Canadian pages the way Stripe does — invoices fall under its standard card-not-present pricing. Hardware: Square readers start at $69 CAD with $0 monthly; Stripe Terminal readers (from $59 for the Reader M2) are a separate hardware purchase on top of a developer integration.</p>
+
+    <h2>The ticket-size crossover math</h2>
+    <p>The fixed-cent fee decides small tickets more than the percentage does. Worked for in-person credit:</p>
+    <table>
+      <tr><th>$15 ticket</th><th>$50 ticket</th><th>$200 ticket</th></tr>
+      <tr><td>Square: 38¢ · Stripe: 46¢</td><td>Square: $1.25 · Stripe: $1.40</td><td>Square: $5.00 · Stripe: $5.45</td></tr>
+    </table>
+    <p>Square wins all three because its percentage is lower <em>and</em> it has no fixed fee in person. Online, the 30¢ fixed fee is identical on both, so the 0.1-point gap scales linearly: Square saves $1 per $1,000 of online volume. Neither gap is decisive — which is exactly the point: pick on product fit, not on the rate card.</p>
+
+    <h2>Decision framework: three merchant profiles</h2>
+    <ul>
+      <li><strong>The counter business</strong> (retail, café, market stall): Square — the 2.5% in-person rate and $0 monthly fee are hard to beat, and debit at 0.75% + 7¢ is a genuine edge.</li>
+      <li><strong>The online store</strong>: a wash on rates — choose Stripe for developer control, subscriptions, and 135+ currencies, or Square for no-code setup with a free store.</li>
+      <li><strong>The invoicing freelancer/contractor</strong>: Square — no per-invoice percentage on top of processing, versus Stripe's 0.4–0.5% invoicing add-on.</li>
+    </ul>
+    <p class="fine">Note: this is a rate explainer, not a procedure guide — no steps here, just the published-rate math to check against your channel mix before you commit.</p>
+
+    <h2>FAQ</h2>
+    <h3>Which is cheaper in Canada, Stripe or Square?</h3>
+    <p>On published rates, Square wins in person (2.5% vs Stripe Terminal's 2.7% + 5¢) and slightly online (2.8% + 30¢ vs 2.9% + 30¢). Stripe wins where developer tooling, subscriptions, or international payments matter more than the percentage point.</p>
+    <h3>Does Square charge extra for international cards in Canada?</h3>
+    <p>Yes — an additional 1.5% applies to transactions with cards issued outside of Canada, on top of the 2.5% in-person rate.</p>
+    <h3>How much does Stripe Invoicing cost on top of processing?</h3>
+    <p>Stripe Invoicing adds 0.4% per paid invoice on Starter or 0.5% on Plus, on top of the 2.9% + 30¢ processing fee.</p>
+    <p class="fine">This guide is general business information, not financial advice. Rates change frequently — always confirm current rates on the vendor's own pricing page. Rates above checked 2026-10-11.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-10-11 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salesforce Editions Pricing Decoded: What Each Tier Unlocks and the Implementation Blind Spot</title>
+<meta name="description" content="Salesforce editions decoded: current per-user prices, the capability gates (API access, sandboxes) that force upgrades, old-vs-new edition names, and the implementation cost buyers miss.">
+<link rel="canonical" href="https://planprice.ca/guides/salesforce-editions-pricing-decoded.html">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Salesforce Editions Pricing Decoded: What Each Tier Unlocks and the Implementation Blind Spot">
+<meta property="og:description" content="Salesforce editions decoded: current per-user prices, the capability gates (API access, sandboxes) that force upgrades, old-vs-new edition names, and the implementation cost buyers miss.">
+<meta property="og:url" content="https://planprice.ca/guides/salesforce-editions-pricing-decoded.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Salesforce Editions Pricing Decoded: What Each Tier Unlocks and the Implementation Blind Spot">
+<meta name="twitter:description" content="Salesforce editions decoded: current per-user prices, the capability gates (API access, sandboxes) that force upgrades, old-vs-new edition names, and the implementation cost buyers miss.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which Salesforce edition includes API access?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Full API access arrives at the Enterprise tier and above. Teams that need custom integrations, custom objects, or Apex code generally need Enterprise or higher — the lower suites are intentionally gated."}
+        },
+        {
+          "@type": "Question",
+          "name": "How much does Salesforce really cost for a small business?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Licenses are the smaller half. Ten users on Starter Suite is about $3,000/year in licenses, but implementation, data migration, integrations, training, and administration commonly exceed the license cost in year one. Budget both halves."}
+        },
+        {
+          "@type": "Question",
+          "name": "What happened to Salesforce Enterprise and Unlimited editions?",
+          "acceptedAnswer": {"@type": "Answer", "text": "On the Sales Cloud pricing page they were replaced by a new ladder: Starter Suite, Pro Suite, Core, Advanced, and Max. Service Cloud still uses the old Enterprise/Unlimited names. Existing contracts on old editions may continue."}
+        }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › Salesforce editions pricing</p>
+    <h1 class="page-title">Salesforce Editions Pricing Decoded: What Each Tier Unlocks and the Implementation Blind Spot</h1>
+    <p class="section-sub">Last updated <time datetime="2026-10-11">2026-10-11</time></p><figure class="post-figure">
+  <img class="post-image" src="../images/salesforce-editions-pricing-decoded.jpg" alt="Four colleagues discussing documents and a laptop around a conference table in a bright office" loading="lazy" width="1920" height="1280">
+  <figcaption>The edition ladder decides the license bill; the capability gates decide the real one.</figcaption>
+</figure>
+
+
+    <p>Salesforce's pricing page is a maze with renamed corridors: Sales Cloud now sells Starter, Pro Suite, Core, Advanced, and Max, while Service Cloud still uses the old Enterprise and Unlimited names. The per-user prices are only the visible half — the capability gates that force upgrades and the implementation bill that dwarfs the licenses are the other half. Prices below are USD list, per user per month, checked September–October 2026.</p>
+
+    <h2>The edition ladder, translated</h2>
+    <table>
+      <tr><th>Sales Cloud edition</th><th>Price (USD)</th><th>Positioning</th></tr>
+      <tr><td>Free Suite</td><td>$0</td><td>Basic lead/account/opportunity management</td></tr>
+      <tr><td>Starter Suite</td><td>$25</td><td>Small teams: sales flows, lead routing, email sync</td></tr>
+      <tr><td>Pro Suite</td><td>$100</td><td>Growing SMBs: customization, quoting, forecasting</td></tr>
+      <tr><td>Core</td><td>$195</td><td>Mid-market: built-in AI, Slack, Tableau</td></tr>
+      <tr><td>Advanced</td><td>$395</td><td>Enhanced security, expanded AI, data capacity</td></tr>
+      <tr><td>Max</td><td>$550</td><td>Full AI suite including Agentforce</td></tr>
+    </table>
+    <p>Service Cloud runs a parallel ladder: Starter Suite $25, Pro Suite $100, Enterprise $175, Unlimited $350, Agentforce 1 Service $550. If a comparison quotes you "Enterprise $165" and "Core $195" in the same breath, it's mixing the two clouds' ladders — a common source of confusion since the rename.</p>
+
+    <h2>What each tier actually unlocks: the capability gates</h2>
+    <p>The gates that force upgrades, verified against edition comparisons:</p>
+    <ul>
+      <li><strong>Full API access</strong> — Enterprise tier and above. If you need to integrate Salesforce with your ERP, marketing platform, or custom apps, the lower suites won't do it. This single gate moves more buyers up the ladder than any other.</li>
+      <li><strong>Deep customization</strong> — custom objects, Apex code, and advanced automation live at Enterprise+. Pro Suite adds customization over Starter, but the ceiling is real.</li>
+      <li><strong>Sandboxes</strong> — partial and full sandboxes for safe testing and deployment arrive at the higher tiers; lower tiers test in production.</li>
+      <li><strong>Advanced AI (Agentforce)</strong> — the top rungs; the $500+/user/month AI editions are a separate buying decision from the CRM itself.</li>
+    </ul>
+    <p>Buy the gate you need, not the price you want: a $25 Starter seat that can't integrate with your stack is more expensive than a $175 Enterprise seat that can.</p>
+
+    <h2>The implementation blind spot: the other half of the check</h2>
+    <p>License math is tidy: 10 users on Starter Suite = <strong>$3,000/year</strong>; 100 users on Pro Suite = <strong>$120,000/year</strong>. Then the rest of the check arrives: implementation and configuration, data migration and cleansing, integrations, user training, consulting, ongoing support, and internal administration. Buyers consistently report these non-license costs matching or exceeding the first-year license bill.</p>
+    <p>Budget rule: get an implementation quote <em>before</em> you sign the license order, from the same partner or an independent one. The license is a subscription; the implementation is a project with its own timeline, and its cost is the number most buyers never see until it's committed.</p>
+
+    <h2>Decision framework: which edition for which buyer</h2>
+    <ul>
+      <li><strong>Starter Suite ($25):</strong> small teams that need a real CRM fast, no integrations, no custom code. If you outgrow it, you migrate up — plan for that.</li>
+      <li><strong>Pro Suite ($100):</strong> growing SMBs needing quoting, forecasting, and real customization without the enterprise apparatus.</li>
+      <li><strong>Core ($195) and up:</strong> mid-market teams where AI features, Tableau, and deeper automation are worth more than headcount savings.</li>
+      <li><strong>Need API/integrations:</strong> start at Enterprise regardless of team size — anything lower is a false economy.</li>
+    </ul>
+    <p><em>Why no step-by-step here:</em> this is a buying-decision guide, not a setup walkthrough — the framework above replaces procedural steps.</p>
+
+    <h2>FAQ</h2>
+    <h3>Which Salesforce edition includes API access?</h3>
+    <p>Full API access arrives at the Enterprise tier and above. Teams that need custom integrations, custom objects, or Apex code generally need Enterprise or higher — the lower suites are intentionally gated.</p>
+    <h3>How much does Salesforce really cost for a small business?</h3>
+    <p>Licenses are the smaller half. Ten users on Starter Suite is about $3,000/year in licenses, but implementation, data migration, integrations, training, and administration commonly exceed the license cost in year one. Budget both halves.</p>
+    <h3>What happened to Salesforce Enterprise and Unlimited editions?</h3>
+    <p>On the Sales Cloud pricing page they were replaced by a new ladder: Starter Suite, Pro Suite, Core, Advanced, and Max. Service Cloud still uses the old Enterprise/Unlimited names. Existing contracts on old editions may continue.</p>
+    <p class="fine">This guide is general business information, not financial advice. Prices verified 2026-10-11 by the PlanPrice research team — always confirm current pricing on salesforce.com before buying. Edition names and packaging change frequently.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-10-11 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

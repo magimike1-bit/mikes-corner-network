@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloudflare Plans Decoded: What Free vs $20 vs $200 Actually Unlocks</title>
+<meta name="description" content="Cloudflare Free vs Pro vs Business for a small site: what each tier genuinely unlocks, the monthly-billing premium, and the add-on layer that bills on top of every plan.">
+<link rel="canonical" href="https://planprice.ca/guides/cloudflare-plans-decoded.html">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Cloudflare Plans Decoded: What Free vs $20 vs $200 Actually Unlocks">
+<meta property="og:description" content="Cloudflare Free vs Pro vs Business for a small site: what each tier genuinely unlocks, the monthly-billing premium, and the add-on layer that bills on top of every plan.">
+<meta property="og:url" content="https://planprice.ca/guides/cloudflare-plans-decoded.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cloudflare Plans Decoded: What Free vs $20 vs $200 Actually Unlocks">
+<meta name="twitter:description" content="Cloudflare Free vs Pro vs Business for a small site: what each tier genuinely unlocks, the monthly-billing premium, and the add-on layer that bills on top of every plan.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Cloudflare Pro worth it for a small website?",
+          "acceptedAnswer": {"@type": "Answer", "text": "For most small brochure sites, no — the Free plan's CDN, DDoS protection, and SSL cover the essentials. Pro's $20/month earns its keep when you need image optimization, the full WAF ruleset, or more than one rate-limiting rule."}
+        },
+        {
+          "@type": "Question",
+          "name": "Does Cloudflare charge for bandwidth?",
+          "acceptedAnswer": {"@type": "Answer", "text": "No. Cloudflare charges no per-GB bandwidth fees on any plan, including Free — unlimited CDN bandwidth is included. Metered add-ons like Argo Smart Routing ($0.10/GB) and Stream are the exception, not the rule."}
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Cloudflare Pro and Business?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Pro ($20/month) adds image optimization, the full OWASP WAF ruleset, and 20 page rules. Business ($200/month) adds custom WAF rules, 5 rate-limit rules, PCI compliance support, custom SSL uploads, and a 100% uptime SLA with 25x credit."}
+        }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › Cloudflare plans decoded</p>
+    <h1 class="page-title">Cloudflare Plans Decoded: What Free vs $20 vs $200 Actually Unlocks</h1>
+    <p class="section-sub">Last updated <time datetime="2026-10-11">2026-10-11</time></p><figure class="post-figure">
+  <img class="post-image" src="../images/cloudflare-plans-decoded.jpg" alt="Glowing fiber-optic cables in close-up, blue and teal light" loading="lazy" width="1920" height="1280">
+  <figcaption>Free covers the essentials; the paid tiers buy security depth.</figcaption>
+</figure>
+
+
+    <p>Most Cloudflare plan breakdowns are written for security engineers — tables of WAF rulesets and rate-limit counts that answer everything except the small-site question: what does a brochure site or a small store actually get for $20 a month that Free doesn't provide? This guide decodes the three plans in practical terms, prices the monthly-billing premium most guides omit, and flags the add-on layer that can bill on top of any plan.</p>
+
+    <h2>What Free genuinely covers</h2>
+    <p>Cloudflare's Free plan is unusually generous and covers the essentials for most small sites: unmetered DDoS mitigation, the global CDN (330+ data centers), a shared SSL certificate, a limited free managed WAF ruleset, one rate-limiting rule, Bot Fight Mode, and 3 page rules. Critically, <strong>Cloudflare charges no per-GB bandwidth fees on any plan, including Free</strong> — unlimited CDN bandwidth is included, which alone makes it the best free tier in the infrastructure business.</p>
+    <p>For a brochure site, a blog, or a small portfolio: Free is enough. The honest test is whether you've ever hit one of its limits — if you haven't configured a WAF rule in anger, you don't need the paid rulesets yet.</p>
+
+    <h2>What $20/month Pro unlocks in practice</h2>
+    <p>Pro costs <strong>$20/month billed annually, or $25/month billed monthly</strong> — the monthly premium is 25%, a detail most guides omit. Per zone (per domain), Pro adds:</p>
+    <ul>
+      <li><strong>The full WAF stack:</strong> Cloudflare Managed Ruleset plus the OWASP Core Ruleset, instead of Free's limited ruleset. This is the headline upgrade — real protection against the OWASP Top 10.</li>
+      <li><strong>Image optimization (Polish)</strong> and <strong>mobile optimization (Mirage)</strong> — automatic image compression and mobile rendering tweaks that genuinely speed up image-heavy pages.</li>
+      <li><strong>Super Bot Fight Mode</strong> (up from basic Bot Fight Mode) and <strong>2 rate-limiting rules</strong> (up from 1).</li>
+      <li><strong>20 page rules</strong> (up from 3) — meaningful if you run redirects, caching exceptions, or forwarding rules.</li>
+      <li><strong>Workers Paid</strong> — 10 million requests included per month (then $0.30 per additional million), with 50ms CPU per invocation instead of Free's 10ms.</li>
+    </ul>
+    <p>In practical terms: Pro earns its $20 when your site is image-heavy enough that Polish pays for itself in speed, when you've outgrown one rate-limit rule (say, protecting both login and checkout), or when you're running Workers in production. A small store doing real transaction volume is the classic Pro customer — not because of the CDN, which Free already gives you, but because of the WAF.</p>
+
+    <h2>Who needs $200/month Business (almost no small site)</h2>
+    <p>Business costs <strong>$200/month billed annually, $250 monthly</strong>. It adds custom WAF rules, 5 rate-limit rules, custom SSL certificate uploads, bypass-cache-on-cookie, PCI compliance support, prioritized email support, 50 page rules, and a 100% uptime SLA with 25x reimbursement credit.</p>
+    <p>The small-site reality check: the features that justify Business are <strong>PCI compliance needs</strong> (payment data flowing through your own infrastructure), <strong>custom WAF rules</strong> for application-specific attacks, and the <strong>uptime SLA</strong> for revenue-critical sites. If none of those describe you, Business is $2,400/year for peace of mind you can get from Pro at $240. One pricing tracker reports the top tier dropped from $250 to $200/month in July 2026 — even at the lower price, it's an enterprise-adjacent tier wearing a small-business name.</p>
+
+    <figure class="post-figure">
+  <img class="post-image" src="../images/cloudflare-plans-decoded-2.jpg" alt="Server cabinet with a hardware drawer pulled open in a data center" loading="lazy" width="1920" height="1280">
+  <figcaption>Add-ons bill on top of every plan — estimate them first.</figcaption>
+</figure>
+
+<h2>The add-on layer above every plan</h2>
+    <p>The plan price isn't the ceiling — Cloudflare sells metered add-ons that bill on top of <em>any</em> plan, including Free:</p>
+    <ul>
+      <li><strong>Argo Smart Routing</strong> — $0.10/GB: faster routing for dynamic content. At 100GB/month of dynamic traffic, that's $10/month on top of your plan.</li>
+      <li><strong>Stream</strong> — $1 per 1,000 minutes of video delivered: video hosting without the YouTube branding. A small course site can outgrow its plan budget here fast.</li>
+      <li><strong>Workers overages</strong> — beyond the included requests, usage-based billing applies.</li>
+    </ul>
+    <p>One pattern worth flagging: SaaS vendors love charges that live outside the plan price — one provider billed per device connected even for read-only data access, a fee that never appeared on the rate card. Cloudflare's add-on layer is the same shape of surprise. Before enabling Argo or Stream, estimate the metered cost at your actual traffic; the plan comparison is only half the bill.</p>
+
+    <h2>The decision, in one pass</h2>
+    <ul>
+      <li><strong>Stay on Free</strong> if: brochure site, blog, portfolio — you haven't hit a Free limit and don't handle payment data directly.</li>
+      <li><strong>Go Pro ($20/mo annual)</strong> if: image-heavy pages, a store with real transaction volume, you need the OWASP WAF ruleset, or one rate-limit rule isn't enough. Bill annually — monthly costs 25% more.</li>
+      <li><strong>Go Business ($200/mo annual)</strong> if: PCI compliance requirements, custom WAF rules for your app, or the uptime SLA is worth $2,160/year more than Pro to you.</li>
+      <li><strong>Watch the add-ons regardless of plan:</strong> Argo, Stream, and Workers overages are metered separately — estimate before enabling.</li>
+    </ul>
+    <p><em>A note on format:</em> this is a buying-decision guide, not a fix-it walkthrough, so there are no numbered setup steps — the decision framework above is the actionable part.</p>
+
+    <h2>FAQ</h2>
+    <h3>Is Cloudflare Pro worth it for a small website?</h3>
+    <p>For most small brochure sites, no — the Free plan's CDN, DDoS protection, and SSL cover the essentials. Pro's $20/month earns its keep when you need image optimization, the full WAF ruleset, or more than one rate-limiting rule.</p>
+    <h3>Does Cloudflare charge for bandwidth?</h3>
+    <p>No. Cloudflare charges no per-GB bandwidth fees on any plan, including Free — unlimited CDN bandwidth is included. Metered add-ons like Argo Smart Routing ($0.10/GB) and Stream are the exception, not the rule.</p>
+    <h3>What is the difference between Cloudflare Pro and Business?</h3>
+    <p>Pro ($20/month) adds image optimization, the full OWASP WAF ruleset, and 20 page rules. Business ($200/month) adds custom WAF rules, 5 rate-limit rules, PCI compliance support, custom SSL uploads, and a 100% uptime SLA with 25x credit.</p>
+    <p class="fine">This guide is general business information, not financial advice. Prices checked 2026-10-11 — always confirm current pricing on Cloudflare's own site before buying.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-10-11 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

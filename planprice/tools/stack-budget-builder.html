@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stack Budget Builder — Price Your Whole Software Stack — PlanPrice</title>
+<meta name="description" content="Free tool: pick one product per category, choose a verified pricing tier, and see your whole software stack's monthly and annual cost in CAD or USD.">
+<link rel="canonical" href="https://planprice.ca/tools/stack-budget-builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Stack Budget Builder — PlanPrice">
+<meta property="og:description" content="Price your whole software stack: pick a product per category and see monthly and annual totals in CAD or USD.">
+<meta property="og:url" content="https://planprice.ca/tools/stack-budget-builder.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+/* overrides the shared .calc-wrap max-width (640px) in /style.css */
+.calc-wrap { max-width: 760px; margin: 0 auto; }
+.calc-controls { display: flex; flex-wrap: wrap; gap: 18px; margin: 14px 0; }
+.calc-controls .calc-field { margin: 0; min-width: 180px; }
+.calc-stack-row { border: 1px solid var(--line, #e9dfc9); border-radius: 12px; padding: 14px; margin: 12px 0; background: #fffdf8; }
+.calc-stack-row h3 { margin: 0 0 10px; font-size: 1rem; }
+.calc-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.calc-row-grid .calc-field { margin: 0; }
+.calc-row-foot { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.calc-row-link { font-size: 0.9em; }
+.calc-row-total { font-weight: 700; }
+.calc-totals { margin-top: 20px; padding: 18px; border: 2px solid var(--line, #e9dfc9); border-radius: 12px; background: #fffdf8; }
+.calc-totals .grand { font-size: 1.4rem; font-weight: 700; }
+.calc-bench { margin-top: 14px; padding: 14px 18px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line, #e9dfc9); }
+</style>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html" class="active">Tools</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/tools.html">Tools</a> › Stack Budget Builder</p>
+    <h1 class="page-title">Stack Budget Builder</h1>
+    <p class="section-sub">Pick one product per category, choose a pricing tier, and watch your whole software stack's monthly and annual cost add up — using the list prices PlanPrice verified on each vendor's own site (checked 2026-09-30).</p>
+    <p class="fine">Tier prices are verified list prices: most come from our <a href="/deals.html">deal directory</a> data (checked 2026-09-30); Pipedrive, Wagepoint, and Knit tiers come from the PlanPrice research store (vendor's own pages, checked 2026-10-11). Zoho CRM, Acuity Scheduling, and Setmore are not listed because we have not verified their tier-by-tier pricing yet — see their <a href="/deals.html">deal pages</a> for starting prices. Prices marked C$ are billed in Canadian dollars; $ prices are USD, converted at a typical card rate (≈1.37 CAD — a rule of thumb; your card's rate may differ). Payroll base prices exclude per-employee add-ons, noted in the tier name.</p>
+    <div class="calc-wrap">
+      <div class="calc-controls">
+        <div class="calc-field">
+          <label for="s-cur">Show totals in</label>
+          <select id="s-cur">
+            <option value="CAD" selected>CAD</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+        <div class="calc-field">
+          <label for="s-team">Team size (for the benchmark)</label>
+          <select id="s-team">
+            <option value="solopreneur" selected>Solopreneur</option>
+            <option value="team_2_10">Team of 2–10</option>
+            <option value="team_11_50">Team of 11–50</option>
+          </select>
+        </div>
+      </div>
+      <div id="s-rows"></div>
+      <div class="calc-totals" id="s-totals" aria-live="polite"></div>
+      <div class="calc-bench" id="s-bench" aria-live="polite"></div>
+    </div>
+    <noscript>
+      <p><strong>This tool needs JavaScript to add up your stack.</strong> The method it uses is simple: for each category, take the tier's list price — multiply by seats for per-seat pricing, divide by 12 for annual pricing — convert USD prices at roughly 1.37 CAD, and sum the rows. The annual total is the monthly total × 12. To price a stack by hand, start from the verified tier tables on our <a href="/deals.html">deal pages</a>.</p>
+    </noscript>
+  </div>
+</main>
+<script>
+(function() {
+  /* Products + verified tiers — regenerate from data/products.json.
+     Only vendors with verified pricing_tiers are included. */
+  var PRODUCTS = [
+    {slug:"hubspot",name:"HubSpot",category:"CRM & Marketing",
+     tiers:[
+      {name:"Free Tools",price:"$0",cadence:"free"},
+      {name:"Starter",price:"$15",cadence:"per seat/month"},
+      {name:"Sales Hub Professional",price:"$90",cadence:"per seat/month"},
+      {name:"Marketing Hub Professional",price:"$890",cadence:"per month"},
+     ]},
+    {slug:"freshbooks",name:"FreshBooks",category:"Accounting",
+     tiers:[
+      {name:"Lite",price:"C$26",cadence:"per month"},
+      {name:"Plus",price:"C$42",cadence:"per month"},
+      {name:"Premium",price:"C$72",cadence:"per month"},
+     ]},
+    {slug:"monday",name:"Monday.com",category:"Work Management",
+     tiers:[
+      {name:"Free",price:"$0",cadence:"free"},
+      {name:"Basic",price:"$9",cadence:"per seat/month"},
+      {name:"Standard",price:"$12",cadence:"per seat/month"},
+      {name:"Pro",price:"$19",cadence:"per seat/month"},
+      {name:"Enterprise",price:"Custom",cadence:"quote"},
+     ]},
+    {slug:"semrush",name:"Semrush",category:"SEO & Marketing",
+     tiers:[
+      {name:"Pro",price:"$139.95",cadence:"per month"},
+      {name:"Guru",price:"$249.95",cadence:"per month"},
+      {name:"Business",price:"$499.95",cadence:"per month"},
+     ]},
+    {slug:"shopify",name:"Shopify",category:"Ecommerce",
+     tiers:[
+      {name:"Starter",price:"$5",cadence:"per month"},
+      {name:"Basic",price:"$39",cadence:"per month"},
+      {name:"Grow",price:"$105",cadence:"per month"},
+      {name:"Advanced",price:"$399",cadence:"per month"},
+      {name:"Plus",price:"from $2,300",cadence:"per month"},
+     ]},
+    {slug:"wave",name:"Wave",category:"Accounting",
+     tiers:[
+      {name:"Starter",price:"$0",cadence:"free"},
+      {name:"Pro",price:"$19",cadence:"per month"},
+      {name:"Payments",price:"2.9% + 60¢",cadence:"per transaction"},
+     ]},
+    {slug:"quickbooks",name:"QuickBooks Online",category:"Accounting",
+     tiers:[
+      {name:"EasyStart",price:"C$30",cadence:"per month"},
+      {name:"Essentials",price:"C$70",cadence:"per month"},
+      {name:"Plus",price:"C$110",cadence:"per month"},
+      {name:"Advanced",price:"C$220",cadence:"per month"},
+     ]},
+    {slug:"xero",name:"Xero",category:"Accounting",
+     tiers:[
+      {name:"Early",price:"$25",cadence:"per month"},
+      {name:"Growing",price:"$55",cadence:"per month"},
+      {name:"Established",price:"$90",cadence:"per month"},
+     ]},
+    {slug:"square",name:"Square",category:"Payments & POS",
+     tiers:[
+      {name:"Square POS",price:"$0",cadence:"free"},
+      {name:"Appointments Free",price:"$0",cadence:"free"},
+      {name:"Appointments Plus",price:"$35",cadence:"per month"},
+      {name:"Appointments Premium",price:"$85",cadence:"per month"},
+     ]},
+    {slug:"calendly",name:"Calendly",category:"Scheduling",
+     tiers:[
+      {name:"Free",price:"$0",cadence:"free"},
+      {name:"Standard",price:"$10",cadence:"per seat/month"},
+      {name:"Teams",price:"$16",cadence:"per seat/month"},
+      {name:"Enterprise",price:"from $15,000",cadence:"per year"},
+     ]},
+    {slug:"jobber",name:"Jobber",category:"Field Service",
+     tiers:[
+      {name:"Core",price:"C$49",cadence:"per month"},
+      {name:"Connect",price:"C$139",cadence:"per month"},
+      {name:"Grow",price:"C$199",cadence:"per month"},
+      {name:"Plus",price:"C$499",cadence:"per month"},
+      {name:"Extra users",price:"C$29",cadence:"per user/month"},
+     ]},
+    {slug:"humi",name:"Humi",category:"HR & Payroll",
+     tiers:[
+      {name:"Core HR platform",price:"Custom",cadence:"quote"},
+      {name:"Payroll",price:"$7",cadence:"per employee/month"},
+      {name:"Managed Payroll",price:"$30",cadence:"per employee/month"},
+     ]},
+    {slug:"ahrefs",name:"Ahrefs",category:"SEO & Marketing",
+     tiers:[
+      {name:"Starter",price:"$29",cadence:"per month"},
+      {name:"Standard",price:"$249",cadence:"per month"},
+      {name:"Enterprise",price:"$1,499",cadence:"per month"},
+     ]},
+    {slug:"plausible",name:"Plausible",category:"SEO & Marketing",
+     tiers:[
+      {name:"Starter",price:"$9",cadence:"per month"},
+     ]},
+    {slug:"stripe",name:"Stripe",category:"Payments & POS",
+     tiers:[
+      {name:"Pay as you go",price:"2.9% + 30¢",cadence:"per transaction"},
+     ]},
+    {slug:"big-cartel",name:"Big Cartel",category:"Ecommerce",
+     tiers:[
+      {name:"Gold",price:"$0",cadence:"free"},
+      {name:"Platinum",price:"$15",cadence:"per month"},
+      {name:"Diamond",price:"$30",cadence:"per month"},
+     ]},
+    /* Store-sourced tiers below — from research/planprice/entities.json.
+       These vendors have no pricing_tiers in data/products.json; the store
+       holds dated, sourced tier prices, so the tool reads from the store. */
+    /* Pipedrive tiers: pipedrive.com (vendor's own blog), checked 2026-10-11,
+       packet pipedrive-plans-decoded. Annual-billing per-user prices. */
+    {slug:"pipedrive",name:"Pipedrive",category:"CRM & Marketing",
+     tiers:[
+      {name:"Lite (annual billing)",price:"$14",cadence:"per user/month"},
+      {name:"Growth (annual billing)",price:"$39",cadence:"per user/month"},
+      {name:"Premium (annual billing)",price:"$59",cadence:"per user/month"},
+      {name:"Ultimate (annual billing)",price:"$79",cadence:"per user/month"},
+     ]},
+    /* Wagepoint tiers: wagepoint.com legal service-fee schedule (vendor's own),
+       checked 2026-10-11, packet wagepoint-vs-humi-vs-knit-payroll-pricing.
+       Base prices shown; per-employee add-ons (+C$4 Solo / +C$6 Unlimited)
+       are noted in the tier name but not modelled in the total. */
+    {slug:"wagepoint",name:"Wagepoint",category:"HR & Payroll",
+     tiers:[
+      {name:"Solo \u2014 base + C$4 per employee",price:"C$20",cadence:"per month"},
+      {name:"Unlimited \u2014 base + C$6 per employee",price:"C$40",cadence:"per month"},
+     ]},
+    /* Knit tier: knitpeople.com (vendor's own blog), checked 2026-10-11,
+       packet wagepoint-vs-humi-vs-knit-payroll-pricing. Base price shown;
+       +C$6 per employee noted but not modelled in the total. */
+    {slug:"knit-people",name:"Knit People",category:"HR & Payroll",
+     tiers:[
+      {name:"Complete \u2014 base + C$6 per employee",price:"C$39",cadence:"per month"},
+     ]},
+  ];
+  var CATEGORIES = ["Accounting","CRM & Marketing","Ecommerce","Field Service","HR & Payroll","Payments & POS","Scheduling","SEO & Marketing","Work Management"];
+  /* FIXTURE — editorial, verify before launch. USD_TO_CAD rule-of-thumb
+     card rate, labelled as approx. throughout. */
+  var USD_TO_CAD = 1.37;
+  /* FIXTURE — editorial, verify before launch. STACK_BANDS: typical
+     monthly stack spend in CAD; a rule of thumb, labelled as such in copy. */
+  var STACK_BANDS = {
+    solopreneur: {label: "Solopreneur", lo: 0, hi: 150},
+    team_2_10: {label: "Team of 2\u201310", lo: 150, hi: 600},
+    team_11_50: {label: "Team of 11\u201350", lo: 600, hi: 2000}
+  };
+  var LS_KEY = "pp-stack-v1";
+
+  var $ = function(id) { return document.getElementById(id); };
+
+  function parseTier(t) {
+    /* Returns {amount, currency, kind} or {amount:null, kind:'na'}. */
+    if (/free/i.test(t.cadence) || /^\s*\$0(\.0+)?\s*$/.test(t.price)) {
+      return {amount: 0, currency: "USD", kind: "free"};
+    }
+    if (/%/.test(t.price)) return {amount: null, kind: "usage"};
+    var cur = /^C\$/i.test(t.price.trim()) ? "CAD" : "USD";
+    var m = t.price.replace(/,/g, "").match(/[\d]+(\.\d+)?/);
+    if (!m || /custom|quote/i.test(t.price)) return {amount: null, kind: "quote"};
+    var amount = parseFloat(m[0]);
+    if (!isFinite(amount)) return {amount: null, kind: "quote"};
+    if (/per year/i.test(t.cadence)) return {amount: amount / 12, currency: cur, kind: "flat"};
+    return {amount: amount, currency: cur, kind: /seat|user|employee/i.test(t.cadence) ? "perseat" : "flat"};
+  }
+
+  function toDisplay(amount, nativeCur, displayCur) {
+    if (displayCur === "CAD" && nativeCur === "USD") return amount * USD_TO_CAD;
+    if (displayCur === "USD" && nativeCur === "CAD") return amount / USD_TO_CAD;
+    return amount;
+  }
+
+  function rowMonthly(prod, tierIdx, seats, displayCur) {
+    var t = prod.tiers[tierIdx];
+    var p = parseTier(t);
+    if (p.amount == null) return {text: p.kind === "usage" ? "Usage-based" : "Custom quote", value: null};
+    if (p.amount === 0) return {text: "Free", value: 0};
+    var seatsN = p.kind === "perseat" ? Math.max(1, seats || 1) : 1;
+    var v = toDisplay(p.amount * seatsN, p.currency, displayCur);
+    return {text: null, value: v};
+  }
+
+  var rowsEl = $("s-rows");
+  var rowState = {}; /* category -> {prod, tierIdx, seats} */
+
+  CATEGORIES.forEach(function(cat, ci) {
+    var prods = PRODUCTS.filter(function(p) { return p.category === cat; });
+    var div = document.createElement("div");
+    div.className = "calc-stack-row";
+    div.innerHTML =
+      "<h3>" + cat + "</h3>" +
+      '<div class="calc-row-grid">' +
+      '<div class="calc-field"><label for="s-p-' + ci + '">Product</label>' +
+      '<select id="s-p-' + ci + '"><option value="">Skip this category</option>' +
+      prods.map(function(p, i) { return '<option value="' + i + '">' + p.name + "</option>"; }).join("") +
+      "</select></div>" +
+      '<div class="calc-field" id="s-tw-' + ci + '" hidden><label for="s-t-' + ci + '">Tier</label>' +
+      '<select id="s-t-' + ci + '"></select></div>' +
+      '<div class="calc-field" id="s-sw-' + ci + '" hidden><label for="s-s-' + ci + '">Seats</label>' +
+      '<input type="number" id="s-s-' + ci + '" min="1" max="10000" value="3"></div>' +
+      "</div>" +
+      '<div class="calc-row-foot"><span class="calc-row-link" id="s-l-' + ci + '"></span>' +
+      '<span class="calc-row-total" id="s-r-' + ci + '"></span></div>';
+    rowsEl.appendChild(div);
+    rowState[cat] = {prods: prods, prodIdx: "", tierIdx: 0, seats: 3, ci: ci};
+
+    $("s-p-" + ci).addEventListener("change", function() {
+      var st = rowState[cat];
+      st.prodIdx = this.value;
+      st.tierIdx = 0;
+      renderTierSelect(cat);
+      recalc();
+      save();
+    });
+  });
+
+  function renderTierSelect(cat) {
+    var st = rowState[cat], ci = st.ci;
+    var tw = $("s-tw-" + ci), sel = $("s-t-" + ci), sw = $("s-sw-" + ci);
+    if (st.prodIdx === "") { tw.hidden = true; sw.hidden = true; return; }
+    var prod = st.prods[+st.prodIdx];
+    sel.innerHTML = prod.tiers.map(function(t, i) {
+      return '<option value="' + i + '"' + (i === st.tierIdx ? " selected" : "") + ">" +
+        t.name + " — " + t.price + " " + t.cadence + "</option>";
+    }).join("");
+    tw.hidden = false;
+    sel.onchange = function() { st.tierIdx = +this.value; renderSeats(cat); recalc(); save(); };
+    renderSeats(cat);
+  }
+
+  function renderSeats(cat) {
+    var st = rowState[cat], ci = st.ci;
+    if (st.prodIdx === "") return;
+    var t = st.prods[+st.prodIdx].tiers[st.tierIdx];
+    var show = /seat|user|employee/i.test(t.cadence);
+    $("s-sw-" + ci).hidden = !show;
+    if (show) {
+      $("s-s-" + ci).oninput = function() {
+        st.seats = Math.max(1, parseInt(this.value, 10) || 1);
+        recalc(); save();
+      };
+    }
+  }
+
+  function fmtMoney(n, cur) {
+    var sym = cur === "CAD" ? "CAD $" : "USD $";
+    return sym + n.toLocaleString("en-CA", {maximumFractionDigits: 0});
+  }
+
+  function recalc() {
+    var displayCur = $("s-cur").value;
+    var picked = [];
+    CATEGORIES.forEach(function(cat) {
+      var st = rowState[cat], ci = st.ci;
+      var linkEl = $("s-l-" + ci), totalEl = $("s-r-" + ci);
+      if (st.prodIdx === "") { linkEl.innerHTML = ""; totalEl.textContent = ""; return; }
+      var prod = st.prods[+st.prodIdx];
+      var r = rowMonthly(prod, st.tierIdx, st.seats, displayCur);
+      linkEl.innerHTML = '<a href="/deals/' + prod.slug + '.html">See ' + prod.name + ' pricing &amp; deal</a>';
+      if (r.value == null) {
+        totalEl.textContent = r.text + " — not counted in totals";
+      } else if (r.value === 0) {
+        totalEl.textContent = "Free";
+      } else {
+        totalEl.textContent = fmtMoney(r.value, displayCur) + "/mo";
+        picked.push({prod: prod, value: r.value});
+      }
+    });
+
+    var totalsEl = $("s-totals");
+    if (!picked.length) {
+      totalsEl.innerHTML = "<p><strong>Your stack is empty.</strong> Pick at least one product above to see your totals.</p>";
+      $("s-bench").innerHTML = "";
+      return;
+    }
+    var monthly = picked.reduce(function(a, r) { return a + r.value; }, 0);
+    var annual = monthly * 12;
+    totalsEl.innerHTML =
+      '<p class="grand">' + fmtMoney(monthly, displayCur) + '/mo <span class="fine">≈ ' + fmtMoney(annual, displayCur) + '/yr (estimate)</span></p>' +
+      '<p class="fine">' + picked.length + ' categor' + (picked.length === 1 ? "y" : "ies") + ' counted. Usage-based and custom-quote tiers are excluded from the total.</p>';
+
+    /* Benchmark strip — rule-of-thumb bands, labelled as such. */
+    var teamKey = $("s-team").value;
+    var band = STACK_BANDS[teamKey];
+    var monthlyCAD = displayCur === "CAD" ? monthly : monthly * USD_TO_CAD;
+    var verdict;
+    if (monthlyCAD <= band.hi) {
+      verdict = "<strong>Within the typical range.</strong> As a rule of thumb, " + band.label.toLowerCase() + " stacks often land between CAD $" + band.lo + " and CAD $" + band.hi + "/mo.";
+    } else {
+      verdict = "<strong>Above the typical range.</strong> As a rule of thumb, " + band.label.toLowerCase() + " stacks often land between CAD $" + band.lo + " and CAD $" + band.hi + "/mo — your biggest line items are below.";
+    }
+    var top = picked.slice().sort(function(a, b) { return b.value - a.value; }).slice(0, 3);
+    var topHtml = top.map(function(r) {
+      return '<li><a href="/deals/' + r.prod.slug + '.html">' + r.prod.name + "</a> — " + fmtMoney(r.value, displayCur) + "/mo</li>";
+    }).join("");
+    $("s-bench").innerHTML = "<p>" + verdict + "</p><p><strong>Biggest line items:</strong></p><ul>" + topHtml + "</ul>";
+  }
+
+  function save() {
+    try {
+      var data = {cur: $("s-cur").value, team: $("s-team").value, rows: {}};
+      CATEGORIES.forEach(function(cat) {
+        var st = rowState[cat];
+        data.rows[cat] = {prodIdx: st.prodIdx, tierIdx: st.tierIdx, seats: st.seats};
+      });
+      localStorage.setItem(LS_KEY, JSON.stringify(data));
+    } catch (e) { /* silent degrade */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(LS_KEY);
+      if (!raw) return false;
+      var data = JSON.parse(raw);
+      if (data.cur) $("s-cur").value = data.cur;
+      if (data.team && STACK_BANDS[data.team]) $("s-team").value = data.team;
+      CATEGORIES.forEach(function(cat) {
+        var st = rowState[cat], ci = st.ci, saved = (data.rows || {})[cat];
+        if (!saved) return;
+        if (saved.prodIdx !== "" && st.prods[+saved.prodIdx]) {
+          st.prodIdx = saved.prodIdx;
+          $("s-p-" + ci).value = saved.prodIdx;
+          st.tierIdx = Math.min(saved.tierIdx || 0, st.prods[+saved.prodIdx].tiers.length - 1);
+          st.seats = Math.max(1, saved.seats || 1);
+          $("s-s-" + ci).value = st.seats;
+          renderTierSelect(cat);
+          $("s-t-" + ci).value = String(st.tierIdx);
+          renderSeats(cat);
+        }
+      });
+      return true;
+    } catch (e) { return false; }
+  }
+
+  $("s-cur").addEventListener("change", function() { recalc(); save(); });
+  $("s-team").addEventListener("change", function() { recalc(); save(); });
+  restore();
+  recalc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

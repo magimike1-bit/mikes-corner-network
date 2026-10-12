@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renewal Hike Checker — Is Your SaaS Renewal Fair? — PlanPrice</title>
+<meta name="description" content="Free tool: compare last year's SaaS renewal total with this year's. See the real percentage increase, a plain-English verdict, and what to do next.">
+<link rel="canonical" href="https://planprice.ca/tools/renewal-hike-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Renewal Hike Checker — PlanPrice">
+<meta property="og:description" content="Your SaaS renewal went up? See the real percentage increase and what to do next.">
+<meta property="og:url" content="https://planprice.ca/tools/renewal-hike-checker.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+.calc-verdict { font-size: 1.15rem; font-weight: 700; margin: 0 0 8px; }
+.calc-verdict.ok { color: #166534; }
+.calc-verdict.mid { color: #92400e; }
+.calc-verdict.high { color: #991b1b; }
+.calc-verdict.down { color: #166534; }
+</style>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html" class="active">Tools</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/tools.html">Tools</a> › Renewal Hike Checker</p>
+    <h1 class="page-title">Renewal Hike Checker</h1>
+    <p class="section-sub">Your renewal invoice arrived and it's higher than last year. Enter both totals to see the real percentage change, a plain-English read, and concrete next steps.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="r-vendor">Vendor (optional)</label>
+        <input id="r-vendor" list="r-vendor-list" placeholder="Start typing a vendor name…" autocomplete="off">
+        <datalist id="r-vendor-list"></datalist>
+      </div>
+      <div class="calc-field">
+        <label for="r-old">Last renewal total (per year)</label>
+        <input type="text" id="r-old" inputmode="decimal" placeholder="e.g. 1,200">
+      </div>
+      <div class="calc-field">
+        <label for="r-new">New renewal total (per year)</label>
+        <input type="text" id="r-new" inputmode="decimal" placeholder="e.g. 1,500">
+      </div>
+      <div class="calc-field">
+        <label for="r-cur">Currency of both totals</label>
+        <select id="r-cur">
+          <option value="1" selected>CAD</option>
+          <option value="1.37">USD (≈1.37 CAD — a typical card rate; yours may differ)</option>
+        </select>
+      </div>
+      <div class="calc-results" id="r-results" aria-live="polite"></div>
+    </div>
+    <noscript>
+      <p><strong>This tool needs JavaScript to do the math.</strong> The formula is simple: (new total − old total) ÷ old total × 100 gives the percentage change. As a rule of thumb: up to about 5% is typical inflation pass-through; 5–15% is above typical and usually negotiable; over 15% is aggressive — worth renegotiating or re-quoting. If the new total is lower than the old one, you got a reduction — still worth checking it against the current list price. Our <a href="/guides/negotiate-saas-renewal.html">SaaS renewal negotiation guide</a> walks through the full playbook.</p>
+    </noscript>
+    <p class="fine">Verdict bands are a rule of thumb, not a market study. Always confirm current pricing on the vendor's own site.</p>
+  </div>
+</main>
+<script src="vendors.js"></script>
+<script>
+(function() {
+  /* Vendor list lives in vendors.js (shared with the other tool pages).
+     Regenerate from data/deals-index.json. */
+  /* FIXTURE — editorial, verify before launch. Verdict bands for renewal % change;
+     labelled "rule of thumb" in the page copy. */
+  var BAND_OK = 5, BAND_MID = 15;
+
+  var $ = function(id) { return document.getElementById(id); };
+  var dl = $("r-vendor-list");
+  VENDORS.forEach(function(v) {
+    var o = document.createElement("option");
+    o.value = v.name;
+    dl.appendChild(o);
+  });
+
+  function num(raw) {
+    if (raw == null) return null;
+    var s = String(raw).replace(/[$,\s]/g, "");
+    if (s === "") return null;
+    var n = parseFloat(s);
+    return isFinite(n) ? n : null;
+  }
+  function fmt(n) {
+    return "CAD $" + n.toLocaleString("en-CA", {maximumFractionDigits: 0});
+  }
+  function findVendor(name) {
+    name = (name || "").trim().toLowerCase();
+    if (!name) return null;
+    for (var i = 0; i < VENDORS.length; i++) {
+      if (VENDORS[i].name.toLowerCase() === name) return VENDORS[i];
+    }
+    return null;
+  }
+
+  function calc() {
+    var out = $("r-results");
+    var fx = parseFloat($("r-cur").value) || 1;
+    var oldT = num($("r-old").value);
+    var newT = num($("r-new").value);
+    if (oldT == null || newT == null) {
+      out.innerHTML = "<p class=\"fine\">Enter both renewal totals to see the percentage change.</p>";
+      return;
+    }
+    oldT *= fx; newT *= fx;
+    var vendor = findVendor($("r-vendor").value);
+    var html = "", ctas = "";
+
+    if (oldT < 0 || newT < 0) {
+      out.innerHTML = "<p class=\"fine\">Enter positive renewal totals — a total below zero is not a real bill amount. Check the field and try again.</p>";
+      return;
+    }
+    if (oldT === 0) {
+      html = "<p class=\"calc-verdict\">First paid bill.</p>" +
+        "<p>There's no prior total to compare against, so no percentage change applies. Compare this bill against the vendor's current list price before you pay it.</p>";
+    } else if (newT < oldT) {
+      var drop = (oldT - newT) / oldT * 100;
+      html = "<p class=\"calc-verdict down\">Down " + drop.toFixed(1) + "% — you got a reduction.</p>" +
+        "<p>Your renewal is " + fmt(oldT - newT) + "/yr cheaper than last year. Still verify it against the current list price — a 'reduction' from an inflated renewal quote is not always a deal.</p>";
+    } else {
+      var pct = (newT - oldT) / oldT * 100;
+      var cls, verdict, advice;
+      if (pct <= BAND_OK) {
+        cls = "ok"; verdict = "Within typical inflation pass-through.";
+        advice = "A rise of " + pct.toFixed(1) + "% is in line with the kind of annual increase vendors commonly pass through. Still worth a quick check against list price.";
+      } else if (pct <= BAND_MID) {
+        cls = "mid"; verdict = "Above typical — usually negotiable.";
+        advice = "A rise of " + pct.toFixed(1) + "% is above the typical pass-through band. Renewals at this level are frequently reduced when customers push back — see the negotiation guide below.";
+      } else {
+        cls = "high"; verdict = "Aggressive — renegotiate or re-quote.";
+        advice = "A rise of " + pct.toFixed(1) + "% is well above typical. Get a competing quote and take it back to your rep before you accept — or ask what changes (seats, tier, add-ons) drove the jump.";
+      }
+      html = "<p class=\"calc-verdict " + cls + "\">" + (pct >= 0 ? "+" : "") + pct.toFixed(1) + "% — " + verdict + "</p>" +
+        "<p>" + advice + "</p>" +
+        "<p class=\"fine\">Last year: " + fmt(oldT) + "/yr · This year: " + fmt(newT) + "/yr · Difference: " + fmt(newT - oldT) + "/yr.</p>";
+    }
+
+    ctas = "<div class=\"calc-ctas\">" +
+      "<a class=\"btn\" href=\"/guides/negotiate-saas-renewal.html\">Renewal negotiation guide</a>";
+    if (vendor) {
+      ctas += "<a class=\"btn btn-ghost\" href=\"/deals/" + vendor.slug + ".html\">" + vendor.name + " pricing &amp; deal</a>" +
+              "<a class=\"btn btn-ghost\" href=\"/categories/" + vendor.catSlug + ".html\">More " + vendor.category + " options</a>";
+    } else {
+      ctas += "<a class=\"btn btn-ghost\" href=\"/compare.html\">Compare all tracked products</a>";
+    }
+    ctas += "</div>";
+    out.innerHTML = html + ctas;
+  }
+
+  ["r-old","r-new","r-vendor"].forEach(function(id) {
+    $(id).addEventListener("input", calc);
+  });
+  $("r-cur").addEventListener("change", calc);
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

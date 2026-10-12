@@ -491,3 +491,19 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .post-figure { margin: 1.75rem auto; max-width: 100%; }
 .post-figure img { display: block; max-width: 100%; height: auto; border-radius: 8px; }
 .post-figure figcaption { margin-top: 0.5rem; font-size: 0.85em; color: #666; }
+
+/* ---- Shared calculator-page styles (tools/*.html). ----
+   Moved here from each tool page's page-local <style> block so the
+   calc-* rules live in one place. Pages keep only their page-specific
+   rules (e.g. fee-decoder/stack override .calc-wrap's max-width locally). */
+.calc-wrap { max-width: 640px; margin: 0 auto; }
+.calc-field { margin: 14px 0; }
+.calc-field label { display: block; font-weight: 700; margin-bottom: 4px; }
+.calc-field input, .calc-field select { width: 100%; padding: 10px 12px; font-size: 1rem; border: 1px solid var(--line, #e9dfc9); border-radius: 8px; }
+.calc-field textarea { width: 100%; min-height: 180px; padding: 10px 12px; font-size: 1rem; border: 1px solid var(--line, #e9dfc9); border-radius: 8px; font-family: inherit; }
+.calc-results { margin-top: 20px; padding: 18px; border: 1px solid var(--line, #e9dfc9); border-radius: 12px; background: #fffdf8; }
+.calc-results table { width: 100%; border-collapse: collapse; }
+.calc-results th, .calc-results td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line, #e9dfc9); }
+.calc-flag { border-left: 4px solid #b45309; background: #fffbeb; padding: 10px 14px; margin: 10px 0; border-radius: 0 8px 8px 0; }
+.calc-ok { border-left: 4px solid #166534; background: #f0fdf4; padding: 10px 14px; margin: 10px 0; border-radius: 0 8px 8px 0; }
+.calc-ctas { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }

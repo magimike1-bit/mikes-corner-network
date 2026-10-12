@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tier Finder — Which Software Tier Fits Your Team? — PlanPrice</title>
+<meta name="description" content="Free 6-question quiz: find out whether a free, starter, or professional software tier fits your team — with the reasoning shown, not just a verdict.">
+<link rel="canonical" href="https://planprice.ca/tools/tier-finder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Tier Finder — PlanPrice">
+<meta property="og:description" content="6 questions, one honest answer: free, starter, or professional tier — with the reasoning shown.">
+<meta property="og:url" content="https://planprice.ca/tools/tier-finder.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+.calc-quiz { border: 1px solid var(--line, #e9dfc9); border-radius: 12px; padding: 22px; background: #fffdf8; }
+.calc-progress { font-size: 0.9rem; color: #6b5d3f; margin: 0 0 10px; }
+.calc-qtitle { margin: 0 0 6px; font-size: 1.25rem; }
+.calc-opt { display: block; width: 100%; text-align: left; margin: 8px 0; padding: 12px 14px; font-size: 1rem; border: 1px solid var(--line, #e9dfc9); border-radius: 8px; background: #fff; cursor: pointer; font-family: inherit; }
+.calc-opt:hover { border-color: #166534; }
+.calc-opt[aria-pressed="true"] { border: 2px solid #166534; background: #f0fdf4; font-weight: 700; }
+.calc-quiznav { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; }
+.calc-profile { font-size: 1.3rem; font-weight: 700; margin: 0 0 8px; }
+</style>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html" class="active">Tools</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/tools.html">Tools</a> › Tier Finder</p>
+    <h1 class="page-title">Tier Finder</h1>
+    <p class="section-sub">Free, starter, or professional? Answer 6 quick questions about your team and we'll point you at the tier range that fits — and show our working, so you can judge the reasoning yourself.</p>
+    <p class="fine">This quiz recommends a <strong>tier range</strong>, never a specific vendor. Your answers stay in this page's memory only — nothing is saved or sent anywhere.</p>
+    <div class="calc-wrap">
+      <div class="calc-quiz" id="q-screen" aria-live="polite"></div>
+      <div class="calc-results" id="q-results" aria-live="polite" hidden></div>
+    </div>
+    <noscript>
+      <p><strong>This quiz needs JavaScript to run.</strong> The logic is straightforward: if you're a team of one with simple needs and a tight budget, start with a free tier; if you need basic automation or have a few thousand records, look at starter tiers; if you need advanced reporting, heavy automation, or have large volumes, you're in professional-tier territory. Browse <a href="/free.html">free plans</a>, <a href="/top-rated.html">top-rated products</a>, or pick a <a href="/compare.html">category to compare</a>.</p>
+    </noscript>
+  </div>
+</main>
+<script>
+(function() {
+  /* FIXTURE — editorial, verify before launch. Scoring points map answers to
+     tier profiles; a rule-of-thumb heuristic, not a market study. Ties resolve
+     to the cheaper profile (stated in the result copy). */
+  var CATS = [
+    {name: "Accounting", slug: "accounting"},
+    {name: "CRM & Marketing", slug: "crm-marketing"},
+    {name: "Ecommerce", slug: "ecommerce"},
+    {name: "Field Service", slug: "field-service"},
+    {name: "HR & Payroll", slug: "hr-payroll"},
+    {name: "Payments & POS", slug: "payments-pos"},
+    {name: "Scheduling", slug: "scheduling"},
+    {name: "SEO & Marketing", slug: "seo-marketing"},
+    {name: "Work Management", slug: "work-management"}
+  ];
+  var QUESTIONS = [
+    { id: "category", title: "What kind of software are you shopping for?",
+      text: "Pick the category — your result will link you to real products in it.",
+      options: CATS.map(function(c) { return {label: c.name, cat: c.slug, scores: {free: 0, starter: 0, pro: 0}}; }) },
+    { id: "team", title: "How big is your team?",
+      text: "Count everyone who would actually log in.",
+      options: [
+        {label: "Just me", scores: {free: 2, starter: 0, pro: 0}},
+        {label: "2\u201310 people", scores: {free: 0, starter: 2, pro: 0}},
+        {label: "11\u201350 people", scores: {free: 0, starter: 0, pro: 2}},
+        {label: "More than 50", scores: {free: 0, starter: 0, pro: 3}}
+      ] },
+    { id: "volume", title: "How much data will live in it?",
+      text: "Contacts, records, orders, appointments — your best guess.",
+      options: [
+        {label: "Under 1,000", scores: {free: 2, starter: 0, pro: 0}},
+        {label: "1,000\u201310,000", scores: {free: 0, starter: 2, pro: 0}},
+        {label: "10,000\u2013100,000", scores: {free: 0, starter: 0, pro: 2}},
+        {label: "Over 100,000", scores: {free: 0, starter: 0, pro: 3}}
+      ] },
+    { id: "automation", title: "Do you need automation and workflows?",
+      text: "Think reminders, follow-ups, multi-step processes.",
+      options: [
+        {label: "No — manual is fine", scores: {free: 2, starter: 0, pro: 0}},
+        {label: "Some basics (reminders, simple rules)", scores: {free: 0, starter: 2, pro: 0}},
+        {label: "Yes — multi-step workflows", scores: {free: 0, starter: 0, pro: 2}},
+        {label: "Yes — across several tools", scores: {free: 0, starter: 0, pro: 3}}
+      ] },
+    { id: "reporting", title: "Do you need advanced reporting?",
+      text: "Custom reports, dashboards, forecasting — or simple lists?",
+      options: [
+        {label: "No — simple lists are fine", scores: {free: 2, starter: 0, pro: 0}},
+        {label: "Some — a few dashboards", scores: {free: 0, starter: 2, pro: 0}},
+        {label: "Yes — custom reports and forecasting", scores: {free: 0, starter: 0, pro: 3}}
+      ] },
+    { id: "budget", title: "What's your monthly budget per tool?",
+      text: "Be honest — it keeps the recommendation useful.",
+      options: [
+        {label: "Under $25/mo", scores: {free: 3, starter: 0, pro: 0}, tight: true},
+        {label: "$25\u2013$100/mo", scores: {free: 0, starter: 2, pro: 0}},
+        {label: "$100\u2013$500/mo", scores: {free: 0, starter: 0, pro: 2}},
+        {label: "Over $500/mo", scores: {free: 0, starter: 0, pro: 3}}
+      ] }
+  ];
+  var PROFILES = {
+    free: {name: "Free-first", headline: "Start with a free tier.",
+      body: "Your answers point to simple needs and a tight budget — most products in this category offer a genuinely useful free tier. Start there; upgrade only when you hit a real limit."},
+    starter: {name: "Starter", headline: "You're in starter-tier territory.",
+      body: "You need more than the basics — some automation, a few thousand records, a small team. Starter tiers are priced for exactly this stage; compare what's included before paying for pro features you won't use yet."},
+    pro: {name: "Professional", headline: "You're in professional-tier territory.",
+      body: "Your volume, automation, or reporting needs go beyond what starter tiers cover. Price the professional tier against the cost of workarounds — at your scale, the upgrade usually pays for itself."}
+  };
+  var ORDER = ["free", "starter", "pro"]; /* cheaper-first: ties resolve here */
+
+  var $ = function(id) { return document.getElementById(id); };
+  var step = 0;
+  var answers = {}; /* question id -> option index */
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function render() {
+    var screen = $("q-screen"), results = $("q-results");
+    results.hidden = true;
+    screen.hidden = false;
+    var q = QUESTIONS[step];
+    var html = '<p class="calc-progress">Question ' + (step + 1) + " of " + QUESTIONS.length + "</p>" +
+      '<h2 class="calc-qtitle">' + esc(q.title) + "</h2>" +
+      '<p class="fine">' + esc(q.text) + "</p>";
+    q.options.forEach(function(o, i) {
+      var pressed = answers[q.id] === i ? "true" : "false";
+      html += '<button type="button" class="calc-opt" data-i="' + i + '" aria-pressed="' + pressed + '">' + esc(o.label) + "</button>";
+    });
+    html += '<div class="calc-quiznav">' +
+      (step > 0 ? '<button type="button" class="btn btn-ghost" id="q-back">Back</button>' : "<span></span>") +
+      '<button type="button" class="btn" id="q-next"' + (answers[q.id] == null ? " disabled" : "") + ">" +
+      (step === QUESTIONS.length - 1 ? "See my result" : "Next") + "</button></div>";
+    screen.innerHTML = html;
+
+    var opts = screen.querySelectorAll(".calc-opt");
+    for (var i = 0; i < opts.length; i++) {
+      (function(btn, idx) {
+        btn.addEventListener("click", function() {
+          answers[q.id] = idx;
+          render();
+          var next = $("q-next");
+          if (next) next.focus();
+        });
+      })(opts[i], i);
+    }
+    var back = $("q-back");
+    if (back) back.addEventListener("click", function() { step--; render(); });
+    var next = $("q-next");
+    if (next && answers[q.id] != null) {
+      next.addEventListener("click", function() {
+        if (step === QUESTIONS.length - 1) showResult();
+        else { step++; render(); }
+      });
+    }
+  }
+
+  function showResult() {
+    var totals = {free: 0, starter: 0, pro: 0};
+    var tips = []; /* {label, contrib} per answered question */
+    QUESTIONS.forEach(function(q) {
+      var o = q.options[answers[q.id]];
+      if (!o) return;
+      ORDER.forEach(function(k) { totals[k] += o.scores[k] || 0; });
+      tips.push({q: q.title, label: o.label, scores: o.scores});
+    });
+    var best = ORDER[0], bestScore = totals[ORDER[0]];
+    ORDER.forEach(function(k) {
+      if (totals[k] > bestScore) { best = k; bestScore = totals[k]; }
+    });
+    var tied = ORDER.filter(function(k) { return totals[k] === bestScore && k !== best; });
+    var prof = PROFILES[best];
+    var topTips = tips
+      .filter(function(t) { return (t.scores[best] || 0) > 0; })
+      .sort(function(a, b) { return (b.scores[best] || 0) - (a.scores[best] || 0); })
+      .slice(0, 3);
+
+    var catOpt = QUESTIONS[0].options[answers.category];
+    var catSlug = catOpt ? catOpt.cat : null;
+    var catName = catOpt ? catOpt.label : null;
+    var budgetTight = QUESTIONS[5].options[answers.budget] &&
+                      QUESTIONS[5].options[answers.budget].tight;
+
+    var html = '<p class="calc-profile">' + esc(prof.headline) + "</p>" +
+      "<p>" + esc(prof.body) + "</p>";
+    if (topTips.length) {
+      html += "<p><strong>Why this fits — your tipping answers:</strong></p><ul>" +
+        topTips.map(function(t) { return "<li>" + esc(t.label) + "</li>"; }).join("") + "</ul>";
+    }
+    if (tied.length) {
+      html += '<p class="fine">Scores were tied between tier ranges — we showed you the cheaper one.</p>';
+    }
+    html += '<div class="calc-ctas">';
+    if (catSlug) {
+      html += '<a class="btn" href="/categories/' + catSlug + '.html">Browse ' + esc(catName) + "</a>";
+    }
+    if (best === "free") {
+      html += '<a class="btn btn-ghost" href="/free.html">All free plans</a>';
+    }
+    html += '<a class="btn btn-ghost" href="/top-rated.html">Top-rated products</a>';
+    if (budgetTight) {
+      html += '<a class="btn btn-ghost" href="/guides/annual-vs-monthly-math.html">Annual vs monthly: the math</a>';
+    }
+    html += '<button type="button" class="btn btn-ghost" id="q-retake">Retake quiz</button></div>';
+
+    var results = $("q-results");
+    results.innerHTML = html;
+    results.hidden = false;
+    $("q-screen").hidden = true;
+    $("q-retake").addEventListener("click", function() {
+      step = 0; answers = {};
+      render();
+    });
+    results.scrollIntoView();
+  }
+
+  render();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

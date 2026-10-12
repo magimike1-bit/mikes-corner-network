@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deal Verifier — Check a SaaS Discount Before You Buy — PlanPrice</title>
+<meta name="description" content="Free tool: enter a vendor's list price and offer price to see the real percentage off, true annual cost, and red flags. Cross-checked against PlanPrice's verified prices.">
+<link rel="canonical" href="https://planprice.ca/tools/deal-verifier.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Deal Verifier — PlanPrice">
+<meta property="og:description" content="Check a SaaS discount before you buy: real % off, true annual cost, and red flags — cross-checked against verified list prices.">
+<meta property="og:url" content="https://planprice.ca/tools/deal-verifier.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+.calc-check { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; font-size: 0.95rem; }
+.calc-check input { margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html" class="active">Tools</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/tools.html">Tools</a> › Deal Verifier</p>
+    <h1 class="page-title">Deal Verifier</h1>
+    <p class="section-sub">A vendor says "50% off"? Run it through the numbers first: the real percentage off, the true annual cost, and common red flags — checked against the list prices PlanPrice verified on the vendor's own site.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="v-vendor">Vendor (optional)</label>
+        <input id="v-vendor" list="v-vendor-list" placeholder="Start typing a vendor name…" autocomplete="off">
+        <datalist id="v-vendor-list"></datalist>
+      </div>
+      <div class="calc-field">
+        <label for="v-list">List price (before the discount)</label>
+        <input type="text" id="v-list" inputmode="decimal" placeholder="e.g. 1,200">
+      </div>
+      <div class="calc-field">
+        <label for="v-list-term">List price covers</label>
+        <select id="v-list-term">
+          <option value="annual" selected>One year</option>
+          <option value="monthly">One month</option>
+          <option value="onetime">One-time (lifetime)</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="v-offer">Offer price (what you'd actually pay)</label>
+        <input type="text" id="v-offer" inputmode="decimal" placeholder="e.g. 840">
+      </div>
+      <div class="calc-field">
+        <label for="v-offer-term">Offer price covers</label>
+        <select id="v-offer-term">
+          <option value="annual" selected>One year</option>
+          <option value="monthly">One month</option>
+          <option value="onetime">One-time (lifetime)</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="v-cur">Currency of both prices</label>
+        <select id="v-cur">
+          <option value="1" selected>CAD</option>
+          <option value="1.37">USD (≈1.37 CAD — a typical card rate; yours may differ)</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="v-seats">Seats / users (optional — for per-seat math)</label>
+        <input type="number" id="v-seats" min="1" max="10000" placeholder="e.g. 5">
+      </div>
+      <label class="calc-check"><input type="checkbox" id="v-enddate"> <span>The offer shows a clear end date.</span></label>
+      <label class="calc-check"><input type="checkbox" id="v-checkoutdiff"> <span>The price shown at checkout differs from the advertised price.</span></label>
+      <div class="calc-results" id="v-results" aria-live="polite"></div>
+    </div>
+    <noscript>
+      <p><strong>This tool needs JavaScript to do the math.</strong> The idea is simple: take the vendor's list price and the offer price, normalize both to an annual total, and the real discount is (list − offer) ÷ list. Watch out for discounts of 70% or more with no end date (often an inflated "was" price), and prices that change at checkout. See our guides <a href="/guides/stack-saas-discounts.html">How to stack SaaS discounts</a> and <a href="/guides/saas-discount-calendar.html">The SaaS discount calendar</a> for the full playbook.</p>
+    </noscript>
+    <p class="fine">Estimates only — always confirm current pricing on the vendor's own site. Verified list prices come from our <a href="/deals.html">deal directory</a>, checked 2026-09-30.</p>
+  </div>
+</main>
+<script src="vendors.js"></script>
+<script>
+(function() {
+  /* Vendor list lives in vendors.js (shared with the other tool pages).
+     Regenerate from data/deals-index.json. */
+  var $ = function(id) { return document.getElementById(id); };
+  var dl = $("v-vendor-list");
+  VENDORS.forEach(function(v) {
+    var o = document.createElement("option");
+    o.value = v.name;
+    dl.appendChild(o);
+  });
+
+  function num(raw) {
+    if (raw == null) return null;
+    var s = String(raw).replace(/[$,\s]/g, "");
+    if (s === "") return null;
+    var n = parseFloat(s);
+    return isFinite(n) ? n : null;
+  }
+  function fmt(n) {
+    return "CAD $" + n.toLocaleString("en-CA", {maximumFractionDigits: 0});
+  }
+  function annualize(amount, term) {
+    if (term === "monthly") return amount * 12;
+    return amount; /* annual and one-time are already totals */
+  }
+  function findVendor(name) {
+    name = (name || "").trim().toLowerCase();
+    if (!name) return null;
+    for (var i = 0; i < VENDORS.length; i++) {
+      if (VENDORS[i].name.toLowerCase() === name) return VENDORS[i];
+    }
+    return null;
+  }
+
+  function calc() {
+    var out = $("v-results");
+    var fx = parseFloat($("v-cur").value) || 1;
+    var list = num($("v-list").value);
+    var offer = num($("v-offer").value);
+    if (list == null || offer == null) {
+      out.innerHTML = "<p class=\"fine\">Enter both a list price and an offer price to verify the deal.</p>";
+      return;
+    }
+    list *= fx; offer *= fx;
+    var listTerm = $("v-list-term").value, offerTerm = $("v-offer-term").value;
+    var listA = annualize(list, listTerm);
+    var offerA = annualize(offer, offerTerm);
+    var assume = "";
+    if (listTerm !== offerTerm) {
+      assume = "<p class=\"fine\">Assumption: both figures describe the same plan, normalized to annual totals for comparison.</p>";
+    }
+    if (listA <= 0) {
+      out.innerHTML = "<p><strong>Not a discount.</strong> An annualized list price of zero means there is nothing being discounted — this is a free tier or free plan, not a deal.</p>" + assume;
+      return;
+    }
+    if (offerA >= listA) {
+      out.innerHTML = "<p><strong>Not a discount.</strong> The " + (offerA > listA ? "offer price is higher than" : "offer price equals") + " the annualized list price — there is no saving here. Double-check you are comparing the same plan and term.</p>" + assume;
+      return;
+    }
+    var pct = (listA - offerA) / listA * 100;
+    var saving = listA - offerA;
+    var offerMonthly = offerA / 12;
+    var listMonthly = listA / 12;
+    var freeMonths = listMonthly > 0 ? saving / listMonthly : 0;
+
+    var html = "<table><tbody>" +
+      "<tr><th scope=\"row\">Stated discount</th><td><strong>" + pct.toFixed(1) + "% off</strong></td></tr>" +
+      "<tr><th scope=\"row\">True annual cost</th><td>" + fmt(offerA) + "/yr (" + fmt(offerMonthly) + "/mo equivalent)</td></tr>" +
+      "<tr><th scope=\"row\">You save</th><td>" + fmt(saving) + "/yr vs list — roughly " + freeMonths.toFixed(1) + " free months</td></tr>";
+    var seats = num($("v-seats").value);
+    if (seats != null && seats > 0) {
+      html += "<tr><th scope=\"row\">Per seat</th><td>" + fmt(offerMonthly / seats) + "/mo per seat (" + seats + " seats)</td></tr>";
+    }
+    html += "</tbody></table>" + assume;
+
+    /* Red-flag checklist — editorial pattern checks, not vendor claims. */
+    var flags = [];
+    var hasEndDate = $("v-enddate").checked;
+    if (pct >= 70 && !hasEndDate) {
+      flags.push('<div class="calc-flag"><strong>Deep discount, no end date.</strong> ' + pct.toFixed(0) + '% off with no stated expiry is a pattern commonly used with inflated anchor prices \u2014 the "list price" may never have been the real price. Treat the saving as illustrative, not cash saved.</div>');
+    }
+    if ($("v-checkoutdiff").checked) {
+      flags.push("<div class=\"calc-flag\"><strong>Price changed at checkout.</strong> If the advertised price and the checkout price differ, confirm in writing which one you will be billed — and whether the difference is taxes, currency conversion, or a different plan.</div>");
+    }
+    var vendor = findVendor($("v-vendor").value);
+    if (vendor && vendor.priceSort != null && vendor.priceSort > 0) {
+      var verifiedMonthly = vendor.priceSort;
+      var ratio = offerMonthly / verifiedMonthly;
+      if (ratio >= 0.9 && ratio <= 1.1) {
+        flags.push("<div class=\"calc-ok\"><strong>Matches our verified price.</strong> Your normalized offer (" + fmt(offerMonthly) + "/mo) lines up with the starting list price we verified on " + vendor.name + "'s own site (" + vendor.priceText + ", checked 2026-09-30).</div>");
+      } else if (ratio < 0.5) {
+        flags.push("<div class=\"calc-flag\"><strong>Unusually low vs our verified price.</strong> Your normalized offer (" + fmt(offerMonthly) + "/mo) is well under the starting price we verified (" + vendor.priceText + "). Confirm it is the same plan and term before you buy — it may be a different tier, a per-seat figure, or a first-year intro rate.</div>");
+      }
+    } else if (!vendor) {
+      flags.push("<p class=\"fine\">Tip: pick a vendor above and we'll cross-check your offer against the list price PlanPrice verified on their own site.</p>");
+    }
+    html += flags.join("");
+
+    /* CTAs — all real links. */
+    html += "<div class=\"calc-ctas\">";
+    if (vendor) {
+      html += "<a class=\"btn\" href=\"/deals/" + vendor.slug + ".html\">See " + vendor.name + " pricing &amp; deal</a>";
+    }
+    html += "<a class=\"btn btn-ghost\" href=\"/guides/stack-saas-discounts.html\">How to stack SaaS discounts</a>" +
+            "<a class=\"btn btn-ghost\" href=\"/guides/saas-discount-calendar.html\">The SaaS discount calendar</a></div>";
+    out.innerHTML = html;
+  }
+
+  ["v-list","v-offer","v-seats","v-vendor"].forEach(function(id) {
+    $(id).addEventListener("input", calc);
+  });
+  ["v-list-term","v-offer-term","v-cur"].forEach(function(id) {
+    $(id).addEventListener("change", calc);
+  });
+  $("v-enddate").addEventListener("change", calc);
+  $("v-checkoutdiff").addEventListener("change", calc);
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fee Decoder — Find Hidden Costs in SaaS Pricing Pages — PlanPrice</title>
+<meta name="description" content="Free tool: paste a vendor's pricing-page fine print and the Fee Decoder highlights common hidden-cost phrases — setup fees, seat minimums, auto-renewal clauses — with plain-English explainers. Runs entirely in your browser.">
+<link rel="canonical" href="https://planprice.ca/tools/fee-decoder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Fee Decoder — PlanPrice">
+<meta property="og:description" content="Paste SaaS pricing-page fine print; get hidden-cost phrases highlighted with plain-English explainers. Runs entirely in your browser.">
+<meta property="og:url" content="https://planprice.ca/tools/fee-decoder.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+/* overrides the shared .calc-wrap max-width (640px) in /style.css */
+.calc-wrap { max-width: 720px; margin: 0 auto; }
+.calc-btnrow { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+.calc-paste { border: 1px solid var(--line, #e9dfc9); border-radius: 8px; padding: 12px; background: #fff; white-space: pre-wrap; font-size: 0.95rem; max-height: 320px; overflow: auto; }
+mark.fee-hit { background: #fef08a; padding: 0 2px; border-radius: 3px; }
+.calc-finding { margin: 14px 0; padding: 12px 14px; border-left: 4px solid #b45309; background: #fffbeb; border-radius: 0 8px 8px 0; }
+.calc-finding h3 { margin: 0 0 6px; font-size: 1rem; }
+.calc-finding .ask { margin: 8px 0 0; font-style: italic; }
+.calc-error { border-left: 4px solid #991b1b; background: #fef2f2; padding: 10px 14px; border-radius: 0 8px 8px 0; }
+</style>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html" class="active">Tools</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/tools.html">Tools</a> › Fee Decoder</p>
+    <h1 class="page-title">Fee Decoder</h1>
+    <p class="section-sub">The headline price is rarely the whole story. Paste a vendor's pricing-page fine print below and the Fee Decoder flags phrases that commonly hide extra costs — setup fees, seat minimums, auto-renewal clauses — with a plain-English explainer and a question to ask the vendor.</p>
+    <p class="fine"><strong>Private by design:</strong> everything runs in your browser — nothing you paste is sent anywhere. This tool provides general information about common pricing terms, not legal advice.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="f-text">Pricing-page text</label>
+        <textarea id="f-text" placeholder="Copy the fine print from a vendor's pricing page and paste it here…"></textarea>
+      </div>
+      <div class="calc-btnrow">
+        <button type="button" class="btn" id="f-decode">Decode fees</button>
+        <button type="button" class="btn btn-ghost" id="f-sample">Try a sample</button>
+        <button type="button" class="btn btn-ghost" id="f-clear">Clear</button>
+      </div>
+      <p class="fine" id="f-sample-note" hidden><strong>Sample text</strong> — illustrative text written by PlanPrice to demonstrate this tool. It is <strong>not</strong> copied from any vendor's pricing page.</p>
+      <div class="calc-results" id="f-results" aria-live="polite">
+        <p class="fine">Paste some text and press "Decode fees" to scan it.</p>
+      </div>
+    </div>
+    <noscript>
+      <p><strong>This tool needs JavaScript to scan text.</strong> When you read a pricing page yourself, watch for these common hidden-cost signals: one-time onboarding or setup fees; minimum seat or user counts; overage rates when you exceed plan limits; annual-only billing with no monthly option; auto-renewal at "then-current" prices; early-termination or cancellation fees; paid add-ons that are effectively required; support limited to higher tiers; data migration or export fees; and currency conversion surcharges on USD billing. See our <a href="/guides/hidden-payment-fees.html">hidden fees guide</a> for the full rundown.</p>
+    </noscript>
+  </div>
+</main>
+<script src="vendors.js"></script>
+<script>
+(function() {
+  /* FIXTURE — editorial, verify before launch. Pattern lists flag phrases that
+     COMMONLY hide extra costs; a match is a prompt to read the clause, not a
+     claim about any vendor. Never presented as legal analysis. */
+  var CATS = [
+    { name: "Onboarding / setup fees",
+      explainers: "A one-time fee charged before you can use the product — training, configuration, or implementation. It can add hundreds to year-one cost.",
+      ask: "Ask the vendor: is onboarding optional, and exactly what does the fee cover?",
+      patterns: [/onboarding fee/i, /setup fee/i, /implementation fee/i, /one-?time (setup|implementation|onboarding) (fee|charge|cost)/i, /professional services fee/i] },
+    { name: "Seat minimums",
+      explainers: "A minimum number of seats or users you must pay for even if your team is smaller. Your real price is minimum × per-seat price, not 1 × price.",
+      ask: "Ask the vendor: can we start below the minimum, and does the minimum apply at renewal?",
+      patterns: [/minimum of \d+ (seats?|users?|licen[sc]es?)/i, /\d+-seat minimum/i, /seats? start at \d+/i, /minimum (seat|user|licen[sc]e)/i] },
+    { name: "Overage rates",
+      explainers: "What you pay when you exceed a plan limit — contacts, records, API calls. Overage rates are often priced to push you into a higher tier.",
+      ask: "Ask the vendor: what is the per-unit overage rate, and at what volume does the next tier become cheaper?",
+      patterns: [/overage/i, /exceed\w* (your )?(limit|quota|allowance)/i, /additional .* charged at/i, /usage-?based (charges|fees|billing)/i, /per extra (record|contact|user|seat|1,?000)/i] },
+    { name: "Annual-only / prepay lock-in",
+      explainers: "No monthly option — you pay the full year upfront. Cheaper per month, but your cash is committed and refunds are rare.",
+      ask: "Ask the vendor: is there a monthly option at any tier, and what is the refund policy if we cancel mid-term?",
+      patterns: [/annual(ly)? (billing|payment|commitment) (only|required)/i, /paid annually/i, /billed annually/i, /upfront/i, /pre-?pay/i, /no monthly (billing|option|plan)/i, /12-?month commitment/i] },
+    { name: "Auto-renewal + price changes",
+      explainers: "Your contract renews automatically, sometimes at whatever the 'then-current' price is. Miss the cancellation window and you are locked into the new rate.",
+      ask: "Ask the vendor: when is the cancellation window, and will we be notified before any price change takes effect?",
+      patterns: [/auto-?renews?/i, /automatically renew/i, /renew(s|ed)? automatically/i, /then-?current (rate|price)/i, /prices? (are |may be |can be )?subject to change/i, /we may (adjust|change|increase) (our )?prices?/i] },
+    { name: "Early-termination fees",
+      explainers: "A fee for leaving before the contract ends — sometimes the full remaining balance. This is the clause that makes 'just try it for a year' expensive.",
+      ask: "Ask the vendor: what exactly do we owe if we cancel in month 6, in writing?",
+      patterns: [/early termination/i, /cancellation fee/i, /terminate early/i, /remaining (contract|term) (value|balance)/i, /break fee/i, /non-?refundable/i, /no refunds?/i] },
+    { name: "Paid add-ons presented as required",
+      explainers: "Features the sales page implies are included, but the fine print sells separately — and you need them for the product to do its job.",
+      ask: "Ask the vendor: which add-ons do most customers your size end up buying in year one?",
+      patterns: [/required add-?on/i, /add-?on (is |are )?required/i, /mandatory (add-?on|module)/i, /not included in (the )?(base|standard|core)/i, /additional (module|add-?on|package) required/i, /sold separately/i] },
+    { name: "Support-tier gating",
+      explainers: "Real support — phone, priority response, a human — reserved for higher tiers. The plan you priced may only include community forums or email.",
+      ask: "Ask the vendor: what support channels and response times come with the tier we are quoted?",
+      patterns: [/priority support/i, /premium support/i, /dedicated (account manager|support)/i, /support (plan|tier|package)/i, /business hours (support|only)/i, /24\/7 support/i, /support is (only|limited)/i] },
+    { name: "Data migration / export fees",
+      explainers: "Fees to get your data in — or out. Export fees are the quiet lock-in: leaving is free until you want your own records back.",
+      ask: "Ask the vendor: how do we export all our data, in what format, and is there a fee?",
+      patterns: [/migration fee/i, /data (export|extraction|migration)/i, /export (your )?data/i, /data portability/i, /import fee/i] },
+    { name: "Currency / FX surcharges (CAD-relevant)",
+      explainers: "Billed in USD with conversion left to your card — the FX markup and foreign-transaction fee land on top of the sticker price for Canadian buyers.",
+      ask: "Ask the vendor: can we be billed in CAD, and if not, what will the charge appear as on a Canadian card?",
+      patterns: [/currency conversion/i, /foreign transaction/i, /exchange rate/i, /billed in USD/i, /USD only/i, /conversion fee/i, /\bFX\b/] }
+  ];
+  var MAX_CHARS = 50000;
+  /* Vendor [slug, name] pairs live in vendors.js as VENDOR_NAMES (shared). */
+  var SAMPLE = "SAMPLE TEXT — illustrative, written by PlanPrice. Not from any vendor's page.\n\n" +
+    "All plans require a $499 one-time onboarding fee for setup and training. " +
+    "Plans start with a 5-seat minimum; additional seats are $25 per month each. " +
+    "Annual billing only — all plans are billed annually upfront, with no monthly option. " +
+    "Your subscription auto-renews at the then-current rate, and prices are subject to change. " +
+    "If you terminate early, you owe the remaining contract balance as an early termination fee. " +
+    "Usage beyond your plan limits is billed as overage at $0.02 per record. " +
+    "Priority support is available as a paid add-on, sold separately.";
+
+  var $ = function(id) { return document.getElementById(id); };
+
+  function stripHtml(s) {
+    return s.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  }
+  function escHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function scan(text) {
+    var hits = [];
+    CATS.forEach(function(cat, ci) {
+      cat.patterns.forEach(function(re) {
+        var g = new RegExp(re.source, "gi"), m;
+        while ((m = g.exec(text)) !== null) {
+          hits.push({start: m.index, end: m.index + m[0].length, text: m[0], cat: ci});
+          if (m.index === g.lastIndex) g.lastIndex++;
+        }
+      });
+    });
+    hits.sort(function(a, b) { return a.start - b.start || (b.end - b.start) - (a.end - a.start); });
+    var merged = [];
+    hits.forEach(function(h) {
+      var last = merged[merged.length - 1];
+      if (last && h.start < last.end) return; /* overlap: keep the first (longest) */
+      merged.push(h);
+    });
+    return merged;
+  }
+
+  function highlight(text, hits) {
+    var out = "", pos = 0;
+    hits.forEach(function(h) {
+      out += escHtml(text.slice(pos, h.start));
+      out += '<mark class="fee-hit">' + escHtml(h.text) + "</mark>";
+      pos = h.end;
+    });
+    out += escHtml(text.slice(pos));
+    return out;
+  }
+
+  function decode() {
+    var out = $("f-results");
+    var raw = $("f-text").value || "";
+    if (!stripHtml(raw)) {
+      out.innerHTML = '<div class="calc-error"><strong>Nothing to scan.</strong> Paste some pricing-page text above first — or press "Try a sample" to see how the decoder works.</div>';
+      return;
+    }
+    var notice = "";
+    var text = stripHtml(raw);
+    if (text.length > MAX_CHARS) {
+      text = text.slice(0, MAX_CHARS);
+      notice = '<p class="fine">Note: pasted text was over 50,000 characters, so only the first 50,000 were scanned.</p>';
+    }
+    var hits = scan(text);
+    if (!hits.length) {
+      out.innerHTML = notice +
+        '<p><strong>No flagged phrases found.</strong> That does not mean none exist — this scan only catches common phrasing patterns, and vendors word things differently. Read the full terms yourself before signing.</p>' +
+        ctaRow(text);
+      return;
+    }
+    var byCat = {};
+    hits.forEach(function(h) { (byCat[h.cat] = byCat[h.cat] || []).push(h); });
+    var html = notice +
+      "<p><strong>" + hits.length + " flagged phrase" + (hits.length === 1 ? "" : "s") + "</strong> across " +
+      Object.keys(byCat).length + " categor" + (Object.keys(byCat).length === 1 ? "y" : "ies") + ":</p>" +
+      '<div class="calc-paste">' + highlight(text, hits) + "</div>";
+    Object.keys(byCat).forEach(function(ci) {
+      var cat = CATS[ci], list = byCat[ci];
+      var shown = list.slice(0, 2).map(function(h) { return "&ldquo;" + escHtml(h.text) + "&rdquo;"; }).join(", ");
+      if (list.length > 2) shown += ", and " + (list.length - 2) + " more";
+      html += '<div class="calc-finding"><h3>' + escHtml(cat.name) + ' <span class="fine">(' + list.length + ' match' + (list.length === 1 ? "" : "es") + ")</span></h3>" +
+        "<p>Matched: " + shown + "</p>" +
+        "<p>" + escHtml(cat.explainers) + "</p>" +
+        '<p class="ask">' + escHtml(cat.ask) + "</p></div>";
+    });
+    html += ctaRow(text);
+    out.innerHTML = html;
+  }
+
+  function ctaRow(text) {
+    var lower = text.toLowerCase(), found = null;
+    for (var i = 0; i < VENDOR_NAMES.length; i++) {
+      if (lower.indexOf(VENDOR_NAMES[i][1].toLowerCase()) !== -1) { found = VENDOR_NAMES[i]; break; }
+    }
+    var html = '<div class="calc-ctas">' +
+      '<a class="btn btn-ghost" href="/guides/hidden-payment-fees.html">Hidden fees guide</a>' +
+      '<a class="btn btn-ghost" href="/compare.html">Compare all products</a>';
+    if (found) {
+      html += '<a class="btn" href="/deals/' + found[0] + '.html">See ' + escHtml(found[1]) + ' pricing &amp; deal</a>';
+    }
+    return html + "</div>";
+  }
+
+  $("f-decode").addEventListener("click", decode);
+  $("f-sample").addEventListener("click", function() {
+    $("f-text").value = SAMPLE;
+    $("f-sample-note").hidden = false;
+    decode();
+  });
+  $("f-clear").addEventListener("click", function() {
+    $("f-text").value = "";
+    $("f-sample-note").hidden = true;
+    $("f-results").innerHTML = '<p class="fine">Paste some text and press "Decode fees" to scan it.</p>';
+  });
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

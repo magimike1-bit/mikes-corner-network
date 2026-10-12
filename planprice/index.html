@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PlanPrice — Verified B2B Software Deals &amp; Pricing</title>
-<meta name="description" content="PlanPrice tracks verified list prices and promotions for 16 essential B2B software products. Every deal is checked against the vendor's own site.">
+<meta name="description" content="PlanPrice tracks verified list prices and promotions for 22 essential B2B software products. Every deal is checked against the vendor's own site.">
 <link rel="canonical" href="https://planprice.ca/">
 <!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PlanPrice">
 <meta property="og:title" content="PlanPrice — Verified B2B Software Deals &amp; Pricing">
-<meta property="og:description" content="PlanPrice tracks verified list prices and promotions for 16 essential B2B software products. Every deal is checked against the vendor's own site.">
+<meta property="og:description" content="PlanPrice tracks verified list prices and promotions for 22 essential B2B software products. Every deal is checked against the vendor's own site.">
 <meta property="og:url" content="https://planprice.ca/">
 <meta property="og:image" content="https://planprice.ca/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PlanPrice — Verified B2B Software Deals &amp; Pricing">
-<meta name="twitter:description" content="PlanPrice tracks verified list prices and promotions for 16 essential B2B software products. Every deal is checked against the vendor's own site.">
+<meta name="twitter:description" content="PlanPrice tracks verified list prices and promotions for 22 essential B2B software products. Every deal is checked against the vendor's own site.">
 <meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -27,6 +27,21 @@
 <meta name='impact-site-verification' value='d3933dd0-8d52-4dd7-b099-5f505aec37fa'>
 <script src="/filter.js" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+/* Homepage-only section styles (2026-10-11 restructure). Page-local: nothing
+   here touches style.css or other pages. */
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 18px 0; }
+.tool-card { border: 1px solid var(--line, #e9dfc9); border-radius: 12px; padding: 16px; background: #fffdf8; }
+.tool-card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.tool-card p { margin: 0 0 10px; font-size: 0.95rem; }
+.guide-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; margin: 18px 0; list-style: none; padding: 0; }
+.guide-list li { border: 1px solid var(--line, #e9dfc9); border-radius: 10px; padding: 12px 14px; background: #fff; }
+.guide-list a { font-weight: 700; }
+.guide-list p { margin: 6px 0 0; font-size: 0.92rem; }
+.cat-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; list-style: none; padding: 0; }
+.cat-chips a { display: inline-block; padding: 8px 14px; border: 1px solid var(--line, #e9dfc9); border-radius: 999px; background: #fff; text-decoration: none; font-size: 0.92rem; }
+.cat-chips a:hover { border-color: #166534; }
+</style>
 </head>
 <body>
 <div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
@@ -42,6 +57,7 @@
       <a href="/compare.html">Compare</a>
       <a href="/guides.html">Guides</a>
       <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
       <a href="/disclosure.html">Disclosure</a>
       <a href="/about.html">About</a>
     </nav>
@@ -60,7 +76,7 @@
 </section>
 <div class="trust-strip">
   <div class="wrap trust-strip-inner">
-    <span class="trust-stat"><strong>16</strong> products tracked</span>
+    <span class="trust-stat"><strong>22</strong> products tracked</span>
     <span class="trust-dot" aria-hidden="true">·</span>
     <span class="trust-stat"><strong>2</strong> live deals</span>
     <span class="trust-dot" aria-hidden="true">·</span>
@@ -78,7 +94,89 @@
     <p><a class="btn" href="/deals/freshbooks.html">See pricing &amp; deal</a></p>
   </div>
 </section>
+  <section class="section tools-feature" aria-label="Free pricing tools">
+    <div class="wrap">
+      <h2 class="section-title">Free pricing tools</h2>
+      <p class="section-sub">Six interactive tools built on our verified pricing data. No sign-up — everything runs in your browser. <a href="/tools.html">See all tools</a>.</p>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <h3><a href="/tools/deal-verifier.html">Deal Verifier</a></h3>
+          <p>A vendor claims "50% off"? See the real percentage off, the true annual cost, and red flags — checked against verified list prices.</p>
+          <p><a href="/tools/deal-verifier.html">Verify a deal →</a></p>
+        </div>
+        <div class="tool-card">
+          <h3><a href="/tools/renewal-hike-checker.html">Renewal Hike Checker</a></h3>
+          <p>Your renewal went up. Enter last year's and this year's totals for the real percentage change and a plain-English read.</p>
+          <p><a href="/tools/renewal-hike-checker.html">Check a renewal →</a></p>
+        </div>
+        <div class="tool-card">
+          <h3><a href="/tools/fee-decoder.html">Fee Decoder</a></h3>
+          <p>Paste pricing-page fine print; get hidden-cost phrases highlighted with plain-English explainers. Private by design.</p>
+          <p><a href="/tools/fee-decoder.html">Decode fine print →</a></p>
+        </div>
+        <div class="tool-card">
+          <h3><a href="/tools/stack-budget-builder.html">Stack Budget Builder</a></h3>
+          <p>Pick one product per category and watch your whole software stack's monthly and annual cost add up.</p>
+          <p><a href="/tools/stack-budget-builder.html">Build my stack →</a></p>
+        </div>
+        <div class="tool-card">
+          <h3><a href="/tools/tier-finder.html">Tier Finder</a></h3>
+          <p>Six questions, one honest answer: free, starter, or professional tier — with the reasoning shown.</p>
+          <p><a href="/tools/tier-finder.html">Find my tier →</a></p>
+        </div>
+        <div class="tool-card">
+          <h3><a href="/tools/true-cost-calculator.html">True Cost Calculator</a></h3>
+          <p>Compare per-seat vs flat-rate pricing for your team size, with CAD conversion and year-two projections.</p>
+          <p><a href="/tools/true-cost-calculator.html">Compare pricing models →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
   <p class="savers-pointer wrap">See the <a href="/deals.html#biggest-savers">biggest annual-billing savings</a> across all tracked products.</p>
+  <section class="section top-deals" aria-label="Today's verified deals">
+    <div class="wrap">
+      <h2 class="section-title">Today's verified deals</h2>
+      <p class="section-sub">Live promotions we've confirmed on the vendor's own site. <a href="/deals.html">See all current promos</a>.</p>
+      <ul class="dir-rows">
+<li class="dir-row has-deal" data-slug="freshbooks">
+    <div class="dir-row-main">
+      <h3 class="dir-row-name"><a href="/deals/freshbooks.html">FreshBooks</a></h3>
+      <p class="dir-row-tag">Simple invoicing and accounting built for Canadian freelancers and small teams.</p>
+      <p class="dir-row-best"><strong>Best for:</strong> Canadian freelancers and service businesses that invoice clients and want accounting in CAD.</p>
+    </div>
+    <div class="dir-row-side">
+      <p class="dir-row-price">From <strong>C$26</strong> per month</p>
+      <p class="dir-row-badge"><span class="badge deal">$1/month for your first year</span> <span class="badge canadian">🇨🇦 Canadian company</span> <span class="verified-pill">✓ Verified 2026-09-30</span></p>
+    </div>
+  </li>
+<li class="dir-row has-deal" data-slug="quickbooks">
+    <div class="dir-row-main">
+      <h3 class="dir-row-name"><a href="/deals/quickbooks.html">QuickBooks Online</a></h3>
+      <p class="dir-row-tag">The accounting suite most Canadian accountants already know.</p>
+      <p class="dir-row-best"><strong>Best for:</strong> Small businesses that want an accountant-compatible accounting platform priced in CAD.</p>
+    </div>
+    <div class="dir-row-side">
+      <p class="dir-row-price">From <strong>C$30</strong> per month</p>
+      <p class="dir-row-badge"><span class="badge deal">90% off for 6 months for new subscribers</span> <span class="verified-pill">✓ Verified 2026-09-30</span></p>
+    </div>
+  </li>
+      </ul>
+    </div>
+  </section>
+  <section class="section home-guides" aria-label="Buying guides">
+    <div class="wrap">
+      <h2 class="section-title">Buying guides</h2>
+      <p class="section-sub">The playbooks behind the tools — how to negotiate, when vendors discount, and where the hidden fees live. <a href="/guides.html">All 58 guides</a>.</p>
+      <ul class="guide-list">
+        <li><a href="/guides/negotiate-saas-renewal.html">How to Negotiate Your SaaS Renewal (and What Discounts to Ask For)</a><p>When to start, what to ask for, and realistic discount ranges for Canadian small businesses.</p></li>
+        <li><a href="/guides/stack-saas-discounts.html">How to Stack SaaS Discounts Without Breaking Terms</a><p>Which discounts legitimately combine: annual billing, promo codes, nonprofit pricing, referral credits.</p></li>
+        <li><a href="/guides/saas-discount-calendar.html">When SaaS Actually Goes on Sale: A Deal-Timing Guide</a><p>Black Friday season, fiscal year-end, new year, back-to-school — the vendor discount calendar.</p></li>
+        <li><a href="/guides/annual-vs-monthly-math.html">Annual vs Monthly Billing: The Prepay Math for Small Businesses</a><p>Break-even months, effective discount rates, and the cash-flow trade-off of paying annually.</p></li>
+        <li><a href="/guides/hidden-payment-fees.html">Hidden Fees in Payment Processing (What Canadian Businesses Actually Pay)</a><p>Beyond the headline rate: the fees that inflate what Canadian businesses actually pay.</p></li>
+        <li><a href="/guides/per-seat-vs-flat-pricing.html">Per-Seat vs Flat-Rate Pricing: Which Actually Costs Less?</a><p>Real math on per-seat, flat-rate, and usage-based pricing — and the crossover point.</p></li>
+      </ul>
+    </div>
+  </section>
   <section class="section directory">
     <div class="wrap">
     <form class="filter-ui" id="deal-filter" hidden aria-label="Filter and sort deals">
@@ -112,7 +210,18 @@
   </div>
     <div class="wrap" id="all-deals">
     <h2 class="section-title">Browse all deals</h2>
-    <p class="section-sub">16 products, grouped by category. Every deal claim links to the vendor's own page.</p>
+    <p class="section-sub">22 products, grouped by category. Every deal claim links to the vendor's own page.</p>
+      <ul class="cat-chips" aria-label="Browse by category">
+        <li><a href="/categories/accounting.html">Accounting (4)</a></li>
+        <li><a href="/categories/crm-marketing.html">CRM &amp; Marketing (3)</a></li>
+        <li><a href="/categories/ecommerce.html">Ecommerce (2)</a></li>
+        <li><a href="/categories/field-service.html">Field Service (1)</a></li>
+        <li><a href="/categories/hr-payroll.html">HR &amp; Payroll (3)</a></li>
+        <li><a href="/categories/payments-pos.html">Payments &amp; POS (2)</a></li>
+        <li><a href="/categories/seo-marketing.html">SEO &amp; Marketing (3)</a></li>
+        <li><a href="/categories/scheduling.html">Scheduling (3)</a></li>
+        <li><a href="/categories/work-management.html">Work Management (1)</a></li>
+      </ul>
     <section class="dir-cat" id="cat-accounting" aria-label="Accounting">
     <h2 class="dir-cat-title"><a href="/categories/accounting.html">Accounting</a></h2>
     <ul class="dir-rows"><li class="dir-row has-deal" data-slug="freshbooks">
@@ -387,10 +496,10 @@
   <section class="compare section">
   <div class="wrap">
     <h2 class="section-title">Every deal, side by side</h2>
-    <p class="section-sub">All 16 products in one table — the same data as the rows above, for scanners.</p>
+    <p class="section-sub">All 22 products in one table — the same data as the rows above, for scanners.</p>
     <div class="compare-scroll">
     <table class="tiers compare-table">
-      <caption class="sr-only">Comparison of all 16 tracked products: price, promotion, and verification date.</caption>
+      <caption class="sr-only">Comparison of all 22 tracked products: price, promotion, and verification date.</caption>
       <thead><tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">From price</th><th scope="col">Current promo</th><th scope="col">Verified</th></tr></thead>
       <tbody><tr>
       <th scope="row"><a href="/deals/hubspot.html">HubSpot</a></th>

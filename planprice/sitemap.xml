@@ -345,6 +345,42 @@
     <lastmod>2026-10-10</lastmod>
   </url>
   <url>
+    <loc>https://planprice.ca/tools.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://planprice.ca/tools/deal-verifier.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://planprice.ca/tools/renewal-hike-checker.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://planprice.ca/tools/fee-decoder.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://planprice.ca/tools/stack-budget-builder.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://planprice.ca/tools/tier-finder.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://planprice.ca/guides/zoom-vs-google-meet-pricing-canada.html</loc>
     <lastmod>2026-10-11</lastmod>
     <changefreq>monthly</changefreq>

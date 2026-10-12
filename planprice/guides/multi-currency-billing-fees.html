@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Currency Billing Fees: What USD Pricing Costs Canadian Buyers</title>
+<meta name="description" content="The true CAD cost of USD-denominated SaaS: exchange rates, vendor spreads, and the 2.5% card markup — worked on a real tool stack, with three ways to cut it.">
+<link rel="canonical" href="https://planprice.ca/guides/multi-currency-billing-fees.html">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Multi-Currency Billing Fees: What USD Pricing Costs Canadian Buyers">
+<meta property="og:description" content="The true CAD cost of USD-denominated SaaS: exchange rates, vendor spreads, and the 2.5% card markup — worked on a real tool stack, with three ways to cut it.">
+<meta property="og:url" content="https://planprice.ca/guides/multi-currency-billing-fees.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Multi-Currency Billing Fees: What USD Pricing Costs Canadian Buyers">
+<meta name="twitter:description" content="The true CAD cost of USD-denominated SaaS: exchange rates, vendor spreads, and the 2.5% card markup — worked on a real tool stack, with three ways to cut it.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › Multi-currency billing fees</p>
+    <h1 class="page-title">Multi-Currency Billing Fees: What USD Pricing Costs Canadian Buyers</h1>
+    <p class="section-sub">Published <time datetime="2026-10-12">2026-10-12</time></p><figure class="post-figure">
+  <img class="post-image" src="../images/multi-currency-billing-fees.jpg" alt="Leather wallet with credit cards and coins" loading="lazy" width="1920" height="1280">
+  <figcaption>USD pricing reaches Canadian buyers through three layers: conversion, the FX fee, and the card markup.</figcaption>
+</figure>
+
+
+    <p>The pricing page says $99 a month. Your credit card is charged in Canadian dollars — and the number is always higher than $99 times the exchange rate. Between the network conversion, the vendor's spread, and your card's foreign-transaction fee, USD-denominated SaaS carries a currency tax of roughly 3–5% on every invoice. Across a whole tool stack, that's a thirteenth month of software you're paying for and never using.</p>
+    <p><em>General information, not financial advice. Exchange rates move — always confirm how a vendor bills Canadian accounts before buying.</em></p>
+    <h2>The sticker is in USD; your bill is not</h2>
+    <p>Most SaaS vendors price in US dollars and bill your Canadian card in USD, leaving the conversion to your card network and issuer. That means the "$99 a month" tool is really three costs: the USD price, the exchange rate, and the markup layered on top. At an exchange reference of about 1.4262 CAD per USD, $99 USD converts to roughly $141.19 CAD — before any fees.</p>
+    <p>Buyers notice the gap but rarely name it. On a long-running forum thread about foreign transaction fees, users reported that card companies add 1–3% even on USD purchases from companies headquartered outside the US — including internet services billed in dollars. The fee is disclosed in the cardholder agreement, as required, but nobody reads the cardholder agreement before buying software.</p>
+    <h2>The three layers of currency cost</h2>
+    <p><strong>Layer 1: the exchange rate itself.</strong> Visa or Mastercard converts the USD charge at its own daily rate, which sits close to the wholesale rate banks trade at. This part is fair — it's the market price of the dollars.</p>
+    <p><strong>Layer 2: the vendor's spread.</strong> Vendors that convert for you — billing "in CAD at checkout" — use their own rate, which includes a margin. Shopify bills Canadians in CAD at checkout at its own exchange rate; the convenience is real, and so is the spread. When a vendor offers CAD billing, compare their rate against the day's wholesale rate before assuming it's cheaper.</p>
+    <p><strong>Layer 3: your card's foreign-transaction fee.</strong> Most Canadian credit cards add about 2.5% on foreign-currency purchases (the range runs roughly 1–3% depending on the card), calculated on the converted CAD amount. A fourth trap, dynamic currency conversion — the vendor offering to bill you in CAD at their terminal rate — adds the merchant's own markup on top and is almost always worse than letting your card convert.</p>
+    <h2>Worked: one team's real CAD stack cost</h2>
+    <p>Take a ten-person team: Slack Pro at $7.25 USD a user a month (billed annually, USD-billed) plus one $99 USD-a-month tool. Sticker: $72.50 + $99 = $171.50 USD a month. At 1.4262, that's $244.59 CAD — and then the card's 2.5% foreign-transaction fee adds about $6.11, for a true cost of roughly $250.70 CAD a month, or about $3,008 a year.</p>
+    <table>
+    <caption>The currency stack on $171.50 USD/month of SaaS, October 2026.</caption>
+    <thead><tr><th scope="col">Layer</th><th scope="col">Monthly cost (CAD)</th></tr></thead>
+    <tbody>
+    <tr><td>USD sticker converted at 1.4262</td><td>$244.59</td></tr>
+    <tr><td>Card foreign-transaction fee (~2.5%)</td><td>$6.11</td></tr>
+    <tr><td><strong>True monthly cost</strong></td><td><strong>~$250.70</strong></td></tr>
+    <tr><td>Annual currency tax vs sticker (2.5% of converted)</td><td>~$73/yr</td></tr>
+    </tbody>
+    </table>
+    <p>Scale that to a $2,000-USD-a-month stack and the FX fee alone is about $71 CAD a month — $857 a year — for the privilege of paying in the wrong currency. The markup is small per invoice and relentless in aggregate.</p>
+    <figure class="post-figure">
+  <img class="post-image" src="../images/multi-currency-billing-fees-2.jpg" alt="Two stacks of coins side by side" loading="lazy" width="1920" height="1280">
+  <figcaption>The FX markup is small per transaction and large per year — about $857 a year on a $2,000 USD monthly stack.</figcaption>
+</figure>
+
+<h2>Which vendors bill you in CAD</h2>
+    <p>The simplest fix is buying from vendors that bill Canadians in Canadian dollars. Shopify bills CAD at checkout. Xero Canada's plans are CAD-denominated (Starter $25 a month). Domestic billing removes the card FX fee entirely — though the vendor's own conversion spread still applies when the list price originated in USD, so the "CAD price" deserves the same scrutiny as any converted price.</p>
+    <h2>Three ways to cut the FX markup</h2>
+    <ol>
+      <li><strong>Prefer CAD-billed vendors.</strong> No foreign-currency charge means no 2.5% card fee. Worth a tiebreak between otherwise equal tools.</li>
+      <li><strong>Use a no-foreign-transaction-fee card for SaaS spend.</strong> Several Canadian cards waive the fee — you pay the network's near-wholesale rate and nothing more. Route all USD subscriptions through it.</li>
+      <li><strong>Never accept dynamic currency conversion.</strong> If a checkout offers to bill you in CAD "for convenience," decline — the merchant's rate carries a markup your card's conversion doesn't.</li>
+    </ol>
+    <p>And budget in CAD, not USD. A stack priced at "$2,000 a month" is really $2,930 CAD at current rates plus fees — plan the cash flow in the currency that leaves your account.</p>
+    <h2>Frequently asked questions</h2>
+    <h3>Do Canadian credit cards charge foreign transaction fees on USD SaaS?</h3>
+    <p>Almost always: most Canadian cards add about 2.5% (range roughly 1–3%) on purchases billed in a foreign currency, calculated after conversion to CAD. The fee applies even when the vendor bills in USD — it's about the currency, not the vendor's location.</p>
+    <h3>Which SaaS tools bill Canadians in CAD?</h3>
+    <p>Shopify bills CAD at checkout, and Xero Canada's plans are CAD-denominated (Starter $25 a month). Always check the vendor's billing currency for Canadian accounts before assuming — many USD-listed vendors still bill in USD.</p>
+    <h3>Is it cheaper to pay annually to reduce currency fees?</h3>
+    <p>Marginally: one annual charge incurs the FX fee once instead of twelve times, but the fee is a percentage, so the saving is only the avoided per-transaction minimums (which are usually zero). The real lever is the card you pay with, not the billing frequency.</p>
+    <h2>Products discussed on PlanPrice</h2>
+    <ul>
+      <li><a href="/deals/shopify.html">Shopify</a></li>
+      <li><a href="/deals/monday.html">monday.com</a></li>
+      <li><a href="/deals/xero.html">Xero</a></li>
+      <li><a href="/deals/quickbooks.html">QuickBooks Online</a></li>
+    </ul>
+    <p><a href="/guides.html">Browse all buyer's guides →</a></p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices checked 2026-10-12 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

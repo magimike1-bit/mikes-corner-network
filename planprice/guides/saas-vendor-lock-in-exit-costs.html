@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Lock-In and Exit Costs: Price the Escape Before You Sign</title>
+<meta name="description" content="Every SaaS contract has an exit price nobody quotes you. The five exit-cost lines, a small-business exit-cost estimator with worked examples, and the pre-sign lock-in audit.">
+<link rel="canonical" href="https://planprice.ca/guides/saas-vendor-lock-in-exit-costs.html">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Vendor Lock-In and Exit Costs: Price the Escape Before You Sign">
+<meta property="og:description" content="Every SaaS contract has an exit price nobody quotes you. The five exit-cost lines, a small-business exit-cost estimator with worked examples, and the pre-sign lock-in audit.">
+<meta property="og:url" content="https://planprice.ca/guides/saas-vendor-lock-in-exit-costs.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vendor Lock-In and Exit Costs: Price the Escape Before You Sign">
+<meta name="twitter:description" content="Every SaaS contract has an exit price nobody quotes you. The five exit-cost lines, a small-business exit-cost estimator with worked examples, and the pre-sign lock-in audit.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › Vendor lock-in and exit costs</p>
+    <h1 class="page-title">Vendor Lock-In and Exit Costs: Price the Escape Before You Sign</h1>
+    <p class="section-sub">Published <time datetime="2026-10-12">2026-10-12</time></p><figure class="post-figure">
+  <img class="post-image" src="../images/saas-vendor-lock-in-exit-costs.jpg" alt="Laptop wrapped in a chain with a padlock" loading="lazy" width="1920" height="1280">
+  <figcaption>Lock-in is priced at exit: migration labor, rewiring, retraining.</figcaption>
+</figure>
+
+
+
+    <p>A vendor's sales demo answers one question: does this tool solve your problem today. It never answers the question that matters two years later: how hard is it to leave? Lock-in isn't a fee — it's the slow disappearance of your bargaining power. This guide prices the escape before you sign: the five exit-cost lines, a worked estimator, and the pre-sign audit that keeps you free.</p>
+    <p><em>General information, not financial or legal advice. Exit terms vary — verify them in your own contract.</em></p>
+
+    <h2>The five exit-cost lines</h2>
+    <p>Leaving a SaaS vendor costs money in five places, and the subscription was never the biggest one:</p>
+    <ol>
+      <li><strong>Data export and migration labor.</strong> Exporting, cleaning, mapping, and importing your data. Data transformation alone can eat around 20% of a total migration budget.</li>
+      <li><strong>Integration rewiring.</strong> Every integration has to be rebuilt on the new platform. A small team might have five — each one is still a project.</li>
+      <li><strong>Retraining.</strong> The team has to learn the new tool. Small per person, real in aggregate.</li>
+      <li><strong>Business disruption.</strong> Downtime, parallel runs, the weeks where two systems are half-alive — lost productivity, not an invoice.</li>
+      <li><strong>Contractual exit penalties.</strong> Early-termination fees, forfeited prepaid value, auto-renewal clauses that fire mid-migration. Multi-year agreements often carry steep early-exit penalties.</li>
+    </ol>
+    <p>These hidden costs can exceed the savings that motivated the switch — price the exit before signing, not during the breakup.</p>
+
+    <h2>Exit-cost estimator: worked examples</h2>
+    <p><strong>Example 1 — switching CRMs.</strong> A HubSpot-to-Salesforce migration for a 50,000-contact CRM breaks down as: data export and cleanup, 40 hours (US$6,000 at contractor rates); import mapping, 20 hours (US$3,000); integration rewiring, 60 hours (US$9,000); training, 10 hours (US$1,500). Total: <strong>US$19,500</strong> — before either subscription. A 10-person team on Salesforce Starter at US$25/user/mo (checked 2026-10-11) eyeing Pipedrive Growth at US$39/user/mo annual (checked 2026-10-11) should budget a migration project in the low thousands even before the subscription delta.</p>
+    <p><strong>Example 2 — the proprietary-format penalty.</strong> Notion stores data in a proprietary JSON structure; Airtable uses a custom relational format. The trap: start with "portable" data, adopt the proprietary features (databases, automations), and discover the data has become non-exportable. Test the export <em>before</em> you commit: if your data doesn't come out in a usable standard format, price the lock-in as part of the purchase.</p>
+    <p><strong>Example 3 — the 30-day window.</strong> After cancellation, Salesforce gives you 30 days of data access. Everything — custom objects, full activity history, attachments — must be exported in that window. Miss it and years of customer history are gone. Full mid-market Salesforce migrations regularly run US$25,000–$80,000+. The export window is the deadline that matters.</p>
+
+    <h2>The pre-sign lock-in audit</h2>
+    <p>Run these five checks before committing to any tool that will hold important data:</p>
+    <ol>
+      <li><strong>Export format.</strong> Export a sample of your real data today (most tools offer a trial). If it comes out clean in CSV/JSON, the exit is cheap. If it's proprietary or partial, the exit is a project — price it.</li>
+      <li><strong>Exit window.</strong> How long do you have data access after cancellation? Thirty days is common; confirm it in writing and calendar the deadline from day one.</li>
+      <li><strong>Integration inventory.</strong> List every integration you'd have to rebuild. Each one is a line item on the exit bill — and a reason to prefer tools with standard APIs.</li>
+      <li><strong>Contract exit terms.</strong> Auto-renewal clauses with short cancellation windows, early-termination penalties, and price-increase caps (or their absence) — the same flags as any contract review, read with exit in mind.</li>
+      <li><strong>Integration pricing.</strong> Some vendors charge per device connected or per integration — a meter "even if it was just reading data." Every paid integration is another dependency to rebuild, so check integration pricing before adopting, not when leaving.</li>
+    </ol>
+
+    <figure class="post-figure">
+  <img class="post-image" src="../images/saas-vendor-lock-in-exit-costs-2.jpg" alt="Handshake across a desk with documents" loading="lazy" width="1920" height="1280">
+  <figcaption>A vendor you can credibly walk away from is a vendor that negotiates.</figcaption>
+</figure>
+
+<h2>Lock-in is leverage</h2>
+    <p>The deepest cost of lock-in isn't the migration bill — it's your negotiating position. When leaving is painful enough, you stop comparing alternatives and stop negotiating; you renew not because it's the best option but because escape is too expensive. A small business that can't credibly walk away has lost its leverage — and a vendor that knows you can't leave has little reason to keep earning you.</p>
+    <p>The exit brief is also a renewal tool: a team that can show a tested export, a current integration list, and a priced migration walks into renewal with a credible walk-away — and vendors negotiate differently with buyers who have one.</p>
+
+    <h2>What real users say</h2>
+    <p>A <a href="https://ie.trustpilot.com/review/salesforce.com">Trustpilot reviewer</a> wrote in October 2026: "Too difficult to use, expensive and difficult to cancel. Buyer be aware!" Another small business <a href="https://ie.trustpilot.com/review/salesforce.com">reviewed in September 2026</a>: "They put me (without consent) on an auto renew, and then renewed my subscription. 4 days later I tried to cancel and they won't let me... We moved to another WAAAAAY better platform."</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>What is vendor lock-in in SaaS?</h3>
+    <p>The accumulated cost of data in proprietary formats, workflows built around vendor-specific features, and integrations that only exist because of one vendor's API — making switching expensive enough that you stop considering it.</p>
+    <h3>How much does it cost to switch CRM?</h3>
+    <p>A 50,000-contact HubSpot-to-Salesforce migration runs about US$19,500 in labor at contractor rates; mid-market Salesforce exits regularly cost US$25,000–$80,000+. Small-team switches cost less in absolute terms but follow the same five cost lines.</p>
+    <h3>How do I avoid SaaS vendor lock-in?</h3>
+    <p>Run the pre-sign audit: test the export format, confirm the exit window, inventory integrations, read the exit terms, and check integration pricing. Prefer standard data formats and APIs — and keep the exit brief current so the walk-away stays credible.</p>
+
+    <h2>Products discussed on PlanPrice</h2>
+    <ul>
+      <li><a href="/deals/hubspot.html">HubSpot</a></li>
+      <li><a href="/deals/pipedrive.html">Pipedrive</a></li>
+      <li><a href="/deals/shopify.html">Shopify</a></li>
+      <li><a href="/deals/xero.html">Xero</a></li>
+      <li><a href="/deals/freshbooks.html">FreshBooks</a></li>
+      <li><a href="/deals/quickbooks.html">QuickBooks</a></li>
+    </ul>
+    <p><a href="/guides.html">Browse all buyer's guides →</a></p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices checked 2026-10-05 and 2026-10-11 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Overage Pricing Traps: How Usage Limits Become Bills</title>
+<meta name="description" content="How SaaS usage allowances turn into overage bills: the unit-definition traps at Zapier, Intercom, and HubSpot, worked overage math, and the five questions that prevent bill shock.">
+<link rel="canonical" href="https://planprice.ca/guides/api-overage-pricing-traps.html">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="API Overage Pricing Traps: How Usage Limits Become Bills">
+<meta property="og:description" content="How SaaS usage allowances turn into overage bills: the unit-definition traps at Zapier, Intercom, and HubSpot, worked overage math, and the five questions that prevent bill shock.">
+<meta property="og:url" content="https://planprice.ca/guides/api-overage-pricing-traps.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="API Overage Pricing Traps: How Usage Limits Become Bills">
+<meta name="twitter:description" content="How SaaS usage allowances turn into overage bills: the unit-definition traps at Zapier, Intercom, and HubSpot, worked overage math, and the five questions that prevent bill shock.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › API overage pricing</p>
+    <h1 class="page-title">API Overage Pricing Traps: How Usage Limits Become Bills</h1>
+    <p class="section-sub">Published <time datetime="2026-10-12">2026-10-12</time></p><figure class="post-figure">
+  <img class="post-image" src="../images/api-overage-pricing-traps.jpg" alt="Water faucet dripping into a metal bucket with a pressure gauge" loading="lazy" width="1920" height="1280">
+  <figcaption>Usage-based pricing meters every action — like a tap running into your bill.</figcaption>
+</figure>
+
+
+    <p>The plan includes 750 tasks a month. That sounds like plenty — until a five-step workflow runs 200 times and you've burned 1,000. Usage-based pricing is where SaaS bills quietly double: the allowance is defined in units you'd never use in conversation, the overage rate is buried in the docs, and nobody emails you before the meter spins. This is the buyer's guide to reading the meter before it reads you.</p>
+    <p><em>General information, not financial advice. Prices change — always confirm allowance and overage terms on the vendor's own site before buying.</em></p>
+    <h2>The allowance is the price; the overage is the bill</h2>
+    <p>Most SaaS pricing is really two prices: the subscription (what the pricing page shows) and the overage rate (what the documentation shows, three clicks deep). The overage rate is what you pay when success strikes — the busy month, the viral post, the automation that finally works. One Reddit user watched their Intercom bill jump from $4,000 to $9,000 a month, calling the pricing "way more complicated than their marketing page suggests": Fin's per-outcome charges, add-ons, outbound messages, and seat hygiene all stacking at once.</p>
+    <p>The extreme version made the news: a developer set a $250 cap on a Google Cloud side project, an attacker burned through the account, the platform auto-upgraded the spending tier, and the bill hit roughly $12,000 before the card issuer declined the charges. Auto-upgrade without explicit consent is the nightmare end of the spectrum — but the mechanism (usage with no hard ceiling) exists in ordinary SaaS plans too.</p>
+    <h2>How vendors define the unit (and why it matters)</h2>
+    <p>You cannot compare allowances until you know what a unit is — and vendors define them incompatibly on purpose:</p>
+    <table>
+    <caption>What counts as a billable unit at four vendors, October 2026.</caption>
+    <thead><tr><th scope="col">Vendor</th><th scope="col">The unit</th><th scope="col">The trap</th></tr></thead>
+    <tbody>
+    <tr><td>Zapier</td><td>Task = one successful action step</td><td>A 5-step Zap running once burns ~5 tasks; overage runs 1.25× the base rate on annual plans, 2.5× on monthly</td></tr>
+    <tr><td>Intercom (Fin)</td><td>Resolution = $0.99 per outcome</td><td>"Assumed resolutions" count — a customer who gives up and leaves is billed the same as one whose problem was solved; qualifications cost $9.99 each</td></tr>
+    <tr><td>HubSpot</td><td>Credits, expiring monthly</td><td>Unused credits vanish at month-end; quiet months are wasted money and busy months are billed fresh</td></tr>
+    <tr><td>Klaviyo</td><td>Contacts and sends</td><td>SMS pricing is per-send and per-region (1,000 Canadian SMS sends run about $18 USD)</td></tr>
+    </tbody>
+    </table>
+    <p>The pattern: the unit is always smaller than you think, and the definition is always in the vendor's favor. A Capterra reviewer put it simply about Fin: it "charges $1 per answer, which feels expensive compared to other AI tools." At 5,000 resolutions a month, that's roughly $5,000 for the AI layer alone — on top of seats.</p>
+    <h2>Worked example: one busy month</h2>
+    <p>Take a small team on Zapier Professional: $19.99 a month billed annually, 750 tasks included. A five-step order workflow (new order → create invoice → update inventory → notify Slack → log to sheet) burns about 5 tasks per run. A normal month at 120 orders costs 600 tasks — inside the allowance. A holiday month at 300 orders costs 1,500 tasks: 750 over, billed at roughly 1.25× the base task rate on the annual plan. One good month doubles the middleware bill, and the overage arrives on the same invoice as the celebration.</p>
+    <p>Prices checked 2026-10-12: Zapier Professional $19.99/mo annual ($29.99 monthly) for 750 tasks; Make Core about $9/mo annual for 10,000 credits; Intercom Fin $0.99 per resolution with a $9.99 qualification outcome; Atlassian automation overage $0.50 per 1,000 steps.</p>
+    <figure class="post-figure">
+  <img class="post-image" src="../images/api-overage-pricing-traps-2.jpg" alt="Magnifying glass over a stack of blank invoices" loading="lazy" width="1920" height="1280">
+  <figcaption>Five questions that prevent bill shock, starting with: what is the billable unit?</figcaption>
+</figure>
+
+<h2>The five questions that prevent bill shock</h2>
+    <ol>
+      <li><strong>What exactly counts as a unit?</strong> Get the definition in writing — "assumed resolution" style surprises live here.</li>
+      <li><strong>What is the overage rate, and is it a multiple of the base rate?</strong> Zapier's 2.5× on monthly billing is the number that hurts.</li>
+      <li><strong>Do unused allowances roll over?</strong> If credits expire monthly, every quiet month subsidizes the vendor.</li>
+      <li><strong>Is there a spend cap or hard stop I control?</strong> Alerts at 50%, 80%, and 100% of the allowance are the minimum; a cap you set yourself is better.</li>
+      <li><strong>What happens at the limit — stop, throttle, or bill?</strong> Zapier holds tasks when you exceed the plan; others keep billing. Know which before the busy month.</li>
+    </ol>
+    <p>One more defense: model your peak month, not your average month. Allowances are sized for the average; overages are priced for the peak.</p>
+    <h2>Frequently asked questions</h2>
+    <h3>What is an overage fee in SaaS?</h3>
+    <p>A charge for usage beyond your plan's included allowance — extra API calls, tasks, resolutions, or sends, billed at the vendor's overage rate. It is the most common source of SaaS bill shock.</p>
+    <h3>Why did my Intercom bill jump so much?</h3>
+    <p>Usually a stack of moving parts: Fin's $0.99-per-outcome charges (including $9.99 qualifications), add-ons, outbound messages, and seat counts — each priced separately, all landing on one invoice. Audit resolutions vs. seats separately.</p>
+    <h3>How do I set a spending limit on usage-based tools?</h3>
+    <p>Look for spend caps or hard usage ceilings in the billing settings, set threshold alerts at 50/80/100% of your allowance, and prefer vendors that stop or ask approval at the limit over vendors that auto-bill. If a tool offers no cap, treat its overage rate as the real price.</p>
+    <h2>Products discussed on PlanPrice</h2>
+    <ul>
+      <li><a href="/deals/hubspot.html">HubSpot</a></li>
+      <li><a href="/deals/stripe.html">Stripe</a></li>
+      <li><a href="/deals/shopify.html">Shopify</a></li>
+    </ul>
+    <p><a href="/guides.html">Browse all buyer's guides →</a></p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices checked 2026-10-12 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

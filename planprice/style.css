@@ -85,23 +85,6 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .trust-stat strong { color: var(--navy); }
 .trust-dot { color: var(--line); }
 
-/* Spotlight — wide horizontal feature block, not a box */
-.spotlight {
-  background: linear-gradient(120deg, var(--navy-dark) 0%, var(--navy) 70%);
-  color: #fff; padding: 2rem 0; border-bottom: 4px solid var(--gold);
-}
-.spotlight-kicker { color: var(--gold-bright); }
-.spotlight-name { margin: 0.35rem 0 0.4rem; font-size: 1.7rem; line-height: 1.2; }
-.spotlight-name a { color: #fff; text-decoration: none; }
-.spotlight-name a:hover { text-decoration: underline; }
-.spotlight-deal {
-  font-size: 1.35rem; font-weight: 800; line-height: 1.3; margin: 0.3rem 0;
-  color: var(--gold-bright);
-}
-.spotlight-tag { color: #cfdce9; margin: 0.4rem 0 0.6rem; max-width: 44rem; }
-.spotlight-verify { font-size: 0.9rem; color: #9fb3c8; margin: 0 0 1rem; }
-.spotlight-verify a { color: #9fd8d7; }
-
 /* Sections */
 .section { padding: 1.75rem 0 0; }
 .section-title { margin: 0 0 0.25rem; font-size: 1.4rem; color: var(--navy); }
@@ -152,7 +135,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .btn:hover { background: var(--teal-dark); color: #fff; }
 
 /* Shared hover micro-interaction (single rule — avoids edit drift) */
-.btn, .main-nav a, .spotlight-name a, .dir-row-name a, .footer-nav a,
+.btn, .main-nav a, .dir-row-name a, .footer-nav a,
 .compare-row-title a, .compare-col-name a {
   transition: background-color .15s ease, color .15s ease;
 }
@@ -295,8 +278,6 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
   .header-inner { padding: 1rem 1.5rem; }
   .section-title { font-size: 1.4rem; }
   .product h1, .page-title { font-size: 2.5rem; }
-  .spotlight-name { font-size: 2rem; }
-  .spotlight-deal { font-size: 1.6rem; }
   .dir-row {
     flex-direction: row; align-items: center; justify-content: space-between;
     gap: 1.25rem; padding: 0.9rem 1.25rem;
@@ -431,9 +412,6 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
   font-weight: 600;
 }
 /* F1: biggest-savers strip on /deals.html; rank numbers via CSS counters. */
-.savers-pointer {
-  margin: 1rem 0 0;
-}
 .saver-rows {
   list-style: none;
   counter-reset: saver;

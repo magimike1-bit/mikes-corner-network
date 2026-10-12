@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integration and Middleware Costs: The Real Price of Zapier and Make</title>
+<meta name="description" content="The middleware layer has its own bill: how Zapier task and Make credit billing multiply, October 2026 prices, and when the automation glue costs more than the apps it connects.">
+<link rel="canonical" href="https://planprice.ca/guides/zapier-make-middleware-costs.html">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Integration and Middleware Costs: The Real Price of Zapier and Make">
+<meta property="og:description" content="The middleware layer has its own bill: how Zapier task and Make credit billing multiply, October 2026 prices, and when the automation glue costs more than the apps it connects.">
+<meta property="og:url" content="https://planprice.ca/guides/zapier-make-middleware-costs.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Integration and Middleware Costs: The Real Price of Zapier and Make">
+<meta name="twitter:description" content="The middleware layer has its own bill: how Zapier task and Make credit billing multiply, October 2026 prices, and when the automation glue costs more than the apps it connects.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › Middleware costs</p>
+    <h1 class="page-title">Integration and Middleware Costs: The Real Price of Zapier and Make</h1>
+    <p class="section-sub">Published <time datetime="2026-10-12">2026-10-12</time></p><figure class="post-figure">
+  <img class="post-image" src="../images/zapier-make-middleware-costs.jpg" alt="Colorful puzzle pieces linked in a chain" loading="lazy" width="1920" height="1280">
+  <figcaption>Middleware is the glue between your apps — and it has its own meter.</figcaption>
+</figure>
+
+
+    <p>Your CRM talks to your email tool, which talks to your spreadsheet, which pings Slack — and the glue holding it all together sends its own invoice. Automation middleware (Zapier, Make, n8n) is the SaaS cost most teams never budget: a second subscription whose bill scales with workflow length times run frequency, and which can quietly exceed the apps it connects.</p>
+    <p><em>General information, not financial advice. Prices change — always confirm task/credit pricing on the vendor's own site before buying.</em></p>
+    <h2>The glue layer has its own bill</h2>
+    <p>Middleware pricing starts cheap and scales on a unit you'd never discuss in a meeting. Zapier's free tier covers 100 tasks a month — fine for a hobby, exhausted by one real workflow. Make's free tier covers 1,000 credits a month. The moment automation does real work, you're on a paid plan, and the paid plan is metered on a unit that multiplies with every step you add.</p>
+    <p>Buyers feel it. On G2, Zapier carries 183 all-time reviewer mentions of being expensive, with reviewers consistently citing cost as the trade-off. One small-business reviewer wrote in April 2026 that "the biggest downside of Zapier is how quickly the pricing can scale because it's based on tasks" — each step counts, costs add up fast, and you end up "constantly thinking about efficiency instead of just building the best workflow." Another, an AI engineer, warned that the transactional model "counts every individual step in a workflow against your monthly task quota," making it "prohibitively expensive to scale for high-volume data loops."</p>
+    <h2>How the units really multiply</h2>
+    <p>The three platforms bill three different things, and the difference matters more than the sticker:</p>
+    <table>
+    <caption>Middleware billing units and October 2026 entry prices.</caption>
+    <thead><tr><th scope="col">Platform</th><th scope="col">Billed per</th><th scope="col">Free tier</th><th scope="col">Entry paid (Oct 2026)</th></tr></thead>
+    <tbody>
+    <tr><td>Zapier</td><td>Task — each successful action step</td><td>100 tasks/mo</td><td>$19.99/mo annual (750 tasks); $29.99 monthly</td></tr>
+    <tr><td>Make</td><td>Credit — each module action (polls count)</td><td>1,000 credits/mo</td><td>~$9/mo annual (10,000 credits)</td></tr>
+    <tr><td>n8n Cloud</td><td>Execution — one full workflow run</td><td>—</td><td>€20/mo annual (2,500 executions)</td></tr>
+    </tbody>
+    </table>
+    <p>The multiplication rule: <strong>monthly units ≈ steps per workflow × runs per month</strong> (plus polling on Make). A 5-step Zap running 200 times a month burns about 1,000 tasks. The same logic on Make burns about 1,000 credits — but credits cost roughly a thirtieth of a task at entry pricing ($0.0009 vs $0.027 per unit). Zapier's Team plan ($69 a month annual for 2,000 tasks) costs nearly 8× Make's Core for 5× the units. And Zapier overage runs about 1.25× the base rate on annual plans — 2.5× on monthly.</p>
+    <h2>Three workflows, three bills</h2>
+    <p><strong>Light: 3-step lead capture, 100 runs a month.</strong> About 300 tasks — inside Zapier's $19.99 Professional plan, or a fraction of Make's $9 Core. Either works; pick on ease of use.</p>
+    <p><strong>Medium: 5-step order flow, 500 runs a month.</strong> About 2,500 tasks — past Zapier Professional's 750, into the $69-a-month Team plan. On Make, 2,500 credits is a quarter of the $9 Core plan. Same automation, roughly a 7× price gap.</p>
+    <p><strong>Heavy: 4-step enrichment flow, 500 cold emails a day.</strong> Roughly 45,000 tasks a month — about $399 a month on Zapier's task ladder. The middleware alone costs more than most teams' entire CRM. This is the workflow where one practitioner noted the middleware layer running $399 a month "just for the glue" — before a dollar of the connected apps.</p>
+    <figure class="post-figure">
+  <img class="post-image" src="../images/zapier-make-middleware-costs-2.jpg" alt="Interlocking metal chains on a desk" loading="lazy" width="1920" height="1280">
+  <figcaption>The crossover: when middleware costs more than the apps it connects.</figcaption>
+</figure>
+
+<h2>The crossover: when middleware costs more than the apps</h2>
+    <p>Compute the ratio: <strong>middleware spend ÷ connected-app spend</strong>. When it passes 1×, the glue costs more than what it connects — the signal to change strategy. Three exits exist: rebuild the heaviest workflow with native integrations (most CRMs now include basic automation free), consolidate workflows to cut steps (every step you remove is a permanent discount), or move heavy volume to a per-execution platform — n8n charges per run regardless of step count, and its self-hosted edition is free apart from roughly €5–€10 a month in server costs.</p>
+    <p>The free tier is a trial, not a plan: 100 Zapier tasks cover roughly one real workflow for one week. Budget the paid tier from the first month the automation matters — and model the peak month, because overage rates are where the bill doubles.</p>
+    <h2>Frequently asked questions</h2>
+    <h3>What is a Zapier task?</h3>
+    <p>One successful action step in a workflow. Triggers and filters are free; every action that runs counts. A 5-step Zap running once uses about 5 tasks — so task burn equals steps times runs.</p>
+    <h3>Is Make really cheaper than Zapier?</h3>
+    <p>Per unit, dramatically: at entry pricing a Make credit costs roughly a thirtieth of a Zapier task, and the $9-a-month Core plan includes 10,000 credits vs 750 tasks on Zapier's $19.99 Professional. The gap narrows for simple two-step workflows and widens as workflows get longer and busier.</p>
+    <h3>When should I switch from Zapier to something cheaper?</h3>
+    <p>When your middleware bill exceeds the apps it connects, when one workflow's task burn dominates the plan, or when polling (Make) or long step chains (Zapier) are the cost driver. Before switching, try cutting steps — removing two steps from a daily workflow is a 40% price cut with zero migration.</p>
+    <h2>Products discussed on PlanPrice</h2>
+    <ul>
+      <li><a href="/deals/hubspot.html">HubSpot</a></li>
+      <li><a href="/deals/pipedrive.html">Pipedrive</a></li>
+      <li><a href="/deals/shopify.html">Shopify</a></li>
+    </ul>
+    <p><a href="/guides.html">Browse all buyer's guides →</a></p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices checked 2026-10-12 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

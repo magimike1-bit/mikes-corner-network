@@ -260,7 +260,7 @@ function scoreSection(p) {
   const lis = sources
     .map(
       ([label, s]) =>
-        `      <li><a href="${esc(s.url)}" rel="noopener">${esc(label)}</a>: <strong>${esc(String(s.score))}/5</strong>${esc(reviewsText(s.reviews))}</li>`
+        `      <li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(label)}</a>: <strong>${esc(String(s.score))}/5</strong>${esc(reviewsText(s.reviews))}</li>`
     )
     .join("\n");
   return `<section class="section scores">
@@ -350,7 +350,7 @@ function spotlightBlock(p) {
     <h2 class="spotlight-name"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></h2>
     <p class="spotlight-deal">${esc(p.deal.headline)}</p>
     <p class="spotlight-tag">${esc(p.tagline)}</p>
-    <p class="spotlight-verify">✓ Vendor-verified <time datetime="${esc(p.deal.verified_date)}">${esc(p.deal.verified_date)}</time> — source: <a href="${esc(p.deal.source_url)}" rel="noopener">${vendorHost(p.deal.source_url)}</a>.</p>
+    <p class="spotlight-verify">✓ Vendor-verified <time datetime="${esc(p.deal.verified_date)}">${esc(p.deal.verified_date)}</time> — source: <a href="${esc(p.deal.source_url)}" target="_blank" rel="noopener">${vendorHost(p.deal.source_url)}</a>.</p>
     <p><a class="btn" href="/deals/${esc(p.slug)}.html">See pricing &amp; deal</a></p>
   </div>
 </section>`;
@@ -581,7 +581,7 @@ function factsStrip(p, extra = "") {
     <div class="facts-item"><dt>Current promo</dt><dd>${promo}${flags ? " " + flags : ""}</dd></div>
     <div class="facts-item"><dt>Category</dt><dd>${esc(p.category)}</dd></div>
     <div class="facts-item"><dt>Verified</dt><dd>Prices verified <time datetime="${esc(p.last_verified)}">${esc(fmtDate(p.last_verified))}</time></dd></div>
-    <div class="facts-item"><dt>Vendor</dt><dd><a href="${esc(p.vendor_homepage)}" rel="noopener">${vendorHost(p.vendor_homepage)}</a></dd></div>
+    <div class="facts-item"><dt>Vendor</dt><dd><a href="${esc(p.vendor_homepage)}" target="_blank" rel="noopener">${vendorHost(p.vendor_homepage)}</a></dd></div>
     ${expiry}${extra}
   </dl>`;
 }
@@ -618,7 +618,7 @@ function verificationBox(p) {
     return `${base}
       <p class="verify-headline">${esc(p.deal.headline)}</p>
       ${dealVerifiedLine(p)}
-      <p class="verify-src">Source: <a href="${esc(p.deal.source_url)}" rel="noopener">${vendorHost(p.deal.source_url)}</a>.</p>
+      <p class="verify-src">Source: <a href="${esc(p.deal.source_url)}" target="_blank" rel="noopener">${vendorHost(p.deal.source_url)}</a>.</p>
       ${expiry}<p class="verify-note">Promotions change. Confirm the current offer on the vendor's page before buying.</p>
     </aside>`;
   }
@@ -689,13 +689,13 @@ function pricingTable(p) {
 function cta(p) {
   if (affiliateLive(p)) {
     if (p.affiliate.url) {
-      return `<a href="${esc(p.affiliate.url)}" class="btn affiliate-cta" data-program="${esc(p.affiliate.program)}" rel="sponsored noopener">Check the current price</a>
+      return `<a href="${esc(p.affiliate.url)}" class="btn affiliate-cta" data-program="${esc(p.affiliate.program)}" target="_blank" rel="sponsored noopener">Check the current price</a>
     <p class="fine">${AFFILIATE_BLUNT} See our <a href="/disclosure.html">affiliate disclosure</a>.</p>`;
     }
     console.warn(`WARN: ${p.slug} has a live affiliate status but no affiliate URL in data — rendering the placeholder CTA.`);
   }
   if (affiliateNone(p)) {
-    return `<a href="${esc(p.vendor_homepage)}" class="btn vendor-cta" rel="noopener">Visit ${esc(p.name)} →</a>
+    return `<a href="${esc(p.vendor_homepage)}" class="btn vendor-cta" target="_blank" rel="noopener">Visit ${esc(p.name)} →</a>
     <p class="fine no-affiliate">PlanPrice has no affiliate relationship with ${esc(p.name)} — we earn nothing if you choose them.</p>`;
   }
   // PP-SERP-DESC-PAGES (2026-10-11): products added by the AdSense remediation
@@ -1404,7 +1404,7 @@ function privacyBody() {
         <li><strong>No accounts, no signups, no email capture.</strong> There is nothing to subscribe to and nothing to log into.</li>
         ${analytics}
         <li><strong>Third parties.</strong> Our hosting provider may log basic server data (IP address, pages requested) for security. When affiliate links go live, clicking one takes you to the vendor's site, which is governed by that vendor's privacy policy — not ours.</li>
-        <li><strong>Advertising.</strong> We've signed up for Google AdSense and placed the account-verification code on our pages, but ads aren't showing yet — they start only if Google approves this site. When they do, Google and its partners may use cookies — including the DoubleClick cookie — to show personalized ads based on your visits to this site and other sites. You can opt out of personalized advertising at <a href="https://www.google.com/settings/ads">Google Ads Settings</a> or <a href="https://www.aboutads.info">aboutads.info</a>. Visitors in the European Economic Area, the UK, and Switzerland will see a consent message from Google's certified consent management platform before personalized ads can show.</li>
+        <li><strong>Advertising.</strong> We've signed up for Google AdSense and placed the account-verification code on our pages, but ads aren't showing yet — they start only if Google approves this site. When they do, Google and its partners may use cookies — including the DoubleClick cookie — to show personalized ads based on your visits to this site and other sites. You can opt out of personalized advertising at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>. Visitors in the European Economic Area, the UK, and Switzerland will see a consent message from Google's certified consent management platform before personalized ads can show.</li>
       </ul>
       <p>We do not sell personal information because we do not collect any. If you contact us about the site, we use your message only to respond.</p>
     </div></section>`;

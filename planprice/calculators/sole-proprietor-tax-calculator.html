@@ -73,14 +73,13 @@
 (function() {
   const $ = id => document.getElementById(id);
   const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
-  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
   const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
   // 2025 figures. Federal brackets: 15% to $57,375; 20.5% to $114,750; 26% to $177,882;
   // 29% to $253,414; 33% above. Basic personal amount $16,129 (credit at 15%).
   // CPP (both halves): 11.9% on $3,500-$71,300, max $8,068.20; CPP2: 8% on $71,300-$81,200, max $792.
+  const BRACKETS = [[57375, 0.15], [114750, 0.205], [177882, 0.26], [253414, 0.29], [Infinity, 0.33]];
   function fedTax(taxable) {
-    const brackets = [[57375, 0.15], [114750, 0.205], [177882, 0.26], [253414, 0.29], [Infinity, 0.33]];
+    const brackets = BRACKETS;
     let tax = 0, prev = 0;
     for (const [cap, rate] of brackets) {
       if (taxable <= prev) break;

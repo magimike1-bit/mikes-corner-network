@@ -80,9 +80,6 @@
 (function() {
   const $ = id => document.getElementById(id);
   const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
-  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
-  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
   function calc() {
     const salary = Math.max(0, +$('c-salary').value || 0);
     const count = Math.max(0, +$('c-count').value || 0);

@@ -98,13 +98,11 @@
 (function() {
   const $ = id => document.getElementById(id);
   const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
-  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
-  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
   function calc() {
     const amt = Math.max(0, +$('c-amount').value || 0);
     const mode = $('c-mode').value;
-    const sel = $('c-prov').options[$('c-prov').selectedIndex];
+    const provEl = $('c-prov');
+    const sel = provEl.options[provEl.selectedIndex];
     const rate = +sel.value;
     const label = sel.getAttribute('data-label');
     let net, tax, gross;

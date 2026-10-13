@@ -83,7 +83,6 @@
   const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
   const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
   const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
-  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
   function calc() {
     const fixed = Math.max(0, +$('c-fixed').value || 0);
     const price = Math.max(0, +$('c-price').value || 0);

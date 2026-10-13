@@ -81,8 +81,6 @@
 (function() {
   const $ = id => document.getElementById(id);
   const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
-  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
   const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
   // 2025 CRA figures: CPP 5.95% on earnings $3,500-$71,300 (max $4,034.10);
   // CPP2 4% on $71,300-$81,200 (max $396); EI 1.64% to $65,700 (max $1,077.48), employer pays 1.4x.

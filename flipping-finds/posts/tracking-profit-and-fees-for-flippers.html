@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tracking Profit and Fees for Flippers: The Lot-Based Tracker — Flipping Auction Finds</title>
+<meta name="description" content="A flipper's profit tracker built for auction lots: allocate all-in lot cost per item, force the forgotten fees into the open, run a monthly review, and keep CRA-ready records.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Flipping Auction Finds</a>
+    <p class="tagline">Practical notes from the liquidation auction trenches</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Tracking profit and fees for flippers</h1>
+  <p class="meta">Reselling &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/tracking-profit-and-fees-for-flippers.jpg" alt="A laptop with a blank spreadsheet grid on a desk with a calculator, notebook, and shelves of boxed inventory" loading="lazy" width="1920" height="1280">
+  <figcaption>One row per item, closed at the sale — the sheet remembers what memory edits out.</figcaption>
+</figure>
+
+
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>Ask a flipper how an item did and you will usually hear two numbers: what it
+  cost at the auction and what it sold for. The space between those numbers is not
+  profit. It is a story with the fees edited out. A tracker exists to put the fees
+  back — and for auction buyers it has one job most reseller advice never mentions:
+  splitting one lot's all-in cost across the many items inside it, honestly.</p>
+
+  <h2>Why 'sold price minus what I paid' is not profit</h2>
+  <p>Reseller-tracking guides make the same point with a bracing example: an item
+  bought for £3 and sold for £25 on eBay ends up yielding only £8.75 of real profit
+  once every expense is counted. The missing money is a familiar list — the costs
+  sellers most often forget to track are entry or lot fees, fuel and transport,
+  parking, packaging, postage, and platform fees — and those guides warn the hidden
+  costs often cut perceived profit in half or more. Auction flippers have it worse:
+  the "what I paid" number itself is wrong until the buyer's premium, the tax on the
+  whole invoice, and any per-lot charges are folded in. Bidding discipline starts
+  with knowing a house's all-in multiplier — on the runs behind this site, a $100
+  hammer at one house lands around $131 all-in, and at another the working
+  multiplier is hammer × 1.356. Your tracker should store the all-in cost, never the
+  hammer price, as the item's cost.</p>
+
+  <h2>The columns that matter (and the lot problem)</h2>
+  <p>A workable per-item tracker needs, at minimum: item description, source (which
+  house, which lot), purchase date and all-in cost, listing date, sale date and sale
+  price, the platform it sold on, platform fees, shipping/packaging cost, and net
+  profit — calculated as sale price minus all-in cost minus fees minus shipping.
+  Standard reseller spreadsheets use exactly this spine, because the payoff is
+  comparative: tracked over months, the sheet shows which sources and which
+  categories actually make money, and sourcing effort follows the numbers instead
+  of hunches.</p>
+  <p>The lot problem: a liquidation lot is one purchase and many items, some gold,
+  some garbage. If the whole lot cost rides on the first item that sells, that item
+  looks like a loss and everything after it looks like free money — both wrong, and
+  both likely to steer your next bids badly. Allocate instead: split the lot's
+  all-in cost across its sellable items by expected value (a reasonable split: each
+  item carries cost in proportion to what you expect it to sell for), and write off
+  the true duds at $0 recovered the day you decide they are duds. It is an estimate,
+  but a consistent estimate beats a flattering fiction.</p>
+
+  <h2>A worked example: one lot, real numbers</h2>
+  <p>Fees checked October 13, 2026. A lot hammers at $100 at a house running about
+  $131 all-in, and contains three sellable items:</p>
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Allocated all-in cost</th><th>Sold for</th><th>Channel and fees</th><th>Net profit</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Small appliance</td><td>$66</td><td>$95</td><td>Marketplace local pickup — no selling fee</td><td>$29.00</td></tr>
+      <tr><td>Hand tool</td><td>$39</td><td>$60</td><td>eBay Canada: 13.6% of the $60 total ($8.16) + $0.40 per-order fee</td><td>$11.44</td></tr>
+      <tr><td>Cable/accessory bundle</td><td>$26</td><td>$30</td><td>Marketplace shipped: 5% fee ($1.50)</td><td>$2.50</td></tr>
+      <tr><td><strong>Lot total</strong></td><td><strong>$131</strong></td><td><strong>$185</strong></td><td></td><td><strong>$42.94</strong></td></tr>
+    </tbody>
+  </table>
+  <p>Run the same lot the lazy way — "$185 sold minus $100 hammer is $85 profit" —
+  and the tracker exposes the $42 gap: premium and tax at purchase, then platform
+  fees at sale. Note what the per-item view also tells you: the local sale did the
+  heavy lifting, and the little shipped bundle barely cleared its cost. That is a
+  sourcing lesson for the next auction, and it only exists because the costs were
+  allocated per item.</p>
+
+  <h2>The fees you will forget if the sheet does not force them</h2>
+  <ul>
+    <li><strong>Buyer's premium and tax at the auction</strong> — fold them into cost
+    at purchase, via your house's all-in multiplier, not at tax time from memory.</li>
+    <li><strong>Platform fees at the sale</strong> — and remember eBay's final value
+    fee is charged on the total amount of the sale, including shipping you charged
+    the buyer. On eBay Canada that is 13.6% for most categories without a Store
+    subscription, plus a $0.30 per-order fee on sales of $10 or less and $0.40 above
+    that (schedule in effect for items sold on or after March 3, 2025; checked
+    October 13, 2026). Local Marketplace pickup, by contrast, carries no selling fee
+    — a difference your tracker should make visible per channel.</li>
+    <li><strong>Pickup costs</strong> — fuel, parking, and the per-lot charges some
+    houses add. Allocate a trip's costs across the lots it collected.</li>
+    <li><strong>Packaging and postage</strong> — boxes, tape, labels, and the
+    difference between the postage you charged and the postage you paid.</li>
+    <li><strong>Losses</strong> — dead items, returns, and refunds are rows too. A
+    tracker that only records wins will teach you to repeat your worst buys.</li>
+  </ul>
+
+  <h2>Set up the tracker in six steps</h2>
+  <ol>
+    <li><strong>Pick the tool you will actually open.</strong> Tracking guidance
+    converges on a simple rule: a spreadsheet is fine at low volume — one guide puts
+    the crossover at roughly 20 items a month — and above that a dedicated reseller
+    app earns its keep by cutting data-entry time. The best system is the one still
+    being updated in month three.</li>
+    <li><strong>Create one row per item, not per lot</strong>, with a lot ID column
+    tying siblings together.</li>
+    <li><strong>Log at the point of purchase</strong>: photograph the item, record
+    the house, the lot, and the all-in cost the same day — memory decays faster than
+    inventory.</li>
+    <li><strong>Allocate the lot cost</strong> across sellable items by expected sale
+    value; zero out confirmed duds immediately.</li>
+    <li><strong>Close the row at sale</strong> with sale price, platform, the exact
+    fees from the payout (not an estimate), and shipping/packaging actuals, letting
+    the net-profit formula do the subtraction.</li>
+    <li><strong>Keep the receipts behind the rows.</strong> In Canada, the CRA
+    requires records with enough information to work out the tax you owe and support
+    every deduction or credit, backed by original documents — electronic documents
+    are acceptable — and supporting documents and records must be kept for six years
+    from the later of the end of the tax year they relate to, or the date the return
+    was filed. A tracker folder that satisfies that rule is the same folder that
+    makes your accountant cheap and your April calm.</li>
+  </ol>
+  <p>Success looks like this: any item on your shelf can be traced, in under a
+  minute, to its lot, its all-in cost, its listing, and its eventual profit or
+  loss — and the month's total is a number you would be willing to show the CRA.</p>
+
+  <h2>The monthly review: where the tracker pays you back</h2>
+  <p>Logging is bookkeeping; reviewing is management. Once a month, read three
+  numbers. First, <strong>unsold inventory value</strong>: the all-in cost of
+  everything still on the shelf. On the buying runs behind this site, that figure
+  is the one watched most closely — a rising pile of unsold cost is the cue to
+  promote the older items, check that their photos are still doing them justice,
+  and cut prices before the space runs out. Second, <strong>net profit by source
+  and category</strong>: which houses and which kinds of lots actually paid, so the
+  next month's bidding follows evidence. Third, <strong>your pay</strong>. A
+  standing rule from the same runs: pay yourself out of the operation on purpose —
+  do not roll every dollar of profit back into more auction stock. Profit you never
+  take out feels theoretical; taking it is what keeps the work enjoyable, and the
+  tracker is what proves the amount is really profit and not cash that belongs to
+  next month's fees.</p>
+  <p>One more review item for Canadian sellers: watch the running revenue total.
+  The CRA requires self-employed sellers to report income from any business they
+  run, and a GST/HST registration becomes mandatory once business income exceeds
+  $30,000 in a single calendar quarter or over the last four consecutive calendar
+  quarters. Your tracker sees that threshold coming months before a calendar does.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Do I really need to track small items?</strong>
+  Yes — small items are where forgotten fees do the most damage proportionally. A
+  $0.40 per-order fee is rounding error on a $95 sale and a real bite on a $6 one.
+  If it is worth listing, it is worth a row.</p>
+  <p><strong>Spreadsheet or app?</strong>
+  Start with a spreadsheet: free, transparent, and enough at low volume. Move to an
+  app when data entry, not selling, becomes the bottleneck — around a few dozen
+  items a month by most guidance — and export your history before switching.</p>
+  <p><strong>Is this tax advice?</strong>
+  No. This article is general information about record-keeping habits, not tax or
+  accounting advice. The CRA publishes self-employed guidance and offers a free
+  Liaison Officer service for small businesses; for your own situation, a Canadian
+  accountant who knows resellers is money well spent.</p>
+
+  <p><em>General information only, not financial or tax advice. Fee schedules change;
+  verify current platform rates and your own tax obligations.</em></p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Flipping Auction Finds — hobbyist notes on buying and reselling auction goods. Content is for information only, not financial advice.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

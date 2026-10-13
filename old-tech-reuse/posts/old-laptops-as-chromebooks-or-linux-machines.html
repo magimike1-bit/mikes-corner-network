@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn an Old Laptop into a Chromebook — or a Lightweight Linux Machine — Old Tech, New Life</title>
+<meta name="description" content="A slow laptop may need a lighter system, not replacing: a triage check, a ChromeOS Flex versus Linux Mint Xfce decision framework, and Google's test-before-you-erase install procedure.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Turn an old laptop into a Chromebook — or a lightweight Linux machine</h1>
+  <p class="meta">Repurpose &middot; 9 min read</p>
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>A slow old laptop is often blamed on its age when the real problem is the
+  operating system it is carrying. A machine that struggles under a heavy, ageing
+  Windows installation may handle a lighter system comfortably, because most of
+  what many households actually do — browsing, email, documents, video calls,
+  streaming — does not need much power. Two routes are worth considering in
+  October 2026: replace the system with Google's ChromeOS Flex, which turns the
+  laptop into something that behaves like a Chromebook, or install a lightweight
+  Linux desktop such as Linux Mint's Xfce edition, which keeps the feel of a
+  traditional computer. Picking between them is the real project. The install
+  itself is the easy part, and installing first and deciding later is how a
+  usable laptop becomes an erased one.</p>
+
+  <h2>First, check whether the hardware deserves a new operating system</h2>
+  <p>A new operating system fixes software weight. It does not fix failing
+  hardware, and the install guides for these systems mostly skip that
+  distinction. Run this pass-or-fail check (a spec verification, in plain terms)
+  before downloading anything:</p>
+  <ul>
+    <li><strong>Power:</strong> the laptop starts reliably, and the battery either
+    holds a reasonable charge or the machine will live plugged in at one desk.
+    A battery that swells, runs hot, or shuts the machine down without warning
+    is a stop sign, not an inconvenience.</li>
+    <li><strong>Basics:</strong> the keyboard, screen, touchpad, Wi-Fi, and at
+    least one USB port all work. A conversion that depends on hardware the
+    machine no longer has is a poor trade.</li>
+    <li><strong>The Flex minimums:</strong> Google lists an Intel or AMD
+    x86-64-bit processor, 4 GB of RAM, 16 GB of internal storage, the ability to
+    boot from a USB drive, and full administrator access to the BIOS. Google
+    also notes that Intel or AMD components from 2012 and earlier, and Nvidia
+    components from 2014 and earlier, are not recommended or supported, and
+    that functionality is only guaranteed on models on its certified list.</li>
+    <li><strong>The Linux minimums:</strong> a Linux Mint forum post for the Xfce
+    edition lists a 1 GHz dual-core processor (2 GHz or faster recommended),
+    2 GB of RAM with 4 GB or more recommended, and 20 GB of disk space. A
+    machine below the Flex floor can still be a Linux candidate — which is
+    itself a useful decision signal.</li>
+  </ul>
+  <p>If the machine fails on power or basics, a lighter system will not rescue
+  it. Skip to the last section: that laptop is a recycling candidate, and the
+  honest move is to wipe it and let it go.</p>
+
+  <h2>The two realistic routes at a glance</h2>
+  <table>
+    <tr><th>Question</th><th>ChromeOS Flex</th><th>Linux Mint Xfce</th></tr>
+    <tr><td>Minimum bar</td><td>64-bit Intel or AMD, 4 GB RAM, 16 GB storage, USB boot</td><td>2 GB RAM listed (4 GB recommended), 20 GB disk space listed</td></tr>
+    <tr><td>Feels like</td><td>A Chromebook: browser-first, cloud-first</td><td>A traditional desktop with menus, folders, and local programs</td></tr>
+    <tr><td>Android apps</td><td>Not supported, and neither is Google Play</td><td>Not the point of the route; desktop programs instead</td></tr>
+    <tr><td>Desktop programs</td><td>Windows and offline desktop applications do not run</td><td>Local applications are the route's reason to exist</td></tr>
+    <tr><td>Files</td><td>Built around cloud storage, primarily Google Drive</td><td>Local folders stay local unless you choose otherwise</td></tr>
+    <tr><td>Guarantees</td><td>Only certified models are guaranteed; others may work without a promise</td><td>Community-supported; hardware behaviour varies by model</td></tr>
+  </table>
+  <p>One more difference matters for shared or school-style machines:
+  TechRepublic's coverage of Flex notes that Flex devices do not include a
+  Google security chip, so ChromeOS verified boot is not available, and BIOS or
+  UEFI firmware updates have to be managed separately. That is not a reason to
+  avoid Flex at home, but it belongs in the decision, not in a footnote found
+  afterwards.</p>
+
+  <h2>A decision framework: Flex, Linux, or neither</h2>
+  <p>Work through three questions, in order. The first one that gives a clear
+  answer settles the route.</p>
+  <ol>
+    <li><strong>Does everything the laptop must do live in a browser?</strong>
+    Webmail, web documents, video calls in the browser, streaming, and general
+    browsing all point to Flex. Gizmo coverage of Flex describes it as a
+    lightweight, cloud-based system with quick boot and the same update cadence
+    as ChromeOS — the appeal is a machine that mostly maintains itself.</li>
+    <li><strong>Does anything important need a real desktop program or local
+    files?</strong> Offline documents, a familiar file system, or desktop
+    software that has no web version points to Linux. Flex is the wrong tool
+    here: reporting on its limits is consistent that desktop applications such
+    as Photoshop, QuickBooks, or offline Microsoft Office do not run on it.</li>
+    <li><strong>Is an Android app the actual goal?</strong> Then neither route
+    delivers it. Flex explicitly does not support Android apps, so a plan built
+    around one specific app needs a different device, not a new operating
+    system.</li>
+  </ol>
+  <p>Tie-breaker: hand the laptop to the least technical person who will use
+  it. Flex's simple, self-updating model suits a machine for a relative or a
+  spare-room browser. Linux suits a machine whose owner is comfortable treating
+  it as a small project — still easy day to day, but the household becomes the
+  help desk.</p>
+
+  <h2>The ChromeOS Flex procedure, step by step</h2>
+  <p>This procedure follows Google's own installation guidance, with the test
+  step treated as mandatory rather than optional:</p>
+  <ol>
+    <li>Back up everything worth keeping to the cloud or a separate drive.
+    Google is blunt about the install: it erases the internal drive, and lost
+    data is permanently unrecoverable.</li>
+    <li>Find an 8 GB or larger USB drive that can be erased — creating the
+    installer wipes its contents too — and disconnect all backup and storage
+    drives from the laptop before installing anything.</li>
+    <li>On a working computer with the Chrome browser, create the installer
+    with the Chromebook Recovery Utility, choosing Google ChromeOS Flex as the
+    model.</li>
+    <li>Turn the old laptop completely off — not asleep — insert the USB
+    installer, press the power button, and repeatedly press the machine's boot
+    key.</li>
+    <li>In the one-time boot menu, select the USB installer. If the machine
+    opens the full BIOS or UEFI setup instead, find the Boot or Startup
+    settings and set the USB installer as the first boot device.</li>
+    <li>On the welcome screen, choose <strong>Try it first</strong>. This live
+    boot runs Flex from the USB without installing it and preserves the current
+    data and operating system, so the test costs nothing.</li>
+    <li>During the test, check everything the laptop will actually be used
+    for: Wi-Fi, sound in and out, the touchpad and keyboard, the webcam, and
+    printing if it matters. This step exists because some features may not
+    work on a given machine — Android Central's install coverage lists
+    automatic screen rotation, Bluetooth, function keys such as brightness and
+    volume, touchscreens, and SD card slots among the features that might not
+    work.</li>
+    <li>If the test passes, sign out, and at the bottom of the sign-in screen
+    choose <strong>Install ChromeOS Flex</strong>. Read the on-screen warning
+    about erasing data, confirm, and let the machine finish — it turns off by
+    itself when installation completes.</li>
+    <li>Remove the USB installer, turn the laptop on, and sign in. Set up the
+    handful of web services the machine exists for, and nothing else.</li>
+  </ol>
+
+  <h2>The Linux route, in brief</h2>
+  <p>The Linux path follows the same discipline with a different download:
+  take the Xfce edition's installer image only from the Linux Mint project,
+  write it to a bootable USB drive, test the machine before committing, and
+  only then install. The Xfce edition exists precisely for this job — the
+  Mint forum description calls it lightweight and suited to older hardware,
+  with the modest requirements listed in the check above. The reason to choose
+  it over Flex is not performance bragging; it is that the laptop stays a
+  general-purpose computer with local programs and local files, at the cost
+  of the household providing a little more of the maintenance and answers.</p>
+
+  <h2>What success looks like</h2>
+  <p>Success is boring, and that is the point. The laptop boots to a sign-in
+  screen without errors, joins the home Wi-Fi on its own, plays a video with
+  sound, completes a video call with a working camera and microphone, and
+  opens every service it was converted for. The former owner of the machine
+  can hand it over with a one-sentence explanation. If the test session in
+  step 7 could not reach that state, the install step should never have
+  happened — go back to the framework and take the other route, or accept
+  the recycling verdict.</p>
+
+  <h2>When to stop and recycle instead</h2>
+  <p>Some machines fail the triage honestly: a dead drive, a battery that
+  cannot be trusted, a cracked screen, or components old enough that Google
+  lists them as not recommended for Flex and too weak to make Linux pleasant.
+  Converting one of those is not thrift; it is deferring a decision while
+  spending an afternoon. Wipe the drive properly and recycle the machine
+  through a real e-waste channel — the guide linked below covers how — and
+  put the afternoon into a machine that can actually take the job.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Will an install erase the laptop?</strong> Yes. Google's guidance
+  states that installing ChromeOS Flex erases the device and that lost data
+  cannot be recovered, which is why the backup and the Try it first session
+  come before the install, never after.</p>
+  <p><strong>The laptop is not on the certified list. Is it hopeless?</strong>
+  No — Google says Flex might work on non-certified devices, but performance,
+  functionality, and stability are not guaranteed. The live-boot test is how
+  an uncertified machine earns the install.</p>
+  <p><strong>Can Flex run Android apps?</strong> No. Flex does not support
+  Android apps or Google Play, per both Google-focused guide coverage and
+  summaries of its limits. Plan around web versions instead.</p>
+
+  <p><a href="/posts/donating-and-recycling-responsibly.html">Next: donate and recycle responsibly &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Tech, New Life — DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

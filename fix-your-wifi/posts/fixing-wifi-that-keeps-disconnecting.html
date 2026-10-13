@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixing Wi-Fi That Keeps Disconnecting — Fix Your Wi-Fi</title>
+<meta name="description" content="Wi-Fi drops are a pattern, not a mystery. Classify the drops first — one device or all, one room or everywhere, random or on the hour — then apply the one fix that matches.">
+<!-- AdSense: ad code goes here -->
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Fixing Wi-Fi that keeps disconnecting</h1>
+  <p class="meta">Troubleshooting &middot; 9 min read</p>
+  <img class="post-image" src="../images/fixing-wifi-that-keeps-disconnecting.jpg" alt="Router on a coffee table with its signal breaking into fragments beside a laptop showing a disconnected Wi-Fi symbol" loading="lazy">
+
+  <p>"My Wi-Fi keeps disconnecting" is four different problems wearing the same
+  coat. A laptop that drops on its own, a house where everything drops at once,
+  drops that arrive on the hour like a bus schedule, and drops that only happen
+  in the back bedroom each have a different cause — and a different fix. Most
+  fix lists throw ten random remedies at all four. This guide works the other
+  way: read the pattern first, then apply the one fix that matches it.</p>
+
+  <h2>First, read the pattern: four kinds of drops</h2>
+  <p>Before changing a single setting, sort your drops into one of these
+  buckets. The bucket decides everything that follows.</p>
+  <ul>
+    <li><strong>One device drops, everything else is fine.</strong> The fault
+    lives in that device — its settings, its power management, or its saved
+    copy of your network — not in the router.</li>
+    <li><strong>Every device drops at the same moment.</strong> The fault is
+    shared: the router, its firmware, or the internet line feeding it. No
+    per-device fix will touch this.</li>
+    <li><strong>Drops arrive on a schedule.</strong> Hourly, nightly, or at
+    the same time each day. Clockwork drops point at timers and leases inside
+    the router, not at signal.</li>
+    <li><strong>Drops happen in one room or one corner.</strong> TP-Link's own
+    troubleshooting notes describe exactly this: smart devices placed in spots
+    the router was not built to reach — a back bedroom, a garage, behind a
+    thick wall — sit at the edge of the signal and fall off it repeatedly.
+    That is a coverage problem, not a settings problem.</li>
+  </ul>
+  <p>One more pattern worth knowing: if you recently changed your Wi-Fi
+  password or network name, every device still holding the old details drops
+  at once and stays dropped. TP-Link flags this as a common cause of "sudden"
+  smart-device disconnects after a router swap or password reset. That is not
+  a fault at all — each device simply needs the new password.</p>
+
+  <h2>Keep a 24-hour drop log before you change anything</h2>
+  <p>Memory is a terrible diagnostic tool: drops feel random even when they
+  are not. For one day, note four things each time the connection falls:
+  the time, which devices dropped, where you were in the house, and what the
+  router's lights were doing. Four columns on a scrap of paper is enough.
+  By the end of the day the bucket above usually names itself — and if the
+  times line up on the hour, you have caught the trickiest cause below
+  red-handed. Change one thing at a time afterwards, or you will never know
+  which change worked.</p>
+
+  <h2>Fix 1: drops on one device only</h2>
+  <p>Start with the device, not the router. On a Windows PC, a classic cause
+  is power management: Windows can be set to switch the Wi-Fi adapter off to
+  save energy, and Microsoft's support answers lead with this check. Open
+  Device Manager, expand Network adapters, right-click your Wi-Fi adapter,
+  open Properties, go to the Power Management tab, and untick "Allow the
+  computer to turn off this device to save power."</p>
+  <p>If that does not settle it, make the device forget the network and join
+  again — a corrupted saved profile causes random drops, and rejoining
+  rebuilds it. The path is Settings &rarr; Wi-Fi &rarr; your network &rarr;
+  Forget on phones, and the same Forget option on a right-click (Windows) or
+  in Network settings (Mac). Reconnect and re-enter the password.</p>
+  <p>The heavier Windows option, documented in the same Microsoft answers, is
+  a network reset: Settings &rarr; Network &amp; Internet &rarr; Advanced
+  network settings &rarr; Network reset. Advanced users can run the
+  equivalent commands from an administrator Command Prompt —
+  <code>netsh int ip reset</code>, <code>netsh winsock reset</code>,
+  <code>ipconfig /release</code>, <code>ipconfig /renew</code>, and
+  <code>ipconfig /flushdns</code> — then restart the PC.</p>
+
+  <h2>Fix 2: drops everywhere, at random times</h2>
+  <p>When the whole house drops together, work on the router. Two causes
+  dominate. The first is outdated firmware: router makers ship fixes for
+  known stability bugs, and TP-Link notes that skipping updates leaves those
+  bugs in place — often the real answer when drops start for no obvious
+  reason and nothing else has changed. Log into the router's admin page or
+  its app, find Firmware Update (usually under Administration, Advanced, or
+  System), install what is offered, and turn on automatic updates if the
+  option exists. Never unplug the router mid-update.</p>
+  <p>The second cause is overload. Every router juggles a limited number of
+  connected devices; TP-Link describes older and entry-level routers
+  struggling once a household adds plugs, cameras, and bulbs on top of
+  phones and laptops, with drops that characteristically begin shortly after
+  a restart. Check the router's connected-devices list (often under DHCP or
+  Connected Devices in the admin page): if devices you no longer use are
+  still attached, remove them, and restart the router to clear the decks.</p>
+
+  <h2>Fix 3: drops on a schedule (clockwork drops)</h2>
+  <p>Drops that repeat at exact intervals are the most diagnosable of all,
+  because radios do not keep time — leases do. Your router hands each device
+  an IP address for a set lease period. In a documented NETGEAR Community
+  case, a modem-router dropped the connection for about five seconds once
+  every hour, on the dot, so predictably the owner could set a watch by it;
+  the trail led to a one-hour DHCP lease expiring. If your drop log shows
+  metronome timing, log into the router, find the DHCP or LAN settings, and
+  look at the lease time — lengthening it, or reserving a fixed address for
+  the device that keeps dropping, addresses the cause directly.</p>
+  <p>A slower variant of the same failure appears in another NETGEAR
+  Community thread: over one to seven days, Wi-Fi devices gradually stopped
+  getting IP addresses while wired connections kept working, which the
+  poster and responders read as the router's DHCP server quietly failing
+  until a reboot revived it. If your drops build over days since the last
+  restart rather than arriving all at once, suspect this: update the
+  firmware, and if it persists, back up your settings and do a factory reset
+  followed by a fresh setup, as the thread's responders advise after firmware
+  changes.</p>
+
+  <h2>Fix 4: drops in one room</h2>
+  <p>If drops stalk one spot — the garage camera, the back-bedroom laptop —
+  the signal there is marginal, and marginal signals drop under load or
+  interference. Before
+  buying anything, test by using the device in the same room as the router
+  for an evening. If the drops vanish, the diagnosis is coverage, and the
+  honest fixes are moving the router, moving the device, or extending
+  coverage — settings changes will not manufacture signal that is not
+  there.</p>
+
+  <h2>The full reset procedure, in order</h2>
+  <p>When you do restart the network — after a firmware update, a settings
+  change, or a whole-house drop — the order matters:</p>
+  <ol>
+    <li><strong>Unplug both modem and router</strong> from power. If they are
+    one combined box, unplug that.</li>
+    <li><strong>Wait 30 seconds.</strong> This clears the memory that a quick
+    off-and-on leaves behind.</li>
+    <li><strong>Plug the modem back in first</strong> and wait until its
+    lights settle — about a minute. The modem must re-establish the internet
+    connection before the router asks it for anything.</li>
+    <li><strong>Plug the router in</strong> and give it a couple of minutes to
+    broadcast and hand out addresses.</li>
+    <li><strong>Reconnect one device and test it</strong> before the whole
+    household piles back on — if the fault is still there, you want to know
+    now, with a clean log entry.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the drop log stays empty for a
+  full 24 hours of normal use — including the times of day when drops used to
+  happen. A quiet hour proves nothing; a quiet day, at the hours that used to
+  fail, is the fix confirmed.</p>
+
+  <h2>When to stop fixing settings and escalate</h2>
+  <p>Two findings mean the problem is not yours to fix in settings. First, if
+  a computer wired directly to the router with an ethernet cable drops too,
+  the fault is the internet line or the modem — that is your provider's
+  problem, and your drop log (times, duration, wired or wireless) is exactly
+  the evidence their support line needs. Second, if a router needs rebooting
+  every day or two to hand out addresses after a firmware update and a
+  factory reset, its DHCP and radio hardware are failing in a way settings
+  cannot cure; that is a hardware conversation, not another evening of
+  menus.</p>
+
+  <div class="callout">
+    <p><strong>Remember:</strong> the pattern is the diagnosis. One device,
+    one room, one schedule, or the whole house — name which one you have
+    before you change anything, and change one thing at a time.</p>
+  </div>
+
+  <h2>FAQ</h2>
+  <p><strong>Why does my Wi-Fi drop at the same time every day?</strong>
+  Clockwork timing points at something scheduled or expiring — most often a
+  short DHCP lease renewing badly. Check the lease time in your router's
+  DHCP settings, and keep a drop log for a day to confirm the interval.</p>
+  <p><strong>Everything dropped right after I changed my password. Why?</strong>
+  Every device still holding the old password or network name loses its
+  connection at once. Reconnect each device with the new details; nothing is
+  broken.</p>
+  <p><strong>Is rebooting the router every week a normal fix?</strong> An
+  occasional restart is harmless, but needing one every day or two to restore
+  connections — especially if devices gradually stop getting addresses — is
+  the signature of failing router software or hardware, not a maintenance
+  routine.</p>
+
+  <p><a href="wifi-channel-interference.html">Related: Wi-Fi channel interference &amp; how to fix it &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

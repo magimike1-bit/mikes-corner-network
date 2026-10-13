@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC Analysis for Retail Shelves: Sorting SKUs So the Important Ones Get the Attention — Retail Inventory Management</title>
+<meta name="description" content="How a small retailer runs ABC analysis in a spreadsheet — cumulative value, tier boundaries, edge cases — and turns the tiers into shelf and review policies.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Retail Inventory Management</a>
+    <p class="tagline">Practical inventory habits for independent retailers</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>ABC analysis for retail shelves: sorting SKUs so the important ones get the attention</h1>
+  <p class="meta">Ordering &amp; stock levels &middot; 7 min read</p>
+
+  <p>Most small stores manage every product the same way: the same glance, the same
+  reorder habit, the same shelf treatment. But the products are not equal. A small
+  share of a typical range produces most of the value moving through the store, while
+  a long tail of lines barely moves at all. ABC analysis is the simple sorting
+  exercise that makes that imbalance visible — and once it is visible, a retailer can
+  stop spreading attention evenly and start spending it where it pays.</p>
+
+  <h2>What ABC analysis actually tells a small store</h2>
+  <p>ABC analysis applies the Pareto principle — the familiar 80/20 pattern — to a
+  product list. Lightspeed's ABC guide describes the usual shape: A items are roughly
+  10–20% of the range contributing about 70–80% of the value, B items are roughly
+  20–30% contributing about 15–25%, and C items are the remaining 50–70% contributing
+  only about 5–10%. Effective Inventory Management, writing about rank-based counting,
+  puts the concentration even more sharply: in practice only about 10–13% of items
+  often account for 80% of sales, and no more than about half of all products account
+  for 95% of sales. The exact percentages vary by store. The pattern — a steep head
+  and a long, thin tail — is what matters.</p>
+  <p>The point of sorting is not the labels. It is that each tier then gets a
+  deliberately different policy: tight control where an error is expensive, and a
+  light touch where an error barely registers. A stockout on an A line costs real
+  sales every day it lasts. A stockout on a C line costs very little, and overstocking
+  that same C line in the name of safety quietly parks cash on a shelf.</p>
+
+  <h2>Run the classification in a spreadsheet</h2>
+  <p>The standard basis for ABC is <strong>annual consumption value</strong>: the units
+  sold in a year multiplied by the unit cost. Lightspeed defines it exactly that way,
+  and Atomix Logistics' step-by-step walkthrough uses the same method: pull twelve
+  months of unit sales by SKU, multiply by unit cost, sort descending, and add a
+  running cumulative percentage of total value. Twelve months matters because it
+  smooths seasonality instead of letting one strong month promote the wrong products.</p>
+  <ol>
+    <li><strong>Export one row per SKU</strong> with units sold in the last twelve
+    months and the unit cost. If the point-of-sale system cannot rank products, a
+    spreadsheet does the whole job — no special software is required.</li>
+    <li><strong>Add a value column:</strong> units × unit cost for each row. This is
+    the annual consumption value.</li>
+    <li><strong>Sort the sheet by that value, highest first.</strong></li>
+    <li><strong>Add a cumulative percentage column:</strong> each row's running total
+    of value divided by the sheet's total value, expressed as a percentage.</li>
+    <li><strong>Draw the tier lines on the cumulative column.</strong> A common
+    convention is A up to about 80% of cumulative value, B from there to about 95%,
+    and C for the remainder. Treat 80 and 95 as starting lines, not laws — a very
+    small range may need the A line lower so the tier stays manageable.</li>
+    <li><strong>Sanity-check the edges</strong> before acting on the result (see the
+    edge cases below). The sort is arithmetic; the judgment is the retailer's.</li>
+  </ol>
+  <p>A miniature example shows the shape. These eight lines are illustrative, with
+  round numbers chosen so the arithmetic is easy to check:</p>
+  <table>
+    <tr><th>Line</th><th>Units / year</th><th>Unit cost</th><th>Annual value</th><th>Cumulative %</th><th>Tier</th></tr>
+    <tr><td>Everyday notebook</td><td>600</td><td>$7</td><td>$4,200</td><td>35.6%</td><td>A</td></tr>
+    <tr><td>Insulated bottle</td><td>310</td><td>$10</td><td>$3,100</td><td>61.9%</td><td>A</td></tr>
+    <tr><td>Canvas tote</td><td>380</td><td>$5</td><td>$1,900</td><td>78.0%</td><td>A</td></tr>
+    <tr><td>Scented candle</td><td>110</td><td>$10</td><td>$1,100</td><td>87.3%</td><td>B</td></tr>
+    <tr><td>Gift wrap roll</td><td>140</td><td>$5</td><td>$700</td><td>93.2%</td><td>B</td></tr>
+    <tr><td>Key ring</td><td>80</td><td>$5</td><td>$400</td><td>96.6%</td><td>B</td></tr>
+    <tr><td>Novelty sticker pack</td><td>50</td><td>$5</td><td>$250</td><td>98.7%</td><td>C</td></tr>
+    <tr><td>Single greeting card design</td><td>30</td><td>$5</td><td>$150</td><td>100%</td><td>C</td></tr>
+  </table>
+  <p>Three of the eight lines — 37.5% of this tiny range — carry 78% of the value.
+  In a real range of several hundred SKUs the head is usually steeper, not flatter,
+  which is why the exercise is worth an afternoon.</p>
+
+  <h2>Choosing the ranking basis</h2>
+  <p>Annual consumption value is the standard basis because the exercise decides
+  where control effort and cash should concentrate. But it is not the only view, and
+  the choice changes the answer. Atomix's walkthrough separates three views clearly:</p>
+  <table>
+    <tr><th>Ranking basis</th><th>What it shows</th><th>Best used for</th></tr>
+    <tr><td>Annual consumption value (units × cost)</td><td>Where working capital sits</td><td>Counting, control, and stock-level policy</td></tr>
+    <tr><td>Revenue</td><td>What sells</td><td>A quick first pass when cost data is unreliable</td></tr>
+    <tr><td>Gross margin dollars</td><td>What actually funds the business</td><td>Merchandising and range decisions</td></tr>
+  </table>
+  <p>Running two views and comparing them is where the interesting decisions live.
+  A line that ranks A by revenue but C by margin is busy without being profitable —
+  a candidate for a price review or a smaller facing, not for more control effort.
+  One caution from practitioners: movement is not the same as profit. A long-running
+  discussion among independent game-store retailers on the RPGnet forums makes
+  exactly this point — volume alone ignores what it costs to carry the product — and
+  lands on a practical rule of thumb: always protect the A movers, choose B lines
+  deliberately, and consider making the weakest C lines special-order only.</p>
+  <p>One prerequisite sits under all of this: the ranking is only as good as the
+  item data behind it. Clean, consistent item records — real costs, real units, no
+  duplicate SKUs splitting one product's sales across two rows — are what make the
+  sort trustworthy. An hour spent merging duplicates before the export saves a
+  misleading result afterward.</p>
+
+  <h2>What each tier gets: shelf and review policies</h2>
+  <ul>
+    <li><strong>A items — protect availability.</strong> These earn the best shelf
+    positions and full facings, a review every week, and the most frequent counts.
+    Published cadences for A items range from weekly or every two weeks (Atomix) to
+    six counts a year as a minimum rhythm (Effective Inventory Management) — a small
+    store should pick the frequent end it can actually sustain. An A stockout is the
+    most expensive empty space in the store.</li>
+    <li><strong>B items — manage steadily.</strong> Standard shelf positions, a
+    monthly review, and counts on a monthly cycle or at least twice a year. B items
+    matter, but they do not need daily attention; steady beats intense.</li>
+    <li><strong>C items — simplify.</strong> Smaller facings or a single home location,
+    a quarterly review, and counts quarterly or twice a year. Order C lines in fewer,
+    larger drops to cut ordering effort, and let the weakest of them become
+    special-order or be delisted at range reviews. The savings in C are mostly time
+    and shelf space, not unit cost.</li>
+  </ul>
+
+  <h2>The edge cases that break the math</h2>
+  <p>A mechanical sort misclassifies a predictable set of products. Atomix's
+  walkthrough flags the main ones: a product launched six weeks ago will look
+  artificially small against twelve months of history, and a discontinued line can
+  look artificially large on old sales. Handle them explicitly:</p>
+  <ul>
+    <li><strong>New lines:</strong> judge them on their selling rate since launch,
+    not their trailing total, and promote the ones clearly selling at an A pace.</li>
+    <li><strong>Seasonal lines:</strong> a product that earns its year in eight
+    weeks should be classified on its in-season rate, then demoted out of season —
+    not averaged into invisibility.</li>
+    <li><strong>Discontinued lines:</strong> remove them from the ranking entirely;
+    they belong in a clearance decision, not in a tier.</li>
+    <li><strong>Loss leaders and basket builders:</strong> a cheap line that pulls
+    customers toward A purchases can justify B treatment even on C numbers. Record
+    the override and the reason, so next year's sort does not silently reverse it.</li>
+  </ul>
+
+  <h2>Keeping the tiers current</h2>
+  <p>Tiers decay. A promotion, a competitor closing, or a shift in taste moves
+  products between tiers within a quarter. Re-run the classification on a fixed
+  rhythm — quarterly is realistic for most small stores, and the rerun takes minutes
+  once the spreadsheet exists. Compare the new tiers against the old ones and look
+  specifically at the movers: a B line climbing toward A needs its stock level and
+  shelf space adjusted before it starts stocking out, and an A line sliding down is
+  an early warning that its space could soon earn more elsewhere.</p>
+  <p><strong>What success looks like:</strong> every SKU in the store carries a
+  current A, B, or C label from a dated spreadsheet run; A lines have a named review
+  day and rarely sit empty; C lines occupy visibly less space and attention than
+  they did before the first sort; and the tier list is re-run on schedule rather
+  than whenever someone remembers. The analysis takes an afternoon. The policies
+  are what pay for it, week after week.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Should the ranking use revenue or cost value?</strong> For stock
+  control, annual consumption value — units multiplied by unit cost — is the
+  standard basis, because it shows where working capital sits. Revenue is an
+  acceptable first pass; margin dollars are the better lens for range decisions.
+  Comparing two views is more informative than either alone.</p>
+  <p><strong>How often should each tier be counted?</strong> Published cadences put
+  A items at weekly to every two weeks, B items monthly, and C items quarterly or
+  twice a year. The right cadence is the most frequent one the store can sustain
+  without the counts slipping.</p>
+  <p><strong>What if the store's split is nothing like 80/20?</strong> That is
+  normal, especially in a small range. The percentages in the guides are a starting
+  reference, not a law — use the cumulative curve the store's own data produces
+  and draw the lines where they keep the A tier small enough to manage tightly.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Retail Inventory Management — practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

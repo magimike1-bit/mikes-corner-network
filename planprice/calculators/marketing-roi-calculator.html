@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing ROI / ROAS Calculator — PlanPrice</title>
+<meta name="description" content="Free marketing ROI and ROAS calculator: campaign spend vs revenue, with an optional cost-of-goods adjustment so the ROI is profit-based, not revenue-based.">
+<link rel="canonical" href="https://planprice.ca/calculators/marketing-roi-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Marketing ROI / ROAS Calculator">
+<meta property="og:description" content="Free marketing ROI and ROAS calculator: campaign spend vs revenue, with an optional cost-of-goods adjustment so the ROI is profit-based, not revenue-based.">
+<meta property="og:url" content="https://planprice.ca/calculators/marketing-roi-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Marketing ROI / ROAS Calculator</p>
+    <h1 class="page-title">Marketing ROI / ROAS Calculator</h1>
+    <p class="section-sub">Free marketing ROI and ROAS calculator: campaign spend vs revenue, with an optional cost-of-goods adjustment so the ROI is profit-based, not revenue-based.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-spend">Total campaign spend (ads + tools + fees)</label>
+        <input type="number" id="c-spend" value="1000" min="0" step="50">
+      </div>
+      <div class="calc-field">
+        <label for="c-revenue">Revenue attributed to the campaign</label>
+        <input type="number" id="c-revenue" value="4000" min="0" step="50">
+      </div>
+      <div class="calc-field">
+        <label for="c-cogs">Cost of goods sold (% of revenue — 0 to ignore)</label>
+        <input type="number" id="c-cogs" value="0" min="0" max="99" step="1">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p><strong>ROAS</strong> = revenue ÷ ad spend — a revenue multiple, not profit. <strong>ROI</strong> = (gross profit − spend) ÷ spend, where gross profit is revenue minus the cost of goods sold. Worked example: $1,000 of spend producing $4,000 of revenue is a 4.0× ROAS and, with no COGS counted, a 300% ROI. Add a 60% COGS and the same campaign's gross profit is $1,600 — ROI falls to 60%. Platforms report ROAS; your bank account experiences ROI.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/cac-calculator.html">Customer Acquisition Cost (CAC) Calculator</a></li>
+      <li><a href="/calculators/ad-spend-break-even-calculator.html">Ad Spend Break-even Calculator</a> — the most you can pay per click.</li>
+      <li><a href="/guides/paid-ads-arbitrage-math.html">Guide: the paid-ads arbitrage math</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Attribution is the soft spot in every ROI number: platforms each claim the same sale. Use one attribution rule across channels and compare like with like.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const spend = Math.max(0, +$('c-spend').value || 0);
+    const rev = Math.max(0, +$('c-revenue').value || 0);
+    const cogs = Math.min(99, Math.max(0, +$('c-cogs').value || 0));
+    if (spend <= 0) { $('c-results').innerHTML = '<p>Enter a campaign spend above zero.</p>'; return; }
+    const gross = rev * (1 - cogs / 100);
+    const profit = gross - spend;
+    const roi = profit / spend * 100;
+    const roas = rev / spend;
+    $('c-results').innerHTML =
+      '<table><tbody>' +
+      '<tr><td>ROAS (revenue ÷ spend)</td><td><strong>' + roas.toFixed(2) + '×</strong></td></tr>' +
+      '<tr><td>Gross profit after COGS and spend</td><td><strong>' + fmt(profit) + '</strong></td></tr>' +
+      '<tr><td>ROI (profit ÷ spend)</td><td><strong>' + pct(roi) + '</strong></td></tr>' +
+      '</tbody></table>' +
+      '<p class="fine">Break-even ROAS at this COGS is ' + (cogs > 0 ? (1 / (1 - cogs / 100)).toFixed(2) : '1.00') + '× — below that, the campaign loses money even though revenue exceeds spend.</p>';
+  }
+  ['c-spend','c-revenue','c-cogs'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

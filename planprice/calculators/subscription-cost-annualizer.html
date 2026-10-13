@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscription Cost Annualizer — PlanPrice</title>
+<meta name="description" content="Free subscription cost calculator: list your monthly subscriptions and see the true annual and three-year cost of your small business software stack.">
+<link rel="canonical" href="https://planprice.ca/calculators/subscription-cost-annualizer.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Subscription Cost Annualizer">
+<meta property="og:description" content="Free subscription cost calculator: list your monthly subscriptions and see the true annual and three-year cost of your small business software stack.">
+<meta property="og:url" content="https://planprice.ca/calculators/subscription-cost-annualizer.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Subscription Cost Annualizer</p>
+    <h1 class="page-title">Subscription Cost Annualizer</h1>
+    <p class="section-sub">Free subscription cost calculator: list your monthly subscriptions and see the true annual and three-year cost of your small business software stack.</p>
+    <div class="calc-wrap">
+      <div id="c-rows"></div>
+      <p><button type="button" class="btn" id="c-add">+ Add a subscription</button></p>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Annual cost = monthly total × 12. Trivial math with a non-trivial effect: monthly pricing is designed to look small. The three defaults here — $29 + $15 + $49 = $93/month — are really <strong>$1,116 a year</strong>, $3,348 over three years, before the price increases most vendors apply annually. Listing every subscription in one place is also the fastest audit there is: anything nobody can explain is a cancellation candidate. (Comparing what those subscriptions <em>should</em> cost is PlanPrice's home turf — see the pricing guides.)</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/tools/stack-budget-builder.html">Stack Budget Builder</a> — price a planned stack from verified tier data.</li>
+      <li><a href="/tools/true-cost-calculator.html">True Cost Calculator</a> — per-seat vs flat-rate, compared.</li>
+      <li><a href="/calculators/runway-calculator.html">Business Runway Calculator</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Uses the prices you enter; per-seat subscriptions multiply quietly as you hire — enter the total you actually pay per tool, not the per-seat sticker.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  const rowsEl = $('c-rows');
+  function addRow(name, cost) {
+    const div = document.createElement('div');
+    div.className = 'calc-field';
+    div.innerHTML = '<label>Subscription</label>' +
+      '<input type="text" class="sub-name" value="' + name + '" style="margin-bottom:6px">' +
+      '<input type="number" class="sub-cost" value="' + cost + '" min="0" step="1" aria-label="Monthly cost">';
+    rowsEl.appendChild(div);
+    div.querySelectorAll('input').forEach(i => i.addEventListener('input', calc));
+  }
+  function calc() {
+    let monthly = 0, count = 0;
+    rowsEl.querySelectorAll('.sub-cost').forEach(i => { const v = Math.max(0, +i.value || 0); if (v > 0) count++; monthly += v; });
+    $('c-results').innerHTML =
+      '<p>' + count + ' paid subscriptions totalling <strong>' + fmt(monthly) + '/month</strong></p>' +
+      '<p>True annual cost: <strong>' + fmt0(monthly * 12) + '</strong><br>' +
+      'Over 3 years at today’s prices: <strong>' + fmt0(monthly * 36) + '</strong></p>' +
+      '<p class="fine">Annual plans typically cut 15–25% versus monthly billing — on this stack that is roughly ' + fmt0(monthly * 12 * 0.2) + ' a year. Check each vendor’s annual price before renewing.</p>';
+  }
+  $('c-add').addEventListener('click', () => { addRow('', 0); calc(); });
+  addRow('Accounting software', 29);
+  addRow('Project management', 15);
+  addRow('CRM', 49);
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

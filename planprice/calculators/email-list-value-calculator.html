@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email List Value Calculator — PlanPrice</title>
+<meta name="description" content="Free email list value calculator: subscribers, click rate, conversion rate, and order value into monthly and annual revenue — and value per subscriber.">
+<link rel="canonical" href="https://planprice.ca/calculators/email-list-value-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Email List Value Calculator">
+<meta property="og:description" content="Free email list value calculator: subscribers, click rate, conversion rate, and order value into monthly and annual revenue — and value per subscriber.">
+<meta property="og:url" content="https://planprice.ca/calculators/email-list-value-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Email List Value Calculator</p>
+    <h1 class="page-title">Email List Value Calculator</h1>
+    <p class="section-sub">Free email list value calculator: subscribers, click rate, conversion rate, and order value into monthly and annual revenue — and value per subscriber.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-subs">Subscribers</label>
+        <input type="number" id="c-subs" value="5000" min="0" step="100">
+      </div>
+      <div class="calc-field">
+        <label for="c-sends">Emails sent per month</label>
+        <input type="number" id="c-sends" value="4" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-click">Click rate per email (% of subscribers who click)</label>
+        <input type="number" id="c-click" value="2" min="0" max="100" step="0.5">
+      </div>
+      <div class="calc-field">
+        <label for="c-conv">Conversion rate (% of clicks that buy)</label>
+        <input type="number" id="c-conv" value="3" min="0" max="100" step="0.5">
+      </div>
+      <div class="calc-field">
+        <label for="c-aov">Average order value</label>
+        <input type="number" id="c-aov" value="60" min="0" step="1">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Revenue per send = subscribers × click rate × conversion rate × average order value. Worked example: 5,000 subscribers × 2% clicking = 100 clicks; × 3% converting = 3 orders; × $60 = <strong>$180 per send</strong>, $720/month at 4 sends, $8,640/year. Click rate does the heavy lifting — the same list at a 1% click rate is worth half as much, which is why relevant, segment-matched emails beat bigger lists.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/ltv-calculator.html">Customer Lifetime Value (LTV) Calculator</a></li>
+      <li><a href="/guides/get-visitors-to-come-back.html">Guide: getting visitors to come back</a> — email is the top retention lever.</li>
+      <li><a href="/calculators/cac-calculator.html">Customer Acquisition Cost (CAC) Calculator</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Uses click-through on the full list (not open-based rates, which privacy features have made unreliable). Your real rates come from your own platform reports — use those, not the defaults, once you have a few sends of history.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const subs = Math.max(0, +$('c-subs').value || 0);
+    const sends = Math.max(0, +$('c-sends').value || 0);
+    const click = Math.max(0, +$('c-click').value || 0);
+    const conv = Math.max(0, +$('c-conv').value || 0);
+    const aov = Math.max(0, +$('c-aov').value || 0);
+    const perSend = subs * click / 100 * conv / 100 * aov;
+    const monthly = perSend * sends;
+    $('c-results').innerHTML =
+      '<table><tbody>' +
+      '<tr><td>Revenue per email sent</td><td><strong>' + fmt(perSend) + '</strong></td></tr>' +
+      '<tr><td>Revenue per month (' + num(sends) + ' sends)</td><td><strong>' + fmt(monthly) + '</strong></td></tr>' +
+      '<tr><td>Revenue per year</td><td><strong>' + fmt(monthly * 12) + '</strong></td></tr>' +
+      '<tr><td>Value per subscriber per month</td><td><strong>' + (subs > 0 ? fmt(monthly / subs) : '—') + '</strong></td></tr>' +
+      '</tbody></table>' +
+      '<p class="fine">The per-subscriber figure is your acquisition ceiling: you can profitably spend up to that much per month to keep a subscriber — and a one-time signup cost is recovered over the months they stay.</p>';
+  }
+  ['c-subs','c-sends','c-click','c-conv','c-aov'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

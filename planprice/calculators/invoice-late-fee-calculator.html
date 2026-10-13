@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Late-Fee & Early-Payment Discount Calculator — PlanPrice</title>
+<meta name="description" content="Free invoice calculator: the late fee owed on an overdue invoice, and the true annualized cost of skipping — or offering — an early-payment discount.">
+<link rel="canonical" href="https://planprice.ca/calculators/invoice-late-fee-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Invoice Late-Fee & Early-Payment Discount Calculator">
+<meta property="og:description" content="Free invoice calculator: the late fee owed on an overdue invoice, and the true annualized cost of skipping — or offering — an early-payment discount.">
+<meta property="og:url" content="https://planprice.ca/calculators/invoice-late-fee-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Invoice Late-Fee & Early-Payment Discount Calculator</p>
+    <h1 class="page-title">Invoice Late-Fee & Early-Payment Discount Calculator</h1>
+    <p class="section-sub">Free invoice calculator: the late fee owed on an overdue invoice, and the true annualized cost of skipping — or offering — an early-payment discount.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-amount">Invoice amount</label>
+        <input type="number" id="c-amount" value="10000" min="0" step="50">
+      </div>
+      <div class="calc-field">
+        <label for="c-days-late">Days overdue</label>
+        <input type="number" id="c-days-late" value="30" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-late-rate">Late fee (% per month)</label>
+        <input type="number" id="c-late-rate" value="1.5" min="0" step="0.1">
+      </div>
+      <div class="calc-field">
+        <label for="c-disc">Early-payment discount offered (%)</label>
+        <input type="number" id="c-disc" value="2" min="0" max="50" step="0.5">
+      </div>
+      <div class="calc-field">
+        <label for="c-days-early">Days paid early to earn it</label>
+        <input type="number" id="c-days-early" value="20" min="1" step="1">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Late fee = invoice × monthly rate × (days overdue ÷ 30) — a simple, non-compounding charge. Worked example: 1.5%/month on a $10,000 invoice 30 days late = <strong>$150</strong>.</p>
+    <p>Early-payment discount, annualized = (discount ÷ (100 − discount)) × (365 ÷ days early). "2/10 net 30" on $10,000 saves $200; earning $200 for paying 20 days early annualizes to <strong>37.2%</strong> — which is why buyers with cash almost always take it, and why offering it is an expensive way to speed up payment.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/sales-tax-calculator.html">HST/GST Sales Tax Calculator</a> — the tax line on that invoice.</li>
+      <li><a href="/calculators/runway-calculator.html">Business Runway Calculator</a> — late-paying customers burn it.</li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Late fees are only enforceable if your contract or invoice terms state them, and some provinces regulate interest on overdue accounts. The annualized figure is a comparison tool, not an interest rate quote.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const amt = Math.max(0, +$('c-amount').value || 0);
+    const daysLate = Math.max(0, +$('c-days-late').value || 0);
+    const lateRate = Math.max(0, +$('c-late-rate').value || 0);
+    const disc = Math.min(50, Math.max(0, +$('c-disc').value || 0));
+    const daysEarly = Math.max(1, +$('c-days-early').value || 1);
+    const fee = amt * lateRate / 100 * (daysLate / 30);
+    const saving = amt * disc / 100;
+    const annualized = disc > 0 ? (disc / (100 - disc)) * (365 / daysEarly) * 100 : 0;
+    $('c-results').innerHTML =
+      '<table><tbody>' +
+      '<tr><td>Late fee at ' + pct(lateRate) + '/month for ' + num(daysLate) + ' days</td><td><strong>' + fmt(fee) + '</strong></td></tr>' +
+      '<tr><td>Total owed if paid now</td><td><strong>' + fmt(amt + fee) + '</strong></td></tr>' +
+      '<tr><td>Early-payment discount saves</td><td><strong>' + fmt(saving) + '</strong></td></tr>' +
+      '<tr><td>Annualized value of taking the discount</td><td><strong>' + annualized.toFixed(1) + '%</strong></td></tr>' +
+      '</tbody></table>' +
+      '<p class="fine">Discount terms like "2/10 net 30" mean paying 20 days early. Skipping a 2% discount to hold cash 20 extra days costs the equivalent of ' + annualized.toFixed(1) + '% a year — more than most credit lines charge.</p>';
+  }
+  ['c-amount','c-days-late','c-late-rate','c-disc','c-days-early'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salary ↔ Hourly Wage Converter — PlanPrice</title>
+<meta name="description" content="Free salary-to-hourly converter: turn an annual salary into an hourly wage (and back), with weekly and monthly figures for Canadian budgeting.">
+<link rel="canonical" href="https://planprice.ca/calculators/salary-hourly-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Salary ↔ Hourly Wage Converter">
+<meta property="og:description" content="Free salary-to-hourly converter: turn an annual salary into an hourly wage (and back), with weekly and monthly figures for Canadian budgeting.">
+<meta property="og:url" content="https://planprice.ca/calculators/salary-hourly-converter.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Salary ↔ Hourly Wage Converter</p>
+    <h1 class="page-title">Salary ↔ Hourly Wage Converter</h1>
+    <p class="section-sub">Free salary-to-hourly converter: turn an annual salary into an hourly wage (and back), with weekly and monthly figures for Canadian budgeting.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-salary">Annual salary</label>
+        <input type="number" id="c-salary" value="62400" min="0" step="500">
+      </div>
+      <div class="calc-field">
+        <label for="c-hourly">Hourly wage</label>
+        <input type="number" id="c-hourly" value="30" min="0" step="0.5">
+      </div>
+      <div class="calc-field">
+        <label for="c-hours">Hours per week</label>
+        <input type="number" id="c-hours" value="40" min="1" max="80" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-weeks">Paid weeks per year</label>
+        <input type="number" id="c-weeks" value="52" min="1" max="52" step="1">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Hourly = salary ÷ (hours per week × paid weeks per year). At 40 hours × 52 weeks = 2,080 paid hours, the quick rule is salary ÷ 2,080: a $62,400 salary = <strong>$30.00/hr</strong>, and $30/hr = $62,400/yr. If vacation is unpaid, reduce paid weeks (a freelancer taking 4 unpaid weeks works 48 — the same $30/hr then yields $57,600).</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/employer-payroll-cost-calculator.html">Employer Payroll Cost Calculator (Canada)</a></li>
+      <li><a href="/calculators/freelance-rate-calculator.html">Freelance / Hourly Rate Calculator</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Gross figures before tax, CPP, and EI. An employee's salary also carries employer payroll costs the hourly wage doesn't show — see the employer payroll cost calculator before comparing a job offer to freelance rates.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const salary = Math.max(0, +$('c-salary').value || 0);
+    const hourly = Math.max(0, +$('c-hourly').value || 0);
+    const hours = Math.max(1, +$('c-hours').value || 1);
+    const weeks = Math.max(1, +$('c-weeks').value || 1);
+    const yearHours = hours * weeks;
+    const fromSalary = yearHours > 0 ? salary / yearHours : 0;
+    const fromHourly = hourly * yearHours;
+    $('c-results').innerHTML =
+      '<table><tbody>' +
+      '<tr><td><strong>' + fmt(salary) + ' salary</strong> at ' + num(hours) + ' hrs/week</td><td><strong>' + fmt(fromSalary) + '/hr</strong> (' + fmt(salary / 12) + '/mo)</td></tr>' +
+      '<tr><td><strong>' + fmt(hourly) + '/hr</strong> at ' + num(hours) + ' hrs/week</td><td><strong>' + fmt(fromHourly) + '/yr</strong> (' + fmt(fromHourly / 12) + '/mo)</td></tr>' +
+      '</tbody></table>' +
+      '<p class="fine">Paid hours per year at these settings: ' + num(yearHours) + '.</p>';
+  }
+  ['c-salary','c-hourly','c-hours','c-weeks'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

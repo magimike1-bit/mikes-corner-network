@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Spend Break-even Calculator — PlanPrice</title>
+<meta name="description" content="Free ad break-even calculator: the maximum cost per click you can pay — from a page's ad revenue (RPM) or from a conversion's value and conversion rate.">
+<link rel="canonical" href="https://planprice.ca/calculators/ad-spend-break-even-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Ad Spend Break-even Calculator">
+<meta property="og:description" content="Free ad break-even calculator: the maximum cost per click you can pay — from a page's ad revenue (RPM) or from a conversion's value and conversion rate.">
+<meta property="og:url" content="https://planprice.ca/calculators/ad-spend-break-even-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Ad Spend Break-even Calculator</p>
+    <h1 class="page-title">Ad Spend Break-even Calculator</h1>
+    <p class="section-sub">Free ad break-even calculator: the maximum cost per click you can pay — from a page's ad revenue (RPM) or from a conversion's value and conversion rate.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-mode">I'm monetizing with</label>
+        <select id="c-mode">
+          <option value="rpm" selected>Display ads (page RPM)</option>
+          <option value="conv">Sales / leads (conversion value)</option>
+        </select>
+      </div>
+      <div id="c-rpm-fields">
+        <div class="calc-field">
+          <label for="c-rpm">Page RPM ($ earned per 1,000 pageviews)</label>
+          <input type="number" id="c-rpm" value="15" min="0" step="1">
+        </div>
+        <div class="calc-field">
+          <label for="c-pv">Pageviews per visit</label>
+          <input type="number" id="c-pv" value="3" min="0" step="0.5">
+        </div>
+      </div>
+      <div id="c-conv-fields" style="display:none">
+        <div class="calc-field">
+          <label for="c-value">Gross profit per conversion</label>
+          <input type="number" id="c-value" value="50" min="0" step="1">
+        </div>
+        <div class="calc-field">
+          <label for="c-rate">Conversion rate (% of clicks that convert)</label>
+          <input type="number" id="c-rate" value="2" min="0" max="100" step="0.5">
+        </div>
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Display-ad version: a pageview earns RPM ÷ 1,000. A visit is worth that × pageviews per visit, and your cost per click must stay under it. At a $15 page RPM and a strong 3 pageviews per visit, break-even CPC is $15 ÷ 1,000 × 3 = <strong>$0.045</strong> — which is why buying traffic to flip into display ads almost never works. The full evidence is in our <a href="/guides/paid-ads-arbitrage-math.html">paid-ads arbitrage guide</a>.</p>
+    <p>Conversion version: value per click = profit per conversion × conversion rate. A $50 profit per sale at a 2% conversion rate values each click at $1.00.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/marketing-roi-calculator.html">Marketing ROI / ROAS Calculator</a></li>
+      <li><a href="/calculators/cac-calculator.html">Customer Acquisition Cost (CAC) Calculator</a></li>
+      <li><a href="/guides/paid-ads-arbitrage-math.html">Guide: the paid-ads arbitrage math, in full</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Break-even means zero profit at the line — real campaigns need CPC comfortably below it. Invalid and accidental clicks (a real share of cheap traffic) push the true break-even lower still.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  const fmtS = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: n < 1 ? 3 : 2, maximumFractionDigits: 3});
+  function calc() {
+    const mode = $('c-mode').value;
+    $('c-rpm-fields').style.display = mode === 'rpm' ? '' : 'none';
+    $('c-conv-fields').style.display = mode === 'conv' ? '' : 'none';
+    let maxCpc, value;
+    if (mode === 'rpm') {
+      const rpm = Math.max(0, +$('c-rpm').value || 0);
+      const pv = Math.max(0, +$('c-pv').value || 0);
+      value = rpm / 1000 * pv;
+      maxCpc = value;
+      $('c-results').innerHTML =
+        '<p>Revenue per visit: <strong>' + fmtS(value) + '</strong> (' + fmt(rpm) + ' per 1,000 pageviews × ' + num(pv) + ' pageviews)</p>' +
+        '<p>Maximum break-even CPC: <strong>' + fmtS(maxCpc) + '</strong></p>' +
+        '<p class="fine">If clicks cost more than this, every visitor loses money before any other cost. At a realistic bought-traffic depth of 1.2 pageviews per visit, the same $15 RPM breaks even at only $0.018 per click — below almost any legitimate click price.</p>';
+    } else {
+      const v = Math.max(0, +$('c-value').value || 0);
+      const rate = Math.min(100, Math.max(0, +$('c-rate').value || 0));
+      value = v * rate / 100;
+      maxCpc = value;
+      $('c-results').innerHTML =
+        '<p>Expected gross profit per click: <strong>' + fmtS(value) + '</strong></p>' +
+        '<p>Maximum break-even CPC: <strong>' + fmtS(maxCpc) + '</strong></p>' +
+        '<p class="fine">Bid below this to leave margin for overhead and for the clicks that convert worse than average.</p>';
+    }
+  }
+  ['c-mode','c-rpm','c-pv','c-value','c-rate'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

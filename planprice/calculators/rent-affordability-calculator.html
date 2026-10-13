@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent Affordability Calculator — PlanPrice</title>
+<meta name="description" content="Free rent affordability calculator for small business: rent as a percentage of revenue, the annual cost, and the maximum rent at common target ratios.">
+<link rel="canonical" href="https://planprice.ca/calculators/rent-affordability-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Rent Affordability Calculator">
+<meta property="og:description" content="Free rent affordability calculator for small business: rent as a percentage of revenue, the annual cost, and the maximum rent at common target ratios.">
+<meta property="og:url" content="https://planprice.ca/calculators/rent-affordability-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Rent Affordability Calculator</p>
+    <h1 class="page-title">Rent Affordability Calculator</h1>
+    <p class="section-sub">Free rent affordability calculator for small business: rent as a percentage of revenue, the annual cost, and the maximum rent at common target ratios.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-revenue">Monthly gross revenue</label>
+        <input type="number" id="c-revenue" value="30000" min="0" step="500">
+      </div>
+      <div class="calc-field">
+        <label for="c-rent">Monthly rent (base rent + TMI/CAM if you pay it)</label>
+        <input type="number" id="c-rent" value="3000" min="0" step="50">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Rent ratio = monthly rent ÷ monthly gross revenue. Worked example: $3,000 of rent on $30,000 of revenue = <strong>10%</strong>. Landlords and lenders look at the same ratio from the other side: a space is "affordable" when projected revenue supports the rent at a ratio your industry can sustain — high-margin services can carry more rent than thin-margin retail.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/break-even-calculator.html">Break-even Point Calculator</a> — rent is a fixed cost there.</li>
+      <li><a href="/calculators/runway-calculator.html">Business Runway Calculator</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">The 5–10% band is a rule of thumb, not a standard — restaurants and retail often run higher, home-based and online businesses near zero. Use your own gross margin as the real test: rent must fit inside it with room for payroll and profit.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const rev = Math.max(0, +$('c-revenue').value || 0);
+    const rent = Math.max(0, +$('c-rent').value || 0);
+    if (rev <= 0) { $('c-results').innerHTML = '<p>Enter your monthly revenue.</p>'; return; }
+    const ratio = rent / rev * 100;
+    const verdict = ratio <= 5 ? 'Comfortable by the usual rules of thumb — rent is a small share of revenue.' :
+                    ratio <= 10 ? 'In the range many small businesses treat as workable (roughly 5–10% of gross revenue).' :
+                    ratio <= 15 ? 'Heavy. Above ~10%, rent starts crowding out margin — negotiate, sublet, or grow revenue before signing a long term.' :
+                    'Very heavy. At this share, the location has to be doing the selling for you; model it against a cheaper space.';
+    $('c-results').innerHTML =
+      '<p>Rent as a share of revenue: <strong>' + pct(ratio) + '</strong></p>' +
+      '<p>Annual rent: <strong>' + fmt0(rent * 12) + '</strong><br>' +
+      'Maximum rent at a 10% target: <strong>' + fmt0(rev * 0.10) + '/mo</strong> · at 5%: ' + fmt0(rev * 0.05) + '/mo</p>' +
+      '<p class="fine">' + verdict + '</p>';
+  }
+  ['c-revenue','c-rent'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

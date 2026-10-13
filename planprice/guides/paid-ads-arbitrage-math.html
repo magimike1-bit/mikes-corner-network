@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Should You Buy Traffic? The Paid-Ads Arbitrage Math, Worked Honestly — PlanPrice</title>
+<meta name="description" content="Buying cheap clicks to flip into ad revenue: the break-even CPC formula worked with real RPM and CPC ranges, plus an interactive calculator. When paid traffic pays — and when it can't.">
+<link rel="canonical" href="https://planprice.ca/guides/paid-ads-arbitrage-math.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Should You Buy Traffic? The Paid-Ads Arbitrage Math">
+<meta property="og:description" content="Buying cheap clicks to flip into ad revenue: the break-even CPC formula worked with real RPM and CPC ranges, plus an interactive calculator. When paid traffic pays — and when it can't.">
+<meta property="og:url" content="https://planprice.ca/guides/paid-ads-arbitrage-math.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › <a href="/marketing.html">Marketing</a></p>
+    <h1 class="page-title">Should You Buy Traffic? The Paid-Ads Arbitrage Math, Worked Honestly</h1>
+    <p class="section-sub">Published <time datetime="2026-10-12">2026-10-12</time> · Last updated <time datetime="2026-10-12">2026-10-12</time></p>
+    <figure class="post-figure">
+  <img class="post-image" src="../images/paid-ads-arbitrage-math.jpg" alt="Desk calculator and ledger beside a laptop" loading="lazy" width="1920" height="1280">
+  <figcaption>Arbitrage is a formula before it's a strategy — run it before spending $1.</figcaption>
+</figure>
+
+    <p>"Buy cheap traffic, show ads, pocket the difference" sounds like a business model. It is, mostly, an arithmetic error — and it's worth doing the arithmetic properly once, because the same formula tells you when paying for traffic <em>can</em> make sense.</p>
+    <h2>The revenue side: what a visitor is worth</h2>
+    <p>A display-ad page earns Page RPM ÷ 1,000 per pageview. Practitioner-reported typical ranges run about <strong>$5–20 Page RPM</strong> for most content niches on entry and mid-tier ad networks (AdSense at the low end; premium networks pay more but gate entry — Mediavine's main programme now requires roughly $5,000/year in ad revenue, with its "Journey" on-ramp starting around 10,000 sessions), finance-type niches up to about $30, and entertainment as low as about $3. At a $15 RPM, <strong>one pageview is worth $0.015</strong>.</p>
+    <h2>The cost side: what a visitor costs</h2>
+    <p>Even "cheap" social and native clicks typically cost <strong>$0.03–0.30+</strong>, and search clicks in anything commercial cost far more — Google Ads' average CPC rose 12.88% in 2025, with 87% of industries up (WordStream data). Compare the two sides and the model inverts: the click costs more than the pageview it buys can earn.</p>
+    <h2>The break-even formula</h2>
+    <p><strong>Maximum CPC = (Page RPM ÷ 1,000) × pageviews per visit.</strong> At $15 RPM and a strong 3 pageviews per visit, break-even CPC is <strong>$0.045</strong>. At the 1.2 pageviews per visit that bought traffic realistically produces (paid visitors browse less), it's <strong>$0.018</strong> — below almost any legitimate click price in Canada, the US, or other top-tier geographies. And that's before invalid traffic (about 20% of impressions in one 2025 fraud analysis), ad-network clawbacks, and the account risk of traffic patterns that look like arbitrage. The spread is collapsing from both sides: click prices rising about 13% a year while monetisation policies tighten (<a href="https://medium.com/@lazurka1976/traffic-arbitrage-2026-profitable-but-the-spread-is-collapsing-e069105ce385" target="_blank" rel="noopener">2026 arbitrage analysis</a>).</p>
+    <h2>Run your own numbers</h2>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-rpm">Your page RPM ($ per 1,000 pageviews)</label>
+        <input type="number" id="c-rpm" value="15" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-pv">Pageviews per visit you expect from paid traffic</label>
+        <input type="number" id="c-pv" value="3" min="0" step="0.5">
+      </div>
+      <div class="calc-field">
+        <label for="c-cpc">The CPC you're being offered / quoted</label>
+        <input type="number" id="c-cpc" value="0.10" min="0" step="0.01">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+    <p>The standalone version, including a conversion-based mode (value per sale instead of ad revenue), is our <a href="/calculators/ad-spend-break-even-calculator.html">ad spend break-even calculator</a>.</p>
+    <h2>When micro-budget paid traffic can pay</h2>
+    <ul>
+      <li><strong>High-RPM niche + deep asset:</strong> a finance, insurance, or legal tool flow producing 5+ pageviews at $40+ RPM can tolerate roughly a $0.20 CPC from cheap native or social placements in narrow geographies. The math works because both inputs are at the favourable extreme.</li>
+      <li><strong>Buying subscribers, not pageviews:</strong> if a lead magnet converts and each subscriber's lifetime pageview and purchase value is calculable (our <a href="/calculators/email-list-value-calculator.html">email list value calculator</a>), a small budget is an investment in an owned audience, not arbitrage.</li>
+      <li><strong>Seeding and testing:</strong> $50–100 to test a creative or validate a niche before you build more on it. You're buying information, not traffic.</li>
+    </ul>
+    <p>As a standing traffic source for ad-supported articles, though, the verdict of the numbers is simple: don't. The cheapest traffic is the kind this site's other <a href="/marketing.html">marketing guides</a> cover — search, tools, email, and (for visual niches) Pinterest.</p>
+
+    <p class="fine">This guide is part of PlanPrice's <a href="/marketing.html">marketing section</a>. RPM and CPC figures are practitioner-reported ranges from the sources linked inline, not guarantees — your niche, geography, and ad network will move them. The formula, however, doesn't move.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmtS = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: n < 1 ? 3 : 2, maximumFractionDigits: 3});
+  function calc() {
+    const rpm = Math.max(0, +$('c-rpm').value || 0);
+    const pv = Math.max(0, +$('c-pv').value || 0);
+    const cpc = Math.max(0, +$('c-cpc').value || 0);
+    const maxCpc = rpm / 1000 * pv;
+    const perVisit = cpc - maxCpc;
+    $('c-results').innerHTML =
+      '<p>Revenue per paid visit: <strong>' + fmtS(maxCpc) + '</strong><br>' +
+      'Maximum break-even CPC: <strong>' + fmtS(maxCpc) + '</strong></p>' +
+      (cpc > 0 ? '<p>' + (perVisit > 0
+        ? '<strong>At ' + fmtS(cpc) + ' per click you lose about ' + fmtS(perVisit) + ' on every visitor</strong> — about ' + fmtS(perVisit * 1000) + ' per 1,000 visitors, before invalid traffic and fees.'
+        : '<strong>At ' + fmtS(cpc) + ' per click you are under break-even</strong> — margin per visitor: ' + fmtS(-perVisit) + '. Check the assumptions (RPM and page depth) hold for paid traffic specifically, not your organic average.') + '</p>' : '');
+  }
+  ['c-rpm','c-pv','c-cpc'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

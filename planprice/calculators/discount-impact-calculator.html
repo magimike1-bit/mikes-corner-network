@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discount Impact Calculator — PlanPrice</title>
+<meta name="description" content="Free discount impact calculator: how much extra volume you need to sell after a discount just to make the same gross profit.">
+<link rel="canonical" href="https://planprice.ca/calculators/discount-impact-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Discount Impact Calculator">
+<meta property="og:description" content="Free discount impact calculator: how much extra volume you need to sell after a discount just to make the same gross profit.">
+<meta property="og:url" content="https://planprice.ca/calculators/discount-impact-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Discount Impact Calculator</p>
+    <h1 class="page-title">Discount Impact Calculator</h1>
+    <p class="section-sub">Free discount impact calculator: how much extra volume you need to sell after a discount just to make the same gross profit.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-price">Regular price per unit</label>
+        <input type="number" id="c-price" value="100" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-cost">Cost per unit</label>
+        <input type="number" id="c-cost" value="60" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-discount">Discount (%)</label>
+        <input type="number" id="c-discount" value="20" min="0" max="99" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-units">Units you sell per month now</label>
+        <input type="number" id="c-units" value="100" min="0" step="1">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Volume multiplier = old unit profit ÷ new unit profit. A discount comes straight out of margin, not out of price proportionally: with a 40% margin, a 20% discount halves your per-unit profit ($40 → $20), so you must sell <strong>twice as many units</strong> — +100% volume — just to stand still. The thinner the margin, the more violent this gets: at a 25% margin, a 20% discount needs 5× the volume.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/profit-margin-calculator.html">Profit Margin &amp; Markup Calculator</a></li>
+      <li><a href="/calculators/pricing-calculator.html">Pricing Calculator</a></li>
+      <li><a href="/calculators/marketing-roi-calculator.html">Marketing ROI Calculator</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Assumes your costs per unit don't change with volume and that the discount applies to every unit sold. It also ignores any new-customer value — a deliberate loss-leader can still make sense, but now you know the size of the hole it has to climb out of.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const price = Math.max(0, +$('c-price').value || 0);
+    const cost = Math.max(0, +$('c-cost').value || 0);
+    const d = Math.max(0, +$('c-discount').value || 0);
+    const units = Math.max(0, +$('c-units').value || 0);
+    const cmOld = price - cost;
+    const newPrice = price * (1 - d / 100);
+    const cmNew = newPrice - cost;
+    if (cmOld <= 0) { $('c-results').innerHTML = '<p>Your regular price is already at or below cost — fix that before discounting.</p>'; return; }
+    if (cmNew <= 0) { $('c-results').innerHTML = '<p><strong>This discount wipes out the entire margin.</strong> At ' + fmt(newPrice) + ' against a ' + fmt(cost) + ' cost, every sale makes ' + fmt(cmNew) + ' — no volume can break even on a per-unit loss.</p>'; return; }
+    const mult = cmOld / cmNew;
+    const need = Math.ceil(units * mult);
+    $('c-results').innerHTML =
+      '<table><tbody>' +
+      '<tr><td>Sale price</td><td>' + fmt(newPrice) + '</td></tr>' +
+      '<tr><td>Profit per unit: before → after</td><td>' + fmt(cmOld) + ' → ' + fmt(cmNew) + '</td></tr>' +
+      '<tr><td>Volume increase needed to keep the same profit</td><td><strong>+' + pct((mult - 1) * 100) + '</strong> (' + num(need) + ' units vs ' + num(units) + ')</td></tr>' +
+      '<tr><td>Revenue at the required volume</td><td>' + fmt0(need * newPrice) + ' (vs ' + fmt0(units * price) + ' now)</td></tr>' +
+      '</tbody></table>';
+  }
+  ['c-price','c-cost','c-discount','c-units'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

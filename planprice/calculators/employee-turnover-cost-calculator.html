@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Turnover Cost Calculator — PlanPrice</title>
+<meta name="description" content="Free turnover cost calculator: what employee departures cost your business per year, based on salary and a replacement-cost percentage you control.">
+<link rel="canonical" href="https://planprice.ca/calculators/employee-turnover-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Employee Turnover Cost Calculator">
+<meta property="og:description" content="Free turnover cost calculator: what employee departures cost your business per year, based on salary and a replacement-cost percentage you control.">
+<meta property="og:url" content="https://planprice.ca/calculators/employee-turnover-cost-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Employee Turnover Cost Calculator</p>
+    <h1 class="page-title">Employee Turnover Cost Calculator</h1>
+    <p class="section-sub">Free turnover cost calculator: what employee departures cost your business per year, based on salary and a replacement-cost percentage you control.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-salary">Average annual salary of departing employees</label>
+        <input type="number" id="c-salary" value="55000" min="0" step="500">
+      </div>
+      <div class="calc-field">
+        <label for="c-count">Departures per year</label>
+        <input type="number" id="c-count" value="3" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-pct">Replacement cost (% of annual salary)</label>
+        <input type="number" id="c-pct" value="50" min="0" step="5">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Total = salary × replacement-cost % × departures. The percentage bundles recruiting, interviewing time, onboarding, training, and the months of lower productivity before a new hire reaches full speed. Gallup has estimated replacement cost at one-half to two times the departing employee's annual salary, depending on the role — the 50% default here is the conservative end; skilled and hard-to-fill roles run higher.</p>
+    <p>Worked example: three departures at a $55,000 salary and 50% replacement cost = <strong>$82,500 a year</strong>.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/employer-payroll-cost-calculator.html">Employer Payroll Cost Calculator (Canada)</a> — the ongoing cost side.</li>
+      <li><a href="/calculators/freelance-rate-calculator.html">Freelance / Hourly Rate Calculator</a> — contractor cover during a vacancy.</li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">An estimate for planning, not a measured cost — your real figure depends on how much hiring is internal, how documented the role is, and how long the vacancy lasts. Track your own last three exits if you want a number to defend.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const salary = Math.max(0, +$('c-salary').value || 0);
+    const count = Math.max(0, +$('c-count').value || 0);
+    const p = Math.max(0, +$('c-pct').value || 0);
+    const per = salary * p / 100;
+    $('c-results').innerHTML =
+      '<p>Cost per departure: <strong>' + fmt(per) + '</strong></p>' +
+      '<p>Total turnover cost per year: <strong>' + fmt(per * count) + '</strong></p>' +
+      '<p class="fine">Avoiding one departure a year saves ' + fmt(per) + ' — compare that with what a raise, a schedule fix, or better tools would cost.</p>';
+  }
+  ['c-salary','c-count','c-pct'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

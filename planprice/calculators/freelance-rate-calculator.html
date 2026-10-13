@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freelance / Hourly Rate Calculator — PlanPrice</title>
+<meta name="description" content="Free freelance rate calculator: turn a target salary, overhead, and billable hours into the hourly rate you actually need to charge.">
+<link rel="canonical" href="https://planprice.ca/calculators/freelance-rate-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Freelance / Hourly Rate Calculator">
+<meta property="og:description" content="Free freelance rate calculator: turn a target salary, overhead, and billable hours into the hourly rate you actually need to charge.">
+<meta property="og:url" content="https://planprice.ca/calculators/freelance-rate-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Freelance / Hourly Rate Calculator</p>
+    <h1 class="page-title">Freelance / Hourly Rate Calculator</h1>
+    <p class="section-sub">Free freelance rate calculator: turn a target salary, overhead, and billable hours into the hourly rate you actually need to charge.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-income">Target annual income (what you'd pay yourself)</label>
+        <input type="number" id="c-income" value="70000" min="0" step="500">
+      </div>
+      <div class="calc-field">
+        <label for="c-overhead">Annual business overhead (software, insurance, phone, accounting…)</label>
+        <input type="number" id="c-overhead" value="6000" min="0" step="100">
+      </div>
+      <div class="calc-field">
+        <label for="c-hours">Billable hours per week (client work only — not admin or marketing)</label>
+        <input type="number" id="c-hours" value="25" min="1" max="80" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-weeks">Weeks worked per year (52 minus vacation, holidays, sick days)</label>
+        <input type="number" id="c-weeks" value="48" min="1" max="52" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-profit">Profit margin to add on top (%)</label>
+        <input type="number" id="c-profit" value="15" min="0" max="90" step="1">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Rate = (target income + overhead) ÷ billable hours, then grossed up for profit: ÷ (1 − margin). The two inputs most freelancers get wrong are billable hours — a 40-hour week rarely yields more than 20–30 billable hours after admin, marketing, and quoting — and weeks actually worked.</p>
+    <p>Worked example: $70,000 income + $6,000 overhead = $76,000, over 25 billable hours × 48 weeks = 1,200 hours, gives a $63.33 break-even rate; with a 15% profit margin, $63.33 ÷ 0.85 = <strong>$74.51/hr</strong>.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/sole-proprietor-tax-calculator.html">Sole-Proprietor Tax Estimate (Canada)</a> — what to set aside from that rate.</li>
+      <li><a href="/calculators/salary-hourly-converter.html">Salary ↔ Hourly Wage Converter</a> — compare against an employee salary.</li>
+      <li><a href="/calculators/subscription-cost-annualizer.html">Subscription Cost Annualizer</a> — overhead usually hides in subscriptions.</li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">This rate covers income, overhead, and profit — but not income tax or CPP, which a Canadian sole proprietor pays personally. Price the tax in separately (see the sole-proprietor tax estimate calculator).</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const income = Math.max(0, +$('c-income').value || 0);
+    const overhead = Math.max(0, +$('c-overhead').value || 0);
+    const hours = Math.max(1, +$('c-hours').value || 1);
+    const weeks = Math.max(1, +$('c-weeks').value || 1);
+    const profit = Math.min(90, Math.max(0, +$('c-profit').value || 0));
+    const billable = hours * weeks;
+    const base = (income + overhead) / billable;
+    const rate = base / (1 - profit / 100);
+    $('c-results').innerHTML =
+      '<p>Billable hours per year: <strong>' + num(billable) + '</strong></p>' +
+      '<p>Break-even rate (covers income + overhead, no profit): <strong>' + fmt(base) + '/hr</strong></p>' +
+      '<p>Rate with a ' + pct(profit) + ' profit margin: <strong>' + fmt(rate) + '/hr</strong><br>' +
+      'Equivalent day rate (8 billable hours): <strong>' + fmt(rate * 8) + '</strong></p>';
+  }
+  ['c-income','c-overhead','c-hours','c-weeks','c-profit'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

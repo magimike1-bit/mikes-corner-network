@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HST/GST Sales Tax Calculator (Canada) — PlanPrice</title>
+<meta name="description" content="Free Canadian sales tax calculator: add or remove GST, HST, PST, RST, and QST by province — all 13 provinces and territories.">
+<link rel="canonical" href="https://planprice.ca/calculators/sales-tax-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="HST/GST Sales Tax Calculator (Canada)">
+<meta property="og:description" content="Free Canadian sales tax calculator: add or remove GST, HST, PST, RST, and QST by province — all 13 provinces and territories.">
+<meta property="og:url" content="https://planprice.ca/calculators/sales-tax-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › HST/GST Sales Tax Calculator (Canada)</p>
+    <h1 class="page-title">HST/GST Sales Tax Calculator (Canada)</h1>
+    <p class="section-sub">Free Canadian sales tax calculator: add or remove GST, HST, PST, RST, and QST by province — all 13 provinces and territories.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-amount">Amount</label>
+        <input type="number" id="c-amount" value="100" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-mode">Calculation</label>
+        <select id="c-mode">
+          <option value="add" selected>Add tax to this amount (price before tax)</option>
+          <option value="remove">Remove tax from this amount (price including tax)</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="c-prov">Province / territory</label>
+        <select id="c-prov">
+          <option value="5" data-label="GST 5%">Alberta — GST 5%</option>
+          <option value="12" data-label="GST 5% + PST 7%">British Columbia — GST 5% + PST 7%</option>
+          <option value="12" data-label="GST 5% + RST 7%">Manitoba — GST 5% + RST 7%</option>
+          <option value="15" data-label="HST 15%">New Brunswick — HST 15%</option>
+          <option value="15" data-label="HST 15%">Newfoundland &amp; Labrador — HST 15%</option>
+          <option value="14" data-label="HST 14%">Nova Scotia — HST 14%</option>
+          <option value="5" data-label="GST 5%">Northwest Territories — GST 5%</option>
+          <option value="5" data-label="GST 5%">Nunavut — GST 5%</option>
+          <option value="13" data-label="HST 13%" selected>Ontario — HST 13%</option>
+          <option value="15" data-label="HST 15%">Prince Edward Island — HST 15%</option>
+          <option value="14.975" data-label="GST 5% + QST 9.975%">Quebec — GST 5% + QST 9.975%</option>
+          <option value="11" data-label="GST 5% + PST 6%">Saskatchewan — GST 5% + PST 6%</option>
+          <option value="5" data-label="GST 5%">Yukon — GST 5%</option>
+        </select>
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>To add tax: amount × (1 + combined rate). To back tax out of a tax-included total, divide by (1 + combined rate) — don't just subtract the percentage, which overstates the net. Nova Scotia's HST dropped to 14% on April 1, 2025; the other HST provinces remain at 15% except Ontario at 13%. Quebec's QST (9.975%) is calculated on the pre-GST amount, so the combined effective rate is 14.975%.</p>
+    <p>Worked example: $100 in Ontario — adding 13% HST gives $13.00 of tax and a $113.00 total. Backing tax out of $100 gives a net of $88.50 and $11.50 of tax.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/sole-proprietor-tax-calculator.html">Sole-Proprietor Tax Estimate (Canada)</a></li>
+      <li><a href="/calculators/pricing-calculator.html">Pricing Calculator</a> — set prices before tax.</li>
+      <li><a href="/calculators/invoice-late-fee-calculator.html">Invoice Late-Fee Calculator</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">General consumer/business rates as of October 2026. Some goods and services are zero-rated or exempt (basic groceries, most health services), and PST/QST rules differ by item — this calculator applies the headline combined rate only.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const amt = Math.max(0, +$('c-amount').value || 0);
+    const mode = $('c-mode').value;
+    const sel = $('c-prov').options[$('c-prov').selectedIndex];
+    const rate = +sel.value;
+    const label = sel.getAttribute('data-label');
+    let net, tax, gross;
+    if (mode === 'add') { net = amt; tax = amt * rate / 100; gross = amt + tax; }
+    else { gross = amt; net = amt / (1 + rate / 100); tax = gross - net; }
+    $('c-results').innerHTML =
+      '<table><tbody>' +
+      '<tr><td>Before tax</td><td>' + fmt(net) + '</td></tr>' +
+      '<tr><td>' + label + '</td><td>' + fmt(tax) + '</td></tr>' +
+      '<tr><td><strong>Total with tax</strong></td><td><strong>' + fmt(gross) + '</strong></td></tr>' +
+      '</tbody></table>';
+  }
+  ['c-amount','c-mode','c-prov'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

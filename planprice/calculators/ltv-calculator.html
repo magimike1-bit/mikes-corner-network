@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Lifetime Value (LTV) Calculator — PlanPrice</title>
+<meta name="description" content="Free LTV calculator: average order value, purchase frequency, lifespan, and margin into customer lifetime value — with the LTV:CAC ratio.">
+<link rel="canonical" href="https://planprice.ca/calculators/ltv-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Customer Lifetime Value (LTV) Calculator">
+<meta property="og:description" content="Free LTV calculator: average order value, purchase frequency, lifespan, and margin into customer lifetime value — with the LTV:CAC ratio.">
+<meta property="og:url" content="https://planprice.ca/calculators/ltv-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Customer Lifetime Value (LTV) Calculator</p>
+    <h1 class="page-title">Customer Lifetime Value (LTV) Calculator</h1>
+    <p class="section-sub">Free LTV calculator: average order value, purchase frequency, lifespan, and margin into customer lifetime value — with the LTV:CAC ratio.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-aov">Average order / invoice value</label>
+        <input type="number" id="c-aov" value="80" min="0" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-freq">Purchases per customer per year</label>
+        <input type="number" id="c-freq" value="4" min="0" step="0.5">
+      </div>
+      <div class="calc-field">
+        <label for="c-life">Average customer lifespan (years)</label>
+        <input type="number" id="c-life" value="3" min="0" step="0.5">
+      </div>
+      <div class="calc-field">
+        <label for="c-margin">Gross margin (%)</label>
+        <input type="number" id="c-margin" value="60" min="0" max="100" step="1">
+      </div>
+      <div class="calc-field">
+        <label for="c-cac">Your CAC (from the CAC calculator — for the ratio)</label>
+        <input type="number" id="c-cac" value="100" min="0" step="5">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>LTV (profit basis) = average order value × purchases per year × years as a customer × gross margin. Worked example: $80 orders, 4× a year, for 3 years at a 60% margin = $960 of lifetime revenue and <strong>$576 of lifetime gross profit</strong>. Against a $100 CAC, the ratio is 5.76 : 1.</p>
+    <p>Always compare like with like: profit-basis LTV against CAC. Revenue-basis LTV flatters the ratio by the inverse of your margin.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/cac-calculator.html">Customer Acquisition Cost (CAC) Calculator</a></li>
+      <li><a href="/calculators/email-list-value-calculator.html">Email List Value Calculator</a> — retention is what makes LTV real.</li>
+      <li><a href="/guides/get-visitors-to-come-back.html">Guide: getting visitors to come back</a></li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Lifespan is the guess in this formula — use your actual repeat-purchase history if you have it, and shorten it if you're new. The 3:1 LTV:CAC benchmark is a widely used rule of thumb, not a measured standard.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const aov = Math.max(0, +$('c-aov').value || 0);
+    const freq = Math.max(0, +$('c-freq').value || 0);
+    const life = Math.max(0, +$('c-life').value || 0);
+    const margin = Math.min(100, Math.max(0, +$('c-margin').value || 0));
+    const cac = Math.max(0, +$('c-cac').value || 0);
+    const rev = aov * freq * life;
+    const ltv = rev * margin / 100;
+    const ratio = cac > 0 ? ltv / cac : 0;
+    $('c-results').innerHTML =
+      '<table><tbody>' +
+      '<tr><td>Lifetime revenue per customer</td><td>' + fmt(rev) + '</td></tr>' +
+      '<tr><td><strong>LTV (gross-profit basis)</strong></td><td><strong>' + fmt(ltv) + '</strong></td></tr>' +
+      '<tr><td>LTV : CAC ratio</td><td><strong>' + (cac > 0 ? ratio.toFixed(2) + ' : 1' : '—') + '</strong></td></tr>' +
+      '</tbody></table>' +
+      (cac > 0 ? '<p class="fine">' + (ratio >= 3 ? 'At 3:1 or better, acquisition is usually sustainable — the classic benchmark, not a guarantee.' : ratio >= 1 ? 'Between 1:1 and 3:1 you profit per customer but thinly — growth can still outrun cash.' : 'Below 1:1 you lose money on every customer acquired. Fix retention or CAC before spending more.') + '</p>' : '');
+  }
+  ['c-aov','c-freq','c-life','c-margin','c-cac'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

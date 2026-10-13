@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Loan Payment Calculator — PlanPrice</title>
+<meta name="description" content="Free business loan calculator: monthly payment, total interest, and total cost for a term loan at a fixed rate.">
+<link rel="canonical" href="https://planprice.ca/calculators/business-loan-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Business Loan Payment Calculator">
+<meta property="og:description" content="Free business loan calculator: monthly payment, total interest, and total cost for a term loan at a fixed rate.">
+<meta property="og:url" content="https://planprice.ca/calculators/business-loan-calculator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/calculators.html">Small business calculators</a> › Business Loan Payment Calculator</p>
+    <h1 class="page-title">Business Loan Payment Calculator</h1>
+    <p class="section-sub">Free business loan calculator: monthly payment, total interest, and total cost for a term loan at a fixed rate.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="c-principal">Loan amount</label>
+        <input type="number" id="c-principal" value="50000" min="0" step="500">
+      </div>
+      <div class="calc-field">
+        <label for="c-rate">Annual interest rate (%)</label>
+        <input type="number" id="c-rate" value="8" min="0" step="0.1">
+      </div>
+      <div class="calc-field">
+        <label for="c-years">Term (years)</label>
+        <input type="number" id="c-years" value="5" min="1" max="30" step="1">
+      </div>
+      <div class="calc-results" id="c-results" aria-live="polite"></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:28px">How it works</h2>
+    <p>Monthly payment = P × r(1 + r)<sup>n</sup> ÷ ((1 + r)<sup>n</sup> − 1), where P is the loan amount, r is the monthly rate (annual rate ÷ 12), and n is the number of monthly payments. Early payments are mostly interest; the principal share grows over the term.</p>
+    <p>Worked example: $50,000 at 8% over 5 years = <strong>$1,013.82/month</strong>, $60,829.20 paid in total, of which $10,829.20 is interest.</p>
+    <h2 class="section-title" style="margin-top:28px">Related calculators</h2>
+    <ul>
+      <li><a href="/calculators/runway-calculator.html">Business Runway Calculator</a> — how long borrowed cash actually lasts.</li>
+      <li><a href="/calculators/break-even-calculator.html">Break-even Point Calculator</a> — the loan payment joins your fixed costs.</li>
+      <li><a href="/calculators.html">All small business calculators</a></li>
+    </ul>
+    <p class="fine">Fixed-rate, monthly-payment estimate. It excludes lender fees, creditor insurance, and the Canada Small Business Financing Program guarantee fee where applicable — ask the lender for the total cost of borrowing in writing.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + n.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const fmt0 = n => 'C$' + n.toLocaleString('en-CA', {maximumFractionDigits: 0});
+  const num = n => n.toLocaleString('en-CA', {maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('en-CA', {maximumFractionDigits: 1}) + '%';
+  function calc() {
+    const P = Math.max(0, +$('c-principal').value || 0);
+    const annual = Math.max(0, +$('c-rate').value || 0) / 100;
+    const n = Math.max(1, Math.round(+$('c-years').value || 1)) * 12;
+    const r = annual / 12;
+    const raw = r > 0 ? P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : P / n;
+    const pay = Math.round(raw * 100) / 100; // lenders bill whole cents; totals use the billed payment
+    $('c-results').innerHTML =
+      '<p>Monthly payment: <strong>' + fmt(pay) + '</strong></p>' +
+      '<p>Total paid over ' + (n / 12) + ' years: <strong>' + fmt(pay * n) + '</strong><br>' +
+      'Total interest: <strong>' + fmt(pay * n - P) + '</strong></p>';
+  }
+  ['c-principal','c-rate','c-years'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-09-30 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

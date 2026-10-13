@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Image Generators for Beginners: What They Can and Can't Do — AI Starter Guide</title>
+<meta name="description" content="An honest beginner's guide to AI image generators: how diffusion works in plain English, what ChatGPT Images and Gemini do well, where they fail, and a pre-publish check.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">AI Starter Guide</a>
+    <p class="tagline">Plain-English introductions to using AI chatbots</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>AI image generators for beginners: what they can and cannot do</h1>
+  <p class="meta">Getting started &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/ai-image-generators-for-beginners.jpg" alt="Bold teal-and-coral duotone graphic of a framed mountain landscape dissolving into scattered dots." loading="lazy" width="1920" height="1280">
+  <figcaption>A generated picture starts as random dots and is refined, step by step, into an image.</figcaption>
+</figure>
+
+
+
+  <p>Type a sentence, get a picture. AI image generators feel like magic the first time
+  — and like a slot machine the fifth time, when the hands have too many fingers and
+  the sign in the background is gibberish. Both impressions are normal. These tools are
+  genuinely capable and genuinely limited, in specific, predictable ways. This guide
+  maps both sides honestly: how a picture is made, what the best-documented tools do
+  well today, where they still fail, and how to get a usable first image without
+  fighting the tool.</p>
+
+  <h2>How an image generator makes a picture, in plain English</h2>
+  <p>The generator does not search a photo library and it does not collage existing
+  pictures together. Google's research team describes its Imagen system as a diffusion
+  model: a system that learned, from very large numbers of example images, how a
+  pattern of random dots gradually becomes a recognisable image. To make your picture,
+  it starts from that random pattern — visual static — and refines it step by step,
+  guided by your words, beginning at low resolution and progressively increasing the
+  detail until an image that never existed before appears. Two practical consequences
+  follow. First, the same prompt rarely produces the identical image twice, because
+  each run starts from a different random pattern. Second, the tool is predicting what
+  a picture matching your words would look like, not remembering a real scene — which
+  explains both its creativity and its strangest mistakes.</p>
+
+  <h2>What they can do well</h2>
+  <p>Verified against the providers' own help pages (checked 13 October 2026), the
+  mainstream tools inside chat apps can reliably:</p>
+  <ul>
+    <li><strong>Create a brand-new image from a description.</strong> OpenAI's help
+    centre documents creating images by describing them in a conversation, or through
+    the Images section of ChatGPT — available on all tiers, on web, iOS, and Android.
+    Google's image generation (its Nano Banana models) is likewise built into the
+    Gemini app and other Google products.</li>
+    <li><strong>Edit an existing image.</strong> You can upload a photo and describe the
+    change — remove an object, change a background, restyle the scene — or select part
+    of a generated image and edit just that area.</li>
+    <li><strong>Work in a chosen shape and style.</strong> ChatGPT Images offers an
+    aspect-ratio picker (or you can name the shape in your prompt), and style words in
+    the prompt — watercolour, flat illustration, photograph — steer the result
+    strongly.</li>
+    <li><strong>Iterate quickly.</strong> Generation may take a few minutes for complex
+    requests, per OpenAI, but follow-up edits happen in the same conversation: "make
+    the sky warmer," "remove the person on the left." Your created images are saved
+    under Images in ChatGPT so you can revisit them.</li>
+  </ul>
+  <p>One naming note that saves confusion: OpenAI has retired the old DALL&middot;E
+  tool inside ChatGPT — its help centre directs everyone to ChatGPT Images instead.
+  Older tutorials that send you looking for DALL&middot;E menus are out of date.</p>
+
+  <h2>Where they still struggle</h2>
+  <ul>
+    <li><strong>Hands, text, and fine detail.</strong> Beginner guides across the web
+    agree on this, and it holds up: fingers merge or multiply, small text turns to
+    nonsense lettering, and intricate patterns unravel on close inspection.</li>
+    <li><strong>Exact counts and exact placement.</strong> Google's researchers state
+    plainly that these models cannot reliably produce a specific number of objects —
+    "ten apples" — or place items exactly as a complex spatial description demands,
+    and that as prompts grow more complex the model may drop details you asked for or
+    add details you did not.</li>
+    <li><strong>Consistency across images.</strong> Ask for the same character in five
+    scenes and you will likely get five similar strangers. Keeping one character,
+    product, or logo identical across a series remains unreliable without specialised
+    workflows.</li>
+    <li><strong>Surgical editing.</strong> OpenAI's own help concedes that in its
+    editor, highlights are not always precise and edits may extend beyond the area
+    you selected. Expect an edit to change a neighbourhood of the image, not a single
+    pixel.</li>
+    <li><strong>Knowing what is real.</strong> The tool will happily generate a
+    convincing picture of an event that never happened. A generated image is an
+    illustration, never evidence.</li>
+  </ul>
+
+  <h2>Your first image, step by step</h2>
+  <ol>
+    <li>Open your chat app and start a conversation. Either describe the image in an
+    ordinary message ("Create an image of…") or open the app's Images section if it
+    has one.</li>
+    <li>Write a prompt with four ingredients: the <strong>subject</strong> (a red
+    bicycle), the <strong>setting</strong> (leaning against a cottage fence), the
+    <strong>style</strong> (soft watercolour illustration), and the
+    <strong>shape</strong> if it matters (wide/landscape).</li>
+    <li>Wait for the result — simple images arrive quickly; complex ones can take a
+    few minutes.</li>
+    <li>Inspect it like a proofreader: zoom in on hands, faces, any words, edges where
+    objects meet, and the background. Most flaws hide at full zoom, not in the
+    thumbnail.</li>
+    <li>Ask for one change at a time in a follow-up message, rather than re-describing
+    the whole scene.</li>
+    <li>Save the version you like using the image controls (OpenAI documents Copy,
+    Save, and Share on generated images) before experimenting further — iterations
+    cannot always be undone.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the subject matches your description at
+  a glance, a zoomed inspection shows no garbled hands or nonsense text, and the image
+  still looks right at the size you will actually use it. If a flaw only appears at
+  full zoom and the image will only ever be shown small, it may already be good
+  enough.</p>
+
+  <h2>Fixing a flawed image instead of starting over</h2>
+  <p>When an image is 90 percent right, editing beats regenerating — a fresh generation
+  is a fresh roll of the dice. Select the flawed area with the editor's selection tool
+  if your app offers one, describe only that change ("remove the extra finger,"
+  "make the sign blank"), and accept that the edit may touch nearby pixels too, as
+  OpenAI warns. If the same flaw survives two edit attempts, change strategy: simplify
+  the prompt (fewer objects, hands out of frame, no text in the scene) rather than
+  repeating it. Most "impossible" images become easy once the request stops demanding
+  the tool's known weak spots.</p>
+
+  <h2>A can / cannot comparison table</h2>
+  <table>
+    <tr><th>Ask</th><th>Realistic expectation</th></tr>
+    <tr><td>An original illustration for a blog post or card</td><td>Can — a strength of every mainstream tool</td></tr>
+    <tr><td>A photo-style image of a place that exists</td><td>Can generate one — but it is invented, not a real photograph of that place</td></tr>
+    <tr><td>Your exact product, pet, or child, recognisable</td><td>Cannot reliably — uploads can be edited or restyled, but likeness drifts</td></tr>
+    <tr><td>A poster with a headline spelled correctly</td><td>Risky — text rendering has improved but still garbles; check every letter, or add text later in another app</td></tr>
+    <tr><td>Exactly seven chairs around a table</td><td>Cannot reliably — counting is a documented weakness</td></tr>
+    <tr><td>The same character across a storybook</td><td>Cannot reliably without specialised workflows</td></tr>
+    <tr><td>Removing an object from your own photo</td><td>Can — a common, well-supported edit, with some spill beyond the selected area</td></tr>
+  </table>
+
+  <h2>Before you publish: a short rights and safety check</h2>
+  <ul>
+    <li><strong>Check the tool's terms for your use.</strong> Beginner guides rightly
+    flag licensing: whether you may use a generated image commercially depends on the
+    provider and your plan. Read the current terms before an image goes on anything
+    you sell.</li>
+    <li><strong>Only upload what you have the right to edit.</strong> Restyling someone
+    else's photograph or artwork does not make it yours.</li>
+    <li><strong>Be careful with real people and logos.</strong> Do not publish generated
+    images that appear to show a real person doing something they did not do, or that
+    borrow a company's branding — expect tools to refuse some of these requests, and
+    treat a refusal as a boundary, not a bug.</li>
+    <li><strong>Label honestly where it matters.</strong> If an image could be mistaken
+    for a real photograph of a real event, say it was AI-generated.</li>
+  </ul>
+
+  <h2>FAQ</h2>
+  <p><strong>Is it copying an existing picture?</strong> No — the image is generated
+  from a random pattern guided by your prompt, not retrieved or stitched together.
+  That said, a prompt that names a living artist's style or a protected character can
+  still produce something you should not use commercially; the pre-publish check above
+  applies.</p>
+  <p><strong>Why did the same prompt give me a different image?</strong> Each
+  generation starts from a different random pattern, so variation is built in. Save
+  versions you like as you go.</p>
+  <p><strong>Which tool should a beginner start with?</strong> The one already inside
+  the chat app you use. Both ChatGPT Images and Google's Gemini image generation are
+  documented by their makers for creating and editing images from plain descriptions,
+  and the skills in this guide — specific prompts, zoom inspection, one change at a
+  time — transfer between all of them.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>AI Starter Guide — plain-English introductions to AI chatbots. General information only, not professional advice. AI tools change quickly — verify current features on each provider's own site.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

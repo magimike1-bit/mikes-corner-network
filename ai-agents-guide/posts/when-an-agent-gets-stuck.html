@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When an Agent Gets Stuck or Loops: How to Break Out — Using AI Agents</title>
+<meta name="description" content="How to spot an AI agent stuck in a loop, why loops happen, a step-by-step break-out procedure with a handoff note, and the setup habits that prevent spinning in the first place.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>When an agent gets stuck or loops: how to spot it and break out</h1>
+  <p class="meta">Troubleshooting &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/when-an-agent-gets-stuck.jpg" alt="Flat illustration of a dizzy orange robot walking in a circle around a rug, its teal footprints forming a complete loop." loading="lazy" width="1920" height="1280">
+  <figcaption>A loop looks busy — the footprints show it going nowhere.</figcaption>
+</figure>
+
+
+
+  <p>Every agent user meets this eventually. You asked for something reasonable
+  twenty minutes ago, and the agent is still working — except "working" turns out
+  to mean doing the same thing, slightly differently, over and over. It searches,
+  dislikes the result, searches again with a tweaked query. It fixes a problem,
+  announces success, and the same problem is still there. Or two of its actions
+  quietly undo each other, back and forth. A stuck agent rarely looks broken. It
+  looks busy. This guide is about recognising the difference, stopping the run
+  safely, and restarting in a way that doesn't walk straight back into the same
+  circle.</p>
+
+  <h2>What stuck actually looks like</h2>
+  <p>Loops have recognisable shapes. Any one of these is a warning sign:</p>
+  <ul>
+    <li><strong>The same failure returns after a claimed fix</strong> — twice or
+    more. The agent says it's sorted; it isn't; it says so again.</li>
+    <li><strong>Its fixes undo each other.</strong> Successive attempts change
+    the same few things back and forth, like a pendulum, instead of moving
+    somewhere new.</li>
+    <li><strong>The explanation never changes</strong> — or changes completely
+    every time. Both mean it isn't learning from the last attempt.</li>
+    <li><strong>Time and usage drain with no new information.</strong> Each lap
+    produces activity but no new fact, no narrowed-down cause, no partial result
+    you could use.</li>
+    <li><strong>You've stopped reading its updates</strong> and started just
+    letting it run. That's the human half of the loop, and it's the one that
+    makes the others expensive.</li>
+  </ul>
+  <p>The common thread is a lack of progress you can point at. Genuine hard work
+  produces new evidence each round: a cause ruled out, a source found, a step
+  verified. A loop produces motion without evidence.</p>
+
+  <h2>Why agents loop</h2>
+  <p>Understanding the cause makes the cure obvious, and the causes are
+  refreshingly unmysterious. Developer write-ups on agent reliability name the
+  same few, again and again:</p>
+  <ul>
+    <li><strong>The agent can't tell it has failed.</strong> If nothing in its
+    results clearly says "that didn't work," it has no reason to change course.
+    Anthropic's guidance to builders makes the same point from the other side:
+    an agent needs ground truth from its environment at each step — real tool
+    results, real outcomes — to judge whether it's making progress.</li>
+    <li><strong>It has no reliable memory of its own attempts.</strong> An agent
+    builds each new step on its previous output. If an early wrong guess is still
+    sitting in that history, later steps keep rebuilding on it, and the guess
+    returns wearing new clothes. Without a record of what was tried and what
+    happened, a repeat doesn't look like a repeat.</li>
+    <li><strong>"Done" was never defined.</strong> If the agent doesn't know
+    exactly what a finished result looks like — or what "give up and ask" looks
+    like — it can't recognise either state, so it defaults to continuing.</li>
+    <li><strong>The goal may be impossible as stated.</strong> A task built on a
+    wrong assumption — a file that doesn't exist, a source that never publishes
+    the data requested — can be retried forever without ever succeeding.</li>
+  </ul>
+
+  <h2>First move: stop the run</h2>
+  <p>Before any diagnosis: pause or cancel the run. Two reasons. First, a looping
+  agent with real permissions can keep taking real actions — re-sending, re-saving,
+  re-buying — and you want the actions stopped while you think. Second, on any
+  metered plan, a running agent is a spending agent: as the
+  <a href="/posts/how-much-do-ai-agents-cost.html">cost guide</a> explains, usage
+  billing charges for attempts, not just successes. Anthropic's guidance flags
+  the same structural fact — an agent's autonomy means higher costs and the
+  potential for errors to compound across steps. Pausing costs you nothing; the
+  run's history and partial work stay available for the diagnosis. Never let an
+  agent "push through" a loop on the theory that one more try will fix it. One
+  more try is what a loop is made of.</p>
+
+  <h2>The break-out procedure</h2>
+  <ol>
+    <li><strong>Stop the run</strong> using the product's pause or cancel control.
+    Don't approve any pending action it has queued.</li>
+    <li><strong>Read the last few steps, not the whole history.</strong> You're
+    looking for the repeated action: the same search, the same edit, the same
+    error message appearing again.</li>
+    <li><strong>Write down, in plain words, three things:</strong> what it was
+    trying to do, the exact error or wrong result it kept hitting, and every
+    approach it already tried. This takes two minutes and is the single most
+    valuable step — it's the record the agent itself was missing.</li>
+    <li><strong>Check the assumption underneath.</strong> Ask: is the thing it's
+    looking for actually there? Is the goal achievable as phrased? A large share
+    of loops die here, because the task — not the agent — was broken.</li>
+    <li><strong>Change something structural before retrying.</strong> Never
+    restart with "try again." Restart with a different approach, a smaller scope,
+    a clearer definition of done, or a missing piece of information supplied.
+    Reliability practitioners put it as a rule: a failed action should trigger a
+    different strategy, not a retry of the same one.</li>
+    <li><strong>Shrink the task.</strong> Ask for the smallest useful piece
+    first — one source checked, one section drafted, one record updated — and
+    verify it before allowing the rest. A small success you can check beats a
+    large run you can't.</li>
+    <li><strong>If two structured retries still fail, start a fresh session —
+    but hand it the note from step 3.</strong> A brand-new session with no notes
+    forgets everything the old one ruled out and walks back into the same wrong
+    idea. With the note — goal, exact error, approaches tried and why they
+    failed, and what has been proven <em>not</em> to be the cause — the new
+    session starts ahead of the loop instead of at the beginning of it.</li>
+    <li><strong>Cap the new run.</strong> Tell the agent, in the brief itself,
+    how many attempts are allowed before it must stop and report back — and what
+    "report back" should contain.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the restarted agent produces
+  something measurably new within its first few steps — a cause ruled out with
+  evidence, a partial result you can verify, or a clear statement of exactly
+  what is blocking it. If step three of the new run already resembles the old
+  loop, it isn't a fresh start; stop it and use the decision check below.</p>
+
+  <h2>Prevention: set the job up so it can't spin</h2>
+  <p>Most loops are preventable at brief time, with habits drawn from how the
+  professionals build these systems:</p>
+  <ul>
+    <li><strong>Define "done" and "give up" in the brief.</strong> State what a
+    finished result contains, and instruct the agent to stop and report after a
+    set number of failed attempts instead of continuing indefinitely.</li>
+    <li><strong>Know that real products have a built-in version of this.</strong>
+    In OpenAI's Agents SDK, for example, a run proceeds in a loop of model calls
+    and tool calls, and exceeding a maximum-turns limit stops the run with a
+    MaxTurnsExceeded error — the limit can be disabled, which is exactly what you
+    don't want. Anthropic gives builders the same advice: include stopping
+    conditions, such as a maximum number of iterations, to maintain control.</li>
+    <li><strong>Ask for a visible plan and progress notes.</strong> An agent that
+    lists its steps and ticks them off is maintaining the tried-and-outcome
+    record whose absence causes loops — and you can spot a repeat in its list
+    far earlier than in its prose.</li>
+    <li><strong>Require a difference before a retry.</strong> Make it a standing
+    instruction: never attempt the same approach twice in a row; state what will
+    be different first. Bounded retries with escalation — try, try differently,
+    then hand it back to you — beat open-ended persistence.</li>
+    <li><strong>Keep consequential actions behind approval,</strong> as covered
+    in <a href="/posts/staying-safe-with-agents.html">staying safe with
+    agents</a>, and prefer read-only tasks while a new agent earns trust. A loop
+    that can only read is an annoyance; a loop that can send or spend is an
+    incident.</li>
+    <li><strong>Test on a small, safe version first.</strong> Anthropic
+    recommends extensive testing in sandboxed environments before trusting an
+    agent with real work. The home version of that advice: first run on a copy,
+    a draft, or a single record — never the whole mailbox.</li>
+  </ul>
+
+  <h2>When to stop delegating and do it yourself</h2>
+  <p>Sometimes the right break-out is out — of the agent entirely. Do the task
+  yourself, or split off the stuck part and do only that by hand, when: the same
+  goal has looped in two separate sessions despite a proper handoff note; the
+  task turns out to need a judgment call the agent keeps guessing at; the cost
+  of further attempts — in usage, time, or risk to real data — exceeds the cost
+  of just doing it; or the agent's partial output is good enough that finishing
+  manually is faster than supervising another run. None of these is a failure of
+  the tool or of you. Agents are goal-seeking text machines, as the
+  <a href="/posts/what-ai-agents-are.html">first guide in this series</a> puts
+  it, and recognising the boundary of a task that fits them is a skill, not a
+  surrender. Note what made the task a bad fit — that note is the start of a
+  better brief next time.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Is a long-running agent always stuck?</strong> No. Long is fine;
+  circular is not. Check for new evidence: ruled-out causes, found sources,
+  verified steps. If each update contains something genuinely new, it's working.
+  If updates repeat, it's looping.</p>
+  <p><strong>Should I just start a new chat when it gets stuck?</strong>
+  Eventually — but not first, and never empty-handed. Write the handoff note
+  (goal, exact error, approaches tried, what's been ruled out) in the old session
+  before you leave it, and paste it into the new one.</p>
+  <p><strong>Can a stuck agent do damage?</strong> It can waste usage and time,
+  and — if it has action permissions — repeat a real action, which is why the
+  first move is always to stop the run and why approvals and read-only starts
+  matter. Keep its permissions at the minimum the task needs, and a loop stays a
+  nuisance instead of becoming a cleanup job.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

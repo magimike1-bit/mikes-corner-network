@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agents vs Chatbots vs Automation: Which Do You Need? — Using AI Agents</title>
+<meta name="description" content="Chatbots, automation workflows, and AI agents compared in plain English: what each one actually does, one job done three ways, and a five-question check for picking the right one.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>AI agents vs chatbots vs automation: which one do you actually need?</h1>
+  <p class="meta">Basics &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/ai-agents-vs-chatbots-vs-automation.jpg" alt="Flat illustration of three robots: one under an empty speech bubble, one on a rail platform, one with a compass at a fork." loading="lazy" width="1920" height="1280">
+  <figcaption>Chatbots talk, workflows follow a fixed track, agents choose a direction.</figcaption>
+</figure>
+
+
+
+  <p>Three terms get used as if they were interchangeable: chatbot, automation,
+  and AI agent. Vendors swap them freely — a scripted help widget gets marketed as
+  an "agent," and a simple rule that copies data between two apps gets an "AI"
+  label. The confusion costs people money and patience, because the three are
+  genuinely different tools with different strengths. This guide separates them
+  using the definitions the builders themselves publish, then gives you a short
+  check for deciding which one a given job actually needs.</p>
+
+  <h2>The short version</h2>
+  <p>A <strong>chatbot</strong> converses: you type, it replies. An
+  <strong>automation workflow</strong> follows a fixed path you designed in
+  advance: when this happens, do that. An <strong>AI agent</strong> is given a
+  goal and decides the steps itself, choosing tools and adjusting as it goes.
+  Chatbots talk, workflows repeat, agents decide. Most real products mix all
+  three — but knowing which part is which tells you what to expect from it, what
+  it will cost, and how it can fail.</p>
+
+  <h2>Three definitions that actually hold up</h2>
+  <p><strong>Chatbot.</strong> At its core, a chatbot is a conversational
+  interface — primarily a way to talk with a system. Some are simple scripts that
+  match your words to prepared answers; others use a language model to phrase
+  replies freely. Either way, conversation is the whole job. A chatbot can be the
+  front door to an agent behind it, but conversation alone doesn't make a system
+  agentic: if nothing acts on the world beyond the chat window, you have a
+  chatbot, however clever its answers sound.</p>
+  <p><strong>Automation workflow.</strong> A workflow follows a path designed in
+  advance. Anthropic, in its engineering guidance for builders, defines workflows
+  as systems where models and tools are orchestrated through predefined code
+  paths — the route is fixed before anything runs. The everyday version is
+  Zapier's: a Zap is an automated workflow built from a trigger and one or more
+  actions, and every time the trigger event happens, the same action steps run.
+  Nothing about the route is improvised. That rigidity is the point: the same
+  input produces the same behaviour, every time.</p>
+  <p><strong>AI agent.</strong> Anthropic's matching definition: an agent is a
+  system where the model dynamically directs its own process and tool usage,
+  staying in control of how it accomplishes the task. You supply the goal, not
+  the route. The agent plans, picks tools, looks at what came back, and decides
+  what to do next — the abilities covered in the first guide in this series,
+  <a href="/posts/what-ai-agents-are.html">what AI agents are</a>. Under the
+  hood, an agent is built on a model enhanced with retrieval, tools, and memory;
+  it's those additions, plus control over the steps, that separate it from a
+  chatbot answering questions.</p>
+
+  <h2>Side by side</h2>
+  <table>
+    <thead>
+      <tr><th></th><th>Chatbot</th><th>Automation workflow</th><th>AI agent</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Who decides the steps?</strong></td><td>Nobody — it replies turn by turn</td><td>You do, in advance</td><td>The model does, as it works</td></tr>
+      <tr><td><strong>Best at</strong></td><td>Answering, explaining, drafting in conversation</td><td>The same job, run the same way, many times</td><td>Jobs where the steps can't be known in advance</td></tr>
+      <tr><td><strong>Handles a surprise</strong></td><td>Answers anyway — sometimes by making something up</td><td>Breaks or skips: the path has no branch for it</td><td>Can adjust its approach and try another route</td></tr>
+      <tr><td><strong>Predictability</strong></td><td>Replies vary; actions don't happen</td><td>Highest — same input, same actions</td><td>Lowest — two runs of the same task can differ</td></tr>
+      <tr><td><strong>Failure mode</strong></td><td>A confident answer that happens to be wrong</td><td>Stops, skips, or misfires when input doesn't fit the path</td><td>Drifts off-goal, or compounds an early mistake across later steps</td></tr>
+      <tr><td><strong>How usage is counted</strong></td><td>Per conversation, in the chat window</td><td>Per completed action (Zapier counts a task per successful action)</td><td>Per step the run takes — longer runs consume more</td></tr>
+      <tr><td><strong>Your main job</strong></td><td>Ask good questions</td><td>Design the path carefully once</td><td>Brief it well, then check its work</td></tr>
+    </tbody>
+  </table>
+  <p>The row that matters most is predictability. Anthropic's guidance to builders
+  is blunt about the trade: workflows offer predictability and consistency for
+  well-defined tasks, while agents are the better option when flexibility and
+  model-driven decision-making are what's needed — and agentic systems generally
+  trade latency and cost for that performance. An agent is not an upgrade to a
+  workflow. It's a different bargain.</p>
+
+  <h2>One job, three ways</h2>
+  <p>Take a small-business staple: a customer emails asking where their order
+  is.</p>
+  <ul>
+    <li><strong>As a chatbot:</strong> the customer types the question into a chat
+    window and gets an answer drawn from your help pages — "orders usually ship in
+    two business days." Helpful, but it can't see <em>their</em> order.</li>
+    <li><strong>As a workflow:</strong> the email arriving is the trigger. The
+    workflow extracts the order number, looks it up, and sends the tracking status
+    from a template. It works flawlessly — until an email arrives with no order
+    number, or two, or a question that isn't about shipping at all. The path has
+    no branch for those, so they need a human or a fallback rule you designed.</li>
+    <li><strong>As an agent:</strong> the agent reads the email, works out what the
+    customer is actually asking, finds the order, checks the carrier, notices the
+    parcel is late, and drafts a reply that says so. It also might misread the
+    email, check the wrong order, or state the late reason with more confidence
+    than the evidence supports — which is why its draft still gets checked, as
+    covered in <a href="/posts/checking-an-agents-work.html">checking an agent's
+    work</a>.</li>
+  </ul>
+  <p>Anthropic points at this exact shape in its own guidance: customer support
+  is a promising fit for agents precisely because it combines a familiar chatbot
+  interface with real action through tools. The conversation is the chatbot part.
+  The looking-up and doing are the agent part.</p>
+
+  <h2>They overlap more than the marketing admits</h2>
+  <p>Real systems are usually hybrids. One product can contain all three layers:
+  a chatbot as the interface a customer talks to, a fixed workflow validating and
+  routing each request, and an agent handling only the part that needs judgment —
+  interpreting a messy, unstructured message, or choosing among several tools.
+  Modern workflow tools also blur the line from the other direction: a workflow
+  can contain a step where a model drafts or classifies something, and it is
+  still a workflow, because the path was designed in advance and the model only
+  fills in a step. When a vendor calls everything an agent, ask the deciding
+  question: who chose the steps — a person in advance, or the model at run time?
+  The honest answer tells you which product you actually have.</p>
+
+  <h2>Which one do you need? A five-question check</h2>
+  <ol>
+    <li><strong>Can you write the steps down in advance, in order?</strong> If
+    yes, you almost certainly want a workflow. It will be faster, cheaper, and
+    identical every run.</li>
+    <li><strong>Are the inputs structured and the rules stable?</strong> Forms,
+    order numbers, known categories — structured inputs with stable rules are
+    where fixed workflows shine, and they're easier to test and audit.</li>
+    <li><strong>Does the job change shape every time?</strong> If each instance
+    needs different sources consulted, different tools chosen, or a judgment call
+    about what "done" means, that's the agent's territory.</li>
+    <li><strong>What happens when it goes wrong?</strong> If a wrong action is
+    expensive or hard to reverse — sending external messages, moving money,
+    deleting data — keep human approval in front of it regardless of which tool
+    you pick, and favour the option whose behaviour you can predict.</li>
+    <li><strong>Is conversation itself the product?</strong> If people just need
+    answers in a chat window, a chatbot is the whole purchase. Don't pay agent
+    prices for a talking FAQ.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> for any tool you're considering,
+  you can say which of the three it is, which question above decided it, and what
+  it will predictably do with a weird input. If the last part is "unknown," start
+  with the simpler tool. Anthropic's advice to professional builders applies
+  unchanged to buyers: find the simplest solution that works, and add complexity
+  only when it demonstrably earns its place.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Is a chatbot with AI in it an agent?</strong> Not by itself. If it
+  only converses — even brilliantly — it's a chatbot. It becomes part of an agent
+  system when a model behind it can choose actions and use tools to pursue a
+  goal, not just reply.</p>
+  <p><strong>My automation tool added an "AI step." Did it become an agent?</strong>
+  No. A model drafting text inside one step of a pre-designed path is still a
+  workflow; the route didn't change, and the model didn't choose it.</p>
+  <p><strong>Which is cheapest?</strong> Roughly in order: a plain chatbot, then
+  a fixed workflow billed per action, then an agent — because agent runs consume
+  usage on every step they take. The guide on
+  <a href="/posts/how-much-do-ai-agents-cost.html">how much AI agents cost</a>
+  breaks down the actual pricing models with dated vendor prices.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

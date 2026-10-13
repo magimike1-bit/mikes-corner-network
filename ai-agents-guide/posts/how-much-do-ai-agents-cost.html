@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Much Do AI Agents Cost? Pricing Models Explained — Using AI Agents</title>
+<meta name="description" content="AI agent pricing explained in plain terms: the four ways vendors charge (per seat, per task, per credit, per token), with prices checked on official vendor pages on 13 October 2026 and a worked cost example.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>How much do AI agents cost? The four ways you actually get charged</h1>
+  <p class="meta">Money &middot; 8 min read &middot; Prices checked 13 October 2026</p><figure class="post-figure">
+  <img class="post-image" src="../images/how-much-do-ai-agents-cost.jpg" alt="Flat illustration of a teal robot dropping a coin into one of four glass jars filled with orange coins on a counter." loading="lazy" width="1920" height="1280">
+  <figcaption>Four pricing models, four different jars — the trick is knowing which one you are filling.</figcaption>
+</figure>
+
+
+
+  <p>"How much does an AI agent cost?" sounds like it should have a simple answer.
+  It doesn't — not because vendors are hiding the number, but because there is no
+  single thing being sold. Depending on the product, you might be paying for a seat,
+  for each action the agent completes, for a bundle of credits, or for the raw text
+  the underlying model reads and writes. Each model bills differently, grows
+  differently, and surprises you in a different place. This guide walks through all
+  four, using prices taken from the vendors' own pricing pages on 13 October 2026.</p>
+
+  <p><em>General information only, not financial advice. Prices change often — every
+  figure below was checked against the vendor's official pricing page on the date
+  shown, in US dollars, before tax where a vendor notes tax is excluded. Always
+  confirm the current price on the vendor's page before you buy.</em></p>
+
+  <h2>The short version</h2>
+  <p>For an individual, a capable agent product starts at about $20 a month on a
+  subscription. For a team, per-seat business plans run from $20 to $100 per person
+  per month depending on how much usage the seat includes. Platform products that
+  let a whole organisation build agents charge in credits or tasks instead —
+  hundreds of dollars a month is normal there. And if you build on a model API
+  directly, you pay per token, which can work out to a few cents per task. Which of
+  those is "the price of an AI agent" depends entirely on which shelf you are
+  shopping on.</p>
+
+  <h2>The four ways you actually get charged</h2>
+  <p><strong>1. Per seat.</strong> A flat monthly fee per person, like any other
+  software subscription. Anthropic's Claude Pro costs $20 a month billed monthly,
+  or $17 a month on an annual plan ($200 billed up front), and it includes Claude
+  Code and the ability to hand off and schedule tasks. OpenAI's ChatGPT Business
+  Standard seat is $20 per user per month billed annually ($25 billed monthly).
+  The catch with seats is that the fee buys a usage allowance, not unlimited work —
+  more on that below.</p>
+  <p><strong>2. Per action unit.</strong> You pay for what the agent does, measured
+  in the vendor's own unit. Automation platform Zapier counts a "task" each time a
+  workflow successfully completes an action, and its plans are sold in monthly task
+  allowances. Microsoft's Copilot Studio counts Copilot Credits, which are consumed
+  whenever an agent performs a task or generates a response. The unit is easy to
+  budget around — until you realise each vendor defines its unit differently.</p>
+  <p><strong>3. Per token.</strong> If you build an agent on a model provider's API,
+  there is no subscription at all. You pay for tokens — roughly, pieces of words —
+  that the model reads (input) and writes (output). This is the cheapest way to run
+  an agent at low volume and the easiest way to get a shocking bill at high volume,
+  because every step, retry, and tool result in a long task adds tokens.</p>
+  <p><strong>4. Custom.</strong> At the top end, pricing simply isn't published.
+  OpenAI's Enterprise plan and Zapier's Enterprise plan are both "contact us"
+  arrangements, and Microsoft sells Copilot Studio partly through prepaid and
+  negotiated plans. If a vendor won't show you a number, expect the number to be
+  large and negotiated.</p>
+
+  <h2>What the price pages say (checked 13 October 2026)</h2>
+  <table>
+    <thead>
+      <tr><th>Product</th><th>How you are charged</th><th>Price checked 13 Oct 2026</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Claude Pro (Anthropic)</td><td>Per seat</td><td>$20/month monthly billing, or $17/month annual ($200 up front)</td></tr>
+      <tr><td>Claude Max (Anthropic)</td><td>Per seat, higher usage</td><td>From $100/month, for 5x or 20x Pro's usage</td></tr>
+      <tr><td>ChatGPT Business (OpenAI)</td><td>Per seat</td><td>Standard $20/user/month annual ($25 monthly); Premium $100 annual ($125 monthly)</td></tr>
+      <tr><td>Microsoft 365 Copilot</td><td>Per seat</td><td>$30/user/month, paid yearly; includes internal agent-building in Copilot Studio</td></tr>
+      <tr><td>Copilot Studio (Microsoft)</td><td>Per credit pack, or pay-as-you-go</td><td>$200/month per pack of 25,000 Copilot Credits</td></tr>
+      <tr><td>Zapier</td><td>Per task</td><td>Free: $0 with 100 tasks/month; Professional from $19.99/month; Team from $69/month</td></tr>
+      <tr><td>Claude API (Anthropic)</td><td>Per token</td><td>Haiku 4.5: $1 in / $5 out per 1M tokens; Sonnet 4.5: $3 / $15; Opus 4.5: $5 / $25</td></tr>
+    </tbody>
+  </table>
+  <p>Two details in that table matter more than the headline numbers. First,
+  Microsoft is explicit that a varying number of Copilot Credits is billed
+  depending on the specific usage — the same agent doing a harder job costs more
+  credits, so the pack price is a ceiling on predictability, not a fixed cost per
+  task. Second, Claude's subscription limits are not a message count. Anthropic
+  says usage resets on a rolling five-hour window, with weekly limits on paid
+  plans, and that how much you can do depends on the length and complexity of your
+  conversations, the model you choose, and the features you use. Two people on the
+  same $20 plan can get very different amounts of agent work out of it.</p>
+
+  <h2>A worked example: what 1,000 agent tasks cost on an API plan</h2>
+  <p>Per-token pricing feels abstract until you run the arithmetic once. Take a
+  modest agent task — say, reading a short document and drafting a reply — and
+  assume it uses 20,000 input tokens and 3,000 output tokens per run. Those are
+  illustrative assumptions, not measurements; substitute your own and the method
+  still works. At Anthropic's published rates:</p>
+  <table>
+    <thead>
+      <tr><th>Model</th><th>Input cost per task</th><th>Output cost per task</th><th>Per task</th><th>1,000 tasks</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Claude Haiku 4.5 ($1 / $5 per 1M)</td><td>$0.020</td><td>$0.015</td><td>$0.035</td><td>about $35</td></tr>
+      <tr><td>Claude Sonnet 4.5 ($3 / $15 per 1M)</td><td>$0.060</td><td>$0.045</td><td>$0.105</td><td>about $105</td></tr>
+      <tr><td>Claude Opus 4.5 ($5 / $25 per 1M)</td><td>$0.100</td><td>$0.075</td><td>$0.175</td><td>about $175</td></tr>
+    </tbody>
+  </table>
+  <p>The lesson is not the specific totals — your tasks will differ. The lesson is
+  the shape: model choice alone swings the same workload five-fold, from roughly
+  $35 to roughly $175, and volume multiplies whatever you pick. It also explains
+  why Anthropic prices tool use the way it does: tool calls are billed on the total
+  input tokens sent, including the tool definitions themselves, plus the output
+  tokens — an agent that makes many tool calls per task is paying for every one of
+  those round trips. For work that doesn't need an instant answer, Anthropic's
+  Batch API discounts both input and output tokens by 50%, which is the single
+  easiest saving on this page.</p>
+
+  <h2>The costs that are not on the price page</h2>
+  <p><strong>Overages.</strong> What happens when you hit a limit is part of the
+  price. On Zapier, reaching your task limit switches you to pay-per-task billing
+  at a higher per-task rate, unless you turn that off — in which case your
+  workflows simply pause until the next usage period. On a Claude subscription,
+  hitting a limit means waiting for the window to reset, moving to a higher plan,
+  or turning on usage credits billed at standard API rates. Neither is a scandal;
+  both are things you want to know before the busy week, not during it.</p>
+  <p><strong>Retries and loops.</strong> Usage-based billing charges for attempts,
+  not just successes — with one friendly exception: Zapier only counts an action
+  when it completes successfully, and triggers and failed actions don't count.
+  Token billing has no such mercy. An agent that retries a failing step ten times
+  has bought ten runs. This is why the guide on
+  <a href="/posts/when-an-agent-gets-stuck.html">what to do when an agent gets
+  stuck</a> belongs next to this one: on a metered plan, a looping agent is a
+  billing problem, not just an annoyance. Relatedly, if an agent reaches your apps
+  through Zapier's MCP connection, each tool call uses two tasks from your plan —
+  chatty agents burn allowances faster than the sticker suggests.</p>
+  <p><strong>Your checking time.</strong> Every agent output still needs the
+  verification step described in the guide on
+  <a href="/posts/checking-an-agents-work.html">checking an agent's work</a>. That
+  time is a real cost of running an agent, and it doesn't shrink just because the
+  subscription does. Price it in honestly when you compare an agent against doing
+  the task yourself.</p>
+
+  <h2>Estimate your own bill in about ten minutes</h2>
+  <ol>
+    <li><strong>Name the job and count it.</strong> Pick one recurring task and
+    estimate how many times a month it runs. Fifty times and five thousand times
+    are different products.</li>
+    <li><strong>Decide which shelf you're on.</strong> One person doing varied
+    work: a seat. A fixed workflow between apps: tasks. A team building many
+    agents: credits. Building your own: tokens.</li>
+    <li><strong>Pull the current price</strong> for that shelf from the vendor's
+    pricing page — not from an article, including this one. Prices checked on
+    13 October 2026 will drift.</li>
+    <li><strong>Do the unit math.</strong> Seats: fee x people. Tasks or credits:
+    runs x units per run. Tokens: use the worked-example method above with your
+    best guess at tokens per run.</li>
+    <li><strong>Add a slop factor.</strong> Retries, longer-than-average tasks,
+    and overage rates all push real bills above the clean estimate. If the padded
+    number still looks fine, the clean one will too.</li>
+    <li><strong>Check the limit behaviour</strong> — pause, pay-per-task, or wait
+    for a reset — and pick the failure mode you can live with.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> you can state, in one sentence,
+  "this agent costs about $X a month at Y runs, and if it exceeds that, Z happens."
+  If you can't fill in Z, you haven't finished estimating.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Can I use an AI agent for free?</strong> Yes, at small scale. Claude
+  has a $0 free plan, and Zapier's free plan includes 100 tasks a month. Free tiers
+  are for learning what an agent does with your actual work — treat them as trials
+  with longer clocks, not as a long-term plan.</p>
+  <p><strong>Why did my bill spike?</strong> On usage-based pricing, the usual
+  suspects are volume (more runs than expected), task length (longer documents and
+  conversations consume more tokens or credits), model choice (a premium model
+  costs several times a small one per token), and retries — an agent repeating a
+  failing step bills every attempt.</p>
+  <p><strong>Is a subscription or pay-per-token cheaper?</strong> It depends on
+  volume, and the worked example shows why: at a few hundred modest tasks a month,
+  per-token billing can come in well under a $20 seat; at heavy daily use, a flat
+  seat with a usage allowance is predictable in a way a meter never is. Run both
+  calculations with your own run count before deciding.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

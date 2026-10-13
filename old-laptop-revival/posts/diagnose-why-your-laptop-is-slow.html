@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnose Why Your Laptop Is Slow: Find the Bottleneck Before You Spend — Old Laptop Revival</title>
+<meta name="description" content="Slow is a symptom, not a diagnosis. A 15-minute routine using Task Manager, startup-impact numbers, free-space and drive-health checks that names the real bottleneck — before you buy parts or apply random fixes.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Diagnose why your laptop is slow: find the bottleneck before you spend</h1>
+  <p class="meta">Troubleshooting &middot; 10 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/diagnose-why-your-laptop-is-slow.jpg" alt="Flat illustration of a magnifying glass over an open laptop showing a gear, a small dial, and circuit traces" loading="lazy" width="1920" height="1280">
+  <figcaption>Measure first: the readings name the bottleneck.</figcaption>
+</figure>
+
+
+
+  <p>Most slow-laptop advice is a list of fixes with no diagnosis in front of
+  it: free up space, disable startup programs, scan for malware, buy an SSD,
+  add RAM. Each fix is right for somebody — and useless for everybody else.
+  Applying them in random order wastes an afternoon, and buying parts before
+  measuring wastes money. The better first step is fifteen minutes of looking
+  at what the machine itself reports, because a slow laptop is almost always
+  slow for one main reason, and the built-in tools will usually point
+  straight at it.</p>
+
+  <p>Microsoft's own guidance names the usual suspects: too little RAM,
+  accumulated junk and temporary files, too many background programs, a full
+  hard drive, malware running quietly in the background, and outdated
+  software and drivers. That list is a differential diagnosis, not a to-do
+  list. The routine below tests them in an order that separates the causes
+  quickly.</p>
+
+  <h2>Sudden or gradual? The first fork</h2>
+
+  <p>Start with one question: did the laptop get slow gradually over months,
+  or suddenly — fine last week, miserable today?</p>
+
+  <p>A <strong>gradual</strong> slowdown is the familiar accumulation story:
+  startup programs piling up one install at a time, a drive filling toward
+  the top, a mechanical hard drive aging. A <strong>sudden</strong> slowdown
+  is a different animal. When a machine falls off a cliff, think of a runaway
+  background process, a malware infection, a Windows update churning, or a
+  drive beginning to fail. Microsoft's support community answers for sudden
+  slowdowns reach for deeper tools first — Resource Monitor and a disk check
+  — because the ordinary cleanup list does not explain a cliff. Keep your
+  pattern in mind as you run the routine; it changes which result matters
+  most.</p>
+
+  <h2>The 15-minute diagnostic routine</h2>
+
+  <p>Work through these steps in order, and write down what each one shows
+  before moving on. Diagnosis is just notes, taken in the right order.</p>
+
+  <ol>
+    <li><strong>Reproduce the slowness, then open Task Manager</strong>
+    (Ctrl + Shift + Esc). Use the laptop the way that feels slow — opening
+    programs, switching between them — while you watch the Performance view.
+    One of the three main graphs will be working hardest, and that pattern
+    is the core evidence.</li>
+    <li><strong>Read the pattern.</strong> If the Disk graph stays pinned at
+    or near the top during simple tasks, the drive cannot keep up. If Memory
+    stays crowded with only a few programs open, the machine is short on RAM
+    and is swapping work to the much slower disk. If the CPU stays high
+    while you are barely doing anything, one specific process is the
+    problem — switch to the Processes view, sort by CPU, and name it.</li>
+    <li><strong>Check the Startup view and use the numbers.</strong> Task
+    Manager labels each startup program's impact, and Microsoft defines the
+    labels by measured cost: <em>Low</em> is under 300 milliseconds of CPU
+    time and under 292 KB of disk use at startup; <em>High</em> is over
+    1 second of CPU or over 3 MB of disk. A long list of High-impact entries
+    explains a laptop that takes forever to become usable after sign-in —
+    a boot problem, distinct from slowness while working.</li>
+    <li><strong>Check free space.</strong> Open Settings &gt; System &gt;
+    Storage. Microsoft treats the drive as in a low-space state when that
+    page's capacity bar turns red. A nearly full drive and a struggling
+    drive produce similar symptoms, and this check costs ten seconds.</li>
+    <li><strong>Run a malware scan.</strong> Microsoft lists malware among
+    the standard causes, and its built-in Defender can run routine scans.
+    An unexpected result here reorders everything else on this page.</li>
+    <li><strong>If Task Manager looks normal but the machine is still slow,
+    open Resource Monitor</strong> (search for it by name). It shows CPU,
+    memory, disk, and network use in more detail than Task Manager —
+    Microsoft's Q&amp;A answers recommend it precisely for the
+    "everything looks fine but it isn't" case. Sustained heavy disk activity
+    with no obvious program behind it is the pattern that points at the
+    drive itself.</li>
+  </ol>
+
+  <h2>Reading the results: symptom to bottleneck</h2>
+
+  <table>
+    <tr><th>What you saw</th><th>Likely bottleneck</th><th>First move</th></tr>
+    <tr><td>Disk pinned during simple tasks; slow boot and program
+    launches</td><td>Mechanical hard drive at its limit, or a drive starting
+    to fail</td><td>Drive-health check below; if healthy, an SSD is the fix
+    that matches</td></tr>
+    <tr><td>Memory crowded with a few programs open; worse with many browser
+    tabs</td><td>Not enough RAM — the system swaps to disk</td><td>Check what
+    the machine can take, then a RAM upgrade</td></tr>
+    <tr><td>CPU high at idle; one named process at the top</td><td>A runaway
+    background program, updater, or sync tool</td><td>Update, reconfigure, or
+    remove that program; scan for malware</td></tr>
+    <tr><td>Many High-impact startup entries; fine once settled, awful for
+    minutes after sign-in</td><td>Startup overload</td><td>Disable the High
+    entries you do not need at sign-in — it does not uninstall them</td></tr>
+    <tr><td>Storage bar red; everything sluggish</td><td>Drive nearly
+    full</td><td>Free space first, then re-measure before buying
+    anything</td></tr>
+    <tr><td>Fans loud under light work; speed comes and goes in
+    waves</td><td>Heat — the processor slows itself to protect
+    itself</td><td>Cooling and dust work, per the battery and cooling
+    guide</td></tr>
+  </table>
+
+  <p>Two cautions about the startup step. Disabling a startup program does
+  not uninstall it — the change is reversible, and anything can be switched
+  back on. And do not disable by label alone: security software and
+  driver-related entries may genuinely be needed at sign-in. Disable the
+  High-impact entries you recognise and do not need immediately; leave the
+  ones you cannot identify until you have looked them up.</p>
+
+  <h2>When the drive itself is failing</h2>
+
+  <p>One branch of the diagnosis outranks all the others. A mechanical drive
+  that is wearing out — or any drive with file-system damage — can present
+  as general slowness long before it fails outright, and it changes the job
+  from "speed up" to "protect the data first." There is real value in
+  keeping an ear and an eye on drive health over a machine's life: older
+  spinning drives often announced trouble audibly, while SSDs fail silently,
+  which makes the software checks below the only warning you get.</p>
+
+  <ol>
+    <li><strong>Back up now</strong>, before any diagnostic that stresses
+    the drive. If the drive is dying, the backup is the task; the diagnosis
+    can wait.</li>
+    <li><strong>Run chkdsk.</strong> Open Command Prompt as administrator
+    and run <code>chkdsk /f</code>. Per Microsoft's documentation, chkdsk
+    scans the file system and its metadata for logical and physical errors
+    and can fix what it finds.</li>
+    <li><strong>Do not interrupt it.</strong> Microsoft's guidance is
+    explicit: do not cancel or interrupt a running chkdsk. Let it finish,
+    note what it reports, and treat recurring errors as a replacement
+    decision, not a cleanup task.</li>
+  </ol>
+
+  <h2>What success looks like</h2>
+
+  <p>Success is not a faster laptop — not yet. Success is a sentence you can
+  say with evidence: "the disk is pinned at 100% during ordinary tasks
+  while CPU and memory sit low, so the drive is the bottleneck." Or: "boot
+  takes minutes, but the machine is fine afterwards and the Startup view
+  shows six High-impact entries." Each sentence names one fix, in the right
+  order, and rules out the parts you do not need to buy. That is the whole
+  point of diagnosing first: every guide on this site works better when it
+  is aimed at the bottleneck you actually measured.</p>
+
+  <p><a href="/posts/windows-cleanup-no-new-parts.html">Next step for the free fixes: the no-parts Windows cleanup &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

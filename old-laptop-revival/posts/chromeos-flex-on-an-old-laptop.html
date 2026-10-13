@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChromeOS Flex on an Old Laptop: Try It From USB Before You Commit — Old Laptop Revival</title>
+<meta name="description" content="ChromeOS Flex can turn a Windows 10-era laptop into a fast, browser-first machine — if it meets Google's minimums and you can live without Windows programs and Android apps. How to check, test from USB, and install.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>ChromeOS Flex on an old laptop: try it from USB before you commit</h1>
+  <p class="meta">Operating systems &middot; 10 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/chromeos-flex-on-an-old-laptop.jpg" alt="Flat illustration of a slate-blue laptop with an orange swirl above its screen and a yellow USB stick beside it" loading="lazy" width="1920" height="1280">
+  <figcaption>One spare USB stick is the whole hardware budget.</figcaption>
+</figure>
+
+
+
+  <p>ChromeOS Flex is Google's free operating system for computers that were not
+  born as Chromebooks. It replaces Windows or macOS with a light, browser-first
+  system that boots quickly, updates itself in the background, and asks very
+  little of old hardware. For a laptop whose main jobs are email, documents in
+  the browser, video calls, and streaming, it can feel like a new machine for
+  the price of a USB stick.</p>
+
+  <p>The timing matters. Microsoft ended support for Windows 10 on
+  October 14, 2025, and no longer provides security updates for it outside the
+  Extended Security Updates (ESU) program, which covers eligible consumer
+  devices until October 12, 2027. A laptop that cannot run Windows 11 is
+  therefore on borrowed time as a Windows machine — which makes a free,
+  still-supported alternative worth a serious look. But Flex is a one-way
+  door if you install it carelessly: installing erases the internal drive.
+  This guide works in the safe order — check the machine, learn the limits,
+  test from USB, and only then install.</p>
+
+  <h2>Check the machine against Google's minimums first</h2>
+
+  <p>Google publishes exact minimum requirements, and they are a genuine
+  pass/fail gate, not a suggestion. Before downloading anything, verify each
+  line against your laptop:</p>
+
+  <ul>
+    <li><strong>Processor:</strong> an Intel or AMD chip with 64-bit (x86-64)
+    architecture. Flex does not support ARM processors, so Apple Silicon Macs
+    are out entirely.</li>
+    <li><strong>Memory:</strong> at least 4 GB of RAM.</li>
+    <li><strong>Storage:</strong> at least 16 GB of internal storage.</li>
+    <li><strong>Boot:</strong> the laptop must be able to boot from a USB
+    drive, and you need full administrator access to its BIOS settings in
+    case the boot order has to change.</li>
+    <li><strong>Age of components:</strong> Google says Intel or AMD processor
+    and graphics components from 2012 and earlier, and Nvidia graphics from
+    2014 and earlier, are not recommended or supported and are unlikely to
+    work. A laptop from 2013 onward is the realistic starting point.</li>
+    <li><strong>USB stick:</strong> 8 GB or larger for the installer — and
+    everything on that stick gets erased when the installer is created, so
+    use one you can spare.</li>
+  </ul>
+
+  <p>One more distinction the quick guides skip: Google only guarantees that
+  Flex works on models on its certified models list. On a certified model,
+  the guaranteed list is long — audio in and out, the internal display, video
+  output, Wi-Fi or Ethernet, the touchpad and keyboard, sleep and resume,
+  USB, and the webcam. A second group of features is tested but
+  <em>not</em> guaranteed even on certified models: Bluetooth, automatic
+  screen rotation, some keyboard shortcuts and function keys, touchscreens,
+  and SD card slots. A laptop that is not on the list may still run Flex
+  well, but nothing is promised — which is exactly why the USB test drive
+  below matters more than any spec sheet.</p>
+
+  <h2>What Flex will not do</h2>
+
+  <p>Flex is not a Chromebook in every respect, and two limits decide most
+  real-world cases. First, there is no Google Play Store: Flex does not run
+  Android apps (Google notes only that some Android VPN apps can be deployed
+  by administrators). If the plan for this laptop involves Android apps, Flex
+  is the wrong tool. Second, it does not run Windows programs — there is no
+  support for Windows virtual machines through Parallels Desktop, and
+  installed Windows software simply has no home here. Work that lives in the
+  browser is fine; work that lives in a specific Windows application is
+  not.</p>
+
+  <p>Smaller print worth knowing before you commit: support for the Linux
+  development environment varies by model, and because the laptop keeps its
+  original keyboard, some shortcuts and printed function keys will not behave
+  the way they do on a real Chromebook. None of this is hidden — Google
+  publishes it on its Flex-versus-ChromeOS differences page — but it rarely
+  makes it into install guides, and it is much better read now than
+  discovered after an erase.</p>
+
+  <p>A useful pre-check, before any of this: look at what the laptop actually
+  does all day. If nearly everything already happens inside a browser window,
+  Flex fits the machine's real life. If the day depends on installed
+  programs, keep reading the site's other options instead.</p>
+
+  <h2>Try it from USB before you erase anything</h2>
+
+  <p>The installer doubles as a test drive. Booting Flex from the USB stick
+  runs the whole system without touching the internal drive, so you can
+  check the Wi-Fi, keyboard, trackpad, sound, and webcam on your exact
+  hardware, then shut down and be back in Windows as if nothing happened.
+  The procedure:</p>
+
+  <ol>
+    <li><strong>Back up first anyway.</strong> Copy anything you cannot
+    afford to lose off the laptop. The test drive does not erase the drive,
+    but the install step later does, and backups made in a hurry get
+    forgotten.</li>
+    <li><strong>Create the installer.</strong> On a working computer with the
+    Chrome browser, add Google's Chromebook Recovery Utility extension, open
+    it, choose <em>Get started</em>, select <em>Google ChromeOS Flex</em>
+    from the model list, insert your 8 GB or larger USB stick, and let the
+    utility write the installer to it. Remember: the stick is erased in the
+    process.</li>
+    <li><strong>Boot the old laptop from the stick.</strong> Insert the USB
+    drive, power on, and press the boot-menu key immediately — commonly
+    F12, F9, Esc, or Del, depending on the maker — then choose the USB
+    device. If Windows starts instead, restart and press the key earlier.</li>
+    <li><strong>Choose the try-first option</strong> on the welcome screen
+    rather than installing, connect to your Wi-Fi, and spend real time in
+    it: open the sites and web apps the laptop is actually used for, join a
+    video call, print something if printing matters, and put it to sleep and
+    wake it.</li>
+    <li><strong>Judge the hardware, not the speed.</strong> Running from a
+    USB stick is slower than running from the internal drive, so a slightly
+    sluggish test drive is normal. What you are checking is whether
+    everything <em>works</em> — a dead Wi-Fi card or a silent speaker in the
+    test drive is a real answer, and it is free.</li>
+  </ol>
+
+  <h2>Install, step by step</h2>
+
+  <p>If the test drive passes and the backup is done, installing is the
+  shortest part of the whole job — Engadget's walkthrough of the process
+  puts the total at about an hour, most of it spent creating the installer
+  and testing:</p>
+
+  <ol>
+    <li>Boot from the same USB installer and, on the welcome screen, choose
+    <em>Install ChromeOS Flex</em> instead of the try-first option.</li>
+    <li>Read the on-screen warning carefully: installing erases everything
+    on the internal drive. Confirm only when the backup is verified.</li>
+    <li>Let the installer finish. The laptop powers itself off when it is
+    done.</li>
+    <li>Remove the USB stick, power the laptop back on, connect to Wi-Fi,
+    and sign in with a Google account to complete setup.</li>
+  </ol>
+
+  <p>Cost check, dated October 13, 2026: Flex itself is a free download from
+  Google, and a spare USB stick is the only hardware involved. Google also
+  sells an optional pre-made installer kit in the US for $3, reported by
+  TechRepublic — a convenience for people who would rather not build the
+  stick themselves, not a requirement.</p>
+
+  <h2>What success looks like</h2>
+
+  <p>A successful conversion is boring in the best way: the laptop boots from
+  its internal drive to the Flex sign-in screen without the USB stick, joins
+  your Wi-Fi on its own, and every device you tested — trackpad, keyboard,
+  sound, webcam, sleep and wake — behaves the way it did in the test drive,
+  only faster. Your files are reachable again from your backup or cloud
+  storage, and updates arrive automatically in the background, which is the
+  whole point: this machine is supported again.</p>
+
+  <h2>Flex, Windows, or Linux: the decision in one table</h2>
+
+  <table>
+    <tr><th>Path</th><th>Best when</th><th>Watch out for</th></tr>
+    <tr><td>ChromeOS Flex</td><td>The laptop's work is browser-based and it
+    meets Google's minimums</td><td>No Android apps, no Windows programs;
+    full guarantees only on certified models</td></tr>
+    <tr><td>Stay on Windows</td><td>The machine runs Windows 11, or Windows
+    10 with ESU cover until October 12, 2027</td><td>An unsupported Windows
+    10 machine without ESU receives no security updates</td></tr>
+    <tr><td>Lightweight Linux</td><td>You need real desktop programs and
+    offline files, and can accept a learning curve</td><td>Covered in the
+    site's lightweight operating systems guide</td></tr>
+  </table>
+
+  <p>Whichever path you choose, the order of operations is the same one this
+  site recommends for every revival: back up, verify against published
+  requirements, test without erasing, and commit last. Flex rewards that
+  order more than most — the test drive is free, and the install is
+  forever.</p>
+
+  <p><a href="/posts/lightweight-operating-systems.html">Compare: lightweight operating systems &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

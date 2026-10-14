@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hard Drive Clicking, Beeping or Grinding? What to Do First — Hard Drive Health</title>
+<meta name="description" content="What clicking, beeping and grinding mean, the ordered stop-protect-diagnose procedure, why repair software is the wrong first move, and sounds that are not the drive.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>Your Hard Drive Is Making Noise: Clicking, Beeping, or Grinding — What to Do First</h1>
+  <p class="meta">Warning signs &middot; 9 min read</p>
+
+  <p>A hard drive that starts making a new noise is giving you information — and, in the worst cases, a deadline. Spinning drives have always talked: owners of older machines learned to hear the difference between a healthy drive's soft whir and the louder, rougher sounds of one going bad. SSDs removed that channel entirely (they fail silently, which is why this site pushes software health checks for them) — but if your machine still spins, your ears remain a diagnostic instrument. This guide sorts the sounds, gives you an ordered procedure for the serious ones, and is blunt about the most important rule: with a mechanically failing drive, the order of operations is <em>stop, protect the data, then diagnose</em> — never the reverse. Content is general information, not professional advice; for irreplaceable data on a failing drive, a professional recovery service is the right call.</p>
+
+  <h2>First: is it actually the drive?</h2>
+  <p>Before any emergency procedure, confirm the source. Fans ramping up at startup and settling within a minute or two is normal thermal behaviour, not drive noise (FixMyPCStore). Optical drives spin up and click once at boot. A practical isolation test from drive-noise guidance: if the noise persists with the drive's cables disconnected, the drive is not its source; if it stops when power is disconnected and returns when reconnected, the drive is implicated (TeamRockie). Do this test <em>once</em>, briefly — repeated power-cycling of a genuinely failing drive is itself harmful, as the procedure below explains.</p>
+
+  <h2>The sound guide</h2>
+  <table>
+    <thead><tr><th>Sound</th><th>What it commonly indicates</th><th>Seriousness</th></tr></thead>
+    <tbody>
+      <tr><td>Repetitive clicking ("click of death")</td><td>The read/write heads fail to read the platter and repeatedly snap back to their rest position, retrying (Drecovery)</td><td>Critical — mechanical failure in progress</td></tr>
+      <tr><td>Grinding or screeching</td><td>Physical contact or bearing failure inside the drive</td><td>Critical — PCWorld's guidance: assume the drive will not be around long</td></tr>
+      <tr><td>Beeping from the drive</td><td>Commonly a stalled motor or stuck heads — the platters cannot spin up (Darwin's Data)</td><td>Critical — do not keep powering it on to "try again"</td></tr>
+      <tr><td>Whirring louder than usual, new vibration</td><td>Bearing wear or mounting looseness</td><td>Warning — back up promptly, plan replacement</td></tr>
+      <tr><td>Single soft click at startup/shutdown</td><td>Normal head parking on many models</td><td>Usually normal — note it, watch for change</td></tr>
+    </tbody>
+  </table>
+  <p>Treat the first three rows as one category, because the correct first response is identical for all of them.</p>
+
+  <h2>The procedure for a critical sound</h2>
+  <ol>
+    <li><strong>Stop using the drive.</strong> Shut the computer down properly if it will let you; unplug external drives. Continued power on a clicking drive lets failing heads keep contacting the platter surface, which can convert recoverable data into permanently destroyed data (Drecovery). FixMyPCStore's version of the same order: stop writing new data to that drive, immediately.</li>
+    <li><strong>Do not run repair software.</strong> This is the instinct to override. Tools like CHKDSK and generic disk utilities stress failing mechanical components and write heavily to the drive, accelerating the failure (Drecovery). Disk-repair guides are for file-system problems on mechanically healthy drives — a different illness entirely.</li>
+    <li><strong>Check your backup status from another device.</strong> What exists in cloud storage or on a separate drive, and how current is it? This answer decides everything downstream.</li>
+    <li><strong>If the data is backed up:</strong> replace the drive. Do not nurse it along; a mechanically failing drive does not heal, and any fix that silences it is temporary at best — the drive keeps failing until it is unusable (TeamRockie).</li>
+    <li><strong>If the data is not backed up and matters:</strong> keep the drive powered off and contact a professional data-recovery service for an evaluation before any DIY attempt. Opening a drive outside a cleanroom, or repeatedly powering it to try cloning tricks, destroys the very data the professionals would recover (Darwin's Data; PCWorld).</li>
+    <li><strong>If the data is not backed up and is replaceable:</strong> you may choose one careful cloning attempt to a new drive — eyes open that the attempt can finish the drive off, which is why PCWorld's writer, weighing exactly this advice, declined to recommend cloning a dying drive to anyone but a skilled professional.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the drive is off, its remaining life unspent, and you have a written answer to "what data exists only on that drive?" Every good outcome from here — professional recovery, a warranty replacement, a restore from backup — starts from those two facts.</p>
+
+  <h2>The warning-sound procedure (quieter, sooner)</h2>
+  <p>For the warning row of the table — louder whir, new vibration, abnormal intermittent clicking without other symptoms — the tempo differs but not the direction. Back up everything important <em>now</em>, while the drive still works willingly, to an external drive or cloud storage, before the next reboot if you can (FixMyPCStore). Then check the drive's SMART readings using this site's health-check guides to see whether the numbers corroborate your ears. Then replace on your schedule. The entire value of catching the warning stage is that replacement happens as a planned purchase with a verified backup in hand, instead of as an emergency with a silent drive and a recovery quote.</p>
+
+    <h2>Sounds that are not the drive (check these before panicking)</h2>
+  <p>Not every new noise is a platter in distress, and misdiagnosis has its own cost — a healthy drive replaced while the actual failing fan cooks the machine. Fan bearings produce grinding and rattling that track with temperature and workload rather than disk activity, and a fan that ramps hard at startup then settles is normal thermal behaviour (FixMyPCStore). Coil whine is a high-pitched electrical tone that changes with screen content and load; it is annoying, not mortal. A loose case panel or a drive mounted with a missing screw can amplify a healthy drive's normal vibration into a buzz that sounds mechanical and sinister. The isolation test in the first section — does the noise follow the drive's power connection or not — separates these cases in minutes. Run it, once, before the emergency procedure: the procedure's urgency is for genuine drive sounds, and the fan bearing you almost ignored while replacing a good drive will not wait as patiently as the drive would have.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>The noise stopped. Did it fix itself?</strong> No. Mechanical faults are intermittent before they are total; a quiet hour is a reprieve, not a repair. Use it to complete the backup you now know you need.</p>
+  <p><strong>Can I put the drive in the freezer / tap it / open it?</strong> Folklore, all of it harmful: DIY physical repair is explicitly not recommended for average users, and modern drives require specialist tools and cleanroom conditions for internal work (Darwin's Data). A freezer trick that "worked" in anecdotes risks condensation damage on top of the original fault.</p>
+  <p><strong>My SSD is silent but the PC is misbehaving. Same emergency?</strong> Different guide: silence is normal for an SSD at every stage of its life. Check its software health counters — this site's SSD health guide walks through them — and back up on the same principle: data first.</p>
+
+  <div class="callout">
+    <p><strong>The one-sentence version:</strong> a new clicking, beeping, or grinding noise means stop the drive, protect the data, and let professionals handle anything irreplaceable — repair software and repeated restarts spend the little life the drive has left.</p>
+  </div>
+
+  <p>Related: <a href="/posts/signs-drive-failing.html">signs your drive is failing</a> and <a href="/posts/the-3-2-1-backup-rule.html">the 3-2-1 backup rule</a>.</p>
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

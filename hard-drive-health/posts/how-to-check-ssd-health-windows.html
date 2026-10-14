@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Check SSD Health on Windows: Wear, Errors, Temperature — Hard Drive Health</title>
+<meta name="description" content="Get-PhysicalDisk health status, the reliability counters (wear, errors, temperature, power-on hours), the WMIC removal warning, and data-first actions per verdict.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>How to Check SSD Health on Windows: Wear Level, Errors, and the Numbers That Matter</h1>
+  <p class="meta">Guide &middot; 9 min read</p>
+
+  <p>An SSD gives you almost none of the warnings a spinning drive used to. Older hard drives often announced trouble — new clicking, grinding, a change in how loud the machine sounded — and that audible decline was a genuine, if crude, early-warning system. An SSD has no moving parts and stays silent to the end, which is exactly why checking its health in software matters: the numbers are the only warning you are going to get (experience note rendered in this site's voice; see the SMART basics guide for background). This guide checks an SSD three ways — Windows' built-in commands, the reliability counters behind them, and what the results mean — in a numbered procedure a non-technical reader can follow. It applies to internal SSDs on Windows 10 and 11.</p>
+
+  <h2>What "health" means for an SSD</h2>
+  <p>SSD wear is real but specific: flash cells tolerate a finite number of writes, and the drive tracks its own consumption of that budget. The headline figure is a wear or "percentage used" value — 0% on a young drive, climbing over years of use. Supporting figures matter alongside it: power-on hours, read and write error totals, and temperature, current and maximum (Digital Trends; Bit Guardian). A sensible reading combines them. High wear with zero errors is an old drive ageing normally. Low wear with <em>rising</em> error counts is a younger drive in trouble. One number, alone, is a headline without the article.</p>
+
+  <h2>Method 1: the two-minute built-in check</h2>
+  <ol>
+    <li>Open the Start menu, type <strong>PowerShell</strong>, right-click <strong>Windows PowerShell</strong>, and choose <strong>Run as administrator</strong>.</li>
+    <li>Type <code>Get-PhysicalDisk</code> and press Enter.</li>
+    <li>Read the <strong>HealthStatus</strong> column for your SSD: <strong>Healthy</strong>, <strong>Warning</strong>, or <strong>Unhealthy</strong> (Digital Trends).</li>
+    <li>Note the <strong>OperationalStatus</strong> as well — it should read OK; anything else points at connection or device problems rather than wear.</li>
+  </ol>
+  <p>An older command you will see in many guides, <code>wmic diskdrive get status</code>, returns a simple OK or Pred Fail per drive — but be aware that Microsoft removed WMIC from Windows 11 starting with version 25H2, so on a current machine the command may simply not exist (TweakTown). The PowerShell route above is the durable one. Know its limit, though: both built-in checks are essentially pass/fail indicators. As TweakTown's guide puts it, Windows' native tools are useful for a quick glance, not for understanding what is happening inside the drive — which is what Method 2 is for.</p>
+
+  <h2>Method 2: the reliability counters (the numbers that matter)</h2>
+  <ol>
+    <li>In the same administrator PowerShell window, run: <code>Get-PhysicalDisk | Get-StorageReliabilityCounter | Format-List</code></li>
+    <li>Read the fields that matter: <strong>Wear</strong> (percentage of rated life used), <strong>PowerOnHours</strong>, <strong>ReadErrorsTotal</strong> and <strong>WriteErrorsTotal</strong>, and <strong>Temperature</strong> with <strong>TemperatureMax</strong> (Digital Trends; Bit Guardian).</li>
+    <li>Write the values down with today's date. A single reading is a snapshot; the same numbers recorded quarterly are a trend, and trends are what predict trouble.</li>
+    <li>If the counters come back empty — some drives and controllers do not expose them to Windows — use the drive manufacturer's own toolbox software, or a SMART reader, instead (Digital Trends notes this fallback). This site's guide to free health-check tools covers those options.</li>
+  </ol>
+  <table>
+    <thead><tr><th>Reading</th><th>Calm interpretation</th><th>Act-now interpretation</th></tr></thead>
+    <tbody>
+      <tr><td>HealthStatus</td><td>Healthy</td><td>Warning or Unhealthy: back up first, diagnose second</td></tr>
+      <tr><td>Wear</td><td>Climbing slowly over years, errors at zero</td><td>Wear high <em>and</em> errors appearing — plan the replacement</td></tr>
+      <tr><td>Read/Write errors</td><td>Zero, or a small count that never changes between checks</td><td>A count that grows between checks, however small the numbers</td></tr>
+      <tr><td>Temperature</td><td>Settles back down after heavy work</td><td>Persistently hot: one how-to source flags below 70°C as the safe working range and advises cooling fixes above it (Bit Guardian)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>What to do with each verdict</h2>
+  <p><strong>Healthy, low wear:</strong> record the numbers, set a reminder to re-check in three months, and confirm your backups exist — a healthy SSD is not a backup strategy, it is one copy with good manners. <strong>Warning, or wear climbing with errors:</strong> back up the irreplaceable data today, before any further testing; then plan a replacement on your schedule instead of the drive's. <strong>Unhealthy or Pred Fail:</strong> treat the drive as already borrowed time. Copy data off in priority order — documents and photos first, bulk media last — avoid heavy write workloads like full-disk scans that spend the drive's remaining life, and do not install the new operating system onto it "to test". In all three cases the order of operations is identical: data first, diagnosis second, replacement third.</p>
+
+    <h2>Why the manufacturer's toolbox still earns its place</h2>
+  <p>Windows' counters answer "is this drive reporting trouble?" — the drive maker's own software answers two further questions. First, firmware: toolbox software checks whether the drive's firmware is current and applies updates, and outdated firmware is a documented cause of drives misreporting health or misbehaving under load. Second, interpretation: SMART attributes are not labelled identically across brands — one maker's wear attribute naming differs from another's, which makes raw third-party readings easy to misread (TweakTown). The manufacturer's tool translates its own drive's attributes into a plain health percentage with no guesswork. The practical routine is therefore layered: PowerShell counters quarterly for the trend, the manufacturer's toolbox once or twice a year — or immediately, the first time the Windows numbers look odd. Neither layer requires the other, but a drive whose two toolsets agree is a drive you can make decisions about, and a drive where they disagree has just told you which reading to investigate before trusting either.</p>
+
+    <h2>Keep the record where you will find it</h2>
+  <p>Store the dated readings with the machine's other documents — a single text file named for the computer, appended each quarter, is enough. When a drive eventually does decline, that file becomes the evidence that turns a vague worry into a decision: wear that took three years to reach 20% and one quarter to reach 35% is a drive announcing a change of behaviour, and it is a far stronger basis for an immediate replacement than any single alarming number read in isolation.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Does checking health wear the SSD out?</strong> No. These commands read counters the drive already maintains; the read itself is negligible. What wears an SSD is writing data, which is why heavy benchmarking on a suspect drive is a poor idea and light counter-reading is a good one.</p>
+  <p><strong>My wear says 12% after two years. Is that bad?</strong> On its own, no — it is a budget being spent at a pace you can project: at the same pace the drive's rated write life lasts many more years. Wear becomes a story when errors join it or when the pace suddenly accelerates.</p>
+  <p><strong>Windows says Healthy but the machine is misbehaving.</strong> Health status covers the drive's self-reported condition, not the whole machine: file-system errors, a failing cable, and software problems all live elsewhere. Run the file-system check in this site's CHKDSK guide after you have a backup.</p>
+
+  <p><strong>What success looks like:</strong> you finish with three things written down — HealthStatus, Wear, and the error totals, dated today — a backup you have verified exists, and a calendar reminder to repeat the check. That small ritual is the SSD equivalent of listening to your old hard drive, and it is the only one you will get.</p>
+
+  <p>Related: <a href="/posts/smart-basics-explained.html">SMART basics, explained simply</a> and <a href="/posts/free-tools-check-drive-health.html">free tools to check drive health</a>.</p>
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

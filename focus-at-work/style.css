@@ -200,3 +200,9 @@ body {
 .site-nav a{color:var(--muted,#666);text-decoration:none;margin-right:18px;padding:2px 0}
 .site-nav a:hover{color:var(--accent,#c2410c)}
 .site-nav a.active{color:var(--accent,#c2410c);font-weight:700;border-bottom:2px solid var(--accent,#c2410c)}
+
+/* Article illustration figures — wired by the image pipeline (stage 6.5).
+   Constrains large generated images to fit inside the article column. */
+.post-figure { margin: 1.75rem auto; max-width: 100%; }
+.post-figure img { display: block; max-width: 100%; height: auto; border-radius: 8px; }
+.post-figure figcaption { margin-top: 0.5rem; font-size: 0.85em; color: #666; }

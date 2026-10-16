@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Route Planning for Deliveries and Service Calls — AI for Small Business</title>
+<meta name="description" content="Route planning software sequences your delivery and service stops in minutes. What the two pricing models really cost, the crossover math, and a one-week pilot to run before you pay.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap article-layout">
+  <article class="article">
+    <p class="breadcrumbs"><a href="/">Home</a> › <a href="/#guides">Operations</a></p>
+    <p class="kicker">Operations</p>
+    <h1>AI Route Planning for Deliveries and Service Calls</h1>
+    <p class="lede">If your business runs vehicles — deliveries, installations, repairs, cleaning rounds — someone is probably sequencing the day's stops by gut feel and a map app. Route planning software does that sequencing with an optimizer: feed it the day's addresses, time windows, and vehicle capacity, and it returns an ordered route per driver, with live tracking and proof of delivery once the wheels are turning. The tools are genuinely useful. The trap is the pricing model, because the two models in this category bill on completely different units — and picking the wrong one can double your bill for the same routes.</p><figure class="post-figure">
+  <img class="post-image" src="/images/ai-route-planning.jpg" alt="Flat illustration of small shops on a curving street, a driver carrying a parcel to a door, and a blue delivery van" loading="lazy" width="2736" height="912">
+  <figcaption>One street, every stop in the right order.</figcaption>
+</figure>
+
+
+    <aside class="toc">
+      <h2>On this page</h2>
+      <ul>
+        <li><a href="#overview">What it is</a></li>
+        <li><a href="#who-its-for">Who it's for</a></li>
+        <li><a href="#what-it-costs">What it costs</a></li>
+        <li><a href="#target-roi">Target ROI</a></li>
+        <li><a href="#setup">Setup steps</a></li>
+        <li><a href="#watch-outs">Watch-outs</a></li>
+        <li><a href="#measuring">What to measure</a></li>
+      </ul>
+    </aside>
+    <section id="overview"><h2>What it is</h2>
+    <p>Route planning tools take a list of stops — imported from a spreadsheet or pulled from your ordering system — and work out which driver should take which stops, in which order. The optimizer weighs road distance, promised time windows, how long each stop typically takes, and how much each vehicle can carry. Dispatchers get a plan for the whole fleet at once instead of one route at a time, drivers get the sequence in a mobile app, and customers can get tracking links and delivery notifications.</p>
+    <p>The "AI" label here is mostly optimization plus prediction: sequencing engines that avoid the criss-crossing routes a human produces under time pressure, and arrival-time estimates that improve as the system learns how long your stops actually take. That is less glamorous than the marketing suggests, but it is the part that matters. A route that saves twenty minutes of driving a day is worth real money across a year; a route that ignores a customer's 9-to-11 window is worth nothing, however clever the algorithm.</p>
+    <p>What these tools do not do is fix bad inputs. A wrong postal code, a missing apartment number, or a time window nobody recorded will produce a confidently wrong route. The setup section below therefore starts with your address data, not with the software.</p>
+    </section>
+    <section id="who-its-for"><h2>Who it's for</h2>
+    <p>Best for businesses running two or more vehicles with ten or more stops per vehicle per day: local delivery rounds, food and floral distribution, HVAC, plumbing and appliance service, cleaning and maintenance crews, parts runners. At that volume, manual planning typically eats thirty minutes to an hour every morning, and the quality of the plan depends on whoever happens to be doing it.</p>
+    <p>It helps much less if one driver makes a handful of stops in a familiar neighbourhood — a free map app and local knowledge already solve that — or if your stops arrive unpredictably all day and routes are really a dispatch problem. It also helps less than vendors claim if your addresses are a mess; clean the data first, or the pilot below will measure your data quality instead of the software.</p>
+    </section>
+    <section id="what-it-costs"><h2>What it costs</h2>
+    <p>Prices checked 2026-10-16. The category splits into two billing models. <strong>Per-driver pricing:</strong> OptimoRoute, in FarEye's 2026 pricing guide, lists Lite at $35.10 per driver per month billed annually ($39 billed monthly), planning up to 700 orders at once, and Pro at $44.10 billed annually ($49 monthly), planning up to 1,000 orders and adding analytics, proof of delivery, real-time order tracking and customer feedback. There is no platform fee or setup fee — the bill is seats times months. G2's pricing summary agrees on the Lite scope: core routing, live tracking, API access and the mobile app, with a free trial but no permanent free tier.</p>
+    <p><strong>Per-order pricing:</strong> Routific's own help centre publishes a different model entirely. Up to 100 scheduled orders a month are free. From 101 to 1,000 orders the price is a flat $150 per month, and above 1,000 orders a per-order charge applies — starting at 15¢ per order and falling to 3¢ per order above 20,000 orders a month. Every plan, including the free one, includes unlimited drivers and dispatchers, route optimization, the driver mobile app, real-time GPS tracking, email customer notifications and proof of delivery. An order counts once, when it is scheduled to a route.</p>
+    <p><strong>The quote-only warning:</strong> Route4Me, a long-standing name in this category, publishes no fixed team pricing at all. Its support documentation says subscription cost is set from your business requirements — route complexity, team size and selected add-ons — through a sales conversation, and it warns plainly that pricing details cannot be reliably obtained from third-party sources because many are outdated or incorrect. When a roundup prints a tidy per-month figure for a quote-only tool, treat the figure as fiction until sales confirms it in writing.</p>
+    <table>
+      <tr><th>Option</th><th>Published price (checked 2026-10-16)</th><th>Billing unit</th><th>Watch for</th></tr>
+      <tr><td>OptimoRoute Lite</td><td>$35.10/driver/month billed annually ($39 monthly)</td><td>Per driver</td><td>700-order planning cap; no proof of delivery or analytics</td></tr>
+      <tr><td>OptimoRoute Pro</td><td>$44.10/driver/month billed annually ($49 monthly)</td><td>Per driver</td><td>Bill grows with every driver you plan, busy month or quiet</td></tr>
+      <tr><td>Routific</td><td>Free to 100 orders/mo; $150/mo flat for 101–1,000; per-order above</td><td>Per scheduled order</td><td>Bill grows with order volume, not headcount</td></tr>
+      <tr><td>Route4Me</td><td>No published fixed price — quote only</td><td>Custom</td><td>Vendor itself warns third-party price listings are unreliable</td></tr>
+    </table>
+    <p>The crossover is simple arithmetic. Three drivers on OptimoRoute Pro billed annually cost about $132 a month, every month. The same business on Routific pays nothing until it passes 100 scheduled orders, then $150 flat until 1,000 orders. So a small fleet with modest order volume usually pays less per-driver; a business with many orders spread across many part-time drivers usually pays less per-order. Run your own two numbers — drivers and monthly orders — before you trial anything.</p>
+    </section>
+    <section id="target-roi" class="roi-box">
+      <h2>Target ROI: the honest math <span class="tag">EXAMPLE</span></h2>
+      <p>Ignore the category's headline claims. One leading top-10 roundup repeats figures of 10–20% fuel savings and 15–30% more stops per vehicle per day, with no method for checking them. Your return comes from two measurable places: planning time eliminated, and driving time reduced on your actual routes.</p>
+      <div class="example-math"><p><strong>Example:</strong> Suppose a dispatcher spends 45 minutes each morning sequencing routes for 3 drivers — about $94 a month at $25/hr across 20 working days. If the tool cuts planning to 10 minutes of review, that frees roughly $73 a month. Add driving time: if optimized routes save each driver just 15 minutes a day, that is about 15 driver-hours a month, worth roughly $375 at $25/hr — against a tool cost of about $132 a month for 3 drivers on a per-driver Pro plan. These are example inputs, not results: the pilot in the setup steps exists precisely to replace them with your numbers.</p></div>
+      <p><strong>What to actually measure:</strong></p>
+      <ul>
+        <li>Minutes spent planning routes each morning, before and after</li>
+        <li>Stops completed per driver-hour, week over week</li>
+        <li>Total miles driven per stop completed</li>
+        <li>Missed or late time windows per week</li>
+        <li>Cost per scheduled order under your actual billing model</li>
+      </ul>
+    </section>
+    <section id="setup"><h2>How to set it up</h2>
+      <ol class="steps">
+        <li><strong>Count your two units first.</strong> Write down how many drivers you plan on a busy day and how many orders or stops you schedule in a typical month. Those two numbers pick your billing model using the crossover math above — before any trial starts.</li>
+        <li><strong>Clean one week of address data.</strong> Export last week's stops and fix what you find: missing unit numbers, wrong postal codes, stops with no time window recorded. Add a realistic service duration per stop type — ten minutes for a drop-off is not forty minutes for an install, and the optimizer believes whatever you tell it.</li>
+        <li><strong>Record your baseline week.</strong> For five working days, log planning minutes each morning, miles driven, stops completed, and late windows. A notebook or spreadsheet is fine. Without a baseline, every improvement claim — yours or the vendor's — is a guess.</li>
+        <li><strong>Run the trial on real routes, not a demo day.</strong> Use a free tier or trial (Routific's free band covers up to 100 scheduled orders a month; OptimoRoute offers a trial) and plan at least one full busy week with the tool. Keep the old method running on paper so a bad day never strands a driver.</li>
+        <li><strong>Compare the same week, honestly.</strong> Put the pilot week next to the baseline: planning minutes, miles per stop, stops per driver-hour, late windows. Success looks like this: planning time down by half or more, miles per stop down, and no increase in missed windows. If miles drop but late windows rise, the optimizer is trading your customers' time for your fuel — adjust the constraints or walk away.</li>
+        <li><strong>Put drivers on the app properly.</strong> Ride along or debrief after day one. Drivers who do not trust the sequence will quietly re-order stops, and your measurements become meaningless. Lock the stops that must stay fixed — a keyholder opening a site, a timed appointment — and let the tool sequence the rest.</li>
+        <li><strong>Re-check the bill after month one.</strong> Compare the invoice against your two units. Per-driver plans bill every driver planned that month; per-order plans bill every order scheduled. Growth in either unit should be a decision, not a surprise.</li>
+      </ol>
+    </section>
+    <section id="watch-outs"><h2>Watch-outs and honest limitations</h2>
+    <p>The optimizer is only as honest as its inputs, and the most common failure is garbage data wearing a professional interface. If a route looks absurd, it usually is — check the address and the time window before blaming the algorithm, and keep a human review step on every plan before it goes to drivers.</p>
+    <p>Live tracking means tracking your own people. Tell drivers what is collected, when it runs, and what it is for, and get your local employment obligations right before switching it on. Using location data gathered for routing to discipline staff after the fact is a fast way to lose good drivers and, in some jurisdictions, a legal problem. This is general information, not legal advice — ask an employment lawyer if you are unsure.</p>
+    <p>Finally, beware the quiet tier trap: on per-driver plans, the features a delivery business actually needs — proof of delivery, customer notifications, analytics — may sit on the higher tier, as they do between OptimoRoute's Lite and Pro. Price the tier you will really run, not the entry tier in the headline.</p>
+    </section>
+    <section id="measuring"><h2>What to measure in your first 30 days</h2>
+    <ul>
+      <li>Planning minutes per morning versus your baseline week</li>
+      <li>Miles per completed stop, and stops per driver-hour</li>
+      <li>Late or missed time windows per week — this number must not rise</li>
+      <li>Actual invoice versus the cost your crossover math predicted</li>
+      <li>Driver overrides: how often the planned sequence gets changed, and why</li>
+    </ul>
+    </section>
+    <section class="keep-reading"><h2>Keep reading: Operations</h2><ul>
+      <li><a href="/articles/ai-scheduling.html">AI Scheduling and Staff Rotas for Small Business</a></li>
+      <li><a href="/articles/ai-inventory.html">Inventory Forecasting with AI</a></li>
+      <li><a href="/articles/ai-invoice-capture.html">AI Invoice Capture and Document Processing</a></li>
+      <li><a href="/articles/ai-sop-drafting.html">Drafting SOPs with AI</a></li>
+    </ul></section>
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p><strong>AI Small Business Playbook</strong> — practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav><a href="/">Home</a><a href="/#guides">All guides</a><a href="/roi-calculator.html">ROI Calculator</a><a href="/ai-cost-simulator.html">Cost Simulator</a><a href="/about.html">About</a></nav>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

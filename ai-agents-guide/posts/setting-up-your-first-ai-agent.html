@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting Up Your First AI Agent: A Step-by-Step Starter Run — Using AI Agents</title>
+<meta name="description" content="A complete first setup run: pick a task that can fail safely, start agent mode, brief it, watch the first run, fix one thing, and decide about schedules — using the vendors' own documented steps.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Setting up your first AI agent: a step-by-step starter run</h1>
+  <p class="meta">How-to &middot; 7 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/setting-up-your-first-ai-agent.jpg" alt="Flat illustration of an orange robot on stepping stones leading to an open toolbox, with a shield beside the path." loading="lazy" width="1920" height="1280">
+  <figcaption>One safe first task, watched end to end — that is the whole first setup.</figcaption>
+</figure>
+
+
+
+  <p>Most setup guides hand you a builder tool, a blank canvas, and a node diagram.
+  That is backwards for a first run. If you already subscribe to a chat service with
+  an agent mode, you can be watching your first agent work within the hour — no
+  building, no canvas — and everything you learn transfers when you later set up a
+  dedicated agent. This guide walks that first run end to end, using the steps the
+  vendors themselves document, with the safety settings done during setup rather
+  than bolted on after something goes wrong.</p>
+
+  <h2>The short version</h2>
+  <p>Pick a small task whose failure costs you nothing. Start the agent mode already
+  in your subscription. Brief it in writing, with a finish line. Enable only the
+  apps the task needs. Watch the whole first run and approve each consequential
+  step. Fix exactly one thing. Only then — if the task repeats — consider putting
+  it on a schedule.</p>
+
+  <h2>Before you touch a setting: pick a first task that can fail safely</h2>
+  <p>Score candidate tasks against three questions. Is the output a draft, summary,
+  or shortlist — something you review before anyone else sees it? Can every step be
+  undone? Do you already know what a good result looks like, so you can spot a bad
+  one? Three yeses makes a starter task. Good examples: "compare these three quotes
+  and summarize the differences," "read these five articles and give me the points
+  they agree on," "draft replies to these routine enquiries for my approval." Bad
+  first tasks involve sending, buying, deleting, or anything touching money or
+  other people — not because agents can never do them, but because your first run
+  is for learning how the agent behaves, and you learn fastest when a mistake is
+  cheap. Note also the budget you are spending: on ChatGPT, agent mode is limited
+  to 40 messages a month on Plus and 400 on Pro, counting each new task you start —
+  another argument for one well-chosen task over five experiments.</p>
+
+  <h2>The setup run, step by step</h2>
+  <p>The worked example below uses ChatGPT's agent mode, following OpenAI's help
+  documentation. The same shape — describe, connect, constrain, watch, review —
+  applies to the alternatives noted at the end.</p>
+  <ol>
+    <li><strong>Start agent mode.</strong> Select it from the tools menu in the
+    composer, or type <strong>/agent</strong>. No technical skills are required,
+    and you can guide or interrupt the agent mid-task at any point.</li>
+    <li><strong>Write the brief before you press send.</strong> Goal in one
+    sentence, the inputs it may use, the output format you want, and the line it
+    must not cross ("draft only — do not send anything"). Vague, open-ended
+    instructions are the single most common setup failure; OpenAI explicitly warns
+    against prompts like "check my email and handle everything."</li>
+    <li><strong>Enable only the apps this task needs.</strong> The agent can use
+    connected apps as data sources. Connect the one source the task requires —
+    leave the rest off. You can widen access later, task by task.</li>
+    <li><strong>Run it and stay in the room.</strong> The agent will pause for
+    clarification or confirmation when it needs to — let it. If a step needs a
+    login, it will pause and hand you the browser through takeover mode; while you
+    control the browser, screenshots are not captured, which is what protects the
+    password you type. Never type passwords or private details into the chat
+    itself.</li>
+    <li><strong>Review the output like a supervisor, not a fan.</strong> Outputs
+    include source links or screenshots — follow at least two of them and confirm
+    the claims trace back to something real. Check the finish line: did it produce
+    the format you asked for, all of it, and nothing extra?</li>
+    <li><strong>Fix one thing and re-run.</strong> Almost every rough first run
+    traces to one unclear instruction. Change that one line — the input list, the
+    format, the boundary — and run the same task again so you can see the
+    difference your change made.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> a finished output in the format you
+  specified, every claim in it traceable to a source the agent showed you, and zero
+  actions taken that you did not watch happen. If all three hold, your setup works
+  — the agent, the brief, and the permissions are all doing their jobs.</p>
+
+  <h2>The safety settings to do during setup, not after</h2>
+  <p>OpenAI's own best-practice list for agent mode reads like a setup checklist,
+  so treat it as one. Enable only the apps the current task needs. Avoid vague,
+  open-ended prompts. Stop a task immediately if something seems suspicious.
+  Clear the agent's remote browser data after any sensitive session, and review
+  your app permissions regularly in settings. Know, too, that the product has
+  guardrails of its own — confirmations before high-impact actions and a watch
+  mode that requires your supervision on certain sites — but those are a backstop,
+  not a setup. The backstop catches the agent. The checklist stops the situation
+  from arising.</p>
+
+  <h2>After the first run: fix one thing, then decide about schedules</h2>
+  <p>If the task is one you will want weekly, agent mode can repeat a finished
+  task: click the Clock icon on the completed task and choose daily, weekly, or
+  monthly. Every recurring task lives on one management page —
+  chatgpt.com/schedules — where you can review, edit, pause, or delete it.
+  Schedule only a task whose manual run you have already watched succeed, and
+  remember that scheduled runs count against the same monthly message limit.</p>
+  <p>Two other shapes are worth knowing once the first run works. If you want a
+  standing assistant with the same instructions every time, Microsoft's Agent
+  Builder in Copilot creates one in a few minutes with no coding: open the Copilot
+  app, choose New Agent under Agents, describe the job, follow the prompts — or
+  pick a template, test it, use Configure to adjust it, then Create. Copilot
+  Studio goes a step further for workplace use: describe the agent in your own
+  words, review the name, instructions, and suggested knowledge sources and tools
+  it generates, configure the basics, then test and improve it. And if your "task"
+  is really the same trigger producing the same action — a new form entry filing
+  itself — that is an automation, not an agent: on Zapier, a workflow is exactly a
+  trigger plus one or more actions, and its free plan includes 100 tasks a month
+  to try it with. Choosing between those routes is the subject of the
+  <a href="/posts/how-to-choose-your-first-ai-agent.html">guide to choosing your
+  first agent</a>; recovering when a run goes sideways is covered in
+  <a href="/posts/when-an-agent-gets-stuck.html">when an agent gets stuck</a>.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>How long should the first setup take?</strong> Under an hour,
+  including watching the first run. If it is taking longer, the task is too big —
+  cut it in half and run the smaller half.</p>
+  <p><strong>The agent keeps asking me questions. Is that a fault?</strong> No —
+  pausing for clarification or confirmation is documented, expected behaviour, and
+  on a first run it is what you want. An agent that never asks is one you should
+  trust less, not more.</p>
+  <p><strong>Should I let it run while I am away?</strong> Not yet. Graduate in
+  stages: watched runs, then scheduled runs of tasks you have watched succeed,
+  then — maybe — wider permissions. Each stage earns the next. Nothing about a
+  good first setup requires you to hand over the keys on day one.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

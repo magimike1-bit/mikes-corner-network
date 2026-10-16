@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Track Referral Links: Clicks, Sign-Ups and Conversions — AI Referral Bonuses</title>
+<meta name="description" content="A two-layer method for tracking AI referral and affiliate links: what the program dashboard owns, how UTM labels keep your own data clean, and a weekly reconciliation routine that catches broken links.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">AI Referral Bonuses</a>
+    <p class="tagline">Every verified AI referral &amp; affiliate bonus, in one filterable list</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <p><a href="/">&larr; All programs and guides</a></p>
+  <h1>How to track referral links: clicks, sign-ups, and conversions without guessing</h1>
+  <p class="meta">Guides &middot; Published 2026-10-16 &middot; Last updated 2026-10-16</p><figure class="post-figure">
+  <img class="post-image" src="../images/how-to-track-referral-links-clicks-conversions.jpg" alt="Cursor, dotted path, signpost and flag on a hill in navy, gold and green" loading="lazy" width="2736" height="912">
+  <figcaption>Every click travels a path; tracking is knowing which path each sign-up actually took.</figcaption>
+</figure>
+
+
+
+  <p>Ask a promoter how a referral link is performing and you will usually get one number quoted from one dashboard, with no way to tell whether it is good, bad, or simply broken. The confusion starts with a category error: two different systems record two different things. The affiliate program&rsquo;s dashboard records the events the program will pay on &mdash; its clicks, its sign-ups, its conversions, under its own attribution rules. Your own analytics record the traffic arriving at your pages and leaving through your links, which is evidence about your content, not about your pay. Tracking works when each layer is used for what it can actually prove, labelled consistently, and reconciled on a schedule instead of glanced at when a payout feels small.</p>
+
+  <p>This guide sets out that two-layer method. The mechanics are drawn from Google&rsquo;s official Analytics documentation and from program terms in this directory, checked on 2026-10-16, and the routine at the end needs nothing more than the dashboards you already have and a simple log.</p>
+
+  <h2>Two tracking layers, and which one owns the truth</h2>
+  <p><strong>Layer one is the program&rsquo;s system.</strong> When a reader clicks your referral link, the program records the click against your account; if a qualifying sign-up or purchase follows inside its window and under its attribution model, a conversion posts. This layer is the only one that decides commissions, and it is deliberately opaque: you see the counts the program chooses to show, computed by rules you cannot inspect. Bolt&rsquo;s referral documentation states the dependency plainly: a referral counts only when the friend signs up through the personal referral link and then subscribes to a paid plan &mdash; a sign-up that happened without the link, or before it was clicked, cannot be attributed at all.</p>
+  <p><strong>Layer two is your own measurement.</strong> Analytics on your site, tagged outbound links, and your own log of where each link was placed. This layer can answer questions the dashboard never will: which article sends the clicks, which placement inside the article gets used, whether a social post outperforms the guide it promotes. It cannot prove a conversion happened, and treating a click count from your side as money owed is how promoters end up arguing with dashboards. Use layer one for payable truth, layer two for decisions about your content, and the reconciliation routine below for the gap between them.</p>
+
+  <h2>What the program dashboard actually records</h2>
+  <p>Across the programs in this directory, dashboards expose the same small set of events, even though names differ. <strong>Clicks</strong>: arrivals through your link that the program&rsquo;s tracking accepted. <strong>Sign-ups or referrals</strong>: accounts created inside the attribution window. <strong>Conversions</strong>: the subset that performed the paying action &mdash; typically subscribing to a paid plan, as in the Bolt example. <strong>Pending, approved, and paid commissions</strong>: the same conversion at later stages of the program&rsquo;s hold and verification process, which is a separate clock from tracking and the subject of this site&rsquo;s payout guide.</p>
+  <p>Two properties of this layer deserve emphasis. First, its numbers are downstream of your link&rsquo;s physical integrity. Rytr&rsquo;s affiliate terms put the duty on the promoter: only valid affiliate links obtained through the program are tracked for determining referral fees, and the affiliate is responsible for ensuring every link placed is correctly formatted and for promptly reporting malfunctioning links. A truncated link, a link mangled by a page editor, or an outdated link from an old campaign can send real readers and record nothing &mdash; and the dashboard will not warn you, because from its side nothing happened. Second, some audiences cannot click a link at all. Writesonic documents the standard workaround: custom tracking coupons, so a podcast listener or event attendee who hears a code can still be credited when no clickable link survives the journey. Where a program offers coupons or codes, they belong in the tracking plan alongside links, not as an afterthought.</p>
+
+  <h2>Labelling your own traffic: UTM rules that keep data clean</h2>
+  <p>For the traffic you can see &mdash; arrivals at your own pages from your newsletter, social posts, and other channels &mdash; Google Analytics documents the labelling system and, more importantly, its failure modes. UTM parameters are tags added to a URL; when a user clicks a referral link carrying them, the parameter values are sent to Analytics and appear in the Traffic acquisition report, under dimensions such as Session source/medium and Session campaign. Google lists the parameters promoters need: <code>utm_source</code> for the referrer (for example, newsletter4), <code>utm_medium</code> for the marketing medium (for example, email), <code>utm_campaign</code> for the product, slogan, or promo code, <code>utm_term</code> for a paid keyword, and <code>utm_content</code> to differentiate creatives &mdash; Google&rsquo;s own example is telling two call-to-action links inside the same email apart, which is exactly the placement question a promoter asks about an article&rsquo;s first and last links.</p>
+  <p>The rules that decide whether this data stays readable are strict, and Google states them explicitly. Always use <code>utm_source</code>, <code>utm_medium</code>, and <code>utm_campaign</code> together when you tag a URL. Build the URL by separating the parameters from the address with a question mark, each pair with an equal sign, and the pairs from each other with an ampersand. And respect case: parameter values are case sensitive, so <code>utm_source=google</code> and <code>utm_source=Google</code> are different values, and a campaign named two ways splits into two rows. Google&rsquo;s best-practice guidance generalises the point: one unique source value per platform, one unique medium per channel, one campaign name that matches the exact campaign, and a strict lowercase naming convention, because inconsistency fragments reporting and missing parameters surface as (not set) values. Written as a promoter&rsquo;s rule: decide your labels once, write them down, and never improvise a variant mid-campaign.</p>
+  <p>One boundary matters. UTM tags label traffic arriving at pages you control; they do not replace the affiliate link itself. The link the program issued is the tracking instrument for commissions, and editing, wrapping, or rebuilding it risks breaking the very tracking layer one depends on. Tag the links that point to <em>your</em> content; publish the program&rsquo;s link exactly as issued inside that content.</p>
+
+  <h2>One link per placement, one log per program</h2>
+  <p>The cheapest tracking upgrade available to a promoter costs no money: stop reusing one undifferentiated link everywhere and start keeping a log. Where a program lets you create more than one link or label per placement, use a distinct one for each article, video, or newsletter slot; where it does not, your layer-two labels and your log carry the distinction instead. The log needs only a few columns: program, placement (the page or post and where in it), the link or code used, the date placed, and a notes field for changes. Its value shows up the first time a dashboard number moves and you need to know what you actually changed that week &mdash; without a log, every investigation starts from memory, and memory is the least reliable instrument in the whole system.</p>
+
+  <h2>The weekly reconciliation routine</h2>
+  <p>Tracking is a routine, not a setup. Run these steps weekly, on the same day, per program:</p>
+  <ol>
+    <li><strong>Record the dashboard&rsquo;s numbers.</strong> For the last seven days, note clicks, sign-ups, conversions, and commissions posted, exactly as the program reports them. Date the entry; dashboards restate history as holds clear.</li>
+    <li><strong>Record your layer-two numbers for the same window.</strong> Sessions and outbound clicks for the pages carrying links, broken down by your UTM labels where you tagged the traffic.</li>
+    <li><strong>Compute the two rates that matter.</strong> Sign-up rate = sign-ups &divide; dashboard clicks. Paid conversion rate = conversions &divide; sign-ups. Rates, unlike raw counts, stay comparable when traffic rises or falls.</li>
+    <li><strong>Check the ratios against their own history.</strong> A click count that falls while your outbound clicks hold steady points at the link or the program&rsquo;s tracking, not your audience. A sign-up rate that halves the week you moved a link points at placement. Compare with your previous weeks before concluding anything.</li>
+    <li><strong>Click-test every live link.</strong> Follow each published link as a reader would, confirm it lands on the right destination, and confirm the click registers in the dashboard where the program shows clicks promptly. Rytr&rsquo;s terms make link integrity the affiliate&rsquo;s responsibility; this step is that duty, operationalised.</li>
+    <li><strong>Log anomalies and actions.</strong> One line per program: what moved, your working explanation, what you changed. Next week&rsquo;s routine starts by checking whether the change worked.</li>
+  </ol>
+  <p>Success looks like this: for every program, you can say what its click, sign-up, and conversion counts were last week, what rates they imply, whether they match your own traffic evidence, and that every live link was physically tested within the last seven days. Anything you cannot say is a hole in the system, and the routine has just told you where it is.</p>
+
+  <h2>When the numbers disagree: a decision framework</h2>
+  <p>Disagreement between the layers is normal; panic is optional. Work the pattern, not the feeling. <strong>Your clicks rise, dashboard clicks flat:</strong> suspect the link first &mdash; test it, check it was not altered by an editor, a shortener, or a page rebuild, and replace it with a freshly issued one if in doubt. <strong>Dashboard clicks healthy, sign-ups near zero:</strong> the tracking is working and the offer or audience fit is not; the problem is what readers find after the click, or which readers you are sending. <strong>Sign-ups healthy, conversions near zero:</strong> check what the program counts as a conversion &mdash; a free sign-up inside the window is not a paid subscription, and several programs in this directory pay only on the paid step. <strong>Everything zeroes at once:</strong> treat it as breakage until proven otherwise: test the link, check the program&rsquo;s status and your account standing, and only then look for an audience explanation. In every case, change one thing at a time and let a full week of the routine judge the result; changing the link, the placement, and the content together destroys the evidence you were trying to create.</p>
+
+  <section class="note">
+    <h2>Important: no income guarantees</h2>
+    <p>Tracking shows what happened; it cannot make a program pay more, and no rate in this guide is a promise about any program&rsquo;s future performance. Dashboard figures, attribution rules, and link formats change at the program&rsquo;s discretion. Figures referenced here were checked against official documentation on 2026-10-16; verify the current terms on the official program page before relying on them.</p>
+  </section>
+
+  <h2>FAQ</h2>
+  <h3>Should I put UTM parameters on my affiliate links?</h3>
+  <p>Tag the links that point to your own pages, where your analytics can read the values. The affiliate link itself is the program&rsquo;s tracking instrument and should be published as issued; altering it risks breaking commission tracking, and the affiliate is responsible for correctly formatted links under program terms such as Rytr&rsquo;s.</p>
+  <h3>Why do my click numbers and the dashboard&rsquo;s never match?</h3>
+  <p>Because they count different events in different systems: your analytics sees traffic and outbound clicks on your pages, while the program counts arrivals its tracking accepted under its attribution rules. Small gaps are normal; a sudden, large gap is a signal to test the link, which is why the weekly routine compares the two rather than trusting either alone.</p>
+  <h3>What if my audience hears about a tool on a podcast, where there is no link to click?</h3>
+  <p>Use the program&rsquo;s non-link mechanism if it offers one. Writesonic, for example, documents custom tracking coupons built for podcast and event audiences, so a listener using the code can be credited without a click.</p>
+  <h3>How often should I check all this?</h3>
+  <p>Weekly, on the routine above. Daily checking produces noise-driven changes, and monthly checking lets a broken link run for weeks. A week is long enough for rates to mean something and short enough to catch breakage while it is still cheap.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>AI Referral Bonuses — a directory of AI referral and affiliate programs. Bonus terms change frequently; always confirm current terms on the official program page. Content is for general information only.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -226,3 +226,42 @@ main { padding: 36px 0 52px; }
 .site-nav a{color:var(--muted,#666);text-decoration:none;margin-right:18px;padding:2px 0}
 .site-nav a:hover{color:var(--accent,#c2410c)}
 .site-nav a.active{color:var(--accent,#c2410c);font-weight:700;border-bottom:2px solid var(--accent,#c2410c)}
+
+/* ---------- design-review polish (2026-10-16) ---------- */
+/* Type pairing: theatrical serif display over the sans body — this site
+   shared an identical single-font template with old-textbooks. */
+.brand, .intro h1, .card h3, .post h1, .post h2 {
+  font-family: Georgia, "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+}
+.intro h1 { font-style: italic; }
+/* Intro becomes a stage panel: a warm spotlight glow from top-centre and
+   a dashed ticket-stub border, instead of flat text on white. */
+.intro {
+  background:
+    radial-gradient(420px 200px at 50% -40px, rgba(232, 192, 122, 0.45), transparent 70%),
+    linear-gradient(165deg, #ffffff 0%, var(--wash) 100%);
+  border: 1.5px dashed var(--accent);
+  border-radius: 14px;
+  padding: 28px 30px 30px;
+  margin-top: 6px;
+  box-shadow: 0 10px 26px rgba(124, 42, 16, 0.10);
+}
+.intro h1 { margin-top: 2px; }
+/* Keyboard focus was invisible on every link/button on the site. */
+a:focus-visible, .cta:focus-visible, .card h3 a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.card:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.10);
+  border-left-color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .cta, .cta .arrow { transition: none; }
+  .card:hover, .card:focus-within, .cta:hover { transform: none; }
+}
+@media (max-width: 640px) {
+  .intro { padding: 22px 20px 24px; }
+}

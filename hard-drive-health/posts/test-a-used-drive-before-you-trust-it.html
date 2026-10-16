@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Test a Used Hard Drive or SSD Before You Trust It — Hard Drive Health</title>
+<meta name="description" content="A staged acceptance test for a second-hand drive: inspect and identify it, read its SMART record, run the short then the long self-test, check the file system last, and give it a trust, probation, or return verdict.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>How to Test a Used Hard Drive or SSD Before You Trust It With Your Files</h1>
+  <p class="meta">Guide &middot; 11 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/test-a-used-drive-before-you-trust-it.jpg" alt="External hard drive on a workbench with a magnifying glass and a blank checklist clipboard" loading="lazy" width="1920" height="1280">
+  <figcaption>A used drive earns trust in stages: inspect it, read its record, then test it.</figcaption>
+</figure>
+
+
+
+  <p><strong>Data-loss warning first:</strong> until a used drive has passed every stage below, treat it as a stranger. Do not move your only copy of anything onto it, do not store the seller's old files anywhere you care about, and run no test that erases or writes across the whole drive. A second-hand drive is cheap precisely because its history is unknown — the point of this procedure is to replace that unknown history with evidence, in an order that protects you if the drive fails halfway through: inspect, identify, read its self-report, run its own built-in tests, and only then check the file system and start a probation period.</p>
+
+  <p>Most drive-health guides assume a drive already in service, quietly degrading in your own machine. A purchase is a different problem. The question is not "is my drive okay?" but "should this drive be accepted at all, and for what jobs?" That is why the procedure below ends in verdicts — trust, probation, or return it — rather than a single green tick. It uses free tools throughout: a SMART reader such as CrystalDiskInfo on Windows, the smartmontools <code>smartctl</code> command where a graphical reader is unavailable, the drive maker's own diagnostics, and, in its proper place at the end, Microsoft's CHKDSK.</p>
+
+  <h2>Stage 1: inspect and identify the drive</h2>
+  <ol>
+    <li>Before connecting anything, look the drive over: a cracked casing, a bent connector, or a rattling loose part inside a spinning drive is a return conversation, not a testing project.</li>
+    <li>Connect it as directly as the computer allows — an internal SATA connection or the maker's recommended hookup in preference to a random USB dock — because some enclosures and docks block diagnostic access entirely (Western Digital's support notes list a third-party enclosure or docking station blocking access among the common causes of a drive not being detected at all).</li>
+    <li>Confirm the computer sees the drive the seller described: model, capacity, and interface, in the SMART reader or the maker's tool. A drive that identifies as a different model or a much smaller capacity than advertised fails at this stage, before any health test runs.</li>
+    <li>Write down the model and serial number now. They are what a warranty check, a support call, or a return will ask for, and they are easiest to copy while the drive is still on the desk.</li>
+  </ol>
+
+  <h2>Stage 2: read the SMART record before testing anything</h2>
+  <p>SMART is the drive's own logbook, and on a used drive it is the closest thing to a service history. Read it before running a single test, because the numbers describe the life the drive has already lived.</p>
+  <ol>
+    <li>On Windows, open CrystalDiskInfo and select the used drive. Read the overall health status first — Good (blue), Caution (yellow), Bad (red), or Unknown (gray) in the maker's colour scheme (Crystal Dew World manual) — then the individual counters below it.</li>
+    <li>For a hard drive, look at the three counters the maker uses for its Caution judgement: <strong>05 Reallocated Sectors Count</strong>, <strong>C5 Current Pending Sector Count</strong>, and <strong>C6 Uncorrectable Sector Count</strong>. CrystalDiskInfo shows Caution when one of these raw values exceeds its configured threshold (CrystalMark).</li>
+    <li>Note the power-on hours and the temperature alongside them, and record every number with today's date. On a used drive the trend cannot help you yet — there is no earlier reading — so today's record becomes the baseline every later check is compared against.</li>
+    <li>For an SSD, read the remaining-life or percentage-used figure instead of sector counts. CrystalMark notes that many SSDs show Caution when remaining life reaches 10 percent or less, and that the percentage is an endurance estimate — it cannot be converted into a number of remaining days or months.</li>
+    <li>On a Mac or Linux machine, or where no graphical reader is available, the equivalent reading is <code>sudo smartctl -a /dev/sda</code> in a terminal, replacing the device path with the used drive's actual device. The smartctl manual describes <code>-a</code> as printing a large amount of SMART information, <code>-H</code> as the overall-health self-assessment, and <code>-l selftest</code> and <code>-l error</code> as the test and error logs.</li>
+  </ol>
+  <p>Two readings end the evaluation immediately. A <strong>Bad</strong> status — which can appear when a value the drive reports falls below the manufacturer's own threshold — means the drive should not become storage for anything that matters (CrystalMark). And any of the 05, C5, or C6 counters that is already large, rather than barely nonzero, describes media that has been deteriorating for a while. Small nonzero values are a probation discussion; a drive that arrives with a long damage history is a return.</p>
+
+  <h2>Stage 3: the short self-test, then the long one</h2>
+  <p>A SMART reading is a report; a self-test is the drive examining itself on request. Run both sizes, short first, because a drive that cannot pass the short test has saved you the hours the long one takes.</p>
+  <ol>
+    <li>Start the short self-test: in the maker's tool, the Short Test — Western Digital describes its Kitfox Short Test as a quick drive health test — or at a terminal, <code>sudo smartctl -t short /dev/sda</code> with the drive's real device path. The smartctl manual puts the short test at usually under ten minutes; it checks electrical and mechanical performance as well as read performance, and records the result in the self-test log.</li>
+    <li>Read the outcome before continuing: the log line via <code>smartctl -l selftest</code>, or a PASS or FAIL message in a maker tool — WD states that a completed Kitfox test shows exactly that, PASS or FAIL.</li>
+    <li>If the short test passes, run the long (extended) self-test: <code>sudo smartctl -t long /dev/sda</code>, or the maker tool's Extended Test — WD describes it as the thorough test, taking ten minutes or more. The smartctl manual calls the long test the longer, more thorough version of the short one, running from tens of minutes to several hours on large drives, and notes it can run during normal system operation.</li>
+    <li>If a test needs stopping, <code>smartctl -X</code> aborts it — but an aborted long test is an unfinished verdict, not a pass. Re-run it to completion before the drive earns trust.</li>
+    <li>For a spinning drive that was shipped to you, add the conveyance test where the tool offers it (<code>smartctl -t conveyance</code>): the manual describes it as a minutes-long routine intended to identify damage incurred during transporting of the device — precisely the risk a mailed used drive carries.</li>
+  </ol>
+
+  <h2>Stage 4: the file-system check, in its proper place</h2>
+  <p>Only now — hardware read, self-tests passed — does the file system enter the picture, and it helps to be clear about what this check is. Microsoft's documentation describes CHKDSK as checking the file system and its metadata for logical and physical errors; run with no parameters it reports status and fixes nothing. It is a check of how the drive is organised, run last because a clean file system on failing hardware proves nothing about the hardware.</p>
+  <ol>
+    <li>Open Command Prompt as administrator — Microsoft notes that membership in the local Administrators group, or equivalent, is the minimum required to run CHKDSK.</li>
+    <li>Run a read-only pass first: <code>chkdsk X:</code>, replacing X with the used drive's letter. Read the status report; no changes are made.</li>
+    <li>If errors are reported and the drive holds nothing you need, repair with <code>chkdsk X: /f</code>. Microsoft documents <code>/f</code> as fixing errors on the disk, with the disk locked while it works.</li>
+    <li>Reserve <code>chkdsk X: /r</code> for a drive you are deliberately probing for bad sectors: <code>/r</code> locates bad sectors and attempts to recover readable information, includes the <code>/f</code> behaviour, and on a large hard drive reads every sector, which can take a considerable amount of time (Microsoft). On a used drive with no data of yours on it, that time is well spent; on a drive already carrying your only copy, it would be exactly the wrong order of operations.</li>
+    <li>Do not interrupt a running CHKDSK — Microsoft recommends against it — and record the final report alongside the SMART baseline from Stage 2.</li>
+  </ol>
+
+  <h2>The two blind spots that fool buyers</h2>
+  <p><strong>The invisible drive.</strong> Some USB bridge chips and external enclosures do not support the commands needed to retrieve SMART information at all, so a drive that does not appear in a SMART reader — or shows Unknown — has not been declared healthy; it has not been examined (CrystalMark). The fix is a more direct connection, not a shrug: test the drive where its logbook can actually be read.</p>
+  <p><strong>The cable that looks like a dying drive.</strong> The C7 Interface CRC Error Count usually records communication errors between the drive and the computer, with causes that include a defective SATA cable, a loose connector, or a power problem (CrystalMark). A used drive tested through a tired cable can collect exactly the errors that make it look like a bad purchase. Swap the cable and re-test before condemning the drive — and note that the C7 counter is cumulative, so judge the re-test by whether the count stops rising, not by whether it returns to zero.</p>
+
+  <h2>Verdicts: trust, probation, or return it</h2>
+  <table>
+    <thead><tr><th>Evidence</th><th>Verdict</th><th>Terms</th></tr></thead>
+    <tbody>
+      <tr><td>Identifies correctly; SMART Good; 05, C5, C6 all zero; short and long self-tests pass; file-system check clean</td><td>Trust — with backups</td><td>Normal service, under the standing rule that no single drive is a backup strategy. CrystalMark's own guidance holds even for a Good drive: important data belongs in more than one location</td></tr>
+      <tr><td>SMART Caution from a small nonzero 05, C5, or C6; self-tests pass; or an SSD with low-but-present remaining life</td><td>Probation</td><td>Working storage for copies, scratch space, or a backup target — never the only copy. Re-read the counters on a schedule; CrystalMark recommends replacement strongly when those values keep increasing</td></tr>
+      <tr><td>SMART Bad; a failed short or long self-test; a maker-tool FAIL; large or fast-rising sector counters; wrong model or capacity at Stage 1</td><td>Return it</td><td>Do not negotiate with the evidence by re-testing until it passes. A drive showing Caution or Bad should not remain the only home for important data (CrystalMark) — a drive that arrives that way should not become a home for it at all</td></tr>
+      <tr><td>No SMART data obtainable through any connection available to you</td><td>Untested — treat as probation at best</td><td>An unexamined drive gets no trust by default. Either find a connection that can read it, or price the risk honestly and keep irreplaceable data off it</td></tr>
+    </tbody>
+  </table>
+  <p>The probation row is where used drives earn their keep. A cheap drive with a small, stable reallocated count can serve for years as a second or third copy — the duty where a failure costs an afternoon of re-copying rather than the data itself. What it must never do is graduate silently: the dated Stage 2 record exists so that a counter which has doubled since purchase is noticed at a routine re-check, not discovered during an emergency.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>The seller says the drive was "fully tested." Tested how?</strong> Ask which tests, and run your own anyway. A format and a quick copy are not a self-test, and the drive's own logs — readable with <code>smartctl -l selftest</code> and <code>-l error</code> — show a history no sales description can edit away.</p>
+  <p><strong>Is a quick format before use a good idea?</strong> Formatting organises a file system; it does not examine hardware, and on a newly bought drive it destroys the one thing you want first — evidence of how the drive was behaving. Test first, format after the verdict, and only on a drive that holds nothing you need.</p>
+  <p><strong>How long does the whole acceptance test take?</strong> The reading stages take minutes. The long pole is the long self-test: from ten minutes or more in a maker tool to several hours for a large spinning drive under smartctl. Run it overnight if needed — deciding inside the return window, with the long test complete, is the entire point of testing on arrival.</p>
+  <p><strong>What success looks like:</strong> a written, dated baseline (model, serial, power-on hours, the 05/C5/C6 counters or the SSD life figure), a short and a long self-test both completed and passed, a file-system check run after — not instead of — the hardware tests, and a verdict from the table applied before the drive stores anything that matters.</p>
+
+  <p>Related: <a href="/posts/free-tools-check-drive-health.html">free tools to check drive health</a> and <a href="/posts/smart-basics-explained.html">SMART basics, explained simply</a>.</p>
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

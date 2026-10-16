@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Check Drive Health on a Mac: SMART Status and First Aid — Hard Drive Health</title>
+<meta name="description" content="Read the SMART status in Disk Utility, run First Aid in Apple's order (volumes, container, device), use Recovery for the startup disk, and act on Failing, Not Supported, and repeat-error results — backup first.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>How to Check Drive Health on a Mac: SMART Status, First Aid, and What Each Result Means</h1>
+  <p class="meta">Guide &middot; 10 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/check-drive-health-on-mac.jpg" alt="Laptop viewed from above with its storage drive exposed beside a magnifying glass on a desk" loading="lazy" width="1920" height="1280">
+  <figcaption>Start with the drive&#x27;s own SMART report, then check the file system with First Aid.</figcaption>
+</figure>
+
+
+
+  <p>A Mac gives you two built-in drive checks, and most short guides treat them as the same thing. They are not. The SMART status is the drive reporting on its own hardware condition. First Aid checks the file system — the formatting and directory structure that organise your files — and tries to repair what it finds there (Engadget; Apple Support). A drive can pass one check and fail the other, and each result calls for a different response. This guide runs both, in the right order, and ends with a decision table for the awkward results: Failing, Not Supported, and errors that keep coming back. One rule runs through all of it, and Apple states it plainly: make sure you have a current backup before you start, in case files are damaged or a check finds errors it cannot repair (Apple Support).</p>
+
+  <p>Why a software check matters at all is simple. Older spinning drives often announced trouble out loud — new clicking, grinding, a change in the machine's sound. Modern Mac storage is silent, so the warning has to come from the drive's own monitoring instead of your ears. The signs that prompt a check are unglamorous ones: corrupted or disappearing files, apps that freeze, or a message from macOS that the storage needs servicing (Engadget). Any of those is reason enough to spend fifteen minutes on the two checks below.</p>
+
+  <h2>Two different checks, not two names for one check</h2>
+  <p>SMART — Self-Monitoring, Analysis and Reporting Technology — is the drive's self-report. Disk Utility surfaces it as a single status line for the physical drive. It answers a hardware question: has the drive flagged a serious problem with itself? First Aid answers a software question: is the file system's structure sound, and can any damage to it be repaired? Engadget's guide puts the limit honestly: First Aid mostly checks the file system itself, and despite its name it does not give the drive a full physical checkup. Run the checks in that order — hardware verdict first, file-system repair second — because a Failing hardware verdict changes what repair is even worth attempting. There is little point polishing the directory structure of a drive that has told you it is dying.</p>
+
+  <h2>Step 1: read the SMART status</h2>
+  <ol>
+    <li>Open <strong>Disk Utility</strong>, which lives in <strong>Applications &gt; Utilities</strong> (Apple Support).</li>
+    <li>From the menu bar, choose <strong>View &gt; Show All Devices</strong>. The sidebar now shows each storage device with its containers and volumes listed underneath it (Apple Support).</li>
+    <li>Select the <strong>physical drive itself</strong> at the top of its group — not a container, and not a volume such as Macintosh HD underneath it.</li>
+    <li>Read the <strong>SMART status</strong> line for that drive, in the drive's information area (the Info view in current versions). <strong>Verified</strong> means the drive passed its SMART tests; <strong>Failing</strong> means it has flagged a serious problem; <strong>Not Supported</strong> means this drive, or the way it is connected, does not offer SMART testing to Disk Utility (Macworld; OSX Daily).</li>
+    <li>Write the result down with today's date, even if it says Verified. A dated record turns a future worry into a comparison.</li>
+  </ol>
+  <p>Read Verified with the right amount of confidence: it means the drive has not flagged a serious problem, not that it has promised you years of life (Engadget). Drives can and do fail without a long warning period, which is why the backup comes before the checks rather than after a bad result.</p>
+
+  <h2>Step 2: run First Aid in Apple's order</h2>
+  <ol>
+    <li>Still in Disk Utility with <strong>View &gt; Show All Devices</strong> on, start at the bottom of the drive's group: select the <strong>last volume</strong> listed under the device (Apple Support).</li>
+    <li>Click <strong>First Aid</strong>, then <strong>Run</strong>. If asked for a password to unlock the disk, enter your administrator password — the one you use to log in to the Mac (Apple Support).</li>
+    <li>When that volume finishes, select the <strong>next item above it</strong> in the sidebar and run First Aid again. Keep moving up: every volume, then each container, then finally the device itself (Apple Support).</li>
+    <li>If the First Aid button is dimmed for an item, skip that item and continue with the next one up the list (Apple Support).</li>
+    <li>Note the wording of each result as it completes — appears to be OK, has been repaired, or errors found that could not be repaired. The exact wording decides what happens next.</li>
+  </ol>
+  <p>That bottom-up order is not a ritual. Repairing a volume first, then the container that holds it, then the device gives each layer a clean structure underneath it before the layer above is checked — which is why Apple prescribes volumes first, then container, then the drive itself (Apple Support; Engadget).</p>
+
+  <h2>The startup disk: do it from macOS Recovery</h2>
+  <p>If the drive you are checking is the Mac's startup disk — or the Mac does not start up all the way — Apple directs you to run Disk Utility from macOS Recovery instead of from the running system (Apple Support). The entry steps differ by Mac:</p>
+  <ol>
+    <li><strong>Apple silicon:</strong> shut the Mac down, then press and hold the power button until the system volume and the <strong>Options</strong> button appear. Select <strong>Options</strong>, click <strong>Continue</strong>, then choose <strong>Disk Utility</strong> from the utilities list (Apple Support).</li>
+    <li><strong>Intel:</strong> restart, and immediately press and hold <strong>Command-R</strong> to start from the built-in Recovery system, then choose <strong>Disk Utility</strong> and click <strong>Continue</strong> (Apple Support).</li>
+    <li>In Recovery's Disk Utility, check the startup volume and its data volume as part of the same bottom-up First Aid run — then work up through the container to the device, exactly as in Step 2.</li>
+    <li>When finished, quit Disk Utility and restart the Mac from the Apple menu (Apple Support).</li>
+  </ol>
+
+  <h2>What each result means</h2>
+  <table>
+    <thead><tr><th>Result</th><th>What it is telling you</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr><td>SMART: Verified; First Aid: OK or repaired</td><td>No serious hardware flag; the file system is sound or was fixed</td><td>Record the date, keep backups current, re-check when symptoms appear or on a regular rhythm</td></tr>
+      <tr><td>SMART: Verified; First Aid errors repeat</td><td>The hardware has not flagged itself, but the file-system damage is not staying repaired</td><td>Back up first, re-run First Aid from Recovery; if the same errors return, treat the drive as suspect and plan around replacement or service</td></tr>
+      <tr><td>SMART: Failing, or a fatal hardware error message</td><td>The drive itself is reporting that it is failing</td><td>Back up immediately, in priority order; this is not repairable by Disk Utility — plan on replacing the disk or arranging service (Apple Support guide; OSX Daily)</td></tr>
+      <tr><td>SMART: Not Supported, or no SMART line</td><td>No verdict at all — this connection or drive does not report SMART to Disk Utility</td><td>Do not read it as healthy. Rely on First Aid plus symptoms, and use a dedicated SMART reader or the drive maker's tools where they can see the drive</td></tr>
+      <tr><td>Device missing from the sidebar</td><td>Disk Utility cannot see the device at all</td><td>Shut down, unplug nonessential devices and try again; for an external drive, check its cable, connections and power (Apple Support)</td></tr>
+      <tr><td>First Aid: errors it can't repair</td><td>Damage beyond what the repair pass can fix</td><td>With a verified backup in hand, Apple's next step is to erase (format) the disk and start clean; without a backup, stop and protect the data first (Apple Support)</td></tr>
+    </tbody>
+  </table>
+  <p>One distinction protects people from a common misread: the problems Disk Utility can repair are almost never SMART failures or other hardware problems (OSX Daily). A successful First Aid repair is good news about the file system. It says nothing, one way or the other, about the physical drive — which is exactly why both checks belong in the same routine.</p>
+
+  <h2>Keep the record where you will find it</h2>
+  <p>Store each dated result — SMART status, the First Aid wording, and any symptom that prompted the check — in one note kept with the computer's other records. A single Verified line means little. The same drive showing Verified in spring, a repaired First Aid result in summer, and repeat errors in autumn is a story with a direction, and it is the story, not any single reading, that should drive a replacement decision. That is the quiet advantage a Mac owner has over the old listen-to-the-drive method: the evidence can be written down.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Does First Aid delete files?</strong> First Aid checks and repairs file-system structure; the destructive step in this area is Erase, which Apple lists as the follow-on only when Disk Utility finds errors it cannot repair — and only after a backup exists (Apple Support). If a screen says Erase, you have left the checking routine and entered the rebuild routine; stop and confirm the backup first.</p>
+  <p><strong>SMART says Verified but the Mac still misbehaves.</strong> That combination is common and coherent: SMART covers the drive's self-reported hardware condition, while the misbehaviour may live in the file system, which is what First Aid and a Recovery-mode run are for (OSX Daily; Engadget).</p>
+  <p><strong>How often should this be run?</strong> On symptoms, immediately; otherwise as a periodic habit alongside backup checks. The value is in the dated sequence of results, so a steady rhythm beats a single anxious marathon of repeated checks.</p>
+  <p><strong>What success looks like:</strong> a current backup verified before you began, a SMART status read from the physical drive (not a volume) and written down with today's date, a First Aid run completed in the volumes-then-container-then-device order, and — for any result other than a clean pass — the matching row of the decision table already acted on.</p>
+
+  <p>Related: <a href="/posts/smart-basics-explained.html">SMART basics, explained simply</a> and <a href="/posts/signs-drive-failing.html">signs your drive is failing</a>.</p>
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting Up a Guest Wi-Fi Network — Fix Your Wi-Fi</title>
+<meta name="description" content="Give visitors internet without giving them your network: set up a guest Wi-Fi network with isolation on, decide which devices belong on it, and test that isolation actually works.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Setting up a guest Wi-Fi network</h1>
+  <p class="meta">Setup &middot; Published October 16, 2026 &middot; Last updated October 16, 2026</p><figure class="post-figure">
+  <img class="post-image" src="../images/setting-up-a-guest-wifi-network.jpg" alt="Visitors with phones in one zone and a family desk with computers and a printer in another, sharing one router" loading="lazy" width="1920" height="1280">
+  <figcaption>Two zones, one router — guests get the internet, not the house.</figcaption>
+</figure>
+
+
+
+  <p>Every visitor's phone that joins your main Wi-Fi gets two things: your
+  password, and a position inside your home network — alongside your computers,
+  your printer, your network storage, and your router's own admin page. A guest
+  network is the feature most routers already have for ending that arrangement.
+  It broadcasts a second Wi-Fi name with its own password. Devices on it can
+  reach the internet, but — configured correctly — they cannot reach anything
+  else in the house.</p>
+  <p>The US Federal Trade Commission (FTC) gives two reasons it is a good
+  security move: a separate login means fewer people hold your primary Wi-Fi
+  password, and if a guest unknowingly has malware on their phone or tablet,
+  that malware does not get onto your primary network and your devices. There
+  is also a practical benefit the security framing undersells: when the guest
+  password eventually spreads further than you intended — and guest passwords
+  do — changing it disrupts nobody's saved connections at home. Your own
+  devices never have to rejoin anything.</p>
+
+  <h2>What a guest network actually does (and what it does not)</h2>
+  <p>Under the hood, the router keeps guest devices separated. ASUS, for
+  example, assigns its guest network a different subnet from the main network —
+  a separate address neighbourhood — and offers an explicit setting controlling
+  whether guests can cross into the main network at all. That crossing setting
+  is the whole ballgame, and it is covered in its own section below, because a
+  guest network with local access switched on is mostly a second name and
+  password: nicer for sharing, but not the security boundary people assume they
+  have created.</p>
+  <p>Be clear about the limits, too. A guest network does not make visitors'
+  traffic private from the internet provider, does not speed anything up, and
+  does not protect a guest's own device from the wider internet. It does one
+  thing: it controls what connected devices can see inside your home. Set up
+  with that expectation, it does the job well.</p>
+
+  <h2>Who goes where: visitors, gadgets, and your own devices</h2>
+  <p>The setup takes five minutes; the decisions are the real work. Use this
+  framework, which follows the guidance of the FTC and the US Cybersecurity and
+  Infrastructure Security Agency (CISA):</p>
+  <table>
+    <tr><th>Device or person</th><th>Network</th><th>Why</th></tr>
+    <tr><td>Visitors' phones, tablets, and laptops</td><td>Guest</td><td>CISA's rule: guest Wi-Fi should be used by anyone who does not routinely connect to the home Wi-Fi. They need internet, not your printer.</td></tr>
+    <tr><td>Smart-home and IoT gadgets that only need the internet — plugs, bulbs, cameras, voice assistants</td><td>Guest</td><td>CISA recommends exactly this: on guest Wi-Fi, such devices cannot discover other devices on the home network, access router settings, or introduce vulnerabilities into it.</td></tr>
+    <tr><td>Your own phones, computers, and tablets</td><td>Main</td><td>They legitimately need the printer, shared files, and each other.</td></tr>
+    <tr><td>Devices that must be controlled from your phone at home — some TV and streaming setups, local media servers</td><td>Main (usually)</td><td>If the controller and the device cannot see each other across networks, the app stops working. Test on guest first if you are unsure; move back to main only the devices that genuinely break.</td></tr>
+    <tr><td>A work laptop</td><td>Either — decide deliberately</td><td>Guest keeps it away from home devices, which many employers would prefer; main is simpler if it must print or reach a home server. Isolation either way beats never thinking about it.</td></tr>
+  </table>
+  <p>One caution on the IoT row: a few gadgets are set up or controlled purely
+  locally, and a guest network's isolation can block their app during setup.
+  The fix is temporary — join your phone to the guest network for the setup,
+  or set the gadget up on main and move it afterwards — not a reason to abandon
+  the arrangement.</p>
+
+  <h2>Set up the guest network, step by step</h2>
+  <p>Menu labels vary by brand, but the sequence is the same everywhere. The
+  concrete paths below are ASUS's, from its official support pages; other
+  brands place a Guest Network page in the equivalent Wireless section of the
+  admin interface or app.</p>
+  <ol>
+    <li><strong>Log in to the router.</strong> Connect a computer or phone to
+    your main network, open the router's admin page (on ASUS, enter your
+    router's LAN IP or <strong>asusrouter.com</strong> in a browser) or open the
+    manufacturer's app, and sign in with the admin username and password.</li>
+    <li><strong>Open the guest network settings.</strong> On ASUS WebGUI, click
+    <strong>Guest Network</strong>. In the ASUS app, the route is
+    <strong>Settings &gt; WiFi &gt; Wireless Settings &gt; Guest
+    Network</strong>, then tap <strong>+</strong> to create one.</li>
+    <li><strong>Choose the band.</strong> Enable the guest network on 2.4 GHz at
+    minimum — it reaches furthest and suits visitors and gadgets alike. Add
+    5 GHz as well if the router offers it and your visitors sit near the
+    router.</li>
+    <li><strong>Name it obviously.</strong> A name like &ldquo;Home-Guest&rdquo;
+    next to your main name means visitors pick the right one without a
+    conversation, and you can spot at a glance which network a device joined.
+    ASUS generates a name automatically; replace it with your own.</li>
+    <li><strong>Set a real password — a different one.</strong> CISA's guidance
+    is a separate password that is long, random, and unique. Resist reusing the
+    main password: a guest password equal to the main password deletes the
+    entire point of the exercise. Keep it shareable — you will say it out loud
+    — but unique to this network.</li>
+    <li><strong>Set encryption to WPA3 Personal or WPA2 Personal.</strong> Both
+    the FTC and CISA name these as the acceptable options (CISA phrases it as
+    WPA3 Personal or WPA2 AES). Never leave the guest network open with no
+    password: an open network invites the whole street, not just your
+    guests.</li>
+    <li><strong>Now the decisive setting — turn local access off.</strong> See
+    the next section; do not skip it.</li>
+    <li><strong>Apply, then log out of the admin account.</strong> The FTC
+    specifically recommends logging out as administrator once settings are
+    changed.</li>
+  </ol>
+
+  <h2>The setting that decides everything: local access off</h2>
+  <p>Creating the guest network is not the same as isolating it. Most routers
+  expose a separate toggle for whether guest devices may reach the internal
+  (main) network, and its default and wording differ. On ASUS the toggle is
+  called <strong>Access Intranet</strong>: in the WebGUI, open the guest
+  network profile, set Access Intranet to <strong>Disable</strong>, and click
+  <strong>Apply</strong>. In the ASUS app, the path is the guest profile &gt;
+  <strong>Network &gt; General &gt; Access Intranet</strong> — uncheck the main
+  network to deny access, then Apply. Other brands word the same control as
+  &ldquo;Allow guests to access my local network,&rdquo; &ldquo;client
+  isolation,&rdquo; or &ldquo;AP isolation.&rdquo; Whatever the wording, the
+  wanted state is: guests get the internet, and nothing else. If you ever
+  deliberately enable local access — say, so a visitor can use your printer —
+  treat it as a temporary exception and switch it back afterwards; a printer
+  shared for a weekend has a way of staying shared for years.</p>
+
+  <h2>What success looks like: the two-minute isolation test</h2>
+  <p>Do not trust the settings screen — test the outcome from a phone, exactly
+  as a guest would experience it:</p>
+  <ol>
+    <li>Join the guest network with your phone and open a website. The internet
+    works.</li>
+    <li>While still on guest, try to open the router's admin page address in
+    the browser, and try to print, or to open a shared folder or your network
+    storage app. Each of these should fail — the admin page does not load, the
+    printer is not found, the share is unreachable. Failure here is the
+    feature working.</li>
+    <li>Switch the phone back to the main network and repeat the admin-page
+    test. It loads. The contrast between the two results is the proof the
+    boundary exists.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> on the guest network, the
+  internet works and everything inside the home is invisible; on the main
+  network, everything works as before. If the guest test can still reach the
+  admin page or the printer, the isolation toggle is on — return to the
+  previous section and find it, because until that test fails on purpose, the
+  guest network is decoration.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Does a guest network slow down the main one?</strong> Guests share
+  the same internet connection and the same router, so a guest streaming in 4K
+  uses the same pipe as anyone. What the guest network controls is access, not
+  bandwidth — though some routers add an optional guest bandwidth limit or a
+  schedule that turns the guest network off at set hours, both of which ASUS
+  supports through its access-time settings.</p>
+  <p><strong>Should the guest password be as strong as the main one?</strong>
+  It should be unique and not short; CISA's phrasing is long, random, and
+  unique. In practice a memorable multi-word phrase used nowhere else hits
+  both targets: strong enough, and sayable across a room.</p>
+  <p><strong>My router has no guest network option. Now what?</strong> Check
+  for a firmware update first — features arrive that way — and check the app
+  as well as the web admin, since some brands expose it in only one place. If
+  it genuinely is not there, the fallback is discipline with the main
+  password: share it rarely, and change it when someone who had it should not
+  anymore.</p>
+  <p><strong>Can guests see each other?</strong> On many routers, guest devices
+  are isolated from each other as well as from the main network, and some
+  expose that as its own toggle. Leave guest-to-guest isolation on unless
+  guests need to share something with each other — visitors almost never
+  do.</p>
+
+  <p><a href="updating-router-firmware-safely.html">Related: Updating router firmware safely &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

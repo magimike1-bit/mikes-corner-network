@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixing Buffering on Streaming TV — Fix Your Wi-Fi</title>
+<meta name="description" content="Stop streaming TV buffering by diagnosing first: compare the speed at your TV with what a stream actually needs, then work a fix sequence in order — one change at a time.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Fixing buffering on streaming TV</h1>
+  <p class="meta">Troubleshooting &middot; Published October 16, 2026 &middot; Last updated October 16, 2026</p><figure class="post-figure">
+  <img class="post-image" src="../images/fixing-buffering-on-streaming-tv.jpg" alt="Television showing a loading ring over a mountain scene, with a router on the stand and popcorn on the table" loading="lazy" width="1920" height="1280">
+  <figcaption>The spinning circle is a symptom — measure at the TV before fixing anything.</figcaption>
+</figure>
+
+
+
+  <p>The spinning circle always arrives at the worst moment: the goal, the
+  verdict, the cliffhanger. Buffering feels like one problem, but it is a
+  symptom with four different causes — not enough speed arriving at the house,
+  not enough of that speed surviving the trip to the TV, too many other things
+  drinking from the same pipe at the same hour, or the TV or streaming app
+  itself having a bad evening. Each cause has a different fix, and the fix for
+  one does nothing for the others. That is why the familiar advice list —
+  restart things, move the router, buy a mesh kit — so often disappoints: it
+  applies every remedy without ever finding out which disease was present.</p>
+  <p>This guide works the other way round. Measure at the TV first, compare
+  the result against what a stream actually needs, and let that comparison
+  point at the cause. Then work a short fix sequence in order, changing one
+  thing at a time, and finish with a test that proves the buffering is gone
+  rather than merely paused.</p>
+
+  <h2>What a stream actually needs (and why two official numbers disagree)</h2>
+  <p>Streaming speed requirements are published per stream, and the figures
+  are smaller than most people fear. Netflix's recommended download speeds,
+  per stream, are 3 Mbps or higher for HD at 720p, 5 Mbps or higher for Full
+  HD at 1080p, and 15 Mbps or higher for 4K Ultra HD. The US Federal
+  Communications Commission's Broadband Speed Guide lists its own minimums
+  per activity: HD video at 5–8 Mbps, and Ultra HD 4K video at 25 Mbps.</p>
+  <table>
+    <tr><th>Picture quality</th><th>Netflix recommends</th><th>FCC guide lists</th></tr>
+    <tr><td>HD (720p)</td><td>3 Mbps</td><td>—</td></tr>
+    <tr><td>Full HD (1080p)</td><td>5 Mbps</td><td>HD video: 5–8 Mbps</td></tr>
+    <tr><td>4K Ultra HD</td><td>15 Mbps</td><td>25 Mbps</td></tr>
+  </table>
+  <p>The two 4K figures are not a contradiction to pick a side in; they are a
+  minimum and a comfort number. Fifteen Mbps is what the service itself asks
+  for to run one 4K stream. Twenty-five leaves room for the stream's own
+  peaks, the Wi-Fi's inefficiency, and everyone else in the house. The useful
+  rule: budget the FCC-style figure per 4K stream, the Netflix figure as the
+  floor below which buffering is expected, and add the household's other
+  simultaneous uses on top. Note also what these numbers are not: a 100 Mbps
+  plan does not deliver 100 Mbps to a TV two rooms and a brick wall away from
+  the router, which is precisely what the test below measures.</p>
+
+  <h2>Measure first: the three-point test at your TV</h2>
+  <p>Run these measurements in the evening, at the hour the buffering actually
+  happens — a connection tested at breakfast will happily hide an 8 p.m.
+  problem.</p>
+  <ol>
+    <li><strong>Test at the TV.</strong> On the TV or streaming device itself if
+    it has a speed test (Netflix's own test tool is Fast.com, usable from the
+    device's browser or a phone held where the TV sits), run a test and write
+    the number down. Compare it with the table: a 4K stream wants 15 Mbps at
+    minimum reaching the TV, with 25 the comfortable target.</li>
+    <li><strong>Test beside the router.</strong> Run the same test standing
+    next to the router. This number approximates the best your Wi-Fi delivers
+    anywhere. A result a few Mbps below your plan's advertised speed is
+    ordinary fluctuation — the guidance around Netflix's test treats a drop of
+    up to about 10 Mbps as unremarkable — but a much larger gap at the router
+    points at the plan or the line, not the room.</li>
+    <li><strong>Test wired, if you can.</strong> Plug a laptop into the router
+    with an Ethernet cable and test again. This is the ceiling the connection
+    itself provides, with Wi-Fi removed from the question entirely.</li>
+  </ol>
+  <p>Now the decision framework — the pattern of the three numbers names the
+  cause:</p>
+  <table>
+    <tr><th>Pattern</th><th>Cause</th><th>Where the fix lives</th></tr>
+    <tr><td>Wired test is also below what the stream needs</td><td>The plan or the line into the house</td><td>Restart the modem/router once; if it persists, it is a provider conversation, with your three numbers as evidence</td></tr>
+    <tr><td>Wired and near-router tests are healthy; the at-TV test collapses</td><td>Wi-Fi signal on the trip to the TV</td><td>Band, placement, a wired run to the TV, or a nearer access point — not a bigger plan</td></tr>
+    <tr><td>All three tests pass, but buffering hits at busy hours</td><td>Competition inside the house — downloads, backups, other streams</td><td>Scheduling and priorities, covered in the fix sequence</td></tr>
+    <tr><td>Numbers pass everywhere and only one app buffers</td><td>The app or the TV itself</td><td>Restart/update that app and device; lower that service's playback quality as a diagnostic</td></tr>
+  </table>
+
+  <h2>The fix sequence, step by step</h2>
+  <p>Work in this order — cheapest and most likely first — and retest playback
+  after each single change. Changing three things at once feels faster and
+  teaches you nothing about which one mattered.</p>
+  <ol>
+    <li><strong>Restart the streaming device properly.</strong> A real restart,
+    not the remote's power button. On Roku, for example, either unplug the
+    power cable, wait 30 seconds, and plug it back in, or go
+    <strong>Home &gt; Settings &gt; System &gt; Power &gt; System
+    restart</strong>. Roku notes a system restart does not affect your
+    settings. Smart TVs: find the equivalent Restart option in settings, or
+    unplug for 30 seconds.</li>
+    <li><strong>Restart the router and modem once.</strong> Unplug, wait
+    20–30 seconds, plug back in, and give the network a few minutes to settle
+    before judging. Roku's own support sequence pairs the device restart with
+    a router restart in exactly this way. Do this once, deliberately — nightly
+    reboot rituals are a symptom of a deeper problem, not a fix.</li>
+    <li><strong>Move the TV's connection to 5 GHz, or move the signal to the
+    TV.</strong> If the TV is on the 2.4 GHz band, switch it to 5 GHz in its
+    network settings: shorter range, but far less crowded and faster where it
+    reaches. If the signal at the TV is weak on either band, the honest fixes
+    are positional — router higher and more central, streaming stick not
+    tucked behind the TV panel (Roku's support guidance likewise flags weak
+    signal and placement behind the TV) — before they are financial.</li>
+    <li><strong>Wire the TV if the room allows it.</strong> An Ethernet cable
+    removes Wi-Fi from the equation entirely, and Roku's support describes a
+    direct wired connection as faster and more reliable on devices that
+    support it. Many TVs and most streaming boxes have the port. If a cable
+    run is impossible, a streaming stick relocated to the room's better-signal
+    side, or a mesh node or access point placed partway, is the wireless
+    version of the same idea.</li>
+    <li><strong>Evict the competition at showtime.</strong> Game downloads,
+    cloud backups, and operating-system updates can each consume the entire
+    pipe in bursts. Pause or schedule them outside viewing hours, and check
+    whether the buffering pattern matches someone else's stream or download
+    starting. The three-point test already told you whether this is your
+    pattern; if it is, this step is the cure, not a ritual.</li>
+    <li><strong>Lower the stream's quality one notch — as a test.</strong> In
+    Netflix, the playback setting lives at <strong>Account &gt; Profile &amp;
+    Parental Controls &gt; Playback settings</strong>, where a lower
+    data-usage option reduces the bandwidth the stream requires. If HD plays
+    flawlessly where 4K buffered, you have confirmed a bandwidth shortfall at
+    the TV rather than guessed at one — and you have a watchable picture while
+    you fix the cause properly.</li>
+    <li><strong>Update the TV or streamer and the app.</strong> Check for a
+    system update in the device settings (on Roku, <strong>Settings &gt;
+    System &gt; System update &gt; Check now</strong>) and update or reinstall
+    the buffering app. An app that buffers alone, on a network that tests
+    healthy, is usually indicting itself.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> a speed test at the TV clears
+  the requirement for the quality you watch — 15 Mbps at minimum for 4K, 25
+  with comfort — and a full program at the busiest hour plays start to finish
+  at full quality with no drop to a softer picture and no spinning circle,
+  while the rest of the house uses the connection normally. One clean evening
+  is a result; three in a row is a fix.</p>
+
+  <h2>When the answer really is the plan — or new hardware</h2>
+  <p>Sometimes the test sequence ends at the first row of the table: the wired
+  number itself cannot feed the house. Before upgrading, do the household
+  arithmetic honestly — one 4K stream budgeted at 25 Mbps, an HD stream at
+  5–8, a video call and general use on top — and compare it with what the
+  wired test actually delivers at 8 p.m., not what the plan advertises. If the
+  delivered number falls short of the arithmetic, the plan is the bottleneck
+  and no router purchase will change that; take the three test numbers to the
+  provider first, since a line fault and an undersized plan present identically
+  from the couch. Conversely, if the wired number is generous and only the TV
+  starves, the money — if any needs spending — belongs on the in-home side:
+  placement first, a wired run second, a mesh node or access point third. And
+  one more isolation trick from Roku's support playbook separates even house
+  from provider: connect the streamer to a phone hotspot briefly. If it plays
+  cleanly there, the streaming service and device are innocent, and the problem
+  is definitely inside your own connection.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Why does only one TV buffer when the others are fine?</strong>
+  Buffering follows the weakest link, and each TV has its own: distance and
+  walls on its Wi-Fi path, the band it joined, or an older streaming stick.
+  Run the at-TV test on the suffering set and on a healthy one — the numbers
+  will usually show the difference immediately.</p>
+  <p><strong>Is 4K worth dropping to HD while troubleshooting?</strong> Yes,
+  as a diagnostic, per step 6: HD needs roughly a third of the 4K bandwidth,
+  so a stream that is stable in HD but buffers in 4K has told you the shortfall
+  is bandwidth at the TV, in a single experiment.</p>
+  <p><strong>Does buffering mean the router is dying?</strong> Rarely on its
+  own. A router that delivers healthy wired and near-router numbers is doing
+  its job; the failure is downstream of it. Suspect hardware when speeds are
+  poor everywhere, wired included, restarts stop helping, or dropouts hit
+  every device at once — patterns this site's disconnecting guide covers.</p>
+  <p><strong>Will a faster plan fix evening buffering?</strong> Only if the
+  wired evening test says the plan is the limit. If the at-TV number is a
+  fraction of the near-router number, a bigger plan raises a ceiling the TV
+  never reaches — the room, not the pipe, is the fix.</p>
+
+  <p><a href="diagnosing-isp-speed-problems.html">Related: Diagnosing ISP speed problems &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

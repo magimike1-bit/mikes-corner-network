@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Updating Router Firmware Safely — Fix Your Wi-Fi</title>
+<meta name="description" content="Update your router firmware without bricking it: back up your settings, verify the exact model and hardware version, choose auto or manual update, and confirm the new version stuck.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Updating router firmware safely</h1>
+  <p class="meta">Troubleshooting &middot; Published October 16, 2026 &middot; Last updated October 16, 2026</p><figure class="post-figure">
+  <img class="post-image" src="../images/updating-router-firmware-safely.jpg" alt="Router on a shelf beside a laptop with an upload arrow, a shield and a circular update arrow above" loading="lazy" width="1920" height="1280">
+  <figcaption>An update in progress — preparation first, then one uninterrupted flash.</figcaption>
+</figure>
+
+
+
+  <p>Firmware is the software that runs your router itself — the operating system
+  underneath the Wi-Fi name and password you set. It is also the one update most
+  homes never install. That matters for two reasons. First, security: the US
+  Cybersecurity and Infrastructure Security Agency (CISA) notes that firmware
+  updates &ldquo;enhance product performance, fix flaws, and address security
+  vulnerabilities.&rdquo; An unpatched router is the front door of the whole home
+  network left on an old lock. Second, stability: a share of the random reboots,
+  dropped connections, and features that quietly stop working trace back to bugs
+  the manufacturer has already fixed in a newer release.</p>
+  <p>The update itself is not hard. What makes people nervous — reasonably — is
+  the warning that interrupting it can damage the router. That risk is real but
+  narrow, and it is almost entirely controlled by preparation. This guide is
+  built around that idea: a short safety checklist first, a simple framework for
+  choosing how to update, numbered steps with the real menu paths for two major
+  brands, and a verification check at the end so you know the update actually
+  took.</p>
+
+  <h2>Before you touch anything: the safety checklist</h2>
+  <p>Do these four things before starting any update, whichever brand you own.
+  Together they remove nearly every way a routine update goes wrong.</p>
+  <ol>
+    <li><strong>Write down the exact model and hardware version.</strong> Both are
+    printed on the label on the bottom or back of the router — TP-Link, for
+    example, prints a string like &ldquo;Ver: 1.0,&rdquo; and the same information
+    appears in the admin page. TP-Link's official guidance is blunt about why:
+    check the hardware version before downloading anything, because using the
+    wrong firmware file can damage the device and void the warranty. Same model
+    name, different hardware version, different file.</li>
+    <li><strong>Download only from the manufacturer, and match your region.</strong>
+    Firmware comes from the maker's official support site for your exact model —
+    never from a driver-download site or a forum link. TP-Link additionally warns
+    that firmware differs by purchase region: EU and US files are not
+    interchangeable, and the file should come from the local official site for
+    where the router was bought.</li>
+    <li><strong>Back up your current settings.</strong> Most updates keep your
+    configuration, but some release notes say the update will reset the router to
+    factory defaults — and then your Wi-Fi name, password, port rules, and
+    everything else are gone. A backup turns that from a disaster into a
+    five-minute restore. On TP-Link routers the backup lives at
+    <strong>Advanced &gt; System &gt; Backup &amp; Restore</strong>: click
+    <strong>BACK UP</strong> and save the file (it is named config.bin by
+    default). Other brands place an equivalent Backup or Save option in their
+    Administration or System section. If your router has no backup option, at
+    minimum write down the settings you changed from the defaults.</li>
+    <li><strong>Pick a quiet time and a wired connection where you can.</strong>
+    The update reboots the router, so the whole house goes offline for a few
+    minutes — do it when nobody is mid-call or mid-movie. TP-Link advises against
+    updating over a wireless connection unless the device has no Ethernet port,
+    and suggests stopping internet applications on the computer first. A laptop
+    plugged into a LAN port removes one whole failure mode.</li>
+  </ol>
+
+  <h2>Auto update or manual file: which route for your router</h2>
+  <p>There are three ways firmware gets installed, and the right one depends on
+  what your router offers. This decision framework keeps it simple:</p>
+  <table>
+    <tr><th>Route</th><th>Choose it when</th><th>Watch out for</th></tr>
+    <tr><td>Automatic update built into the router</td><td>Your router offers it — CISA notes some routers have this option. It is the best default for most homes because updates stop depending on anyone remembering.</td><td>Set the scheduled time for overnight or another unused hour, since the router reboots. ASUS, for example, lets you enable Auto Firmware Upgrade and pick the time.</td></tr>
+    <tr><td>One-click check inside the admin page or app</td><td>No automatic option, but the router can check the manufacturer's server itself. TP-Link cloud routers show an Update icon in the admin page, and its Tether app offers More &gt; System &gt; Firmware Update.</td><td>Needs a stable internet connection during the download.</td></tr>
+    <tr><td>Manual file upload</td><td>The router cannot check online, the online check fails, or the router has not been updated in a very long time. ASUS specifically recommends a manual update in that last case.</td><td>This is the route where the checklist above matters most: exact model, hardware version, region, extracted file.</td></tr>
+  </table>
+  <p>One special case: if the router came from your internet provider, the
+  update may not be yours to run at all. The US Federal Trade Commission (FTC)
+  advises checking with the provider whether it pushes automatic updates to its
+  routers. If it does, your job shrinks to confirming the version is current.
+  The FTC also suggests registering the router with the manufacturer and signing
+  up for update notices, so the next release finds you instead of the other way
+  around.</p>
+
+  <h2>The update, step by step</h2>
+  <p>The steps below follow the manual and one-click routes, with the exact
+  menu paths for TP-Link and ASUS — the pattern on other brands is the same
+  shape with different labels.</p>
+  <ol>
+    <li><strong>Connect and log in to the admin page.</strong> On TP-Link, open a
+    browser and go to <strong>tplinkwifi.net</strong>, then sign in. On ASUS, go
+    to your router's LAN IP address or <strong>asusrouter.com</strong> and click
+    <strong>Sign In</strong>. Use a computer connected by cable if you can.</li>
+    <li><strong>Note the current firmware version.</strong> It is shown on the
+    firmware page itself (and on TP-Link models at the bottom of the admin
+    interface, next to the hardware version). Write it down — the success check
+    at the end compares against this number.</li>
+    <li><strong>For a manual update, download and prepare the file.</strong> Find
+    your exact model and hardware version on the manufacturer's support site,
+    download the newest firmware for it, and unzip the download. The file you
+    will upload is usually a BIN file.</li>
+    <li><strong>Open the firmware page.</strong> TP-Link:
+    <strong>Advanced &gt; System &gt; Firmware Upgrade</strong>, then click
+    <strong>BROWSE</strong> and select the extracted file. ASUS manual route:
+    <strong>Administration</strong> (under Advanced Settings) &gt;
+    <strong>Firmware Upgrade</strong> &gt; <strong>Upload</strong>, then choose
+    the file. For the one-click route instead, click the router's own Check or
+    Update control and let it fetch the release itself — on ASUS a pop-up
+    appears at the upper right when a new version is available, and
+    <strong>Update now</strong> leads to the Firmware Upgrade page.</li>
+    <li><strong>Start the update and then do nothing.</strong> Confirm the prompt
+    (TP-Link's says Upgrade). From this moment the rule from both manufacturers
+    is identical: do not turn off the power, do not unplug the Ethernet cable,
+    and do not disconnect, until the process finishes. An interrupted flash is
+    the one genuinely dangerous moment in this whole procedure.</li>
+    <li><strong>Let the router reboot itself.</strong> TP-Link puts the wait at
+    about 3 minutes; ASUS says to wait a few minutes for the upload and restart
+    to complete. The Wi-Fi name disappearing and reappearing is normal.</li>
+    <li><strong>Log back in and verify.</strong> Return to the same firmware page
+    and confirm the version shown is the new one — TP-Link's page reports the
+    updated version there directly. Reconnect your devices and open a few sites
+    and apps to confirm the network behaves normally.</li>
+    <li><strong>Turn on automatic updates if the option exists</strong>, set for
+    an unused hour, so this is the last manual update you ever run. Then log out
+    of the admin account — a step the FTC specifically recommends after any
+    settings session.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the firmware page shows the new
+  version number (different from the one you wrote down in step 2), every device
+  reconnects to the same Wi-Fi name without re-entering passwords, and a quick
+  speed test beside the router lands in its usual range. If the release notes
+  warned of a settings reset and your network came back under a default name
+  instead, that is the expected case, not a failure — restore the backup file
+  from the same Backup &amp; Restore area, or run the setup wizard again.</p>
+
+  <h2>If the update fails or the router misbehaves afterwards</h2>
+  <p>Stay calm and work in this order. First, give it time: a router mid-reboot
+  can look dead for several minutes, and pulling the plug during that window is
+  how a recoverable situation becomes a real one. Second, if the admin page
+  will not load after a generous wait, power the router off and on once, wait
+  again, and try the admin address once more. Third, if the router responds but
+  settings are scrambled or the update plainly did not finish, ASUS's official
+  path is to restore the router and upgrade again; if a normal retry still
+  fails, ASUS provides a Firmware Restoration utility used in Rescue Mode to
+  upload firmware to an uncooperative router. ASUS also recommends restoring
+  factory defaults after an update as a general practice —
+  <strong>Administration &gt; Restore/Save/Upload Setting &gt; Factory
+  default &gt; Restore</strong> — followed by running the setup wizard again,
+  which is another reason the step-one backup matters. Finally, the honest
+  endpoint: a router old enough that the manufacturer publishes no firmware for
+  it anymore is not protected by any procedure. At that point the update problem
+  has become a replacement question, and no setting changes that.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>How often should firmware be updated?</strong> Whenever the
+  manufacturer releases a version for your model — there is no fixed calendar.
+  Automatic updates, where available, remove the need to think about it; the
+  FTC's suggestion of registering the router for update notices covers the
+  brands that do not push them.</p>
+  <p><strong>Will updating erase my Wi-Fi name and password?</strong> Usually
+  not — but some releases do reset settings, and the release notes or the
+  router's app will say so (TP-Link's Tether app flags exactly this in its
+  release logs). That is why the backup comes before the update, not after a
+  problem.</p>
+  <p><strong>Can a phone do the update?</strong> On routers with a companion app,
+  yes: TP-Link cloud routers update through the Tether app, and ASUS recommends
+  its router app as a firmware route. The same rules apply — stable connection,
+  quiet time, and do not interrupt the process.</p>
+  <p><strong>Is it safe to skip updates if everything works?</strong> Working
+  and patched are different things. Per CISA, updates address security
+  vulnerabilities as well as performance and bugs, and the vulnerable ones are
+  invisible in daily use. A router that works fine can still be the weakest
+  door in the house.</p>
+
+  <p><a href="fixing-wifi-that-keeps-disconnecting.html">Related: Fixing Wi-Fi that keeps disconnecting &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIOS and Boot Settings That Still Matter on an Old Laptop — Old Laptop Revival</title>
+<meta name="description" content="The firmware settings worth understanding on an old laptop — boot order, UEFI vs legacy mode, Secure Boot, and virtualization — checked safely from inside Windows first, with a clear change/check/never-touch triage.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>BIOS and boot settings that still matter on an old laptop</h1>
+  <p class="meta">Firmware &middot; 9 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/bios-boot-settings-old-laptops.jpg" alt="Flat illustration of a laptop in profile with a large gear, toggle switches, and a USB stick below" loading="lazy" width="1920" height="1280">
+  <figcaption>Four settings matter; the rest can stay exactly as found.</figcaption>
+</figure>
+
+
+
+  <p>Every revival project on this site eventually walks through the firmware
+  setup screens: booting an installer from USB, installing a lighter operating
+  system, trying a virtual machine, or figuring out why a freshly installed
+  system will not start. The setup screens on an old laptop look intimidating
+  — dense menus, unfamiliar acronyms, no undo button — but the honest truth
+  is that only a handful of settings matter for getting an old machine useful
+  again, and one of them can leave the laptop unable to boot if it is changed
+  casually. This guide is a triage, not a tour: check the current state from
+  inside Windows first, learn the four settings that matter, and leave
+  everything else exactly as it was found.</p>
+
+  <h2>Check where you stand before touching setup</h2>
+
+  <p>Most of what setup would tell you is already visible from the desktop,
+  with no key-press timing involved. Press Windows+R, type
+  <code>msinfo32</code>, and open System Information. Two lines matter.
+  <strong>BIOS Mode</strong> reads either UEFI or Legacy — that single line
+  settles which boot world the machine currently lives in. <strong>Secure
+  Boot State</strong> reads On, Off, or Unsupported. A third check lives in
+  Task Manager: open the Performance tab, select CPU, and read the
+  <strong>Virtualization</strong> line, which reports Enabled or Disabled.
+  For a fuller firmware report, the <code>systeminfo</code> command lists a
+  Hyper-V Requirements section, including "Virtualization Enabled in
+  Firmware: Yes/No" — the line that tells you whether a firmware trip is even
+  needed for virtual machines. Write all three values down. They are the
+  baseline every later change is measured against, and they make setup a
+  targeted visit instead of an exploration.</p>
+
+  <p>Entering setup, when it is needed: restart and tap the maker's key —
+  F2 or F12 on Dell, Esc then F10 on HP, F1 or F2 on Lenovo, Delete or F2 on
+  ASUS are the documented common keys. Miss the window and the machine simply
+  boots normally; try again.</p>
+
+  <h2>Boot order and the one-time boot menu</h2>
+
+  <p>Boot order is the safest useful setting in the whole firmware: it only
+  decides which device the machine tries first. The everyday revival use is
+  booting a USB installer or rescue drive. Two ways to do it, in order of
+  preference. The one-time boot menu (often F12 or Esc at power-on,
+  depending on the maker) picks a device for that boot only and changes
+  nothing permanently — use it for installers. The permanent boot order, on
+  the Boot tab of setup, is worth changing when a new internal drive has been
+  fitted and the machine keeps looking for the old one. On legacy-style menus
+  the order is moved with the +/− keys or arrow keys; save and exit is F10 on
+  most systems. A revival-specific tip: after an SSD swap, if the machine
+  boots to "no bootable device" despite a good install, the boot order (or
+  the boot menu) is the first place to look — the firmware may still be
+  pointing at a device that is no longer there.</p>
+
+  <h2>UEFI vs legacy (CSM): the switch that can strand your install</h2>
+
+  <p>Boot mode is the one setting in this guide that deserves real caution.
+  UEFI is the modern firmware standard; legacy mode — labelled Legacy, or
+  CSM (Compatibility Support Module) on UEFI machines — emulates the old
+  BIOS behaviour for older media and operating systems. The critical fact,
+  understated in most tutorials: an operating system is installed
+  <em>for</em> one mode. Windows installed in legacy mode will not boot after
+  the firmware is switched to UEFI, and an OS installed in UEFI mode will
+  not boot in legacy mode. HP's support experts state the consequence
+  plainly: moving a machine to UEFI mode means reinstalling Windows in UEFI
+  mode, booting the installation media from the EFI USB boot source rather
+  than the legacy one.</p>
+
+  <p>So the rule for a working machine is simple: the boot mode is not a
+  preference to tidy up, it is part of the installation. Change it only as
+  part of a planned reinstall, at the moment of reinstalling, with the
+  installer prepared for the target mode. On some machines the switch is
+  also one-directional in practice — on an HP EliteBook 840 G3, for example,
+  UEFI boot itself cannot be disabled at all; the supported route to older
+  media is enabling legacy support alongside it and disabling Secure Boot,
+  then confirming the media appears in the boot order. Menus differ by maker
+  and model, which is why the service manual for the exact laptop outranks
+  any generic screenshot.</p>
+
+  <h2>Secure Boot: what it checks, and when it has to come off</h2>
+
+  <p>Secure Boot is UEFI's signature check. On a machine without it — most
+  computers released before Windows 8 — the firmware hands control to
+  whatever bootloader it finds, without determining whether it is a trusted
+  operating system or malware. With Secure Boot active, the firmware checks
+  each piece of boot software, including option ROMs and the operating
+  system itself, against databases of known-good signatures stored in the
+  firmware, and runs only what validates. It requires UEFI (specification
+  2.3.1 Errata C or later); on UEFI Class 2 machines, enabling Secure Boot
+  also requires the CSM to be disabled, so the machine can only boot
+  authorized UEFI-based systems. It does not require a TPM.</p>
+
+  <p>Practically, on an old laptop Secure Boot matters in two moments. It
+  must usually be <strong>on</strong>, or at least available, for modern
+  Windows installations and some current software that checks for it. It
+  sometimes has to come <strong>off</strong> to boot unsigned installers,
+  older rescue media, or alternative operating systems whose bootloaders are
+  not in the firmware's database — although Windows-certified machines must
+  allow users to add signatures to that database and must allow Secure Boot
+  to be disabled entirely, so both escape hatches exist by design. Two
+  working notes: some machines require setting a firmware administrator
+  password before the Secure Boot toggle unlocks, and Secure Boot cannot be
+  enabled at all on a legacy-mode installation — the attempt ends with a
+  machine that will not boot until the setting is reverted. Change one thing
+  at a time, and know the way back.</p>
+
+  <h2>Virtualization: the hidden on-switch for virtual machines</h2>
+
+  <p>Hardware virtualization — Intel VT-x or AMD-V in the menus, often
+  labelled Virtualization Technology — gates an entire category of revival
+  uses: virtual machines, and the Windows features built on the same
+  hypervisor technology. The requirements chain is documented for Hyper-V:
+  a 64-bit processor with second-level address translation (SLAT), VM
+  Monitor Mode extensions, at least 4 GB of RAM, and virtualization support
+  enabled in the BIOS or UEFI. If the <code>systeminfo</code> check from the
+  first section says "Virtualization Enabled in Firmware: No," the firmware
+  trip is short: find the virtualization entry (on the referenced HP
+  machines it lives in the Security menu of setup; other makers file it
+  under Advanced or CPU configuration), set it to Enabled, save, and reboot.
+  One reassurance from HP's support community worth knowing before starting:
+  virtualization can be enabled while the machine stays in legacy boot mode
+  — there is no need to touch the boot mode, with all its consequences, just
+  to switch VT on.</p>
+
+  <h2>The settings triage: change, check, never touch</h2>
+
+  <table>
+    <tr><th>Setting</th><th>Virtue</th><th>Guidance</th></tr>
+    <tr><td>One-time boot menu</td><td>Change freely</td><td>Affects one boot only; the right tool for USB installers</td></tr>
+    <tr><td>Permanent boot order</td><td>Change deliberately</td><td>Worth setting after a drive swap; note the original order first</td></tr>
+    <tr><td>Virtualization (VT-x / AMD-V)</td><td>Change deliberately</td><td>Enable if VMs or hypervisor features are wanted; harmless left on</td></tr>
+    <tr><td>Secure Boot</td><td>Change with a reason</td><td>Off for unsigned media, on for modern Windows; never alongside legacy mode</td></tr>
+    <tr><td>Boot mode (UEFI / Legacy / CSM)</td><td>Check only</td><td>Change solely as part of a planned reinstall in the new mode</td></tr>
+    <tr><td>SATA operation mode (AHCI / IDE / RAID)</td><td>Check only</td><td>Note it before an SSD swap; switching it on an installed system can stop that system booting — change only with a reinstall or documented procedure for the model</td></tr>
+    <tr><td>Passwords, voltages, timings, fan curves</td><td>Never touch</td><td>Nothing in a revival needs them; a forgotten firmware password can lock the machine</td></tr>
+  </table>
+
+  <h2>A safe settings pass, step by step</h2>
+
+  <ol>
+    <li>Record the baseline from Windows: BIOS Mode, Secure Boot State, and
+    Virtualization status, as in the first section.</li>
+    <li>Back up anything irreplaceable on the machine. Firmware changes are
+    reversible; the hour spent re-installing after a mode mistake is the real
+    cost being insured against.</li>
+    <li>Restart into setup with the maker's key.</li>
+    <li>Photograph each screen before changing it. The photos are the undo
+    button the firmware does not provide.</li>
+    <li>Make exactly one change from the triage table — for example, enabling
+    virtualization — and nothing else on the same visit.</li>
+    <li>Save and exit (F10 on most systems) and let the machine boot fully
+    into the installed operating system.</li>
+    <li>Repeat the baseline check in Windows and confirm the changed value
+    now reads as intended, with everything else unchanged.</li>
+  </ol>
+
+  <h2>What success looks like</h2>
+
+  <p>The machine boots into its existing operating system exactly as before —
+  that is the primary success condition for any firmware visit on a working
+  laptop. The targeted value has flipped: Task Manager's CPU page reports
+  Virtualization: Enabled, or System Information shows the intended Secure
+  Boot State, or the USB installer boots from the one-time menu. If the
+  machine instead reports no bootable device after a change, do not stack
+  more changes on top: re-enter setup, restore the photographed settings —
+  boot mode first — and boot again. Nearly every firmware scare on an old
+  laptop ends there.</p>
+
+  <h2>FAQ</h2>
+
+  <p><strong>Switching to UEFI made the laptop stop booting. Is the drive dead?</strong>
+  Almost certainly not. The installation was made in legacy mode and cannot
+  boot in UEFI mode. Switch the boot mode back and the system returns;
+  moving to UEFI permanently is a reinstall project, not a settings tweak.</p>
+
+  <p><strong>Does enabling virtualization slow the laptop down?</strong>
+  The firmware switch itself simply makes the processor feature available.
+  Performance costs arrive only when virtual machines are actually running
+  and sharing the machine's memory and processor time.</p>
+
+  <p><strong>The Secure Boot option is greyed out. Why?</strong>
+  Two common causes: the machine is in legacy/CSM mode, where Secure Boot
+  cannot operate, or the firmware wants an administrator password set before
+  it unlocks the toggle. Check the boot mode first.</p>
+
+  <p><a href="/posts/chromeos-flex-on-an-old-laptop.html">Related: trying a new OS from USB, step by step &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

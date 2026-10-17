@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supplier Lead Times and Safety Stock: Measuring Real Lead Time and Sizing the Buffer — Retail Inventory Management</title>
+<meta name="description" content="Safety stock starts with an honest lead-time number: how to log actual supplier lead times, read their variability, and choose between the max-min and Z-score formulas.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Retail Inventory Management</a>
+    <p class="tagline">Practical inventory habits for independent retailers</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Supplier lead times and safety stock: measuring real lead time and sizing the buffer</h1>
+  <p class="meta">Ordering &amp; stock levels &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/supplier-lead-times-and-safety-stock.jpg" alt="Delivery driver carrying boxes into a stockroom while an employee logs the delivery on a clipboard" loading="lazy" width="1920" height="1280">
+  <figcaption>Every delivery logged is a lead time measured, not quoted.</figcaption>
+</figure>
+
+
+
+  <p>The companion guide on this site covers reorder points — the stock level
+  that triggers the next order. This guide covers the two inputs that make a
+  reorder point trustworthy or worthless: the supplier's lead time, and the
+  safety stock that sits underneath the reorder point as a buffer. Both fail
+  in the same quiet way. The lead time in the spreadsheet is the number the
+  supplier quoted, not the number the delivery history shows; and the safety
+  stock is a round figure chosen once, by feel, and never revisited. The result
+  is a store that stocks out on lines it thought were covered and over-stocks
+  lines it padded out of anxiety. Safety stock exists for a specific, narrow
+  job: it is extra inventory held to absorb variation in demand, in lead time,
+  or in both. It is not a universal percentage that every item deserves, and it
+  cannot eliminate stockouts — it can only make them rarer, at a price. Getting
+  the price right starts with measuring lead time honestly.</p>
+
+  <h2>Lead time is a measurement, not a quote</h2>
+  <p>Lead time is the amount of time, in days, between placing an order and the
+  stock being delivered — shelf-ready, not merely dispatched. Every formula in
+  this area consumes that number, and every formula inherits its errors. A
+  supplier who quotes three days and usually takes five has not set a three-day
+  lead time; the store has, by writing the quote into its records. The fix is
+  to treat lead time the way sales are treated: as history to be recorded, not
+  as a promise to be believed. Inventory guidance is consistent on the point —
+  use the supplier's actual average performance, not the figure printed on a
+  rate card — but the average alone is only half the measurement. The spread
+  matters as much. A supplier averaging seven days who delivers between six
+  and eight is a different risk from a supplier averaging seven days who
+  delivers between three and fifteen, even though the averages are identical.
+  Longer lead times and greater variability in demand or lead time generally
+  require more safety stock; the variability is not a detail, it is half the
+  calculation.</p>
+
+  <h2>Keep a lead-time log</h2>
+  <p>The log needs no software. A notebook by the receiving area or a tab in
+  the stock spreadsheet, filled in at the moment of delivery, captures what
+  memory will not:</p>
+  <ol>
+    <li><strong>Record four fields per delivery:</strong> supplier, order date,
+    promised date, and the date the goods were actually checked in and
+    shelf-ready. The shelf-ready date is the honest end of lead time — a
+    delivery that sat in the stockroom for two days before check-in consumed
+    two days of selling time, whatever the carrier's tracking said.</li>
+    <li><strong>Compute the actual lead time</strong> for each delivery (check-in
+    date minus order date) and keep a running average per supplier.</li>
+    <li><strong>Record the maximum as well as the average.</strong> The slowest
+    recent delivery is not an embarrassment to be forgotten; it is an input
+    the safety-stock formulas below consume directly.</li>
+    <li><strong>Note the cause of outliers.</strong> One line — "held at depot",
+    "short-shipped, remainder followed a week later", "supplier holiday
+    closure" — separates a pattern worth planning around from a one-off worth
+    ignoring.</li>
+    <li><strong>Review the log quarterly.</strong> Suppliers drift. A log that
+    shows the average creeping from five days to eight over two quarters is an
+    early warning that every reorder point fed by that supplier is quietly
+    going stale.</li>
+  </ol>
+  <p>After a quarter, most small retailers have enough deliveries per main
+  supplier to read the pattern: average lead time, worst recent lead time, and
+  a rough sense of how jumpy the supplier is. That is all the input the simple
+  formula needs, and most of what the statistical one needs.</p>
+
+  <h2>Two ways to size safety stock</h2>
+  <p><strong>The max-min method</strong> is the version most small and
+  medium-sized operations use, because it runs on numbers a lead-time log and a
+  sales history already contain:</p>
+  <p><em>Safety stock = (maximum daily sales &times; maximum lead time) &minus;
+  (average daily sales &times; average lead time)</em></p>
+  <p>The logic is transparent: it holds enough buffer to survive the worst
+  recent combination — the busiest sales day pattern stretched across the
+  slowest delivery — instead of the average one. A worked example from
+  inventory software guidance uses a phone case selling an average of 20 units
+  a day with a 10-day average lead time, peaking at 30 units a day with lead
+  time stretching to 12 days: safety stock = (30 &times; 12) &minus; (20 &times; 10)
+  = 360 &minus; 200 = 160 units, giving a reorder point of (20 &times; 10) + 160
+  = 360 units once the full calculated buffer is applied. A second published example,
+  a bakery's flour, shows the same arithmetic at kitchen scale: maximum 10 bags
+  a day and maximum lead time 5 days, against an average of 4 bags a day and
+  3 days, gives (10 &times; 5) &minus; (4 &times; 3) = 38 bags of safety stock and a
+  reorder point of (4 &times; 3) + 38 = 50 bags. Average daily sales should come
+  from a recent, representative window — 30 to 90 days is the range inventory
+  guidance suggests for most products — not from the best week the store ever
+  had.</p>
+  <p><strong>The statistical (Z-score) method</strong> ties the buffer to a
+  chosen service level — the probability of not stocking out during a
+  replenishment cycle. In its common form:</p>
+  <p><em>Safety stock = Z &times; standard deviation of daily demand &times;
+  &radic;(lead time in days)</em></p>
+  <p>where Z is the service-level factor: 1.65 corresponds to a 95 percent
+  service level and 2.33 to 99 percent. A published worked example: with daily
+  demand varying by a standard deviation of 10 units, a 4-day lead time, and a
+  95 percent service target, safety stock = 1.65 &times; 10 &times; &radic;4 =
+  1.65 &times; 10 &times; 2 = 33 units. Two properties of this method matter for a
+  small retailer. First, the service level is an explicit choice with a price
+  tag: moving from 95 to 99 percent does not add a little buffer, it adds a
+  lot. Second, variability grows with the square root of lead time, not in
+  proportion to it — doubling lead time raises the required buffer by a factor
+  of about 1.41, not two. The method needs a demand history long enough to
+  compute a meaningful standard deviation, which is its main cost.</p>
+  <table>
+    <tr><th></th><th>Max-min method</th><th>Z-score method</th></tr>
+    <tr><td>Inputs needed</td><td>Average and maximum daily sales; average and maximum lead time</td><td>Standard deviation of daily demand; average lead time; chosen service level</td></tr>
+    <tr><td>Data history needed</td><td>A few months of sales and a lead-time log</td><td>Enough daily sales history to compute a stable standard deviation (a season or more is safer)</td></tr>
+    <tr><td>Behaviour</td><td>Conservative: sizes the buffer to the worst recent combination, so it often overstates the buffer for steady items</td><td>Proportional: sizes the buffer to measured variability and an explicit service target</td></tr>
+    <tr><td>Best for</td><td>New items, thin history, simple spreadsheet operations</td><td>Established bestsellers where stockouts are expensive and history is solid</td></tr>
+    <tr><td>Failure mode</td><td>One freak week inflates the maximum and the buffer stays inflated until review</td><td>False precision: a neat number computed from messy or short history</td></tr>
+  </table>
+
+  <h2>Choosing between them, item by item</h2>
+  <p>The choice is per item, not per store. A practical allocation follows the
+  store's existing tiers. For the small set of bestsellers and must-never-stock-out
+  lines — the items customers ask for by name — the Z-score method at a
+  deliberately chosen service level is worth its data cost, because those are
+  the stockouts that send customers elsewhere. For the broad middle of the
+  range, the max-min method gives a defensible buffer from data the store
+  already has. For slow, cheap, easily substituted lines, either method will
+  usually produce a buffer larger than the item deserves; a minimal buffer, or
+  none with an accepted occasional stockout, is a legitimate decision, because
+  safety stock is protection bought with cash and shelf space, and some items
+  are not worth protecting. What is not legitimate is the uniform rule — the
+  same percentage padded onto every line regardless of its sales rate, its
+  supplier, or its importance. Variability differs by item and by supplier;
+  the buffer should too.</p>
+  <p>One more check before any buffer is increased: confirm the stock figure
+  the calculation starts from is real. A safety-stock calculation built on a
+  count that includes stock that is damaged, misplaced, or still sitting in a
+  returns pile is arithmetic on a fiction. Count first, then calculate.</p>
+
+  <h2>Keeping the buffer honest</h2>
+  <p>Safety stock decays in two directions. It silently grows when every scare
+  adds "a bit more" and nothing ever subtracts; and it silently shrinks in
+  usefulness when lead times lengthen and nobody recalculates. The maintenance
+  routine is short:</p>
+  <ul>
+    <li><strong>Recalculate on a schedule.</strong> Review reorder-point and
+    safety-stock inputs quarterly at the tightest, and every three to six
+    months at the loosest — published guidance lands in that range, and the
+    inputs (sales rates, lead times) genuinely drift on that timescale.</li>
+    <li><strong>Recalculate on an event.</strong> A supplier change, a carrier
+    change, a visibly late delivery pattern, or a promotion that resets an
+    item's sales rate all invalidate the old buffer immediately, whatever the
+    calendar says.</li>
+    <li><strong>Shrink the buffer by fixing the cause.</strong> The cheapest
+    safety stock is the stock no longer needed because lead time got shorter
+    or steadier. Established ways to improve lead-time performance include
+    ordering smaller amounts more frequently, sourcing from local suppliers
+    where the range allows it, keeping reliable suppliers and dropping
+    chronically unreliable ones, and reducing paperwork delays on the store's
+    own side of the order. A reorder point falls when daily usage drops, lead
+    time shortens, or the buffer is reduced — a faster, steadier supplier
+    literally lowers the inventory the store must hold.</li>
+    <li><strong>Watch the buffer being used.</strong> If an item repeatedly eats
+    into its safety stock, the inputs are wrong — demand rose, lead time
+    lengthened, or both — and the answer is a recalculation, not a bigger
+    guess. If the buffer is never touched for a year, it is probably too big,
+    and the excess is cash sitting on a shelf.</li>
+  </ul>
+  <p><strong>What success looks like:</strong> every main supplier has a
+  lead-time log with a current average and maximum; every important item has a
+  safety-stock figure whose method and inputs can be stated in one sentence;
+  buffers differ by item tier instead of following one blanket percentage; and
+  at each quarterly review at least the drifted inputs — the suppliers whose
+  lead times moved and the items whose sales rates changed — have been
+  recalculated rather than carried forward by habit.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Should safety stock use the supplier's quoted lead time?</strong>
+  No. Use the actual performance from the delivery history — the average, and
+  for the max-min method the slowest recent delivery. A quote is a promise;
+  the log is data, and the buffer exists precisely for the days the promise is
+  not kept.</p>
+  <p><strong>Which formula should a very small shop start with?</strong> The
+  max-min method. It needs only average and maximum daily sales and average
+  and maximum lead times, all obtainable from a sales history and a simple
+  lead-time log. Graduate the handful of critical items to the Z-score method
+  once a solid season of daily sales data exists.</p>
+  <p><strong>Does more safety stock always mean fewer stockouts?</strong>
+  Fewer, not zero. Safety stock absorbs variation in demand and delivery; it
+  does not repeal it. Each step up in service level costs disproportionately
+  more stock than the last, which is why the level should be chosen per item
+  tier rather than maximised everywhere.</p>
+  <p><strong>How often should safety stock be reviewed?</strong> Quarterly is
+  a sound default for key items, and no less often than every six months for
+  the rest — plus an immediate recalculation whenever a supplier, carrier, or
+  an item's sales pattern changes materially.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Retail Inventory Management — practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

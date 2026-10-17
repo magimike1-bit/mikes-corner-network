@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handling Returns and Damaged Stock: A Quarantine and Disposition Workflow — Retail Inventory Management</title>
+<meta name="description" content="A small-store workflow for returns and damaged goods: a quarantine area, condition grading, five disposition routes, and a returns log that keeps stock counts honest.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Retail Inventory Management</a>
+    <p class="tagline">Practical inventory habits for independent retailers</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Handling returns and damaged stock: a quarantine and disposition workflow for small stores</h1>
+  <p class="meta">Stockroom &amp; receiving &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/handling-returns-and-damaged-stock.jpg" alt="Employee inspecting a returned knit beside a clear quarantine bin of tagged returned goods on a shop counter" loading="lazy" width="1920" height="1280">
+  <figcaption>Quarantine first: nothing returns to the shelf uninspected.</figcaption>
+</figure>
+
+
+
+  <p>Returns are not a side task; at scale they are a river running backwards
+  through the store. The National Retail Federation estimated that 19.3 percent
+  of items sold in 2025 would eventually be returned — an industry estimate
+  for retail as a whole, not a target for any single shop, but a useful sense
+  of the volume involved. In a small store the problem is rarely the volume
+  itself. It is the informality: a returned item placed back on the shelf
+  uninspected, a damaged line left in a corner "to deal with later", a refund
+  given with no record of what happened to the goods. Each informality quietly
+  corrupts the stock count — the system says a unit is sellable that is
+  scratched, incomplete, or not there at all — until a count, a customer, or a
+  stockout exposes it. The workflow in this guide rests on one physical rule
+  and one paper rule. Physical: nothing returned or damaged re-enters sellable
+  stock until it has been inspected and given a disposition. Paper: every item
+  that enters quarantine leaves it with a recorded decision. Neither rule needs
+  software, a returns department, or more than a shelf, some tags, and a log.</p>
+
+  <h2>Why returns quietly corrupt your stock counts</h2>
+  <p>Shopify's reverse logistics guidance states the central risk plainly: all
+  returned inventory must be tested, because unsellable inventory can otherwise
+  make its way back onto the shelf. The failure mode is easy to picture. A
+  customer returns an item as "wrong size"; the reason given is not always the
+  whole story — the item may have been used, damaged, or swapped — and a busy
+  counter puts it straight back into stock. The next customer buys a used item
+  sold as new, which is a worse outcome than the original return. The second
+  failure mode is the opposite: returned and damaged goods that never re-enter
+  the count at all. They sit in a pile that belongs to no report — not
+  sellable, not written off, not claimed from a supplier — while the stock
+  value on paper still carries some of them and the shelf space in reality is
+  consumed by all of them. A quarantine area with a time limit fixes both
+  failure modes at once: the first by forcing an inspection gate, the second
+  by forcing a decision.</p>
+
+  <h2>Set up the quarantine area</h2>
+  <p>The area can be a single marked shelf, a lidded bin, or a taped square in
+  the stockroom — what matters is that it is designated, labelled, and the only
+  place returned or damaged goods may wait. Returns guidance for smaller
+  businesses makes the same point in warehouse language: create a designated
+  area and a procedure for receiving returns, rather than letting them land
+  wherever there is space. Three setup rules make the area work:</p>
+  <ul>
+    <li><strong>One way in, one way out.</strong> Every return and every
+    damaged item found on the shelf or at receiving goes into quarantine first
+    — including items that look perfect. The inspection happens in quarantine,
+    not at the counter under time pressure and not from memory later.</li>
+    <li><strong>Tag on arrival.</strong> Each item gets a tag or a line in the
+    log the moment it enters: date, item, where it came from (customer return,
+    damaged on shelf, damaged on delivery), and the stated reason. For returns
+    processed with an authorisation or reference number, the tag carries that
+    number so the item can be matched to the refund or exchange it belongs
+    to.</li>
+    <li><strong>Out of the count until decided.</strong> Quarantined stock is
+    not sellable stock. If the point-of-sale system has a status for it, use
+    it; if not, the log is the record and the physical separation is the
+    control. An item is added back to sellable quantity only at the moment its
+    disposition says "restock" — never on arrival.</li>
+    <li><strong>A time limit.</strong> Set a maximum stay — a week is a workable
+    default for most lines, shorter in a busy season — and a named person who
+    owns emptying it. Returns processes stall in the gaps between people;
+    assigning a single owner for the quarantine shelf closes the gap.</li>
+  </ul>
+
+  <h2>The returns and damaged-stock workflow</h2>
+  <ol>
+    <li><strong>Settle the customer first, separately.</strong> The refund,
+    exchange, or credit decision follows the store's stated policy — its
+    return window, condition requirements, and refund or exchange terms
+    should be written down and visible to staff, because a policy that lives
+    in one person's head produces a different answer every Saturday. Typical
+    refund criteria in published guidance include the return arriving within
+    the stated window, proof of purchase, original packaging including tags,
+    and the product being unused or unworn. Settling the customer and settling
+    the goods are two different decisions; keep them in that order and keep
+    them separate.</li>
+    <li><strong>Receive into quarantine and tag.</strong> The item enters the
+    quarantine area with its tag and log line before anything else happens to
+    it. Goods damaged on arrival from a supplier enter the same way, tagged
+    with the delivery they came on — the disposition for those runs through
+    the supplier, but the physical control is identical.</li>
+    <li><strong>Inspect and grade.</strong> Compare the item against the stated
+    return reason, check it works or is complete as its category requires,
+    check for signs of use or alteration, and note the packaging condition —
+    packaging damage can indicate shipping damage on the way back, and the
+    observation belongs in the record. Grade the condition using the framework
+    in the next section and write the grade on the tag.</li>
+    <li><strong>Decide the disposition.</strong> Choose one of the five routes
+    below, based on the grade. The decision, not the hope, is what moves the
+    item.</li>
+    <li><strong>Execute and adjust the count in the same motion.</strong>
+    Restocked items go back to the shelf and back into sellable quantity now.
+    Discounted items are repriced and labelled as such now. Items for repair,
+    return-to-vendor, or write-off leave quarantine to their destination, and
+    the stock record is adjusted at the same time — a write-off recorded next
+    month is a stock count that is wrong until next month.</li>
+    <li><strong>Close the log line.</strong> Date, disposition, and value
+    recovered (full price, discounted price, supplier credit, or zero) complete
+    the entry. An open line older than the time limit is the weekly prompt to
+    chase.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> at any moment, the quarantine
+  area contains only tagged items inside their time limit, each with a grade
+  or a pending inspection; the sellable count contains no uninspected returns;
+  and the log can answer, for the past month, how many items came back, why,
+  and where each one went.</p>
+
+  <h2>The disposition decision: five ways out of quarantine</h2>
+  <p>Published returns guidance converges on three core dispositions — restock,
+  refurbish, dispose — and a small store needs two more made explicit: discount
+  as-is, and return-to-vendor. Graded by condition, the framework is:</p>
+  <table>
+    <tr><th>Condition grade</th><th>What it means</th><th>Disposition</th></tr>
+    <tr><td>A — Sealed or as-new</td><td>Unopened, or opened with no defects, complete, packaging intact or replaceable</td><td><strong>Resell at full price.</strong> Restock after inspection and update the count; reselling is the most effective value recovery there is</td></tr>
+    <tr><td>B — Minor flaw</td><td>Works and is complete, but packaging is scratched, a cosmetic mark exists, or an accessory needed replacing</td><td><strong>Discount and disclose.</strong> Sell openly as a returned or imperfect item at a reduced price, or refurbish/repackage first if a small fix restores it</td></tr>
+    <tr><td>C — Fixable fault</td><td>Defective or damaged, but repair is realistic relative to value</td><td><strong>Repair, then resell as refurbished</strong> — or hold as a demo, loaner, or replacement unit if the store uses them</td></tr>
+    <tr><td>D — Defective, supplier's problem</td><td>Fault present on arrival, failed early in normal use, or part of a pattern from one supplier or delivery</td><td><strong>Return to vendor.</strong> Claim under the supplier's terms while the evidence, the delivery record, and the time window are fresh</td></tr>
+    <tr><td>E — Unsellable</td><td>Damaged beyond economic repair, incomplete in a way that cannot be fixed, unsafe, or not eligible for resale</td><td><strong>Write off and remove.</strong> Salvage parts where that is genuinely useful, recycle where facilities exist, otherwise dispose — and record the loss</td></tr>
+  </table>
+  <p>Seller practice fills in the discount end of the framework. In a Shopify
+  seller-community discussion, a solution provider's rundown of the options
+  includes refurbishing high-value items with minor fixes and selling them as
+  refurbished at a 10–20 percent discount (a tech store partnering with a
+  local repair shop for lightly damaged headphones is the example given),
+  selling minor-flaw returns through a clearly labelled "last chance" section
+  at around 30 percent off, donating low-value unsellable returns, salvaging
+  parts — a bike shop reusing tyres and gears from defective returns as spares
+  is the example — and bundling small, low-cost returns into other offers.
+  Those figures are one community answer's illustrations, not benchmarks, but
+  the shape is sound: the discount grows with the flaw, and the label always
+  tells the customer what the item is. Two cautions govern every grade.
+  First, never let a grade B or C item drift back to the full-price shelf
+  unlabelled; the short-term recovery is not worth the customer who discovers
+  it. Second, the return-to-vendor route exists only within the supplier's
+  actual terms, so check them before goods pile up in quarantine awaiting a
+  claim that was never available — and note the terms in the log when they are
+  confirmed, so the next claim is faster.</p>
+
+  <h2>The returns log and the monthly review</h2>
+  <p>The log is the workflow's memory. Six fields per item are enough: date in,
+  item or SKU, source and stated reason, condition grade, disposition, and
+  value recovered. Kept consistently, that log produces the measures returns
+  guidance recommends tracking — return rate, refund rate, exchange rate, and
+  handling time per return — without any extra reporting effort: the counts
+  are already there. The monthly review is where the log pays for itself.
+  Read it for patterns, not for individual items:</p>
+  <ul>
+    <li><strong>Repeat products.</strong> The items with the highest return
+    rates and the most common faults deserve a decision — a description that
+    misleads, a quality problem, or a line to stop carrying. A high return
+    rate on one product can point to its description rather than the product
+    itself; either way, the log is what surfaces it.</li>
+    <li><strong>Repeat causes.</strong> Damage concentrated from one supplier,
+    one delivery route, or one packaging method is a handling problem with an
+    address. The fix may be a conversation with the supplier, better packaging
+    for shipped orders, or a change in how a fragile line is shelved.</li>
+    <li><strong>Money left in quarantine.</strong> Total the value sitting in
+    grades B to E at month end and the value recovered during the month. A
+    growing pile with slow decisions is a process problem; a shrinking pile
+    with a healthy recovery share is the workflow working.</li>
+    <li><strong>Policy friction.</strong> Disputes and exceptions cluster where
+    the written policy is vague. Repeated arguments about the same condition
+    or the same window are the policy asking to be clarified — clarify it in
+    writing, for staff and customers alike.</li>
+  </ul>
+  <p>A note on records and rules: how written-off or donated stock is treated
+  for tax and accounting purposes depends on the store's situation and
+  jurisdiction, so confirm the treatment with an accountant rather than
+  assuming it; the log's job is to make sure the facts — what was written off,
+  when, and why — are recorded accurately enough for that conversation.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Can a returned item go straight back on the shelf?</strong> Not
+  safely. All returned inventory should be inspected and, where the category
+  requires it, tested before restocking — the reason a customer gives is not a
+  condition report, and unsellable items reaching the shelf is the known
+  failure mode the quarantine step exists to prevent.</p>
+  <p><strong>What should happen to stock damaged on delivery?</strong> Quarantine
+  and tag it with the delivery it arrived on, record the damage, and claim
+  through the supplier or carrier under their terms while the evidence is
+  fresh. It should never be quietly shelved, quietly discounted, or left in a
+  corner unrecorded — each of those converts a recoverable claim into a silent
+  loss.</p>
+  <p><strong>How long should items stay in quarantine?</strong> As short as the
+  store can manage, with a stated maximum — a week is a workable default for
+  most goods. The time limit matters more than its exact length: without one,
+  quarantine becomes storage, and storage becomes the unrecorded pile the
+  workflow was built to eliminate.</p>
+  <p><strong>Is discounting a returned item deceptive?</strong> Not when it is
+  labelled as what it is. Openly described returned, imperfect, or refurbished
+  items at a reduced price are a legitimate and common route — the deception
+  risk runs the other way, when a flawed return is silently resold as new.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Retail Inventory Management — practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+  <p class="footer-nav"><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

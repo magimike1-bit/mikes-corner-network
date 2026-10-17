@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What to Look for in a Budget Gaming SSD — Budget Gaming Gear</title>
+<meta name="description" content="The model name is marketing — the capacity row is the product. How to verify a budget SSD's real speeds, TBW and NAND type, when DRAM matters, and the separate spec test a PS5 drive has to pass.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Budget Gaming Gear</a>
+    <p class="tagline">Smart buying advice for gaming on a budget</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/index.html">&larr; All guides</a>
+  <h1>What to look for in a budget gaming SSD</h1>
+  <p class="meta">Buying criteria &middot; 9 min read</p>
+
+  <p>Every SSD listing leads with one big number — "up to 7,000 MB/s!" — and that number is doing more marketing work than any other figure in PC hardware. It describes the fastest capacity of the fastest variant under ideal conditions, which is frequently not the drive in the box you're about to buy. Budget SSDs are genuinely good value in 2026, but they're good value for specific, knowable reasons, and the spec sheet tells you all of them if you read the right row. This guide covers what to verify: the capacity row, the NAND type, the endurance rating, and — if a PlayStation 5 is involved — a completely separate set of hard requirements.</p>
+
+  <h2>The model name is marketing: the capacity row is the product</h2>
+  <p>Under a single model name, a budget SSD is really three or four different drives. Smaller capacities have fewer NAND chips working in parallel, so they're slower and wear out sooner. Western Digital's WD Black SN7100 — PCWorld's current pick as the best PCIe 4.0 SSD for average users and gamers — makes the pattern plain:</p>
+  <table>
+    <thead>
+      <tr><th>Drive and capacity</th><th>Seq. read</th><th>Seq. write</th><th>Endurance (TBW)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>WD Black SN7100 — 500GB</td><td>6,800 MB/s</td><td>5,800 MB/s</td><td>300 TBW</td></tr>
+      <tr><td>WD Black SN7100 — 1TB</td><td>7,250 MB/s</td><td>6,900 MB/s</td><td>600 TBW</td></tr>
+      <tr><td>WD Black SN7100 — 2TB</td><td>7,250 MB/s</td><td>6,900 MB/s</td><td>1,200 TBW</td></tr>
+      <tr><td>Kingston NV3 — 500GB</td><td>5,000 MB/s</td><td>3,000 MB/s</td><td>160 TBW</td></tr>
+      <tr><td>Kingston NV3 — 1TB</td><td>6,000 MB/s</td><td>4,000 MB/s</td><td>320 TBW</td></tr>
+      <tr><td>Kingston NV3 — 2TB</td><td>6,000 MB/s</td><td>5,000 MB/s</td><td>640 TBW</td></tr>
+    </tbody>
+  </table>
+  <p>The headline "7,250 MB/s" on the SN7100's box belongs to the 1TB and 2TB models; the 500GB drive is a 6,800 MB/s drive with half the 1TB model's endurance, and its random-read rating steps down too, from 1,000k IOPS to 760k. The Kingston NV3 shows the same staircase in a cheaper drive: the 500GB variant writes at barely half the family's headline speed. None of this is hidden — it's printed in the manufacturers' own tables. The failure is in how listings are written, with the family's best numbers attached to every variant. The fix is a habit: never read a drive's specs from the product title. Read them from the row for the exact capacity you're buying.</p>
+
+  <h2>DRAM, HMB and QLC: what the budget compromises actually cost</h2>
+  <p>Budget drives save money in three places, and each saving has a specific, bounded cost:</p>
+  <ul>
+    <li><strong>No DRAM cache.</strong> DRAM-less drives use HMB (host memory buffer), borrowing a small slice of your system RAM for the mapping table — the SN7100 does this, and the NV3 sample reviewers examined used 64 MB of HMB. PCWorld's assessment is reassuring and precise: HMB can actually produce slightly faster sequential transfers, with weaker random performance than a DRAM drive; the DRAM advantage shows up as a slightly snappier operating system, and even that can be hard to spot. For a games drive, modern HMB is a reasonable place to save money.</li>
+    <li><strong>QLC NAND.</strong> QLC flash stores more bits per cell and costs less, and its weakness is sustained writes. PCWorld notes the QLC in its best-budget pick, the WD Blue SN5100, slows down during very long writes, and the Kingston NV3 ships QLC in most regions. Installing a game is a burst; copying a 200 GB library drive-to-drive is a marathon. QLC loses marathons.</li>
+    <li><strong>Component variance.</strong> This is the one nobody puts on the box. Reviewers who peeled the sticker off an NV3 found a DRAM-less TenaFE controller and YMTC 232-layer QLC flash, and flagged outright that parts vary by batch — a "hardware lottery." The practical meaning: the review you read describes the reviewer's sample. Buy the rated specs (which Kingston guarantees) rather than the specific chips (which it doesn't).</li>
+  </ul>
+  <p>The compromises also share a trigger: they surface under pressure, as the drive fills. A budget drive's fast cache is a shrinking fraction of a nearly full drive, so a cheap SSD run at 95% capacity feels slower than its spec sheet, while the same drive with headroom feels like the bargain it was. Capacity discipline — covered below — is part of the purchase, not an afterthought.</p>
+
+  <h2>TBW and warranty: the endurance numbers</h2>
+  <p>TBW (terabytes written) is the manufacturer's endurance rating, and the warranty is how long they'll stand behind it. The SN7100 carries a five-year warranty at 600 TBW per terabyte of capacity — so the 1TB model is rated for 600 TBW, the 2TB for 1,200. Read the NV3's table again with endurance eyes: 160 TBW at 500GB is a genuinely low ceiling next to the SN7100's 300 at the same size, and that gap, not the speed gap, is the better argument for spending a little more. As a rule of thumb from the budget-SSD post-mortems: a low endurance ceiling paired with a short warranty is the manufacturer telling you how long they expect the drive to live. Believe them.</p>
+
+  <h2>How much capacity a game library really needs</h2>
+  <p>Club386's verdict on the current market is worth adopting whole: a slower yet larger Gen4 drive serves most people better than a faster but smaller Gen5 drive, because games have yet to actually use Gen5 speeds. PCIe generations are the most expensive place to overspend and the least rewarding — the gap shows up in benchmarks, not load screens. Spend the same money one capacity step up instead. Then keep the drive honest: leave real headroom rather than filling to the brim, because the QLC and cache compromises above all bite hardest on a full drive, and a library that forces constant delete-and-redownload cycles writes far more data — against that TBW budget — than one that fits.</p>
+
+  <h2>The PS5 slot is a separate spec test</h2>
+  <p>A drive can be an excellent PC buy and a paperweight in a PlayStation 5, because Sony publishes hard requirements rather than recommendations:</p>
+  <div class="checklist">
+    <h3>PS5 M.2 requirements (Sony's published list)</h3>
+    <ul>
+      <li>PCIe Gen4 x4 M.2 NVMe, Socket 3 (Key M) — M.2 SATA drives are not supported at all, and Gen3 drives don't meet the speed threshold and aren't supported</li>
+      <li>Sequential read of 5,500 MB/s or faster is recommended</li>
+      <li>Capacity from 250 GB to 8 TB; form factors 2230, 2242, 2260, 2280 or 22110</li>
+      <li>Cooling is required — a heatsink or heat-transfer sheet — with the drive and cooler together under 11.25 mm thick and 25 mm wide</li>
+      <li>Gen5 drives fit and work but run at Gen4 speeds, so there's no reason to pay the Gen5 premium for a console</li>
+      <li>Sony doesn't guarantee every drive meeting the specs will work — check the drive maker's own PS5 compatibility note</li>
+    </ul>
+  </div>
+  <p>Two budget traps follow from that list. The NV3 ships without a heatsink, so its PS5 price is the drive plus a compliant cooler, and the combined height still has to clear 11.25 mm. And the SN5100-class QLC drives that make fine PC game drives deserve a second look against the 5,500 MB/s line before going anywhere near a console.</p>
+
+  <h2>The spec-verification procedure: check the exact variant before you pay</h2>
+  <p>This is a buying guide, not a repair topic, so in place of a fix procedure it carries a verification one — five checks, in order, for any budget SSD:</p>
+  <ol>
+    <li>Find the manufacturer's spec table and read only the row for the exact capacity you're buying: sequential read, sequential write, TBW. Ignore the family headline number entirely.</li>
+    <li>Identify the NAND type for that variant (TLC vs. QLC) and whether the design is DRAM or HMB. If the listing won't say, the spec sheet will — and if neither will, price the drive as if it's the weaker option.</li>
+    <li>Check the physical fit: M.2 2280 is the common size, single-sided drives (the SN5100, and the NV3 even at 2TB) fit the widest range of laptops and boards, and a bare drive needs your motherboard's M.2 heatsink — reviewers flag the NV3 throttling under sustained loads without one.</li>
+    <li>Run the endurance comparison at your capacity: TBW and warranty years, drive against drive. This is the cheapest performance insurance in the whole purchase.</li>
+    <li>If the drive is headed for a PS5, run Sony's list separately — Gen4, 5,500 MB/s, cooling, total height — and confirm the maker's compatibility note.</li>
+  </ol>
+  <p>Success looks like this: the numbers you can recite for your drive come from its own capacity row, and there is no spec on the receipt you haven't seen on the manufacturer's page.</p>
+
+  <h2>A decision framework for three kinds of buyer</h2>
+  <ul>
+    <li><strong>The value-first PC gamer:</strong> a modern HMB Gen4 drive is the sweet spot — PCWorld ranks the SN7100 as its best PCIe 4.0 pick for average users and gamers precisely because the HMB design keeps the price down without giving up the performance that matters in games. Buy the 1TB or 2TB row of the table, not the 500GB.</li>
+    <li><strong>The tightest-budget builder:</strong> PCWorld's best-budget pick, the WD Blue SN5100, or the Kingston NV3 — with eyes open. QLC long-write slowdowns, the NV3's lower TBW per capacity, and batch variance are the stated price of admission. At this tier the verification procedure matters most, because the spec staircases are steepest.</li>
+    <li><strong>The PS5 owner:</strong> ignore the PC rankings and shop Sony's list first — Gen4, at least 5,500 MB/s rated read, cooling included or budgeted, height checked. A drive that fails any line of that checklist is not a deal at any price.</li>
+  </ul>
+
+  <h2>FAQ</h2>
+  <p><strong>Does a gaming SSD need DRAM?</strong> No. Current HMB designs use a slice of system memory for caching and, per PCWorld's testing coverage, can match or beat DRAM drives on sequential transfers while trailing on random performance — a difference that's hard to spot in game loading. DRAM is a nicety for a mixed OS-and-everything drive, not a requirement for a games drive.</p>
+  <p><strong>How much SSD storage do I need for gaming?</strong> More than the current library, with headroom left over — because budget drives slow as they fill, and because the bigger capacity in the same model line is usually also the faster, longer-lived one (the SN7100's 2TB row doubles the 1TB model's endurance). One capacity step up beats one PCIe generation up.</p>
+  <p><strong>Can I put a Gen3 SSD in a PS5?</strong> No. Gen3 drives don't reach Sony's 5,500 MB/s recommendation and aren't supported in the expansion slot. The slot is Gen4 territory; Gen5 works but is capped at Gen4 speeds.</p>
+
+  <div class="checklist">
+    <h3>Budget gaming SSD shopping checklist</h3>
+    <ul>
+      <li>Specs read from the exact capacity's row — not the family headline?</li>
+      <li>NAND type (TLC vs. QLC) and DRAM vs. HMB identified for that variant?</li>
+      <li>TBW and warranty compared against the rival drive at the same capacity?</li>
+      <li>Capacity bought with headroom, one step up instead of one PCIe generation up?</li>
+      <li>Physical fit checked: 2280, single-sided if the laptop is thin, heatsink available?</li>
+      <li>For PS5: Gen4, 5,500 MB/s, cooling and the 11.25 mm height limit all verified?</li>
+    </ul>
+  </div>
+
+  <div class="take">
+    <p><strong class="take-label">Our take:</strong> A budget SSD is three purchases wearing one name — pick the capacity row first and the model second. The honest budget drive states its NAND type, its per-capacity TBW and its cache design on the spec page; the five-minute verification above is the whole difference between the bargain and the box of compromises.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="disclaimer">Buying advice reflects the author's opinion and general guidance. Specs and prices change — always check current details with the retailer before you buy.</p>
+    <p>Budget Gaming Gear — buying advice for gaming on a budget.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

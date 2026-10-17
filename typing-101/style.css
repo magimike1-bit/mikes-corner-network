@@ -226,3 +226,21 @@ main { padding: 36px 0 52px; }
 .site-nav a{color:var(--muted,#666);text-decoration:none;margin-right:18px;padding:2px 0}
 .site-nav a:hover{color:var(--accent,#c2410c)}
 .site-nav a.active{color:var(--accent,#c2410c);font-weight:700;border-bottom:2px solid var(--accent,#c2410c)}
+
+/* --- Design pass 2026-10-17: intro hero panel + home-row keycap visual --- */
+.intro {
+  background: linear-gradient(140deg, #ffffff 0%, var(--wash) 55%, var(--accent-soft) 100%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 34px 32px 30px;
+  box-shadow: 0 12px 30px rgba(8,77,96,0.10);
+}
+.key-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 26px; }
+.key-row kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1rem; font-weight: 700; color: var(--accent-deep);
+  background: #fff; border: 1px solid var(--line); border-bottom: 3px solid var(--accent);
+  border-radius: 8px; padding: 10px 15px; box-shadow: 0 3px 8px rgba(8,77,96,0.12);
+}
+.key-row .key-gap { width: 20px; }
+@media (max-width: 640px) { .intro { padding: 24px 20px 22px; } .key-row kbd { padding: 8px 11px; } }

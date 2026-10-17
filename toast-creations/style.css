@@ -226,3 +226,21 @@ main { padding: 36px 0 52px; }
 .site-nav a{color:var(--muted,#666);text-decoration:none;margin-right:18px;padding:2px 0}
 .site-nav a:hover{color:var(--accent,#c2410c)}
 .site-nav a.active{color:var(--accent,#c2410c);font-weight:700;border-bottom:2px solid var(--accent,#c2410c)}
+
+/* --- Design pass 2026-10-17: intro becomes a warm toasted hero panel --- */
+.intro {
+  background: linear-gradient(140deg, #fff7e8 0%, var(--accent-soft) 58%, #f5d9a8 100%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 34px 32px 30px;
+  box-shadow: 0 12px 30px rgba(122,56,4,0.10);
+}
+.intro h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 700; }
+.intro > p { color: #5d4125; }
+.brand { font-family: Georgia, "Times New Roman", serif; }
+.hero-facts { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 24px 0 0; padding: 0; }
+.hero-facts li {
+  background: #fff; border: 1px solid var(--line); border-radius: 999px;
+  padding: 6px 14px; font-size: 0.88rem; font-weight: 600; color: var(--accent-deep);
+}
+@media (max-width: 640px) { .intro { padding: 24px 20px 22px; } }

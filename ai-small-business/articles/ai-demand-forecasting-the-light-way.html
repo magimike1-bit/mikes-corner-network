@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demand Forecasting the Light Way: AI Help Without an Enterprise System</title>
+<meta name="description" content="Stockouts and dead stock both start as guessing. A light forecasting routine for small businesses: clean sales history, a seasonality check, AI as an analyst you verify, and a reorder rule you can run in a spreadsheet.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap article-layout">
+  <article class="article">
+    <p class="kicker">Operations</p>
+    <h1>Demand Forecasting the Light Way: AI Help Without an Enterprise System</h1>
+    <p class="lede">Big companies forecast demand with dedicated systems. Small businesses mostly guess — and pay for it twice, in stockouts that lose sales and overstock that eats cash. Between guessing and enterprise software there is a light middle path, and AI help fits it well, as long as you keep the verifying job for yourself.</p>
+    <p class="meta">Published 2026-10-19 &middot; Last updated 2026-10-19</p>
+
+<h2>The two ways guessing bills you</h2>
+<p>Every small business that holds stock pays for bad forecasts in one of two currencies. Under-forecast and the bill arrives as a stockout: the weekend surge you could not serve, the regular customer told &ldquo;we're out of that&rdquo;, the marketplace ranking that slips while a listing sits unavailable. Over-forecast and the bill arrives as dead stock: slow variants and seasonal leftovers quietly converting your working capital into shelf decoration — money that should have funded the products that actually move. Large enterprises insure against both with planning departments and expensive systems. The interesting question for a small business is how much of that protection is available for the price of a spreadsheet and an hour a month.</p>
+<p>More than most owners expect — because the core of forecasting is not exotic mathematics. It is three habits: keeping clean sales history, adjusting for your own seasonality, and ordering against a rule instead of a feeling. AI assistance speeds up the analysis and spots patterns in the numbers, but the habits are the product. Skip them and the fanciest tool is just a faster way to guess.</p>
+<h2>Step one: clean history, monthly buckets</h2>
+<ol>
+<li><strong>Export what you have.</strong> Date, item, quantity sold is enough to start — the same three columns lightweight forecasting tools ask for. Twelve months of history is workable; twenty-four is better, because seasonality needs a full cycle to show itself.</li>
+<li><strong>Clean before you calculate.</strong> Remove returns and cancelled orders. Flag — do not silently delete — the distortions: the one-off bulk order, the promotion week, the month you were closed. A forecast trained on a lie repeats the lie with confidence.</li>
+<li><strong>Bucket by month, per product or product family.</strong> Small catalogues forecast fine at family level (&ldquo;gift sets&rdquo; rather than each scent), and family-level numbers are steadier and more honest than per-item noise.</li>
+</ol>
+<p><strong>What success looks like at this stage:</strong> a tidy table, one row per month per family, that you could hand to a stranger and have them understand your year. If assembling it took heroics, fix the record-keeping first — that is the real project, and every later step gets easier because of it.</p>
+<h2>Step two: your seasonality, in one index</h2>
+<p>Seasonality sounds technical and is not. For each month, divide that month's sales by your average monthly sales. A month scoring 1.4 sells forty percent more than a typical month; a month scoring 0.7 sells thirty percent less. Twelve divisions give you the shape of your year, and that shape — not last month, not hope — is what next month's order should start from. Multiply a product family's typical monthly sales by the coming month's index and you have a baseline forecast an owner can defend out loud.</p>
+<p>This is the right place to use an AI assistant: hand it the cleaned table and ask it to compute the indices, flag months that break the pattern, and draft the baseline forecast per family. Then do the job the AI cannot do for you — interrogate the output against what you know. Does the December spike match your memory of December? Did it mistake the promotion month for organic growth? Does it know about the roadworks, the new competitor, the local event that will not repeat? AI works from the table; you work from the table plus the world. A forecast you have not sanity-checked against the same month last year is not finished.</p>
+<h2>Step three: a reorder rule, with a buffer you chose on purpose</h2>
+<table><caption>From forecast to order: the light decision framework</caption><thead><tr><th>Input</th><th>How to get it</th><th>Why it matters</th></tr></thead><tbody>
+<tr><td>Baseline forecast</td><td>Typical monthly sales &times; next month's seasonality index</td><td>The expected case, honestly derived</td></tr>
+<tr><td>Lead time</td><td>Your supplier's real delivery days, from past orders</td><td>You must order before you need it — the forecast covers the lead time too</td></tr>
+<tr><td>Safety buffer</td><td>A higher-demand scenario (e.g. a strong month, not an average one) for your top sellers only</td><td>Cheap insurance where a stockout hurts most; dead-stock risk where it does not</td></tr>
+<tr><td>Order quantity</td><td>Forecast for the period + buffer &minus; stock on hand &minus; stock already on order</td><td>A rule you can rerun monthly, not a mood</td></tr>
+</tbody></table>
+<p>Notice where the judgment lives: in the buffer. Buffering everything equally is how small businesses drown in stock; buffering nothing is how staples run out. Buffer the proven sellers with long lead times, run the slow tail lean, and write the choices down so next month's review can argue with them. Then close the loop monthly: compare forecast against actual, note the miss and its cause in one line, and adjust. A forecast that is reviewed becomes a system; a forecast that is filed becomes a superstition.</p>
+<p><em>General information only, not financial advice. Ordering decisions commit your own cash — run the numbers for your business and your suppliers before acting.</em></p>
+<h2>Questions owners ask about light forecasting</h2>
+<p><strong>Is my history too short?</strong> With under a year of data you cannot compute your own seasonality — borrow the shape cautiously from your category's known peaks, lean harder on lead times and small frequent orders, and start the clean-history habit today so next year you can.</p>
+<p><strong>When is real forecasting software worth it?</strong> When the spreadsheet routine itself becomes the bottleneck: hundreds of items, multiple locations, or supplier lead times so variable that buffers need constant recalculation. Dedicated tools exist on a spectrum from store-platform analytics upward; buy when the monthly hour becomes a monthly day, not before.</p>
+<p><strong>Can AI just do the whole forecast?</strong> It can do the arithmetic and the pattern-spotting, and lightweight tools already turn a sales export into expected demand and a purchase-order draft. What it cannot supply is your knowledge of what is about to change. Use it as the analyst. Stay the owner.</p>
+
+  
+<h2>What to do in the first month, week by week</h2>
+<p>Week one is archaeology: export the sales history, clean it, and get the monthly table built, flagging promotions, closures, and one-off orders as you go. Resist forecasting anything yet — a week spent making the data honest is the highest-return week in the whole project, because every later number inherits its quality. Week two is the seasonality pass: compute the twelve indices, run them past your own memory of the year, and write one line per month explaining any spike or dip in words (&ldquo;school fair&rdquo;, &ldquo;roadworks&rdquo;, &ldquo;the viral post&rdquo;). That annotation habit, kept up monthly, becomes an asset no software can sell you: your business's memory, in writing.</p>
+<p>Week three, produce the first real forecast and order against the framework — baseline, lead time, chosen buffer, minus stock — and record what you ordered and why, in the same file. Week four is the first review: compare forecast with actual while the month is still fresh, note the miss in one honest line, and adjust one thing. Then the routine settles to its cruising altitude of about an hour a month. Owners who have run it for a season report the same surprise: the forecast itself is not the main benefit. The benefit is that stock stops being a source of ambient anxiety and starts being a small, boring, well-lit system — and boring, in operations, is the sound of money not leaking.</p>
+
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p><strong>AI Small Business Playbook</strong> — practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav><a href="/">Home</a><a href="/#guides">All guides</a><a href="/roi-calculator.html">ROI Calculator</a><a href="/ai-cost-simulator.html">Cost Simulator</a><a href="/about.html">About</a></nav>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

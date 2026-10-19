@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for Spreadsheets: Get Formulas Written, Explained, and Fixed</title>
+<meta name="description" content="You do not need to memorise formula syntax to use a spreadsheet well anymore. Ask AI to write formulas from plain English, explain inherited ones, and fix errors — then verify one row by hand before you trust the rest.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">AI Starter Guide</a>
+    <p class="tagline">Plain-English introductions to using AI chatbots</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>AI for Spreadsheets: Get Formulas Written, Explained, and Fixed</h1>
+  <p class="lede">Spreadsheets punish beginners twice: you must know what calculation you want AND the exact syntax to demand it. AI help removes the second punishment. It will not remove the first — which is why this guide pairs every AI shortcut with the one habit that makes it safe: checking a value you can verify yourself.</p>
+  <p class="meta">Published 2026-10-19 &middot; Last updated 2026-10-19</p>
+
+<h2>The three jobs, in the order beginners need them</h2>
+<p>AI help with spreadsheets is really three different jobs wearing one coat. The first is <strong>writing</strong>: you describe the calculation in plain English — &ldquo;total the amounts in column B where column C says East&rdquo; — and receive a formula you could not have typed from memory. The second is <strong>explaining</strong>: you inherit a spreadsheet from someone else, meet a formula three functions deep, and ask what it actually does before you dare change a number it feeds on. The third is <strong>fixing</strong>: a cell shows an error instead of an answer, and you want to know which of the dozen possible causes is yours. Naming the job matters, because each one needs a different prompt and a different level of suspicion afterwards.</p>
+<p>What AI does not do, in any of the three, is understand your business. It does not know that column D excludes refunds, that March had a one-off grant, or that your boss counts a &ldquo;sale&rdquo; at invoice rather than payment. The honest vendors of these tools say so themselves: treat the output as a draft and an explanation, not an authority on your workbook's logic. Your knowledge of what the numbers mean is the part that was never automatable — the syntax was.</p>
+<h2>Job one and two: writing and explaining, well prompted</h2>
+<ol>
+<li><strong>Name the columns like a person, then like a spreadsheet.</strong> &ldquo;Column B is the amount, column C is the region, rows 2 to 100 are the data&rdquo; gets you a formula that fits your file instead of a textbook example.</li>
+<li><strong>Say the result you expect in words.</strong> &ldquo;For East rows only, add up the amounts&rdquo; — then ask the assistant to explain the formula it wrote, part by part, before you paste it. A formula you cannot explain is a formula you cannot maintain.</li>
+<li><strong>For an inherited formula, ask for the plain-English translation first.</strong> &ldquo;Explain what this does, step by step, and what each referenced range is&rdquo; turns a frightening string into a paragraph you can argue with — which is the moment you often discover the sheet has been answering a slightly different question than everyone assumed.</li>
+<li><strong>Paste it into one cell. Check that cell by hand.</strong> Pick a row where you already know the answer, or compute it on paper. Only when the formula reproduces your known answer does it earn the right to fill down the column.</li>
+</ol>
+<p><strong>What success looks like:</strong> for any formula the AI gave you, you can say in one sentence what it calculates, name the columns it reads, and point to the one row you verified manually. If any of those three is missing, the formula is still a stranger in your spreadsheet.</p>
+<h2>Job three: an error translator you can actually use</h2>
+<table><caption>Common spreadsheet errors, in plain language</caption><thead><tr><th>Error</th><th>Plain meaning</th><th>Usual cause</th><th>What to ask the AI</th></tr></thead><tbody>
+<tr><td>#VALUE!</td><td>&ldquo;I was given the wrong kind of thing&rdquo;</td><td>A number stored as text (a price typed as $ 5.50), or text inside a maths formula</td><td>&ldquo;Here is my formula and one row of data — which input is text instead of a number, and how do I clean it?&rdquo;</td></tr>
+<tr><td>#N/A</td><td>&ldquo;I looked and it is not there&rdquo;</td><td>Lookup value missing: a spelling difference, an extra space, or numbers-as-text on one side</td><td>&ldquo;Find which lookup values have no match, show blanks instead of errors, and list the missing items&rdquo;</td></tr>
+<tr><td>#REF!</td><td>&ldquo;The thing I pointed at is gone&rdquo;</td><td>A row, column, or sheet the formula referenced was deleted or moved</td><td>&ldquo;Which reference in this formula is broken, and what should it point at now?&rdquo;</td></tr>
+<tr><td>A wrong number, no error</td><td>The most dangerous case: valid syntax, wrong logic</td><td>Conditions in the wrong order, a range one row short, a rule the sheet never encoded</td><td>&ldquo;Explain this formula's logic step by step&rdquo; — then compare the explanation against the rule you actually wanted</td></tr>
+</tbody></table>
+<p>The debugging prompt that works has four parts: the goal, the problem, the exact formula, and a small sample of your data with the columns explained. Vague prompts (&ldquo;my formula is broken&rdquo;) get vague sympathy; the four-part prompt gets a diagnosis, because you have given the assistant the same evidence you would give a helpful colleague looking over your shoulder. And when the fix involves several changes at once, ask for a list of every change made — on an important file, that list is your audit trail.</p>
+<h2>What never to hand over</h2>
+<p>Two cautions complete the workflow. First, privacy: uploading a spreadsheet uploads its contents, so strip or anonymise personal data, client details, and anything under a confidentiality duty before a file goes to a general AI tool, and prefer tools your workplace has approved for real data. Second, scale of trust: verify one row for a household budget, and verify a sample of rows, plus the totals, for anything money or grades depend on. The assistant is fast and usually right. &ldquo;Usually&rdquo; is a fine property in a drafting partner and an unacceptable one in a ledger — which is why the checker in this workflow is, permanently, you.</p>
+<h2>Questions beginners ask about AI and spreadsheets</h2>
+<p><strong>Do I still need to learn formulas at all?</strong> You need to learn what formulas <em>mean</em> — sums, averages, lookups, conditions — not their punctuation. AI has made syntax optional and understanding compulsory, which is a better deal than the old one.</p>
+<p><strong>Can I use AI without an add-in?</strong> Yes: upload the file (or a small sample) to a general assistant, or paste the formula and describe your columns. Add-ins are smoother; the paste-and-describe route works with nearly any spreadsheet program.</p>
+<p><strong>Why did the AI's formula work on its example but not my file?</strong> Usually the unglamorous details: different column letters, a header row shifting the ranges, or separators that differ by locale. Give it your real columns and check real rows — the fix is context, not a cleverer prompt.</p>
+
+
+<h2>A starter set of five prompts worth keeping</h2>
+<p>Save these five, adapted with your own column names, and you have covered most of what beginners actually need. <strong>One:</strong> &ldquo;Write a formula that adds the amounts in column B for rows where column C says East, data in rows 2 to 100. Explain each part.&rdquo; <strong>Two:</strong> &ldquo;Explain this formula in plain English, step by step, and tell me which cells it reads: [paste formula].&rdquo; <strong>Three:</strong> &ldquo;This formula returns #VALUE! — here is the formula, and here are three example rows. Which input is the wrong type, and how do I fix it?&rdquo; <strong>Four:</strong> &ldquo;My lookup returns #N/A for some rows. Show me how to display 'Not found' instead, and list the values that have no match.&rdquo; <strong>Five:</strong> &ldquo;Here is a formula I was given. Before I use it: what does it assume about my data, and what breaks if a column moves?&rdquo;</p>
+<p>Notice the shape every one of them shares: the request, the context, and an ask for explanation alongside the answer. That shape is deliberate. A formula delivered without its explanation is a debt you will repay at the worst moment — when the sheet is due, the numbers look wrong, and nobody can say why. A formula delivered with its explanation is a tiny lesson, and fifty such lessons, accumulated across real work you actually needed, amount to something no course quite replicates: spreadsheet literacy, learned in the order your own life required it, verified one honest row at a time.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>AI Starter Guide — plain-English introductions to AI chatbots. General information only, not professional advice. AI tools change quickly — verify current features on each provider's own site.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

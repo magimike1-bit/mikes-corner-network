@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to secure your home Wi-Fi network — Fix Your Wi-Fi</title>
+<meta name="description" content="Nine router settings that secure a home network, in safe order: the two different passwords, WPA3 or WPA2-AES, firmware, disabling WPS/UPnP/remote admin, and a guest network for visitors and smart devices.">
+<!-- AdSense: ad code goes here -->
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>How to secure your home Wi-Fi network</h1>
+  <p class="meta">Security basics &middot; 8 min read</p>
+
+  <h2>The front door nobody locks</h2>
+  <p>Every device in a modern house — phones, laptops, cameras, doorbells, speakers, the TV — passes through one small computer that ships with its settings chosen for convenience rather than safety, and then, in most homes, is never opened again. The risk is not exotic. Across the FTC-, CISA- and NSA-aligned checklists, the same handful of defaults account for nearly all of it: a factory admin password, firmware years out of date, encryption left on an old mode, and a guest network that was never turned on, so visitors and smart bulbs share a network with the laptop that holds the household's files. Hardening takes one session, most of it is nine settings, and done in the order below it cannot lock you out of your own house.</p>
+  <p><em>General information only, not professional IT advice. Menu labels vary by router model; where your manual disagrees with a generic path here, the manual wins. If the router is your provider's gateway, ask the provider how firmware updates are handled before changing update settings.</em></p>
+
+  <h2>First, the distinction everything else hangs on</h2>
+  <p>A router has <strong>two different passwords</strong>, and conflating them is the single most common home-network security failure. The <strong>Wi-Fi password</strong> lets a device join the network. The <strong>admin password</strong> logs into the router itself and can change everything — including, as one checklist explainer puts it, redirecting your traffic. The admin password is the one that matters most, and the one most often still set to whatever the factory printed. A household can change its Wi-Fi password every year and believe itself secure while the router's settings panel opens to a password published in every manual on the internet.</p>
+  <p>Both passwords follow the same modern rule: <strong>length is what resists guessing</strong> — the point made in CISA's password guidance and NIST SP 800-63B, and carried by the checklists as concrete numbers: a Wi-Fi passphrase of at least 16 characters, ideally 20 or more, or five to seven unrelated words. Make the two passwords different from each other, different from every other account you own, and store the admin one somewhere safe before you change it — the procedure below assumes you can get back in.</p>
+
+  <h2>The hardening session, in safe order</h2>
+  <ol><li><strong>Log in and back up.</strong> Find the router's admin address (the default gateway: ipconfig on Windows, or the network settings on a Mac), sign in, and export a configuration backup if the router offers one. Keep a wired or currently connected device at hand for the whole session, so a Wi-Fi change never strands you.</li><li><strong>Update the firmware first.</strong> Apply any pending update and reboot if required; turn on automatic updates if offered. If the model no longer receives updates at all, note it — that is a replace-the-router finding, and several checklists state it as such.</li><li><strong>Change the admin password</strong> (and the admin username, if the router allows), storing the new one safely before you log out. This happens before the Wi-Fi changes deliberately: secure the control panel while you still have a working connection to it.</li><li><strong>Set encryption to the strongest mode your devices support:</strong> WPA3 Personal, or WPA2/WPA3 transitional mode for a house with older devices, or WPA2 with AES as the floor. Never WEP, never open. A staged approach — WPA2-AES while WPA3-capable gear phases in — is the documented pattern for legacy households.</li><li><strong>Set the new Wi-Fi passphrase and a neutral network name.</strong> The SSID should carry no name, address, or household detail. Expect every device in the house to need reconnecting after this step; that is why it comes after the admin work.</li><li><strong>Turn off what you do not use:</strong> WPS, UPnP, and remote administration — each is a door that exists for convenience, and the checklists converge on closing all three unless a specific device genuinely needs one. Check before you close: note what stops working, if anything, rather than disabling blindly.</li><li><strong>Create the guest network</strong> — password-protected — and move visitors and smart-home devices onto it. Then verify the point of the exercise (see the success check): on many routers the guest network's isolation from your local devices is a setting, not a given.</li><li><strong>Confirm the firewall is on, review the connected-device list,</strong> rename what you recognise, investigate what you do not — and log out of the admin panel when you are done, every time.</li></ol>
+  <p>Success check, in three parts: a phone rejoins the main network with the new passphrase and browses normally; a device on the guest network <em>cannot</em> open a local resource you intend to keep private (a network drive, the router's admin page, a printer's settings); and you can state where the admin password is stored. All three true means the session worked. A guest device that can see the main network means the isolation setting, not the effort, failed — fix that one toggle and retest.</p>
+
+  <h2>What each setting is actually buying</h2>
+  <table><thead><tr><th>Setting</th><th>Threat it closes</th><th>If you skip it</th></tr></thead><tbody><tr><td>Admin password changed</td><td>Anyone on (or reaching) the network reconfiguring the router itself</td><td>The whole checklist is decoration — the panel is still open</td></tr><tr><td>WPA3 / WPA2-AES</td><td>Eavesdropping and offline password guessing against captured traffic</td><td>Older modes (WEP, original WPA) are treated as open by the checklists</td></tr><tr><td>Firmware current</td><td>Known, published router vulnerabilities — the ones with patches you never took</td><td>Every patched flaw stays available; an unsupported router stays that way forever</td></tr><tr><td>WPS / UPnP / remote admin off</td><td>Convenience doors that accept connections you never initiated</td><td>Three standing invitations, audited by nobody</td></tr><tr><td>Guest network for visitors + IoT</td><td>A compromised smart bulb or a guest's infected laptop reaching your computers</td><td>The least-trusted device in the house shares a LAN with the most-trusted</td></tr></tbody></table>
+  <p>One fashionable non-fix deserves its line: a VPN on your laptop protects traffic between that device and the VPN service, but it does not fix a misconfigured or open router — the hardening guide says so directly. Secure the router first; treat anything else as an addition, never a substitute. And keep the backup file from step one somewhere protected: configuration backups can contain credentials, which makes the backup itself a sensitive document.</p>
+
+  <h2>Keeping it done: the monthly five minutes</h2>
+  <p>Security settings decay by accumulation, not by attack: a port-forwarding rule added for a game in March, a smart device joined to the main network because the guest password was upstairs. The hardening guides converge on a light rhythm — review the connected devices and the settings about monthly, apply firmware when it appears (or confirm automatic updates are doing it), and remove rules and devices you no longer recognise. That is the entire maintenance burden. The session above is the hard part, and it only has to be done once per router.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Where do I find the admin page?</strong> It is your network's default gateway address — ipconfig on Windows shows it; on a Mac it is in the network settings under TCP/IP. The factory credentials are on the router's label or in its manual.</p>
+  <p><strong>Will WPA3 break my older devices?</strong> Some very old devices cannot join a WPA3-only network. The documented answer is the transitional WPA2/WPA3 mode, or WPA2-AES while you phase in newer gear — both are checklist-approved; WEP and open are not.</p>
+  <p><strong>Should smart devices really go on the guest network?</strong> Yes — that is the segmentation the checklists prescribe: visitors and less-trusted smart devices on the guest network, computers and phones on the main one, with the guest network's isolation verified.</p>
+  <p><strong>My provider supplied the router. Can I still do this?</strong> Mostly yes, but ask the provider how firmware updates work on a supplied gateway before changing update settings — some are managed by the provider, and the admin credentials may be split between you and them.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

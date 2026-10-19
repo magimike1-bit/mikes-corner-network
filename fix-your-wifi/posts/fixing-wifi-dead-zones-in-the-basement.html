@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixing Wi-Fi dead zones in the basement — Fix Your Wi-Fi</title>
+<meta name="description" content="Why the basement is always the dead zone — concrete, rebar, and a router exiled to a corner — and the fix ladder in order: measure, move, wire. Wired backhaul beats repeaters, and a bigger plan fixes nothing.">
+<!-- AdSense: ad code goes here -->
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Fixing Wi-Fi dead zones in the basement</h1>
+  <p class="meta">Coverage fixes &middot; 8 min read</p>
+
+  <h2>Why it is always the basement</h2>
+  <p>The basement dead zone is not bad luck and it is not a defective router. It is geometry. The router usually lives where the internet enters the house — a corner of the main floor, often inside a cabinet or behind the TV — and the basement sits beneath the single most obstructive layer in the building: the floor itself, with its joists, ductwork, and frequently concrete or tile between your router and the room below. Radio at Wi-Fi frequencies loses strength through every dense layer it crosses, and the 5 GHz band, the fast one, loses more per layer than 2.4 GHz. So the pattern repeats in house after house: strong signal upstairs, a phone showing full bars that loads nothing in the basement, and a homeowner shopping for a stronger router when the router was never the problem.</p>
+  <p>Two purchases follow from that misdiagnosis, and both are named here so you can skip them. A <strong>bigger internet plan</strong> will not fix a weak signal — the Calgary installers who wrote one of this guide's sources state it flatly, because the plan governs the pipe to the house, not the radio inside it. And a <strong>plug-in repeater</strong> dropped into the basement inherits the dead zone it was bought to cure, then rebroadcasts it at reduced speed. The fix is a ladder, climbed in order, and the first rung costs nothing but an afternoon.</p>
+  <p><em>General information only: this guide explains home networking concepts and common settings paths. Router menus vary by model — check your router's manual for exact labels, and if you are unsure about changing settings, ask your internet provider.</em></p>
+
+  <h2>Step zero: measure before you move anything</h2>
+  <ol><li><strong>Install a Wi-Fi analyser app</strong> on your phone (any of the common free ones reports signal in dBm).</li><li><strong>Record three readings:</strong> beside the router, at the top of the basement stairs, and in the basement seat where the signal fails. Write the numbers down — they are your baseline and your proof later.</li><li><strong>Read the scale:</strong> around -50 to -60 dBm is strong; near -70 dBm is weak but workable for browsing; at -80 dBm and beyond, connections drop and stall. (These thresholds are the working bands used across dead-zone guides.)</li><li><strong>Check which band you measured.</strong> If the basement reading is the 5 GHz network, repeat it on the 2.4 GHz network before concluding anything — the slower band's longer reach is sometimes the whole fix for a basement TV or printer.</li></ol>
+  <p>Success check for this step: you can name the basement's number and band. A dead zone you have measured is a problem with a shape; a dead zone you have only felt is a shopping trip.</p>
+
+  <h2>Rung one and two: the router move, and the 2.4 GHz reality</h2>
+  <p>Move the router before you buy anything. The homeowner guidance is specific about what 'move' means: raise it, expose it, and get it away from metal, water, large electronics, and the edge of the home — out of the cabinet, off the floor, as close to the centre of the floor plan as the cabling allows. An installer guide aimed at exactly this problem adds the honest caveat: this is worth five minutes and is rarely enough on its own for a true basement dead zone. Do it anyway, re-measure, and bank whatever it gives you, because every later rung works better with a sensibly placed main router.</p>
+  <p>Then be deliberate about bands. A tested dead-zone fix reported by How-To Geek is instructive: the second access point they added was an old router limited to 2.4 GHz, and the limitation barely mattered, because 2.4 GHz has the longer wavelength that penetrates walls and floors more easily and reaches farther — the right trade for a basement or a backyard where coverage, not peak speed, is the deficit. If your basement devices are a TV, a printer, and phones, 2.4 GHz measured at -65 dBm beats 5 GHz measured at -82 dBm every hour of the day.</p>
+
+  <h2>The ladder, compared: what each fix actually buys</h2>
+  <table><thead><tr><th>Fix</th><th>Cost class</th><th>What it buys</th><th>The catch</th></tr></thead><tbody><tr><td>Router repositioning</td><td>Free</td><td>A better starting signal everywhere</td><td>Rarely enough alone for a basement</td></tr><tr><td>Extender / repeater</td><td>Low</td><td>Reach, at reduced speed</td><td>Shares its radio with backhaul; must sit where signal is still usable, not in the dead zone</td></tr><tr><td>Mesh, wireless backhaul</td><td>Mid</td><td>One network, managed roaming (802.11k/v/r), band steering</td><td>Nodes must hear each other clearly; placement is the job</td></tr><tr><td>Mesh or AP with wired backhaul</td><td>Mid + a cable run</td><td>Full local speed in the dead zone; the terminal fix</td><td>Somebody has to run the cable — once</td></tr><tr><td>MoCA over existing coax</td><td>Mid</td><td>Near-Ethernet speeds where a coax outlet already reaches the room</td><td>Needs the coax run to exist and be usable</td></tr><tr><td>Powerline</td><td>Low-mid</td><td>Signal through the electrical wiring, bypassing floors</td><td>Performance varies unpredictably by house and circuit</td></tr></tbody></table>
+  <p>The table's dividing line is <strong>backhaul</strong> — how the new radio talks back to the router. A networking explainer puts it precisely: real mesh is separated from a repeater by dedicated backhaul, a separate radio or an Ethernet run carrying node-to-node traffic, so client bandwidth is not shared with it. A repeater spends the same radio twice — once listening, once repeating — which is why extended networks so often deliver about half the speed and a clumsy handoff. Wired backhaul removes the compromise entirely: the basement radio receives the full connection by cable and spends all of its radio on your devices.</p>
+
+  <h2>The terminal fix: a wired access point, step by step</h2>
+  <ol><li><strong>Choose the basement radio.</strong> A mesh satellite with an Ethernet port, a dedicated access point, or an old router that can be set to access-point mode — the How-To Geek test used a retired ISP router and a cheap 100-foot Ethernet cable and ended the problem for the price of the cable.</li><li><strong>Run the cable.</strong> Along baseboards, through a closet, down a cold-air return path where local code allows, or under a carpet edge — the route matters less than the fact of it. Plug one end into a LAN port on the main router.</li><li><strong>Configure the second radio.</strong> Access-point mode if it offers one; if reusing a router, disable its DHCP server so the main router stays in charge of addresses. Set the same network name and password as upstairs if the coverage areas overlap (devices will roam), or a second, clearly named network if they barely overlap — the tested fix chose a second name for exactly that reason.</li><li><strong>Place it like a router, not like a secret:</strong> elevated, exposed, roughly central to the basement's used rooms, away from metal ducting where you can manage it.</li><li><strong>Re-measure the three points</strong> from step zero, standing in the same spots.</li></ol>
+  <p>Success check: the basement seat that read near -80 dBm now reads -65 dBm or better on a network served by the basement radio, and a streamed film plays through the room's worst corner without a buffering pause. If the number improved but the film still stalls, the bottleneck has moved — check that the basement radio is genuinely on the wired backhaul and not quietly repeating wirelessly, the single most common silent failure of this fix.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Will a mesh kit fix it without any cables?</strong> Often, if the nodes are placed where they can still hear each other well — which means the basement node goes at the edge of the dead zone's approach, not in its centre. Wiring the nodes together remains the reliability upgrade when the building fabric fights back.</p>
+  <p><strong>Where exactly should an extender go?</strong> Halfway, in signal terms: a spot that still measures usable (around -65 to -70 dBm). Inside the dead zone it has nothing worth repeating.</p>
+  <p><strong>Is MoCA a real option?</strong> Where coax already runs to the room, yes — current MoCA adapters deliver speeds close to Ethernet over that coax with an easy setup, and then feed a small access point the same way a cable run would.</p>
+  <p><strong>My provider offered a faster plan for this problem.</strong> Decline politely. Plan speed ends at the modem; the dead zone is between the router and the room, and no plan changes that distance.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

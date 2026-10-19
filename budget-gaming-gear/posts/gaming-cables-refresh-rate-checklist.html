@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Cables That Cap Your Refresh Rate: HDMI, DisplayPort and Adapter Checks — Budget Gaming Gear</title>
+<meta name="description" content="Your refresh rate is the lowest ceiling in the chain: GPU port, cable version, adapter, monitor input. The version table and a ten-minute audit.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Budget Gaming Gear</a>
+    <p class="tagline">Smart buying advice for gaming on a budget</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/index.html">&larr; All guides</a>
+  <h1>Gaming cables that cap your refresh rate: HDMI, DisplayPort and adapter checks</h1>
+  <p class="meta">Setup &middot; 10 min read</p>
+
+  <p>One of the most common budget-gaming disappointments costs nothing to fix: a 144 Hz monitor quietly running at 60 Hz because the cable in the middle cannot carry the signal. Every link in the chain — graphics card port, cable version, any adapter, monitor input — has a ceiling, and the chain runs at its lowest one. Cable marketing makes this worse, since a cable labelled simply "HDMI" may be any of several versions with wildly different bandwidth. This guide gives the version table that matters, the adapter traps, and a ten-minute audit that finds the weak link in a setup you already own before you spend money replacing the wrong part.</p>
+
+  <h2>The ceilings that matter</h2>
+  <table>
+    <thead><tr><th>Standard</th><th>Bandwidth</th><th>Practical gaming ceiling</th></tr></thead>
+    <tbody>
+      <tr><td>HDMI 1.4</td><td>10.2 Gbps</td><td>1080p at 144 Hz is within reach on some implementations; 4K only at 30 Hz — the classic silent cap on older cables and ports</td></tr>
+      <tr><td>HDMI 2.0</td><td>18 Gbps</td><td>1080p and 1440p at 144 Hz; 4K at 60 Hz</td></tr>
+      <tr><td>HDMI 2.1</td><td>48 Gbps</td><td>4K at 120 Hz (more with compression); the console standard for current PlayStation and Xbox machines</td></tr>
+      <tr><td>DisplayPort 1.2</td><td>21.6 Gbps</td><td>1080p and 1440p at 144 Hz; 4K at 60 Hz — still the workhorse on many budget monitors</td></tr>
+      <tr><td>DisplayPort 1.4</td><td>32.4 Gbps</td><td>4K at 120 Hz (higher with DSC compression); the safe default recommendation for PC gaming</td></tr>
+      <tr><td>DisplayPort 2.1</td><td>80 Gbps</td><td>4K at very high refresh without compression; future-facing, still uncommon at budget prices</td></tr>
+    </tbody>
+  </table>
+  <p>Two rules turn the table into decisions. First, for PC gaming, DisplayPort is usually the better default: it has natively supported adaptive sync (FreeSync and G-Sync) across its range, and a DP 1.2 cable — cheap and common — already covers the 1080p and 1440p high-refresh combinations most budget setups target. Second, certification is the only label that means anything: look for VESA-certified DisplayPort cables and, for HDMI 2.1, the "Ultra High Speed" certification, because unbranded cables with impressive version claims and no certification are where flicker, dropouts and phantom 60 Hz caps come from. Length matters too — high-refresh signals degrade over distance, with DisplayPort happiest under about two metres and long HDMI runs at high refresh sometimes needing active or fibre cables.</p>
+
+  <h2>The adapter traps</h2>
+  <p>Adapters are where good chains quietly go to die. A passive adapter can only pass what both ends already agree on, and many cap resolution or refresh below both — a bargain USB-C-to-HDMI adapter limited to 4K at 30 Hz will happily cap a gaming laptop's external monitor at 30 Hz while every specification sheet in the chain claims more. Direction matters as well: DisplayPort-to-HDMI adapters and HDMI-to-DisplayPort adapters are different products, and the common cheap ones work in one direction only. USB-C adds a subtler trap — not every USB-C port carries video at all; the port needs DisplayPort Alt Mode, which is a hardware feature of the laptop or phone, not of the cable, and no adapter can add it after the fact. The discipline is simple: every adapter in a gaming chain gets its maximum resolution <em>and</em> refresh rate verified in its own specifications, at your resolution, before purchase — "supports 4K" without a refresh rate attached is a 30 Hz confession.</p>
+
+  <h2>The ten-minute audit of the setup you already own</h2>
+  <ol>
+    <li><strong>Read the operating system's display settings first.</strong> On Windows: Settings, System, Display, Advanced display — the current refresh rate is printed there. If it already says 144 Hz or your monitor's maximum, your chain is fine and this audit cost you one minute.</li>
+    <li><strong>If it is capped, raise it there before buying anything.</strong> Many monitors ship or default to 60 Hz in settings despite a capable chain. Select the monitor's rated rate from the dropdown; if the higher rate is absent from the list, the chain — not the setting — is the limit, and you proceed.</li>
+    <li><strong>Identify which monitor input you are using.</strong> On many monitors, one HDMI input is an older version than the DisplayPort input or the second HDMI port. The manual's specifications page lists per-port versions; moving the same cable to the better port is a free fix that surprises people every week.</li>
+    <li><strong>Swap in the shortest, newest cable you own and retest.</strong> If the higher refresh appears, the old cable was the ceiling — replace it with a certified equivalent of the right version, at the shortest length your desk honestly needs plus a little slack (about 20 cm extra is a common recommendation).</li>
+    <li><strong>Remove adapters one at a time.</strong> Connect directly, even awkwardly, for one test. Any adapter whose removal restores the refresh rate has identified itself; replace it with a verified adapter or, better, a single cable of the right type end to end.</li>
+    <li><strong>Check the graphics card end last.</strong> Older cards may offer high refresh only on their DisplayPort outputs, with HDMI capped at an earlier version. The card's specification page settles which of its ports can drive your monitor at full rate.</li>
+  </ol>
+  <p>What success looks like: the advanced display settings show the monitor's rated refresh rate, adaptive sync is enabled in the GPU control panel, and the image survives an hour of play without flicker or dropouts — achieved, in most cases, by moving a cable or changing a setting rather than by buying anything.</p>
+
+    <h2>When the audit says the monitor itself is the ceiling</h2>
+  <p>Occasionally the audit ends somewhere less satisfying: the panel's rated refresh is only available over one specific input standard that your source cannot output, or the advertised rate applies at a lower resolution than the one you play at — a pattern worth checking in the specifications of any monitor before purchase, since headline refresh rates on budget models sometimes describe an overclock mode or a reduced-resolution mode rather than the native panel behaviour. Read the manual's timing table, which lists resolution, refresh and input together, rather than the box's largest number. If you are shopping now, that table — plus per-port versions — tells you more about the gaming experience you are buying than any marketing panel on the product page.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Do expensive cables carry a better picture?</strong> Digital signals do not grade in quality the way analogue ones did — a certified cable either delivers the signal intact or visibly fails with flicker, sparkles or dropouts. Pay for certification and build, not for gold-plated promises.</p>
+  <p><strong>My monitor is 165 Hz but games feel like 60.</strong> Work the audit in order: in-game settings and the GPU control panel can each hold their own frame-rate or refresh cap, independent of the Windows setting. All three must agree before the panel's rate reaches your eyes.</p>
+  <p><strong>Console to a gaming monitor — which cable?</strong> The cable in the console's box is the correct one for it (HDMI 2.1 on current machines); the usual failure is the monitor's side, where the HDMI port used may be an older version. Check the per-port specifications before blaming the cable.</p>
+
+  <div class="take">
+    <strong class="take-label">Our take:</strong>
+    Your refresh rate is set by the weakest link among port, cable, adapter and input — in that order of suspicion, cheapest first. Audit before you buy: most capped setups are one setting, one port or one certified $15 cable away from the rate already printed on the monitor's box.
+  </div>
+
+  <p><em>General information only. Bandwidth and ceiling figures are the published specifications for each standard, checked 2026-10-19; individual products vary, and the specifications for your exact monitor, card and cable govern. Product and standard names are trademarks of their owners.</em></p>
+
+  <p>Next, see <a href="/posts/what-to-look-for-budget-gaming-monitor.html">what to look for in a budget gaming monitor</a> or <a href="/posts/budget-gaming-desk-setup-ergonomics.html">a budget gaming desk setup</a>.</p>
+  <p><a class="back" href="/index.html">&larr; All guides</a></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="disclaimer">Buying advice reflects the author's opinion and general guidance. Specs and prices change — always check current details with the retailer before you buy.</p>
+    <p>Budget Gaming Gear — buying advice for gaming on a budget.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

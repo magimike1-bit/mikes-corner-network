@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buying a Used Gaming PC: A 15-Minute Test Checklist Before You Pay — Budget Gaming Gear</title>
+<meta name="description" content="Verify parts with CPU-Z/GPU-Z, stress CPU and GPU with temperature limits, check SMART storage health, and price the findings. The full pass/fail table.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Budget Gaming Gear</a>
+    <p class="tagline">Smart buying advice for gaming on a budget</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/index.html">&larr; All guides</a>
+  <h1>Buying a used gaming PC: a 15-minute test checklist before you pay</h1>
+  <p class="meta">Buying guides &middot; 10 min read</p>
+
+  <p>A used gaming PC is the best value in the hobby and the easiest place to lose $600 in fifteen minutes. The listing photo cannot show a GPU that artifacts under load, a power supply on its last winter, or storage quietly re-allocating sectors — but a short, structured test at the seller's desk can surface all three before money changes hands. Experienced buyers run the same sequence: verify the parts are what the listing claims, stress the CPU and GPU while watching temperatures, check storage health, and test the boring peripherals everyone forgets. This guide turns that sequence into a 15-minute procedure with pass/fail lines, plus the negotiation and walk-away rules that make the checklist worth carrying.</p>
+
+  <h2>Before you go: set up the meeting to succeed</h2>
+  <p>Ask the seller, in advance and in writing, whether you may run a short stress test and inspect the system information — a seller who refuses testing has answered the most important question on the checklist. Bring a USB stick prepared with free tools: CPU-Z and GPU-Z for verifying components, HWMonitor for temperatures, a CPU stress tool such as Prime95, a GPU stress tool such as FurMark or MSI Kombustor, and CrystalDiskInfo for storage health. Agree on a public or well-lit meeting place consistent with a desktop tower's practicality — realistically the seller's home with a friend aware of where you are, cash held until tests pass, and a price already discussed as conditional on the machine matching its description. Decide your walk-away lines at home, while you are calm: the point of a checklist is that it decides, so you do not have to improvise under sales pressure.</p>
+
+  <table>
+    <thead><tr><th>Test</th><th>What to run</th><th>Pass</th><th>Fail / walk away</th></tr></thead>
+    <tbody>
+      <tr><td>Identity</td><td>CPU-Z and GPU-Z against the listing</td><td>CPU, GPU model and VRAM, RAM size and speed all match what was advertised</td><td>Any substitution — a lesser GPU variant or slower RAM — reprices or ends the deal; it is the single most common listing fudge</td></tr>
+      <tr><td>CPU stress</td><td>Prime95 Small FFTs for about 5 minutes with HWMonitor open</td><td>Temperatures ideally stay under about 85°C with clock speeds holding near normal boost</td><td>Sustained temperatures above the mid-90s, throttling well below base speed, crashes or blue screens</td></tr>
+      <tr><td>GPU stress</td><td>FurMark or Kombustor burn-in at 1280x720 for about 5 minutes</td><td>No visual artifacts — lines, blocks, flickering corruption — and temperatures staying under roughly 90°C</td><td>Artifacts at any temperature: a damaged GPU. A crash under load: end the test and the negotiation</td></tr>
+      <tr><td>Storage health</td><td>CrystalDiskInfo / SMART data</td><td>Overall health "Good", no meaningful reallocated-sector counts, sensible power-on hours for the price</td><td>"Caution" or "Bad" health, climbing reallocated sectors — price in a replacement drive or walk</td></tr>
+      <tr><td>Memory</td><td>Windows Memory Diagnostic at minimum; MemTest86 if time allows</td><td>Completes without errors</td><td>Any error — faulty RAM is a common hidden cause of "random" crashes blamed on software</td></tr>
+      <tr><td>The boring pass</td><td>Every USB port, display output, audio jack, network port; keyboard test; a dead-pixel check on a plain background if a monitor is included</td><td>Everything responds</td><td>Dead ports and flickering outputs are repair-shop money; count them into the price explicitly or walk</td></tr>
+    </tbody>
+  </table>
+
+  <h2>The 15-minute procedure, in order</h2>
+  <ol>
+    <li><strong>Boot it twice.</strong> A machine that POSTs and loads Windows twice in a row, from a full shutdown, has cleared the cheapest stability test there is. Note slow boots — they can betray a dying drive.</li>
+    <li><strong>Verify identity before thermals.</strong> Two minutes in CPU-Z and GPU-Z, comparing against the listing line by line, including RAM capacity, speed and whether it runs in dual channel.</li>
+    <li><strong>Check storage health while the case is still cool.</strong> CrystalDiskInfo takes thirty seconds and settles the drive question permanently.</li>
+    <li><strong>Run CPU and GPU stress together for the final five minutes.</strong> Combined load is the worst case a game will approximate: watch temperatures, listen for fan rattle or coil whine that changes pitch erratically, and watch the screen for artifacts. Touch the exhaust air — a burning smell ends the meeting pleasantly and immediately.</li>
+    <li><strong>Check activation and accounts.</strong> Windows should report itself activated with a digital licence; an unactivated or organisation-linked install can mean a licence cost of roughly $100–$200 landing on you. Confirm the machine is signed out of the seller's accounts and reset or ready for reset.</li>
+    <li><strong>Inspect the power supply label.</strong> Brand, wattage and age. Forum wisdom on used builds is blunt for a reason: the PSU is where sellers cheap out, and an ageing no-name unit is the one component whose failure can take others with it. A quality PSU visibly present is worth money; its absence is a discount or a walk.</li>
+  </ol>
+  <p>What success looks like: a machine that matches its listing on screen, holds safe temperatures under combined load without artifacts or errors, shows healthy storage, activates cleanly, and powers its parts from a PSU you would trust — bought at a price that already reflected the small faults you found and accepted with your eyes open.</p>
+
+  <h2>Negotiating with findings instead of feelings</h2>
+  <p>Checklist findings convert directly into price language: a caution-flagged SSD is a replacement drive's cost off the price; dusty, loud cooling that runs hot is a repaste-and-fans cost; 16 GB of RAM where 32 was implied is the difference, priced. Present each as arithmetic, not accusation, and cap your total: if the findings stack past roughly a quarter of the asking price, the machine is not a bargain with issues, it is a different, worse machine than the one advertised, and the correct move is to thank the seller and leave. Keep the same discipline at home afterward — run a longer memory test and an evening of your own games in the first days, while a return conversation is still socially possible.</p>
+
+    <h2>Price the whole first month, not just the tower</h2>
+  <p>Budget for the machine's first month as part of the purchase decision. A used PC commonly needs at least one of: a replacement or additional storage drive, fresh thermal paste and a proper clean, a keyboard or mouse the seller did not include, and occasionally the Windows licence discussed in the checklist. None of these is a reason to avoid used hardware — together they are simply the honest price, and a tower that looks $80 cheaper than another can be the more expensive purchase once its first month is counted. Sellers who include the original boxes, spare cables and a monitor with no dead pixels are offering real value that listings rarely price; count it when you compare, the same way you count the faults.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>The seller will not allow stress tests but offers a "guarantee it works."</strong> Treat refusal as a failed test. Every legitimate seller of a working machine gains from proving it; the only sales protected by refusing are the ones the test would have ended.</p>
+  <p><strong>Is a benchmark score enough instead of stress testing?</strong> No — they answer different questions. A benchmark compares performance against similar systems (useful for spotting a substituted part); a stress test answers whether the machine survives its own performance. A used purchase needs the second more than the first.</p>
+  <p><strong>What about used gaming laptops?</strong> The same procedure, plus the battery report: Windows' built-in battery report shows design versus current full-charge capacity and cycle count, and a heavily degraded battery is a real, priced-in cost rather than a surprise.</p>
+
+  <div class="take">
+    <strong class="take-label">Our take:</strong>
+    Fifteen minutes, six checks, decided in advance: identity, storage, CPU heat, GPU artifacts, the boring ports, and the PSU label. A used PC that passes all six is the best deal in gaming; one whose seller refuses the tests has already told you its result.
+  </div>
+
+  <p><em>General information only. Stress testing carries a small inherent risk on already-failing hardware; run tests with the seller's agreement, stop on any burning smell or runaway temperature, and follow each tool's own guidance. Prices and licence costs mentioned are illustrative figures checked 2026-10-19.</em></p>
+
+  <p>Next, see <a href="/posts/buying-refurbished-gaming-gear.html">buying refurbished gaming gear</a> or <a href="/posts/building-a-budget-gaming-setup.html">building a budget gaming setup</a>.</p>
+  <p><a class="back" href="/index.html">&larr; All guides</a></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="disclaimer">Buying advice reflects the author's opinion and general guidance. Specs and prices change — always check current details with the retailer before you buy.</p>
+    <p>Budget Gaming Gear — buying advice for gaming on a budget.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

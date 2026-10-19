@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Cost Controls: Budgets, Caps, and Loop Limits That Prevent Bill Shock</title>
+<meta name="description" content="Agent costs spike, they do not drift. The layered controls that keep them boring: provider caps, per-task budgets, step and loop limits, model routing, and the cost-per-outcome number that actually matters.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>AI Agent Cost Controls: Budgets, Caps, and Loop Limits That Prevent Bill Shock</h1>
+  <p class="lede">Nobody&#x27;s agent bill ever grew politely. It spiked — a loop over a weekend, a research task that explored the entire internet, a cheap prototype quietly promoted to production traffic. Cost control for agents is therefore not a budget spreadsheet. It is a set of brakes, fitted before the hill.</p>
+  <p class="meta">Published 2026-10-19 &middot; Last updated 2026-10-19</p>
+
+<h2>Why agent bills spike instead of growing</h2>
+<p>A normal software subscription costs the same on a bad day as a good one. An agent's cost is consumption: every reasoning step, tool call, retry, and token is metered, and the agent itself decides how much to consume. That autonomy is the product — and it means the failure modes are dynamic. An agent stuck between two plausible next steps can loop for hours. A vaguely scoped research task (&ldquo;research the market&rdquo;) can explore for as long as you let it. A workflow that retries failures forever will, eventually, meet a failure worth retrying forever. Bill shock is rarely a pricing problem. It is a missing-brakes problem, and brakes are cheapest before the first run.</p>
+<p>The encouraging fact is that productive agent work is actually quite bounded. Most useful runs complete in a small number of steps — practitioners put typical runs in the range of three to eight reasoning passes for a task. That gives cost control a concrete shape: you are not rationing an unpredictable genius, you are fencing a worker whose normal day fits in a small box, so anything outside the box is a signal, not a surprise.</p>
+<h2>The controls, in the order to adopt them</h2>
+<ol>
+<li><strong>Provider-level hard cap (today, five minutes).</strong> Set the monthly spending limit in your AI provider's dashboard, at a number whose loss would annoy but not wound you. This is the safety net of last resort: crude, global, and absolutely non-negotiable, because every finer control below can have a bug and this one is the provider's own.</li>
+<li><strong>Step and loop limits (per agent).</strong> Cap the number of reasoning steps or tool calls a single task may take, and treat breaching the cap as a pause-and-report event, not a failure to hide. A run still going after several times the normal step count is a loop until proven otherwise.</li>
+<li><strong>Token limits per request.</strong> Cap output length to what the job needs. A summary task with a generous-looking cap is safe; the same task uncapped can return an essay per question, billed by the word-equivalent, forever.</li>
+<li><strong>Per-task and per-agent budgets.</strong> Give each workflow its own small budget envelope — research gets one number, drafting a smaller one, review a smaller one still — with a soft cap that alerts you and a hard cap that stops the agent. One global pot lets a single misbehaving workflow drink the whole month.</li>
+<li><strong>Model routing.</strong> Match the model to the job's difficulty: inexpensive models for classification, extraction, formatting, and routine drafting; the expensive reasoning models reserved for work that demonstrably needs them. Routing by task type is the largest single saving available and, on simple tasks, costs no quality at all.</li>
+<li><strong>Approval above a threshold.</strong> Let small spend flow freely and require a human yes for runs or tools above a set cost. A gate at a modest threshold catches the rare expensive task — which is precisely the tail where the money goes.</li>
+</ol>
+<p><strong>What success looks like:</strong> a month where your total agent spend lands within a narrow band you could have predicted in advance, every cap breach produced a pause and a note rather than a discovery on the invoice, and you can state your cost per completed task — not just your total bill.</p>
+<h2>Scope is a cost control</h2>
+<table><caption>The same job, two very different bills</caption><thead><tr><th>Loose instruction</th><th>Scoped instruction</th><th>Why the bill differs</th></tr></thead><tbody>
+<tr><td>&ldquo;Research our competitors&rdquo;</td><td>&ldquo;Compare these three competitors on price and target customer; stop after their pricing and about pages&rdquo;</td><td>Named targets and a stopping rule replace open-ended exploration</td></tr>
+<tr><td>&ldquo;Fix the errors in this data&rdquo;</td><td>&ldquo;Fix date formats in column C only; list any other problems instead of fixing them&rdquo;</td><td>The agent stops at the boundary instead of improving everything it can see</td></tr>
+<tr><td>&ldquo;Keep trying until it works&rdquo;</td><td>&ldquo;Try twice; if it still fails, stop, save the error, and report&rdquo;</td><td>A retry limit converts an infinite loop into a two-line report</td></tr>
+</tbody></table>
+<p>Read the table as a budgeting tool, because it is one: narrow instructions reduce exploration, tangents, and tool calls before any cap is reached. When a run comes back expensive, the cheapest fix is usually editing the instruction, not raising the budget. And when you review spend — five minutes weekly is enough at small scale — review it per outcome: cost per finished summary, per processed inbox, per completed research brief. Totals tell you that you spent; cost per outcome tells you whether the spending is working, and which agent has quietly become a luxury.</p>
+<p><em>Figures from vendor and practitioner guides describe typical patterns, not guarantees for your workload; set caps from your own first weeks of metered runs, then tighten them as the patterns settle.</em></p>
+<h2>Questions people ask about agent costs</h2>
+<p><strong>What budget should a first agent get?</strong> The smallest number that lets it complete its real job for a week — set from the provider cap downward, watched daily at first. Small per-job envelopes are a feature: they make the cost of each workflow visible while mistakes are still cheap.</p>
+<p><strong>Do caps hurt quality?</strong> Caps on steps and spend mostly hurt loops, rambling, and gold-plating. If a cap regularly stops legitimate work, that is information — the task is bigger than its description, and it deserves a deliberate bigger budget, not a silent unlimited one.</p>
+<p><strong>What is the one metric to watch?</strong> Cost per completed outcome, trended weekly. A rising cost per outcome is the earliest warning that prompts are drifting, models are mis-routed, or a workflow is quietly looping — weeks before the invoice makes it obvious.</p>
+
+
+<h2>The five-minute weekly cost review</h2>
+<p>Controls fitted in advance still need a human glancing at the dials, and at small scale the glance is genuinely small. Once a week, open the provider's usage view and answer four questions in a notebook or a note file. What did agents cost in total this week, and is that inside the band you predicted? Which single workflow cost the most, and does its cost per completed outcome still make sense? Did any cap, step limit, or approval gate trigger — and if so, was it a loop, a genuinely big task, or a badly written instruction? And is any agent's cost trending upward week over week, which is drift announcing itself politely before it invoices you rudely?</p>
+<p>Act on the answers with the cheapest lever first. A rising cost per outcome usually yields to a tighter instruction, a cheaper model for the routine steps, or a smaller token cap — in that order — long before it justifies a bigger budget. Keep the weekly notes. Three months of them become the evidence base for every later decision: which agent earns a raise, which gets retired, and what a new agent should be budgeted before its first run. That is the mature state of agent cost control — not anxiety about tokens, but a small, boring, well-documented system in which surprises have to work very hard to happen. Boring bills are the goal. Fit the brakes, do the glance, and let the agents be interesting in their work instead of their invoices.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

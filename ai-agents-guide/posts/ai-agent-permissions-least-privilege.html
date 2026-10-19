@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Permissions: Give an Agent the Least Access That Does the Job</title>
+<meta name="description" content="An agent&#x27;s risk is set by its permissions, not its prompt. Least privilege in plain terms: one identity per agent, read-only by default, time-bound access, and a human gate on anything irreversible.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>AI Agent Permissions: Give an Agent the Least Access That Does the Job</h1>
+  <p class="lede">When an AI agent goes wrong, the post-mortem almost never reads &#x27;the prompt was not polite enough&#x27;. It reads: the agent could delete, send, pay, or publish — and did. Permissions are the control that decides how much damage a mistake, or a manipulation, can do. Here is how to set them like an adult.</p>
+  <p class="meta">Published 2026-10-19 &middot; Last updated 2026-10-19</p>
+
+<h2>The blast radius is set by permissions, not by the prompt</h2>
+<p>Every AI agent is, from a security point of view, a new kind of insider: it holds credentials, touches real systems, and acts faster than any human can watch. It also takes instructions from an unusually dangerous place — its inputs. Documents, emails, web pages, and files an agent reads can contain text crafted to redirect it, which means &ldquo;the agent was told to behave&rdquo; is not a control at all. The control that survives a manipulated or simply mistaken agent is the one enforced outside the model: the permission set that decides what the agent <em>can</em> do, whatever it currently <em>wants</em> to do.</p>
+<p>That is why experienced practitioners repeat one sentence until it bores them: the blast radius of an agent is set by its permissions, not by its prompt. A read-only research agent that gets manipulated can produce a bad report. A write-everywhere agent with the same manipulation can produce a bad week. Least privilege — the minimum access a specific task requires, enforced per agent — is how you choose which of those outcomes is even possible.</p>
+<h2>The starter permission table</h2>
+<table><caption>Match access to the task, not to your optimism</caption><thead><tr><th>Agent task</th><th>Grant</th><th>Refuse by default</th></tr></thead><tbody>
+<tr><td>Research, summarise, monitor, audit</td><td>Read-only access to the specific sources</td><td>Any write, send, or delete capability</td></tr>
+<tr><td>Draft emails, posts, documents</td><td>Write to a drafts location only</td><td>Sending or publishing — a human sends</td></tr>
+<tr><td>Update records, tickets, spreadsheets</td><td>Write to those records, in that tool</td><td>Deleting records, changing ownership, billing changes</td></tr>
+<tr><td>Customer-facing answers</td><td>Read approved knowledge; draft replies</td><td>Refunds, discounts, order changes, promises</td></tr>
+<tr><td>Anything financial, destructive, or public</td><td>Prepare the action for approval</td><td>Executing it without a human confirming the actual action</td></tr>
+</tbody></table>
+<p>Two habits make the table real rather than decorative. <strong>One identity per agent:</strong> each agent gets its own account, keys, or scoped token — never a shared login, and never your personal admin credentials. Separate keys per agent or per job mean a problem agent can be cut off in one move, and your logs can answer the question every incident asks first: which agent did this? <strong>Credentials stay out of the model's sight:</strong> keys live in the platform's secret storage or your password manager, are attached by the system at run time, and never appear in prompts, documents the agent reads, or logs it can browse. A secret an agent can read is a secret it can repeat.</p>
+<h2>Time is a permission too</h2>
+<p>Standing access — credentials that work forever, waiting — is where quiet risk accumulates. Prefer the opposite wherever the platform allows it: short-lived or task-scoped access that expires, separate credentials for reading versus modifying, test or staging access before production access, and different credentials for each so a mix-up is visible rather than silent. Then add the calendar habit that keeps it all honest: a short monthly review where you list every agent, the access it holds, and the last time that access was actually used. Access an agent has not needed in a month is access it should lose until it needs it again. Permission creep is not a scandal; it is the default outcome of never looking.</p>
+<h2>The human gate: a short list, kept sacred</h2>
+<ol>
+<li><strong>Deleting anything</strong> — files, records, accounts, environments. Deletion is irreversible in a way a mistaken edit is not.</li>
+<li><strong>Sending anything outward</strong> — emails, messages, posts, or submissions in your name or your business's name.</li>
+<li><strong>Spending anything</strong> — purchases, refunds, payments, plan changes, or commitments that create them.</li>
+<li><strong>Changing access itself</strong> — creating accounts, granting permissions, changing security or network settings.</li>
+</ol>
+<p>For everything on that list, the agent prepares and a person confirms the concrete action — not a summary of it, the action itself — before it executes. Everything off the list can run at the speed agents are good at. That split is the whole philosophy in one line: <strong>autonomy is something an agent earns task by task, inside boundaries a person set while calm</strong> — not a default you discover during an incident.</p>
+<p><strong>What success looks like:</strong> you can produce, in two minutes, a list of your agents, the exact access each holds, and the last time each permission was used — and every irreversible action in the past month shows a human confirmation next to it.</p>
+<h2>Questions people ask about agent permissions</h2>
+<p><strong>Isn't this overkill for a personal agent?</strong> Scale the ceremony, not the principle. A personal agent might need three lines in a notebook instead of a policy document — but read-only by default, its own login, and a human tap on sends and spends are as cheap at home as they are wise at work.</p>
+<p><strong>The tool only offers one all-access key. Now what?</strong> Then the tool is the boundary: give the agent a limited account or workspace inside it (a folder, a project, a draft space) and keep the all-access key out of the agent entirely. If neither is possible, that tool gets a drafting agent, not an acting one.</p>
+<p><strong>What should I log?</strong> Enough to reconstruct an incident: which agent, what it did, when, on what, and who approved it if approval was required. Logs you never test are decoration — glance at them monthly, in the same review where you prune permissions.</p>
+
+
+<h2>Your first permission audit, in twenty minutes</h2>
+<p>If your agents are already running with access granted in the enthusiasm of setup day, this audit is the way back. List every agent you have, including the ones you have half-forgotten — especially those. For each, write down three things: what it can read, what it can change or send, and which credentials it holds. Compare that list against the starter table in this article and mark every place the agent holds more than its task needs. Downgrade in the order of danger: remove send and delete rights first, then production access, then anything the agent has not touched in a month.</p>
+<p>Where a platform makes downgrading awkward, use the practical fallbacks the security literature offers: a separate limited account, a drafts-only workspace, a scoped key for the specific job, or simply moving the agent to prepare-only mode for the risky step while a person executes it. Then schedule the monthly ten-minute version of the same review, because permissions drift back — every &ldquo;just this once&rdquo; grant is permanent until somebody looks. The audit's real product is not the tightened list, satisfying as that is. It is the sentence you will be able to say after any future incident, truthfully and immediately: here is exactly what that agent could reach, and here is the record of what it did. In a world of agents that act while you sleep, that sentence is worth more than any single tool you can buy.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

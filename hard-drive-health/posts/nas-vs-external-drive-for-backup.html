@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAS vs External Drive for Backup: Which One Actually Fits Your Home?</title>
+<meta name="description" content="A NAS automates backup for every device in the house; an external drive is cheaper and simpler. A decision framework based on device count, automation, redundancy — and why the best answer is often both.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>NAS vs External Drive for Backup: Which One Actually Fits Your Home?</h1>
+  <p class="lede">The NAS-versus-external-drive debate is usually argued as a product contest. It is really a habits contest: the best backup is the one that runs without you remembering it, survives the failures you actually face, and can be restored on your worst day. Here is how the two options score on those terms.</p>
+  <p class="meta">Published 2026-10-19 &middot; Last updated 2026-10-19</p>
+
+<h2>Start with the failure you are protecting against</h2>
+<p>Backup options fail in different ways, and the right choice depends on which failures are realistic for you. A single drive dying is the most common failure, and the easiest to survive — any second copy handles it. A computer being lost, stolen, or hit by ransomware is next. The failure people plan for least is the shared one: fire, flood, break-in, or a power surge taking everything in one building at once. Keep those three separate in your mind, because the two products in this comparison protect against them very differently, and marketing language about &ldquo;redundancy&rdquo; deliberately blurs the lines.</p>
+<p>RAID, the NAS feature most often sold as safety, protects against exactly one thing: a single drive inside the NAS failing. It keeps files available while you replace the dead drive. It does not protect against the NAS itself being stolen, the house flooding, a deletion syncing faithfully to both drives, or ransomware encrypting the mirrored copy as happily as the original. Redundancy is not backup, and a mirror is not a location.</p>
+<h2>The honest comparison</h2>
+<table><caption>NAS vs external drive, scored for home backup</caption><thead><tr><th>Factor</th><th>External drive</th><th>NAS</th></tr></thead><tbody>
+<tr><td>Upfront cost</td><td>Low — the drive alone</td><td>High — enclosure plus drives</td></tr>
+<tr><td>Ongoing cost</td><td>None</td><td>Electricity, occasional drive replacement</td></tr>
+<tr><td>Automation</td><td>Only when plugged in; depends on your habit or backup software scheduling</td><td>Built in; every device backs up over the network on a schedule</td></tr>
+<tr><td>Devices covered</td><td>One at a time</td><td>Every computer, phone, and tablet in the household</td></tr>
+<tr><td>Drive-failure protection</td><td>None — it is a single point of failure</td><td>Yes, with a multi-drive RAID setup</td></tr>
+<tr><td>Location protection</td><td>Only if you physically take it offsite</td><td>None by itself — it lives in the same building</td></tr>
+<tr><td>Setup and upkeep</td><td>Low skill, near-zero upkeep</td><td>Moderate setup; another device to update and maintain</td></tr>
+<tr><td>Restore speed</td><td>Fast, direct connection</td><td>Moderate, limited by your network</td></tr>
+</tbody></table>
+<p>Read the automation row twice, because for most households it decides the question by itself. An external drive backs up when someone remembers to plug it in, run the job, and unplug it afterwards — a chain of good intentions that real life breaks within a few months for almost everyone. The most common state of a home external-drive backup is <em>stale</em>: weeks or months old, discovered on the day it is needed. A NAS removes the human from the loop. Backups happen at night, for every device, whether or not anyone thought about backup that week. That — not RAID, not remote access — is the real argument for a NAS.</p>
+<h2>The decision framework</h2>
+<p><strong>One computer, modest files, tight budget:</strong> an external drive plus an offsite element wins. Use backup software with a schedule and keep the drive plugged in if your threat model allows it, or rotate two drives with one always stored elsewhere. Spending NAS money here buys automation you can mostly get from a calendar reminder and honest habits.</p>
+<p><strong>Several computers and phones, a household that will not maintain a routine:</strong> the NAS earns its cost. It centralizes every device's backup automatically and removes the plug-in habit from the plan entirely. Budget for the drives as well as the enclosure, set up the RAID for drive-failure tolerance, and treat the NAS as the hub — not the whole plan.</p>
+<p><strong>Files you genuinely cannot lose — business records, the only copy of family photos, work in progress:</strong> neither product alone is enough, at any price. This is where the 3-2-1 rule applies in full: three copies, on two different kinds of media, with one copy offsite. In practice that usually means a NAS or external drive at home, plus a cloud backup or a rotated drive stored at another location. The offsite copy is the only element that survives the shared-building failures, and it is the element both product pages talk about least.</p>
+<h2>Why &ldquo;both&rdquo; is often the grown-up answer</h2>
+<p>The comparison sources converge on the same conclusion once the scenarios get serious: resilient setups combine the options rather than crowning one. A NAS as the always-on core, an external drive rotated offsite as the location insurance, covers drive failure, device loss, and building loss with no subscription at all. Adding cloud for the offsite leg instead trades the rotation chore for a monthly fee and restores that depend on your internet speed. Either hybrid beats either product alone, because each component covers the failure the other cannot.</p>
+<p>Whichever shape you choose, close the loop the same way: pick a restore day twice a year, actually restore a few files from each copy, and confirm the backups are current rather than assuming the schedule ran. Unpowered archive drives deserve a spin-up and a read a couple of times a year as well — a drive ignored for years can fail on the exact spin-up you need most. A backup plan is not the hardware. It is the verified, current, restorable copies; the boxes are just how you get them.</p>
+<h2>Questions people ask when choosing</h2>
+<p><strong>Is RAID a backup?</strong> No. RAID survives a dead drive inside the box. It faithfully mirrors deletions, corruption, and encryption-by-ransomware, and it shares a building with everything it protects. Useful, worth having — and not a backup by itself.</p>
+<p><strong>Can I start with an external drive and add a NAS later?</strong> Yes, and it is the natural path: the external drive becomes the offsite rotation copy the day the NAS arrives, so nothing is wasted.</p>
+<p><strong>What about cloud only?</strong> Cloud solves the offsite problem elegantly and automates well, at the price of a permanent subscription and restores limited by your connection. For many single-computer households it is a legitimate complete answer; for large photo and video libraries, local copies usually rejoin the plan on cost and restore speed alone.</p>
+
+
+<h2>The upkeep nobody puts on the box</h2>
+<p>One cost separates the options in a way spec sheets hide: attention over years. An external drive asks almost nothing of you between backups — no updates, no accounts, no software beyond the backup job itself. A NAS is a small computer living in your home, and it inherits a computer's chores: firmware and app updates, user accounts to keep tidy, a drive-health dashboard worth glancing at, and eventual drive replacements on a schedule set by physics rather than preference. For a household comfortable with that rhythm, the upkeep is minutes a month and buys genuine automation. For a household that will not do it, an unmaintained NAS quietly becomes the worst option of all — a centralised, network-connected store of everything, running old software.</p>
+<p>That is not an argument against the NAS. It is an argument for choosing with your real household in the room, not the aspirational one. Score the decision honestly: count the devices, admit whether anyone will plug a drive in weekly for the next five years, admit whether anyone will patch a NAS, and let those two confessions — not the product pages — pick the architecture. Then spend the money you saved by not over-buying on the part every architecture needs and nobody markets: the second copy, somewhere else.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

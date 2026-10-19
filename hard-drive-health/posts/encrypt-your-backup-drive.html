@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encrypt Your Backup Drive: BitLocker, FileVault, and VeraCrypt Compared</title>
+<meta name="description" content="A backup drive holds everything — which makes it the drive most worth encrypting. Compare BitLocker To Go, macOS encrypted volumes, and VeraCrypt, with the recovery-key rules that keep encryption from becoming data loss.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>Encrypt Your Backup Drive: BitLocker, FileVault, and VeraCrypt Compared</h1>
+  <p class="lede">A backup drive is a copy of your whole digital life in one small, losable, stealable object. Encryption is what makes that object boring to a thief — but it comes with one sharp edge: lose the password or recovery key, and the encryption locks you out just as completely. Here is how to get the protection without the trap.</p>
+  <p class="meta">Published 2026-10-19 &middot; Last updated 2026-10-19</p>
+
+<h2>Why the backup drive, specifically</h2>
+<p>People encrypt laptop drives and leave the backup drive plain, which inverts the actual risk. The laptop stays home, behind a login, in daily use where a theft is noticed within hours. The backup drive travels — to a relative's house for offsite storage, in a bag to the office, in a drawer that anyone clearing the house can open — and it contains not just current files but every older version you backed up, including the documents you later deleted from the computer itself. If one object in your setup deserves encryption, it is that one.</p>
+<p>Encryption protects exactly one thing, and it is worth being precise: data at rest, on a powered-off or locked drive, against someone who has the hardware but not the password. It does nothing against malware on a running, unlocked computer, nothing against accidental deletion, and nothing against the drive simply failing. It is one layer — the confidentiality layer — of a backup plan, not the plan itself.</p>
+<h2>The three realistic options for a home backup drive</h2>
+<table><caption>Choosing an encryption method for an external backup drive</caption><thead><tr><th>Option</th><th>Platform</th><th>Cost</th><th>Choose it when</th><th>Watch out for</th></tr></thead><tbody>
+<tr><td>BitLocker To Go</td><td>Windows (full feature on Pro/Enterprise editions)</td><td>Built in</td><td>Your backup drive lives in a Windows-only household</td><td>Reading the drive on macOS or Linux needs extra tools; edition limits on Home</td></tr>
+<tr><td>macOS encrypted volume (FileVault family)</td><td>macOS</td><td>Built in</td><td>Your machines are Macs and the drive stays in that world</td><td>Windows cannot read it natively; key management is tied to your Mac and Apple ID choices</td></tr>
+<tr><td>VeraCrypt</td><td>Windows, macOS, Linux</td><td>Free, open-source</td><td>The drive must move between operating systems, or you are on Windows Home</td><td>Steeper learning curve; you manage everything yourself, including mistakes</td></tr>
+</tbody></table>
+<p>The decision rule is simpler than the feature lists suggest: <strong>encrypt with the system your future self will have in front of you on restore day</strong>. A backup you cannot open on the machine you own after a failure is not a backup. Mixed households and anyone who might switch platforms should lean cross-platform (VeraCrypt, or keep one unencrypted-but-physically-secured copy for the most critical documents and encrypt the rest). Single-platform households should use the built-in tool and spend their effort on the key-storage step below, which is where encrypted backups actually succeed or fail.</p>
+<h2>Encrypt a Windows backup drive with BitLocker To Go</h2>
+<ol>
+<li><strong>Connect the drive and finish a full backup first.</strong> Verify the backup completed. Encryption is a change to a working system, not a first step.</li>
+<li><strong>Open Manage BitLocker</strong> from the Windows search box. Find the drive under removable drives, where its status will show as off, and choose Turn on BitLocker.</li>
+<li><strong>Choose password unlock</strong> and set a long, unique passphrase you do not reuse anywhere else. This password is now the single key to every file on the drive.</li>
+<li><strong>Save the recovery key to a file — and then move that file off this computer.</strong> Print it and store the paper somewhere separate from the drive, or keep it in a password manager. A recovery key stored only on the computer the backup protects is a key stored inside the locked room.</li>
+<li><strong>Choose how much to encrypt.</strong> For a drive that already holds data, encrypt the entire drive; the used-space-only option suits a brand-new empty drive.</li>
+<li><strong>Choose compatible mode</strong> if the drive may be plugged into other Windows computers, then start encryption and let it finish without unplugging the drive.</li>
+<li><strong>Test the result.</strong> Eject, reconnect, and confirm Windows asks for the password and the backup files open. Then restore one real file to a test folder. An encrypted backup you have never restored from is a hope, not a backup.</li>
+</ol>
+<p><strong>What success looks like:</strong> the disconnected drive asks for a password on every connection, your test restore opens correctly, and your recovery key exists in at least one place that is neither the drive itself nor the computer it backs up.</p>
+<h2>The rules that keep encryption from eating your data</h2>
+<p>Every encryption horror story has the same plot: the encryption worked perfectly, and the owner lost the key. Losing the password or recovery key can make the files permanently inaccessible — there is no support desk that can override the mathematics, by design. So the key gets the same redundancy thinking as the data. Keep it in two places, in two forms if you can (password manager plus paper in a sealed envelope), and tell one trusted person where the paper is. Never store the only copy on the backed-up computer, and never store it in a plain file on the backup drive itself.</p>
+<p>Two more habits complete the picture. First, keep at least one other backup copy under the usual 3-2-1 thinking, because encryption does not protect against deletion, failure, or ransomware — it can even amplify a failure, since a partially damaged encrypted volume is harder to recover scraps from than a plain one. Second, re-test after big changes: operating-system upgrades, a new computer, a password change. The day you need the backup is the worst day to discover the key in your password manager belongs to the previous drive.</p>
+<h2>Questions people ask before encrypting</h2>
+<p><strong>Will encryption slow my backups down?</strong> Modern computers encrypt in hardware-assisted ways that make the difference small for typical home backup sizes. The one-time full-drive encryption pass is the slow part; routine backups afterwards feel normal.</p>
+<p><strong>What if I forget the password but have the recovery key?</strong> That is exactly what the recovery key is for — it unlocks the drive so you can reset access. Without either one, the data is gone. That bluntness is the feature working as intended.</p>
+<p><strong>Should the offsite copy be encrypted too?</strong> Especially the offsite copy. It is the one outside your physical control — in a car, a workplace, or someone else's home — which is precisely the exposure encryption exists for.</p>
+
+
+<h2>Encrypt before the drive leaves the building</h2>
+<p>Timing matters more than most guides admit. The natural moment to encrypt a backup drive is when it is bought, empty, and boring — not after a year of backups has accumulated and encryption becomes an afternoon-long full-drive operation performed under mild anxiety. If you are setting up a new drive today, encrypt it first, then run the first backup onto the encrypted volume, then do the test restore. The whole security layer becomes part of the drive's birth certificate rather than a renovation.</p>
+<p>For an existing plain drive that already holds your only backups, the order of operations protects you from the one real danger in this project, which is a half-finished change on your sole copy. Make or verify a second copy first, even a temporary one. Encrypt the original. Test the unlock and the restore. Only then carry on as before — with the second copy now free to become the start of a proper rotation. And whatever route you took, write the fact down where future you will find it: which drives are encrypted, with what, and where the keys live. In five years, the person restoring from that drive during a stressful week will be deeply grateful that present you treated documentation as part of the backup, because it is.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

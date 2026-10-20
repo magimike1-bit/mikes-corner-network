@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Use an Old DSLR or Mirrorless Camera as a Webcam: USB Utility vs HDMI Capture — Old Tech, New Life</title>
+<meta name="description" content="An old DSLR or mirrorless body makes a far better webcam than it has any right to — if you triage it right: check the brand utility list, try USB first, and fall back to HDMI capture.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Use an old DSLR or mirrorless camera as a webcam: USB utility vs HDMI capture, by brand</h1>
+  <p class="meta">Repurpose &middot; 9 min read</p>
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>A retired interchangeable-lens camera is a strange and wonderful webcam candidate: a real sensor, real glass, and depth of field a webcam will never have, all sitting in a drawer because a phone or a newer body took over photography duty. Getting there is not a matter of buying the most expensive adapter first. The camera brands all solved this problem themselves with free USB utilities, and the route to a working video call is a triage — check whether the body is supported, use USB when it is, and only then consider a capture device. The other half of the job is two caveats that end more webcam sessions than any settings menu: sound and power. This guide runs both halves together so the first call works.</p>
+
+  <h2>The comparison table: brand by brand</h2>
+  <table>
+    <tr><th>Brand utility</th><th>How it connects</th><th>Models covered</th><th>Caveats to know</th></tr>
+    <tr><td>Canon EOS Webcam Utility</td><td>USB, no capture card needed</td><td>Check the model list on Canon's page; the supported ranges include the 6D and 7D series, 60D through 90D, and most Rebels</td><td>Verify the exact body on the list before buying anything — the list, not the brand name, decides</td></tr>
+    <tr><td>Sony Imaging Edge Webcam</td><td>USB</td><td>Includes the A7 II and A7 III, the A7R II through IV, the A5100, and the A6x00 series</td><td>The camera's built-in microphone cannot be used through the utility — plan an external microphone from the start</td></tr>
+    <tr><td>Nikon Webcam Utility</td><td>USB</td><td>21 compatible cameras per the guide; includes the D500, D750, D850, D3500, the D5300 through 5600, and the D7200/7500</td><td>An external microphone is required here too; USB audio from the camera is not part of the setup</td></tr>
+    <tr><td>Fujifilm X Webcam</td><td>USB</td><td>The X-T2 through X-T4</td><td>A narrower list than the others, so unsupported-body fallback planning matters most with Fujifilm</td></tr>
+    <tr><td>Any body via HDMI capture</td><td>Camera's HDMI output into a capture card such as the Elgato Cam Link 4K</td><td>Bodies the USB utilities do not support</td><td>The route to full quality: where USB utilities cap the feed at roughly 576p/720p with no audio over the tether, HDMI capture gives a full-quality feed</td></tr>
+  </table>
+  <p>Two readings of that table deserve emphasis. First, the model lists are the authority. Brand enthusiasm is not; a Canon-adjacent body not on the list is not a Canon utility body. Second, the USB rows share one shape: a free utility, a cable, and known limits. The capture row is the planned fallback, not a failure — some bodies will simply live there, and knowing that in advance is what keeps the project from stalling.</p>
+
+  <h2>USB utility first, HDMI capture as the fallback</h2>
+  <p>The decision sequence is short, and it should be followed in this order:</p>
+  <ol>
+    <li><strong>Identify the body and check the utility list.</strong> Find the exact model name on the camera body or in its menus, then check it against the relevant brand utility's supported-model list. This single check routes the whole project: listed bodies go to step 2, unlisted bodies go to step 4.</li>
+    <li><strong>Install the brand utility and try USB.</strong> Install the manufacturer's utility, connect the camera to the computer with a USB cable, and select the camera in the computer's video software. For supported bodies this is the whole connection — no capture card is needed, and the Canon route in particular is built around exactly that simplicity.</li>
+    <li><strong>Check the result against the known limits.</strong> USB utilities cap the feed at roughly 576p/720p with no audio over the USB tether. For a standard video call that is perfectly usable; it is the source of neither panic nor upgrade pressure. If the call software refuses the feed at all, note that some apps do not see the utility feed, and try a different application before diagnosing anything else — the camera may be fine and the app may be the narrow part.</li>
+    <li><strong>Fall back to HDMI capture when needed.</strong> If the body is not on any utility list, or if the call genuinely needs more than the USB cap — a recorded presentation, a streaming project — the fallback is a capture card, with the Elgato Cam Link 4K as the named example, fed from the camera's HDMI output. Where USB gives a capped feed, HDMI capture gives a full-quality feed, and that is the trade the extra hardware buys.</li>
+  </ol>
+  <p>The framework, stated plainly: USB utility first because it is free and simple; HDMI capture when the body is unsupported or when the job needs full quality. Money enters the project only at the fallback step, and only then because the triage said so.</p>
+
+  <h2>Microphone and power: the two caveats that end calls</h2>
+  <p>Picture this: the image is beautiful and the call still fails, because the camera has no working audio and dies halfway through the meeting. Both failure modes are documented, and both are cheap to prevent once they are known in advance.</p>
+  <p><strong>Sound.</strong> The Sony utility cannot use the camera's built-in microphone, so an external microphone is needed, and the Nikon utility likewise requires an external mic. The USB tether does not carry the camera's audio into the computer, and the Nearstream assessment states the same limit directly: no audio over the USB tether. The rule is simple — treat audio as a separate device from the start. A desk microphone or a headset plugged into the computer handles the call's sound while the camera handles the picture, and the two never have to be reconciled.</p>
+  <p><strong>Power.</strong> A camera running a webcam session drains its battery far faster than a photo session would, and the session ends mid-call when the battery does. The recommended preparation is an AC power adapter or a dummy battery for long sessions, plus a tripod so the camera holds a steady frame without a hand on it. One more charging note: whether the camera can charge while acting as a webcam varies by model, so do not assume the USB cable that carries the video is also keeping the battery topped up. For a daily-call setup, continuous AC power is the arrangement to plan around; for an occasional call, a full battery plus a charger standing by is enough.</p>
+
+  <h2>The setup procedure</h2>
+  <ol>
+    <li><strong>Confirm the body is supported.</strong> Match the exact model against the brand utility's list — Canon's EOS Webcam Utility list, Sony's Imaging Edge Webcam range, Nikon's 21-camera list, or Fujifilm's X-T2 through X-T4.</li>
+    <li><strong>Install the utility on the computer.</strong> Download it from the manufacturer's own page for that utility, not from a third-party bundle.</li>
+    <li><strong>Assemble the hardware.</strong> USB cable for the video connection, AC power adapter or dummy battery for power, tripod for the frame, and an external microphone or headset for audio. The Shotkit guidance bundles these together because the sessions that fail fail for lack of one of them, not for lack of camera quality.</li>
+    <li><strong>Connect and select.</strong> Power the camera, connect it by USB, and choose it as the camera in the call or recording software. If the app does not list it, try another application — some apps do not see the utility feed — before changing anything else.</li>
+    <li><strong>Check audio separately.</strong> Confirm the computer is using the external microphone or headset for the call's audio, not expecting sound from the camera.</li>
+    <li><strong>Run a full-length trial.</strong> Hold a test call for the real duration of a typical meeting. Watch for the battery level, the camera's heat, and any auto-shutoff behaviour, and fix what the trial reveals before the first real call.</li>
+    <li><strong>Route to capture only if the triage said so.</strong> For unsupported bodies, connect the camera's HDMI output to the capture card and select the capture card as the video source. Everything about microphone and power above still applies.</li>
+  </ol>
+
+  <h2>What success looks like</h2>
+  <p>Success is a call where the camera behaves like a webcam and nothing else needs touching. The computer lists the camera — or the capture card — as a selectable video source, the image appears upright and in focus in the call software, audio runs through the external microphone with no echo from a camera speaker, and the camera stays powered and connected for the whole length of a real meeting. If the image is capped at a modest resolution over USB, that is the documented limit of the utility route, not a fault — and if the app cannot see the feed at all, the documented response is a different app first, new hardware never. A beautiful sensor behind a dead battery or a missing microphone is not a webcam yet; with power and sound handled, it finally is.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>My camera is not on any utility list. Is it useless?</strong> No — that is exactly what the capture fallback is for. The camera's HDMI output feeds a capture card such as the Elgato Cam Link 4K, which the computer then sees as a video source, and that route gives a full-quality feed.</p>
+  <p><strong>Can the camera's microphone handle call audio?</strong> Do not plan on it. The Sony utility cannot use the camera's built-in mic and the Nikon utility needs an external mic, and the USB route carries no audio over the tether. Budget for a headset or desk microphone alongside the camera.</p>
+  <p><strong>Will the USB feed look bad?</strong> Expect roughly 576p/720p through the USB utilities — fine for video calls, and honest about what it is. When the job needs more, the HDMI capture route is the upgrade that raises the ceiling.</p>
+  <p><strong>What about compact cameras or camcorders?</strong> This guide covers DSLR and mirrorless ranges, because the sourced utility lists are those ranges. Other camera types are outside what the sources here verify, so they are excluded rather than guessed at.</p>
+
+  <p><a href="/posts/old-game-consoles-as-media-players.html">Next: use a retired game console as a media player &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Tech, New Life — DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

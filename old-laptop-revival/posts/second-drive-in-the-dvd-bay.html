@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add a Second Drive in the DVD Bay: The Optical-Drive Caddy Upgrade — Old Laptop Revival</title>
+<meta name="description" content="A second drive in the DVD bay only pays off in the right order: measure the bay, check the SATA generation, put the SSD in the main bay and the old drive in the caddy.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Add a second drive in the DVD bay: the optical-drive caddy upgrade, done in the right order</h1>
+  <p class="meta">Storage &middot; 9 min read</p>
+
+  <p>The optical drive is the least-used part of most old laptops, and the bay it sits in is exactly the size and shape of a 2.5-inch drive. That observation has launched a thousand caddy upgrades: pull the DVD drive out, slide a small adapter tray in, and gain a second drive without giving up the first one. The idea is sound. The way the upgrade is usually described is not. Most short guides present the caddy as a home for a shiny new SSD, as if the new drive should naturally go in the new tray. Follow that version and the result is a fast drive throttled by a slow connector, in some cases a drive the machine will not boot from at all. Done in the right order, the same parts produce a genuinely better machine: a fast system drive where the fast connector is, and a large, cheap capacity drive where speed matters least. Order is not a detail here. Order is the upgrade.</p>
+
+  <h2>The tempting version is the wrong version</h2>
+  <p>Start with the warning that matters most, because it reverses the instinct almost everyone brings to the job. An accepted solution on the HP Support Community puts it bluntly: do not put the SSD in the optical caddy. In that advice, an SSD placed in the caddy runs slow and may not boot. The recommended layout is the opposite of the instinctive one — the new SSD goes in the laptop's main drive bay, and the old mechanical drive, the one that came out of the main bay, goes into the caddy. Nothing about the parts changes. Only the placement changes, and placement decides whether the money spent on the SSD buys full speed or a fraction of it.</p>
+  <p>A discussion on the MSI forum explains the mechanism behind that warning. The optical bay connects at SATA-2, which runs at half the speed of SATA-3. A drive in the caddy therefore has a ceiling on its transfer speed no matter how fast the drive itself is. The same discussion is fair about the nuance: an SSD in the optical bay is still faster than a mechanical hard drive, because responsiveness is not only about peak transfer speed. Faster, however, is not the same as full speed, and a capped SSD in the bay that may not boot is a poor trade when a better layout costs nothing extra. The mechanical drive, by contrast, loses little in the caddy. A spinning drive was never going to saturate even the slower connection for the jobs it will be given — file storage, media, and backups — so the slow bay should be given to the slow drive. That single principle organises everything that follows.</p>
+
+  <h2>Spec verification: measure the bay, check the connector</h2>
+  <p>Before any part is ordered, two specifications need verifying on the actual machine, because caddies are not universal and guessing is how a ten-minute swap turns into a return shipment.</p>
+  <ul>
+    <li><strong>Bay height: 9.5mm or 12.7mm.</strong> Optical-drive caddies come in two sizes, 9.5mm and 12.7mm, and the caddy has to match the height of the optical drive it replaces. Measure the removed drive, or look the model up in its service manual. The HP example is instructive: the laptop in that thread takes a 9.5mm optical drive, a fact established from its service manual rather than assumed. A 12.7mm caddy in a 9.5mm bay will not fit; a 9.5mm caddy in a taller bay leaves a loose, poorly seated tray.</li>
+    <li><strong>Connectors on both ends.</strong> A caddy carries a SATA connector for the drive mounted inside it and a second SATA connector that mates with the laptop. Confirm the drive intended for the caddy is a 2.5-inch SATA drive and that the caddy's laptop-side connector matches the optical bay it slides into.</li>
+    <li><strong>SATA generation of each bay.</strong> Treat the main bay as the fast connection and the optical bay as the capped one. The MSI discussion identifies the optical bay as SATA-2, at half the speed of the SATA-3 connection the main bay offers, and that difference — not the drives — is what the whole layout is built around.</li>
+    <li><strong>Price expectation, with a date on it.</strong> One caddy guide put caddies at under $10. Treat that as that guide's dated claim rather than a current quote: check the live price of the correctly sized caddy before ordering, and let the size measurement, not the price, choose the part.</li>
+  </ul>
+  <p>That verification list is short on purpose. Height, connectors, and which bay is fast — once those three are known, the rest of the job is sequencing, not shopping.</p>
+
+  <h2>The decision: which drive goes where</h2>
+  <table>
+    <tr><th>Placement</th><th>Verdict</th><th>Why</th></tr>
+    <tr><td>New SSD in the main bay, old mechanical drive in the caddy</td><td>The recommended layout</td><td>The SSD sits on the faster SATA-3 connection and boots as the system drive; the spinner gives capacity from the capped bay, where its own speed is not the limit. Both the HP accepted solution and the MSI thread land on this layout.</td></tr>
+    <tr><td>New SSD in the caddy, mechanical drive stays in the main bay</td><td>Avoid</td><td>The SSD is capped at SATA-2 speed and, per the HP advice, may not boot from the caddy at all. The system still starts from the slow drive, so the everyday sluggishness remains.</td></tr>
+    <tr><td>SSD in the caddy as a second, non-boot drive</td><td>Acceptable, with eyes open</td><td>The MSI discussion notes an SSD in the optical bay still beats a mechanical drive, so as overflow storage it works — but the same money in the main bay would have bought uncapped speed.</td></tr>
+    <tr><td>Largest mechanical drive that fits, in the caddy</td><td>Good use of the bay</td><td>A caddy guide makes the capacity argument directly: install the largest drive that fits, for backup value. The capped bay is exactly where bulk capacity belongs.</td></tr>
+  </table>
+  <p>The decision framework reduces to two questions. Which drive does the machine boot from and run programs from? That drive belongs in the main bay, and it should be the SSD. Which drive holds the files that are large, rarely opened, or kept as copies? That drive belongs in the caddy, at whatever capacity is affordable. Answer those two questions and the layout is decided before a single screw comes out.</p>
+
+  <h2>The swap, in the right order</h2>
+  <p>The sequence below puts the SSD into service first and moves the mechanical drive last, so the machine is never left without a bootable system drive mid-job.</p>
+  <ol>
+    <li><strong>Back up first.</strong> Copy anything irreplaceable off the laptop to an external drive or another computer. A drive swap touches every file the machine owns.</li>
+    <li><strong>Verify the specs.</strong> Measure the optical drive's height (9.5mm or 12.7mm), confirm it against the service manual where one is available, and order the caddy in that size.</li>
+    <li><strong>Prepare the SSD while the machine still runs.</strong> Clone the existing system drive to the new SSD, or prepare installation media for a clean install, before opening the laptop. The old drive is still the working system at this point — use that.</li>
+    <li><strong>Shut down fully and unplug.</strong> A complete shutdown, not sleep, and remove the battery where the design allows it.</li>
+    <li><strong>Remove the main-bay drive.</strong> Open the drive bay, slide the mechanical drive out, and unmount it from its bracket or caddy rails, keeping screws organised.</li>
+    <li><strong>Fit the SSD in the main bay.</strong> Mount the new 2.5-inch SATA SSD in the same bracket and slide it home on the main connector. This is the step the whole upgrade hinges on: the fast drive, on the fast connection.</li>
+    <li><strong>Mount the mechanical drive in the optical caddy.</strong> Seat the old drive in the caddy so its SATA connector mates with the caddy's drive-side connector, and secure it as the caddy design requires.</li>
+    <li><strong>Remove the optical drive and slide the caddy in.</strong> Release the DVD drive, slide it out, and slide the loaded caddy into the same bay until its laptop-side connector seats. Transfer the original bezel to the caddy face where the design allows, so the side of the laptop still looks finished.</li>
+    <li><strong>Reassemble and boot from the SSD.</strong> Power on and confirm the machine starts from the new system drive. If the boot order needs adjusting, set the main-bay drive first.</li>
+    <li><strong>Format and label the caddy drive.</strong> Once the system is stable, initialise the mechanical drive in the caddy if it was wiped, give it a clear volume label such as Storage or Backup, and move the large, slow-changing folders there.</li>
+  </ol>
+  <p>Notice what the order protects against. The SSD is cloned, fitted, and proven bootable in the main bay before the mechanical drive's new home is finalised, and the optical drive — the part being sacrificed — comes out only after its replacement is loaded and ready. At no point does the laptop hold two half-finished storage changes at once.</p>
+
+  <h2>What success looks like</h2>
+  <p>Success is checkable, not a feeling. The laptop boots from the SSD in the main bay, noticeably faster than it started from the mechanical drive. The operating system shows two internal drives: the SSD as the system volume and the mechanical drive, at its full capacity, as a second volume that can be written to and read from without errors. A large file copies to the caddy drive and opens from it. The laptop sleeps and wakes with both drives still present, and the caddy sits flush in the side of the machine with no rattle. If the second drive is missing after sleep or the machine tries to boot from the caddy, revisit the seating of the caddy connector and the boot order before questioning the drives themselves.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Will an SSD work at all in the DVD bay?</strong> Yes, within limits. The MSI discussion is clear that an SSD in the optical bay still outperforms a mechanical drive, but its speed is capped by the SATA-2 connection, and the HP accepted solution warns it may not boot from there. As a main system drive it is the wrong placement; as extra storage it is a compromise, not a failure.</p>
+  <p><strong>Which caddy size is needed?</strong> The one that matches the optical drive being removed: 9.5mm or 12.7mm. Measure the drive or check the service manual — the HP example laptop's drive is 9.5mm per its manual. Do not guess from the laptop's age or size.</p>
+  <p><strong>What is the second drive best used for?</strong> Capacity jobs: backups, media libraries, downloads, and archives. A caddy guide's advice is to fit the largest drive practical for exactly that reason — backup value scales with size, and none of those jobs needs the main bay's faster connection.</p>
+  <p><strong>Is the DVD drive gone for good?</strong> The bay is occupied, so internal disc reading goes with it. Keep the removed optical drive somewhere safe; the swap is reversible by sliding the caddy out and the optical drive back in.</p>
+
+  <p><a href="/posts/ssd-upgrade-walkthrough.html">Next: the SSD upgrade walkthrough &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

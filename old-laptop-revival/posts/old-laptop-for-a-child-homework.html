@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set Up an Old Laptop for a Child: A Homework Machine With Guardrails — Old Laptop Revival</title>
+<meta name="description" content="Handing a child an old laptop is a transfer of ownership, not a hand-me-down: clear the previous owner, keep the admin account, add a standard child account, then set Family Safety limits.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Set up an old laptop for a child: a homework machine with guardrails, not a hand-me-down</h1>
+  <p class="meta">Repurpose &middot; 9 min read</p>
+
+  <p>An old laptop passed to a child usually arrives in the worst possible configuration: signed in as someone else, holding that person's files, browser history, saved passwords, and administrator rights, with no limits of any kind. Simply handing it over is not a setup — it is an accident of ownership. A homework machine needs the opposite arrangement, built deliberately and in order: the previous owner cleared out, a parent holding the one administrator account, the child working in a standard account with limits a parent can review, and an operating system decision made honestly rather than by default. None of that requires a new computer. All of it requires doing the transfer properly instead of treating the laptop as a toy that happens to run a browser. This article is general information, not a substitute for supervision: no setting replaces a parent who stays involved in what a child does online.</p>
+
+  <h2>Decide the operating system first</h2>
+  <p>The operating system question comes before accounts, because it decides which guardrails are even available. One fact has to sit at the centre of the decision: Windows 10's standard support ended on Oct 14, 2025. A laptop still running Windows 10 can follow the Family Safety path described below, and for a machine used for a school term under close supervision that may be a reasonable, eyes-open choice. A machine expected to serve a child for years deserves more hesitation, because the system underneath the guardrails is no longer receiving standard support. Weigh that date, not just whether the laptop still turns on.</p>
+  <table>
+    <tr><th>Option</th><th>Choose it when</th><th>Guardrail to plan for</th></tr>
+    <tr><td>Keep Windows and use Microsoft Family Safety</td><td>The homework tools the child needs are Windows or browser tools, a parent already uses a Microsoft account, and the support end date above has been weighed and accepted for the machine's expected life.</td><td>The full procedure below: parent as administrator, child as a standard Family Safety account, limits managed at family.microsoft.com.</td></tr>
+    <tr><td>Install a lightweight Linux system</td><td>The Windows installation is beyond sensible repair and a technically confident adult in the household is willing to own updates and troubleshooting personally.</td><td>Family Safety does not carry across. Guardrails become a separate, deliberate project — standard (non-administrator) accounts for daily use at minimum — rather than a built-in panel, so choose this only where that adult support genuinely exists.</td></tr>
+    <tr><td>Install ChromeOS Flex</td><td>The homework load is entirely browser-based and the household prefers a simpler, browser-first machine over local Windows programs.</td><td>As with Linux, the Windows-specific Family Safety steps below do not transfer. Supervision has to be arranged within that system's own account model, so confirm a workable supervision route exists before committing the machine.</td></tr>
+  </table>
+  <p>The framework is deliberately unsentimental. The best system for a child is the one where a named adult can actually administer the guardrails week after week. A familiar Windows setup with limits switched on protects a child better than an unfamiliar system with limits left as a future project — and an unsupported system with no plan at all protects nobody.</p>
+
+  <h2>The setup procedure, in order</h2>
+  <ol>
+    <li><strong>Rescue, then clear, the previous owner's data.</strong> Before anything is reset, copy off anything the previous owner still needs — documents, photos, anything irreplaceable. Then reset or reinstall the system so the child's machine starts empty: no former accounts, no saved passwords, no leftover files. A homework laptop should contain the child's work and nothing else.</li>
+    <li><strong>Update the clean system.</strong> Run the operating system's updates to completion and restart as many times as it asks. Guardrails configured on a half-updated machine get configured twice.</li>
+    <li><strong>Create the parent administrator account first.</strong> A parent signs in with the parent's own Microsoft account and holds the administrator role, protected by a strong password the child does not know. Advice in a Microsoft Q&amp;A thread on exactly this setup is explicit: the parent keeps an administrator account of their own, and there should always be one admin account on the machine. That account is the control panel for everything that follows — never share its password, and never let it become the child's daily login.</li>
+    <li><strong>Add the child as a family member.</strong> On Windows 10, the path runs through Settings, then Accounts, then Family &amp; other users, then Add a family member. The child gets a standard account inside the family group — standard matters, because a standard account cannot undo the limits an administrator sets.</li>
+    <li><strong>Use a Microsoft account for the child, not a local account.</strong> This is a hard requirement, not a preference: the parental controls work only on Microsoft accounts, not local accounts. A local child account looks simpler and silently disables the entire guardrail system.</li>
+    <li><strong>Set the Family Safety limits from the parent's side.</strong> Management happens at family.microsoft.com, where the parent sets screen time, web filtering, and app limits. Set an initial, deliberate set rather than everything at maximum: school-day screen-time windows, web filters on, and app limits for the obvious distractions. Limits can be loosened later with evidence; starting loose and tightening later rarely works.</li>
+    <li><strong>Install the homework tools, from the admin account.</strong> Add the browser, the school platforms, the document and note tools homework actually requires, and nothing speculative. Installing from the parent account keeps the standard child account unable to add software on its own — which is precisely the point.</li>
+    <li><strong>Test the machine as the child.</strong> Sign in on the child account and spend a few minutes in that seat. Open the homework sites. Try to install something. Try to reach a site that should be filtered. Note what the child account can and cannot do, and fix gaps from the parent account before the laptop changes hands.</li>
+    <li><strong>Agree the house rules out loud.</strong> Where the laptop lives, where it charges overnight, and what happens when a limit needs changing. The technical guardrails below support those rules; they do not replace them.</li>
+  </ol>
+
+  <h2>The limits that do the daily work</h2>
+  <p>Once the accounts exist, the management surface at family.microsoft.com carries the ongoing controls, and the AEANET guide to that system usefully groups them into four working parts. Screen-time limits can be set per app and per game, not just for the device as a whole, so a reading app and a game do not have to share one allowance. Content filters work by age rating, giving a starting line that matches the child rather than a parent's guess at individual titles. Activity reporting covers sites visited, apps used, and searches, which turns "what happened on the laptop this week" from an argument into a reviewable record. And app approval closes the loop: apps can be approved or blocked, so new software arrives through a parent decision instead of a child's curiosity. Reviewed together, briefly and regularly, those four controls are the actual guardrail system. The accounts are just what makes them stick.</p>
+  <p>Two failure modes deserve naming. The first is the shared login: if the child knows the administrator password, or does homework inside the parent's account because it is "easier", every limit above is decorative. The second is the unreviewed report. Activity reporting only protects anyone if a parent actually reads it, so put the review on a rhythm — weekly is enough for most households — and treat surprises as conversations first and rule changes second.</p>
+
+  <h2>What success looks like</h2>
+  <p>Success is checkable from the child's chair. The child signs in on a standard account, in the child's own name, and finds the homework tools ready and working. The child cannot install software, change system settings, or remove the limits without the parent's administrator password. Screen time ends at the agreed hour without negotiation with the machine. A blocked site or app produces a block, not a workaround, and the parent can open family.microsoft.com and see the week's activity — sites, apps, and searches — in the activity report. The laptop contains the child's schoolwork and nothing from its previous life. If any one of those checks fails, the setup is not finished, and the failing check names exactly which step to revisit.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Can the child just use a local account to keep things simple?</strong> Not if the guardrails matter. The controls work only on Microsoft accounts, not local accounts, so the child's account must be a Microsoft family account for screen time, filters, and reporting to function at all.</p>
+  <p><strong>Should the child have administrator rights "to install school software"?</strong> No. The Microsoft Q&amp;A advice keeps one administrator account — the parent's — and gives the child a standard account. When school software genuinely needs installing, the parent does it in a two-minute visit with the admin password; that inconvenience is the guardrail working.</p>
+  <p><strong>The laptop runs Windows 10. Is that disqualifying?</strong> Not automatically, but decide with the date in view: Windows 10's standard support ended Oct 14, 2025. For a short, supervised homework role the Family Safety route above still applies; for a machine expected to last a child for years, weigh a supported system using the decision table at the top of this article.</p>
+  <p><strong>Do these settings supervise a child on their own?</strong> No. They enforce limits and produce reports; they do not provide judgement. Keep the laptop in shared spaces where possible, read the activity reports, and keep talking about what happens online. The settings buy structure. Supervision is still a person.</p>
+
+  <p><a href="/posts/windows-cleanup-no-new-parts.html">Next: the no-parts Windows cleanup &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

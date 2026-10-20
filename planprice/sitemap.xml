@@ -784,4 +784,10 @@
     <loc>https://planprice.ca/guides/google-workspace-vs-microsoft-365-pricing-canada.html</loc>
     <lastmod>2026-10-18</lastmod>
   </url>
+  <url>
+    <loc>https://planprice.ca/guides/mailerlite-pricing-decoded.html</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

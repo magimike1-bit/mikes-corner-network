@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi Drops on One Device Only? The Fix Lives on That Device — Fix Your Wi-Fi</title>
+<meta name="description" content="When only one device drops, the fix lives on that device: forget and rejoin, update the driver, and turn off Wi-Fi power saving — a numbered procedure with exact settings paths for Windows, Mac, iPhone, and Android, plus the success check.">
+<!-- AdSense: ad code goes here -->
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Wi-Fi drops on one device only: fix the device, not the router</h1>
+  <p class="meta">Troubleshooting &middot; 8 min read</p>
+
+<p>When every device in the house holds its connection except one, the network is almost certainly innocent. That single fact reorganises the whole repair: instead of rebooting the router for the fifth time and changing settings the healthy devices depend on, you work on the one device that is dropping — its saved network profile, its driver or system version, and its power-saving behaviour. EPB's tech-support guide states the working principle directly: if only one device drops, the fixes live on that device, starting with forgetting the network and reconnecting, which it calls the fix for the most common cause of a single device dropping — a corrupted saved profile. This guide turns that principle into one ordered procedure, with the exact settings path for each platform and a test at the end that tells you whether you actually fixed it.</p>
+<h2>Why one device drops while the rest stay connected</h2>
+<p>A Wi-Fi connection is a relationship between two specific radios and a saved set of settings on the device. When the relationship breaks on one device only, the suspects are all on that device's side of it. The saved network profile can be corrupted or stale — for example after a router password change, a firmware update, or a band rename — so the device keeps trying to negotiate with settings that no longer match. The device's Wi-Fi driver or operating system can be out of date in a way that mishandles the router's current settings. And power management can be switching the Wi-Fi radio off to save battery, which looks exactly like a random disconnect: the connection drops when the screen sleeps, the lid closes partway, or the device decides cellular looks better. PCSscientist's dropping-Wi-Fi guide makes the same diagnosis from the other side: if only one gadget misbehaves, the fix almost always lives on that device, not the router — and lists power saving, outdated drivers, and weak radios in smart devices as the recurring causes.</p>
+<p>Before the procedure, run one two-minute confirmation. Note whether any other device drops at the same moments as the problem device. If a second device drops at the same time even once, you do not have a one-device problem — work on the router and the connection instead, starting with this site's disconnecting and ISP-diagnosis guides. If the problem device is the only one that ever drops, proceed below and change nothing on the router while you do it.</p>
+<h2>The fix: a numbered procedure, in order</h2>
+<p>Do the steps in order and test for a day — or at least a few hours of normal use — between the major ones. Changing three things at once and having the drops stop tells you nothing about which change mattered, and the problem will be back the first time a setting reverts.</p>
+<ol>
+<li><strong>Forget the network and rejoin it fresh.</strong> On the dropping device: iPhone or iPad — Settings &gt; Wi-Fi &gt; tap the (i) beside your network &gt; Forget This Network. Android — Settings &gt; Connections (or Network &amp; internet) &gt; Wi-Fi &gt; tap the gear beside your network &gt; Forget. Windows — Settings &gt; Network &amp; internet &gt; Wi-Fi &gt; Manage known networks &gt; Forget. Mac — System Settings &gt; Wi-Fi &gt; Details… beside your network &gt; Forget This Network. Then rejoin by selecting the network and typing the password again. This clears the corrupted saved profile EPB identifies as the most common single-device cause.</li>
+<li><strong>Restart the device itself</strong> — a full restart, not sleep and wake. A restart clears the radio's stuck state in a way that toggling Wi-Fi off and on does not always manage.</li>
+<li><strong>Update the device's Wi-Fi driver or system software.</strong> Windows: right-click Start &gt; Device Manager &gt; Network adapters &gt; right-click your Wi-Fi adapter &gt; Update driver — and if Windows reports nothing newer, download the latest driver from the laptop maker's support site, which is the copy that counts. Mac, iPhone, and Android: install any pending system update under Settings &gt; General &gt; Software Update (Apple) or Settings &gt; System &gt; System update (Android).</li>
+<li><strong>Turn off Wi-Fi power saving.</strong> Windows: Device Manager &gt; Network adapters &gt; your Wi-Fi adapter &gt; Properties &gt; Power Management &gt; uncheck "Allow the computer to turn off this device to save power." Android: Settings &gt; Connections &gt; Wi-Fi &gt; Intelligent Wi-Fi (or the ⋮ menu) &gt; turn off Switch to mobile data and Adaptive Wi-Fi — these drop Wi-Fi whenever the phone decides cellular looks better. iPhone: Settings &gt; Cellular &gt; scroll down &gt; turn off Wi-Fi Assist, for the same reason.</li>
+<li><strong>Test the device on the other band.</strong> If your router broadcasts both 2.4 GHz and 5 GHz, connect the problem device to the band it is not currently using for a day. A device that is stable on 2.4 GHz and drops on 5 GHz is telling you its radio or driver struggles with that band or its channel at your distance — useful evidence, and a stable workaround while you decide whether a driver update or a replacement adapter is worth it.</li>
+<li><strong>Test the device on a different network.</strong> Take the laptop or phone to another Wi-Fi network — a workplace, a library, a friend's house — and use it there. Drops that follow the device to a second network point at the device's hardware or software; a device that is rock-solid elsewhere points back at how it and your router interact, which is when a router-side band or channel change becomes worth trying after all.</li>
+<li><strong>Last resort on the device: reset its network settings.</strong> This wipes every saved network, Bluetooth pairing, and cellular setting on phones, so it comes last and only after the steps above. On computers, the equivalent is removing and reinstalling the Wi-Fi adapter driver from the manufacturer's copy you downloaded in step 3.</li>
+</ol>
+<p><strong>What success looks like:</strong> the device stays connected through the situations that used to drop it — a full workday, an evening of streaming, overnight standby and wake — for at least 48 hours, while nothing on the router was changed. If drops return only in one situation (only on sleep, only on one band), that pattern is the diagnosis: sleep-only drops mean power saving is still active somewhere; band-only drops mean stay on the stable band and treat the other as unsupported for that device.</p>
+<h2>If the "one device" is a TV or a smart device</h2>
+<p>Smart TVs and streaming boxes deserve a footnote of their own, because their Wi-Fi radios are often the weakest in the house and their settings menus hide the power and update options in different places. PCSscientist's guide notes the pragmatic answer for a smart device that keeps dropping: wire it with an Ethernet adapter instead of fighting its radio. If the TV sits near the router or a mesh node with a free port, a short cable ends the problem permanently and frees the air for devices that genuinely need to be wireless. Check for a firmware update in the TV's settings first — but do not spend a weekend on a radio that a cable replaces in five minutes.</p>
+<h2>FAQ</h2>
+<p><strong>Why does my phone lose Wi-Fi when the screen turns off?</strong> Almost always battery behaviour: the phone is putting the Wi-Fi radio to sleep or switching to mobile data because it judged the Wi-Fi weak. EPB's guide points Android users to the Switch to mobile data and Adaptive Wi-Fi toggles and iPhone users to Wi-Fi Assist — step 4 above covers both.</p>
+<p><strong>Should I reboot the router anyway, just in case?</strong> Once, at the start, as a baseline — then leave it alone. Repeated router changes during a one-device repair destroy your evidence: when the drops stop or continue, you no longer know which side of the connection changed.</p>
+<p><strong>When is it the device's hardware?</strong> When the drops follow the device to a second network (step 6) after a fresh profile, current software, and power saving disabled. At that point a USB Wi-Fi adapter on a computer is the cheap test and often the permanent fix; on a phone or tablet, it is a repair-shop conversation.</p>
+<p class="disclaimer">General home-networking information only, not professional IT advice. Menu names vary slightly by device model and software version; if a path above does not match your screen, your device maker's support pages carry the same settings under near-identical names.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

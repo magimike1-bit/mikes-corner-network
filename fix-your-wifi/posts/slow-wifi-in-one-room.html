@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slow Wi-Fi in One Room Only? Measure, Walk the Signal Path, Then Fix — Fix Your Wi-Fi</title>
+<meta name="description" content="A slow room is a physics problem: measure in three places, walk the straight line the signal travels, reposition and re-aim before spending — a numbered procedure with settings paths and a success check.">
+<!-- AdSense: ad code goes here -->
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Slow Wi-Fi in one room only: the measured fix, free steps first</h1>
+  <p class="meta">Troubleshooting &middot; 8 min read</p>
+
+<p>A room where the Wi-Fi crawls while the rest of the house flies is not a mystery to be solved with a new router. It is a physics problem with a short list of usual causes: what stands between the router and that room, which band the devices in it are using, and where the router itself is sitting. The diagnostic guides on this problem all converge on the same opening move — confirm the slowness really is isolated to one room by testing in the room and beside the router — because a slow result beside the router means the internet connection, not the room, and no amount of room-level fixing will change it. This guide runs the full procedure in order: measure, inspect the path the signal travels, fix the free things, and only then spend money on coverage hardware, placed where it can actually help.</p>
+<h2>What blocks a signal on its way to one room</h2>
+<p>Wi-Fi is radio, and building materials tax it unevenly. D-Link's wireless installation guidance states the rules plainly: the number, thickness, and location of walls and ceilings between devices limits range; each wall or ceiling can reduce range substantially; a wall crossed at a shallow angle is effectively far thicker than the same wall crossed straight on; and materials make a difference — glass, steel, metal, insulated walls, water (it names fish tanks), mirrors, file cabinets, brick, and concrete all degrade the signal, while drywall and open doorways let it through. NetComm's router-placement guidance adds the interference side: keep the router away from devices that emit radio noise such as microwave ovens and 2.4 GHz cordless phones, and check that refrigerators, washers and dryers, metal cabinets, and large aquariums are not sitting in the signal's path. A room can be slow for no more exotic reason than being the one room whose path to the router crosses the kitchen, the bathroom's plumbing wall, and a mirrored wardrobe.</p>
+<p>Band choice compounds the materials problem. The standard behaviour, repeated across the diagnostic guides for this symptom, is that 2.4 GHz travels further and penetrates obstacles better while 5 GHz is faster at short range and drops off sooner through walls. A device in the far room that insists on 5 GHz may show a connection and deliver very little through it, while the same device on 2.4 GHz in the same chair runs acceptably. Neither band is "the good one" — the room decides.</p>
+<p>Two pieces of hard-won placement experience from the repair bench behind this site apply directly here. First, most people give almost no thought to where the router goes, and kitchens are rarely a good spot for one, precisely because of the microwave sitting in the signal path. Second, on routers with external antennas, the antennas should not all point the same way: putting some at different angles helps the signal reach places a single orientation misses — including, often, the one slow room.</p>
+<h2>The fix: a numbered procedure, free steps first</h2>
+<ol>
+<li><strong>Measure in three places and write the numbers down.</strong> Run a speed test (a) in the slow room, (b) in the room beside the router, and (c) with a laptop plugged into the router by Ethernet if you can. Read the results as a decision table: slow everywhere including wired = the internet connection or the router itself, not the room. Fast wired and beside the router, slow only in the room = a coverage problem; continue below. Fast in the room on a phone but slow on a laptop = that device's problem, not the room's.</li>
+<li><strong>Walk the straight line between the router and the slow room</strong> and list what the signal crosses: walls and their material, floors, large metal objects, mirrors, aquariums, appliances. Use the D-Link rule — count walls, note any the signal crosses at a shallow angle, and flag the dense materials (brick, concrete, metal, water, mirrors) by name. This list is your suspect list, in order.</li>
+<li><strong>Reposition the router, using a long cable before you commit.</strong> Move it toward the centre of the home, up off the floor onto a shelf, out of any cabinet, and away from the kitchen and large metal objects if it started there. Retest the slow room after each single move. A move of even a few metres that takes one brick wall or one aquarium out of the path routinely outperforms any setting change.</li>
+<li><strong>Re-aim the antennas.</strong> On a router with adjustable antennas, set them at mixed angles — for a single-storey home, mostly vertical with one tilted; for two storeys, at least one antenna angled to serve the other floor. Retest. This step costs nothing and, per the bench experience above, is skipped by almost everyone.</li>
+<li><strong>Put the slow room's devices on the right band.</strong> Split the bands into separate network names in the router settings if they are merged (router admin page — usually 192.168.0.1 or 192.168.1.1 in a browser — then the wireless settings for each band), then connect the far room's devices to 2.4 GHz for a day and compare against your step-1 numbers. Devices that stream in the far room and still struggle on 2.4 GHz are telling you the path loss is severe, not that the band choice was wrong.</li>
+<li><strong>Check the channel.</strong> In the same admin page, look at the 2.4 GHz channel: use 1, 6, or 11 — the three that do not overlap — and if a Wi-Fi analyser app shows a neighbour dominating yours, pick the quietest of the three. This site's channel-interference guide covers the reasoning and the 5 GHz side in full.</li>
+<li><strong>Update the router's firmware</strong> from the admin page's administration or system section, then retest. Firmware updates routinely change how a router manages its radios, and this step is free.</li>
+<li><strong>Only now, add coverage hardware — placed halfway, not in the dead room.</strong> An extender or mesh node belongs where it still receives a strong signal from the router and can relay it into the weak room — typically halfway along the path, not inside the room where the signal already fails. A node placed in the dead room faithfully extends a bad connection. For one room, an extender is usually enough; for several weak rooms, mesh is the honest answer — this site's mesh-versus-extender guide works through that choice.</li>
+</ol>
+<p><strong>What success looks like:</strong> repeat the step-1 measurements. The slow room's speed should land within roughly half of the beside-the-router result on the same band, and — the test that actually matters — the room's real work runs clean for an evening: video calls without freezing, streaming without dropping to low resolution, and no improvement that vanishes when the microwave runs.</p>
+<h2>The causes compared: which fix matches which measurement</h2>
+<table>
+<tr><th>What you measured</th><th>Likely cause</th><th>First fix</th></tr>
+<tr><td>Slow wired as well</td><td>Internet connection or router fault — not the room</td><td>ISP diagnosis; leave placement alone</td></tr>
+<tr><td>Fast beside router, slow in room on both bands</td><td>Path loss: dense materials on the line (step 2 list)</td><td>Router move (step 3), then coverage hardware (step 8)</td></tr>
+<tr><td>Slow on 5 GHz, fine on 2.4 GHz in the room</td><td>Band range: 5 GHz attenuating through the walls</td><td>Band assignment (step 5) — free and finished</td></tr>
+<tr><td>Room fine until evenings</td><td>Neighbour congestion on your channel</td><td>Channel change (step 6)</td></tr>
+<tr><td>One device slow, others fine in the same room</td><td>That device's radio or settings</td><td>The one-device repair procedure on this site</td></tr>
+</table>
+<h2>FAQ</h2>
+<p><strong>Will a more expensive router fix the room?</strong> Only sometimes. Transmit power is regulated, so a new router does not shout much louder through the same brick wall; what newer routers add is better antennas, better radios, and mesh options. If the step-2 list shows dense materials on the path, placement and a relay node fix the room more reliably than a flagship router in the same bad spot.</p>
+<p><strong>Why does the signal show strong bars but run slowly?</strong> Bars report signal strength, not quality or speed. Interference and a weak relayed connection can both produce full bars with poor throughput, which is why this procedure measures with speed tests in three places instead of trusting the icon.</p>
+<p><strong>Is an extender in the slow room ever right?</strong> Only when the room's existing signal is already decent and the problem is a corner or a device position within it. As a rule, the relay belongs where the signal is still strong — halfway — because it can only pass on what it receives.</p>
+<p class="disclaimer">General home-networking information only, not professional IT advice. Admin page addresses and menu names vary by router model; your router's manual carries the exact paths for yours.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

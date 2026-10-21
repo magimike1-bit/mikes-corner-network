@@ -58,6 +58,8 @@
     document.getElementById('p-go').addEventListener('click', function () {
       var bed = parse(document.getElementById('p-bed').value || '19:30');
       var wake = parse(document.getElementById('p-wake').value || '06:30');
+      if (!Number.isFinite(bed)) bed = parse('19:30');
+      if (!Number.isFinite(wake)) wake = parse('06:30');
       var days = [
         ['Wednesday, October 28', 15],
         ['Thursday, October 29', 30],
@@ -67,7 +69,10 @@
       var html = '<p><strong>Your plan:</strong> bedtime and wake-up move 15 minutes later each night. On Sunday, November 1, the clocks fall back an hour — so you simply return to the usual clock times, and your child\u2019s body is already there.</p>';
       html += '<table><tr><th>Night</th><th>Bedtime</th><th>Wake-up next morning</th></tr>';
       for (var i = 0; i < days.length; i++) {
-        html += '<tr><td>' + days[i][0] + '</td><td>' + fmt(bed + days[i][1]) + '</td><td>' + fmt(wake + days[i][1]) + '</td></tr>';
+        // Saturday night's "next morning" is Sunday, Nov 1 AFTER the 2 a.m. fall back,
+        // so the wake-up clock time reverts to the usual time, not the shifted one.
+        var wakeCell = (i === days.length - 1) ? fmt(wake) + ' (clocks back — usual time)' : fmt(wake + days[i][1]);
+        html += '<tr><td>' + days[i][0] + '</td><td>' + fmt(bed + days[i][1]) + '</td><td>' + wakeCell + '</td></tr>';
       }
       html += '<tr><td><strong>Sunday, November 1 (clocks back)</strong></td><td><strong>' + fmt(bed) + '</strong></td><td><strong>' + fmt(wake) + '</strong></td></tr>';
       html += '</table>';

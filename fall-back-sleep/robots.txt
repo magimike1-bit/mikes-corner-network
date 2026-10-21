@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fall-back-sleep-yjdzq.kinsta.page/sitemap.xml

@@ -790,4 +790,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://planprice.ca/guides/beehiiv-pricing-decoded.html</loc>
+    <lastmod>2026-10-21</lastmod>
+  </url>
 </urlset>

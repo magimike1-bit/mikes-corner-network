@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wired vs Wi-Fi for Gaming: The Cheapest Lag Fix You Can Buy — Budget Gaming Gear</title>
+<meta name="description" content="Bandwidth is rarely the problem — latency, jitter and packet loss are. The measured differences between Ethernet and Wi-Fi, the no-drill ways to get wired, and a test that tells you if your connection is really the issue.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Budget Gaming Gear</a>
+    <p class="tagline">Smart buying advice for gaming on a budget</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/index.html">&larr; All guides</a>
+  <h1>Wired vs Wi-Fi for gaming: the cheapest lag fix you can buy</h1>
+  <p class="meta">Setup &middot; 5 min read</p>
+<p>When a game feels laggy, the instinct is to shop: a faster internet plan, a gaming router, a new PC part. Almost all of that shopping targets bandwidth, and bandwidth is almost never the problem. Games move very little data. What they cannot tolerate is data arriving unevenly — and uneven arrival is exactly where the connection inside your own home, between your PC and your router, does its damage. That last few metres is also the cheapest part of the whole chain to fix.</p>
+
+  <h2>The three numbers that actually matter</h2>
+  <p><strong>Latency</strong> (ping) is how long a packet takes to travel. <strong>Jitter</strong> is how much that time varies from packet to packet. <strong>Packet loss</strong> is how many packets never arrive and have to be resent or guessed around. Averages hide the crime: a connection can average a respectable ping while jitter makes every third packet late, which is what rubber-banding, teleporting opponents, and shots that never register actually are.</p>
+  <table>
+    <tr><th>Measure (to your own router)</th><th>Wired Ethernet</th><th>Wi-Fi 5GHz</th><th>Wi-Fi 2.4GHz</th></tr>
+    <tr><td>Ping</td><td>1-5 ms</td><td>10-30 ms</td><td>20-50 ms</td></tr>
+    <tr><td>Jitter</td><td>Under 1 ms variation</td><td colspan="2">5-40 ms depending on interference</td></tr>
+    <tr><td>Packet loss</td><td>Near 0% on a healthy connection</td><td colspan="2">1-5% common, spiking higher during congestion</td></tr>
+  </table>
+  <p>Those ranges come from a wired-versus-wireless comparison that tabulates all three measures rather than quoting speed. An independent cross-check points the same way: network monitoring company NetBeez, quoted in a wired-vs-Wi-Fi explainer, puts the average round-trip time to the gateway at around 2.5ms on Ethernet, easily doubling on Wi-Fi, with packet loss around 0.19% wired versus closer to 1% on Wi-Fi. The same source makes the point this article is built on: the bottleneck exists inside your home, not over your ISP connection — a wired run has no shared airtime, no interference, and no signal loss over a normal household cable length.</p>
+
+  <h2>Test your own connection before spending anything</h2>
+  <ol>
+    <li><strong>Ping your router, not the internet.</strong> On Windows, open Command Prompt and run <em>ping -n 50 192.168.1.1</em> (your router's address may be 192.168.0.1 — it is printed on the router's label). This isolates the in-home leg from your ISP entirely.</li>
+    <li><strong>Read the spread, not the average.</strong> Note the minimum and maximum. A wired connection should sit in a tight band; on Wi-Fi, a spread of tens of milliseconds between lowest and highest is jitter you can feel.</li>
+    <li><strong>Repeat under load.</strong> Run the same test while someone streams video or a download runs elsewhere in the house. Wi-Fi shares airtime, so this is the test that reproduces game-night conditions.</li>
+    <li><strong>Repeat standing next to the router.</strong> If the numbers clean up at close range, your problem is distance and walls, and placement fixes rank above purchases.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> you can name which of the three numbers is failing, and under what conditions. Minimum and maximum ping within a few milliseconds of each other, with zero replies lost, means your in-home connection is not your lag problem — look at the game server and your ISP instead, and keep your money.</p>
+
+  <h2>The free fixes, in order (for when the test fails on Wi-Fi)</h2>
+  <ol>
+    <li><strong>Move to the 5GHz band</strong> if you are on 2.4GHz. The ranges above show why: the 2.4GHz band starts slower to the router and suffers more interference.</li>
+    <li><strong>Fix placement before settings.</strong> Central, elevated, and out from behind the TV or inside a cabinet; every wall between router and desk is jitter waiting to happen. The close-range test in step 4 tells you how much placement is worth in your home.</li>
+    <li><strong>Pick a less congested channel</strong> in the router's settings, especially in apartments where neighbouring networks overlap yours.</li>
+    <li><strong>Re-run the loaded test.</strong> Stop at the step where minimum-to-maximum spread narrows to a few milliseconds and stays there under load. That is a genuinely playable wireless connection for most games.</li>
+  </ol>
+
+  <h2>When the cable is worth it — and how to run one without drilling</h2>
+  <p>Run Ethernet when the free fixes still leave spikes under load, when you play competitive shooters where a lost exchange is decided in tens of milliseconds, or when the desk simply never moves — a fixed setup pays the one-time cable effort back every session. A fair comparison of the two options concedes Wi-Fi's real wins: setup convenience, mobility, and zero upfront cost. Ethernet's wins are the performance columns: ping, jitter, packet loss, interference immunity, and reliability. Honest verdict: modern Wi-Fi is good enough for a great many players, and the same comparison notes millions game wirelessly without major problems. The cable is for the players whose own ping test says otherwise.</p>
+  <p>Renter-friendly runs, cheapest first: a flat Ethernet cable under a rug or along a baseboard with adhesive clips; a cable run through the same path as any existing coax or phone line; and, as a last resort before giving up on wired, moving the gaming setup's room role — swapping which room holds the desk and which holds the router is sometimes a furniture decision, not a construction one. What not to buy first: a premium "gaming" router to feed the same bad wireless path. A better radio on a bad path improves averages; the spikes are a physics problem, and physics is what the cable removes.</p>
+
+  <h2>Common questions</h2>
+  <p><strong>Will a faster internet plan fix my lag?</strong> If your router ping test shows jitter or loss, no — that fault is inside the home and the plan never touches it. If the router test is clean and in-game ping is high, the issue sits beyond the router, and that is when the ISP conversation starts.</p>
+  <p><strong>Is Wi-Fi 6 or 6E enough to skip the cable?</strong> Newer standards narrow the gap, especially at close range on emptier bands. The deciding instrument is still your own loaded ping test, not the standard's logo: run it, and let the spread decide.</p>
+  <p><strong>Does cable category matter?</strong> For a normal household run, any intact modern Ethernet cable delivers the consistency above. Spend on length and routing that you will actually install, not on exotic categories.</p>
+
+  <h2>Reading your results: three patterns and what each one means</h2>
+  <p><strong>Pattern one: tight at rest, wild under load.</strong> Your idle test sits in a narrow band and the loaded test explodes. That is shared airtime doing exactly what the physics says it does — the wireless medium serves every device in the home in turn, and a streaming box or a cloud backup is standing in your queue. This is the pattern the free fixes help most, because band choice and placement change how often your packets wait. It is also the pattern where Ethernet is most decisive if the fixes fall short: the cable does not negotiate for airtime with anyone.</p>
+  <p><strong>Pattern two: wild even at rest, clean beside the router.</strong> Distance and obstruction, full stop. The close-range test exists to produce this diagnosis, and it converts a vague complaint into a furniture problem with a free solution. Move the router, move the desk, or shorten the path between them before any purchase is discussed — the 5GHz band in particular loses its advantage quickly through walls, which is why the same router can feel wired-fast in one room and unusable in the next.</p>
+  <p><strong>Pattern three: clean everywhere, in-game ping still high.</strong> Your home is innocent. The remaining suspects are the line to your home, your ISP's routing, and the game server's distance — none of which a cable, a router, or a gaming accessory inside your home can touch. This pattern is worth real money to identify, because it is the one where players most often buy hardware to fix a problem that lives streets away. Run the router test first, every time; it is the cheapest diagnostic in gaming.</p>
+
+  <div class="take">
+    <p><strong class="take-label">Our take:</strong> Fifty pings to your own router will tell you more than any product page. Fix placement and band for free first; if the spikes survive, one plain Ethernet cable is the highest-value upgrade in budget gaming — it removes a whole category of problem instead of shrinking it.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="disclaimer">Buying advice reflects the author's opinion and general guidance. Specs and prices change — always check current details with the retailer before you buy.</p>
+    <p>Budget Gaming Gear — buying advice for gaming on a budget.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

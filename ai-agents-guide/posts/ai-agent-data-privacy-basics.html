@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Not to Share With an AI Agent: A Data Privacy Basics Guide — Using AI Agents</title>
+<meta name="description" content="The never list for agent work — credentials, financial identifiers, unredacted records — plus the redaction procedure and the retention questions to answer before the first real task.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>What not to share with an AI agent: a data privacy basics guide</h1>
+  <p class="meta">Safety &middot; 9 min read</p>
+<p>An AI agent with access to your accounts is, from a data-protection standpoint, a very capable intern with perfect recall of everything it was shown and no instinct for what should have stayed in the drawer. The guidance from security and privacy sources is remarkably consistent about where the lines sit: never hand an agent credentials or financial identifiers, redact before you share, prefer synthetic examples over real records, and treat retention — how long inputs are kept, and whether they train future models — as a question to answer before the first real task, not after an incident. This guide organises that guidance for agent use specifically, because agents raise the stakes beyond chatbots in one specific way: they do not just read what you paste, they act through tools, integrations and stored memory, so a secret shared once can be used, logged and resurfaced in places a chat answer never reaches.</p>
+<h2>The never list</h2>
+<p>Privacy guidance for AI tools converges on a hard core of things that should never be entered at all: passwords and passkeys; credit card and bank account numbers; social security numbers and national IDs; and — the item people forget — API keys and other machine credentials, which agent setups are especially prone to leaking because keys get pasted into configuration chats, stored in knowledge bases, or included in tool-call payloads. Agent-platform best-practice documentation is explicit on the configuration side: do not store API keys in a knowledge base, do not give a public agent access to sensitive integrations such as email or an internal CRM, and do not upload confidential knowledge to an agent anyone can use. The rule generalises beyond passwords: anything whose disclosure alone causes harm — a credential, a recovery code, a private key — belongs in a proper vault or secret store, referenced by the agent's tooling, never carried in its conversation or memory.</p>
+<table><tr><th>Data type</th><th>Rule for agent work</th><th>Workable substitute</th></tr>
+<tr><td>Passwords, passkeys, API keys</td><td>Never paste, never store in knowledge or variables</td><td>Vault/secret-store references; scoped, revocable keys</td></tr>
+<tr><td>Card and bank account numbers, national IDs</td><td>Never enter into a general agent</td><td>Last-four references; tokenised payment tools</td></tr>
+<tr><td>Customer and client records</td><td>Redact identifiers before the agent sees the record</td><td>Pseudonyms and generic IDs (User123 pattern); synthetic examples</td></tr>
+<tr><td>Trade secrets, unreleased plans, source code</td><td>Keep out of tools that may store inputs or train on them</td><td>Excerpts limited to the task; local processing for the sensitive part</td></tr>
+<tr><td>Health and medical details</td><td>Not in general-use agents, which are usually not built to health-privacy standards</td><td>Purpose-built, compliant tools where they exist</td></tr>
+<tr><td>Full names with addresses and contact details</td><td>Avoid unless the task genuinely requires them</td><td>First names or role labels; placeholders restored after the draft</td></tr></table>
+<h2>Why agents amplify the risk</h2>
+<p>Three properties of agents turn a careless paste into a durable exposure. First, retention: many AI services retain user inputs, and research summarised by Stanford's team concludes that information shared with major models may be collected and used for training by default — which is why the standing advice is to check training opt-outs, review privacy settings and app permissions, and clear history where the tool allows. Second, inference: generative tools can extrapolate beyond what was explicitly provided, inferring attributes and patterns from minimal inputs, so “I only shared a little” is weaker protection than it feels. Third, action: an agent does not merely hold data, it sends it — into tickets, documents, emails and third-party tools connected as integrations — and each hop is another store, another log, another retention policy the user did not read. Data-handling guidance for model APIs makes the defensive principle plain: avoid sending sensitive information to the model in the first place; once processed, direct control over it is lost, so anonymise, mask or exclude before the request, and keep genuinely sensitive computation local, sending only the non-sensitive output onward.</p>
+<h2>A working procedure for everyday tasks</h2>
+<ol>
+<li><strong>Classify before you paste.</strong> Ask which row of the table the material falls in. Credentials and financial identifiers stop the task until a vault-backed route exists.</li>
+<li><strong>Redact by default.</strong> Replace names with pseudonyms, account numbers with last-four references, and real records with synthetic examples that preserve the structure the agent needs. Guidance for safe AI use recommends exactly this: fake-but-realistic data and placeholders such as [REDACTED] in place of real values.</li>
+<li><strong>Scope the agent, not just the prompt.</strong> Read-only integrations where possible, no destructive actions for public-facing agents, and strong confirmation gates before any write — the platform guidance is explicit on all three.</li>
+<li><strong>Check the retention answers.</strong> Does the tool train on inputs, can training be opted out, is there a deletion control, and are inputs encrypted in transit and at rest? “No clear deletion policy” and “trains on your data” are listed in security guidance as reasons to avoid sharing sensitive material with a tool at all.</li>
+<li><strong>Restore placeholders only outside the agent.</strong> The real values re-enter the finished document in your own editor, so the agent's stored history never contains the assembled sensitive whole.</li></ol>
+<p>What success looks like: the agent's conversation history, read cold by a stranger, contains structure, drafts and placeholders — nothing that could open an account, empty one, or identify a client. If a pasted item would embarrass or endanger in a breach notification, it fails the test and gets redacted or rerouted.</p>
+<h2>Public agents deserve a stricter rule</h2>
+<p>Everything above applies double to an agent other people can use. Platform guidance for public agents is blunt: assume anyone might use it, curate its knowledge for public consumption, review its conversations regularly for misuse, and never connect it to integrations whose data you would not publish. The reasoning is structural, not paranoid. A private agent's exposure is bounded by its owner's mistakes; a public agent invites strangers to probe its knowledge, test its instructions, and try to make it repeat or act on things it should never have been given. Data that would be merely risky in a private setup — a client list in the knowledge base, a connected inbox, a stored key — becomes an open liability in a public one. The safe architecture is separation: public agents get public knowledge, read-only tools and confirmation gates, while anything sensitive lives behind a different agent, a different account, and an authentication boundary the public surface never crosses.</p>
+<h2>Frequently asked questions</h2>
+<p><strong>Is it safe if the tool promises encryption?</strong> Encryption in transit and at rest is one of several trust signals — alongside no-retention commitments, transparent policies, independent audits and deletion controls — not a complete answer by itself. <strong>Can an agent keep a secret between sessions?</strong> Assume not: inputs may be logged, retained, reviewed or used for training depending on the tool and its settings; design as if anything shared could resurface. <strong>What about my own business documents?</strong> Treat proprietary material like other sensitive company information — leaks can breach confidentiality obligations and hand competitors your plans; share the minimum excerpt the task needs. <strong>What should an agent itself do if a user pastes a secret?</strong> Platform guidance sets the pattern: never ask for passwords, cards or ID numbers; if sensitive information is shared anyway, remind the user not to share it and that conversations may be logged, and do not store it in variables or tool calls.</p>
+<p><em>Sources, accessed October 21, 2026: Sticky Password, “Is It Safe to Share Sensitive Data With AI?”; Agent.ai documentation, “Best Practices” (security &amp; privacy); Norton, “Don't Feed the Bots: What Not to Share with AI Chatbots”; Milvus AI reference, “How can I handle sensitive data in OpenAI models?” This is general information, not legal or compliance advice; regulated data carries obligations beyond this guide.</em></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

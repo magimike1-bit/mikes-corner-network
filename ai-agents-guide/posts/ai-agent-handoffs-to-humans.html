@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Handoffs: What a Good Escalation to a Human Includes — Using AI Agents</title>
+<meta name="description" content="A warm handoff is a package, not a transfer: the six context fields, the approval-escalation extras, the triggers to write into policy first, and how to test them before launch.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>AI agent handoffs: what a good escalation to a human includes</h1>
+  <p class="meta">Workflows &middot; 9 min read</p>
+<p>Every AI agent eventually reaches something it should not do alone: a refund above its limit, a customer who is done negotiating with a bot, a question it has tried twice and muddled twice. What happens next decides whether the automation earns trust or spends it. A cold handoff — the human opens the case and asks “how can I help you?” — resets the customer to zero and quietly teaches them that the bot was a toll booth, not a helper. A warm handoff hands the human a compact package: what the customer wants, what the agent already tried, why it stopped, and what should happen next, so the first human sentence can acknowledge the AI's work instead of erasing it. Published handoff guidance converges on the same minimum package and the same escalation triggers. This guide turns that convergence into a buildable checklist: the triggers to define before launch, the six-field context package, the extra fields an approval escalation needs, and how to test handoff quality before real customers grade it.</p>
+<h2>Define the triggers before the prompts</h2>
+<p>The consistent advice across handoff guides is that the boundary belongs in a written policy, not buried in a prompt inside a vendor console. The triggers that recur: task complexity (missing tools or permissions, unclear intent after two attempts, high-risk actions such as refunds above a threshold or legal exposure); emotional load (repeated questions, abusive language, urgent or critical scenarios, visible frustration); and the simplest trigger of all — the customer asks for a human. That request should be honoured immediately, without negotiation or a dead end: customer preference is a legitimate routing signal, especially when the matter is sensitive or the interaction is getting longer instead of closer to resolution. Spend and data limits belong on the same list: a per-conversation or per-day spend cap that stops the agent and hands off when reached, and a rule that sensitive data — full payment details, health records — is never collected by the assistant outside a secure process; when in doubt, hand off.</p>
+<h2>The minimum context package</h2>
+<table><tr><th>Field</th><th>What it carries</th><th>Why it matters</th></tr>
+<tr><td>Issue summary</td><td>One sentence in the agent's own words</td><td>The human reads this first; everything else loads on demand</td></tr>
+<tr><td>Detected intent</td><td>The classified category (refund request, billing dispute, …)</td><td>Shows what the bot thought this was — and what it may have got wrong</td></tr>
+<tr><td>Customer and account data</td><td>Name, plan, order value, recent orders, support history</td><td>Anchors the human in the relationship, not just the conversation</td></tr>
+<tr><td>Sentiment indicators</td><td>Frustrated / neutral / positive at handoff</td><td>Prepares the human's tone before they read the transcript</td></tr>
+<tr><td>What the AI tried</td><td>Replies sent, sources cited, actions taken or attempted</td><td>Stops the human suggesting something the AI just tried</td></tr>
+<tr><td>Draft reply</td><td>A starter response the human can edit and send</td><td>The single fastest quality lift: the human never starts from zero</td></tr></table>
+<p>Two disciplines keep the package honest. First, build it as a compact context card, not a raw transcript dump — the transcript stays nearby for verification, but the facts that drive action sit in the brief, with confirmed facts, the AI's inferences, and open questions kept visibly separate, and each important claim pointing at the record behind it. Second, trim to the receiver's role: excess detail slows the human down, and sensitive information travels only as far as the person who needs it. For action-approval escalations — where a human is being asked to authorise something, not just take over — guidance adds five more fields: an estimated financial impact, a reversibility flag, the alternative approaches the agent evaluated, a session ID for audit correlation, and an approval-deadline timestamp, so the approver is never asked to click yes without seeing what they are approving.</p>
+<h2>Build the handoff: a procedure</h2>
+<ol>
+<li><strong>Write the escalation policy first.</strong> Allowed-alone actions, approval-required actions, always-human categories, confidence thresholds and restricted topics — documented before any flow design. Success check: a new team member can classify a sample case from the policy alone.</li>
+<li><strong>Configure the context card.</strong> The six fields above, generated at the moment of escalation, plus trigger and promised next step. Test that no field arrives empty on a staged case.</li>
+<li><strong>Set primary, backup and callback routes per case type</strong>, including separate after-hours rules with an urgent path and a named owner for callback follow-up.</li>
+<li><strong>Script the human's opener, not just the bot's exit.</strong> The first human message acknowledges the issue the bot summarised (“I see you were chatting about resetting your password — let me help with that”) instead of restarting the conversation.</li>
+<li><strong>Test against history before launch.</strong> Run the policy and package against real past tickets — the cases that exposed missing context, failed tool calls, policy exceptions, wrong queues and late escalation — and score whether the agent stopped at the right point, passed enough verified context, and reached an owner who could act.</li>
+<li><strong>Review weekly at first.</strong> Sample handoffs, check the metrics below, and feed every failure back into intents, examples and knowledge articles.</li></ol>
+<p>What success looks like: the customer never repeats information after escalation, the human's first action is a decision rather than a question the bot already asked, and the case record shows trigger, package and outcome without anyone reconstructing it later.</p>
+<h2>The metrics that tell you it is working</h2>
+<p>Standard measures still apply — abandonment, satisfaction, first-contact resolution — but handoff quality needs its AI-specific pair: transfer rate, segmented by intent, which shows where autonomy is actually holding, and intent accuracy, how reliably the agent identified what the customer needed. Read together weekly, they diagnose the common failure: if transfer rate rises while intent accuracy falls, the usual cause is new intents shipped without the data, tools or escalation rules to support them. The fix is rarely a better prompt; it is the missing context field, the missing tool, or the trigger that was never written into the policy.</p>
+<h2>The customer's side of the transfer</h2>
+<p>A handoff has two audiences, and the internal package serves only one of them. The customer also needs a handoff: a plain explanation of what happens next, when, and through which channel. Guidance is consistent that silence or a vague “please hold” during transfer is where trust leaks — the customer cannot tell a warm transfer from a dropped conversation. The well-built flow therefore narrates its own escalation in one sentence: a person is taking over, they have the history, and the customer will not need to repeat anything. That promise then becomes a quality standard the operation can be measured against, because the first thing the human says either keeps it or breaks it publicly. Teams that script the bot's exit line and the human's opener as a pair — rather than optimising each in isolation — are the ones whose transfer metrics improve, because the handoff is a single experience spanning both speakers, not two separate messages that happen to be adjacent.</p>
+<h2>Frequently asked questions</h2>
+<p><strong>What is the difference between a warm and cold handoff?</strong> A cold transfer simply connects the customer to a human with no context; a warm transfer briefs the human first — summary, history, what was tried — so the customer never starts over. <strong>When must an agent hand off immediately?</strong> When the customer asks for a human, when a spend cap is reached, when sensitive data would need collecting outside a secure process, and for emergencies, which automation should never handle alone. <strong>Should the human get the full transcript?</strong> Nearby, yes; as the handoff itself, no — a compact context card with sources linked beats a transcript dump. <strong>How is handoff quality tested?</strong> Against real historical tickets before launch, scored on stopping point, context completeness and routing to an owner who can act.</p>
+<p><em>Sources, accessed October 21, 2026: eesel AI, “How to set up an AI agent that escalates to a human when unsure”; AI Customer Support Operating Model (CallNovo, 2026); QueryPal, “AI Support Agent Handoff: When and How to Escalate to Humans”; Cytranet, “AI Receptionist Human Handoff: Escalation Guide.” This guide is general information about support-workflow design, not advice for any specific regulated service.</em></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

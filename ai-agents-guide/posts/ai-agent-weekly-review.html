@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weekly AI Agent Review: 30 Minutes That Keep an Agent Useful — Using AI Agents</title>
+<meta name="description" content="Agents decay quietly: knowledge ages, tools disconnect, instructions drift. The documented weekly review — sample 10–20 conversations, check four places, ship one or two fixes.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>The weekly AI agent review: 30 minutes that keep an agent useful</h1>
+  <p class="meta">Workflows &middot; 8 min read</p>
+<p>An AI agent does not stay good by itself. Its knowledge ages, its tools change, its instructions quietly drift away from the work it is actually being given, and none of that announces itself — the agent keeps answering confidently while its usefulness erodes. The countermeasure in platform guidance is unglamorous and specific: a weekly review, roughly thirty minutes, sampling real conversations and making one or two improvements rather than a heroic overhaul. This guide turns that prescription into a repeatable procedure for a non-technical operator: what to sample, the four places to look (conversations, knowledge, instructions, tools), the failure patterns each place reveals, and the discipline of shipping small fixes weekly instead of redesigning monthly.</p>
+<h2>Why weekly, and why thirty minutes</h2>
+<p>The cadence is a compromise with two failure modes. Review less often and errors compound silently — an outdated price, a retired policy, a tool that stopped working weeks ago — while every user in between gets the degraded version. Review in giant monthly sessions and the session never happens, or happens as a rewrite that breaks what worked. The documented pattern is a short weekly pass with a deliberately small output: make one or two improvements based on what the evidence shows. That constraint is the feature. It keeps the review finishable, keeps each change attributable (when behaviour shifts next week, there are only two suspects), and matches how agents actually decay — gradually, in small ways, fixable in small ways.</p>
+<h2>The review, step by step</h2>
+<ol>
+<li><strong>Sample recent conversations (10–20).</strong> Read them cold, as a user would. Log every error or confusion, and — just as valuable — every new use case emerging that the agent was never designed for. Recurring confusion on one topic is a knowledge or instruction gap; a recurring new use case is a scope decision to make deliberately rather than by drift.</li>
+<li><strong>Audit the knowledge base.</strong> Ask two questions of every section users touched this week: is anything outdated, and is anything missing that users asked about? Knowledge fails by staleness (last season's terms stated as current) and by absence (the question the agent improvises around because no source covers it).</li>
+<li><strong>Re-read the system instructions against the evidence.</strong> Look for patterns the agent is not following — an instruction it routinely ignores is either unclear, contradicted elsewhere, or impossible, and each cause has a different fix. Add guidance only where a sampled conversation proves the need.</li>
+<li><strong>Test the tools.</strong> Confirm every integration is still connected and workflows complete successfully end to end. Tool failures are the quietest decay of all: connections expire and APIs change while the agent keeps promising the action it can no longer take.</li>
+<li><strong>Choose one or two improvements and make them now.</strong> Write down what changed and why, in one line each. Next week's sample is the test of this week's fix.</li>
+<li><strong>Run the safety spot-checks.</strong> In the same pass, confirm the standing guardrails still hold: the agent is not asking for or storing sensitive data, confirmation gates still precede write actions, and any spend or usage limits configured for expensive tools remain in place.</li></ol>
+<p>What success looks like: the review ends inside its half hour with a short dated log — sample size, what was found, the one or two changes made — and next week's sample shows at least one of this week's failure patterns gone. What failure looks like is a review that produces a long wish list and no changes, or changes with no sampling behind them.</p>
+<h2>Reading the sample: four patterns and their fixes</h2>
+<table><tr><th>Pattern in the sample</th><th>Likely cause</th><th>First fix to try</th></tr>
+<tr><td>Same question answered wrongly the same way</td><td>Knowledge is wrong or outdated</td><td>Correct the knowledge entry; re-test that question</td></tr>
+<tr><td>Agent improvises around a topic</td><td>Knowledge gap — no source covers it</td><td>Add the missing source, or add an instruction to escalate that topic</td></tr>
+<tr><td>Agent ignores a standing instruction</td><td>Instruction unclear, contradicted, or buried</td><td>Rewrite it plainly and move it earlier; remove the contradiction</td></tr>
+<tr><td>Promised actions silently fail</td><td>Tool or integration decay</td><td>Reconnect/repair the tool; add a failure message so the agent stops promising</td></tr>
+<tr><td>Users keep asking for something new</td><td>Emerging use case, scope drift</td><td>Decide deliberately: support it properly, or teach a graceful hand-off</td></tr></table>
+<h2>What the review is not</h2>
+<p>It is not a redesign session, a prompt-writing workshop, or an occasion to add features on speculation. Every change should trace to a sampled conversation, a stale knowledge entry, or a failed tool test; changes without evidence are how a working agent gets worse in new directions. Nor is the review a substitute for fixing urgent breakage when it is found mid-week — a disconnected payment tool or a confidently wrong price gets fixed when discovered, and the weekly review then verifies the fix held. And it is not only about errors: the emerging-use-case column matters because it is the earliest, cheapest signal of what the agent should become next, gathered from real demand rather than brainstorming.</p>
+<h2>Keeping the log that makes reviews compound</h2>
+<p>The review's lasting value is not any single fix; it is the dated log the fixes accumulate into. Four lines a week — sample size, findings, changes, and the following week's verdict on those changes — become, within a quarter, the only reliable history of why the agent behaves the way it does. That history pays off in three concrete ways. It prevents repeat experiments: when someone proposes a change that was tried in March and quietly made things worse, the log settles the argument in seconds. It reveals seasonality and drift that no single sample can show, such as questions that spike monthly or a knowledge area that goes stale on a predictable cycle. And it gives a new owner, months later, a running start instead of a mystery — the difference between inheriting a maintained system and inheriting a black box. Store the log where the agent's configuration lives, keep it brutally short, and never let a week close with changes made but not recorded: an unrecorded fix is next quarter's unexplained behaviour.</p>
+<p>The same log discipline applies to what was deliberately not changed. Recording a noticed pattern and the decision to watch it for another week — an emerging use case not yet worth supporting, a borderline instruction left as-is — stops the next reviewer from re-litigating settled questions and turns restraint into a visible, defensible choice rather than an oversight.</p>
+<h2>Frequently asked questions</h2>
+<p><strong>How long should the review take?</strong> Platform guidance frames it as about 30 minutes weekly — long enough to sample 10–20 conversations and ship one or two fixes. <strong>What if nothing looks wrong?</strong> Then the log says so, the tool tests still get run, and the week counts as a pass — a clean sample is evidence, not a skipped review. <strong>Who should do it?</strong> Whoever owns the agent's outcomes; the reviewer needs authority to change knowledge and instructions, or the review degrades into a report nobody acts on. <strong>What gets written down?</strong> Date, sample size, findings, the one or two changes made — four lines that make next week's review, and any future troubleshooting, dramatically faster.</p>
+<p><em>Sources, accessed October 21, 2026: Agent.ai documentation, “Best Practices” (maintenance &amp; iteration: the weekly review; resource limits; sensitive-data instructions). Supporting handoff and escalation practice cross-checked against QueryPal, “AI Support Agent Handoff.” Tool behaviour varies by platform; adapt the checklist to the agent system in use.</em></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

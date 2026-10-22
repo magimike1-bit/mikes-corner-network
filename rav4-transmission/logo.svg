@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="RAV4 Transmission Fluid Guide logo: a red gear ring around a fluid droplet">
+  <rect width="512" height="512" rx="96" fill="#23272e"/>
+  <polygon points="405,235 451,236 451,276 405,277" fill="#c0272d"/><polygon points="395,312 435,337 415,370 374,348" fill="#c0272d"/><polygon points="348,374 370,415 337,435 312,395" fill="#c0272d"/><polygon points="277,405 276,451 236,451 235,405" fill="#c0272d"/><polygon points="200,395 175,435 142,415 164,374" fill="#c0272d"/><polygon points="138,348 97,370 77,337 117,312" fill="#c0272d"/><polygon points="107,277 61,276 61,236 107,235" fill="#c0272d"/><polygon points="117,200 77,175 97,142 138,164" fill="#c0272d"/><polygon points="164,138 142,97 175,77 200,117" fill="#c0272d"/><polygon points="235,107 236,61 276,61 277,107" fill="#c0272d"/><polygon points="312,117 337,77 370,97 348,138" fill="#c0272d"/><polygon points="374,164 415,142 435,175 395,200" fill="#c0272d"/>
+  <circle cx="256" cy="256" r="158" fill="#c0272d"/>
+  <circle cx="256" cy="256" r="112" fill="#23272e"/>
+  <path d="M256 176 C256 176 312 248 312 292 a56 56 0 1 1 -112 0 C200 248 256 176 256 176 Z" fill="#e0343b"/>
+</svg>

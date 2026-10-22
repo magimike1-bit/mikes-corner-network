@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wipe an Old Laptop Before You Sell or Donate It: Windows Reset, SSD Secure Erase, Done Right — Old Laptop Revival</title>
+<meta name="description" content="Deleting files is not wiping them. The Windows Reset route with Clean data on, the different rule for SSDs (firmware secure erase, NIST guidance), and the handover checklist — in order.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Wipe an old laptop before it leaves: sell or donate it clean</h1>
+  <p class="meta">Before it goes &middot; 6 min read</p>
+<p>Deleting your files does not remove them. On a drive, ordinary deletion removes the pointers to files while the data itself sits recoverable — which is why studies of second-hand drives keep finding the previous owners' lives on them. An old laptop leaving the house — sold, donated, given to a relative, recycled — needs a real wipe, and the right wipe depends on one thing most guides bury: whether the drive is a spinning hard drive (HDD) or a solid-state drive (SSD). The methods differ, the built-in Windows tools handle both if you choose the correct options, and the one unforgivable step order is backup first, because a proper wipe is deliberately irreversible.</p>
+<h2>Step 0: Everything before the wipe</h2>
+<ol>
+<li><strong>Back up what you want to keep</strong> — documents, photos, downloads, desktop, browser bookmarks and saved passwords, and data stored inside apps — to an external drive or cloud storage. Verify the backup opens. After the wipe there is no recovery, by design.</li>
+<li><strong>Sign out and deauthorize.</strong> Sign out of your Microsoft account, OneDrive, Office, and any app that limits how many computers you may use, and deauthorize the machine inside those apps while it still runs. Remove the PC from your Microsoft account afterwards.</li>
+<li><strong>Save the BitLocker recovery key</strong> if the drive is encrypted, in case the reset asks for it.</li>
+<li><strong>Note the specs for the listing</strong> — processor, RAM, storage, Windows edition — while the machine can still tell you. A wiped laptop with known specs sells; a mystery box does not.</li>
+<li><strong>Plug in the charger.</strong> A reset with data cleaning can take hours on a large drive and must not be interrupted.</li>
+</ol>
+<h2>The Windows built-in route (works for most people)</h2>
+<ol>
+<li>Open <strong>Settings</strong>. On Windows 11: System &gt; Recovery. On Windows 10: Update &amp; Security &gt; Recovery.</li>
+<li>Under <strong>Reset this PC</strong>, choose <strong>Get started</strong> / <strong>Reset PC</strong>.</li>
+<li>Choose <strong>Remove everything</strong>. Never "Keep my files" for a machine that is leaving — that option preserves the personal data this whole procedure exists to remove.</li>
+<li>Choose <strong>Cloud download</strong> (a fresh copy of Windows from Microsoft, useful if local files are damaged) or <strong>Local reinstall</strong> (uses files already on the PC). Either removes the data.</li>
+<li>On the settings summary, open <strong>Change settings</strong> and turn on <strong>Clean data</strong> (Windows 10 wording: "Remove files and clean the drive"). This is the critical switch: it overwrites the drive so files are far harder to recover, instead of the quick removal that only deletes pointers. If the laptop has multiple drives that are all leaving with it, also enable deletion from all drives.</li>
+<li>Confirm and start. The PC restarts several times; the screen may go black for long stretches. Do not hold the power button.</li>
+<li>When the first-time Windows setup screen appears, <strong>stop</strong>. Power off without completing setup, so the next owner creates their own account.</li>
+</ol>
+<p><strong>What success looks like:</strong> the machine boots to the Windows welcome/setup screen with no user accounts, no files, and no signed-in services — a stranger could complete setup and find nothing of yours anywhere on it.</p>
+<h2>Choosing the method by drive type</h2>
+<table>
+<tr><th>Situation</th><th>Method</th></tr>
+<tr><td>Windows laptop, HDD, leaving the house</td><td>Reset with Remove everything + Clean data turned on — the overwrite pass is the point</td></tr>
+<tr><td>Windows laptop, SSD, leaving the house</td><td>Manufacturer's secure-erase utility (for example Samsung Magician, Crucial Storage Executive, WD Dashboard, Kingston SSD Manager) or a BIOS/UEFI secure erase, which issues the drive's own firmware sanitize command; or Reset with Clean data as the simpler route</td></tr>
+<tr><td>Drive encrypted with BitLocker throughout its use</td><td>Cryptographic erase — destroying the encryption key renders the contents unreadable; among the fastest legitimate methods</td></tr>
+<tr><td>Failed or unreadable drive</td><td>It cannot be wiped at all — do not sell or donate it as-is; physical destruction is the remaining option</td></tr>
+<tr><td>Going to a family member you trust</td><td>The same procedure. Trust is not a sanitization method, and accounts stay signed in through casual resets more often than anyone expects</td></tr>
+</table>
+<h2>Why SSDs get their own row</h2>
+<p>Overwrite tools were designed for spinning disks. An SSD's controller constantly relocates data for wear levelling, including into hidden over-provisioned areas an overwrite cannot reliably reach — which is why the NIST media-sanitization guidance does not accept plain overwriting as sanitization for SSDs. The drive's own firmware command — ATA Secure Erase for SATA SSDs, NVMe Format for NVMe drives — instructs the controller to reset every NAND cell, including the hidden areas, to a factory-empty state, and that is the method recognized as meeting the higher "Purge" standard. In practice this is a few minutes through the manufacturer's utility, not an overnight pass. One honest caveat travels with the built-in route: Microsoft itself notes that the consumer Reset experience does not meet government and industry data-erase standards. For a typical household laptop going to a buyer or charity, Reset with Clean data — or the manufacturer's secure erase on an SSD — is the proportionate answer; for a drive that held genuinely sensitive records, secure erase or destruction is the answer, and "good enough" is a decision to make knowingly.</p>
+<h2>Questions people commonly ask</h2>
+<p><strong>Is a quick format enough?</strong> No. Formatting removes file references, not data — the same problem as deletion, wearing a tie.</p>
+<p><strong>How long should it take?</strong> A quick reset may finish in under an hour but is not secure. Clean-data wipes on a hard drive can run several hours; SSD secure erase is typically minutes; cryptographic erase, seconds. Start a long wipe before bed and let it finish.</p>
+<p><strong>The laptop will not boot — can it still be wiped?</strong> Boot from a USB erasure tool or the drive maker's utility on another machine, or remove the drive and wipe or destroy it separately. A dead laptop with a live drive is still a data risk in a recycling bin.</p>
+<h2>After the wipe: the handover checklist</h2>
+<p>A clean drive is most of the job, not all of it. Before the laptop changes hands: remove the device from your Microsoft account's device list so it no longer appears among your machines; check that no browser, email client, or cloud app remains signed in anywhere (a correct wipe makes this a formality — check anyway); include the charger, since a laptop without one loses value and invites returns; and pass along the recovery key situation honestly — if the drive was encrypted and reinstalled clean, say so, and if you removed a drive entirely, say that too, in writing, rather than letting the buyer discover an empty bay. For a donation, ask the charity whether it prefers the machine wiped with an operating system installed or delivered without storage; reputable refurbishers run their own certified sanitization and will tell you their standard. Keeping a one-line record for yourself — machine, serial number if you have it, method used, date, recipient — closes the loop: if a question ever surfaces about where an old machine went, the answer exists.</p>
+
+</main>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job. A swollen or deformed battery is a fire risk: do not charge or puncture it; take it to an electronics recycling drop-off.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

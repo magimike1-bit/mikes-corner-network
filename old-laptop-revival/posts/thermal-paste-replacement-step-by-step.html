@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Replace the Thermal Paste in an Old Laptop, Step by Step — Old Laptop Revival</title>
+<meta name="description" content="Dried-out thermal paste makes old laptops loud and slow. Take a temperature baseline first, then clean, repaste, and remount in order — and judge the job by the numbers afterwards.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Replace the thermal paste, step by step</h1>
+  <p class="meta">Maintenance &middot; 6 min read</p>
+<p>Thermal paste is the thin compound between a laptop's chips and its heatsink, and it does not last forever: over years it dries, pumps out under heat cycles, and stops transferring heat efficiently. The symptoms are familiar on an old machine — fans running loud at idle, slowdowns during demanding tasks as the processor throttles itself to stay safe, a chassis that feels hot during light work, and in the worst cases shutdowns under load. Replacing the paste is one of the few revival jobs that costs a few dollars in materials. It is also a job inside the machine, so it follows the cooling basics first: clean the vents and fans before deciding the paste is the problem, because dust is the more common culprit and needs no disassembly.</p>
+<h2>Before you open anything: take a temperature baseline</h2>
+<p>A repaste you cannot measure is a repaste you cannot judge. Before disassembly, record the machine's behaviour with a monitoring tool such as HWMonitor or Core Temp: idle temperature after ten quiet minutes, and temperature under a repeatable load — the same demanding task you will rerun afterwards. Healthy ranges vary by processor and design, but typical laptop readings fall somewhere between roughly 30°C at idle and 80°C under load. Write the numbers down. They are the before picture, and they protect against the two failure modes of this job: declaring victory over a change that never happened, and missing a bad mount because the machine "feels" better.</p>
+<h2>What you need</h2>
+<ul>
+<li>New thermal paste suitable for electronics (electrically non-conductive, non-capacitive compounds are the safe default)</li>
+<li>Isopropyl alcohol, 90 percent or higher, with lint-free wipes or cotton swabs</li>
+<li>The correct small screwdrivers for your model, and a tray or labelled surface for screws — laptops use several screw lengths, and their locations matter</li>
+<li>Thermal pads of the <em>correct thickness</em>, only if the existing pads are damaged — pads are not interchangeable with paste and thickness is not a guess</li>
+<li>An antistatic strap if available, and your model's service manual or a teardown guide for its screw and connector order</li>
+</ul>
+<h2>The procedure, in order</h2>
+<ol>
+<li><strong>Shut down, unplug, and remove or disconnect the battery.</strong> Work on a clean, non-conductive surface and document screw locations as you go — a photo per stage is the cheapest insurance in the whole job.</li>
+<li><strong>Open the laptop.</strong> Remove the bottom cover with the correct driver; never force clips or connectors. If something resists, a screw or a clip is still holding — find it rather than prying harder.</li>
+<li><strong>Remove the heatsink assembly.</strong> Loosen its screws gradually, in the numbered order printed on the heatsink where present, a little at a time, so pressure releases evenly. Lift the assembly straight off the CPU and GPU without twisting forcefully and without pulling on the fan cable.</li>
+<li><strong>Clean every contact surface.</strong> Wipe the old compound from the chips and from the heatsink's contact plates with isopropyl alcohol and lint-free material until no residue remains — old paste left behind interferes with the new application. Let all surfaces dry completely, keep liquid off the motherboard, and do not scratch the chip surfaces.</li>
+<li><strong>Apply the new paste.</strong> A small amount at the centre of each chip — a pea-sized dot is the standard guidance for a desktop-sized die; long, narrow laptop dies are often covered with a thin line or a small dot that the heatsink's pressure spreads. Too much is a real failure mode: excess squeezes out, makes a mess, and does not improve cooling.</li>
+<li><strong>Reinstall the heatsink evenly.</strong> Set it straight down over both chips and tighten the screws gradually in the manufacturer's numbered sequence, a little per screw in rotation, until snug. Even pressure is what forms the thin, uniform layer the whole job depends on; do not overtighten.</li>
+<li><strong>Reassemble.</strong> Reconnect the fan and the battery, confirm no cables are trapped, refit the bottom cover, and return every screw to its documented place.</li>
+</ol>
+<h2>What success looks like</h2>
+<p>Power on and confirm the fan runs. Then rerun the exact baseline from the first step — same idle period, same load — and compare. Success is specific: temperatures under the repeated load are lower than the baseline, the fan reaches full howl less often or later, and throttling slowdowns during the test task are reduced or gone. If temperatures are unchanged, the paste was not the bottleneck (look back at dust, fans, and airflow). If they are <em>worse</em>, or the machine crashes or behaves abnormally, suspect the mount before anything else: poor contact, a pad of the wrong thickness lifting the heatsink, or a fan left disconnected are the classic causes — open it again and correct them rather than living with a hotter machine than you started with.</p>
+<h2>How often, and when not to bother</h2>
+<p>General guidance puts paste replacement on a multi-year rhythm — often quoted as every two to three years depending on use — but an old laptop that has never been opened is judged by its baseline numbers, not by a calendar. A machine idling cool and holding its speeds under load gains nothing from a repaste; a machine throttling with clean vents and a working fan is the candidate. Heat, noise, and throttling are the evidence. Measure first, open second.</p>
+<h2>Questions people commonly ask</h2>
+<p><strong>Paste or pads — can one replace the other?</strong> No. Paste fills microscopic gaps between flat mating surfaces; pads bridge larger, designed gaps over components like memory chips. Substituting one for the other, or fitting pads of the wrong thickness, prevents proper heatsink contact and makes temperatures worse.</p>
+<p><strong>Is any paste safe?</strong> Choose a compound made for electronics and described as electrically non-conductive. Conductive compounds near exposed laptop dies are an unnecessary risk for a few theoretical degrees.</p>
+<p><strong>The heatsink will not budge — force it?</strong> Never. Old paste can bond firmly; gentle warmth from running the machine briefly before shutdown, and patience, loosen it. A heatsink torn off can take a chip's surface with it.</p>
+<h2>Do the free cooling work in the same session</h2>
+<p>Since the machine is open anyway, the same hour should finish the rest of the cooling system. Blow dust out of the fan blades and heatsink fins with compressed air while holding the fan still — a fan spun freely by the air jet can be damaged, and its connector should be treated as fragile. Check that the fan turns smoothly by hand and makes no grinding noise, which would mark a bearing on its way out that no paste will fix. Inspect the thermal pads on surrounding chips: pads that are torn, dried, or compressed flat are replaced in the same session, with pads of exactly the original thickness measured before removal. Confirm the exhaust vents in the chassis are clear from the inside as well as the outside. A repaste done alongside a full clean is the honest version of the job — it removes every airflow excuse at once, so the before-and-after temperatures measure the whole cooling path and not one link of it.</p>
+
+</main>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job. A swollen or deformed battery is a fire risk: do not charge or puncture it; take it to an electronics recycling drop-off.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

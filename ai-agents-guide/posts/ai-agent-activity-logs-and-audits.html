@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI agent activity logs: the audit trail that saves you when a run goes wrong</title>
+<meta name="description" content="Agent logs scaled down to one operator: the eight fields every run record needs, why inputs must be snapshotted instead of linked, four self-tests borrowed from procurement, and a ten-minute weekly review.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>AI agent activity logs: the audit trail that saves you when a run goes wrong</h1>
+  <p class="lede">An agent&#x27;s history tab is not an audit trail. The trail is a record you own — what the agent was asked, what it saw, what it did, what it cost, and who approved it — built before the bad run, not reconstructed after it.</p>
+  <p class="meta">Published 2026-10-23 &middot; Last updated 2026-10-23</p>
+
+<h2>Why the log matters on the worst day, not the average one</h2>
+<p>An agent that behaves gives you nothing to audit. The log earns its keep on the one run that goes wrong: the email sent to the wrong list, the record updated twice, the summary built on data that was true yesterday. Reconstructing that run from memory and chat scrollback is the small operator's version of an incident investigation, and it fails the same way every time — the evidence has moved. Observability guidance aimed at enterprises makes the foundational point in plain terms: design the audit trail before you need it, as three simple things — agent action logs recording what agents did, decision timestamps recording when, and input-output chains recording what data they used and acted on (s1). None of that requires enterprise tooling. It requires deciding, in advance, that every run leaves a record you own. The second timing rule is just as blunt: instrument before agents run at any meaningful scale, because retrofitting leaves you with unattributed costs, undetected quality drift, and gaps in the record precisely where the early, formative runs should be (s4).</p>
+
+<h2>The eight fields a useful entry carries</h2>
+<p>Audit guidance converges on a minimum viable entry. Synthesizing the published checklists (s4, s5), one run's record should carry: <strong>(1)</strong> the agent's identity and version; <strong>(2)</strong> the task or instruction it was given; <strong>(3)</strong> the model used; <strong>(4)</strong> every tool call it made, in order; <strong>(5)</strong> the output it produced; <strong>(6)</strong> what the run cost, in credits or tokens; <strong>(7)</strong> the human review outcome — accepted, revised, or rejected; and <strong>(8)</strong> errors and retries, not just the final state (s4). Structured event fields sharpen the same idea for searching later: a run id, an event type such as TOOL_CALL, POLICY_VIOLATION, or ERROR, the tool name, latency, retry count, and result status (s5). One privacy rule rides on top: prompts stored in logs should be sanitized or templated rather than copied raw, so the log itself does not become a sensitive-data leak (s5). For a small operator, this is a table — in a notes file, a spreadsheet, or whatever system of record you actually keep — with structured fields for last action, timestamp, and who or what made the change, plus a dedicated operations log that is searchable and links back to the records involved (s1).</p>
+
+<h2>Snapshot what the agent saw, not where it lives now</h2>
+<p>Here is the subtlest and most valuable idea in the audit literature. Records change after the run. The field the agent read at 2:14 p.m. may be overwritten by 2:20, so a log entry that stores a pointer to "the current value" preserves the wrong evidence — by audit time, it proves something the agent never saw (s2). The fix is to snapshot inputs at decision time: serialize the context and fields the agent actually read into the record, or store them in content-addressed form and keep the hash (s2). The same discipline pins the machinery: record the exact model revision and the version or hash of the instructions in force, so a silent provider update cannot rewrite your history (s2). Enterprises route these events to write-once storage with a hash chain so edits and gaps are detectable, and they keep audit retention separate from disposable telemetry — years for the trail, days for the noise (s2). Scaled down, the principles survive translation intact: an append-only file you do not edit after the fact, inputs copied rather than linked, versions named. The technology is smaller; the evidentiary logic is identical.</p>
+
+<h2>Test your log before you need it: four checks</h2>
+<p>Procurement specialists test vendor logs before buying; the same tests, repurposed, verify your own setup in an afternoon (s3).</p>
+<ol>
+<li><strong>Create a failed run.</strong> Give the agent a task it lacks permission to complete. The refusal, the attempted action, and the rule it hit should all appear in the log (s3).</li>
+<li><strong>Add a human approval.</strong> Run something through your review step and confirm the log records the reviewer's identity, decision, timestamp, and the evidence presented — not merely that "approval occurred" (s3).</li>
+<li><strong>Trigger a retry.</strong> Force a failure the agent retries. Repeated calls should be visible as repetitions, and no duplicate external action — two emails, two updates — should result (s3).</li>
+<li><strong>Export the evidence.</strong> Take one run's record out of the tool in a usable, portable format. A screenshot is not a portable audit trail; if the record cannot leave the platform, it is a hostage, not a log (s3).</li>
+</ol>
+<p><strong>What success looks like:</strong> for any run from the past month, you can answer — from the log alone, in under five minutes — what the agent was asked, what it saw, what it did, what it cost, who approved it, and what went wrong on the way.</p>
+
+<h2>The ten-minute weekly review</h2>
+<p>A log nobody reads is a diary. The performance side of observability guidance suggests a light weekly pass over the measures that actually predict trouble: task completion rate, acceptance rate (outputs that went through without meaningful revision), cost per task, error and retry counts, and override rate — how often a human discarded the output entirely, the hardest metric to collect and the most informative about whether the agent is useful rather than merely running (s4). Pair those with cost per run and failure rates from the metrics checklist (s5), and define what "good" is before you look — observability without defined success criteria gives you perfect visibility into behaviour you cannot judge (s1). Ten minutes, same time weekly, three questions: Did anything act outside its expected pattern? Is cost per completed task drifting? Is the acceptance rate falling, which is quality drift announcing itself while it is still cheap to fix?</p>
+<table><caption>Three logging setups, honestly scoped</caption><thead><tr><th>Setup</th><th>What you get</th><th>What you give up</th></tr></thead><tbody>
+<tr><td>Platform history only</td><td>Zero effort; a chat-style record inside the tool</td><td>Search, export, input snapshots, version pinning — most of this article</td></tr>
+<tr><td>Your own structured log</td><td>The eight fields, snapshots, and review habit, in a file you own and can export</td><td>A few minutes of discipline per week; manual where platforms are automatic</td></tr>
+<tr><td>Observability platform</td><td>Automatic traces, metrics, and dashboards across many agents</td><td>Cost and complexity sized for fleets; overkill for one or two agents</td></tr>
+</tbody></table>
+
+<h2>Questions people ask about agent logs</h2>
+<p><strong>Isn't the chat history enough?</strong> It records conversation, not action: tool calls, retries, costs, versions, and the inputs-as-seen are exactly the parts a chat transcript omits, and exactly the parts an incident turns on (s2, s4).</p>
+<p><strong>How long should I keep logs?</strong> Longer than feels natural. The audit pattern separates the trail (policy-driven retention, often years in regulated settings) from operational telemetry (days to weeks) — for a small operator, keeping run records for at least a full business cycle is the working version of the same rule (s2).</p>
+<p><strong>Who should be able to see the log?</strong> Access should follow roles, and viewing or exporting sensitive evidence should itself be logged — the log of the log is what keeps the system honest when more than one person is involved (s3).</p>
+<p><em>General information only, not compliance advice. Logging features vary by platform and change often; verify your tools' current capabilities against the four checks above.</em></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

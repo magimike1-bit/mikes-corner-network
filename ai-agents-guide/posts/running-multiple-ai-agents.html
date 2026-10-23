@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running multiple AI agents without the pile-ups</title>
+<meta name="description" content="A second agent is a staffing decision: the threshold test for adding one, the three collision shapes, handoff contracts, a shared log, named decision authority, and budgets — in a six-step setup.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>Running multiple AI agents without the pile-ups</h1>
+  <p class="lede">One agent is a tool. Two agents are an organization — with an organization&#x27;s failure modes: duplicated work, contradictory edits, and decisions nobody owns. The fix is not smarter agents. It is structure, written down in advance.</p>
+  <p class="meta">Published 2026-10-23 &middot; Last updated 2026-10-23</p>
+
+<h2>First question: should there be a second agent at all?</h2>
+<p>Every multi-agent problem gets cheaper the earlier you ask whether it needs to exist. The clearest statement in the orchestration literature is also the least marketed: use the least complex option that meets the need. A direct model call handles single-step work; a single agent with tools handles varied requests in one domain and is often the right default; multi-agent orchestration earns its overhead only for cross-domain problems, work needing distinct security boundaries per agent, or genuine parallel specialization (s4). The reason is arithmetic, not conservatism: every added agent brings coordination overhead, latency, and cost of its own (s4). So the threshold test for a second agent is concrete. Name what the current agent cannot do reliably — a different specialty it performs badly, a permission boundary it should not cross, or a volume of parallel work it serializes too slowly. If the honest answer is "it could, with better instructions," improve the instructions. You are not collecting agents; you are staffing a workflow, and headcount is a cost centre.</p>
+
+<h2>The three ways agents collide</h2>
+<p>When multi-agent setups fail, they fail in three recognizable shapes. <strong>Duplicated work</strong>: two agents, both diligent, research the same question or draft the same reply because neither knew the other had it. <strong>Contradictory edits</strong>: two agents update the same record from different starting states, and the later save silently erases the earlier one. <strong>Contradictory decisions</strong>: agents acting on the same situation reach opposite conclusions — one approves, one flags — with no rule for whose call stands. Practitioner and platform guidance agrees on the root cause hiding under all three: conflict is largely what happens when agents run in parallel on the same data without structure. Sequence the work, partition the data, or govern the decisions — every working fix is one of those three (s1, s2).</p>
+
+<h2>Handoffs with contracts: the boring machinery that works</h2>
+<p>The proven shape is unglamorous. Define the sequence and the data flow explicitly: agent A runs, completes, and passes its output to agent B in a structured handoff — sequential by default, concurrent only where you deliberately designed it (s1). The hinge is the <strong>contract</strong>: exactly what structure each agent outputs and exactly what the next one expects as input. "A returns an array of objects with these fields; B consumes that structure and returns scored results in this one" — when contracts are written at that level, coordination becomes straightforward and the platform or schedule can enforce that B does not start until A is done (s1). Around the handoffs sits the coordination layer, in whatever size your setup affords: an orchestrator — a software layer or a designated agent — that decomposes the goal, assigns tasks to the right agent, resolves conflicts, aggregates output, and maintains the shared context so no stage starts from zero (s4, s5). At small scale that "layer" can be a schedule and a shared file; the functions, not the tooling, are what matter. One more mechanism, from practice: agents check a <strong>shared log before acting</strong> — the first agent logs its decision, the next reads the log, acts on what it finds, and logs in turn, so the whole chain is visible in one place (s3).</p>
+
+<h2>Decision authority: who wins, decided in advance</h2>
+<table><caption>Collision rules worth writing down before the second agent starts</caption><thead><tr><th>Collision</th><th>Rule that prevents it</th></tr></thead><tbody>
+<tr><td>Two agents want the same task</td><td>Single ownership: each workflow has exactly one named agent; others may advise, never execute (s2)</td></tr>
+<tr><td>Two agents edit the same record</td><td>Single writer per record, plus check-the-log-before-acting so edits build on the latest state (s3)</td></tr>
+<tr><td>Agents reach opposite conclusions</td><td>Named decision authority per topic — the specialist's call stands on its subject — with a human as the appeal court for unclear cases (s2, s3)</td></tr>
+<tr><td>An agent fails mid-chain</td><td>Checkpoints: each stage stores its decision and output, so the run resumes from the last good stage instead of restarting or duplicating (s3)</td></tr>
+<tr><td>Costs creep as agents multiply</td><td>Per-agent budgets and trigger-based runs: agents act when an event calls them, not continuously by default (s3)</td></tr>
+</tbody></table>
+<p>The authority row deserves the emphasis practitioners give it. In one documented order-processing setup, the inventory agent's word on stock availability overrides general business rules, while the payment agent holds a veto if payment fails — and the account stresses that all of it was configured upfront, not left to emerge (s3). Generalized coordination guidance says the same at the system level: pre-set rules resolve opposing results by trusting the designated agent for that question more, or escalating to a human where the case is unclear (s2). And the cost row is the one that surprises people: agents left running continuously made low-value decisions until budgets and event triggers replaced the always-on default (s3). Coordination, it turns out, is mostly a list of decisions you make once, in writing, while calm.</p>
+
+<h2>Add your second agent in six steps</h2>
+<ol>
+<li><strong>Pass the threshold test</strong>: write down what agent one cannot do reliably — specialty, permission boundary, or parallel volume. No named gap, no new agent (s4).</li>
+<li><strong>Draw the boundary</strong>: list each agent's tasks and, just as explicitly, what it must never touch. One owner per workflow, one writer per record (s2).</li>
+<li><strong>Write the handoff contract</strong>: the exact output structure of the first agent and the exact input the second expects, with a worked example (s1).</li>
+<li><strong>Stand up the shared log</strong>: one place every agent reads before acting and writes after deciding, so state is shared rather than assumed (s3).</li>
+<li><strong>Name the authorities</strong>: per topic, whose conclusion wins; which agent holds a veto; which cases escalate to you (s2, s3).</li>
+<li><strong>Set budgets and triggers, then checkpoint</strong>: per-agent spend limits, event-based starts, and a stored decision at each stage so failures resume instead of repeat (s3).</li>
+</ol>
+<p><strong>What success looks like:</strong> a week of two-agent work with zero duplicated tasks, zero overwritten edits, every disagreement settled by a rule you wrote in advance, and a log a single daily review can audit — coordination as a quiet system, not a group chat you referee.</p>
+
+<h2>Questions people ask about running several agents</h2>
+<p><strong>Do my agents need to "talk to each other"?</strong> They need shared state and defined handoffs, which is less romantic and more reliable than conversation: standard protocols exist for agent-to-agent messaging, but at small scale a shared log plus contracts delivers the same guarantees (s1, s2, s3).</p>
+<p><strong>What if both agents are right and still disagree?</strong> Then the disagreement is about values or priorities, not facts — exactly the case pre-set authority rules route to a human. Design the escalation; do not let the agents average their answers (s2).</p>
+<p><strong>How many agents is too many?</strong> The count where coordination work — contracts, logs, authority rules, reviews — grows faster than the work being coordinated. The ladder exists for a reason: add an agent only when the simpler shape demonstrably cannot carry the job (s4).</p>
+<p><em>General information only. Platforms and protocols for multi-agent work change quickly; the coordination principles here — contracts, shared state, named authority — outlast any specific tool.</em></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

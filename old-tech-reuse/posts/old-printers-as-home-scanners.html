@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An Old Printer's Second Job: The Home Scanner and Occasional-Print Station — Old Tech, New Life</title>
+<meta name="description" content="That retired all-in-one still scans beautifully. The driver check that decides its fate, a revival procedure for Windows, and the honest cases for scanner-only duty or recycling.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>An old printer's second job: the home scanner and occasional-print station</h1>
+  <p class="meta">Repurpose &middot; 7 min read</p>
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>Most all-in-one printers are retired for one of three reasons — expensive ink, a paper-feed quirk, or a new computer that could not find a driver — and in almost every case the scanner half of the machine never got the memo. The scan bed does not care about ink prices, rarely wears out, and is often better than what a phone camera does to a document on a kitchen table. The right second job for an old all-in-one is therefore not "printer, again, but sadder." It is a dedicated scanning and occasional-print station: the machine that digitizes receipts, school forms, photos and paperwork, and prints the odd return label when asked nicely. Whether yours can take the job depends on one test — the driver test — and this guide starts there.</p>
+
+  <h2>Decide its fate first: the three outcomes</h2>
+  <table>
+    <tr><th>What the driver check finds</th><th>Second job</th><th>What it means day to day</th></tr>
+    <tr><td>Manufacturer offers a current driver or full software package for your operating system</td><td>Full station: scanning + occasional printing</td><td>Install the full package; both halves of the machine work</td></tr>
+    <tr><td>No current manufacturer driver, but the system detects it and a generic or built-in driver works</td><td>Scanner-first station (printing if it cooperates)</td><td>Scanning through the operating system's own scan tools; printing treated as a bonus, not a promise</td></tr>
+    <tr><td>Nothing detects it on USB or network, on any machine you own</td><td>Retire it</td><td>Donate or recycle it responsibly rather than storing a machine no computer can talk to</td></tr>
+  </table>
+  <p>The order matters. Troubleshooting threads for old printers are full of people spending weekends resurrecting machines whose manufacturers never published a driver for their current system. Twenty minutes of checking first — the manufacturer's support page for your exact model, against your exact operating system — tells you which row of the table you live in, and every later step follows from it.</p>
+
+  <h2>Before the cables: the saved-cord advantage</h2>
+  <p>Old all-in-ones use the chunky USB-B printer cable that nothing else uses anymore — which is why the household habit of keeping a labelled box of saved cables pays off precisely here. Computer power cords and printer USB leads have not changed in years, and the owner who saved them skips the most common revival delay: the week spent waiting for a two-dollar cable. Check the printer's power adapter against the label on the machine before plugging in (voltage and plug must match — the wrong adapter is how old electronics die), find the USB-B lead, and you have the whole hardware list. If the machine also has Wi-Fi and your network can still see it, that works too — with one condition the scanning guides repeat: for wireless use, the printer and the computer must be on the same Wi-Fi network, or neither will ever find the other.</p>
+
+  <h2>The revival procedure (Windows)</h2>
+  <ol>
+    <li><strong>Clean install, not a pile-up.</strong> If an earlier failed attempt left half-installed printer software behind, remove it first (Settings &gt; Apps), then restart. Old-driver debris is a leading cause of "it worked on the old PC" mysteries.</li>
+    <li><strong>Connect by USB for setup, even if you plan to use Wi-Fi.</strong> A cable removes the network from the list of suspects. Try a different USB port if the machine is not detected — ports fail, and swapping one takes ten seconds.</li>
+    <li><strong>Install the manufacturer's latest full package if one exists</strong> for your model and operating system; otherwise let Windows find it (Settings &gt; Bluetooth &amp; devices &gt; Printers &amp; scanners &gt; Add device) and accept the built-in generic driver. Device Manager offers the manual route: right-click the printer, Update driver, and "let me pick from a list of available drivers" when automatic search finds nothing.</li>
+    <li><strong>Restart the Print Spooler if printing misbehaves.</strong> The standard fix sequence from Microsoft's support community: open Services (type <em>services.msc</em> in the Run box), stop the Print Spooler service, delete the files in <em>C:\Windows\System32\spool\PRINTERS</em>, then restart the service. A stuck spooler makes a healthy printer look dead.</li>
+    <li><strong>Restart the Windows Image Acquisition (WIA) service if scanning misbehaves.</strong> WIA is the service that lets scanning devices talk to applications; in the same Services list, right-click Windows Image Acquisition and choose Restart, then try the scan again. Scanning support threads return to this step constantly, because a stalled WIA service is invisible everywhere else.</li>
+    <li><strong>Run the built-in troubleshooter before reinstalling anything.</strong> Settings &gt; Troubleshoot &gt; Other troubleshooters &gt; Printer. It is not magic, but it catches the simple causes — stopped services, wrong default, queued errors — in the right order.</li>
+    <li><strong>Confirm the scan app sees the right device.</strong> In the manufacturer's scan software or the system's scan tool, check that your printer is the selected device; a computer that once knew another scanner will cheerfully keep addressing it. Then make one test scan of a document you do not care about, at the settings you will actually use.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> a test page prints (or a clear-eyed decision that printing is not this machine's job), a test scan lands in the folder you chose at readable quality, and both still work after a restart of the computer and the printer. A revival that only works until the next reboot is a postponement, not a second job.</p>
+
+  <h2>Set it up as a scanning station, not a printer that scans</h2>
+  <p>The station mindset changes three defaults. First, location: put it where the paperwork is — near the desk or the household files — not where the old computer desk used to be; a scanner you walk to gets used, and one in a closet becomes storage. Second, defaults: set the scan tool to save to one named folder, in one format (PDF for documents, a photo format for pictures), at a resolution you have actually tested for readability — consistency is what turns a pile of scans into an archive you can search and trust. Third, ink discipline: if the print half works, let it be the occasional-print station for labels and forms, and do not re-enlist it as the household's photo printer — that is the job description that retired it. A machine with a bounded job lasts; a machine re-promoted to everything is back in the cupboard by spring.</p>
+
+  <h2>Documents and photos are two different jobs — set the station for both</h2>
+  <p>A scanning station earns its keep on two kinds of paper, and they want opposite handling. Documents — forms, receipts, letters, the children's school paperwork — want speed and legibility: a moderate resolution that keeps text crisp without ballooning file sizes, PDF as the format, and a naming habit (date, then subject) applied at save time, because a scan called "scan0042" is a scan you will open three times and trust never. Photos want the opposite patience: the highest resolution the bed offers, an image format rather than PDF, and one print at a time treated gently, because a photograph scanned badly gets re-scanned from an original that is not getting any younger. Most scan tools let you save both as named presets or profiles. Set them up once, on the day the station is revived, and label them plainly — "Documents" and "Photos" — so the next person to use the station (often you, in a hurry, in February) picks the right one without thinking. Ten quiet minutes of setup is the difference between an archive and a folder of good intentions.</p>
+
+  <h2>Know when to let go</h2>
+  <p>Retire the machine if no computer you own can detect it after the procedure, if the manufacturer never published a driver for any operating system you run, or if the scanner's own hardware has failed — streaks and shadows on every scan, from a bed you have cleaned, are the lamp or sensor aging, not a settings problem. A retired printer still holds a little of your life (old scan jobs, network settings, a Wi-Fi password), so reset it to factory defaults before it leaves, and take it to e-waste or a donation stream that accepts printers rather than the household garbage — the responsible-exit guide on this site covers the details.</p>
+
+  <p><a href="/posts/old-stereo-bluetooth-receiver-upgrade.html">Next: give an old stereo a second job with Bluetooth &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Tech, New Life — DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

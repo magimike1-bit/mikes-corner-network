@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fix video calls that keep freezing — Fix Your Wi-Fi</title>
+<meta name="description" content="Your speed test is lying by omission: calls die on jitter and packet loss, not megabits. The wired test that finds the real fault, then the fixes in diagnostic order.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Fix video calls that keep freezing</h1>
+  <p class="meta">Fixes &middot; 8 min read</p>
+
+
+  <p>A video call that freezes on a fast internet plan feels like a betrayal — the speed
+  test says 200 megabits, the meeting says otherwise. The resolution is in what a call
+  actually is. Unlike a streamed film, a live call cannot buffer: every frame is needed
+  the instant it arrives, in both directions at once. That is why the requirements
+  analysis at SpeedPulse insists consistency matters more than peak speed, and names the
+  three numbers that decide call quality after raw bandwidth stops mattering: ping kept
+  under 50 milliseconds so conversation stays natural, jitter — the variation in that
+  ping — kept under 20 milliseconds so audio does not chop and video does not freeze,
+  and packet loss held near zero, because even one percent loss is visibly choppy. A
+  modest 5 Mbps connection with low ping and no jitter feels flawless; a 100 Mbps
+  connection with heavy jitter feels broken. Freezing calls are almost never a
+  not-enough-megabits problem. They are a stability problem, and stability problems have
+  addresses.</p>
+
+  <h2>First, the arithmetic that clears the plan of suspicion</h2>
+  <p>Zoom's own recommendations, as compiled by WFH Lounge, are smaller than most people
+  expect: a group call in high-quality video wants about 1.0 Mbps of upload, a 720p HD
+  group call about 2.6 Mbps up and 1.8 down, and a full 1080p HD group call about
+  3.8 Mbps up and 3.0 down. SpeedPulse's cross-platform comparison lands in the same
+  place for Teams and Meet — a few megabits each way. So on any modern broadband plan, a
+  single call uses a single-digit percentage of the headline speed. Two conclusions
+  follow. If one call freezes while nothing else is running, the plan is not the prime
+  suspect. And if calls freeze only when the household is busy, the suspect is not the
+  total either — it is contention, especially for upload, which is the direction most
+  home plans provision thinnest and the direction a call cannot do without.</p>
+
+  <h2>The diagnostic that splits the problem in five minutes</h2>
+  <p>SpeedPulse names Wi-Fi itself as the number-one culprit — distance, walls, and
+  interference making the local link unstable — ahead of every plan-level cause. That
+  ordering hands the home user a gift: one test that divides the world in two. Run the
+  freezing call, or a test call, with the computer wired to the router by an Ethernet
+  cable. If the freezes vanish, the internet service was never the problem and every
+  dollar aimed at a faster plan is wasted; the fault is in the wireless hop, and the
+  fixes are placement, band, and interference, covered elsewhere in this site's guides.
+  If the freezes persist on the wire, Wi-Fi is exonerated and the hunt moves to
+  contention and the connection itself. No other single step sorts the causes this
+  cleanly, which is why it comes first instead of appearing as tip seven in a list.</p>
+
+  <h2>The fix procedure, in diagnostic order</h2>
+  <ol>
+    <li><strong>Wire up and retest.</strong> Ethernet cable from router to the call computer; run a real call or a test meeting. Stable on wire: stay with steps 2–3 as Wi-Fi improvements, or simply keep the desk wired for call hours. Still freezing: skip to step 4.</li>
+    <li><strong>Shorten and clear the wireless hop.</strong> Take the call in the router's room, line-of-sight if possible, for one meeting. A freeze-free call at short range convicts distance and walls; the permanent answers are repositioning the router centrally, or a mesh node or access point near the call room — not a faster plan.</li>
+    <li><strong>Use the 5 GHz band for the call device.</strong> On a dual-band router, join the 5 GHz network name for calls: shorter range, but far less interference from neighbours and household gadgets than the crowded 2.4 GHz band. (This site's band guide covers the per-device assignment in full.)</li>
+    <li><strong>Hunt the upload thieves.</strong> Pause cloud sync and backup during call hours — SpeedPulse names iCloud, Google Drive, and Dropbox quietly eating upload — and check whether freezes coincide with someone else's streaming, downloads, or cloud photo uploads. On cable plans especially, a busy household can saturate upload while download idles.</li>
+    <li><strong>Prioritise the call.</strong> If the router offers Quality of Service (QoS), enable it and prioritise the call device or the conferencing application, so bulk traffic waits its turn instead of barging into the call's small, steady stream.</li>
+    <li><strong>Restart, then update.</strong> Reboot modem and router (in that order, a minute apart), then check for router firmware updates in the admin panel; an old router struggling with multiple real-time streams is on SpeedPulse's cause list for a reason.</li>
+    <li><strong>Test the clock.</strong> If freezes cluster in the early evening, suspect peak-hour congestion at the provider; a week of noting freeze times builds the evidence a provider support call actually needs.</li>
+  </ol>
+  <p>Success looks like this: a thirty-minute group call at the household's busiest hour
+  with no freeze longer than a blink, audio that never turns robotic, and — run a speed
+  test's advanced view if available — jitter visibly under the 20-millisecond guide and
+  packet loss at or near zero. The headline speed will barely have changed. That is the
+  point: it was never the number that mattered.</p>
+
+  <h2>Reading the three stability numbers without special tools</h2>
+  <p>None of the evidence above needs purchased software. Most conferencing apps expose
+  a statistics or call-health view during a meeting — Zoom's sits under Settings,
+  Statistics — reporting the live latency, jitter, and packet loss for the call in
+  progress. Open it during a freeze, not after: the spike visible at the moment of the
+  freeze is the diagnosis in miniature. A latency that sits politely under the 50
+  millisecond guide while jitter repeatedly bursts past 20 points at wireless
+  interference or a contended hop, not at the plan. Packet loss that appears only when
+  another household member starts a large upload points at the contention step of the
+  procedure. And a full set of healthy numbers during a freeze that everyone on the call
+  also experienced points away from the home entirely — sometimes the meeting's problem
+  is the meeting, and the correct fix is to say so, with the statistics screen as
+  evidence, rather than rebuilding a healthy network. Screenshot the statistics view at
+  the worst moment of the worst call of the week; that single image organises every
+  support conversation that follows.</p>
+
+  <h2>What not to buy first</h2>
+  <p>The decision framework is short because the arithmetic is. Do not upgrade the plan
+  until the wired test fails and the contention hunt comes up empty — a bigger pipe
+  delivers the same jitter faster. Do not replace the router until placement and band
+  have been tried; an old router is a named cause, but it is the last named cause, not
+  the first. And do not accept "your speed is fine" as a provider's closing answer when
+  calls freeze on the wire at peak hours: the stability numbers — ping, jitter, loss —
+  are the relevant evidence, and they are measurable from the user's side of the call.</p>
+
+  <p class="disclaimer">General information about home networking, not professional IT
+  advice. Router menus vary by model; check the manual for the exact QoS and firmware
+  paths on a specific device.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>How much speed does a video call really need?</strong> A few megabits each
+  way — about 3.8 Mbps up for a 1080p HD group call on Zoom's recommendations. Headroom
+  helps a busy household; it does not fix instability.</p>
+  <p><strong>Why does the call freeze when someone else starts streaming?</strong>
+  Contention — usually upload contention, worsened by cloud backups running in the
+  background. Pause sync during calls and enable QoS if the router offers it.</p>
+  <p><strong>The speed test looks perfect. Why is the call still bad?</strong> Speed
+  tests measure peak throughput in a short burst; calls live or die on ping, jitter,
+  and packet loss sustained over thirty minutes. Measure the stability numbers, not
+  just the speed.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

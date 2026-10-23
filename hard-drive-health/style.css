@@ -298,3 +298,17 @@ main { padding: 22px 0 48px; }
 .post-figure { margin: 1.75rem auto; max-width: 100%; }
 .post-figure img { display: block; max-width: 100%; height: auto; border-radius: 8px; }
 .post-figure figcaption { margin-top: 0.5rem; font-size: 0.85em; color: #666; }
+
+/* Design review 2026-10-23: keyboard focus (sibling-pattern rule) */
+a:focus-visible, .btn:focus-visible, .brand:focus-visible,
+.card h3 a:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px;
+}
+
+/* Design review 2026-10-23: pipeline cards use .kicker "New" labels — style them like .badge */
+.card .kicker {
+  display: inline-block; font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-deep);
+  background: var(--wash); border: 1px solid var(--line); border-radius: 999px;
+  padding: 2px 8px; margin-bottom: 8px;
+}

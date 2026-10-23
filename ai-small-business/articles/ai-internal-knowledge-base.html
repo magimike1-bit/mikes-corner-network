@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An AI Knowledge Base for Your Own Staff: Answering the Questions Your Team Asks Every Week</title>
+<meta name="description" content="An internal AI assistant can answer your team's repeat questions — but only after the unglamorous work: collect the twenty questions, clean the documents that answer them, and fence off the payroll and HR files before anything gets indexed. Sequence, permissions, and per-seat math.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap article-layout">
+  <article class="article">
+    <p class="kicker">Operations</p>
+    <h1>An AI Knowledge Base for Your Own Staff: Answering the Questions Your Team Asks Every Week</h1>
+    <p class="lede">Every small business has one person who knows how everything works, and that person's day is a drip of interruptions: where is the returns procedure, what is the wifi code for the till tablet, who do we call when the freezer alarm goes off. An internal AI assistant can absorb those questions — it answers from your own documents, with citations — but the tool is the last step. The first steps are finding the questions, cleaning the answers, and deciding what the assistant must never read.</p>
+    <p class="meta">Published 2026-10-23 &middot; Last updated 2026-10-23</p>
+
+<h2>The real problem is not search, it is scatter</h2>
+<p>Vendor pages describe the pain accurately: company wikis and internal documents are supposed to be the source of truth, but in reality employees message a colleague because searching is too slow and too unreliable — and a handful of people become &ldquo;the person who knows how X works,&rdquo; their messages filling up with repeat questions while their real work waits. In a large company the knowledge at least lives in a wiki. In a small business it lives in an email thread from March, a chat message, a PDF on a shared drive, a laminated sheet by the till, and the owner's memory. No AI tool indexes a memory. So the sequence in this article starts before any subscription: gather the knowledge into documents an assistant can actually read, in one place, in current versions. An AI assistant can only be as good as the pages it reads — clean up the content before switching anything on, as one implementation guide bluntly puts it. Skipping that step produces an assistant that confidently answers from last year's procedure, which is worse than no assistant at all.</p>
+
+<h2>Step zero: the twenty questions</h2>
+<p>Do not start by uploading your drive. Start with a list. For one week, every time someone asks a repeat question — in person, by message, by phone — write it down. Twenty questions will cover most of the interruptions: opening and closing procedures, the returns rule, how to book time off, the supplier phone numbers, what to do when a system is down, where the safety documents live. That list is your pilot scope, and it does three jobs. It tells you which documents the assistant genuinely needs. It gives you a test set: after setup, you ask the assistant your twenty questions and grade the answers against the documents. And it gives you the before picture — you know roughly how many interruptions a week the system should absorb, so &ldquo;is it working?&rdquo; has an answer. Vendor analytics point the same direction from the other side: assistants log every unanswered question, and that log becomes a prioritised list of what to document next. Your twenty questions are simply that list, built before the tool instead of after.</p>
+
+<h2>Clean before you connect</h2>
+<p>For each of the twenty questions, find or write the one document that answers it, and make it current. This is the unglamorous core of the project and it is mostly deleting: three versions of the returns procedure become one; the 2022 price list goes to an archive folder the assistant will not index; the procedure that exists only as a chat thread gets typed up once, properly. Put the pilot set in a single folder or space with plain names. Assistants index sources like Google Drive, Notion, SharePoint, Confluence and BookStack, and return answers with citations back to the original documents — citations are your audit trail, and they only work if the underlying document is the right one. A useful rule while cleaning: if you would not hand the document to a new hire on their first day, it does not go in the pilot folder.</p>
+
+<h2>Permissions: decide what the assistant may never read</h2>
+<p>Here is the step the comparison articles skip, and the one that matters most in a small business. Your shared drive does not separate the returns procedure from the payroll spreadsheet, the disciplinary letter, or next quarter's pricing plan — but an indexed assistant flattens whatever it can read into answers for anyone who asks. So the exclusion list comes before the connection, not after an awkward incident: payroll and anything with salaries, HR files and personal data, banking and tax records, and any pricing or strategy material you would not read aloud to the whole team. Put the pilot documents in their own folder with its own sharing settings and connect only that folder. Then check what the vendor actually promises: look for encryption in transit and at rest, a commitment that your documents are not used to train foundation models, and sign-in controls such as SSO — one internal-assistant vendor, SiteSpeakAI, publishes exactly those commitments, and any vendor you consider should match them in writing. If a vendor cannot say plainly what happens to your documents, that is your answer about the vendor.</p>
+
+<h2>Four ways to add AI, and the per-seat math</h2>
+<p>There are four established ways to put AI over a knowledge base: AI answers built into the wiki's own search; an AI writing and answering helper inside the editor; an outside AI assistant connected to the wiki (over MCP or a connector); or a custom build on the vendor's API. They differ mainly in who sets them up — a workspace admin flipping a setting versus developer time — and in where your team asks: pick the approach that matches where your team already asks questions. If your team lives in a chat tool, an assistant that answers in that chat wins over a smarter one on a wiki page nobody opens.</p>
+<table><caption>What the tiers cost (as reported by eesel.ai's comparison, checked October 23, 2026 — verify before buying)</caption><thead><tr><th>Pattern</th><th>Reported price</th><th>Watch out for</th></tr></thead><tbody>
+<tr><td>Budget per-seat (e.g. Tettra)</td><td>From $8/user/month, 10-user minimum</td><td>Minimums mean a 6-person team pays for 10</td></tr>
+<tr><td>Bundled with your wiki (Confluence AI)</td><td>About $5.42/user/month within Confluence Standard</td><td>Answers only from that wiki's content</td></tr>
+<tr><td>Premium per-seat (e.g. Slite Pro, Notion AI Business)</td><td>Around $20/user/month</td><td>Per-seat cost compounds: the comparison's example puts a 50-person team at $1,000/month</td></tr>
+<tr><td>Fixed-price / credit-based</td><td>One monthly price sized to interactions, not seats</td><td>Credit overages; best when headcount is large relative to question volume</td></tr>
+</tbody></table>
+<p>Two more cautions from the same comparison landscape: only some tools index across multiple sources at once — Notion, Drive, chat and helpdesk together — while others answer only from their own native content, so a business whose cleaned documents live in Drive should not buy an assistant that reads only its own wiki. And per-seat pricing punishes exactly the small-team pattern of &ldquo;everyone might ask occasionally&rdquo;: count the people who will genuinely ask weekly, not the org chart.</p>
+
+<h2>The pilot procedure</h2>
+<ol>
+<li><strong>Collect the twenty questions</strong> over one working week, from every channel they arrive on.</li>
+<li><strong>Gather and clean the answering documents</strong> into one pilot folder — one current version each, plainly named.</li>
+<li><strong>Write the exclusion list</strong> (payroll, HR, banking, unreleased pricing) and confirm none of it sits in, or is reachable from, the pilot folder.</li>
+<li><strong>Connect one source</strong> — the pilot folder only — in the tool whose pattern matches where your team asks questions.</li>
+<li><strong>Run the test set:</strong> ask the assistant your twenty questions yourself. Every answer must cite the right document and match it. Any confident wrong answer stops the pilot until the document or the permissions are fixed.</li>
+<li><strong>Launch to the team with the citation habit:</strong> answers carry sources; if the citation looks wrong, the document wins and the error gets reported, not worked around.</li>
+<li><strong>Review the unanswered-question log monthly</strong> and document the top few — the assistant's gaps are your documentation to-do list.</li>
+</ol>
+<p><strong>What success looks like:</strong> the person who used to field the drip of questions gets measurably fewer of them; a new hire answers their own routine questions from cited documents in their first week; and every answer the assistant gives can be traced to a document you chose, in a folder you control.</p>
+<p><em>General information for small-business owners. Employment and privacy obligations vary by jurisdiction — when documents contain personal information about staff or customers, check your obligations before indexing them anywhere.</em></p>
+
+<h2>Frequently asked questions</h2>
+<p><strong>Our documents are a mess. Is it too early?</strong> It is exactly the right time to do step zero and the cleanup — that work pays off even without AI, because the cleaned folder becomes the real source of truth. Buy the assistant after the pilot folder exists, not before.</p>
+<p><strong>Will the assistant invent answers?</strong> A properly grounded assistant answers from your documents and cites them; the risk is stale or wrong source documents, which is why the twenty-question test set and the citation habit are in the procedure. Treat any uncited, confident answer as a defect to report.</p>
+<p><strong>Per-seat or fixed price for a team of eight?</strong> At eight people even premium per-seat pricing is modest, and minimums matter more than the headline rate — an $8 plan with a 10-user minimum costs a 6-person team more per actual user. Run the math on your real headcount and question volume, using the table above as the shape, not the quote.</p>
+
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p><strong>AI Small Business Playbook</strong> — practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav><a href="/">Home</a><a href="/#guides">All guides</a><a href="/roi-calculator.html">ROI Calculator</a><a href="/ai-cost-simulator.html">Cost Simulator</a><a href="/about.html">About</a></nav>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

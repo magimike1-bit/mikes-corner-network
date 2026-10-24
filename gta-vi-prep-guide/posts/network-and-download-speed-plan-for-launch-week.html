@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network and Download Speed Plan for Launch Week: The Size-Agnostic Guide — GTA VI Prep Guide</title>
+<meta name="description" content="Rockstar has published no GTA VI install size and no pre-load date — so plan with arithmetic instead: download-time math for every likely size, a measured-speed procedure, wired vs Wi-Fi decided properly, and the PS5 and Xbox background-download settings set on purpose.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/logo.svg" alt="GTA VI Prep Guide logo" width="34" height="34"><span>GTA VI <span class="brand-hi">Prep Guide</span></span></a>
+    <p class="tagline">Get launch-ready without the hype</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>A network and download plan for launch week, built for the one number nobody has</h1>
+  <p class="meta">Setup &middot; 7 min read</p>
+<p>Every download plan for a big launch starts with the install size. For GTA VI, that number does not exist. Rockstar's official page confirms the launch — November 19, 2026, on PlayStation 5 and Xbox Series X|S — and publishes no install size and no pre-load date. Any site stating either as fact is inventing it, and any plan built on an invented size collapses the moment the real one differs. So this plan is built differently: on arithmetic that works for <em>any</em> size, a speed you measure rather than assume, console download settings set on purpose, and a household schedule for pre-load week. When Rockstar eventually announces the real number, you will need exactly one lookup in one table — everything else will already be done.</p>
+<h2>The only math you need, worked for every likely size</h2>
+<p>Download time is one formula: <strong>time = size &times; 8 &divide; speed</strong> — gigabytes times eight gives gigabits, divided by your connection's megabits per second gives seconds. A published anchor confirms the scale: at 100 Mbps, 100 GB takes roughly 2.2 hours at full line rate. Everything else in this table is that same arithmetic, scaled — no game's size is assumed anywhere in it:</p>
+<table>
+<tr><th>If the download is…</th><th>at 25 Mbps</th><th>at 50 Mbps</th><th>at 100 Mbps</th><th>at 300 Mbps</th><th>at 500 Mbps</th></tr>
+<tr><td>50 GB</td><td>~4.4 hours</td><td>~2.2 hours</td><td>~1.1 hours</td><td>~22 min</td><td>~13 min</td></tr>
+<tr><td>100 GB</td><td>~8.9 hours</td><td>~4.4 hours</td><td>~2.2 hours</td><td>~44 min</td><td>~27 min</td></tr>
+<tr><td>150 GB</td><td>~13.3 hours</td><td>~6.7 hours</td><td>~3.3 hours</td><td>~1.1 hours</td><td>~40 min</td></tr>
+<tr><td>200 GB</td><td>~17.8 hours</td><td>~8.9 hours</td><td>~4.4 hours</td><td>~1.5 hours</td><td>~53 min</td></tr>
+</table>
+<p>Read the table honestly: these are <em>ideal</em> line-rate figures. Real downloads run slower — protocol overhead, a store server under load, and other household traffic all take a share. Treat the table as a floor, not a promise: if your row says 4.4 hours, plan a window of six. The table's real job is the go/no-go decisions it makes obvious. At 25 Mbps, a large download is an overnight-and-then-some job that must start the moment pre-load opens. At 300 Mbps or better, the same file is under an hour and launch-day downloading is survivable. Most households sit between those poles, which is why the next step matters more than the table.</p>
+<h2>Measure your real speed where the console sits</h2>
+<p>Your internet plan's advertised speed is a ceiling measured somewhere else. The plan needs the speed your console actually receives, in its actual position, at the time of day you will actually download:</p>
+<ol>
+<li><strong>Run the console's own connection test.</strong> Both consoles report a measured download speed in their network settings screens. Run it once in the evening — peak household hours — not at 7 a.m. on a Sunday. The evening number is the planning number.</li>
+<li><strong>Run it again wired, if you can.</strong> Even a temporary cable draped across the room for one test tells you what the wired row of the table would be. That single comparison decides the next section with data instead of opinion.</li>
+<li><strong>Note the gap.</strong> If the console's measured speed is far below your plan's headline number, the bottleneck is inside your home — distance, walls, band, or an old router — and pre-load week is the wrong time to discover it.</li>
+</ol>
+<p><strong>What success looks like:</strong> you can name the console's measured evening download speed, wired and on Wi-Fi, and you know which column of the table above is yours.</p>
+<h2>Wired vs Wi-Fi: decide with this download in mind</h2>
+<p>For everyday play, the wired-vs-Wi-Fi argument is mostly about latency and consistency. For a one-off download of a hundred-plus gigabytes, the argument is simpler: a wired Ethernet connection removes the wireless link — the most variable part of the chain — from the largest single transfer your console will make all year. That argues for wiring the console for pre-load week specifically, even if it goes back to Wi-Fi afterwards. A temporary cable for one week is a legitimate plan; powerline or MoCA adapters are the fallback where a cable run is impossible. If Wi-Fi it must be: prefer the 5 GHz band at reasonable range over a distant 2.4 GHz connection, and keep the console's path to the router as clear as the room allows. On the router side, two documented notes apply regardless of cable: NAT type is set by the router and network configuration, not by the wire; and if your router offers Quality of Service, setting the console as a priority device lets its traffic go first when the household is busy — useful exactly once a year, and this is the week.</p>
+<h2>Set the console to download while you sleep</h2>
+<p>A pre-load you have to sit and watch is a failed plan. Both consoles can download while they appear to be off — but only if the right low-power settings are chosen in advance:</p>
+<ul>
+<li><strong>PS5:</strong> under Settings &gt; System &gt; Power Saving &gt; Features Available in Rest Mode, enable <strong>Stay Connected to the Internet</strong>. Then, under Settings &gt; Saved Data and Game/App Settings &gt; Automatic Updates, turn on <strong>Auto-Download</strong> and <strong>Auto-Install in Rest Mode</strong>. PlayStation's guidance notes the useful subtlety: Auto-Download alone will fetch files in rest mode without closing a suspended game, leaving the install decision to you when you resume. PlayStation also documents auto-downloading a pre-order — set it up when you pre-order, not when the window opens. Do the same for system software under Settings &gt; System &gt; System Software &gt; System Software Update and Settings, so launch week does not begin with a console update.</li>
+<li><strong>Xbox Series X|S:</strong> the power mode decides everything. Under Profile &amp; system &gt; Settings &gt; General &gt; Power options, choose <strong>Sleep</strong> (formerly called Instant-on) rather than Shutdown (energy saving): Sleep keeps the console in a low-power standby that can finish downloads and updates in the background, while Shutdown cannot. Then under Settings &gt; System &gt; Updates, keep both "Keep my console up to date" and "Keep my games &amp; apps up to date" on.</li>
+<li><strong>The Xbox catch:</strong> background downloads are deliberately constrained while a game is running, to protect the game. If a pre-load crawls while someone plays something else on the console, that is the design working — suspend the running game to lift the constraint, or let the download own the overnight hours instead.</li>
+</ul>
+<h2>The household schedule for pre-load week</h2>
+<p>Bandwidth is shared, and pre-load week is when the sharing gets negotiated — in advance, in the open, or at 9 p.m. on the night, badly. A workable schedule has three parts. First, <strong>pick the console's window</strong>: overnight hours, when the household's streaming and video calls are done, are when your measured speed is closest to the table's ideal. Second, <strong>pause the competition</strong>: other large downloads, cloud backups, and game updates on other machines wait a few days; one household queue, with the pre-load at the front. Third, <strong>start the moment the window opens</strong> — whenever Rockstar sets it, the players who finish first are the ones who started first, and a stalled or forgotten pre-load discovered on November 18 has no recovery path at 25 Mbps. If your row of the table says the download exceeds one night, the schedule is not a preference; it is the whole plan.</p>
+<h2>Launch-day reality: the patch and the servers</h2>
+<p>Two things no home plan controls. A launch-day update may arrive on top of the pre-load, and it obeys the same arithmetic — an hour of slack in your schedule is the only hedge. And the stores themselves slow down under launch load: a strong home network cannot control publisher server load, so speeds and queue times can vary no matter what your connection test said. That is the final argument for finishing the download days early rather than hours early. The goal for November 19 is a console with nothing left to fetch.</p>
+<h2>Questions players commonly ask</h2>
+<p><strong>What is GTA VI's install size?</strong> Unknown. Rockstar has published none, and this guide deliberately plans for a range instead of repeating a rumoured number. The table above converts the real announcement into your download time in one look.</p>
+<p><strong>When does pre-load open?</strong> Also unannounced at the time of writing. Everything here — measured speed, wired decision, rest-mode and Sleep settings — can be done now, so the announcement only starts a download, not a project.</p>
+<p><strong>Does rest mode / Sleep mode really keep downloading?</strong> Yes, on both consoles, provided the specific settings in this guide are on: on PS5, staying connected in rest mode with auto-download enabled; on Xbox, the Sleep power mode. A full Shutdown on Xbox stops downloads entirely.</p>
+<p><strong>Is upgrading my internet plan worth it for one game?</strong> That is a household budget question, not a gaming one — run the table first. If your measured speed already puts the likely sizes inside an overnight window, the honest answer is usually that a cable and a schedule beat a new contract.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">GTA VI Prep Guide</p>
+    <p class="disclaimer">Unofficial fan-made resource. Not affiliated with, endorsed by, or connected to Rockstar Games,
+    Take-Two Interactive, Sony, or Microsoft. Content is general information for entertainment purposes — release dates
+    and details can change; always check official Rockstar announcements. Not professional or financial advice.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms of Use</a> &middot; <a href="/">Home</a></p>
+  </div>
+</footer>
+</body>
+</html>

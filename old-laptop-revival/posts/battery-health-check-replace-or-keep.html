@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check Your Laptop Battery Health: Replace It, Keep It, or Run It Tethered — Old Laptop Revival</title>
+<meta name="description" content="How to check laptop battery health on Windows with powercfg /batteryreport and on Linux with upower and acpi, how to calculate wear from design vs full charge capacity, and how to decide between replacing, keeping, or running the laptop plugged in.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Check your laptop battery health: replace it, keep it, or run it tethered</h1>
+  <p class="meta">Maintenance &middot; 8 min read</p>
+
+  <p>An old laptop that dies forty minutes after unplugging is not necessarily a laptop with a dead battery — and a battery icon showing 100% says nothing about health at all. The percentage on screen is the current charge level. Battery health is a different number: how much capacity the battery holds now, at a full charge, compared with how much it held when it was new. Both Windows and Linux can report that number with built-in tools, in a few minutes, for free. This guide runs the check on both systems, shows the one division that turns the report into a health percentage, and then makes the actual decision — replace the battery, keep it, or accept a laptop that lives on its charger.</p>
+
+  <h2>The two numbers that matter</h2>
+  <p>Every method below returns the same pair of figures. <strong>Design capacity</strong> is what the battery was built to hold when new. <strong>Full charge capacity</strong> is what it holds today when charged to 100%. Health is the second divided by the first, as a percentage; wear is 100% minus health. One published walkthrough works the example plainly: a battery designed for 57,000 mWh that now holds 45,600 mWh is at 80% health — 20% of its original capacity is gone. Neither operating system's settings screen shows this directly: Windows' Power &amp; battery settings show charge level and per-app usage, not wear, which is why the report below exists.</p>
+
+  <h2>On Windows: the battery report</h2>
+  <ol>
+    <li><strong>Open a terminal.</strong> Right-click the Start button and choose Terminal, or open Command Prompt or Windows PowerShell from the Start menu. On most laptops no administrator rights are needed; if the command errors, reopen the terminal as administrator.</li>
+    <li><strong>Run the report command:</strong> type <code>powercfg /batteryreport</code> and press Enter. The command generates a report covering the battery's specifications, usage, capacity, and life estimates.</li>
+    <li><strong>Open the file.</strong> Windows saves an HTML report and prints its location — typically <code>battery-report.html</code> in the user folder. To choose the location, add an output path: <code>powercfg /batteryreport /output "C:\battery-report.html"</code>. Double-click the file to open it in a browser.</li>
+    <li><strong>Read the Installed batteries section</strong> near the top: Design Capacity, Full Charge Capacity, and Cycle Count, all reported there. Divide full charge by design and multiply by 100. A worked Linux-side example of the identical arithmetic: a battery at 36.2 Wh against a 48.9 Wh design capacity has lost about 26% of its capacity — it sits at roughly 74% health.</li>
+    <li><strong>Check the history before judging.</strong> The report's Battery capacity history shows how full charge capacity has moved over time, and Battery life estimates compare runtime at today's capacity against runtime at design capacity. A slow slide is normal wear; a sudden drop is worth a second look, because it can indicate a failing cell — or a reading the battery corrects after its next full charge and discharge.</li>
+  </ol>
+
+  <h2>On Linux: upower and acpi</h2>
+  <ol>
+    <li><strong>Find the battery's device path.</strong> In a terminal, run <code>upower -e</code> (or <code>upower -e | grep BAT</code>) and look for the path containing BAT — typically <code>/org/freedesktop/UPower/devices/battery_BAT0</code>.</li>
+    <li><strong>Read the detailed report:</strong> run <code>upower -i /org/freedesktop/UPower/devices/battery_BAT0</code>, substituting the path found in step 1. The output lists the battery's state, its energy-full figure (today's full capacity), its energy-full-design figure (the factory capacity), the current percentage, and the cycle count where the firmware tracks one.</li>
+    <li><strong>Do the same division.</strong> upower also prints a capacity line expressing full capacity as a percentage of design capacity — that line is the health figure directly. Percentage, by contrast, is only the current charge level.</li>
+    <li><strong>Cross-check with acpi if anything looks odd.</strong> The <code>acpi -i</code> command reports battery information from the ACPI interface, including design capacity and last full capacity. Desktop environments offer graphical routes to the same data — GNOME's power statistics tool, and KDE Plasma, which displays battery health when the battery icon in the system tray is clicked.</li>
+  </ol>
+
+  <h2>Interpreting the result: working bands</h2>
+  <p>There is no single industry threshold, and published guidance draws the lines in slightly different places — Dell's official support guidance treats a full charge capacity below 40% of design capacity as significantly degraded and grounds for replacement, while a typical consumer guide bands the range more finely. The bands below synthesize that guidance into a decision tool; treat them as working rules, not specifications.</p>
+  <table>
+    <tr><th>Health (full charge ÷ design)</th><th>What it means in use</th><th>Default decision</th></tr>
+    <tr><td>Above 80%</td><td>Healthy; normal for a battery a year or two old</td><td>Keep — no action needed</td></tr>
+    <tr><td>60–80%</td><td>Worn; noticeably shorter runtime, still usable</td><td>Keep if the runtime still covers actual use; price a replacement for later</td></tr>
+    <tr><td>40–60%</td><td>Short runtime; replacement worth considering, especially if the laptop shuts down unexpectedly at moderate charge</td><td>Replace if the laptop must work away from a socket; otherwise tether</td></tr>
+    <tr><td>Below 40%</td><td>Significantly degraded per manufacturer guidance</td><td>Replace, or retire the battery and run tethered permanently</td></tr>
+  </table>
+
+  <h2>Replace, keep, or tether: the decision</h2>
+  <ul>
+    <li><strong>Replace</strong> when the health figure is low <em>and</em> the laptop genuinely works away from a desk — commuting, classes, moving room to room. Replacement only makes sense for a removable or serviceable battery at a sane price relative to the laptop's value; a sealed battery in a machine with other failing parts fails that test, and the money belongs toward the machine's next job instead.</li>
+    <li><strong>Keep</strong> when the health figure is moderate and the shortened runtime still covers the laptop's real pattern of use. A homework or kitchen laptop that needs ninety unplugged minutes does not need a new battery at 65% health. Re-run the check every few months and compare reports: the trend matters more than any single reading, and a stable 65% is a different situation from a battery that fell from 80% to 65% in one quarter.</li>
+    <li><strong>Run it tethered</strong> when the laptop has become a desk machine — an external-monitor setup, a media server, a second screen station. A worn battery costs nothing in that role. Two cautions apply: check whether the laptop runs normally with the battery removed or set to a charge limit in its firmware settings where offered, and never ignore the safety rule below — a tethered laptop with a damaged battery is not a settled question, it is a replacement or removal.</li>
+  </ul>
+  <div class="callout">
+    <p><strong>The safety override:</strong> if the battery is swollen — the case bulges, the base no longer sits flat, or the trackpad lifts — stop using the laptop and treat the battery as a safety risk to be replaced or removed promptly, whatever its reported health percentage says. Capacity figures measure wear; swelling is physical failure, and it outranks every band in the table.</p>
+  </div>
+
+  <h2>What success looks like</h2>
+  <p>The check is complete when: a battery report or upower output exists and has actually been read; the health percentage has been calculated from the two capacity figures (not guessed from the charge icon); the result has been compared against the laptop's real unplugged needs, not against its runtime when new; and a decision — replace, keep and re-check on a date, or tether — has been written down with the health figure beside it. A single anomalous reading is not success: if the number contradicts how the laptop behaves, charge fully, use it down, charge fully again, and run the report a second time before spending anything.</p>
+
+  <h2>FAQ</h2>
+  <h3>Why does the battery report show no cycle count?</h3>
+  <p>Not every battery reports one. On the Linux side, upower shows a cycle count only if the firmware tracks it, and the Windows report likewise leaves the field blank on batteries that do not expose it. A missing cycle count does not block the health calculation, which needs only the two capacity figures.</p>
+  <h3>Can battery health read above 100%?</h3>
+  <p>It can: the figures are firmware estimates, and a healthy battery can read slightly above its design capacity. Readings also shift with charge level, so comparisons are most meaningful between reports taken in similar conditions — another reason the trend across reports beats any single number.</p>
+  <h3>The laptop drains while it sleeps. Is that battery wear?</h3>
+  <p>Usually not — it is a sleep-behaviour question, and Windows has a separate report for it: <code>powercfg /sleepstudy</code>, run as administrator, lists each sleep session, how much battery it used, and what kept the laptop busy. Check the Recent usage and Battery usage sections of the main battery report first; they show when the laptop was on battery or plugged in over the last few days and how fast the charge fell.</p>
+
+  <p><a href="/posts/lightweight-operating-systems.html">Next: lightweight operating systems for old hardware &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

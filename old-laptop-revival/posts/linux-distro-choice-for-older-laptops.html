@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choosing a Lightweight Linux Distro for an Older Laptop: Mint Xfce, Lubuntu, MX Linux, or Zorin OS Lite — Old Laptop Revival</title>
+<meta name="description" content="A distro-by-distro decision for older laptops using each project's own published minimums: Linux Mint Xfce, Lubuntu, MX Linux, and Zorin OS Lite compared on RAM, disk, CPU architecture, and support horizon.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Choosing a lightweight Linux distro for an older laptop</h1>
+  <p class="meta">Software &middot; 9 min read</p>
+
+  <p>The general case for a lightweight operating system is made elsewhere on this site. This guide is the next step down: four specific, currently maintained distributions — Linux Mint Xfce, Lubuntu, MX Linux, and Zorin OS Lite — compared distro by distro against their own published system requirements, so the choice can be made from the laptop's actual specifications instead of from reputation. The four are not interchangeable. They differ in minimum RAM by a factor of two, in whether a 32-bit processor is still supported, and in one case in whether the edition itself has a planned end date.</p>
+
+  <h2>First, read the laptop's specifications</h2>
+  <p>Three numbers decide most of this choice, and all three can be read off the machine before downloading anything: how much RAM is installed, whether the processor is 32-bit or 64-bit, and how much disk space exists. A fourth fact matters almost as much: what the laptop will actually do. Every distribution below can open a document. The honest constraint on old hardware is the modern web browser, which is the heaviest everyday application on any of them — a point comparison guides return to repeatedly, because it means RAM headroom left over after the desktop loads is what the browsing experience is made of. The desktop environment is the main lever: LXQt and Xfce desktops use far less memory than heavier desktops, which is why all four candidates here ship one of those two.</p>
+
+  <h2>The verified specifications</h2>
+  <p>Each row is the distribution's own published figure, checked against its official documentation or announcement. "Minimum" means the system installs and runs; the recommended figure is the one to plan a daily-use machine around.</p>
+  <table>
+    <tr><th>Distribution</th><th>Desktop</th><th>RAM minimum / recommended</th><th>Disk minimum / recommended</th><th>Processor</th></tr>
+    <tr><td>Linux Mint Xfce</td><td>Xfce</td><td>2 GB / 4 GB</td><td>20 GB / 100 GB</td><td>64-bit only</td></tr>
+    <tr><td>Lubuntu</td><td>LXQt</td><td>1 GB / 2 GB</td><td>Small footprint; see note</td><td>64-bit (current releases)</td></tr>
+    <tr><td>MX Linux</td><td>Xfce (also KDE and Fluxbox editions)</td><td>1 GB / 2 GB or more</td><td>6 GB / 20 GB</td><td>Modern 64-bit Intel or AMD (current release)</td></tr>
+    <tr><td>Zorin OS Lite</td><td>Xfce</td><td>1 GB</td><td>10 GB</td><td>1 GHz single-core, 64-bit</td></tr>
+  </table>
+  <p>The sources behind the table: Linux Mint's official release announcements publish a single baseline for all editions — 2 GB of RAM with 4 GB recommended for comfortable use, 20 GB of disk space with 100 GB recommended, and a 1024×768 display — and Mint has been 64-bit only since version 20, so 32-bit-only hardware is not supported. Lubuntu is the official Ubuntu flavour built on the LXQt desktop; reporting on its current requirements puts comfortable running at a 1 GB minimum with 2 GB recommended — notably, the Lubuntu team itself has announced it will no longer publish minimum system requirements and no longer focuses primarily on older hardware, so its figures should be read as a floor, not a promise. MX Linux's own user manual for the current release lists a minimum of 1 GB of RAM and 6 GB of free disk space on a modern 64-bit processor, recommends 2 GB or more of RAM and at least 20 GB of disk, and notes that 4 GB is recommended for memory-intensive applications. Zorin OS Lite's published requirements, as quoted on its official forum, are a 1 GHz single-core 64-bit processor, 1 GB of RAM, and 10 GB of storage.</p>
+
+  <h2>Distro by distro: who each one is for</h2>
+  <h3>Linux Mint Xfce — the familiar default</h3>
+  <p>Mint's Xfce edition keeps the project's traditional, Windows-like layout — taskbar, menu, system tray — on the lighter Xfce desktop instead of the heavier Cinnamon. Its official minimums are the highest of the four, which is the trade: in exchange for 2 GB of RAM and 20 GB of disk as a starting point, the machine gets a polished, beginner-friendly system with a graphical software manager and driver tooling. For a laptop with 4 GB of RAM that will be someone's daily computer, this is the lowest-friction choice of the four. For a laptop with 2 GB, it is at its floor, and the lighter options below will leave more memory for the browser.</p>
+  <h3>Lubuntu — the lightest mainstream option</h3>
+  <p>Lubuntu pairs the Ubuntu base — its software repositories, documentation, and hardware support — with the LXQt desktop, which is designed for low resource use. That combination makes it the natural candidate for a 2 GB machine, and a workable one at the bottom of the range where Mint is straining. The caution is the project's own direction: the team has stepped back from publishing minimums and from targeting old hardware specifically, so Lubuntu is best treated as a light modern system that happens to suit older laptops, with requirements verified against the current release before installing.</p>
+  <h3>MX Linux — the toolbox option</h3>
+  <p>MX Linux describes itself as midweight, and its manual's figures back that positioning: a 1 GB minimum with 2 GB recommended, and the smallest published disk minimum of the four at 6 GB. What distinguishes MX is its suite of graphical MX Tools for common system jobs, and editions beyond the default Xfce, including a Fluxbox edition for especially low-capacity machines. One architecture note matters for genuinely old hardware: earlier MX series offered 32-bit builds, but the current release line is 64-bit, so a 32-bit-only laptop belongs on an older, time-limited series or a different distribution entirely — a shrinking category worth checking before any download.</p>
+  <h3>Zorin OS Lite — polished, with a sunset clause</h3>
+  <p>Zorin OS Lite is an Xfce system styled to feel familiar to Windows users, with the lowest published headline figures of the group alongside MX. It carries one fact no other candidate here has: Zorin has officially committed to the Lite edition for the 17 and 18 release series, fully supported until at least June 2029, and plans to sunset Lite from Zorin OS 19 onward, recommending migration to the standard editions — which the project states can now run on as little as 2 GB of RAM and machines as old as 15 years. Lite is therefore a reasonable install today with a known horizon: a laptop revived with it should be planned as a machine that moves to a standard edition, or to stock Xfce installed from the repositories, when the 18 series ends.</p>
+
+  <h2>Test before installing: the live USB check</h2>
+  <ol>
+    <li><strong>Download the ISO</strong> of the first-choice distribution and verify its checksum where one is published.</li>
+    <li><strong>Write it to a USB stick</strong> with a USB-writing tool; the stick is erased in the process.</li>
+    <li><strong>Boot the laptop from the USB</strong> into live mode, which runs the full system without touching the installed one.</li>
+    <li><strong>Run the real workload:</strong> connect to Wi-Fi, open the browser with several tabs, play a video, and open a document. Wi-Fi is the classic trouble spot on older machines, and this is where it shows up — before anything is erased.</li>
+    <li><strong>Check the leftover RAM</strong> in the system monitor with the browser open. If the machine is already swapping in live mode, step down one row in the table — a lighter desktop — rather than installing and hoping.</li>
+    <li><strong>Install only after the live session passes,</strong> with a verified backup of everything on the old drive, since installing normally erases it.</li>
+  </ol>
+
+  <h2>The decision framework</h2>
+  <ul>
+    <li><strong>4 GB RAM or more, daily-use machine, least learning curve:</strong> Linux Mint Xfce.</li>
+    <li><strong>2 GB RAM:</strong> Lubuntu or MX Linux — both publish 1 GB minimums and leave more of the 2 GB to the browser.</li>
+    <li><strong>Very small disk:</strong> MX Linux, with the smallest published install minimum (6 GB), then Zorin OS Lite (10 GB).</li>
+    <li><strong>Windows-familiar polish on modest hardware, horizon acceptable:</strong> Zorin OS Lite, installed knowing its support runs to at least June 2029 and that a migration follows.</li>
+    <li><strong>32-bit-only processor:</strong> none of the four current releases — confirm the processor first; this single fact eliminates more old laptops than RAM does.</li>
+    <li><strong>Still unsure between two:</strong> the live USB check decides. Fifteen minutes in each live session is worth more than any comparison table, including this one.</li>
+  </ul>
+
+  <h2>FAQ</h2>
+  <h3>Which is the lightest of the four?</h3>
+  <p>By published minimums, Lubuntu, MX Linux, and Zorin OS Lite all start at 1 GB of RAM, against Mint Xfce's 2 GB. In practice the desktop environment matters more than the distribution name — LXQt (Lubuntu) and Xfce (the other three) are both light, and the browser opened afterwards consumes more than the difference between them.</p>
+  <h3>Can these run on a laptop with only 2 GB of RAM?</h3>
+  <p>Yes, with expectations set correctly: 2 GB is a workable minimum with a lightweight distribution, while 4 GB gives a noticeably smoother experience for web browsing, because browser tabs — not the operating system — are the heaviest everyday load.</p>
+  <h3>Is Zorin OS Lite being discontinued?</h3>
+  <p>It is being sunset, on a published schedule: Lite continues in the Zorin OS 17 and 18 series and remains fully supported until at least June 2029, and from Zorin OS 19 onward the project will focus on its standard editions, with stock Xfce still installable from the repositories for anyone who wants that desktop.</p>
+
+  <p><a href="/posts/battery-and-cooling-fixes.html">Next: battery and cooling fixes &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

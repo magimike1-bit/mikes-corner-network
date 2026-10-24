@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transferring Stock Between Stores Without Corrupting Counts at Either End — Retail Inventory Management</title>
+<meta name="description" content="Move stock between two store locations (or store and warehouse) without wrecking either count: the transfer record, an in-transit state, receiving verification, and who owns an in-transit shortage.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Retail Inventory Management</a>
+    <p class="tagline">Practical inventory habits for independent retailers</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Transferring stock between stores: keeping counts honest at both ends</h1>
+  <p class="meta">Multi-location stock &middot; 7 min read</p>
+
+  <p>Moving stock from one shop to another sounds like the simplest job in retail:
+  box it, drive it across town, shelve it. It is also one of the most reliable
+  ways to corrupt two stores' counts at once. The sending store takes units off
+  its books before they physically leave, the receiving store adds units it has
+  not counted, a box goes astray in between — and for weeks afterwards, both
+  stores are reordering, promising, and counting against numbers that were never
+  true. The fix is not better software. It is treating a transfer as three
+  separate states — at the source, in transit, and received — and recording each
+  state change on its own, instead of letting one click pretend the whole journey
+  happened at once.</p>
+
+  <h2>Why transfers corrupt counts</h2>
+  <p>Most point-of-sale transfer tools are built for speed. Square's transfer
+  flow, for example, is five steps: pick the source and destination, choose items
+  and quantities, and complete the transfer — with a unique transfer number and a
+  history entry as the record. There is no receiving step at the destination at
+  all. Some inventory systems go further and offer a direct transfer type that
+  moves goods instantly between two locations without a goods-in-transit location
+  and without receiving at the destination. Instant feels efficient, and for a
+  box carried from the stockroom to a second till point in the same building it
+  may be fine. Between separate premises, it creates three specific errors:</p>
+  <ul>
+    <li><strong>Double availability.</strong> The same units can appear sellable
+    at both ends at once — at the source because nobody decremented them yet, at
+    the destination because the system added them on dispatch. A transfer should
+    never make the same units available at both ends.</li>
+    <li><strong>Promised stock that is not ready.</strong> Destination staff see
+    the units in their count and promise them to a customer, when the box is
+    still on a truck or sitting unopened by the back door. In-transit units are
+    not ready stock in either location.</li>
+    <li><strong>Nowhere for a shortage to live.</strong> If ten leave and nine
+    arrive, an instant transfer has no honest answer: one store's count is simply
+    wrong, and the error surfaces weeks later as unexplained shrinkage in
+    whichever store gets counted first.</li>
+  </ul>
+  <p>Systems that model transfers properly keep the states separate. Shopify's
+  transfers, for instance, can be moved to in transit, marked ready to ship, or
+  marked as transferred, and stock can be received in full or in part at the
+  destination. Older retail systems achieved the same thing with two records: a
+  goods-out entry at the store the stock leaves and a goods-in entry at the store
+  it arrives at, both posted against a dedicated internal transfer account rather
+  than a trading supplier. The tooling differs; the discipline is the same. Under
+  all of it sits a data point worth stating plainly, because it decides whether
+  any of this works: a transfer record is only as good as the item data behind
+  it. Clean, consistent item records are the most useful thing a store can
+  maintain — processes and systems cannot fix what the underlying data gets
+  wrong, and unknown or messy item data should be cleaned up before it is moved,
+  not carried into a second store's books.</p>
+
+  <h2>The transfer record: what it has to carry</h2>
+  <p>Whether the record lives in a POS transfer module or on a printed sheet that
+  travels with the box, it needs the same fields. Before an item can be
+  transferred at all, it must exist — with availability assigned — at both
+  locations; an item the destination has never carried has to be set up there
+  first, or the receiving entry has nowhere to land.</p>
+  <table>
+    <tr><th>Field</th><th>Why it matters</th></tr>
+    <tr><td>Unique transfer number</td><td>The one reference both stores, and anyone investigating later, can quote. Mature systems assign one automatically to every transfer.</td></tr>
+    <tr><td>Source and destination</td><td>Named locations, not &ldquo;the other shop&rdquo; — a warehouse, a second store, and a market stall are different destinations with different counts.</td></tr>
+    <tr><td>Item, SKU, and quantity dispatched</td><td>Counted at the source as the box is packed, not copied from the system balance.</td></tr>
+    <tr><td>Dispatch date and expected arrival</td><td>Sets the window in which the destination should expect, chase, and finally escalate a missing box.</td></tr>
+    <tr><td>Quantity received and condition</td><td>Filled in at the destination from a physical count, with damage noted per line.</td></tr>
+    <tr><td>Discrepancy notes</td><td>A dated note on any line that does not match, written so the record explains itself months later.</td></tr>
+  </table>
+
+  <h2>The transfer procedure, dispatch to receiving</h2>
+  <ol>
+    <li><strong>Build the transfer from a count, not a balance.</strong> At the
+    source, physically pick and count the units going into the box. The system
+    balance is a claim; the box is the fact. If the shelf holds seven where the
+    system says nine, that is a source-store count problem to log now — not a
+    transfer of nine imaginary units.</li>
+    <li><strong>Create the transfer record before the box moves.</strong> Source,
+    destination, items, counted quantities, and the transfer number go on the
+    record while the box is still open. One copy (printed or photographed) travels
+    with the goods.</li>
+    <li><strong>Move the stock to in-transit at dispatch.</strong> The units leave
+    the source's available count and enter an in-transit state: owned by the
+    business, sellable nowhere. If the system has no in-transit state, the paper
+    record carries that role — the destination does not add the units yet.</li>
+    <li><strong>Seal and label the box with the transfer number.</strong> A box
+    that cannot be matched to a record at the far end will be opened, shelved, and
+    guessed at. The number on the outside is what makes step 6 possible.</li>
+    <li><strong>Record the three times separately.</strong> When the source
+    released the units, when transport is expected to arrive, and when the
+    destination can treat the stock as ready are three different times. A truck
+    arriving at 10:00 does not supply a shelf or a customer promise at 10:00 if
+    unloading and checking still have to happen.</li>
+    <li><strong>Count at the destination before anything is shelved.</strong>
+    Open the box against the transfer record, item by item. Count what is
+    physically there, check condition, and note damaged units with a photo before
+    they are mixed into destination stock.</li>
+    <li><strong>Receive what arrived — exactly what arrived.</strong> Accept the
+    units that are present and sellable; reject units that arrived damaged so
+    they are recorded on the transfer without entering available stock anywhere.
+    Receiving systems built for supplier deliveries work exactly this way —
+    accept, reject, or cancel per line — and the same three outcomes fit an
+    inter-store box.</li>
+    <li><strong>Leave short lines open.</strong> If nine of ten units arrived,
+    receive nine and leave one open on the transfer. Marking the whole transfer
+    received would conceal the problem until someone goes to pick or sell the
+    missing unit. A unit genuinely on its way in a second box stays open; only a
+    unit that will never come gets cancelled off the record — mixing the two up
+    leaves the next reorder too small or too big.</li>
+    <li><strong>Close the transfer only when every line is accounted for.</strong>
+    A transfer is finished when each line is accepted, rejected, or cancelled with
+    a note — not when the box was emptied. Until then it stays visibly in
+    progress, which is what makes a three-week-old open transfer a useful alarm
+    instead of a forgotten one.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> pick any transfer from the last
+  month and ask three questions. Can both stores state, from the record alone,
+  what left, what arrived, and what is still outstanding? Does the destination's
+  available count include only units that were physically counted there? Is any
+  line still open, and does a named person know why? Three yeses mean the system
+  is working; a no names the step to fix.</p>
+
+  <h2>Who owns a shortage found at the destination</h2>
+  <p>Shortages feel like accusations, which is why they get quietly absorbed into
+  whichever count is nearest. Decide the ownership rules before the first
+  transfer, while nobody is defensive:</p>
+  <table>
+    <tr><th>Situation</th><th>Who owns it</th><th>Why</th></tr>
+    <tr><td>Box sealed at source, arrives sealed, count is short</td><td>Sending store</td><td>The error happened at picking or packing; the sealed box proves the destination received what was sent, and the transfer was built from the source count.</td></tr>
+    <tr><td>Box arrives damaged or tampered, units missing or crushed</td><td>In transit — investigate before assigning</td><td>Photograph the box and contents at receiving, note it on the transfer the same day, and keep the damaged units out of sellable stock until the carrier or driver question is settled.</td></tr>
+    <tr><td>Box received in full, shortage found at the destination days later</td><td>Receiving store</td><td>Once the destination signed for a verified full count, later losses are that store's ordinary shrinkage, not a transfer discrepancy.</td></tr>
+    <tr><td>Destination received without counting (&ldquo;receive all&rdquo;)</td><td>Receiving store's process</td><td>An unverified receipt converts every upstream error into the destination's count. The fix is procedural: no count, no receipt.</td></tr>
+  </table>
+  <p>The pattern underneath the table: ownership follows the last verified count.
+  Every handoff that gets counted transfers responsibility cleanly; every handoff
+  that does not leaves the loss unowned, which in practice means it lands on the
+  business as unexplained shrinkage.</p>
+
+  <h2>Timing counts around a transfer</h2>
+  <p>Two timing rules prevent most of the remaining damage. First, never run a
+  stock count at either store while a transfer between them is open, if it can be
+  avoided: the counting team will find the in-transit units missing at the source
+  and not yet present at the destination, and a well-meaning &ldquo;correction&rdquo;
+  at both ends manufactures stock from nothing. If a count cannot move, flag the
+  open transfers on the count sheet so counters expect the gap. Second, keep
+  in-transit units out of every promise: they should not appear in the
+  destination's sellable count, should not be offered to a customer asking the
+  source store either, and should not be counted as cover when either store
+  decides whether to reorder. They become real at exactly one moment — the
+  destination's verified receipt.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Two stores, same owner — does the paperwork really matter?</strong>
+  Yes, because the counts are separate even when the ownership is not. The
+  two-record approach (out at one store, in at the other, against an internal
+  transfer account) exists precisely for companies moving stock between their own
+  shops; skipping it is how stock control issues start.</p>
+  <p><strong>Can a transfer be split across two boxes or two trips?</strong>
+  Yes — partial receiving is a normal case, not an exception. Receive each
+  shipment against the same transfer as it arrives, keep the unshipped balance
+  open on the record, and close the transfer only when the last line is accounted
+  for.</p>
+  <p><strong>What if the destination needs the stock on the shelf today?</strong>
+  Speed up the count, not around it. A two-minute item-by-item check at the back
+  door is what makes the units honestly sellable; shelving first and reconciling
+  later is how phantom stock is born.</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Retail Inventory Management — practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi Slow at Night Only — Fix Your Wi-Fi</title>
+<meta name="description" content="Fast at noon, crawling at 8 p.m.? Three different clocks cause evening slowdowns. Four speed tests — wired and Wi-Fi, midday and evening — name which one is yours.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Wi-Fi slow at night only: split the evening slowdown into three faults</h1>
+  <p class="meta">Fixes &middot; 9 min read</p>
+
+  <p>At noon the connection flies. At eight in the evening the film buffers, the
+  game lags, and the call turns to soup — on the same router, the same plan, in
+  the same chair. A slowdown that keeps office hours is not one problem, and
+  treating it as one is why the usual checklist of ten tips fixes nothing: the
+  tips for three different faults are shuffled together, most of them aimed at
+  faults the household does not have. Evening slowness has three clocks, and
+  each clock leaves a different fingerprint in the measurements. Measure first,
+  name the clock, then apply the one fix that belongs to it.</p>
+
+  <h2>Three clocks, one symptom</h2>
+  <p><strong>The provider's clock.</strong> The whole neighbourhood comes home at
+  once. The U.S. Federal Communications Commission's Measuring Broadband
+  America reporting puts it in measurement language: the speeds a consumer
+  experiences fluctuate during the day, typically because of increased traffic
+  demand and the resulting stress on parts of the network infrastructure, which
+  is why the program measures performance during peak hours specifically and
+  tracks an "80/80 consistent speed" — the speed 80 percent of users get 80
+  percent of the time. What the data also shows is that the evening dip depends
+  heavily on the technology delivering the line: in the FCC's eleventh report,
+  between 89 and 98 percent of cable subscribers and between 53 and 98 percent
+  of fibre subscribers received at least 95 percent of their advertised
+  download speed during peak hours, while for DSL the figure ranged from just
+  3 percent to 75 percent of subscribers. An evening dip on an older DSL line
+  is close to a design feature; the same dip on cable or fibre is worth
+  evidence and a phone call.</p>
+  <p><strong>The household's clock.</strong> The home's own demand peaks at the
+  same hours for the same reason: everyone is back, every screen is on, and the
+  background machinery wakes up — cloud photo uploads, game downloads, system
+  updates, and backups all prefer the evening. The router feels this twice
+  over, as traffic and as sheer device count: TP-Link's guidance notes that
+  too many connected devices can overload a router, with the strain typically
+  surfacing as drops and slowdowns under load rather than at idle.</p>
+  <p><strong>The neighbours' clock.</strong> Every surrounding network is also
+  at its busiest in the evening, and on the 2.4 GHz band those networks share a
+  handful of channels. Apple's router guidance frames channel choice as an
+  interference problem — the best channel is the one that performs best given
+  the other routers and devices using the same channel — and interference is
+  at its worst exactly when everyone is home using it.</p>
+
+  <h2>The four-number test: measure before you fix</h2>
+  <p>Four speed tests, run with the same test service, separate the three clocks
+  cleanly. Two require an Ethernet cable; that is deliberate, because the cable
+  is the only tool that removes Wi-Fi from the measurement entirely.</p>
+  <ul>
+    <li><strong>Wired, midday</strong> — the baseline: what the line delivers
+    when nobody is competing for it.</li>
+    <li><strong>Wired, evening (between about 7 and 10 p.m.)</strong> — if this
+    number falls with the midday baseline healthy, Wi-Fi is innocent: the dip
+    arrives on the wire itself, which means the provider's clock (or a modem
+    fault) and no home setting will cure it.</li>
+    <li><strong>Wi-Fi, midday, from the usual evening seat</strong> — the
+    wireless baseline in the room where the problem is felt.</li>
+    <li><strong>Wi-Fi, evening, same seat, same device</strong> — if wired
+    evening speed holds up while this number falls, the fault is inside the
+    home: the household's clock, the neighbours' clock, or both. The channel
+    check in the procedure separates those two.</li>
+  </ul>
+  <p>Run the set on two or three evenings, not one. A single bad evening can be
+  an outage, a storm, or a one-off download; the pattern across evenings is
+  the diagnosis, and it is also the evidence a provider's support line cannot
+  argue with.</p>
+
+  <h2>The fix procedure, in order</h2>
+  <ol>
+    <li><strong>Take the four numbers above</strong> and write them down with
+    dates and times. Change nothing until the set is complete — a fix applied
+    mid-measurement destroys the comparison.</li>
+    <li><strong>If wired evening speed fell too, stop here and escalate.</strong>
+    Restart the modem and router once, in that order, and retest wired on the
+    next evening. If the wired dip persists, the remaining steps are the
+    provider's, not yours: the escalation section below covers what to send
+    them. Do not buy a router to fix a wire problem.</li>
+    <li><strong>Audit the household's own evening load.</strong> Open the
+    router's connected-devices list — TP-Link notes it typically sits under
+    DHCP or Connected Devices in the admin page — during the slow hour, and
+    count what is actually attached. Remove devices that are no longer used.
+    Then hunt the schedulable loads: pause or reschedule cloud backups, photo
+    sync, game downloads, and operating-system updates to after midnight on
+    the devices that offer a schedule, and retest the following evening. If
+    Wi-Fi evening speed recovers, the household's clock was the fault and the
+    cure is the schedule, permanently.</li>
+    <li><strong>Move the evening's heavy devices to 5 GHz.</strong> Streaming
+    boxes, game consoles, and laptops used in the evening should sit on the
+    5 GHz band, leaving the crowded 2.4 GHz band to the small devices that
+    have no choice. Apple recommends enabling every band the router supports
+    and every radio mode it offers, so older devices connect at the fastest
+    mode they support while capable devices spread onto the faster bands.</li>
+    <li><strong>Fix the 2.4 GHz channel for the evening, not the afternoon.</strong>
+    Scan the surrounding networks during the slow hour, not at midday when
+    half of them are idle. Set the channel to Auto if the router offers it —
+    Apple's recommended default, since the router can then select the best
+    channel itself. If choosing manually, the non-overlapping choices on
+    2.4 GHz are channels 1, 6, and 11, the set TP-Link specifies, with a
+    channel width of 20 MHz: Apple's guidance gives the same 20 MHz figure
+    for 2.4 GHz, because wider channels are faster but more susceptible to
+    interference and more likely to interfere with others. On 5 GHz, leave
+    width at Auto.</li>
+    <li><strong>Keep WMM on, and let the router update itself.</strong> WMM is
+    the Wi-Fi multimedia prioritisation built into every Wi-Fi 4 and later
+    router; Apple notes it prioritises traffic to improve video and voice
+    performance, should be enabled by default, and that disabling it can hurt
+    the performance and reliability of devices on the network. In the same
+    settings visit, turn on automatic firmware updates if the router offers
+    them — updates carry the stability and performance fixes that matter most
+    on the evenings the router works hardest.</li>
+    <li><strong>Prioritise the traffic that cannot wait, with QoS.</strong> If
+    the wired numbers are healthy and the schedule and channel work is done,
+    Quality of Service is the remaining lever: NETGEAR defines it as the
+    feature that prioritises internet traffic for applications, online gaming,
+    Ethernet LAN ports, or specified devices, to minimise the impact of busy
+    bandwidth. On a NETGEAR router the documented path is a browser to
+    routerlogin.com (or 192.168.1.1), then ADVANCED, then Setup, then QoS
+    setup, then Setup QoS rule and Add Priority Rule: set the Priority
+    Category to Applications or Online Gaming, choose the application, set
+    Priority to Highest or High, and click Apply — or categorise by MAC
+    Address to prioritise a whole device, such as the work laptop, instead.
+    Other brands place the same feature under their own QoS or traffic-control
+    menus; the principle is identical, and bulk traffic — downloads, backups —
+    belongs at Normal or Low so it waits its turn.</li>
+    <li><strong>Retest the same four numbers</strong> on the next two evenings,
+    after exactly the changes above. One change-set, then one measurement set:
+    that is how the household learns which clock it actually fixed.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the evening Wi-Fi number, taken
+  from the usual seat at the usual hour, lands within roughly a fifth of the
+  midday Wi-Fi number on three consecutive evenings, streaming starts without
+  the opening buffer, and calls stay clear through the busiest hour. The wired
+  numbers barely move — they were never the problem. If the gap persists only
+  on the wired evening test, success was never available at home, and the
+  evidence file below is the deliverable instead.</p>
+
+  <h2>When the wired test fails too: escalate with evidence</h2>
+  <p>A provider support call that begins "it feels slow at night" ends with a
+  reboot suggestion. A call that begins with three evenings of dated numbers —
+  wired midday, wired evening, the size of the gap, and the plan's advertised
+  speed — is a different conversation, and the FCC's own framing backs it:
+  peak-hour performance is the measured, published standard, and the gap
+  between advertised and peak-hour delivered speed is exactly what the
+  Measuring Broadband America program exists to expose. State the pattern
+  plainly: the line delivers its speed at midday and loses a named percentage
+  at peak hours on a wired connection, which removes Wi-Fi, placement, and
+  household devices from the discussion. Ask whether the local segment is
+  congested at peak and what remediation or plan options exist. On a DSL line,
+  keep the FCC's peak-hour figures in mind — a deep evening dip there may be
+  the technology's ceiling rather than a fault, and the honest fix may be a
+  different delivery technology rather than another support ticket.</p>
+
+  <p class="disclaimer">General information about home networking, not
+  professional IT advice. Router menus vary by model; check the manual for the
+  exact QoS, channel, and firmware paths on a specific device.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Can neighbours really slow down a home network?</strong> Yes, on
+  the shared 2.4 GHz band, where only channels 1, 6, and 11 avoid overlapping
+  each other and every nearby network is busiest in the evening. Apple's
+  guidance treats channel choice as an interference decision for exactly this
+  reason. The fingerprints are specific: wired speed stays healthy, midday
+  Wi-Fi is healthy, and evening Wi-Fi falls — then the channel and band steps
+  in the procedure are the fix.</p>
+  <p><strong>Is the provider throttling the connection at night?</strong> The
+  measurement cannot distinguish deliberate management from ordinary peak
+  congestion, and for the household it does not need to: the FCC attributes
+  time-of-day fluctuation to increased traffic demand stressing the network
+  infrastructure, and measures providers on peak-hour delivery for that
+  reason. What the four numbers establish is the part that matters — whether
+  the dip arrives on the wire (the provider's side) or only in the air (the
+  home's side).</p>
+  <p><strong>Will a faster plan fix evening slowness?</strong> Only if the wired
+  evening test shows the line itself saturated at the plan's ceiling — and the
+  four-number test shows that directly. If wired speed holds and Wi-Fi falls,
+  a faster plan delivers the same evening Wi-Fi problem at a higher midday
+  number. Fix the clock the measurements name first; the plan conversation
+  belongs after the escalation step, with the evidence in hand.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

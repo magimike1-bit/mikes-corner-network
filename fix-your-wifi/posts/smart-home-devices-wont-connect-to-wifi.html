@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Home Devices Won't Connect to Wi-Fi — Fix Your Wi-Fi</title>
+<meta name="description" content="Phones connect fine but the plug, bulb, or camera refuses? That pattern is a compatibility fault, not a broken router. Build one permanent 2.4 GHz WPA2 IoT lane, step by step.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Smart home devices won't connect to Wi-Fi: give them their own 2.4 GHz lane</h1>
+  <p class="meta">Fixes &middot; 9 min read</p>
+
+  <p>The phone joined the new router in seconds. The laptop joined. Then the smart
+  plug blinked, thought about it, and gave up — and the bulb and the camera failed
+  the same way. That split is the single most useful clue in this whole problem:
+  when modern devices connect and only the small, cheap, single-purpose gadgets
+  fail, the network is not broken. The gadgets are speaking an older dialect of
+  Wi-Fi than the router is offering, and no amount of re-entering the password
+  changes that. The fix is not to drag the whole network back to older settings.
+  It is to give the gadgets one small network of their own, set up the way they
+  need it, once — after which every future plug, bulb, and sensor joins without
+  a fight.</p>
+
+  <h2>Name the failure stage before changing anything</h2>
+  <p>Smart-device setup fails at one of three stages, and each stage points at a
+  different cause. Read which one matches before touching a setting.</p>
+  <ul>
+    <li><strong>The device cannot see your network at all.</strong> The network
+    name never appears in the app's list, or the app reports it cannot find your
+    home Wi-Fi. This is a band problem first: a large share of smart plugs, bulbs,
+    and sensors carry a 2.4 GHz radio only. TP-Link states it plainly for its Tapo
+    line — the device does not support 5 GHz — so a network the router is only
+    offering on 5 GHz, or a phone steered to 5 GHz during setup, leaves the device
+    with nothing to join.</li>
+    <li><strong>The device sees the network but the password is rejected.</strong>
+    The password is usually right; the security mode is wrong. ASUS documents
+    that some older IoT devices are incompatible with WPA3 because they were
+    designed before WPA3 was widely adopted and lack the firmware or hardware to
+    authenticate it — and many current routers default to WPA3 or a WPA3 mixed
+    mode on the main network. To a WPA2-only plug, a correct password on a
+    WPA3-only network looks exactly like a wrong password.</li>
+    <li><strong>The device joins, then the app cannot find it, or it shows as
+    "Local Only."</strong> The radio link worked; something after it did not.
+    TP-Link's troubleshooting for this stage points at the router's maximum
+    device limit, at firewalls, and at DNS — three checks that have nothing to
+    do with signal strength.</li>
+  </ul>
+  <p>One more possibility sits underneath all three stages: the device is simply
+  too far away. ASUS's own troubleshooting puts distance and obstacles on the
+  list — a weak signal at a far outlet fails setup intermittently in ways that
+  mimic every fault above. That is why the procedure below starts with the
+  device and the phone in the router's room.</p>
+
+  <h2>Verify what the device can actually speak</h2>
+  <p>Before building anything, confirm the mismatch is real. Three checks, all
+  from manufacturer guidance, settle it. First, the band: if the device is a
+  plug, bulb, switch, or sensor, assume 2.4 GHz only until its documentation
+  says otherwise — TP-Link's Tapo FAQ is explicit that its smart plugs do not
+  support 5 GHz at all. Second, the security: Apple recommends WPA3 Personal
+  where everything supports it, and WPA2/WPA3 Transitional — WPA3 for devices
+  that support it, WPA2 Personal (AES) for older ones — where they do not. A
+  router set to WPA3-only offers the older device no fallback at all. Third,
+  the generation: ASUS notes that some legacy devices are not compatible with
+  Wi-Fi 7 or its GCMP-256 encryption, and lists disabling Wi-Fi 7 mode or using
+  a dedicated IoT network as the remedies. If the failures began the day a new
+  router went in, this third check is very likely the whole story.</p>
+
+  <h2>The fix procedure: build the IoT lane</h2>
+  <p>Work through these steps in order. The design goal is narrow: one extra
+  network name, on 2.4 GHz, speaking WPA2, that never changes again. The main
+  network keeps its modern settings untouched.</p>
+  <ol>
+    <li><strong>Restart the device and the router, once.</strong> ASUS notes that
+    restarting clears IP address conflicts and DNS cache problems and refreshes
+    the router's address assignments — and that a restart does not change any
+    existing settings. Unplug the smart device for ten seconds as well. If setup
+    now succeeds, the fault was stale state, not compatibility, and the rest of
+    this procedure is unnecessary.</li>
+    <li><strong>Set up in the router's room.</strong> Bring the device within a
+    few metres of the router for setup, whatever its final home will be, and
+    stand there with the phone. TP-Link's guidance for a network the app cannot
+    find starts with exactly this: move the smart device closer to ensure a
+    strong signal, then tap Rescan, or choose Other Network and type the network
+    name and password manually.</li>
+    <li><strong>Back up the router's settings.</strong> Apple recommends backing
+    up the existing configuration before changing anything, so a wrong turn is
+    reversible. The backup option lives in the router's administration or system
+    section, or in its app.</li>
+    <li><strong>Create the IoT network.</strong> On routers that offer one, turn
+    on the dedicated IoT network: ASUS describes it as a separate wireless
+    network whose name carries an [IoT] marker and whose default authentication
+    is WPA2-Personal. On routers without an IoT option, create a second network
+    name (SSID) bound to the 2.4 GHz band only, or temporarily give the 2.4 GHz
+    and 5 GHz bands different names so the 2.4 GHz one can be chosen directly.
+    Either way, the gadgets get a name that is always 2.4 GHz.</li>
+    <li><strong>Set that network's security to WPA2-Personal (AES).</strong> On
+    the ASUS IoT profile this is already the default; on a hand-made second
+    network, choose WPA2-Personal and AES explicitly. Leave the main network at
+    WPA2/WPA3 Transitional or WPA3 — the downgrade, such as it is, applies only
+    to the small lane the gadgets use.</li>
+    <li><strong>Set the 2.4 GHz channel and width for compatibility.</strong>
+    TP-Link specifies channel 1, 6, or 11, a channel width of 20 MHz, and WPA2
+    encryption as the combination that gets a stubborn device configured.
+    Apple's guidance independently lands in the same place: 20 MHz on the
+    2.4 GHz band helps avoid performance and reliability issues near other
+    networks, and automatic channel selection is the recommended default where
+    the router offers it — so pick 1, 6, or 11 manually only if Auto keeps
+    landing somewhere else.</li>
+    <li><strong>On a Wi-Fi 7 router, apply the compatibility switches if setup
+    still fails.</strong> ASUS's documented path is the router settings page,
+    then Network, then the main network's Wi-Fi profile: disable Wi-Fi 7 mode
+    there and apply, and set the WPA encryption to AES — or skip both switches
+    by putting the gadgets on the IoT network from step 4, which is the option
+    ASUS itself recommends first.</li>
+    <li><strong>Prepare the phone.</strong> Join the phone to the new 2.4 GHz
+    network name before opening the device's app — the phone hands the device
+    the network it is itself using. Turn off any VPN on the phone for the setup
+    attempt; Google's own Nest Wifi setup help instructs exactly that. Update
+    the device's app and the phone's software, per TP-Link, before blaming the
+    hardware.</li>
+    <li><strong>Add devices one at a time, with the right model selected.</strong>
+    TP-Link is explicit on both halves: power on one device at a time when
+    configuring several, to avoid setup failure, and select the correct model
+    number during configuration, checking the box or the device label — some
+    models pair by Bluetooth setup and others by Wi-Fi setup, and choosing the
+    wrong method fails before Wi-Fi is even involved. Confirm the device's LED
+    shows its setup pattern; if the LED looks abnormal, factory reset the
+    device and start its setup again.</li>
+    <li><strong>Prove the password before suspecting it.</strong> If the app
+    reports a connection failure, TP-Link's check is elegant: forget the
+    network on the phone and rejoin it by typing the password fresh. If the
+    phone rejoins, the password is right and the remaining suspects are the
+    security mode (step 5), the channel settings (step 6), and the router's
+    device limit (step 10's check).</li>
+    <li><strong>Check the router's connected-device limit.</strong> A router that
+    has reached its maximum number of connected devices refuses new ones, and
+    TP-Link notes this restriction is more commonly found in guest network
+    settings — one more reason the IoT lane should be its own network rather
+    than the guest network. Disconnect devices that are no longer used, or
+    raise the limit, and retry.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the device completes setup on the
+  IoT network name on the first attempt, appears in its app within a minute,
+  and — the real test — is still connected and controllable 24 hours later and
+  after one deliberate router restart. A device that joins during setup but is
+  gone the next morning has passed the radio test and failed a later stage;
+  that is the branch covered next, not a reason to rebuild the lane.</p>
+
+  <h2>If it joins but the app cannot find it</h2>
+  <p>TP-Link's pairing-failure sequence doubles as an isolation test, and it is
+  worth borrowing whole. Connect the device to a phone's mobile hotspot
+  instead of the router. If it sets up cleanly on the hotspot, the device and
+  the app are both healthy and the router is the blocker — update the device's
+  firmware inside the app while it is on the hotspot, then reset it and set it
+  up on the IoT lane again. If the device connects to Wi-Fi but displays
+  "Local Only," TP-Link's step is to change the router's DNS settings to
+  8.8.8.8 and 8.8.4.4. Temporarily disabling the router's firewall to test,
+  then re-enabling it, is the same vendor's final isolation step. One related
+  network-level check from Apple's guidance: the network should have exactly
+  one DHCP server — if both a modem-router and a separate router are handing
+  out addresses, the resulting conflicts can prevent devices from communicating
+  even though each one shows as connected.</p>
+
+  <h2>What not to do: do not downgrade the whole network</h2>
+  <p>The tempting shortcut — setting the main network back to whatever makes
+  the plug happy — trades a small problem for a real one. Apple's list of
+  security settings to avoid is unambiguous: WPA/WPA2 mixed modes, WPA
+  Personal, every form of WEP, anything with TKIP in the name, and open or
+  unsecured networks are deprecated because they are no longer secure and they
+  reduce reliability. The IoT lane exists precisely so none of those modes is
+  needed anywhere: WPA2-Personal (AES) on a gadgets-only network is the floor,
+  and the phones and computers keep WPA3 or the transitional mode. Two more
+  non-fixes from the same guidance: hiding the network name does not secure
+  anything or help a device find the network, and MAC address filtering is not
+  a connection tool — Apple advises against relying on it, since addresses can
+  be copied and some devices rotate theirs. If a gadget still refuses after
+  the lane, the channel settings, and the hotspot test, the honest conclusion
+  is a device at the end of its life, not a network that needs weakening.</p>
+
+  <p class="disclaimer">General information about home networking, not
+  professional IT advice. Router menus and IoT network features vary by model
+  and firmware; check the manufacturer's support pages for the exact paths on a
+  specific device.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Why do my phone and laptop connect but my smart plug will
+  not?</strong> Because they speak different Wi-Fi generations. The plug very
+  likely has a 2.4 GHz-only radio and WPA2-only security, while the router may
+  be steering setup to 5 GHz or offering WPA3-only authentication. ASUS and
+  TP-Link both document this exact split, and the fix is a 2.4 GHz WPA2 network
+  for the gadgets, not a change to the network the phone uses.</p>
+  <p><strong>Should the bands have one name or two?</strong> One shared name is
+  Apple's general recommendation for phones and computers, so devices can move
+  between bands reliably. Smart gadgets are the exception that justifies a
+  second name: a dedicated 2.4 GHz IoT network gives a 2.4 GHz-only device a
+  target it can always see, while the main network keeps its single name.</p>
+  <p><strong>The device worked until the new router arrived. Is it
+  broken?</strong> Almost certainly not. A router swap changes the defaults —
+  WPA3, Wi-Fi 7 mode, band steering — and ASUS documents legacy devices failing
+  on exactly those changes. Rebuild the gadget's network the old way, on the
+  IoT lane, before replacing any hardware. A device that was previously set up
+  on another network may also need its own factory reset before it will join a
+  new one, as Google's setup help notes for its Wifi devices.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

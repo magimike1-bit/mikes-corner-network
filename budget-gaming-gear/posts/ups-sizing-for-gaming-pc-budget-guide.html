@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPS sizing for a gaming PC: buy watts and minutes, not VA — Budget Gaming Gear</title>
+<meta name="description" content="Size a gaming UPS by watts and runtime at your load, not the VA headline: the 125 percent rule, same-VA different-watts spec check, outlet assignment and the unplug test.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Budget Gaming Gear</a>
+    <p class="tagline">Smart buying advice for gaming on a budget</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/index.html">&larr; All guides</a>
+  <h1>UPS sizing for a gaming PC: buy watts and minutes, not VA</h1>
+  <p class="meta">Power &middot; 7 min read &middot; Published October 25, 2026</p>
+
+<p>A UPS is the one gaming purchase sold almost entirely on the wrong number. The box leads with VA — 1000VA, 1500VA — because it is the bigger figure. But a UPS can fail a gaming PC in two completely separate ways, and VA decides neither of them on its own. It can fail on watts, the instant the load passes the watt ceiling and the unit overloads. And it can fail on minutes, when the battery runs out before the game is saved and the PC is shut down cleanly. Buy for those two numbers — the watt rating and the runtime at your actual load — and the VA headline becomes what it should be: a rough size class, nothing more.</p>
+<p>There is also an honest expectation to set first. A budget UPS for a gaming setup is a safe-shutdown device. It exists to ride out flickers, correct dips, and give a few calm minutes to save and power down during an outage. It is not a battery for playing through a blackout, and sizing one as if it were is how the budget doubles for almost no benefit.</p>
+
+  <h2>The two numbers that decide everything</h2>
+  <p>The watt rating is a ceiling. Add up everything that will draw from the battery outlets, and that total must sit below it with room to spare. Manufacturer sizing guidance from CyberPower puts the rule plainly: the load should not exceed 80 percent of the capacity of the UPS system, and the minimum capacity to buy is the total load multiplied by 125 percent. Those are two ways of saying the same thing, and both are more useful than any VA band on a roundup page.</p>
+  <p>Runtime is the second number, and it is always quoted at a stated load. CyberPower publishes the clearest illustration on its own gaming-class hardware: its 1500VA PFC Sinewave unit runs 2.5 minutes at full load and 10 minutes at half load. Same box, same battery — a fourfold difference in minutes created entirely by how much is plugged into it. That is why a runtime claim without a load attached to it means nothing, and why cutting the load is often worth more than buying the next size up.</p>
+
+  <h2>Spec verification: same VA, different UPS</h2>
+  <p>The proof that VA misleads sits in two current manufacturer listings. Both units below are sold as 1500VA gaming or gaming-capable UPS systems. They do not carry the same load.</p>
+  <table>
+    <tr><th>Unit (manufacturer listing, checked October 25, 2026)</th><th>VA</th><th>Watt ceiling</th><th>Published runtime</th><th>Outlets</th></tr>
+    <tr><td>APC Back-UPS Pro for Gaming BGM1500</td><td>1500VA</td><td>900W</td><td>See the manufacturer's runtime chart for the specific load</td><td>10 total: 6 battery plus surge, 4 surge only; 1080-joule surge rating</td></tr>
+    <tr><td>CyberPower CP1500PFCLCD PFC Sinewave</td><td>1500VA</td><td>1000W</td><td>2.5 minutes at full load, 10 minutes at half load</td><td>See the manufacturer's listing for the outlet layout</td></tr>
+  </table>
+  <p>Read that table the way a purchase should be read. A setup drawing 950 watts overloads the first unit and fits the second, even though a shopper comparing VA alone would call them identical. The watt column is the purchase. The VA column is the shelf category.</p>
+  <p>One more spec trap sits underneath both listings: the power supply inside a gaming PC is rated for its capacity, not its constant draw. General guidance on gaming UPS sizing makes the point with a typical example — a PC built around a 750W power supply might pull 400W to 500W under load. Sizing a UPS from the PSU label alone therefore oversizes the purchase, sometimes by a whole price tier. The label is a starting estimate, not a measurement, and the procedure below treats it that way.</p>
+
+  <h2>The sizing procedure, in order</h2>
+  <ol>
+    <li><strong>List only what must stay alive.</strong> The PC and one monitor are the core. A router is worth including if staying connected matters during a short outage, because its draw is small next to a gaming PC. Everything else starts on the surge-only side until the maths says otherwise.</li>
+    <li><strong>Put a watt figure next to each item.</strong> CyberPower's sizing guidance names the three honest sources: the figure in the equipment's user manual, the figure on the safety label of the device or its power supply, or the calculation voltage multiplied by amperage equals wattage. Use the PSU label figure for the PC only as an upper-bound estimate, remembering the point above — real gaming draw is usually well under it.</li>
+    <li><strong>Add the list, then multiply by 1.25.</strong> That total is the minimum watt ceiling to buy, and it automatically keeps the running load at or below 80 percent of the UPS capacity. If the result lands just under a unit's watt rating, move up a tier anyway — a future graphics card belongs in this budget too.</li>
+    <li><strong>Check runtime at your load, not at the headline load.</strong> Find the manufacturer's runtime figure at half load and at full load, and place your total between them. The question to answer in numbers is simple: at this load, are there enough minutes to save, close the game, and shut the PC down without rushing? If the answer only works at a load lower than yours, the unit is too small regardless of its VA.</li>
+    <li><strong>Assign the outlets before paying.</strong> On the APC gaming unit above, 6 of the 10 outlets provide battery backup plus surge protection and 4 provide surge protection only. The PC and the main monitor go on battery outlets. Speakers, a second screen that is not needed to shut down, chargers and lamps go on surge-only outlets, where they are protected but do not eat runtime.</li>
+    <li><strong>Install the shutdown software the same day.</strong> The APC unit ships with PowerChute Serial Shutdown for safe system shutdown. Software like this is the difference between a UPS that protects an unattended PC and one that merely delays the crash by a few minutes while nobody is there to act.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> after setup, run one controlled test — save everything, start a game or a heavy task, then switch the UPS off at the wall or unplug it. Success is specific: the PC and monitor stay up, the runtime estimate on the display or in the software is comfortably longer than a calm shutdown takes, the shutdown completes normally, and nothing plugged into a battery outlet was decorative. If the unit alarms, overloads, or drops the PC, the load or the outlet assignment is wrong — fix it now, while the test is free, not during a real outage.</p>
+
+  <h2>Waveform, AVR and what matters after size</h2>
+  <p>Once size passes, waveform is the next real decision. APC describes its gaming unit's pure sine wave output as providing the cleanest signal for active PFC servers and electronics, and CyberPower's PFC Sinewave line exists for the same reason: computers whose power supplies use active power factor correction are the loads sine wave output is built to match. On a budget, the practical reading is narrow — if a cheaper simulated-wave unit and a sine wave unit both pass the watt and runtime tests, the sine wave unit is the safer match for a modern gaming PSU, and the price gap is the premium for that compatibility.</p>
+  <p>Automatic Voltage Regulation earns its place for a different reason. Both manufacturers describe AVR the same way: it corrects voltage dips and surges — CyberPower adds, minor fluctuations — without switching to battery. That matters for battery life over years, because every correction handled by AVR is a discharge the battery never takes. In a home where the lights flicker weekly, AVR is not a brochure feature; it is the thing keeping the battery fresh for the outage that actually needs it.</p>
+  <p>What can safely be skipped at this budget: gaming styling, coloured lighting, and extra USB charging ports are conveniences, not protection. A second monitor on battery power is also usually a skip — it shortens runtime to protect a screen that plays no part in saving work or shutting down.</p>
+
+  <h2>The decision framework, in order</h2>
+  <ul>
+    <li><strong>Watts first:</strong> total must-stay-alive load, multiplied by 1.25, at or under the unit's watt ceiling.</li>
+    <li><strong>Minutes second:</strong> published runtime at a load close to yours must cover a calm save-and-shutdown, with margin.</li>
+    <li><strong>Outlets third:</strong> enough battery outlets for the PC and one monitor — and a surge-only side for everything else.</li>
+    <li><strong>Waveform fourth:</strong> sine wave output preferred for a modern active-PFC gaming power supply.</li>
+    <li><strong>Everything else last:</strong> displays, software and styling only break ties between units that already passed the four checks above.</li>
+  </ul>
+
+  <h2>Common questions</h2>
+  <p><strong>Can a UPS keep a gaming PC playing through an outage?</strong> Briefly, at low load — and that is the wrong goal. Published full-load runtimes on gaming-class units are measured in single-digit minutes. Buy for a clean shutdown and treat any extra minutes as margin, not as playing time.</p>
+  <p><strong>Is a bigger VA rating always safer?</strong> No. Two 1500VA units above carry 900W and 1000W ceilings. A larger VA figure with a watt ceiling below the load still overloads. Compare watts, then runtime, then VA.</p>
+  <p><strong>Should the whole desk go on battery power?</strong> No. Every extra device on a battery outlet shortens the runtime the PC depends on. Battery outlets are for what must stay alive to shut down safely; surge-only outlets protect the rest.</p>
+  <p><strong>What if a future GPU upgrade is planned?</strong> It belongs in step 3 of the procedure. Headroom bought now is almost always cheaper than replacing an undersized UPS later, which is the practical reason the 125 percent rule is a floor, not a ceiling.</p>
+  <div class="take">
+    <p><strong class="take-label">Our take:</strong> Watts first, minutes second, VA last. A budget UPS is a calm shutdown with margin — size the load, multiply by 1.25, check the runtime at that load, and prove it once with a controlled unplug test.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="disclaimer">Buying advice reflects the author's opinion and general guidance. Specs and prices change — always check current details with the retailer before you buy.</p>
+    <p>Budget Gaming Gear — buying advice for gaming on a budget.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

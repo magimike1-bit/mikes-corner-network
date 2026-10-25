@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lightspeed Payments at 2.6% + 10¢: When the Dime Costs More Than the Rate (2026)</title>
+<meta name="description" content="Lightspeed Payments charges 2.6% + 10¢ per transaction. Against Square's flat 2.5%, the per-transaction dime — not the rate — decides who pays more. Basket-size break-even math inside.">
+<link rel="canonical" href="https://planprice.ca/guides/lightspeed-payments-rate-math.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Lightspeed Payments at 2.6% + 10¢: When the Dime Costs More Than the Rate (2026)">
+<meta property="og:description" content="Lightspeed Payments charges 2.6% + 10¢ per transaction. Against Square's flat 2.5%, the per-transaction dime — not the rate — decides who pays more. Basket-size break-even math inside.">
+<meta property="og:url" content="https://planprice.ca/guides/lightspeed-payments-rate-math.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lightspeed Payments at 2.6% + 10¢: When the Dime Costs More Than the Rate (2026)">
+<meta name="twitter:description" content="Lightspeed Payments charges 2.6% + 10¢ per transaction. Against Square's flat 2.5%, the per-transaction dime — not the rate — decides who pays more. Basket-size break-even math inside.">
+<meta name="twitter:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/guides.html" class="active">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/search.html">Search</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › Lightspeed Payments at 2.6% + 10¢</p>
+    <h1 class="page-title">Lightspeed Payments at 2.6% + 10¢: When the Dime Costs More Than the Rate (2026)</h1>
+    <p class="section-sub">Published <time datetime="2026-10-25">2026-10-25</time> &middot; Last updated <time datetime="2026-10-25">2026-10-25</time></p>
+<p>Compare two rate cards as a spec problem. Lightspeed Payments: <strong>2.6% + $0.10 per transaction</strong>. Square in-person (Canada): <strong>2.5%</strong> on credit, no per-transaction fee — and 0.75% + 7¢ on Interac debit. Most comparisons stop at "2.6 vs 2.5, basically the same." They aren't, because one card has a fixed per-transaction component and the other doesn't; the fixed fee's weight depends entirely on your average basket.</p>
+<h2>The dime, weighted</h2>
+<table><tr><th>Average basket</th><th>Lightspeed fee per sale</th><th>Effective rate</th><th>Square credit per sale</th><th>Gap per sale</th></tr>
+<tr><td>$8</td><td>$0.31</td><td>3.85%</td><td>$0.20</td><td>$0.11</td></tr>
+<tr><td>$25</td><td>$0.75</td><td>3.00%</td><td>$0.63</td><td>$0.13</td></tr>
+<tr><td>$60</td><td>$1.66</td><td>2.77%</td><td>$1.50</td><td>$0.16</td></tr>
+<tr><td>$200</td><td>$5.30</td><td>2.65%</td><td>$5.00</td><td>$0.30</td></tr></table>
+<p>At an $8 basket — a coffee and a muffin — Lightspeed's effective rate is 3.85%, over half again Square's. The dime never shrinks; the percentage gap (0.1 point) grows with the basket while the fixed gap stays $0.10, so Lightspeed's relative penalty is worst exactly where small retailers live. At 2,600 transactions a month, the per-transaction fees alone total $260 before the percentage is applied.</p>
+<h2>Where the comparison flips</h2>
+<p>Two places. First, debit: Lightspeed's published card lumps debit into the same 2.6% + 10¢ in the data checked, while Square prices Interac debit at 0.75% + 7¢ — a debit-heavy till widens Square's lead dramatically (full math in our <a href="/guides/teardown-retail-store.html">retail teardown</a>). Second, the software: Lightspeed's $89/month Retail Basic buys inventory depth Square's free POS doesn't match, so the honest comparison is total stack cost, not processing alone — at high volumes with complex inventory, the processing penalty can be the price of the inventory system, and worth it. What it should never be is uncomputed. Run your own basket through the table: (volume × 2.6%) + (transactions × $0.10) versus your Square mix.</p>
+<h2>Worked example: the gift shop</h2>
+<p>A gift shop: $28,000 a month, 1,450 transactions, average basket $19.30. Lightspeed Payments: $28,000 × 2.6% = $728, plus 1,450 × $0.10 = $145 — total $873. Square mix (say 70% credit, 30% debit by volume): credit $19,600 × 2.5% = $490; debit $8,400 × 0.75% = $63 plus ~435 debit transactions × $0.07 = $30 — total ≈ $583. The processing gap is $290 a month, before Lightspeed's $89 subscription is even counted. For the gap to close, the shop's inventory needs — variants, purchase orders, a second location on the horizon — have to be worth roughly $379 a month of operational value. Sometimes they are. The failure mode is never running this arithmetic and discovering, at renewal, that the POS decision was made by a demo.</p>
+<h2>Negotiation note</h2>
+<p>Published rates are the opening position for flat-rate vendors, but processing at any real volume is a negotiated market underneath: interchange-plus quotes from independent processors routinely land below flat rates for $30k+/month businesses with clean chargeback histories. If you stay with Lightspeed for the software, its integrated payments are the default — weigh the integration's operational value (one support call, synced refunds) against an external quote's savings in dollars per month, and re-weigh annually. Rates drift; your volume grows; the correct answer at $15k a month is frequently wrong at $50k.</p>
+<h2>Frequently asked questions</h2>
+<p><strong>Can I use a different processor with Lightspeed POS?</strong> Historically Lightspeed has steered merchants to its own payments, with terms varying by contract — confirm current third-party processing terms on your agreement before assuming an external quote can be used.</p><p><strong>Why do vendors add a per-transaction fee at all?</strong> It prices their fixed per-authorization costs and, frankly, it raises the effective rate on small tickets where merchants comparison-shop the percentage. Reading both components is the entire defence.</p><p><strong>What rate should a high-volume store target?</strong> Above roughly $30–50k/month of card volume, get interchange-plus quotes and compare against your flat-rate total — the spread at that scale funds real negotiation.</p>
+<h2>The bottom line</h2>
+<p>Rate cards are arithmetic, not branding. Lightspeed's 2.6% + 10¢ is a defensible price for the merchants its software serves best — inventory-led retailers at healthy basket sizes — and an expensive one for small-ticket sellers, where the dime inflates the effective rate toward 3.9%. Square's flat 2.5% with cheap Interac debit is the opposite shape. Neither is "the cheaper processor" in the abstract: each is cheaper for a specific basket size and payment mix, and yours is knowable in ten minutes with last month's statement. That ten minutes, repeated annually, is worth more than any single negotiation in this category.</p>
+<p class="sign-off">— Dex Carter, Tech Writer</p>
+<p><em>Lightspeed Payments rate 2.6% + 10¢ and Retail plan prices as published (checked October 11, 2026); Square Canada rates checked October 25, 2026. Examples are illustrative models. General information only, not financial advice.</em></p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/verified.html">Verification log</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices checked 2026-10-25 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

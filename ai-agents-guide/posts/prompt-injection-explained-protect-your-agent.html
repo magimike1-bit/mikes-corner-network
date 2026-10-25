@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Injection Explained: How an Agent Gets Tricked, and How to Limit the Damage</title>
+<meta name="description" content="Prompt injection is text hidden in an email, page or file that talks your agent into working for someone else. Why it cannot be patched away, the three forms it takes, and a per-task decision framework plus a harmless self-test.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>Prompt Injection Explained: How an Agent Gets Tricked, and How to Limit the Damage</h1>
+  <p class="lede">Most software follows its code. An agent follows text — and it cannot reliably tell the difference between an instruction from you and an instruction hidden in something it was asked to read. That single fact is prompt injection, the risk the OWASP GenAI Security Project ranks first for LLM applications. This guide explains the trick without the engineering jargon, then gives you the two things the technical write-ups leave out: a per-task decision framework, and a harmless way to test your own agent before someone less friendly does.</p>
+  <p class="meta">Published 2026-10-25 &middot; Last updated 2026-10-25</p>
+
+<h2>The trick, in plain English</h2>
+<p>The OWASP definition is short: a prompt injection occurs when user prompts alter a model&rsquo;s behaviour or output in unintended ways. The planted input does not need to be visible to you — it only needs to be parsed by the model. White text on a white background, a line buried in a long document, instructions inside a file or a webpage: if the agent reads it, the words are in the room.</p>
+<p>The United Kingdom&rsquo;s National Cyber Security Centre (NCSC) explains why this is not an ordinary bug. When you give a model a prompt, it does not understand the text the way a person does; it is predicting the most likely next token from the text so far. Under the hood there is no inherent distinction between &ldquo;data&rdquo; and &ldquo;instruction&rdquo; — there is only text. A database can be built so that user input can never be executed as a command, which is how SQL injection is properly fixed. A language model has no equivalent boundary to enforce, and the NCSC warns that prompt injection may never be totally mitigated in the way SQL injection was.</p>
+<p>That is the mindset shift this whole topic requires. Prompt injection is not a flaw waiting for one vendor patch. It is a permanent property of how these systems read, and your job is to decide how much a successfully tricked agent is allowed to do.</p>
+<h2>Three forms, and why the quiet one matters most</h2>
+<table><caption>Direct, indirect and unintentional injection compared</caption><thead><tr><th>Form</th><th>Where the planted text lives</th><th>What it looks like in everyday agent work</th><th>Who is at risk</th></tr></thead><tbody>
+<tr><td><strong>Direct</strong></td><td>In the message typed to the agent itself</td><td>Someone pastes or types &ldquo;ignore your previous instructions&rdquo; style text to make the agent reveal its system prompt or bypass its rules. OWASP treats jailbreaking — making the model disregard its safety protocols entirely — as a form of direct injection.</td><td>Anyone who lets other people talk to their agent, such as a support agent on a website</td></tr>
+<tr><td><strong>Indirect</strong></td><td>In external content the agent reads: a webpage, email, file, or a document in a knowledge base</td><td>OWASP&rsquo;s own example: a page being summarised contains hidden instructions that make the model insert an image linking to a URL, leaking the private conversation. Another: an attacker edits a document a retrieval system uses, so the returned content steers the answer.</td><td>Anyone whose agent browses, summarises inboxes, or reads shared files — which is most agent users</td></tr>
+<tr><td><strong>Unintentional</strong></td><td>In ordinary content that happens to contain instruction-like text</td><td>No attacker is required. OWASP notes injections can be unintentional: instruction-shaped text in a document can trigger behaviour nobody planned, simply because the model read it as a command.</td><td>Everyone, including careful users working with clean sources</td></tr>
+</tbody></table>
+<p>For a chatbot that only talks, a successful injection mostly costs you a bad answer. For an agent, OWASP&rsquo;s list of possible impacts is longer and more practical: disclosure of sensitive information, revealing system prompts, manipulated outputs, unauthorised access to functions available to the model, executing commands in connected systems, and manipulated decision-making. The damage scales with the agent&rsquo;s tools and permissions — which is why this topic belongs next to, not instead of, a least-privilege permission setup.</p>
+<h2>Why &ldquo;a better filter&rdquo; is the wrong plan</h2>
+<p>OWASP is blunt about prevention: given the stochastic way models work, it is unclear whether foolproof methods of prevention exist, and techniques such as retrieval-augmented generation and fine-tuning do not fully mitigate the vulnerability. Platform guardrails help at the margins — OpenAI, for example, describes its Guardrails as a modular safety layer that can mask or flag personal information and detect jailbreaks — but a detector that flags some attacks is not a wall that stops all of them, and it should never be the only control standing between planted text and a real action.</p>
+<p>So borrow the structure of OWASP&rsquo;s seven mitigations and translate them into plain habits. Constrain what the agent is for. Validate the format of what it produces before anything acts on it. Filter inputs and outputs where the platform allows. Keep the agent&rsquo;s access at the minimum its task needs — OWASP specifically recommends handling extensible functions in code with the application&rsquo;s own tokens rather than handing them to the model. Require human approval for high-risk actions. Clearly separate and label untrusted content so it carries less influence. And test adversarially, treating the model as an untrusted user. None of those requires you to build infrastructure. Most of them are settings, defaults, and one decision you make per task.</p>
+<h2>The decision framework: act, approve first, or read-only</h2>
+<p>For every task you give an agent, ask two questions. <strong>First: does this task require the agent to read content you do not control?</strong> Email from strangers, public web pages, shared documents, uploaded files, and pasted text all count as untrusted. Content you wrote yourself, in your own private files, is a different risk class. <strong>Second: if the agent were fully tricked during this task, what is the worst action it could take with the access it currently has?</strong> Then place the task in one of three buckets:</p>
+<ol>
+<li><strong>Read-only is fine.</strong> The agent reads untrusted content but can only report back: summarising, searching, drafting into a drafts folder. A tricked agent can waste your time or produce a slanted summary — annoying, checkable, reversible. Let it run, and spot-check the output against the source.</li>
+<li><strong>Approve first.</strong> The agent reads untrusted content and prepares an action a person confirms: a reply it wants to send, a record it wants to change, a purchase it wants to place. The confirmation shows the concrete action, not a summary of it. This is the default bucket for anything outward-facing.</li>
+<li><strong>Never on untrusted input.</strong> The task combines untrusted content with an irreversible or high-value action — sending money, deleting records, changing access, publishing in your name — and no approval step the platform actually enforces. Do not automate that combination. Either split the task so a person performs the final step, or do the task yourself.</li>
+</ol>
+<p>The framework&rsquo;s power is that it works even when the injection succeeds. You are not betting that the agent will spot the trick. You are deciding in advance that a tricked agent in bucket one can embarrass you, a tricked agent in bucket two can only propose, and bucket three does not exist in your setup.</p>
+<h2>Test your own agent with harmless planted instructions</h2>
+<p>OWASP recommends regular adversarial testing, treating the model as an untrusted user. You can run a beginner version of that in about twenty minutes, using planted text that asks for something harmless and unmistakable — never anything that would cause real harm if it worked.</p>
+<ol>
+<li><strong>Pick a marker action.</strong> Choose something visible and safe, such as beginning the summary with a specific nonsense word, or adding a line that says MARKER TEST at the end. If the marker appears, the planted instruction was followed.</li>
+<li><strong>Plant it in a test document.</strong> Create a short document or email to yourself about an ordinary topic, and include one instruction-shaped sentence in the middle, addressed to any AI reading it, asking for the marker.</li>
+<li><strong>Ask for the normal task.</strong> Have the agent summarise or process that document exactly as you normally would. Do not warn it about the test.</li>
+<li><strong>Check the output for the marker.</strong> Marker present means the agent followed instructions from the content, not just from you. That is the finding — record it plainly.</li>
+<li><strong>Tighten one control and repeat.</strong> Move the task down a bucket — read-only instead of acting, or approval before acting — or use the platform&rsquo;s option to label external content as untrusted, then run the same test again.</li>
+<li><strong>Repeat after changes.</strong> Run the same planted document again whenever the agent&rsquo;s instructions, model, or tools change, and whenever you connect a new source of content.</li>
+</ol>
+<p><strong>What success looks like:</strong> you have a written note, per agent task, of which bucket it sits in — and for any task in the first two buckets, a marker test you have actually run, showing either that planted instructions were ignored, or that the worst a followed instruction could do was produce a marked summary you caught. If a marker test succeeds against an agent that can send, spend, or delete, that task moves buckets the same day.</p>
+<h2>Questions people ask about prompt injection</h2>
+<p><strong>Can a stronger system prompt stop this?</strong> It helps and it is one of OWASP&rsquo;s mitigations — constrain the model&rsquo;s role and tell it to ignore attempts to modify its core instructions. But the instruction and the attack arrive as the same kind of text, so a prompt is a request, not an enforcement. Enforcement lives in permissions, approval gates, and code outside the model.</p>
+<p><strong>Is this only a problem for agents I build myself?</strong> No. The indirect form targets exactly what ready-made agents do all day: read email, browse pages, and summarise files other people wrote. You do not control the platform&rsquo;s internals, but you do control the buckets above — what the agent may access, and what needs your approval.</p>
+<p><strong>What should I watch for in normal use?</strong> Output that drifts from the task you gave: a summary that suddenly recommends an action, asks you to visit a link, or includes content that is not in the source. Treat links and next steps suggested while an agent is reading untrusted content with the same suspicion you would give the content itself.</p>
+<p><em>Disclaimer: this article is general security information, not professional security advice. For agents handling regulated, financial, or other people&rsquo;s sensitive data, get a qualified security review before relying on any setup described here.</em></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

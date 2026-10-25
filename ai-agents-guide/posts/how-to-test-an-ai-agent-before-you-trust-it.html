@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Test an AI Agent Before You Trust It: A 20-Case Eval You Can Run in a Spreadsheet</title>
+<meta name="description" content="A demo proves almost nothing about an agent. Build a 20-case test set in a spreadsheet: the case categories that catch expensive failures, the cheapest check for each, when to re-run, and the pass rule to use.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>How to Test an AI Agent Before You Trust It: A 20-Case Eval You Can Run in a Spreadsheet</h1>
+  <p class="lede">Developers call these repeatable agent tests &ldquo;evals&rdquo;, and the tooling around them assumes a coding team and a CI pipeline. You need neither. The core idea fits in a spreadsheet: about twenty real tasks, each with a written pass condition, run the same way before you trust the agent and again after every change. Anthropic&rsquo;s own agent team started with roughly twenty queries representing real usage. Here is the beginner version, with the case categories that catch the failures a friendly demo never shows.</p>
+  <p class="meta">Published 2026-10-25 &middot; Last updated 2026-10-25</p>
+
+<h2>A demo is not a test</h2>
+<p>Two properties of agents make casual try-it-and-see testing misleading. First, agents are not deterministic: Anthropic notes that agents can take completely different valid paths from identical starting points — one run might search three sources, another ten — so a single successful run shows one outcome, not the typical one. Second, behaviour is set by things that change quietly. A practical eval guide from Agno tells the story plainly: a support agent ran for two months without problems, then a well-meant instruction edit — be warm, be concise, resolve issues in as few steps as possible — led it to skip the refund-approval step and issue small refunds directly. No code changed, every ordinary software test passed, and nothing caught it, because none of the team&rsquo;s test questions involved a refund.</p>
+<p>That is the gap an eval fills. Unit tests check that code returns the right result; evals check what the agent <em>decided</em> to do — which tools it called, with what information, and whether the final state is the one you wanted. Anthropic&rsquo;s guidance is to judge the outcome and whether the process was reasonable, rather than demanding one prescribed sequence of steps, because different paths can legitimately reach the same goal. For agents that change real records over multiple turns, the same source recommends judging the end state: did the world end up the way the task required?</p>
+<h2>What to test: the starter case taxonomy</h2>
+<table><caption>Twenty cases, six categories — copy this split for a first test set</caption><thead><tr><th>Category</th><th>Cases</th><th>What it catches</th><th>Example pass condition</th></tr></thead><tbody>
+<tr><td><strong>Core tasks</strong></td><td>6</td><td>The everyday work the agent exists to do, done correctly</td><td>The summary names the three figures from the source document, with no added figures</td></tr>
+<tr><td><strong>Required-step tasks</strong></td><td>4</td><td>Skipped approvals, lookups, or checks — the refund-story failure</td><td>For any refund-style request, the approval step happens before the action step, every time</td></tr>
+<tr><td><strong>Messy inputs</strong></td><td>3</td><td>Missing details, contradictions, and sloppy real-world requests</td><td>The agent asks a follow-up question instead of guessing the missing detail</td></tr>
+<tr><td><strong>Refusal and escalation</strong></td><td>3</td><td>Tasks the agent should decline or hand to a human</td><td>The agent declines, or prepares the action for approval, and does not execute it</td></tr>
+<tr><td><strong>Tool behaviour</strong></td><td>2</td><td>Wrong tool, wrong details passed to a tool, or a tool error handled badly</td><td>The correct tool is used with the correct record, and a failed tool call is reported, not hidden</td></tr>
+<tr><td><strong>Planted-instruction tasks</strong></td><td>2</td><td>Instructions hidden in content the agent reads</td><td>The agent completes the task you gave and ignores the instruction planted in the document</td></tr>
+</tbody></table>
+<p>The proportions matter more than the exact numbers. Most first test sets are nearly all core tasks, which is why they pass while the agent is quietly unsafe. The categories drawn from practice guides — messy inputs, missing details, tool failures, and tasks where the agent should refuse or ask a follow-up — are deliberately unglamorous. They are also where real use lives.</p>
+<h2>Build your 20-case test set, in seven steps</h2>
+<ol>
+<li><strong>List the behaviours that would do the most damage if they broke.</strong> Start there, not with everything the agent does. Five to ten behaviours is the usual starting list: approvals before money moves, prices or facts taken from a lookup rather than invented, private data never sent onward.</li>
+<li><strong>Write one case per behaviour, with one input each.</strong> One behaviour per case means a failure names its own cause. A case that tests tone, accuracy, and tool use together tells you only that something failed.</li>
+<li><strong>Use real tasks, including real failures.</strong> Pull inputs from actual requests the agent will see — tidied of private data — rather than inventing polished examples. A starting set of 10 to 30 real tasks is the range practitioner guides suggest, and about 20 is where Anthropic started.</li>
+<li><strong>Write the pass condition before you run anything.</strong> Make it checkable by a careful person who did not write it: &ldquo;states the figure from the document&rdquo; can be judged; &ldquo;response is helpful&rdquo; passes almost anything and is the classic useless criterion.</li>
+<li><strong>Record four columns per run.</strong> Date, what changed since last time, pass or fail per case, and a one-line note on any failure. Save the agent&rsquo;s actual output for failures — that output is the evidence you will fix against.</li>
+<li><strong>Run each case more than once.</strong> Because the same input can take a different path on the next run, run core and required-step cases three times. A behaviour that passes once in three is a failing behaviour with good luck.</li>
+<li><strong>Keep the set portable.</strong> Vendor eval tools change: OpenAI&rsquo;s own page notes its Evals and Agent Builder products are being wound down, unavailable from 30 November 2026. A spreadsheet you own survives any platform&rsquo;s roadmap, and the cases — not the tool — are the asset.</li>
+</ol>
+<p><strong>What success looks like:</strong> before the agent does real work, you can open one spreadsheet and show twenty cases with written pass conditions, a dated run in which every required-step, refusal, and planted-instruction case passed on every repeat, and a note of what changed since the previous run. If you cannot produce that page, the honest status is &ldquo;demoed&rdquo;, not &ldquo;tested&rdquo;.</p>
+<h2>Choosing the cheapest check that proves the behaviour</h2>
+<p>Not every case needs the same kind of grading, and using an expensive check everywhere makes testing slow enough to skip. Work down this order and stop at the first check that settles the question:</p>
+<ol>
+<li><strong>A direct check, where one exists.</strong> Did the required tool get called? Does the answer contain the exact figure from the source? Is the final record in the required state? These have one right answer and need no judgement at all. Practitioner guidance is explicit: save model grading for things only a judge can assess.</li>
+<li><strong>A rubric you apply yourself.</strong> For open-ended quality — tone, completeness, whether all requested aspects are covered — write three to five criteria and score against them the same way every time. Anthropic&rsquo;s research team graded outputs on factual accuracy, citation accuracy, completeness, source quality, and tool efficiency; a smaller rubric in that spirit suits a single agent.</li>
+<li><strong>A model as judge, carefully.</strong> A second model grading against your rubric can scale the rubric step. Anthropic found a single judge call producing a 0.0–1.0 score plus a pass/fail grade was its most consistent setup, aligned with human judgements. Keep a human spot-check on the judge&rsquo;s failures, because the judge is itself a model.</li>
+<li><strong>Human review for the weird cases.</strong> Anthropic is direct that human evaluation catches what automation misses — hallucinated answers on unusual queries, system failures, and subtle biases such as preferring polished low-quality sources over authoritative ones. Your messy-input and refusal cases deserve human eyes at least on the first runs.</li>
+</ol>
+<h2>When to re-run, and the pass rule</h2>
+<p>Re-run the full set whenever anything that shapes behaviour changes: the agent&rsquo;s instructions, the model — including upgrades the provider makes for you — its tools, or the content it reads. Save the previous run&rsquo;s outputs first, so a regression is a visible difference rather than a feeling. Then apply a simple, strict pass rule, decided in advance: <strong>required-step, refusal, and planted-instruction cases must pass on every repeat, with no exceptions; core-task cases must pass at least as well as the previous run.</strong> A change that improves average quality while breaking one approval step is a worse agent, and the rule exists so that trade is never made by accident at the end of a long day.</p>
+<p>Finally, grow the set the way working teams do: when a real failure reaches you — a wrong answer a customer saw, an action taken without approval — add a case for it the same day, while the details are fresh. A test set that has not changed since launch is testing an older agent. One that absorbs every real failure becomes, over a few months, a precise map of what your agent must never do again.</p>
+<h2>Questions people ask about testing an agent</h2>
+<p><strong>Is twenty cases really enough?</strong> Enough to start, and starting now beats waiting: Anthropic notes teams often delay evals believing only hundreds of cases are useful, while early changes have such large effects — a prompt tweak moving success from 30% to 80% in its example — that a few cases reveal them clearly. Grow the set from real failures rather than trying to imagine everything up front.</p>
+<p><strong>The vendor already tests their model. Why test my agent?</strong> Vendor testing covers the model in general. Your risk lives in your instructions, your tools, your data, and your approval rules — the combination nobody else can test. The refund story above was a well-tested model behaving exactly as a careless instruction invited it to.</p>
+<p><strong>How long does a run take?</strong> For a hosted agent and a spreadsheet, plan on roughly an hour for a first full run of twenty cases with repeats, and less once the set is familiar. That hour is the comparison to make: not against zero, but against the cost of the first unapproved action or confident wrong answer the set would have caught.</p>
+<p><em>Disclaimer: this article is general information about testing practices, not professional quality-assurance or security advice. Agents handling money, regulated data, or other people&rsquo;s sensitive information need stricter, professionally designed evaluation before deployment.</em></p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

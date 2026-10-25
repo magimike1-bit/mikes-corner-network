@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search — PlanPrice</title>
+<meta name="description" content="Search every PlanPrice deal page, guide, calculator and tool.">
+<link rel="canonical" href="https://planprice.ca/search.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Search — PlanPrice">
+<meta property="og:description" content="Search every PlanPrice deal page, guide, calculator and tool.">
+<meta property="og:url" content="https://planprice.ca/search.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/search.html">Search</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Search</p>
+    <article class="product">
+      <h1>Search PlanPrice</h1>
+      <p class="lead">Every deal page, guide, calculator and tool — searched locally in your browser. No query ever leaves your device.</p>
+      <form id="search-form" role="search">
+        <label for="q">Search vendors, guides and tools</label><br>
+        <input id="q" name="q" type="search" size="42" autocomplete="off" placeholder="Try “payroll”, “FreshBooks”, “HST”…">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <p id="search-status" class="fine" aria-live="polite"></p>
+      <ul id="results" class="dir-rows"></ul>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/verified.html">Verification log</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-10-25 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+<script>
+(function () {
+  var input = document.getElementById('q'), list = document.getElementById('results'),
+      status = document.getElementById('search-status'), DATA = null;
+  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function run(q) {
+    q = (q || '').trim().toLowerCase();
+    if (!DATA) { status.textContent = 'Loading the index…'; return; }
+    if (!q) { list.innerHTML = ''; status.textContent = DATA.length + ' pages indexed.'; return; }
+    var terms = q.split(/\s+/), scored = [];
+    DATA.forEach(function (e) {
+      var title = e.title.toLowerCase(), hay = (e.title + ' ' + e.desc + ' ' + e.url).toLowerCase(), s = 0;
+      terms.forEach(function (t) {
+        if (title.indexOf(t) === 0) s += 5; else if (title.indexOf(t) >= 0) s += 3;
+        if (hay.indexOf(t) >= 0) s += 1;
+      });
+      if (terms.every(function (t) { return hay.indexOf(t) >= 0; })) scored.push([s, e]);
+    });
+    scored.sort(function (a, b) { return b[0] - a[0]; });
+    var top = scored.slice(0, 30);
+    status.textContent = scored.length + ' result' + (scored.length === 1 ? '' : 's') + ' for “' + q + '”';
+    list.innerHTML = top.map(function (pair) {
+      var e = pair[1];
+      return '<li class="dir-row"><div class="dir-row-main"><h3 class="dir-row-name"><a href="' + e.url + '">' + esc(e.title) + '</a></h3>' +
+             '<p class="dir-row-tag">' + esc(e.desc) + '</p></div>' +
+             '<div class="dir-row-side"><p class="dir-row-badge"><span class="badge">' + e.type + '</span></p></div></li>';
+    }).join('') || '<li class="dir-row"><div class="dir-row-main"><p>No matches. Try a vendor name (FreshBooks), a category (payroll), or a tool (calculator).</p></div></li>';
+  }
+  fetch('/search-index.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    var q = new URLSearchParams(location.search).get('q') || '';
+    input.value = q; run(q);
+  }).catch(function () { status.textContent = 'The search index could not be loaded.'; });
+  document.getElementById('search-form').addEventListener('submit', function (ev) { ev.preventDefault(); run(input.value); });
+  input.addEventListener('input', function () { run(input.value); });
+})();
+</script>
+</body>
+</html>

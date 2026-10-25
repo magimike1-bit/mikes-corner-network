@@ -1,5 +1,5 @@
 {
-  "checked": "2026-09-30",
+  "checked": "2026-10-14",
   "scores": {
     "ahrefs": {
       "capterra": {
@@ -9,31 +9,26 @@
       },
       "g2": {
         "score": 4.5,
-        "reviews": 711,
+        "reviews": 717,
         "url": "https://www.g2.com/products/ahrefs/reviews"
       }
     },
     "big-cartel": {
-      "capterra": {
-        "score": 4.2,
-        "reviews": 16,
-        "url": "https://www.capterra.com/p/1013033/Big-Cartel"
-      },
       "g2": {
         "score": 4.6,
-        "reviews": 92,
+        "reviews": 101,
         "url": "https://www.g2.com/products/big-cartel/reviews"
       }
     },
     "calendly": {
       "capterra": {
         "score": 4.7,
-        "reviews": 4161,
+        "reviews": 4164,
         "url": "https://www.capterra.com/p/148036/Calendly"
       },
       "g2": {
         "score": 4.7,
-        "reviews": 2647,
+        "reviews": 2649,
         "url": "https://www.g2.com/products/calendly/reviews"
       }
     },
@@ -52,7 +47,7 @@
     "hubspot": {
       "capterra": {
         "score": 4.5,
-        "reviews": 4488,
+        "reviews": 4491,
         "url": "https://www.capterra.com/p/152373/HubSpot-CRM/reviews/"
       },
       "g2": {
@@ -76,19 +71,19 @@
       },
       "g2": {
         "score": 4.6,
-        "reviews": 526,
+        "reviews": 529,
         "url": "https://www.g2.com/products/jobber/reviews"
       }
     },
     "monday": {
       "capterra": {
         "score": 4.6,
-        "reviews": 6116,
+        "reviews": 6123,
         "url": "https://www.capterra.com/p/147657/monday-com"
       },
       "g2": {
         "score": 4.7,
-        "reviews": 17151,
+        "reviews": 17263,
         "url": "https://www.g2.com/products/monday-com/reviews"
       }
     },
@@ -107,33 +102,33 @@
     "quickbooks": {
       "g2": {
         "score": 4,
-        "reviews": 3879,
+        "reviews": 3891,
         "url": "https://www.g2.com/products/quickbooks-online/reviews"
       }
     },
     "semrush": {
       "capterra": {
         "score": 4.6,
-        "reviews": 2326,
+        "reviews": 2329,
         "url": "https://www.capterra.com/p/151962/SEMrush/reviews/"
       },
       "g2": {
         "score": 4.4,
-        "reviews": 4035,
+        "reviews": 4069,
         "url": "https://www.g2.com/products/semrush/reviews"
       }
     },
     "shopify": {
       "g2": {
         "score": 4.4,
-        "reviews": 5143,
+        "reviews": 5146,
         "url": "https://www.g2.com/products/shopify/reviews"
       }
     },
     "square": {
       "capterra": {
         "score": 4.6,
-        "reviews": 3038,
+        "reviews": 3039,
         "url": "https://www.capterra.com/p/121583/AccuPOS-Point-Of-Sale-Software/alternatives/"
       },
       "g2": {
@@ -145,26 +140,26 @@
     "stripe": {
       "capterra": {
         "score": 4.6,
-        "reviews": 3383,
+        "reviews": 3388,
         "url": "https://www.capterra.com/p/123889/Stripe/"
       },
       "g2": {
         "score": 4.2,
-        "reviews": 458,
+        "reviews": 460,
         "url": "https://www.g2.com/products/stripe-stripe-payments/reviews"
       }
     },
     "wave": {
       "g2": {
         "score": 4.3,
-        "reviews": 328,
+        "reviews": 329,
         "url": "https://www.g2.com/products/wave/reviews"
       }
     },
     "xero": {
       "g2": {
         "score": 4.4,
-        "reviews": 1832,
+        "reviews": 1837,
         "url": "https://www.g2.com/products/xero/reviews"
       }
     }

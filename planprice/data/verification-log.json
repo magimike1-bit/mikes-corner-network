@@ -1,0 +1,432 @@
+{
+ "updated": "2026-10-25",
+ "entries": [
+  {
+   "date": "2026-10-25",
+   "item": "HubSpot",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/hubspot.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "FreshBooks",
+   "type": "promo-verified",
+   "detail": "Promotion confirmed on the vendor's site: 80% off for 4 months for new subscribers.",
+   "url": "/deals/freshbooks.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "FreshBooks",
+   "type": "pricing-verified",
+   "detail": "List pricing re-verified against the vendor's own pricing page; page dates updated.",
+   "url": "/deals/freshbooks.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Monday.com",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/monday.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Semrush",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/semrush.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Shopify",
+   "type": "promo-verified",
+   "detail": "Promotion confirmed on the vendor's site: $1/month for 3 months for new merchants (Basic, Grow and Advanced).",
+   "url": "/deals/shopify.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Wave",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/wave.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Wave",
+   "type": "pricing-verified",
+   "detail": "List pricing re-verified against the vendor's own pricing page; page dates updated.",
+   "url": "/deals/wave.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "QuickBooks Online",
+   "type": "promo-verified",
+   "detail": "Promotion confirmed on the vendor's site: 90% off for new subscribers (Lite C$2/mo, list C$20).",
+   "url": "/deals/quickbooks.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "QuickBooks Online",
+   "type": "pricing-verified",
+   "detail": "List pricing re-verified against the vendor's own pricing page; page dates updated.",
+   "url": "/deals/quickbooks.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Xero",
+   "type": "promo-verified",
+   "detail": "Promotion confirmed on the vendor's site: 80% off your first 3 months for new customers.",
+   "url": "/deals/xero.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Square",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/square.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Square",
+   "type": "pricing-verified",
+   "detail": "List pricing re-verified against the vendor's own pricing page; page dates updated.",
+   "url": "/deals/square.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Calendly",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/calendly.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Calendly",
+   "type": "pricing-verified",
+   "detail": "List pricing re-verified against the vendor's own pricing page; page dates updated.",
+   "url": "/deals/calendly.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Jobber",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/jobber.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Humi",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/humi.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Ahrefs",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/ahrefs.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Plausible",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/plausible.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Stripe",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/stripe.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Big Cartel",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/big-cartel.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Big Cartel",
+   "type": "pricing-verified",
+   "detail": "List pricing re-verified against the vendor's own pricing page; page dates updated.",
+   "url": "/deals/big-cartel.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Pipedrive",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/pipedrive.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Zoho CRM",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/zoho-crm.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Wagepoint",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/wagepoint.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Wagepoint",
+   "type": "pricing-verified",
+   "detail": "List pricing re-verified against the vendor's own pricing page; page dates updated.",
+   "url": "/deals/wagepoint.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Knit People",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/knit-people.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Acuity Scheduling",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/acuity.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Setmore",
+   "type": "promo-checked",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
+   "url": "/deals/setmore.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Trello",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/trello.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Asana",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/asana.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "ClickUp",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/clickup.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Notion",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/notion.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Slack",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/slack.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Zoom",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/zoom.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Google Workspace",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/google-workspace.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Microsoft 365",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/microsoft-365.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Salesforce",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/salesforce.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Capsule CRM",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/capsule-crm.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Mailchimp",
+   "type": "promo-verified",
+   "detail": "Promotion confirmed on the vendor's site: 15% off your first 12 months (accounts with 10,000+ contacts). Vendor page added to PlanPrice today from the research inventory.",
+   "url": "/deals/mailchimp.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Klaviyo",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/klaviyo.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "ActiveCampaign",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/activecampaign.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "AWeber",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/aweber.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "MailerLite",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/mailerlite.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Moz",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/moz.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Hootsuite",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/hootsuite.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Sage 50",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/sage-50.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Zoho Books",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/zoho-books.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "BigCommerce",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/bigcommerce.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Squarespace",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/squarespace.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Wix",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/wix.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Lightspeed",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/lightspeed.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Toast",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/toast.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Deel",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/deel.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Housecall Pro",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/housecall-pro.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Cal.com",
+   "type": "promo-checked",
+   "detail": "Vendor page added to PlanPrice today from the research inventory; no public promotion found.",
+   "url": "/deals/cal-com.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Wagepoint",
+   "type": "pricing-corrected",
+   "detail": "Fee schedule updated by Wagepoint on 2026-10-22: Lite C$20 + C$4/employee, Core C$40 + C$6, Plus C$80 + C$10 replace the former Solo/Unlimited plans. Pricing table corrected.",
+   "url": "/deals/wagepoint.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "FreshBooks",
+   "type": "promo-corrected",
+   "detail": "The previous headline offer ($1/month for your first year, Solopreneur) is no longer offered. Replaced with the current offer found on freshbooks.com/en-ca/pricing: 80% off for 4 months.",
+   "url": "/deals/freshbooks.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "QuickBooks Online",
+   "type": "promo-corrected",
+   "detail": "Previous headline specifics (C$3/month on EasyStart for 6 months) could not be confirmed. Corrected to the offer confirmed on quickbooks.intuit.com/ca today: 90% off for new subscribers (Lite C$2/mo, list C$20).",
+   "url": "/deals/quickbooks.html"
+  },
+  {
+   "date": "2026-10-25",
+   "item": "Site disclosure",
+   "type": "correction",
+   "detail": "Disclosure page corrected: deal-page buttons were described as 'placeholders until programs are approved'. They are plain outbound vendor links; the sentence was removed and replaced.",
+   "url": "/disclosure.html"
+  },
+  {
+   "date": "2026-09-30",
+   "item": "Full catalogue",
+   "type": "baseline",
+   "detail": "Baseline verification sweep: list prices and promo status recorded for the 22 products then tracked. This is the date most older pages still show — it stays wherever pricing was not re-checked since.",
+   "url": "/deals.html"
+  }
+ ]
+}

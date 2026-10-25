@@ -131,7 +131,7 @@ const termBySlug = new Map();
  * affiliateLive(p) is true only when a product's affiliate status is "live".
  * Until programs are approved every product is "pending-approval", and the
  * site renders the INTERIM disclosure wording: no affiliate links exist yet,
- * deal-page CTAs are inert placeholders, and no commissions are being earned.
+ * deal-page CTAs are plain outbound vendor links, and no commissions are being earned.
  * The moment a product flips to "live", its deal page gets the blunt live
  * disclosure plus a real affiliate link. */
 const affiliateLive = (p) => !!(p.affiliate && p.affiliate.status === "live");
@@ -1365,7 +1365,7 @@ function disclosureBody() {
     : `<p><strong>Current status: no affiliate links are live yet.</strong> PlanPrice is reader-supported: our plan is to fund the site through affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors — no commissions are being earned. When affiliate links go live, this page will say so, and buying through them will never cost you extra.</p>`;
   const statusBullet = anyAffiliateLive
     ? `<li>We label affiliate links as affiliate links. If a link earns us a commission, the page says so.</li>`
-    : `<li>Right now, zero commissions are being earned. Deal-page buttons are either inert placeholders marked "Affiliate link pending approval" or plain outbound links to vendors we have no affiliate relationship with — either way, no commissions are earned, and outbound links go straight to the vendor.</li>`;
+    : `<li>Right now, zero commissions are being earned. Deal-page buttons are plain outbound links to vendors we have no affiliate relationship with — no commissions are earned, and outbound links go straight to the vendor.</li>`;
   return `<section class="section"><div class="wrap">
       ${status}
       <p><strong>What this means in practice:</strong></p>
@@ -1378,7 +1378,7 @@ function disclosureBody() {
       <p>As of our current check (${CHECKED}), ${
         anyAffiliateLive
           ? "affiliate partnerships are active and earning commissions."
-          : "affiliate partnerships are being established — buttons on deal pages are placeholders until programs are approved. No commissions are being earned yet."
+          : "affiliate partnerships are still being established and no commissions are being earned yet. Buttons on deal pages are plain outbound links that go straight to the vendor."
       }</p>
       <p>If you have questions about how we make money: ${
         anyAffiliateLive

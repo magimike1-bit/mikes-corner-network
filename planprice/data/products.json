@@ -92,16 +92,16 @@
     }
    ],
    "deal": {
-    "headline": "$1/month for your first year (Solopreneur offer)",
+    "headline": "80% off for 4 months for new subscribers",
     "source_url": "https://www.freshbooks.com/en-ca/pricing",
-    "verified_date": "2026-09-30"
+    "verified_date": "2026-10-25"
    },
    "affiliate": {
     "program": "freshbooks-affiliate",
     "network": "pending",
     "status": "pending-approval"
    },
-   "last_verified": "2026-09-30",
+   "last_verified": "2026-10-25",
    "sort_priority": 999,
    "reviews": {
     "strengths": [
@@ -173,7 +173,7 @@
    "reviews": {
     "strengths": [
      "Ease of use is its dominant pro; intuitive interface.",
-     "Team collaboration features \u2014 shared boards, updates, communication.",
+     "Team collaboration features — shared boards, updates, communication.",
      "Strong project management with visual Kanban and Gantt boards.",
      "Automations reduce manual work across boards."
     ],
@@ -241,7 +241,7 @@
    "category": "Ecommerce",
    "tagline": "The default storefront platform for selling online.",
    "vendor_homepage": "https://www.shopify.com",
-   "description": "Shopify hosts your online store, checkout, and payments in one platform \u2014 the reason it powers most new ecommerce businesses. Pricing is USD at list; Canadian merchants are billed in CAD at checkout at Shopify's exchange rate. The Grow and Advanced tiers cut transaction fees and add reporting, while Plus targets high-volume brands.",
+   "description": "Shopify hosts your online store, checkout, and payments in one platform — the reason it powers most new ecommerce businesses. Pricing is USD at list; Canadian merchants are billed in CAD at checkout at Shopify's exchange rate. The Grow and Advanced tiers cut transaction fees and add reporting, while Plus targets high-volume brands.",
    "best_for": "Businesses selling products online that want a managed storefront without managing servers.",
    "similar_to": "the WordPress of ecommerce",
    "pricing_tiers": [
@@ -255,13 +255,13 @@
      "name": "Basic",
      "price": "$39",
      "cadence": "per month",
-     "notes": "$29/month billed annually; roughly C$50\u201355/mo in CAD; USD list."
+     "notes": "$29/month billed annually; roughly C$50–55/mo in CAD; USD list."
     },
     {
      "name": "Grow",
      "price": "$105",
      "cadence": "per month",
-     "notes": "$79/month billed annually; roughly C$132\u2013140/mo in CAD; USD list."
+     "notes": "$79/month billed annually; roughly C$132–140/mo in CAD; USD list."
     },
     {
      "name": "Advanced",
@@ -276,7 +276,11 @@
      "notes": "High-volume plan; custom pricing starts here; USD list."
     }
    ],
-   "deal": null,
+   "deal": {
+    "headline": "$1/month for 3 months for new merchants (Basic, Grow and Advanced)",
+    "source_url": "https://www.shopify.com",
+    "verified_date": "2026-10-25"
+   },
    "affiliate": {
     "program": "shopify-affiliate",
     "network": "pending",
@@ -309,7 +313,7 @@
    "category": "Accounting",
    "tagline": "Free accounting and invoicing for Canadian small businesses.",
    "vendor_homepage": "https://www.waveapps.com",
-   "description": "Wave offers genuinely free accounting and invoicing for small businesses, and it is a Canadian company, so CAD handling feels native. It makes money on payment processing (2.9% + 60\u00a2 per transaction) and optional add-ons like payroll and bookkeeping services. The Pro tier adds receipt scanning and removes ads.",
+   "description": "Wave offers genuinely free accounting and invoicing for small businesses, and it is a Canadian company, so CAD handling feels native. It makes money on payment processing (2.9% + 60¢ per transaction) and optional add-ons like payroll and bookkeeping services. The Pro tier adds receipt scanning and removes ads.",
    "best_for": "Canadian sole proprietors and micro-businesses that want free bookkeeping and invoicing.",
    "similar_to": "the Google Docs of accounting software",
    "pricing_tiers": [
@@ -327,7 +331,7 @@
     },
     {
      "name": "Payments",
-     "price": "2.9% + 60\u00a2",
+     "price": "2.9% + 60¢",
      "cadence": "per transaction",
      "notes": "Online card processing rate when you accept payments through Wave."
     }
@@ -338,7 +342,7 @@
     "network": "pending",
     "status": "pending-approval"
    },
-   "last_verified": "2026-09-30",
+   "last_verified": "2026-10-25",
    "sort_priority": 999,
    "reviews": {
     "strengths": [
@@ -348,7 +352,7 @@
      "Bank transaction syncing automates bookkeeping data entry."
     ],
     "weaknesses": [
-     "Customer support is poor \u2014 users report being unable to reach a human.",
+     "Customer support is poor — users report being unable to reach a human.",
      "Lacks growth features: no 1099 filing without year-round payroll, no inventory, no time tracking.",
      "Paid add-ons are priced high for businesses outgrowing the free tier."
     ]
@@ -395,16 +399,16 @@
     }
    ],
    "deal": {
-    "headline": "90% off for 6 months for new subscribers (as low as C$3/month on EasyStart)",
+    "headline": "90% off for new subscribers (Lite C$2/mo, list C$20)",
     "source_url": "https://quickbooks.intuit.com/ca",
-    "verified_date": "2026-09-30"
+    "verified_date": "2026-10-25"
    },
    "affiliate": {
     "program": "quickbooks-affiliate",
     "network": "pending",
     "status": "pending-approval"
    },
-   "last_verified": "2026-09-30",
+   "last_verified": "2026-10-25",
    "sort_priority": 999,
    "reviews": {
     "strengths": [
@@ -427,7 +431,7 @@
    "category": "Accounting",
    "tagline": "Cloud accounting with unlimited users on every plan.",
    "vendor_homepage": "https://www.xero.com",
-   "description": "Xero is the main cloud rival to QuickBooks, known for clean design and unlimited users on every tier \u2014 you pay for features, not seats. List pricing is in USD. Xero regularly offers introductory discounts to new subscribers, but the headline offer and its term change often, so always check the current pricing page before signing up.",
+   "description": "Xero is the main cloud rival to QuickBooks, known for clean design and unlimited users on every tier — you pay for features, not seats. List pricing is in USD. Xero regularly offers introductory discounts to new subscribers, but the headline offer and its term change often, so always check the current pricing page before signing up.",
    "best_for": "Small businesses that want unlimited users and strong bank-feed reconciliation.",
    "similar_to": "the Mac to QuickBooks' PC",
    "pricing_tiers": [
@@ -450,7 +454,11 @@
      "notes": "Unlimited users; multi-currency and project tracking; USD."
     }
    ],
-   "deal": null,
+   "deal": {
+    "headline": "80% off your first 3 months for new customers",
+    "source_url": "https://www.xero.com/ca/pricing-plans",
+    "verified_date": "2026-10-25"
+   },
    "affiliate": {
     "program": "xero-affiliate",
     "network": "pending",
@@ -476,15 +484,15 @@
    "category": "Payments & POS",
    "tagline": "Free point-of-sale software; you pay when you take payments.",
    "vendor_homepage": "https://squareup.com",
-   "description": "Square's point-of-sale software is free \u2014 the business model is the processing fee on each sale (2.6% + 15\u00a2 for in-person payments). Hardware readers are cheap and the ecosystem grows into online stores, appointments, and payroll. Square Appointments adds paid tiers for salons, clinics, and services that book online.",
-   "best_for": "Retailers, caf\u00e9s, and service businesses that need a free POS and transparent card rates.",
+   "description": "Square's point-of-sale software is free — the business model is the processing fee on each sale (2.6% + 15¢ for in-person payments). Hardware readers are cheap and the ecosystem grows into online stores, appointments, and payroll. Square Appointments adds paid tiers for salons, clinics, and services that book online.",
+   "best_for": "Retailers, cafés, and service businesses that need a free POS and transparent card rates.",
    "similar_to": "the Shopify of Main Street",
    "pricing_tiers": [
     {
      "name": "Square POS",
      "price": "$0",
      "cadence": "free",
-     "notes": "Free POS software; in-person card processing 2.6% + 15\u00a2 per transaction."
+     "notes": "Free POS software; in-person card processing 2.6% + 15¢ per transaction."
     },
     {
      "name": "Appointments Free",
@@ -511,7 +519,7 @@
     "network": "pending",
     "status": "pending-approval"
    },
-   "last_verified": "2026-09-30",
+   "last_verified": "2026-10-25",
    "sort_priority": 999,
    "reviews": {
     "strengths": [
@@ -532,7 +540,7 @@
    "category": "Scheduling",
    "tagline": "Booking pages that kill the back-and-forth email.",
    "vendor_homepage": "https://www.calendly.com",
-   "description": "Calendly lets clients book time with you from a link \u2014 no more 'does Tuesday work?' email threads. The free plan covers one event type, which is enough for a solo consultant. Paid tiers add multiple event types, team scheduling, reminders, and CRM integrations, priced per seat.",
+   "description": "Calendly lets clients book time with you from a link — no more 'does Tuesday work?' email threads. The free plan covers one event type, which is enough for a solo consultant. Paid tiers add multiple event types, team scheduling, reminders, and CRM integrations, priced per seat.",
    "best_for": "Consultants, sales reps, and teams that schedule a lot of external meetings.",
    "similar_to": "the OpenTable for business meetings",
    "pricing_tiers": [
@@ -567,7 +575,7 @@
     "network": "pending",
     "status": "pending-approval"
    },
-   "last_verified": "2026-09-30",
+   "last_verified": "2026-10-25",
    "sort_priority": 999,
    "reviews": {
     "strengths": [
@@ -590,7 +598,7 @@
    "category": "Field Service",
    "tagline": "Job management for home-service businesses, priced in CAD.",
    "vendor_homepage": "https://www.getjobber.com",
-   "description": "Jobber is built for field-service businesses \u2014 plumbers, cleaners, landscapers, contractors \u2014 covering quotes, scheduling, dispatch, invoicing, and client communication. It is a Canadian company with CAD pricing, and annual prepayment cuts the monthly rate significantly on every tier. Extra team members cost C$29/month each.",
+   "description": "Jobber is built for field-service businesses — plumbers, cleaners, landscapers, contractors — covering quotes, scheduling, dispatch, invoicing, and client communication. It is a Canadian company with CAD pricing, and annual prepayment cuts the monthly rate significantly on every tier. Extra team members cost C$29/month each.",
    "best_for": "Canadian home-service and field-service businesses managing jobs and crews.",
    "similar_to": "the Shopify for the trades",
    "pricing_tiers": [
@@ -636,7 +644,7 @@
    "reviews": {
     "strengths": [
      "Intuitive interface.",
-     "Excellent mobile app (rated 4.7\u20134.8).",
+     "Excellent mobile app (rated 4.7–4.8).",
      "Professional quotes and invoices; Client Hub.",
      "Automation features.",
      "Responsive customer support."
@@ -660,7 +668,7 @@
    "category": "HR & Payroll",
    "tagline": "Canadian HR and payroll from the company now known as Employment Hero.",
    "vendor_homepage": "https://www.humi.ca",
-   "description": "Humi (now part of Employment Hero) is a Canadian HR platform covering onboarding, time off, documents, and payroll. The core HR platform is quote-based \u2014 you talk to sales for pricing. Payroll is the published piece: $7 per employee per month with a $70 monthly minimum, or a managed-payroll service at $30 per employee per month with a $500 monthly minimum.",
+   "description": "Humi (now part of Employment Hero) is a Canadian HR platform covering onboarding, time off, documents, and payroll. The core HR platform is quote-based — you talk to sales for pricing. Payroll is the published piece: $7 per employee per month with a $70 monthly minimum, or a managed-payroll service at $30 per employee per month with a $500 monthly minimum.",
    "best_for": "Canadian businesses that want HR and payroll in one Canadian-compliant system.",
    "similar_to": "the Gusto of Canada",
    "pricing_tiers": [
@@ -703,7 +711,7 @@
      "Payroll year-end filing difficulties reported.",
      "Inflexible time-off policies for multi-role employees.",
      "Occasional bugs/glitches.",
-     "No published pricing \u2014 quote required."
+     "No published pricing — quote required."
     ]
    },
    "canadian": {
@@ -755,7 +763,7 @@
    "category": "SEO & Marketing",
    "tagline": "Privacy-friendly web analytics without cookies.",
    "vendor_homepage": "https://plausible.io/",
-   "description": "Plausible is an open-source, privacy-friendly web analytics platform \u2014 a lightweight Google Analytics alternative with a simple single-page dashboard. Its script is a fraction of the size of Google Analytics, processes no personal data, and needs no cookie banners.",
+   "description": "Plausible is an open-source, privacy-friendly web analytics platform — a lightweight Google Analytics alternative with a simple single-page dashboard. Its script is a fraction of the size of Google Analytics, processes no personal data, and needs no cookie banners.",
    "best_for": "Site owners who want simple analytics without cookie banners or privacy headaches.",
    "pricing_tiers": [
     {
@@ -785,7 +793,7 @@
    "pricing_tiers": [
     {
      "name": "Pay as you go",
-     "price": "2.9% + 30\u00a2",
+     "price": "2.9% + 30¢",
      "cadence": "per transaction",
      "notes": "Domestic card transactions; no setup or monthly fees."
     }
@@ -833,7 +841,7 @@
     "network": null,
     "status": "none"
    },
-   "last_verified": "2026-09-30",
+   "last_verified": "2026-10-25",
    "sort_priority": 999
   },
   {
@@ -858,7 +866,30 @@
    "category": "HR & Payroll",
    "tagline": "Canadian-built payroll that handles CPP, EI, and T4s.",
    "vendor_homepage": "https://www.wagepoint.com",
-   "description": "Canadian payroll from C$20/mo base + C$4/employee (Solo) or C$40 + C$6 (Unlimited). Bills in CAD."
+   "description": "Canadian payroll priced as a base fee plus a per-employee charge: Lite C$20/mo + C$4/employee, Core C$40 + C$6, Plus C$80 + C$10 (fee schedule updated 2026-10-22). Bills in CAD.",
+   "last_verified": "2026-10-25",
+   "best_for": "Canadian small businesses (roughly 1–100 employees) that want straightforward, compliant payroll without a full HR platform.",
+   "similar_to": "payroll done the Canadian way, without paying for an HR suite you don't need",
+   "pricing_tiers": [
+    {
+     "name": "Lite",
+     "price": "C$20 + C$4/employee",
+     "cadence": "per month",
+     "notes": "Lowest base fee tier (fee schedule updated 2026-10-22)."
+    },
+    {
+     "name": "Core",
+     "price": "C$40 + C$6/employee",
+     "cadence": "per month",
+     "notes": "Mid tier (fee schedule updated 2026-10-22)."
+    },
+    {
+     "name": "Plus",
+     "price": "C$80 + C$10/employee",
+     "cadence": "per month",
+     "notes": "Top tier (fee schedule updated 2026-10-22)."
+    }
+   ]
   },
   {
    "slug": "knit-people",
@@ -883,6 +914,1084 @@
    "tagline": "Free appointment scheduling for up to 4 staff.",
    "vendor_homepage": "https://www.setmore.com",
    "description": "Free for 4 staff with unlimited appointments. Pro from $5/user/mo (USD, annual)."
+  },
+  {
+   "slug": "trello",
+   "name": "Trello",
+   "category": "Work Management",
+   "tagline": "Kanban boards for visual task tracking.",
+   "vendor_homepage": "https://trello.com",
+   "description": "Trello organizes work on boards, lists and cards — the simplest visual project tracker in this directory. The free plan caps a workspace at 10 boards; paid plans remove the cap and are billed per user. The cost trap is guests: multi-board guests in a paid workspace bill at the full seat rate.",
+   "best_for": "Small teams that want a visual board without a project-management learning curve.",
+   "similar_to": "the digital corkboard for team tasks",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Up to 10 boards per workspace; unlimited cards."
+    },
+    {
+     "name": "Standard",
+     "price": "$5",
+     "cadence": "per user/month, billed annually",
+     "notes": "Unlimited boards, advanced checklists, custom fields."
+    },
+    {
+     "name": "Premium",
+     "price": "$10",
+     "cadence": "per user/month, billed annually",
+     "notes": "Admin controls, workspace views, priority support."
+    },
+    {
+     "name": "Enterprise",
+     "price": "$17.50",
+     "cadence": "per user/month, annual only",
+     "notes": "Organization-wide controls; 50-seat minimum."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "trello-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-12",
+   "sort_priority": 999
+  },
+  {
+   "slug": "asana",
+   "name": "Asana",
+   "category": "Work Management",
+   "tagline": "Work management with timelines, portfolios and automation.",
+   "vendor_homepage": "https://asana.com",
+   "description": "Asana is the step up from a board tool: projects, timelines, portfolios and rules-based automation for teams coordinating across departments. List prices are published in USD; Asana's help centre documents payment in CAD, so Canadian accounts can be billed without a US card.",
+   "best_for": "Growing teams coordinating projects across departments that have outgrown a simple board.",
+   "similar_to": "the project portfolio manager for teams that outgrew Trello",
+   "pricing_tiers": [
+    {
+     "name": "Personal",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Free tier for individuals and very small teams."
+    },
+    {
+     "name": "Starter",
+     "price": "$10.99",
+     "cadence": "per user/month, billed annually",
+     "notes": "$13.49 billed monthly. Timelines, dashboards, forms."
+    },
+    {
+     "name": "Advanced",
+     "price": "$24.99",
+     "cadence": "per user/month, billed annually",
+     "notes": "Portfolios, goals, workload management, approvals."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "asana-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-23",
+   "sort_priority": 999
+  },
+  {
+   "slug": "clickup",
+   "name": "ClickUp",
+   "category": "Work Management",
+   "tagline": "All-in-one work app: tasks, docs, goals and time tracking.",
+   "vendor_homepage": "https://clickup.com",
+   "description": "ClickUp packs tasks, docs, whiteboards, goals and time tracking into one per-seat subscription, undercutting most rivals on headline price. The catch is add-ons: AI features are billed separately per seat, so model the add-on before comparing the base price against Asana or monday.",
+   "best_for": "Cost-conscious teams that want one app instead of four subscriptions.",
+   "similar_to": "the everything-app that undercuts Asana on seat price",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Free tier with limited storage and views."
+    },
+    {
+     "name": "Unlimited",
+     "price": "$7",
+     "cadence": "per user/month, billed annually",
+     "notes": "Unlimited storage, integrations and dashboards."
+    },
+    {
+     "name": "Business",
+     "price": "$12",
+     "cadence": "per user/month, billed annually",
+     "notes": "Advanced automation, timelines and workload views."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "clickup-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-15",
+   "sort_priority": 999
+  },
+  {
+   "slug": "notion",
+   "name": "Notion",
+   "category": "Work Management",
+   "tagline": "Docs, wikis and lightweight projects in one workspace.",
+   "vendor_homepage": "https://www.notion.com",
+   "description": "Notion blends documents, wikis, databases and lightweight project tracking. Paid plans are per user; the Business tier now bundles Notion AI, which used to be a separate per-seat add-on. The free tier caps team workspaces at 1,000 blocks, which real teams hit quickly.",
+   "best_for": "Teams that live in documents and want their project tracker in the same place.",
+   "similar_to": "the team wiki that quietly became a project tool",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Team workspaces capped at 1,000 blocks; 5 MB file uploads; 7-day page history."
+    },
+    {
+     "name": "Plus",
+     "price": "$10",
+     "cadence": "per user/month, billed annually",
+     "notes": "Unlimited blocks and uploads; 30-day page history."
+    },
+    {
+     "name": "Business",
+     "price": "$20",
+     "cadence": "per user/month, billed annually",
+     "notes": "Notion AI included; private teamspaces; 90-day history."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "notion-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-23",
+   "sort_priority": 999
+  },
+  {
+   "slug": "slack",
+   "name": "Slack",
+   "category": "Work Management",
+   "tagline": "Team messaging with channels, huddles and workflow automation.",
+   "vendor_homepage": "https://slack.com",
+   "description": "Slack is the default team chat for small businesses that have outgrown email threads. Paid plans are per active user. Watch the renewal price: Business+ rose from $12.50 to $15 per user at renewals after August 2025, so older guides quoting $12.50 are stale.",
+   "best_for": "Teams that coordinate in chat all day and need message history that survives past 90 days.",
+   "similar_to": "the office hallway, as a subscription",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "90-day message history; core messaging and huddles."
+    },
+    {
+     "name": "Pro",
+     "price": "$7.25",
+     "cadence": "per user/month, billed annually",
+     "notes": "$8.75 billed monthly. Unlimited history, group calls, Slack Connect."
+    },
+    {
+     "name": "Business+",
+     "price": "$15",
+     "cadence": "per user/month, billed annually",
+     "notes": "$18 billed monthly. SSO/SAML, advanced admin and compliance."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "slack-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-11",
+   "sort_priority": 999
+  },
+  {
+   "slug": "zoom",
+   "name": "Zoom",
+   "category": "Work Management",
+   "tagline": "Video meetings, phone and webinars under one licence.",
+   "vendor_homepage": "https://www.zoom.com",
+   "description": "Zoom Workplace bundles meetings with chat, whiteboard and mail. The Business tier carries a 10-licence minimum — teams under 10 pay for 10 — which makes Pro the real small-team tier. Phone and webinar add-ons are priced per user on top.",
+   "best_for": "Small teams whose day runs on video calls with clients.",
+   "similar_to": "the meeting room everyone already knows how to join",
+   "pricing_tiers": [
+    {
+     "name": "Basic",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Free tier; 40-minute group meetings."
+    },
+    {
+     "name": "Workplace Pro",
+     "price": "$14.16",
+     "cadence": "per user/month, billed annually",
+     "notes": "$16.99 billed monthly. 30-hour meetings, AI Companion, 5 GB cloud storage per licence."
+    },
+    {
+     "name": "Workplace Business",
+     "price": "$18.33",
+     "cadence": "per user/month, billed annually",
+     "notes": "$21.99 billed monthly. 300 participants, SSO. 10-licence minimum."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "zoom-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-18",
+   "sort_priority": 999
+  },
+  {
+   "slug": "google-workspace",
+   "name": "Google Workspace",
+   "category": "Work Management",
+   "tagline": "Gmail, Drive and Docs for business, priced in CAD.",
+   "vendor_homepage": "https://workspace.google.com",
+   "description": "Google Workspace is the email-and-docs suite most small businesses default to. Unusually for this directory, Google publishes Canadian-dollar list prices, so the numbers below need no conversion. Plans cap at 300 users, and Gemini AI is bundled into the standard tiers.",
+   "best_for": "Businesses that want business email on their own domain plus docs and storage in one bill.",
+   "similar_to": "the office suite that starts with your email address",
+   "pricing_tiers": [
+    {
+     "name": "Business Starter",
+     "price": "C$9.20",
+     "cadence": "per user/month, billed annually",
+     "notes": "Custom email, 30 GB pooled storage per user."
+    },
+    {
+     "name": "Business Standard",
+     "price": "C$18.40",
+     "cadence": "per user/month, billed annually",
+     "notes": "2 TB pooled storage per user, Gemini included."
+    },
+    {
+     "name": "Business Plus",
+     "price": "C$28.70",
+     "cadence": "per user/month, billed annually",
+     "notes": "5 TB pooled storage per user, enhanced security and eDiscovery."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "google-workspace-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-18",
+   "sort_priority": 999
+  },
+  {
+   "slug": "microsoft-365",
+   "name": "Microsoft 365",
+   "category": "Work Management",
+   "tagline": "Office apps, Teams and business email, priced in CAD.",
+   "vendor_homepage": "https://www.microsoft.com",
+   "description": "Microsoft 365 is the Office suite — Word, Excel, Outlook, Teams — on a per-user subscription with Canadian-dollar list prices. Note the July 2026 change: Business Standard rose from US$12.50 to US$14 on annual commitment, and month-to-month billing runs about 20% above the annual rate.",
+   "best_for": "Businesses standardized on Office documents and Outlook email.",
+   "similar_to": "the office suite your accountant's files already assume",
+   "pricing_tiers": [
+    {
+     "name": "Business Basic",
+     "price": "C$9.50",
+     "cadence": "per user/month, annual commitment",
+     "notes": "Web/mobile Office apps, Teams, 1 TB OneDrive per user."
+    },
+    {
+     "name": "Business Standard",
+     "price": "C$19.00",
+     "cadence": "per user/month, annual commitment",
+     "notes": "Desktop Office apps plus everything in Basic."
+    },
+    {
+     "name": "Business Premium",
+     "price": "C$29.80",
+     "cadence": "per user/month, annual commitment",
+     "notes": "Advanced security, Intune device management, Azure AD Premium."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "microsoft-365-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-18",
+   "sort_priority": 999
+  },
+  {
+   "slug": "salesforce",
+   "name": "Salesforce",
+   "category": "CRM & Marketing",
+   "tagline": "The enterprise CRM, with a small-business suite at the door.",
+   "vendor_homepage": "https://www.salesforce.com",
+   "description": "Salesforce is the CRM most growing businesses eventually evaluate — and the one whose real cost is hardest to see. Seat prices are only the start: implementation for a small business runs into five figures, and training is a separate line. The Starter Suite is genuinely priced for small teams; everything above it assumes an admin.",
+   "best_for": "Businesses with a dedicated admin or a growth path that justifies enterprise CRM depth.",
+   "similar_to": "the enterprise CRM with a small-business front door",
+   "pricing_tiers": [
+    {
+     "name": "Starter Suite",
+     "price": "$25",
+     "cadence": "per user/month",
+     "notes": "Core CRM for small teams; monthly or annual billing."
+    },
+    {
+     "name": "Pro Suite",
+     "price": "$100",
+     "cadence": "per user/month, billed annually",
+     "notes": "Deeper customization and automation."
+    },
+    {
+     "name": "Core (Enterprise)",
+     "price": "$195",
+     "cadence": "per user/month, billed annually",
+     "notes": "Advanced pipeline management and workflow."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "salesforce-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-12",
+   "sort_priority": 999
+  },
+  {
+   "slug": "capsule-crm",
+   "name": "Capsule CRM",
+   "category": "CRM & Marketing",
+   "tagline": "Simple contact-and-pipeline CRM for small teams.",
+   "vendor_homepage": "https://capsulecrm.com",
+   "description": "Capsule is the deliberately simple CRM: contacts, pipelines and tasks without the enterprise sprawl. Editions scale mainly on contact counts and pipelines. AI features start at the Growth tier, which is also where workflow automation arrives.",
+   "best_for": "Solo operators and small teams that want a CRM they'll actually keep updated.",
+   "similar_to": "the CRM for people who found Salesforce exhausting",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per user/month",
+     "notes": "Up to 2 users, 250 contacts, 1 pipeline."
+    },
+    {
+     "name": "Starter",
+     "price": "$18",
+     "cadence": "per user/month, billed annually",
+     "notes": "$21 billed monthly. 30,000 contacts, 1 pipeline."
+    },
+    {
+     "name": "Growth",
+     "price": "$36",
+     "cadence": "per user/month, billed annually",
+     "notes": "$38 billed monthly. 60,000 contacts, 5 pipelines, automation and AI features."
+    },
+    {
+     "name": "Advanced",
+     "price": "$54",
+     "cadence": "per user/month, billed annually",
+     "notes": "$60 billed monthly. 120,000 contacts, 50 pipelines."
+    },
+    {
+     "name": "Ultimate",
+     "price": "$72",
+     "cadence": "per user/month, billed annually",
+     "notes": "$75 billed monthly. 240,000 contacts, 100 pipelines."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "capsule-crm-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-25",
+   "sort_priority": 999
+  },
+  {
+   "slug": "mailchimp",
+   "name": "Mailchimp",
+   "category": "CRM & Marketing",
+   "tagline": "Email and SMS marketing for growing lists.",
+   "vendor_homepage": "https://mailchimp.com",
+   "description": "Mailchimp is the default first email platform for small businesses: campaigns, automations and a free tier to start. Pricing scales by contact count, so the same plan gets more expensive as your list grows — the 5,000-contact prices below show the jump. The current 15%-off offer applies to accounts with 10,000+ contacts.",
+   "best_for": "Businesses sending regular email campaigns to a growing list.",
+   "similar_to": "the first email tool most businesses outgrow",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Basic email for very small lists."
+    },
+    {
+     "name": "Essentials",
+     "price": "$13",
+     "cadence": "per month at 500 contacts",
+     "notes": "Email plus automations; $75/mo at 5,000 contacts."
+    },
+    {
+     "name": "Standard",
+     "price": "$20",
+     "cadence": "per month at 500 contacts",
+     "notes": "Advanced automations and insights; $100/mo at 5,000 contacts; $135/mo at 10,000."
+    },
+    {
+     "name": "Premium",
+     "price": "$350",
+     "cadence": "per month at 10,000 contacts",
+     "notes": "Phone support, advanced segmentation, unlimited users."
+    }
+   ],
+   "deal": {
+    "headline": "15% off your first 12 months (accounts with 10,000+ contacts)",
+    "source_url": "https://mailchimp.com",
+    "verified_date": "2026-10-25"
+   },
+   "affiliate": {
+    "program": "mailchimp-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-20",
+   "sort_priority": 999
+  },
+  {
+   "slug": "klaviyo",
+   "name": "Klaviyo",
+   "category": "CRM & Marketing",
+   "tagline": "Email and SMS marketing priced by active profiles.",
+   "vendor_homepage": "https://www.klaviyo.com",
+   "description": "Klaviyo is the ecommerce-focused email and SMS platform. It bills on active (emailable) profiles, not emails sent — a distinction that decides your real bill. SMS is priced per send and costs more in Canada than in the US.",
+   "best_for": "Online stores whose email revenue justifies profile-based pricing.",
+   "similar_to": "the email platform built for online stores",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Up to 250 active profiles."
+    },
+    {
+     "name": "Email",
+     "price": "$20",
+     "cadence": "per month at 500 active profiles",
+     "notes": "Scales with profiles — about $150/mo at 10,000 active profiles."
+    },
+    {
+     "name": "SMS (add-on)",
+     "price": "$18",
+     "cadence": "per 1,000 sends in Canada",
+     "notes": "US sends are $15 per 1,000; Canadian sends cost more."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "klaviyo-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-20",
+   "sort_priority": 999
+  },
+  {
+   "slug": "activecampaign",
+   "name": "ActiveCampaign",
+   "category": "CRM & Marketing",
+   "tagline": "Email automation with a built-in CRM ladder.",
+   "vendor_homepage": "https://www.activecampaign.com",
+   "description": "ActiveCampaign pairs email marketing with serious automation and an optional CRM. There is no free plan — a 14-day trial capped at 100 subscribers is the on-ramp. Pricing scales by contact count, and unsubscribed and bounced contacts still count toward your tier.",
+   "best_for": "Businesses whose follow-up sequences are the sales team.",
+   "similar_to": "the automation engine for email-led sales",
+   "pricing_tiers": [
+    {
+     "name": "Starter",
+     "price": "$15",
+     "cadence": "per month at 1,000 contacts, billed annually",
+     "notes": "Email marketing and basic automation."
+    },
+    {
+     "name": "Plus",
+     "price": "$49",
+     "cadence": "per month at 1,000 contacts, billed annually",
+     "notes": "Landing pages, lead scoring; $189/mo at 10,000 contacts."
+    },
+    {
+     "name": "Pro",
+     "price": "$79",
+     "cadence": "per month at 1,000 contacts, billed annually",
+     "notes": "Advanced automation and attribution."
+    },
+    {
+     "name": "Enterprise",
+     "price": "$145",
+     "cadence": "per month at 1,000 contacts, billed annually",
+     "notes": "Custom reporting and dedicated support."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "activecampaign-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-12",
+   "sort_priority": 999
+  },
+  {
+   "slug": "aweber",
+   "name": "AWeber",
+   "category": "CRM & Marketing",
+   "tagline": "Email marketing for creators and small lists.",
+   "vendor_homepage": "https://www.aweber.com",
+   "description": "AWeber is one of the oldest email platforms, aimed at creators and small businesses. Lite caps you at one list and three automations; Plus removes the caps. A $4.99/month Hold package pauses billing — a genuinely useful feature most rivals don't offer.",
+   "best_for": "Creators and newsletters that send regularly to a modest list.",
+   "similar_to": "the email veteran for creators",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Small-list free tier."
+    },
+    {
+     "name": "Lite",
+     "price": "$12.49",
+     "cadence": "per month at 500 subscribers, billed annually",
+     "notes": "$15 billed monthly. 1 list, 3 automations, 3 users."
+    },
+    {
+     "name": "Plus",
+     "price": "$19.99",
+     "cadence": "per month at 500 subscribers, billed annually",
+     "notes": "$30 billed monthly. Caps removed; $135/mo at 10,000 subscribers."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "aweber-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-22",
+   "sort_priority": 999
+  },
+  {
+   "slug": "mailerlite",
+   "name": "MailerLite",
+   "category": "CRM & Marketing",
+   "tagline": "Budget email marketing with a nonprofit discount.",
+   "vendor_homepage": "https://www.mailerlite.com",
+   "description": "MailerLite is the budget pick in email marketing. Two June 2026 changes matter: the entry plan was renamed Comfort (top tier is now Power), and the free plan was cut to 250 subscribers and 2,500 emails a month. Nonprofits get 30% off paid plans.",
+   "best_for": "Small lists that want real automation without Mailchimp money.",
+   "similar_to": "the budget email tool with honest pricing",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Up to 250 subscribers and 2,500 emails/month (reduced June 2026)."
+    },
+    {
+     "name": "Comfort",
+     "price": "$12",
+     "cadence": "per month at 500 subscribers",
+     "notes": "$19 at 1,000 subscribers; $33 at 2,500; $49 at 5,000."
+    },
+    {
+     "name": "Power",
+     "price": "$25",
+     "cadence": "per month at 500 subscribers",
+     "notes": "$39 at 1,000; $49 at 2,500; $129 at 10,000."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "mailerlite-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-20",
+   "sort_priority": 999
+  },
+  {
+   "slug": "moz",
+   "name": "Moz",
+   "category": "SEO & Marketing",
+   "tagline": "SEO software with the original domain-authority metric.",
+   "vendor_homepage": "https://moz.com",
+   "description": "Moz Pro is the long-running SEO suite built around keyword research, rank tracking and its Domain Authority metric. Our dataset currently captures the Standard tier; higher tiers exist but their prices are not yet in our verified dataset, so they are shown as a gap rather than guessed.",
+   "best_for": "Small sites that want one SEO dashboard without agency pricing.",
+   "similar_to": "the SEO suite that invented Domain Authority",
+   "pricing_tiers": [
+    {
+     "name": "Pro Standard",
+     "price": "$79",
+     "cadence": "per month, billed annually",
+     "notes": "$99 billed monthly. Keyword research, rank tracking, site audits."
+    },
+    {
+     "name": "Higher tiers",
+     "price": "—",
+     "cadence": "",
+     "notes": "Pricing not yet captured in our verified dataset — check moz.com for current tiers."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "moz-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-13",
+   "sort_priority": 999
+  },
+  {
+   "slug": "hootsuite",
+   "name": "Hootsuite",
+   "category": "SEO & Marketing",
+   "tagline": "Social media scheduling and management, from a Canadian company.",
+   "vendor_homepage": "https://www.hootsuite.com",
+   "description": "Hootsuite — founded in Vancouver — schedules and manages social accounts from one dashboard. Pricing is per user on annual billing, and it climbs quickly: the jump from Standard to Professional doubles the seat price, so model your actual poster count before committing.",
+   "best_for": "Businesses posting to several social accounts with more than one person involved.",
+   "similar_to": "the social dashboard from Vancouver",
+   "pricing_tiers": [
+    {
+     "name": "Standard",
+     "price": "$99",
+     "cadence": "per user/month, billed annually",
+     "notes": "Core scheduling, analytics and engagement for small teams."
+    },
+    {
+     "name": "Professional",
+     "price": "$199",
+     "cadence": "per user/month, billed annually",
+     "notes": "Advanced analytics, team features and higher limits."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "hootsuite-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-13",
+   "sort_priority": 999
+  },
+  {
+   "slug": "sage-50",
+   "name": "Sage 50",
+   "category": "Accounting",
+   "tagline": "Desktop-rooted Canadian accounting with payroll bundles.",
+   "vendor_homepage": "https://www.sage.com/en-ca/products/sage-50/pricing/",
+   "description": "Sage 50 is the Canadian desktop accounting line many bookkeepers grew up on, sold as annual licences in Canadian dollars with a separate Canadian price book. Payroll bundles roughly double the licence. It is the non-cloud option in this category — your data lives on your machine, and so does the responsibility for backups.",
+   "best_for": "Businesses whose bookkeeper already runs Sage 50 and isn't moving to the cloud.",
+   "similar_to": "the desktop accounting your bookkeeper refuses to give up",
+   "pricing_tiers": [
+    {
+     "name": "Pro Accounting",
+     "price": "C$916",
+     "cadence": "per year, 1 user",
+     "notes": "Core Canadian accounting; up to 2 currencies."
+    },
+    {
+     "name": "Premium Accounting",
+     "price": "C$1,371",
+     "cadence": "per year, 2–4 users",
+     "notes": "Unlimited currencies, deeper inventory and job costing."
+    },
+    {
+     "name": "Quantum Accounting",
+     "price": "from C$6,341",
+     "cadence": "per year, 5+ users",
+     "notes": "Highest tier for larger desktop deployments."
+    },
+    {
+     "name": "Pro + Payroll bundle",
+     "price": "from C$1,758",
+     "cadence": "per year",
+     "notes": "Pro Accounting with payroll included."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "sage-50-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-12",
+   "sort_priority": 999
+  },
+  {
+   "slug": "zoho-books",
+   "name": "Zoho Books",
+   "category": "Accounting",
+   "tagline": "Accounting priced per organization, not per seat.",
+   "vendor_homepage": "https://www.zoho.com",
+   "description": "Zoho Books prices per organization rather than per user, which makes it unusually cheap for teams. The free tier covers businesses under US$50K revenue with 1,000 invoices a year. It pairs naturally with Zoho CRM for businesses buying into the Zoho suite.",
+   "best_for": "Small teams that need several accounting seats without per-seat pricing.",
+   "similar_to": "the per-organization alternative to per-seat accounting",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per organization/month",
+     "notes": "For businesses under US$50K revenue; 1 user + accountant; 1,000 invoices/yr."
+    },
+    {
+     "name": "Standard",
+     "price": "$15",
+     "cadence": "per organization/month, billed annually",
+     "notes": "Core invoicing, expenses and bank feeds."
+    },
+    {
+     "name": "Professional",
+     "price": "$40",
+     "cadence": "per organization/month, billed annually",
+     "notes": "Multi-currency, projects and inventory."
+    },
+    {
+     "name": "Premium",
+     "price": "$60",
+     "cadence": "per organization/month, billed annually",
+     "notes": "Advanced workflows and reporting."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "zoho-books-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-12",
+   "sort_priority": 999
+  },
+  {
+   "slug": "bigcommerce",
+   "name": "BigCommerce",
+   "category": "Ecommerce",
+   "tagline": "Hosted ecommerce with a B2B and multi-storefront ladder.",
+   "vendor_homepage": "https://www.bigcommerce.com",
+   "description": "BigCommerce is Shopify's closest hosted rival, recently renamed into Core, Growth and Scale tiers. Annual billing carries a discount over monthly. It tends to include more built-in features (and fewer app purchases) than Shopify at the same tier — the comparison worth doing is total cost with apps included.",
+   "best_for": "Stores that want more built in and fewer paid apps.",
+   "similar_to": "the Shopify rival that bundles more in the box",
+   "pricing_tiers": [
+    {
+     "name": "Core",
+     "price": "$29",
+     "cadence": "per month, billed annually",
+     "notes": "Storefront, payments and core selling tools."
+    },
+    {
+     "name": "Growth",
+     "price": "$79",
+     "cadence": "per month, billed annually",
+     "notes": "Abandoned-cart recovery and deeper reporting."
+    },
+    {
+     "name": "Scale",
+     "price": "$299",
+     "cadence": "per month, billed annually",
+     "notes": "Priority support and advanced merchandising."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "bigcommerce-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-14",
+   "sort_priority": 999
+  },
+  {
+   "slug": "squarespace",
+   "name": "Squarespace",
+   "category": "Ecommerce",
+   "tagline": "Design-led websites with commerce on the upper tiers.",
+   "vendor_homepage": "https://www.squarespace.com",
+   "description": "Squarespace is the design-first website builder whose commerce tiers double as an online store. Watch the transaction fee: the entry tier historically carried a 3% fee that disappears on the commerce plans — on real volume that fee dwarfs the plan difference.",
+   "best_for": "Design-conscious businesses selling a modest catalogue online.",
+   "similar_to": "the beautiful website that also sells",
+   "pricing_tiers": [
+    {
+     "name": "Basic",
+     "price": "$16",
+     "cadence": "per month, billed annually",
+     "notes": "Website with core features; $19 billed monthly."
+    },
+    {
+     "name": "Core",
+     "price": "$23",
+     "cadence": "per month, billed annually",
+     "notes": "More customization and analytics."
+    },
+    {
+     "name": "Plus",
+     "price": "$39",
+     "cadence": "per month, billed annually",
+     "notes": "Commerce features with 0% transaction fees."
+    },
+    {
+     "name": "Advanced",
+     "price": "$99",
+     "cadence": "per month, billed annually",
+     "notes": "Advanced commerce: subscriptions, advanced shipping and discounts."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "squarespace-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-12",
+   "sort_priority": 999
+  },
+  {
+   "slug": "wix",
+   "name": "Wix",
+   "category": "Ecommerce",
+   "tagline": "Website builder with a free tier and business plans.",
+   "vendor_homepage": "https://www.wix.com",
+   "description": "Wix is the other default website builder, with a genuinely free tier and paid plans that add a custom domain and ecommerce. Our dataset captures the Core and Business plans on annual billing; a free custom domain for one year is bundled with annual Premium purchases.",
+   "best_for": "Businesses that want to start free and upgrade in place.",
+   "similar_to": "the website builder that starts at zero",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Wix-branded site on a Wix subdomain."
+    },
+    {
+     "name": "Core",
+     "price": "$29",
+     "cadence": "per month, billed annually",
+     "notes": "Custom domain and core business features."
+    },
+    {
+     "name": "Business",
+     "price": "$39",
+     "cadence": "per month, billed annually",
+     "notes": "Full ecommerce and marketing suite."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "wix-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-20",
+   "sort_priority": 999
+  },
+  {
+   "slug": "lightspeed",
+   "name": "Lightspeed",
+   "category": "Payments & POS",
+   "tagline": "Retail and restaurant POS from Montreal.",
+   "vendor_homepage": "https://www.lightspeedhq.com",
+   "description": "Lightspeed — headquartered in Montreal — is the POS for retailers and restaurants that have outgrown a basic till: deep inventory, multi-location and ecommerce sync. Software is priced per location register plan; Lightspeed Payments charges 2.6% + 10¢ in person. Model software plus processing together — either alone misleads.",
+   "best_for": "Retailers and restaurants with real inventory complexity or multiple locations.",
+   "similar_to": "the Montreal POS for serious retail",
+   "pricing_tiers": [
+    {
+     "name": "Retail Basic",
+     "price": "$89",
+     "cadence": "per month, billed annually",
+     "notes": "$109 billed monthly. Core POS and inventory."
+    },
+    {
+     "name": "Retail Core",
+     "price": "$149",
+     "cadence": "per month, billed annually",
+     "notes": "$179 billed monthly. Ecommerce and advanced reporting."
+    },
+    {
+     "name": "Retail Plus",
+     "price": "$289",
+     "cadence": "per month, billed annually",
+     "notes": "$339 billed monthly. Advanced workflows and priority support."
+    },
+    {
+     "name": "Lightspeed Payments",
+     "price": "2.6% + 10¢",
+     "cadence": "per in-person transaction",
+     "notes": "The processing rate to pair with any plan above."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "lightspeed-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-20",
+   "sort_priority": 999
+  },
+  {
+   "slug": "toast",
+   "name": "Toast",
+   "category": "Payments & POS",
+   "tagline": "Restaurant POS with Canadian pricing in CAD.",
+   "vendor_homepage": "https://pos.toasttab.com",
+   "description": "Toast is the restaurant-specific POS: kitchen display, online ordering and payroll built for food service. Its Canadian pricing page publishes plan prices in CAD — but does not publish the flat processing rate, so the processing line has to come from a quote before you can model total cost.",
+   "best_for": "Restaurants that want one system for POS, kitchen and online orders.",
+   "similar_to": "the POS built only for restaurants",
+   "pricing_tiers": [
+    {
+     "name": "Starter (Canada)",
+     "price": "C$120",
+     "cadence": "per month",
+     "notes": "Core restaurant POS for a single location."
+    },
+    {
+     "name": "Essentials (Canada)",
+     "price": "C$220",
+     "cadence": "per month",
+     "notes": "Adds online ordering and deeper reporting."
+    },
+    {
+     "name": "Custom",
+     "price": "—",
+     "cadence": "",
+     "notes": "Quote-only tier; the Canadian page does not publish the flat processing rate."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "toast-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-20",
+   "sort_priority": 999
+  },
+  {
+   "slug": "deel",
+   "name": "Deel",
+   "category": "HR & Payroll",
+   "tagline": "Global payroll and employer-of-record for distributed teams.",
+   "vendor_homepage": "https://www.deel.com",
+   "description": "Deel is for the specific problem of paying people in other countries: employer-of-record where you have no entity, contractor management where you do. The EOR price per employee is the headline; for a purely Canadian team, a domestic payroll tool costs a fraction of it — Deel earns its price only across borders.",
+   "best_for": "Canadian businesses hiring employees or contractors in other countries.",
+   "similar_to": "the border-crossing payroll for distributed teams",
+   "pricing_tiers": [
+    {
+     "name": "Global Payroll",
+     "price": "$29",
+     "cadence": "per employee/month",
+     "notes": "Payroll for your own entities abroad."
+    },
+    {
+     "name": "Contractor Management",
+     "price": "$49",
+     "cadence": "per contractor/month",
+     "notes": "Contracts, compliance and payments for contractors."
+    },
+    {
+     "name": "Contractor of Record",
+     "price": "$325",
+     "cadence": "per contractor/month",
+     "notes": "Deel carries the misclassification risk."
+    },
+    {
+     "name": "EOR Standard",
+     "price": "$599",
+     "cadence": "per employee/month",
+     "notes": "Deel employs your hire in their country; Enterprise EOR is $899."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "deel-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-23",
+   "sort_priority": 999
+  },
+  {
+   "slug": "housecall-pro",
+   "name": "Housecall Pro",
+   "category": "Field Service",
+   "tagline": "Field-service software for home-service trades.",
+   "vendor_homepage": "https://www.housecallpro.com",
+   "description": "Housecall Pro is Jobber's main US rival for home-service businesses: scheduling, dispatch, invoicing and review requests. Team plans cap included users (Essentials covered 5 users in our October check), so confirm the current seat caps before comparing against Jobber's per-plan user counts.",
+   "best_for": "Home-service businesses comparing directly against Jobber.",
+   "similar_to": "the US alternative to Jobber",
+   "pricing_tiers": [
+    {
+     "name": "Basic",
+     "price": "$59",
+     "cadence": "per month, billed annually",
+     "notes": "Scheduling, invoicing and payments for a solo operator."
+    },
+    {
+     "name": "Essentials",
+     "price": "$149",
+     "cadence": "per month, billed annually",
+     "notes": "Team features; historically capped at 5 users — confirm current cap."
+    },
+    {
+     "name": "MAX",
+     "price": "$299",
+     "cadence": "per month, billed annually",
+     "notes": "Top tier; historically capped at 8 users — confirm current cap."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "housecall-pro-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-23",
+   "sort_priority": 999
+  },
+  {
+   "slug": "cal-com",
+   "name": "Cal.com",
+   "category": "Scheduling",
+   "tagline": "Open-source scheduling with a genuinely free tier.",
+   "vendor_homepage": "https://cal.com",
+   "description": "Cal.com is the open-source scheduling platform: booking pages, routing and round-robin for teams, with a free tier that covers solo scheduling properly. It is the main open alternative to Calendly, and can be self-hosted if your business wants the data in-house.",
+   "best_for": "Teams that want Calendly-style booking without per-seat creep, or that prefer open source.",
+   "similar_to": "the open-source Calendly",
+   "pricing_tiers": [
+    {
+     "name": "Free",
+     "price": "$0",
+     "cadence": "per month",
+     "notes": "Core scheduling for individuals."
+    },
+    {
+     "name": "Teams",
+     "price": "$16",
+     "cadence": "per user/month",
+     "notes": "Team booking pages, routing and workflows."
+    },
+    {
+     "name": "Organizations",
+     "price": "$37",
+     "cadence": "per user/month",
+     "notes": "Multi-team structure, advanced admin and SSO options."
+    }
+   ],
+   "deal": null,
+   "affiliate": {
+    "program": "cal-com-affiliate",
+    "network": "pending",
+    "status": "pending-approval"
+   },
+   "last_verified": "2026-10-25",
+   "sort_priority": 999
   }
  ]
 }

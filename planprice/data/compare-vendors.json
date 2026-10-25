@@ -1,0 +1,1361 @@
+[
+ {
+  "slug": "hubspot",
+  "name": "HubSpot",
+  "category": "CRM & Marketing",
+  "url": "/deals/hubspot.html",
+  "verified": "2026-09-30",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free Tools",
+    "price": "$0",
+    "cadence": "free"
+   },
+   {
+    "name": "Starter",
+    "price": "$15",
+    "cadence": "per seat/month"
+   },
+   {
+    "name": "Sales Hub Professional",
+    "price": "$90",
+    "cadence": "per seat/month"
+   },
+   {
+    "name": "Marketing Hub Professional",
+    "price": "$890",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "freshbooks",
+  "name": "FreshBooks",
+  "category": "Accounting",
+  "url": "/deals/freshbooks.html",
+  "verified": "2026-10-25",
+  "deal": "80% off for 4 months for new subscribers",
+  "start": "C$26 per month",
+  "tiers": [
+   {
+    "name": "Lite",
+    "price": "C$26",
+    "cadence": "per month"
+   },
+   {
+    "name": "Plus",
+    "price": "C$42",
+    "cadence": "per month"
+   },
+   {
+    "name": "Premium",
+    "price": "C$72",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "monday",
+  "name": "Monday.com",
+  "category": "Work Management",
+  "url": "/deals/monday.html",
+  "verified": "2026-09-30",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "free"
+   },
+   {
+    "name": "Basic",
+    "price": "$9",
+    "cadence": "per seat/month"
+   },
+   {
+    "name": "Standard",
+    "price": "$12",
+    "cadence": "per seat/month"
+   },
+   {
+    "name": "Pro",
+    "price": "$19",
+    "cadence": "per seat/month"
+   },
+   {
+    "name": "Enterprise",
+    "price": "Custom",
+    "cadence": "quote"
+   }
+  ]
+ },
+ {
+  "slug": "semrush",
+  "name": "Semrush",
+  "category": "SEO & Marketing",
+  "url": "/deals/semrush.html",
+  "verified": "2026-09-30",
+  "deal": null,
+  "start": "$139.95 per month",
+  "tiers": [
+   {
+    "name": "Pro",
+    "price": "$139.95",
+    "cadence": "per month"
+   },
+   {
+    "name": "Guru",
+    "price": "$249.95",
+    "cadence": "per month"
+   },
+   {
+    "name": "Business",
+    "price": "$499.95",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "shopify",
+  "name": "Shopify",
+  "category": "Ecommerce",
+  "url": "/deals/shopify.html",
+  "verified": "2026-09-30",
+  "deal": "$1/month for 3 months for new merchants",
+  "start": "$5 per month",
+  "tiers": [
+   {
+    "name": "Starter",
+    "price": "$5",
+    "cadence": "per month"
+   },
+   {
+    "name": "Basic",
+    "price": "$39",
+    "cadence": "per month"
+   },
+   {
+    "name": "Grow",
+    "price": "$105",
+    "cadence": "per month"
+   },
+   {
+    "name": "Advanced",
+    "price": "$399",
+    "cadence": "per month"
+   },
+   {
+    "name": "Plus",
+    "price": "from $2,300",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "wave",
+  "name": "Wave",
+  "category": "Accounting",
+  "url": "/deals/wave.html",
+  "verified": "2026-10-25",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Starter",
+    "price": "$0",
+    "cadence": "free"
+   },
+   {
+    "name": "Pro",
+    "price": "$19",
+    "cadence": "per month"
+   },
+   {
+    "name": "Payments",
+    "price": "2.9% + 60¢",
+    "cadence": "per transaction"
+   }
+  ]
+ },
+ {
+  "slug": "quickbooks",
+  "name": "QuickBooks Online",
+  "category": "Accounting",
+  "url": "/deals/quickbooks.html",
+  "verified": "2026-10-25",
+  "deal": "90% off for new subscribers",
+  "start": "C$30 per month",
+  "tiers": [
+   {
+    "name": "EasyStart",
+    "price": "C$30",
+    "cadence": "per month"
+   },
+   {
+    "name": "Essentials",
+    "price": "C$70",
+    "cadence": "per month"
+   },
+   {
+    "name": "Plus",
+    "price": "C$110",
+    "cadence": "per month"
+   },
+   {
+    "name": "Advanced",
+    "price": "C$220",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "xero",
+  "name": "Xero",
+  "category": "Accounting",
+  "url": "/deals/xero.html",
+  "verified": "2026-09-30",
+  "deal": "80% off your first 3 months for new customers",
+  "start": "$25 per month",
+  "tiers": [
+   {
+    "name": "Early",
+    "price": "$25",
+    "cadence": "per month"
+   },
+   {
+    "name": "Growing",
+    "price": "$55",
+    "cadence": "per month"
+   },
+   {
+    "name": "Established",
+    "price": "$90",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "square",
+  "name": "Square",
+  "category": "Payments & POS",
+  "url": "/deals/square.html",
+  "verified": "2026-10-25",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Square POS",
+    "price": "$0",
+    "cadence": "free"
+   },
+   {
+    "name": "Appointments Free",
+    "price": "$0",
+    "cadence": "free"
+   },
+   {
+    "name": "Appointments Plus",
+    "price": "$35",
+    "cadence": "per month"
+   },
+   {
+    "name": "Appointments Premium",
+    "price": "$85",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "calendly",
+  "name": "Calendly",
+  "category": "Scheduling",
+  "url": "/deals/calendly.html",
+  "verified": "2026-10-25",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "free"
+   },
+   {
+    "name": "Standard",
+    "price": "$10",
+    "cadence": "per seat/month"
+   },
+   {
+    "name": "Teams",
+    "price": "$16",
+    "cadence": "per seat/month"
+   },
+   {
+    "name": "Enterprise",
+    "price": "from $15,000",
+    "cadence": "per year"
+   }
+  ]
+ },
+ {
+  "slug": "jobber",
+  "name": "Jobber",
+  "category": "Field Service",
+  "url": "/deals/jobber.html",
+  "verified": "2026-09-30",
+  "deal": null,
+  "start": "C$49 per month",
+  "tiers": [
+   {
+    "name": "Core",
+    "price": "C$49",
+    "cadence": "per month"
+   },
+   {
+    "name": "Connect",
+    "price": "C$139",
+    "cadence": "per month"
+   },
+   {
+    "name": "Grow",
+    "price": "C$199",
+    "cadence": "per month"
+   },
+   {
+    "name": "Plus",
+    "price": "C$499",
+    "cadence": "per month"
+   },
+   {
+    "name": "Extra users",
+    "price": "C$29",
+    "cadence": "per user/month"
+   }
+  ]
+ },
+ {
+  "slug": "humi",
+  "name": "Humi",
+  "category": "HR & Payroll",
+  "url": "/deals/humi.html",
+  "verified": "2026-09-30",
+  "deal": null,
+  "start": "Custom",
+  "tiers": [
+   {
+    "name": "Core HR platform",
+    "price": "Custom",
+    "cadence": "quote"
+   },
+   {
+    "name": "Payroll",
+    "price": "$7",
+    "cadence": "per employee/month"
+   },
+   {
+    "name": "Managed Payroll",
+    "price": "$30",
+    "cadence": "per employee/month"
+   }
+  ]
+ },
+ {
+  "slug": "ahrefs",
+  "name": "Ahrefs",
+  "category": "SEO & Marketing",
+  "url": "/deals/ahrefs.html",
+  "verified": "2026-09-30",
+  "deal": null,
+  "start": "$29 per month",
+  "tiers": [
+   {
+    "name": "Starter",
+    "price": "$29",
+    "cadence": "per month"
+   },
+   {
+    "name": "Standard",
+    "price": "$249",
+    "cadence": "per month"
+   },
+   {
+    "name": "Enterprise",
+    "price": "$1,499",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "plausible",
+  "name": "Plausible",
+  "category": "SEO & Marketing",
+  "url": "/deals/plausible.html",
+  "verified": "2026-09-30",
+  "deal": null,
+  "start": "$9 per month",
+  "tiers": [
+   {
+    "name": "Starter",
+    "price": "$9",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "stripe",
+  "name": "Stripe",
+  "category": "Payments & POS",
+  "url": "/deals/stripe.html",
+  "verified": "2026-09-30",
+  "deal": null,
+  "start": "2.9% + 30¢ per transaction",
+  "tiers": [
+   {
+    "name": "Pay as you go",
+    "price": "2.9% + 30¢",
+    "cadence": "per transaction"
+   }
+  ]
+ },
+ {
+  "slug": "big-cartel",
+  "name": "Big Cartel",
+  "category": "Ecommerce",
+  "url": "/deals/big-cartel.html",
+  "verified": "2026-10-25",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Gold",
+    "price": "$0",
+    "cadence": "free"
+   },
+   {
+    "name": "Platinum",
+    "price": "$15",
+    "cadence": "per month"
+   },
+   {
+    "name": "Diamond",
+    "price": "$30",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "pipedrive",
+  "name": "Pipedrive",
+  "category": "CRM & Marketing",
+  "url": "/deals/pipedrive.html",
+  "verified": "2026-10-10",
+  "deal": null,
+  "start": "$14 per user/month",
+  "tiers": [
+   {
+    "name": "Lite",
+    "price": "$14",
+    "cadence": ""
+   },
+   {
+    "name": "Growth",
+    "price": "$39",
+    "cadence": ""
+   },
+   {
+    "name": "Premium",
+    "price": "$59",
+    "cadence": ""
+   },
+   {
+    "name": "Ultimate",
+    "price": "$79",
+    "cadence": ""
+   }
+  ]
+ },
+ {
+  "slug": "zoho-crm",
+  "name": "Zoho CRM",
+  "category": "CRM & Marketing",
+  "url": "/deals/zoho-crm.html",
+  "verified": "2026-10-10",
+  "deal": null,
+  "start": "$0 free (3 users)",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": ""
+   },
+   {
+    "name": "Standard",
+    "price": "$14",
+    "cadence": ""
+   },
+   {
+    "name": "Professional",
+    "price": "$23",
+    "cadence": ""
+   },
+   {
+    "name": "Enterprise",
+    "price": "$40",
+    "cadence": ""
+   },
+   {
+    "name": "Ultimate",
+    "price": "$52",
+    "cadence": ""
+   }
+  ]
+ },
+ {
+  "slug": "wagepoint",
+  "name": "Wagepoint",
+  "category": "HR & Payroll",
+  "url": "/deals/wagepoint.html",
+  "verified": "2026-10-25",
+  "deal": null,
+  "start": "C$20 per month",
+  "tiers": [
+   {
+    "name": "Lite",
+    "price": "C$20 + C$4/employee",
+    "cadence": "per month"
+   },
+   {
+    "name": "Core",
+    "price": "C$40 + C$6/employee",
+    "cadence": "per month"
+   },
+   {
+    "name": "Plus",
+    "price": "C$80 + C$10/employee",
+    "cadence": "per month"
+   }
+  ]
+ },
+ {
+  "slug": "knit-people",
+  "name": "Knit People",
+  "category": "HR & Payroll",
+  "url": "/deals/knit-people.html",
+  "verified": "2026-10-10",
+  "deal": null,
+  "start": "C$39 per month",
+  "tiers": [
+   {
+    "name": "Lite",
+    "price": "C$39/mo",
+    "cadence": ""
+   },
+   {
+    "name": "Complete",
+    "price": "C$39/mo",
+    "cadence": ""
+   },
+   {
+    "name": "Concierge",
+    "price": "C$199/mo",
+    "cadence": ""
+   }
+  ]
+ },
+ {
+  "slug": "acuity",
+  "name": "Acuity Scheduling",
+  "category": "Scheduling",
+  "url": "/deals/acuity.html",
+  "verified": "2026-10-10",
+  "deal": null,
+  "start": "$20 per month",
+  "tiers": [
+   {
+    "name": "Emerging",
+    "price": "$20",
+    "cadence": ""
+   },
+   {
+    "name": "Growing",
+    "price": "$34",
+    "cadence": ""
+   },
+   {
+    "name": "Powerhouse",
+    "price": "$61",
+    "cadence": ""
+   }
+  ]
+ },
+ {
+  "slug": "setmore",
+  "name": "Setmore",
+  "category": "Scheduling",
+  "url": "/deals/setmore.html",
+  "verified": "2026-10-10",
+  "deal": null,
+  "start": "$0 free (4 staff)",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": ""
+   },
+   {
+    "name": "Pro",
+    "price": "$5/user",
+    "cadence": ""
+   },
+   {
+    "name": "Team",
+    "price": "$5/user",
+    "cadence": ""
+   }
+  ]
+ },
+ {
+  "slug": "trello",
+  "name": "Trello",
+  "category": "Work Management",
+  "url": "/deals/trello.html",
+  "verified": "2026-10-12",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Standard",
+    "price": "$5",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Premium",
+    "price": "$10",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Enterprise",
+    "price": "$17.50",
+    "cadence": "per user/month, annual only"
+   }
+  ]
+ },
+ {
+  "slug": "asana",
+  "name": "Asana",
+  "category": "Work Management",
+  "url": "/deals/asana.html",
+  "verified": "2026-10-23",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Personal",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Starter",
+    "price": "$10.99",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Advanced",
+    "price": "$24.99",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "clickup",
+  "name": "ClickUp",
+  "category": "Work Management",
+  "url": "/deals/clickup.html",
+  "verified": "2026-10-15",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Unlimited",
+    "price": "$7",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Business",
+    "price": "$12",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "notion",
+  "name": "Notion",
+  "category": "Work Management",
+  "url": "/deals/notion.html",
+  "verified": "2026-10-23",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Plus",
+    "price": "$10",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Business",
+    "price": "$20",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "slack",
+  "name": "Slack",
+  "category": "Work Management",
+  "url": "/deals/slack.html",
+  "verified": "2026-10-11",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Pro",
+    "price": "$7.25",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Business+",
+    "price": "$15",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "zoom",
+  "name": "Zoom",
+  "category": "Work Management",
+  "url": "/deals/zoom.html",
+  "verified": "2026-10-18",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Basic",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Workplace Pro",
+    "price": "$14.16",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Workplace Business",
+    "price": "$18.33",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "google-workspace",
+  "name": "Google Workspace",
+  "category": "Work Management",
+  "url": "/deals/google-workspace.html",
+  "verified": "2026-10-18",
+  "deal": null,
+  "start": "C$9.20 per user/month",
+  "tiers": [
+   {
+    "name": "Business Starter",
+    "price": "C$9.20",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Business Standard",
+    "price": "C$18.40",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Business Plus",
+    "price": "C$28.70",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "microsoft-365",
+  "name": "Microsoft 365",
+  "category": "Work Management",
+  "url": "/deals/microsoft-365.html",
+  "verified": "2026-10-18",
+  "deal": null,
+  "start": "C$9.50 per user/month",
+  "tiers": [
+   {
+    "name": "Business Basic",
+    "price": "C$9.50",
+    "cadence": "per user/month, annual commitment"
+   },
+   {
+    "name": "Business Standard",
+    "price": "C$19.00",
+    "cadence": "per user/month, annual commitment"
+   },
+   {
+    "name": "Business Premium",
+    "price": "C$29.80",
+    "cadence": "per user/month, annual commitment"
+   }
+  ]
+ },
+ {
+  "slug": "salesforce",
+  "name": "Salesforce",
+  "category": "CRM & Marketing",
+  "url": "/deals/salesforce.html",
+  "verified": "2026-10-12",
+  "deal": null,
+  "start": "$25 per user/month",
+  "tiers": [
+   {
+    "name": "Starter Suite",
+    "price": "$25",
+    "cadence": "per user/month"
+   },
+   {
+    "name": "Pro Suite",
+    "price": "$100",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Core (Enterprise)",
+    "price": "$195",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "capsule-crm",
+  "name": "Capsule CRM",
+  "category": "CRM & Marketing",
+  "url": "/deals/capsule-crm.html",
+  "verified": "2026-10-25",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per user/month"
+   },
+   {
+    "name": "Starter",
+    "price": "$18",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Growth",
+    "price": "$36",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Advanced",
+    "price": "$54",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Ultimate",
+    "price": "$72",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "mailchimp",
+  "name": "Mailchimp",
+  "category": "CRM & Marketing",
+  "url": "/deals/mailchimp.html",
+  "verified": "2026-10-20",
+  "deal": "15% off your first 12 months",
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Essentials",
+    "price": "$13",
+    "cadence": "per month at 500 contacts"
+   },
+   {
+    "name": "Standard",
+    "price": "$20",
+    "cadence": "per month at 500 contacts"
+   },
+   {
+    "name": "Premium",
+    "price": "$350",
+    "cadence": "per month at 10,000 contacts"
+   }
+  ]
+ },
+ {
+  "slug": "klaviyo",
+  "name": "Klaviyo",
+  "category": "CRM & Marketing",
+  "url": "/deals/klaviyo.html",
+  "verified": "2026-10-20",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Email",
+    "price": "$20",
+    "cadence": "per month at 500 active profiles"
+   },
+   {
+    "name": "SMS (add-on)",
+    "price": "$18",
+    "cadence": "per 1,000 sends in Canada"
+   }
+  ]
+ },
+ {
+  "slug": "activecampaign",
+  "name": "ActiveCampaign",
+  "category": "CRM & Marketing",
+  "url": "/deals/activecampaign.html",
+  "verified": "2026-10-12",
+  "deal": null,
+  "start": "$15 per month",
+  "tiers": [
+   {
+    "name": "Starter",
+    "price": "$15",
+    "cadence": "per month at 1,000 contacts, billed annually"
+   },
+   {
+    "name": "Plus",
+    "price": "$49",
+    "cadence": "per month at 1,000 contacts, billed annually"
+   },
+   {
+    "name": "Pro",
+    "price": "$79",
+    "cadence": "per month at 1,000 contacts, billed annually"
+   },
+   {
+    "name": "Enterprise",
+    "price": "$145",
+    "cadence": "per month at 1,000 contacts, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "aweber",
+  "name": "AWeber",
+  "category": "CRM & Marketing",
+  "url": "/deals/aweber.html",
+  "verified": "2026-10-22",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Lite",
+    "price": "$12.49",
+    "cadence": "per month at 500 subscribers, billed annually"
+   },
+   {
+    "name": "Plus",
+    "price": "$19.99",
+    "cadence": "per month at 500 subscribers, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "mailerlite",
+  "name": "MailerLite",
+  "category": "CRM & Marketing",
+  "url": "/deals/mailerlite.html",
+  "verified": "2026-10-20",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Comfort",
+    "price": "$12",
+    "cadence": "per month at 500 subscribers"
+   },
+   {
+    "name": "Power",
+    "price": "$25",
+    "cadence": "per month at 500 subscribers"
+   }
+  ]
+ },
+ {
+  "slug": "moz",
+  "name": "Moz",
+  "category": "SEO & Marketing",
+  "url": "/deals/moz.html",
+  "verified": "2026-10-13",
+  "deal": null,
+  "start": "$79 per month",
+  "tiers": [
+   {
+    "name": "Pro Standard",
+    "price": "$79",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Higher tiers",
+    "price": "—",
+    "cadence": ""
+   }
+  ]
+ },
+ {
+  "slug": "hootsuite",
+  "name": "Hootsuite",
+  "category": "SEO & Marketing",
+  "url": "/deals/hootsuite.html",
+  "verified": "2026-10-13",
+  "deal": null,
+  "start": "$99 per user/month",
+  "tiers": [
+   {
+    "name": "Standard",
+    "price": "$99",
+    "cadence": "per user/month, billed annually"
+   },
+   {
+    "name": "Professional",
+    "price": "$199",
+    "cadence": "per user/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "sage-50",
+  "name": "Sage 50",
+  "category": "Accounting",
+  "url": "/deals/sage-50.html",
+  "verified": "2026-10-12",
+  "deal": null,
+  "start": "C$916 per year",
+  "tiers": [
+   {
+    "name": "Pro Accounting",
+    "price": "C$916",
+    "cadence": "per year, 1 user"
+   },
+   {
+    "name": "Premium Accounting",
+    "price": "C$1,371",
+    "cadence": "per year, 2–4 users"
+   },
+   {
+    "name": "Quantum Accounting",
+    "price": "from C$6,341",
+    "cadence": "per year, 5+ users"
+   },
+   {
+    "name": "Pro + Payroll bundle",
+    "price": "from C$1,758",
+    "cadence": "per year"
+   }
+  ]
+ },
+ {
+  "slug": "zoho-books",
+  "name": "Zoho Books",
+  "category": "Accounting",
+  "url": "/deals/zoho-books.html",
+  "verified": "2026-10-12",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per organization/month"
+   },
+   {
+    "name": "Standard",
+    "price": "$15",
+    "cadence": "per organization/month, billed annually"
+   },
+   {
+    "name": "Professional",
+    "price": "$40",
+    "cadence": "per organization/month, billed annually"
+   },
+   {
+    "name": "Premium",
+    "price": "$60",
+    "cadence": "per organization/month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "bigcommerce",
+  "name": "BigCommerce",
+  "category": "Ecommerce",
+  "url": "/deals/bigcommerce.html",
+  "verified": "2026-10-14",
+  "deal": null,
+  "start": "$29 per month",
+  "tiers": [
+   {
+    "name": "Core",
+    "price": "$29",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Growth",
+    "price": "$79",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Scale",
+    "price": "$299",
+    "cadence": "per month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "squarespace",
+  "name": "Squarespace",
+  "category": "Ecommerce",
+  "url": "/deals/squarespace.html",
+  "verified": "2026-10-12",
+  "deal": null,
+  "start": "$16 per month",
+  "tiers": [
+   {
+    "name": "Basic",
+    "price": "$16",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Core",
+    "price": "$23",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Plus",
+    "price": "$39",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Advanced",
+    "price": "$99",
+    "cadence": "per month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "wix",
+  "name": "Wix",
+  "category": "Ecommerce",
+  "url": "/deals/wix.html",
+  "verified": "2026-10-20",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Core",
+    "price": "$29",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Business",
+    "price": "$39",
+    "cadence": "per month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "lightspeed",
+  "name": "Lightspeed",
+  "category": "Payments & POS",
+  "url": "/deals/lightspeed.html",
+  "verified": "2026-10-20",
+  "deal": null,
+  "start": "$89 per month",
+  "tiers": [
+   {
+    "name": "Retail Basic",
+    "price": "$89",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Retail Core",
+    "price": "$149",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Retail Plus",
+    "price": "$289",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Lightspeed Payments",
+    "price": "2.6% + 10¢",
+    "cadence": "per in-person transaction"
+   }
+  ]
+ },
+ {
+  "slug": "toast",
+  "name": "Toast",
+  "category": "Payments & POS",
+  "url": "/deals/toast.html",
+  "verified": "2026-10-20",
+  "deal": null,
+  "start": "C$120 per month",
+  "tiers": [
+   {
+    "name": "Starter (Canada)",
+    "price": "C$120",
+    "cadence": "per month"
+   },
+   {
+    "name": "Essentials (Canada)",
+    "price": "C$220",
+    "cadence": "per month"
+   },
+   {
+    "name": "Custom",
+    "price": "—",
+    "cadence": ""
+   }
+  ]
+ },
+ {
+  "slug": "deel",
+  "name": "Deel",
+  "category": "HR & Payroll",
+  "url": "/deals/deel.html",
+  "verified": "2026-10-23",
+  "deal": null,
+  "start": "$29 per employee/month",
+  "tiers": [
+   {
+    "name": "Global Payroll",
+    "price": "$29",
+    "cadence": "per employee/month"
+   },
+   {
+    "name": "Contractor Management",
+    "price": "$49",
+    "cadence": "per contractor/month"
+   },
+   {
+    "name": "Contractor of Record",
+    "price": "$325",
+    "cadence": "per contractor/month"
+   },
+   {
+    "name": "EOR Standard",
+    "price": "$599",
+    "cadence": "per employee/month"
+   }
+  ]
+ },
+ {
+  "slug": "housecall-pro",
+  "name": "Housecall Pro",
+  "category": "Field Service",
+  "url": "/deals/housecall-pro.html",
+  "verified": "2026-10-23",
+  "deal": null,
+  "start": "$59 per month",
+  "tiers": [
+   {
+    "name": "Basic",
+    "price": "$59",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "Essentials",
+    "price": "$149",
+    "cadence": "per month, billed annually"
+   },
+   {
+    "name": "MAX",
+    "price": "$299",
+    "cadence": "per month, billed annually"
+   }
+  ]
+ },
+ {
+  "slug": "cal-com",
+  "name": "Cal.com",
+  "category": "Scheduling",
+  "url": "/deals/cal-com.html",
+  "verified": "2026-10-25",
+  "deal": null,
+  "start": "$0 free",
+  "tiers": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "cadence": "per month"
+   },
+   {
+    "name": "Teams",
+    "price": "$16",
+    "cadence": "per user/month"
+   },
+   {
+    "name": "Organizations",
+    "price": "$37",
+    "cadence": "per user/month"
+   }
+  ]
+ }
+]

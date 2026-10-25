@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare Vendors Side by Side — PlanPrice</title>
+<meta name="description" content="Compare up to three vendors side by side on verified PlanPrice pricing data — including vendors with no promo and no affiliate program.">
+<link rel="canonical" href="https://planprice.ca/compare-vendors.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="Compare Vendors Side by Side — PlanPrice">
+<meta property="og:description" content="Side-by-side vendor comparison on verified pricing data.">
+<meta property="og:url" content="https://planprice.ca/compare-vendors.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/search.html">Search</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <p class="breadcrumbs"><a href="/">All deals</a> › Compare vendors</p>
+    <article class="product">
+      <h1>Compare vendors side by side</h1>
+      <p class="lead">Pick a category and up to three vendors. Every vendor we track is listed — including ones with no promotion and no affiliate program — because a comparison that only shows paying vendors isn't a comparison.</p>
+      <p>All figures come from the same verified pricing data as the deal pages, with the verification date shown for each vendor. Where a price can't be computed from published list data, the cell shows — rather than a guess.</p>
+      <div class="compare-controls">
+        <label>Category <select id="cat"></select></label>
+        <label>Vendor 1 <select id="v0"></select></label>
+        <label>Vendor 2 <select id="v1"></select></label>
+        <label>Vendor 3 <select id="v2"></select></label>
+        <label>Team size (seats) <input id="seats" type="number" min="1" max="500" value="5" size="4"></label>
+      </div>
+      <div class="table-scroll"><table class="tiers" id="cmp">
+        <caption>Side-by-side comparison from PlanPrice verified pricing data.</caption>
+        <thead></thead><tbody></tbody>
+      </table></div>
+      <p class="fine">Seat costs use the cheapest published per-user tier for each vendor and exclude add-ons, overages and taxes. Confirm current pricing on the vendor's own page before buying.</p>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/verified.html">Verification log</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-10-25 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+  </div>
+</footer>
+<script>
+(function () {
+  var DATA = null, cat = document.getElementById('cat'), sels = [0,1,2].map(function(i){return document.getElementById('v'+i);}),
+      seatsEl = document.getElementById('seats'), table = document.getElementById('cmp');
+  function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function vendors() { return DATA.filter(function (d) { return d.category === cat.value; }); }
+  function fill() {
+    var vs = vendors();
+    sels.forEach(function (sel, i) {
+      var cur = sel.value;
+      sel.innerHTML = '<option value="">—</option>' + vs.map(function (v) { return '<option value="' + v.slug + '">' + esc(v.name) + '</option>'; }).join('');
+      sel.value = (cur && vs.some(function (v) { return v.slug === cur; })) ? cur : (vs[i] ? vs[i].slug : '');
+    });
+    render();
+  }
+  function seatCost(v, seats) {
+    var best = null;
+    v.tiers.forEach(function (t) {
+      var m = /^(C\$|\$)([\d.]+)$/.exec(t.price.trim());
+      if (m && /per user|per seat/.test(t.cadence) && /month/.test(t.cadence)) {
+        var val = parseFloat(m[2]);
+        if (best === null || val < best.val) best = { val: val, cur: m[1] };
+      }
+    });
+    return best ? best.cur + (best.val * seats).toFixed(2).replace(/\.00$/, '') + '/mo for ' + seats + ' seats (' + best.cur + best.val + ' per seat)' : '—';
+  }
+  function render() {
+    if (!DATA) return;
+    var chosen = sels.map(function (s) { return DATA.find(function (d) { return d.slug === s.value; }); }).filter(Boolean);
+    var thead = table.querySelector('thead'), tbody = table.querySelector('tbody');
+    if (!chosen.length) { thead.innerHTML = ''; tbody.innerHTML = ''; return; }
+    thead.innerHTML = '<tr><th scope="col"></th>' + chosen.map(function (v) { return '<th scope="col"><a href="' + v.url + '">' + esc(v.name) + '</a></th>'; }).join('') + '</tr>';
+    function row(label, fn) { return '<tr><th scope="row">' + label + '</th>' + chosen.map(function (v) { return '<td>' + fn(v) + '</td>'; }).join('') + '</tr>'; }
+    var seats = Math.max(1, parseInt(seatsEl.value || '5', 10));
+    var html = row('Starting price', function (v) { return 'From ' + esc(v.start); });
+    html += row('Current promo', function (v) { return v.deal ? esc(v.deal) : 'No public promo'; });
+    html += row('Pricing verified', function (v) { return esc(v.verified); });
+    html += row('Monthly cost at ' + seats + ' seats', function (v) { return seatCost(v, seats); });
+    var tierNames = [];
+    chosen.forEach(function (v) { v.tiers.forEach(function (t) { if (tierNames.indexOf(t.name) < 0) tierNames.push(t.name); }); });
+    tierNames.forEach(function (name) {
+      html += row('Tier: ' + esc(name), function (v) {
+        var t = v.tiers.find(function (x) { return x.name === name; });
+        return t ? esc(t.price) + (t.cadence ? ' <span class="fine">' + esc(t.cadence) + '</span>' : '') : '—';
+      });
+    });
+    tbody.innerHTML = html;
+  }
+  fetch('/data/compare-vendors.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    var cats = []; d.forEach(function (x) { if (cats.indexOf(x.category) < 0) cats.push(x.category); });
+    cat.innerHTML = cats.map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('');
+    fill();
+  });
+  cat.addEventListener('change', fill);
+  sels.forEach(function (s) { s.addEventListener('change', render); });
+  seatsEl.addEventListener('input', render);
+})();
+</script>
+</body>
+</html>

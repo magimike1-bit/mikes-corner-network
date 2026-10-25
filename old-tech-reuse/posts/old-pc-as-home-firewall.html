@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn an Old PC Into a Home Firewall With OPNsense — Old Tech, New Life</title>
+<meta name="description" content="OPNsense turns a retired desktop into a serious home firewall — if it clears the published hardware tiers and the 24/7 power math works. A staged build beside your live network, one cutover, and a one-cable rollback.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Turn an old PC into a home firewall with OPNsense: check the hardware, count the power cost, cut over safely</h1>
+  <p class="meta">Repurpose &middot; 8 min read</p>
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>Every guide to home firewalls eventually says the same two things about an old
+  desktop: OPNsense will run on it, and you might prefer a small new mini PC instead.
+  Both are true, and neither is a plan. The old tower in the closet is free, already
+  owned, and — unlike most retired gadgets — being considered for a job that runs
+  twenty-four hours a day at the centre of the whole home network. That changes the
+  questions. The right ones are: does this specific machine clear the firewall's own
+  published hardware tiers, what does its electricity actually cost across a year of
+  always-on service, and how is it installed without taking the household's internet
+  down while you learn? This guide answers all three in order, then builds the firewall
+  beside the live network and cuts over once, keeping the old router as both the Wi-Fi
+  access point and the rollback plan.</p>
+
+  <h2>First check: the old PC against OPNsense's own tiers</h2>
+  <p>OPNsense is a free, open-source firewall and routing system — the same class of
+  software as pfSense CE — built on FreeBSD and published for x86-64 hardware only.
+  That architecture line is the first gate: a standard Intel or AMD desktop passes; an
+  ARM board or an ancient 32-bit-only machine does not. Beyond it, the project
+  publishes three hardware tiers, and an honest reuse decision starts by placing the
+  candidate machine in one:</p>
+  <table>
+    <tr><th>OPNsense tier</th><th>Processor</th><th>RAM</th><th>Install target</th><th>Published throughput / scale</th></tr>
+    <tr><td>Minimum</td><td>1 GHz dual-core</td><td>3 GB</td><td>4 GB SD or CF card, nano image</td><td>11&ndash;150 Mbps, 10&ndash;30 users/networks; standard features that need disk writes (caching proxy, intrusion-detection alert database) are excluded</td></tr>
+    <tr><td>Reasonable</td><td>1 GHz dual-core</td><td>4 GB</td><td>40 GB SSD</td><td>151&ndash;350 Mbps, 30&ndash;50 users/networks; every standard feature functional</td></tr>
+    <tr><td>Recommended</td><td>1.5 GHz multi-core</td><td>8 GB</td><td>120 GB SSD</td><td>350&ndash;750+ Mbps, 50&ndash;150+ users/networks; fits most use cases</td></tr>
+  </table>
+  <p>Placing a real machine is usually reassuring: a typical retired desktop from the
+  last decade lands at or past the Reasonable tier on processor and RAM, and its drive
+  — swapped for any small SSD if it still spins — clears the storage line easily. Two
+  sizing notes from the same documentation matter for older hardware. Each entry in the
+  firewall's connection state table uses about 1&nbsp;kB of RAM (a thousand connections
+  is roughly 1&nbsp;MB), so ordinary home connection counts are not a memory problem
+  even at the Minimum tier. And the features that genuinely raise the hardware bar are
+  the optional heavy ones — a caching proxy and large captive-portal deployments —
+  which a home install can simply leave off until the hardware justifies them. If the
+  machine cannot reach the Minimum tier, the verdict is quick: it is not a firewall,
+  whatever else it becomes.</p>
+
+  <h2>The network card is the real gate</h2>
+  <p>A router needs two network interfaces — one facing the internet (WAN), one facing
+  the house (LAN) — and the installer's interface assignment expects exactly that
+  order: LAN first, WAN second, anything further becomes an optional interface. Most
+  retired desktops have exactly one Ethernet port on the motherboard, so the standard
+  reuse purchase is a single add-in network card in a free PCIe slot, giving the
+  machine its second port. Choose that card by its chip, not its price sticker:
+  because the system is based on FreeBSD it is pickier about network hardware than
+  Linux, and both the OPNsense documentation and independent guides converge on the
+  same advice — Intel network interfaces are described by the project as reliable,
+  fast and not error-prone, delivering higher throughput at reduced CPU load, and
+  Intel-chip cards are the recommended buy when purchasing. A desktop has one more
+  advantage over the mini PCs the other guides steer you toward: when a port fails or
+  a third network is wanted later, the fix is another inexpensive card, not another
+  computer.</p>
+
+  <h2>Count the power cost before committing</h2>
+  <p>Here is the calculation the buy-a-mini-PC guides gesture at with the words "power
+  hungry" and never perform. A firewall runs 8,760 hours a year, so the formula is:
+  <strong>annual cost = (watts &divide; 1,000) &times; 8,760 &times; your price per
+  kWh</strong>. Measure the candidate PC's draw at the wall with a plug-in power meter
+  while it idles at a desktop — idle is the honest number for a home firewall — or work
+  with an estimate and label it as one. Worked example, with the inputs stated so any
+  reader can substitute their own:</p>
+  <table>
+    <tr><th>Machine (example inputs)</th><th>Annual energy</th><th>Annual cost at an example $0.15/kWh</th></tr>
+    <tr><td>Old desktop drawing 65 W</td><td>about 569 kWh</td><td>about $85</td></tr>
+    <tr><td>Low-power mini PC drawing 12 W</td><td>about 105 kWh</td><td>about $16</td></tr>
+    <tr><td>Difference</td><td>about 464 kWh</td><td>about $70 per year</td></tr>
+  </table>
+  <p>Read the result as a payback line, not a verdict: on these example inputs, every
+  $70 of a replacement machine's purchase price takes about a year of power savings to
+  earn back — so a replacement costing around $210 breaks even in roughly three years,
+  and the free desktop is the cheaper firewall until then. Substitute the measured
+  watts and the rate on an actual electricity bill and the same arithmetic gives the
+  household's real answer. Two reuse corollaries follow. A genuinely thirsty machine —
+  an old gaming tower idling at 120&nbsp;W or more — flips the answer quickly, and is
+  worth more sold or parted out. And a desktop pressed into this job should be stripped
+  to it: no discrete graphics card left drawing power for a machine that will run
+  headless, and if a saved spare power supply from an earlier build goes in, confirm
+  its wattage covers the configuration with room to spare — saved desktop power
+  supplies are genuinely reusable, but the wattage check is the whole job. The
+  kettle-style power cord, at least, will be in the saved-cable drawer: computer power
+  cords have not changed in years, and this project is exactly the kind that sends
+  people digging them out.</p>
+
+  <h2>The staged build-and-cutover procedure</h2>
+  <p>The existing router stays live and untouched until step 10. Everything before that
+  happens on a bench, on a spare subnet, with the household none the wiser.</p>
+  <ol>
+    <li><strong>Record the current setup.</strong> Note the existing router's admin
+    address, the internet connection type (most home fibre and cable connections hand
+    the router an address automatically by DHCP — if yours needs a PPPoE login or a
+    VLAN tag from the provider, write those settings down now), and the Wi-Fi network
+    name and password the house already uses.</li>
+    <li><strong>Prepare the machine.</strong> Fit the add-in network card, connect a
+    monitor and keyboard, and confirm in the BIOS/UEFI setup that the machine boots
+    from USB and will power back on after a power failure if that option exists — a
+    firewall that stays off after an outage is a household outage.</li>
+    <li><strong>Download the installer and verify it.</strong> Get the current full
+    (vga) USB image from the OPNsense mirrors — installation images arrive with the
+    major releases in January and July — then verify the download before trusting it:
+    the project publishes a SHA-256 checksum file, a signature file and a public key,
+    and its documented OpenSSL checksum and <em>openssl dgst -verify</em> commands must
+    agree and return "Verified OK". Write the verified image to a USB stick.</li>
+    <li><strong>Install to the internal drive.</strong> Boot from the USB stick, log in
+    as <em>installer</em> with password <em>opnsense</em>, accept the keymap, choose
+    Install (ZFS) — the documentation describes ZFS as in most cases the best and most
+    reliable option — with the stripe layout for a single disk, select the internal
+    drive (not the USB stick), and accept the final warning, understanding it destroys
+    that drive's contents: anything on the old PC worth keeping was backed up before
+    this step. Set a strong root password when prompted, complete the install, remove
+    the USB stick and reboot.</li>
+    <li><strong>Assign the interfaces.</strong> At the console, assign the first
+    interface as LAN and the second as WAN, matching each to the physical port noted
+    when the card went in (plug a cable in and watch which port's link light answers,
+    if unsure). Decline VLAN setup — VLANs are optional and can be added later.</li>
+    <li><strong>Move the LAN onto a spare subnet.</strong> Still at the console, log in
+    as <em>root</em> (default password <em>opnsense</em> on a fresh install) and use
+    menu option 2 to set the LAN address to an address that clashes with nothing —
+    10.1.1.1 with a /24 prefix is the example the PCWorld guide uses for exactly this
+    purpose — so the new firewall and the still-live old router can coexist while you
+    configure. Change the root password here if the installer did not already.</li>
+    <li><strong>Configure from a laptop on the bench.</strong> Cable a laptop directly
+    to the LAN port, give it an address on the same subnet (10.1.1.2, mask
+    255.255.255.0), and open https://10.1.1.1 — expect a browser warning about the
+    self-signed certificate on first contact. Log in as <em>root</em> and run the setup
+    wizard: hostname, domain, time zone, and the WAN type recorded in step 1.</li>
+    <li><strong>Prove it routes, off to the side.</strong> Temporarily connect the WAN
+    port to a LAN port of the old router. The bench network now has double NAT, which
+    is wrong as a final state and perfect as a test: from the laptop, confirm the WAN
+    shows an address under Interfaces &gt; Overview, then use System &gt; Firmware &gt;
+    Status &gt; Check for updates — a successful update check proves DNS and routing
+    end to end — and install the post-install update the project recommends. The
+    default rule set needs no emergency surgery: the system ships with no unsafe
+    default options.</li>
+    <li><strong>Repurpose the old router on paper.</strong> Decide its second job now:
+    following this site's router-as-access-point pattern, it will stop routing and
+    keep broadcasting the house Wi-Fi — same network name and password — plugged into
+    the new firewall's LAN. If separate networks for guests or smart-home gear are
+    wanted later, that is the point where a managed switch enters the picture, because
+    a managed switch is what makes VLANs usable.</li>
+    <li><strong>Cut over in one move, at a quiet hour.</strong> Power down, move the
+    modem or fibre terminal's cable from the old router's WAN port to the firewall's
+    WAN port, connect the firewall's LAN port to the switch or directly to the old
+    router — now switched to access-point mode with its DHCP server off — and power
+    everything up, modem first, firewall second, access point last. Set the firewall's
+    LAN address back to the household's familiar gateway address if devices depend on
+    it.</li>
+    <li><strong>Keep the rollback within reach for a week.</strong> The old router's
+    configuration was never reset, so the way back is literal: modem cable back to the
+    old router, old router back to router mode, done. Leave its settings untouched
+    until the new firewall has survived a full week of ordinary use.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> every device in the house is online
+  through the new firewall with the Wi-Fi name unchanged; the firewall's dashboard
+  shows a WAN address from the provider (not from the old router), an update check
+  succeeds, a speed test lands in the throughput band the hardware tier predicted, and
+  a deliberate reboot of the firewall — and one full power-cycle — brings the whole
+  network back without anyone touching a cable.</p>
+
+  <h2>After cutover: the job is mostly updates</h2>
+  <p>The security case for the whole project is maintenance: instead of depending on a
+  consumer router maker's update schedule, the firewall receives frequent updates
+  carrying the latest security fixes, and checking for them is a thirty-second task in
+  the same Firmware screen used as the step-8 test. Set a monthly rhythm, take the
+  configuration backup the interface offers before each update, and the old desktop has
+  settled into the least dramatic job in the house. The features that justified the
+  hardware headroom — separate VLANs with their own firewall rules for smart-home
+  gadgets, a recursive DNS server, dynamic DNS — can then be switched on one at a time,
+  each as its own small project, on a network that never has to come down to learn.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>How much RAM does the old PC actually need?</strong> By the project's own
+  tiers: 3&nbsp;GB reaches the Minimum specification, 4&nbsp;GB with an SSD is the
+  Reasonable specification that runs every standard feature, and 8&nbsp;GB is
+  Recommended. A retired desktop below 3&nbsp;GB is not a candidate.</p>
+  <p><strong>Is a second network card really required?</strong> For the standard
+  two-network layout, yes — the installer assigns a LAN and a WAN interface, and a
+  desktop's single onboard port cannot be both. The one-card exception, a single
+  interface carrying tagged VLANs through a managed switch, is a real technique but a
+  poor first build; the add-in card is the simpler, better-documented path.</p>
+  <p><strong>Could it run as a virtual machine instead?</strong> It can — both OPNsense
+  and pfSense CE run under virtualization — but then the whole home network depends on
+  the host machine's uptime and updates. Dedicated retired hardware that does nothing
+  else is precisely the advantage this reuse offers.</p>
+
+  <p><a href="/posts/old-routers-as-extenders.html">Next: give an old router a second job extending Wi-Fi &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Tech, New Life — DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

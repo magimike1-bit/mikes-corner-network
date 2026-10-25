@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn an Old Phone Into a Dashcam — Old Tech, New Life</title>
+<meta name="description" content="An old phone can record your drives with GPS and speed burned into the video — if it passes the heat, battery and storage checks. The honest decision framework, the storage math, and one ordered setup procedure.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Turn an old phone into a dashcam: the honest setup, heat limits and storage math included</h1>
+  <p class="meta">Repurpose &middot; 7 min read</p>
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>A dashcam is a camera, some storage, a GPS receiver and a power source in a small
+  box — and a retired phone already contains all four, usually with a better screen than
+  the dashcam it would replace. That is why the phone-in-a-mount conversion is so
+  popular, and the basic version really is simple: install a dashcam app, mount the
+  phone, keep it plugged in. What the quick versions of this project skip is everything
+  that decides whether the conversion is still working in three months: the temperature
+  limits the phone's own maker publishes, the battery wear from recording for hours at a
+  time, and the storage arithmetic that determines how much of your driving the loop
+  actually keeps. This guide starts with the decision, states the limits honestly, does
+  the math, and then gives one ordered setup procedure with a playback check at the end.</p>
+
+  <h2>First, the decision: phone dashcam or dedicated dashcam?</h2>
+  <p>Run the candidate phone through five questions before spending anything on a mount.
+  A "no" on the first two ends the project; the rest tell you what kind of dashcam you
+  are getting.</p>
+  <ul>
+    <li><strong>Is the battery sound?</strong> Batteries are consumables that wear out
+    over time, and continuous recording is hard use — the Droid Dashcam app's own FAQ
+    warns that battery usage is high, the battery drains fast and the device becomes
+    hot. A phone whose battery is swollen, whose case is lifting, or that shuts down
+    unexpectedly is a recycling candidate, not a dashcam.</li>
+    <li><strong>Can it record a readable plate at night?</strong> Camera quality is the
+    whole product. A very old phone's camera may not deliver usable video, and quality
+    drops further at night. If a test clip (step 9 below) cannot resolve the plate of a
+    car stopped directly ahead in daylight, the phone fails the only test that
+    matters.</li>
+    <li><strong>Is it Android, or are you prepared to shop the App Store carefully?</strong>
+    The best-documented app for this job, Droid Dashcam, is an Android app. On an
+    iPhone the same checklist applies — loop recording, GPS overlay, autostart — but
+    the app names differ, so verify each feature in the listing before relying on
+    it.</li>
+    <li><strong>Will it live in the car, or travel with you?</strong> A phone left
+    mounted is more visible to thieves than a small dedicated unit, and a parked car is
+    exactly where the heat problem below bites. The workable pattern for most people is
+    drive-time only: mount it when you drive, take it out when you park for long.</li>
+    <li><strong>Do you need parking surveillance?</strong> If the footage you care
+    about is what happens while the car is parked and unattended, a phone is the wrong
+    tool — it will be out of the car, out of battery, or shut down by heat. Buy the
+    dedicated unit instead and let the phone do a different second job.</li>
+  </ul>
+  <table>
+    <tr><th></th><th>Old phone as dashcam</th><th>Dedicated dashcam</th></tr>
+    <tr><td>Starting cost</td><td>The hardware is already owned; a mount and a charging cable are the only possible purchases, and only if they are not already in a drawer</td><td>A new purchase before anything records</td></tr>
+    <tr><td>Camera and GPS</td><td>Timestamp, GPS coordinates, GPS-based speed and the vehicle plate can be burned directly into the video file; a mid-range phone typically brings a better sensor and a solid GPS chip</td><td>Budget units are described as tending toward mediocre recording quality, tiny screens and unreliable GPS integration</td></tr>
+    <tr><td>Reviewing footage</td><td>Clips play back immediately on the phone's own large display and can be uploaded over Wi-Fi at home — no SIM card is needed for recording</td><td>Some models have no display at all, so review waits for a computer or a phone app</td></tr>
+    <tr><td>Presence in the car</td><td>Big, visible, and worth stealing; also bound by the phone maker's 0&ndash;35&nbsp;&deg;C operating range, so it cannot simply live on the windshield</td><td>Small and discreet, and built to stay in the vehicle — check the individual unit's own temperature rating rather than assuming</td></tr>
+  </table>
+
+  <h2>The heat limit nobody mentions</h2>
+  <p>This is the section most dashcam conversions need and few include. Apple states
+  that iPhone is designed for ambient temperatures between 0 and 35&nbsp;&deg;C, can be
+  stored between &minus;20 and 45&nbsp;&deg;C, and says plainly: do not leave the device
+  in a car, because temperatures in parked cars can exceed the storage range. Samsung
+  Canada publishes the same 0 to 35&nbsp;&deg;C optimal range for Galaxy devices, warns
+  that extended use or storage above 35&nbsp;&deg;C leads to unexpected shutdowns and
+  shorter battery life, and gives the same hot-car warning. Apple adds the mechanisms:
+  using the camera for an extended period, or GPS tracking in a car, in hot conditions
+  or direct sunlight is on its list of activities to avoid; an overheated phone slows or
+  stops charging, dims or blacks out its display, disables some camera features, and in
+  extreme conditions temporarily disables itself. Hot use can permanently shorten
+  battery life, and Samsung notes continuous use or charging in extreme temperatures
+  accelerates battery deterioration.</p>
+  <p>Translated into dashcam rules: the phone records while you drive, with the car's
+  ventilation running — and it leaves the car with you whenever the car will sit in
+  summer sun. A phone that shows a temperature warning, stops charging, or goes dark
+  mid-drive is not malfunctioning; it is enforcing the limit its maker published. If
+  your driving life means the phone would bake on the windshield daily, that is a
+  decision-framework answer, not a setup problem: choose the dedicated unit.</p>
+
+  <h2>Do the storage math before choosing settings</h2>
+  <p>Loop recording deletes the oldest clips when the space cap is reached, so the cap
+  and the recording bitrate together decide how much driving you keep. The conversion
+  is fixed: <strong>gigabytes per hour &asymp; bitrate in Mbps &times; 0.45</strong>.
+  Worked examples for a 32&nbsp;GB cap — the size suggested in XDA's account of this
+  setup:</p>
+  <table>
+    <tr><th>Recording bitrate (example input)</th><th>Storage per hour</th><th>Driving kept in a 32 GB loop</th></tr>
+    <tr><td>5 Mbps</td><td>about 2.25 GB</td><td>about 14 hours</td></tr>
+    <tr><td>10 Mbps</td><td>about 4.5 GB</td><td>about 7 hours</td></tr>
+    <tr><td>15 Mbps</td><td>about 6.75 GB</td><td>about 4.7 hours</td></tr>
+  </table>
+  <p>Read your app's actual bitrate from a test clip's file properties and redo the one
+  multiplication with your number. The practical reading: at a moderate bitrate, a
+  one-hour daily commute is retained for roughly two weeks before the loop overwrites
+  it — ample for incident footage, provided any clip that matters is copied off the
+  phone promptly, because the loop will not keep it forever. Short segments make that
+  copying practical: with 5-minute segments, an incident is one timestamped file, not a
+  position inside an hour-long recording.</p>
+
+  <h2>The setup procedure</h2>
+  <ol>
+    <li><strong>Prep the phone as a single-purpose device.</strong> Back up anything
+    worth keeping, charge it fully, install the newest system update it supports, and
+    remove apps the dashcam job does not need — every removal frees storage for the
+    loop. Sign out of banking and shopping accounts; this device will live in a car.</li>
+    <li><strong>Choose where recordings live.</strong> Droid Dashcam can record to the
+    phone's storage or to an external SD card where the phone has a slot. Set the
+    maximum space for all videos to the cap your storage math produced (32&nbsp;GB is a
+    sensible starting point on a 64&nbsp;GB phone).</li>
+    <li><strong>Install the app and grant its permissions.</strong> Install Droid
+    Dashcam from Google Play on an Android phone. On first launch it asks for
+    permissions including camera, location and notifications — grant them, because the
+    GPS overlay is the point of the exercise. On an iPhone, install the App Store
+    dashcam app chosen in the decision step and grant the equivalent permissions.</li>
+    <li><strong>Turn on the evidence overlay.</strong> In Settings, enable the hardcoded
+    subtitles: timestamp, GPS coordinates, GPS-based speed, and your vehicle
+    registration plate. Burned into the file, they survive sharing and uploading in a
+    way a separate log file does not.</li>
+    <li><strong>Set segments, day/night and impact locking.</strong> Set the segment
+    length to 5 minutes, leave the automatic day/night mode switch on, and enable the
+    G-shock lock so a detected impact protects that clip from the loop's overwriting.</li>
+    <li><strong>Set an autostart trigger.</strong> Configure recording to start on the
+    trigger that matches your car: on charging, if the car's USB port wakes with the
+    ignition, or on Bluetooth connection, if the phone pairs with the car. Recording
+    that starts by itself is recording that is never forgotten.</li>
+    <li><strong>Mount it high, central and unobstructed.</strong> Fit the mount so the
+    phone sits in landscape orientation with a clear view of the road — typically high
+    on the windshield near the rear-view mirror — with nothing covering the camera
+    lens and the mount itself outside the camera's field of view. Keep the phone out of
+    any airbag deployment zone, and out of your own line of sight as far as the view
+    allows: a phone is bigger and bulkier than a dashcam and intrudes more.</li>
+    <li><strong>Wire the power for every trip.</strong> This is the project the
+    saved-cable drawer was made for — charging leads and power cords from earlier
+    devices have not changed in years, and a sound saved cable is the right cable here.
+    Run it from the car's USB port or charger to the mount, routed so it cannot dangle
+    across controls or fall into the footwell, and leave it in the car permanently.
+    Constant recording drains a battery quickly; an unplugged dashcam phone is a dead
+    dashcam phone.</li>
+    <li><strong>Take the test drive before trusting it.</strong> Drive ten minutes in
+    daylight including a stop behind another vehicle, then a short stretch after dark
+    if you drive at night. Play the clips back on the phone itself — which is, not
+    coincidentally, the conversion's best feature.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the test clips play back with the correct
+  timestamp, GPS coordinates and speed visible on the video; the plate of the vehicle
+  stopped directly ahead is readable in the daylight clip; recording restarted by
+  itself on the second trip with no tap from you; and after a 30-minute drive the phone
+  shows no temperature warning and is still charging. If the plate is not readable, no
+  setting fixes it — that phone's camera has failed the decision test, and the honest
+  outcome is a different second job for the phone.</p>
+
+  <h2>Living with it</h2>
+  <p>Three habits keep the conversion honest. First, treat the loop as short-term
+  memory: copy any clip that matters to a computer or cloud storage over home Wi-Fi the
+  same day, because loop recording exists to overwrite. Second, do everything with the
+  phone before moving off — settings, playback, uploads. Rules on phone use while
+  driving vary by jurisdiction, but the pattern is consistent: the phone must be
+  mounted, and holding or interacting with it while driving is prohibited in most
+  places. Check your local rules, then set the phone up parked, every time. Third,
+  re-check the mount after big temperature swings and glance at the phone's battery
+  health seasonally; a battery that begins shutting the phone down unexpectedly has
+  reached the end of this job too.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Does the phone need a SIM card or a data plan?</strong> No. The phone
+  records without one, and recordings upload later over Wi-Fi. GPS positioning for the
+  overlay does not require a mobile plan either — but without one, obviously, the phone
+  cannot upload or call from the car.</p>
+  <p><strong>Can it watch the car while parked?</strong> Not in any way worth relying
+  on. Parked surveillance needs the phone left in the car, powered and recording —
+  precisely the hot-parked-car situation both major makers warn against, with a battery
+  that continuous recording drains fast. That gap is the dedicated dashcam's reason to
+  exist.</p>
+  <p><strong>Which resolution should be chosen?</strong> The highest the phone sustains
+  without overheating or exhausting the loop too quickly — then verify with the storage
+  math and the test-drive playback. A readable plate at a moderate bitrate beats an
+  unreadable one at a spectacular bitrate the loop erases by Thursday.</p>
+
+  <p><a href="/posts/old-phones-as-security-cameras.html">Next: turn a retired phone into a home camera &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Tech, New Life — DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

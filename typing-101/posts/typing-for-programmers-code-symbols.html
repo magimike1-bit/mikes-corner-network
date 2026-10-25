@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typing for Programmers: Why Code Feels Slower Than Prose — Typing 101</title>
+<meta name="description" content="Code is 30-40 percent symbols prose practice never trains. Verify editor autoclosing, measure code WPM separately, and drill the right bottleneck.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Typing 101</a>
+    <p class="tagline">Learn to touch type the right way — no apps to buy, no magic required</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">For programmers</p>
+  <h1>Typing for Programmers: Why Code Feels Slower Than Prose — and How to Fix the Symbol Bottleneck</h1>
+  <p class="meta">Published 2026-10-25 &middot; Last updated 2026-10-25</p>
+<p class="lede">A fast prose score can hide a slow code score. The bottleneck is usually a specific cluster — brackets, operators, or capitals inside words — and each one has a different fix, starting with a check of what the editor already types for you.</p>
+<h2>Why code feels slower than prose</h2>
+<p>A paragraph of English and a line of code ask for different keyboards, in effect. Code is dense in brackets, operators, underscores, semicolons and mixed-case names at frequencies that prose never reaches, and a programmer guide that specialises in this work puts the contrast plainly: a prose speed can be roughly double the same person's real coding speed. Another symbol guide states the underlying reason in numbers — real code is 30 to 40 percent non-alphanumeric characters, while standard typing instruction teaches the letters, the digits and basic punctuation and then stops. The characters that fill a third or more of code are the characters that received no training at all. That gap, not a lack of general typing ability, is what a stumble over a line of code usually is.</p>
+<p>It also explains why more prose tests do not fix it. Practising prose strengthens the part of typing that is already strong. The slow part — a shifted brace, a two-character operator, a capital letter in the middle of a word — appears too rarely in prose for prose practice to train it. Programming typing therefore needs its own measure and its own drills, aimed at four things prose tests largely skip: bracket and parenthesis pairs, operator clusters, mixed-case identifiers, and the digit-and-symbol row.</p>
+<h2>First, verify what your editor already types for you</h2>
+<p>Before drilling any pair, check a fact about the editor that most practice guides never mention. In Visual Studio Code, the official language-configuration documentation defines brackets as the pairs { }, [ ] and ( ), and defines auto-closing pairs for those brackets plus single quotes, double quotes, the backtick and block comments. When a quote key is typed, the editor creates the pair and places the cursor in the middle. The behaviour is controlled by settings named editor.autoClosingBrackets and editor.autoClosingQuotes, it can be disabled in particular contexts such as strings and comments, and by default a pair is only auto-closed when there is whitespace immediately after the cursor.</p>
+<p>That specification changes what practice should train. If the editor inserts the closing brace, the valuable skill is not producing both halves as two separate hunts. The valuable skills are producing the opening character without looking, typing the contents cleanly inside the pair, and moving past or out of the closing character the editor supplied without breaking rhythm — plus knowing what happens in the contexts where auto-closing does not apply, such as inside a string or comment, or when typing directly before another character. A drill that ignores the editor trains a version of the job the reader does not actually do all day. A drill built around the editor trains the real one.</p>
+<h2>Measure the right thing: three numbers, not one</h2>
+<table><caption>Three measures, three different diagnoses</caption><thead><tr><th>Measure</th><th>How it is taken</th><th>What it tells you</th></tr></thead><tbody>
+<tr><td>Prose WPM</td><td>A standard typing test on ordinary English text</td><td>A ceiling for email, documents and messages; it says little about code</td></tr>
+<tr><td>Code WPM</td><td>Retyping a real function from scratch, without copy-paste</td><td>Usually 40–60 percent of prose WPM; below 40 percent points to a symbol or bracket bottleneck</td></tr>
+<tr><td>Symbol accuracy</td><td>Per-character accuracy on the symbol row during code practice</td><td>Below 95 percent means the keys are still being guessed at, not typed</td></tr>
+</tbody></table>
+<p>Those three numbers turn a vague feeling — code is slow — into a diagnosis that points at a fix. A healthy prose score beside a code score in the normal 40 to 60 percent range usually means the symbol work is proportionate and general fluency is the remaining lever. A code score below 40 percent of prose is a specific accusation: brackets and symbols, not letters, are eating the time. And symbol accuracy below 95 percent settles the argument about method — at that level the fingers do not yet know where the keys are, so speed work is premature and accuracy work, at whatever slower pace it requires, is the correct next step.</p>
+<h2>The three bottlenecks, compared</h2>
+<p><strong>Bracket pairs.</strong> Code uses ( ), { }, [ ] and &lt; &gt; as matched pairs, and pair fluency is a placement skill prose never builds. Symbol guides consistently rank curly braces and square brackets among the slowest characters for developers: braces require Shift and sit on the right side of the keyboard, and brackets ask the right hand to stretch away from the home position. The fix is pair work — empty pairs typed as single gestures, then nested combinations — adapted to the editor check above: opening fluently, filling accurately, and exiting cleanly.</p>
+<p><strong>Operator clusters.</strong> Code is full of two- and three-character units that function as one symbol: =&gt;, ==, !=, &lt;=, &gt;=, ::, ?., &amp;&amp; and ||, among others. Each cluster has its own finger choreography, often involving Shift in the middle, which is why a cluster can stall a line even when each character in it is known separately. The slowest-symbols lists return to the same clusters for the same reason — the arrow function, the pipe, the ampersand pair, angle brackets, the backtick used for template literals, and strict inequality all combine high frequency in modern code with a Shift dependency.</p>
+<p><strong>Mixed-case identifiers.</strong> Prose capitals arrive at the start of a sentence, where the Shift key is a single, predictable event. Code capitals arrive in the middle of words: camelCase, PascalCase, snake_case and constant-style names each impose a different rhythm, and the skill is releasing or holding Shift mid-word without breaking the word into two separate motions. Identifier practice should use real names — the kind that appear in actual code, such as getUserById or parseQueryString — because the case transitions in invented short words do not resemble the transitions in real ones.</p>
+<h2>A two-week diagnostic and drill procedure</h2>
+<ol>
+<li><strong>Take the three measures on day one.</strong> Record a prose score, retype a real function of about twenty lines from scratch and record that score, and note symbol accuracy. Write all three down; the retest only means something against the same tasks.</li>
+<li><strong>Check the editor before drilling pairs.</strong> Confirm whether auto-closing for brackets and quotes is on, and practise one line with it in mind: open pairs, type inside them, and move past the supplied closing characters.</li>
+<li><strong>Spend five minutes on operator drills.</strong> Choose the five operators used most in the main language, and repeat each cluster until the fingers stop searching between its characters.</li>
+<li><strong>Spend ten minutes retyping real code.</strong> Use a short function from a respected project or the language's standard material, typed from scratch without copy-paste, slowly enough that a mistyped bracket is noticed rather than carried.</li>
+<li><strong>Spend five minutes writing a plain-English comment or explanation.</strong> Describing something just built, in full prose with no shortcuts, keeps ordinary writing speed from decaying while symbol speed climbs.</li>
+<li><strong>Repeat daily for two weeks, then retest the same three measures.</strong> Compare code WPM as a percentage of prose WPM, and symbol accuracy against the 95 percent line, before deciding what the next two weeks should target.</li>
+</ol>
+<p><strong>What success looks like:</strong> the retest shows code speed moving toward or into the 40 to 60 percent of prose range, symbol accuracy at or above 95 percent, and — the practical test — a familiar line of code typed without a pause at its brackets, operators or capital letters.</p>
+<h2>Choose your drill set by language: a decision framework</h2>
+<p><strong>If the main language is JavaScript or TypeScript,</strong> the drill set is braces for blocks and destructuring, brackets, the arrow cluster, template literals with the backtick, optional chaining and nullish coalescing, and generics with angle brackets — the patterns those languages repeat in file after file. <strong>If the main language is Python,</strong> braces matter far less and the set changes accordingly: colons after control structures, brackets and braces inside comprehensions and dictionaries, f-string forms, and asterisk forms such as *args and **kwargs. <strong>If the work is Rust, Go, shell or SQL,</strong> build the set from that language's documented operators instead of borrowing another language's list — scope and channel operators, pointers, pipes and redirections, and comparison forms differ enough that a borrowed drill set trains yesterday's bottleneck. The rule underneath every branch is the same: the five most frequent clusters in the code actually typed each week are the drill set, and the keyword sprint follows the same rule — the ten keywords of the working language, typed as a one-word drill until they are automatic, because a slow keyword is typed every few seconds.</p>
+<h2>Questions programmers ask about typing</h2>
+<p><strong>How fast is fast enough?</strong> The goal described by programmer-focused guidance is not a headline number but the point where the keyboard stops being the bottleneck — commonly framed as roughly 50 to 70 words per minute on prose together with fluency on the symbol-heavy material. A fast prose score with slow symbols does not meet that description.</p>
+<p><strong>Should closing brackets be drilled at all if the editor inserts them?</strong> Yes, but differently: drill opening them without looking, typing inside them accurately, and moving past the supplied closing character. Also keep some pair practice for contexts where auto-closing is disabled or does not trigger, such as certain string and comment contexts or typing immediately before another character.</p>
+<p><strong>Why does accuracy come before speed here?</strong> Because the diagnostic says so. Symbol accuracy below 95 percent identifies guessing, and speed built on guessed key positions has to be unlearned. Slowing down until the cluster is clean, then letting speed return, is the route the practice guidance recommends for a plateau as well.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Typing 101 — practical touch-typing lessons for beginners. Content is for general
+    information only; the ergonomics article is not medical advice. If you have pain,
+    numbness, or a medical condition, consult a qualified health professional.</p>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://old-textbooks.pages.dev/sitemap.xml
+Sitemap: https://old-textbooks-1qzrm.kinsta.page/sitemap.xml

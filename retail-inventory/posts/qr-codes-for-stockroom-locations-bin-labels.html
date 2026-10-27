@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Using QR Codes for Stockroom Locations and Bin Labels — Retail Inventory Management</title>
+<meta name="description" content="Code the locations first, items second: a location taxonomy, dynamic codes linked to a register, a pilot-aisle setup procedure, and the maintenance rules that keep QR bin labels true.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Retail Inventory Management</a>
+    <p class="tagline">Practical inventory habits for independent retailers</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Using QR codes for stockroom locations and bin labels</h1>
+  <p class="meta">Stockroom systems &middot; 7 min read</p>
+
+  <p>A QR code is a printed square that opens a record when a phone or
+  scanner reads it. That is the whole technology. Everything interesting
+  about QR codes in a stockroom is a design decision the square itself does
+  not make for you: does the code name a <em>place</em> — this shelf, this
+  bin — or a <em>thing</em> — this product, this unit? Most inventory guides
+  start with things, one code per SKU or asset. A small stockroom gets more
+  from the opposite order. Locations are few, fixed, and shared by
+  everything that moves through them; items are many and churn. Code the
+  fixed points first, and the moving stock inherits the structure.</p>
+
+  <h2>Locations first: what a location code does</h2>
+  <p>In the one well-documented location-first setup — a stock system built
+  for galleries — the software generates QR codes for locations and for
+  items separately, as two distinct families. Scanning a location code is
+  not a lookup; it is an action. It updates the recorded location of the
+  items being moved and supports stock checks at that location: the scan
+  says "this stock is here now," and the register agrees. That is the
+  difference that matters. An item code answers "what is this?" A location
+  code answers "where is this, and what else is here?" — and the second
+  question is the one a stockroom asks all day.</p>
+
+  <h2>Items second: what item codes are still for</h2>
+  <p>Item codes keep their place at the edges of the system: receiving,
+  where a code on an incoming item ties it to its record, and counting,
+  where scanning the item confirms the unit in hand. Generating one code
+  per SKU, bin, or asset is the standard generator workflow — the tools do
+  not distinguish the designs, which is why the distinction has to come
+  from the shop. The head-to-head, honestly scored: locations win on
+  movement and stock checks; items win on identity at receiving. A small
+  stockroom needs the first badly and the second only where goods arrive
+  unlabelled.</p>
+
+  <h2>Design the location taxonomy</h2>
+  <p>Location codes encode a hierarchy, and the hierarchy should match how
+  staff already talk: room, aisle or run, bay, shelf, bin. A code like
+  <em>SR-A2-B3-S1</em> — stockroom, aisle A2, bay 3, shelf 1 — reads the
+  same on the label, in the register, and out loud across the room. Keep
+  the levels shallow: every extra level is a label to print, a scan to
+  make, and a place for the naming to drift. Bins earn their own codes only
+  where several bins share a shelf and stock genuinely moves between them;
+  a shelf where one product sits alone needs the shelf code and nothing
+  finer.</p>
+
+  <h2>Static or dynamic: the spec decision that decides maintenance</h2>
+  <p>Each code is one of two kinds, and the difference is the whole
+  maintenance story. A <strong>static</strong> code has its destination
+  baked in at print time; it cannot be edited afterwards, so any change
+  means reprinting every affected label. A <strong>dynamic</strong> code
+  points at a register — a live spreadsheet or the inventory system — and
+  the record behind it can change while the printed square stays on the
+  bin. For locations, dynamic is the correct default: bins get repurposed,
+  aisles get re-planned, and a location system whose labels must be
+  reprinted at every change will quietly stop being updated, then stop
+  being true. Verify which kind a generator produces before printing
+  anything; the squares look identical.</p>
+
+  <h2>The pilot aisle: setup procedure</h2>
+  <p>Start with one aisle or category. A documented pilot of 500 SKUs takes
+  roughly two to three hours to set up; a single aisle of a small stockroom
+  is a fraction of that.</p>
+  <ol>
+    <li><strong>Walk the aisle and list the locations.</strong> Every bay,
+    shelf, and bin that will hold stock gets its taxonomy code on paper
+    first. If two staff would name a spot differently, settle it now — the
+    label settles it permanently.</li>
+    <li><strong>Create the register.</strong> One row per location code in
+    a spreadsheet or the inventory system: the code, what the location
+    holds, and its current contents. This register is what every dynamic
+    code will point at.</li>
+    <li><strong>Generate one dynamic code per location</strong>, linked to
+    its register row — not one code per item.</li>
+    <li><strong>Print and place.</strong> Standard address labels are
+    sufficient stock for printing QR codes. Place each label at the front
+    edge of its shelf or bin, at a consistent height, where a bin sliding
+    out does not scrape across it.</li>
+    <li><strong>Set who can scan.</strong> In the documented system,
+    scanning requires a user account with access permissions for that
+    location. Match that in whatever tool is used: the register should
+    know whose scan moved the stock.</li>
+    <li><strong>Run the aisle for two weeks.</strong> Every move in or out
+    is a location scan. No parallel paper system — parallel systems are
+    how the digital one dies.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> any staff member can stand in
+  the pilot aisle, scan a bin, and see what the register believes is in it
+  — and the register is right, because moves have been scanned for two
+  weeks. The rollout decision is then a copying exercise, aisle by aisle,
+  not a second design project.</p>
+
+  <h2>Maintenance: damaged labels, retired bins, audit scans</h2>
+  <p>Three rules keep the system true after the rollout. <strong>Damaged
+  label:</strong> reprint from the register, never hand-copy a code — the
+  register is the only source of what a location's code should open.
+  <strong>Retired bin:</strong> with dynamic codes, retiring a location is
+  a register edit — clear its contents, mark it inactive — and the printed
+  square can come down at leisure; with static codes the same change would
+  have meant a reprint round, which is the drift the dynamic choice exists
+  to prevent. <strong>Audit scans:</strong> on a fixed cadence, scan each
+  location and reconcile what is physically there against the register row
+  the code opens; a location whose contents disagree twice in a row is a
+  process problem — usually unscanned moves — not a label problem.</p>
+
+  <h2>When QR is the wrong tool</h2>
+  <p>The alternatives have published prices, and they frame QR's limits.
+  NFC tags run $0.15 to $0.40 per chip in bulk — cheap per unit, but a
+  per-item cost that QR, at labels only, does not carry. Bluetooth scanners
+  run $30 to $80 in hardware and earn it where staff scan barcodes at
+  volume, at a till or receiving desk, rather than walking locations with a
+  phone. QR loses where hands are the bottleneck: scanning is one code,
+  one moment, one deliberate aim. A room where stock moves by the armful
+  and nobody can pause to scan is a room that needs a different system —
+  or a routine that builds the pause in. For a stockroom of shelves and
+  bins, scanned at human pace, labels and a register are the whole bill.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>How do you use QR codes for inventory management?</strong> Two
+  ways, and the order matters: codes on locations record where stock is and
+  support stock checks at that spot; codes on items identify units at
+  receiving and counting. Most small stockrooms should build the location
+  layer first.</p>
+  <p><strong>Do QR bin labels need special label stock?</strong> No —
+  standard address labels work for printing them. Placement matters more
+  than stock: front edge, consistent height, out of the scrape path of
+  sliding bins.</p>
+  <p><strong>What happens when a bin is repurposed?</strong> If the code is
+  dynamic, only the register row changes and the printed label stays. If it
+  is static, the label must be reprinted — the reason to verify the code
+  type before the first print run.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Retail Inventory Management — practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

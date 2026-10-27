@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>External SSD vs External HDD for Backup: Speed, Shock, and Cost — Hard Drive Health</title>
+<meta name="description" content="US$65 vs about US$140 for 2TB, checked 25 Oct 2026 as cited figures. Sustained-rate backup times for 1TB, cost per terabyte, failure patterns, and the unpowered-retention caveat that decides drawer storage.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>External SSD vs External HDD for Backup: Speed, Shock, and Cost</h1>
+  <p class="meta">Backup drives &middot; Published 2026-10-27 &middot; Last updated 2026-10-27</p>
+
+  <p>US$65 against about US$140. Those are the cited prices, from a 2026 GuideSpot analysis checked on 25 October 2026, for two 2TB portable drives: a Seagate Portable external HDD at approximately US$65, and a SanDisk Extreme portable SSD at about US$140. The SSD costs a little more than twice as much for the same capacity. What that extra money buys — and the one backup job where it buys the wrong thing — is the whole comparison.</p>
+  <p>These are cited figures from that analysis, not prices re-verified at a retailer for this page, so treat them as a dated snapshot: product, price, and check date together. Prices move; the ratio and the reasoning are the durable parts.</p>
+
+  <h2>Speed, worked end to end: timing a 1TB backup</h2>
+  <p>Interface peaks sell drives. Sustained rates time backups. The sourced sustained ranges are: external HDD at 80–160 MB/s, a SATA external SSD at 400–550 MB/s, and an NVMe external SSD over USB 3.2 Gen 2 at 900–1,000 MB/s.</p>
+  <p>Divide 1TB by those rates and the backup window changes shape:</p>
+  <table>
+    <thead><tr><th>Drive type</th><th>Sustained rate</th><th>Time for 1TB, by simple division</th></tr></thead>
+    <tbody>
+      <tr><td>External HDD</td><td>80–160 MB/s</td><td>About 105–210 minutes</td></tr>
+      <tr><td>SATA external SSD</td><td>400–550 MB/s</td><td>About 30–42 minutes</td></tr>
+      <tr><td>NVMe external SSD, USB 3.2 Gen 2</td><td>900–1,000 MB/s</td><td>About 17–19 minutes</td></tr>
+    </tbody>
+  </table>
+  <p>That arithmetic assumes a steady stream of large files. A real library is mixed, and for many small files the SSD advantage can be 10 to 20 times, because of random-access speed. So the table understates the gap for a documents-and-photos backup and states it fairly for a video archive.</p>
+  <p>Why it matters is behavioural, not technical. A backup that takes three hours gets postponed. A backup that finishes in twenty minutes gets run.</p>
+
+  <h2>Cost per terabyte, and the cost of the pair</h2>
+  <p>The same 2026 analysis puts external HDDs at US$20–30 per terabyte for 2–5TB models, and external SSDs at US$60–90 per terabyte. Other published tables disagree — one lists HDD at about US$10–15 per terabyte and SSD at about US$40–80 — which is exactly why this page anchors on two named drives with a date instead of averaging conflicting tables.</p>
+  <p>From the named examples: the 2TB SSD at about US$140 works out to about US$70 per terabyte, inside its range. The two-drive pattern covered at the end — one of each, 2TB apiece — costs about US$205 in total using those cited figures (US$65 + US$140). That combined figure, not either drive alone, is the honest comparison for a reader whose data matters most: roughly three times the HDD-only cost, for a fast working copy plus a long-term copy.</p>
+
+  <h2>How each drive dies, and the travel question</h2>
+  <p>The failure patterns differ in shape. HDD failure is listed as gradual, SSD failure as sudden. A gradual failure gives warning signs and time to copy; a sudden one gives neither, which is why an SSD backup should never be the only copy of anything.</p>
+  <p>On shock, a caution about evidence: the sources behind this comparison publish no drop rating for either named drive. Do not buy on a shock number that is not on a spec sheet you can check. What can be planned around, from the sourced material, is the failure pattern above and where the drive will live — a drive that travels gets handled, packed, and unpacked far more often than a drive that stays on a desk, so it needs a second copy sooner, whichever type it is.</p>
+  <p>Wear is the other fear, and it is mostly misplaced for this job. A typical consumer SSD rated at 300 TBW can last well over a decade under normal use, and the limiting factor is usually electronic failure, not NAND wear. Backup duty — large writes, then long rests — is not the workload that spends a 300 TBW budget quickly.</p>
+
+  <h2>The drawer problem: unpowered retention</h2>
+  <p>Here the HDD wins a round that speed cannot answer. One published comparison table lists data retention at 5–10+ years for HDD against 1–3 years for SSD, and recommends HDD for long-term backup on that basis.</p>
+  <p>Separate two situations that most comparisons merge. An SSD in regular powered use is covered by the endurance picture above: rated wear lasts well over a decade in normal use. An SSD written once and left unpowered in a drawer is a different case, and it is precisely the backup case — the drive whose whole job is to sit untouched until a bad day. For that job, the retention figures favour the HDD, and a drawer SSD should be powered and checked on a schedule rather than trusted silently for years.</p>
+  <p>Neither figure is a guarantee in either direction. Both say the same practical thing: a long-term copy belongs on the medium whose storage behaviour matches long, unpowered rests, and every backup drive needs periodic checks regardless of type.</p>
+
+  <h2>The two-drive pattern, and who needs it</h2>
+  <p>The source recommendation matches the evidence assembled here: SSD for active data plus HDD for long-term backup is the best strategy of the options compared. Assigned by job, the pair looks like this:</p>
+  <ul>
+    <li><strong>External SSD:</strong> the working backup — frequent, fast runs that actually happen, and the copy that travels.</li>
+    <li><strong>External HDD:</strong> the long-term copy — cheaper per terabyte, better suited to unpowered storage, and the second copy if the SSD fails suddenly.</li>
+  </ul>
+  <p>Who can skip the pair? A reader with one small library, backed up often to a single drive that stays powered and checked, can start with one drive and add the second later. Who should not skip it: anyone whose only copy would be a drawer SSD left for years, or a single drive of either type holding data they cannot replace.</p>
+  <p>Start from the job, then. Frequent backups favour the SSD&rsquo;s minutes. Archive storage favours the HDD&rsquo;s retention and price. Data that matters most earns both, at about US$205 on the dated figures above.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

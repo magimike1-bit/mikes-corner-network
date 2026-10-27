@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSD Suddenly Read-Only or Disappearing: What Those Symptoms Mean — Hard Drive Health</title>
+<meta name="description" content="A read-only SSD, a drive that disappears, a 0-byte capacity, and a RAW volume mean different things. A symptom-by-symptom table, a capture-first procedure, and the actions to avoid.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>SSD Suddenly Read-Only or Disappearing: What Those Symptoms Mean</h1>
+  <p class="meta">Drive failure &middot; Published 2026-10-27 &middot; Last updated 2026-10-27</p>
+
+  <p>Short answer: these symptoms are not interchangeable, and they do not call for the same response. A drive that has gone read-only is usually protecting itself. A drive that disappears, or reports the wrong capacity, is pointing at its controller or firmware. Copy what you can reach first, record what the drive still reports, and do not run repair tools on a drive that is already struggling to be read.</p>
+
+  <p>That order matters. Several popular repair guides start with a firmware update or a disk check. Recovery sources warn in the opposite direction: a firmware update on a failing SSD can lock the drive permanently, and repeated power-cycling of a drive showing 0 bytes can end the chance of getting data back. The symptom decides which advice applies.</p>
+
+  <h2>The symptom table: what each presentation points to</h2>
+  <table>
+    <thead><tr><th>Symptom</th><th>What it points to</th><th>First move</th></tr></thead>
+    <tbody>
+      <tr><td>Read-only / write-protected</td><td>The drive has entered failsafe mode, typically at end of life</td><td>Copy files off while reads still work; plan replacement</td></tr>
+      <tr><td>Not detected / not showing in BIOS</td><td>Controller or firmware failure</td><td>Stop; do not keep power-cycling it; decide whether the data justifies a recovery service</td></tr>
+      <tr><td>Wrong capacity, 0 bytes, or a factory-mode identifier</td><td>A firmware or translation-layer problem; the presentation alone does not prove the controller silicon is dead</td><td>Record the reported capacity exactly; do not run recovery software on a 0-byte drive</td></tr>
+      <tr><td>Disappears under load, or returns zero-filled regions</td><td>Unstable reads; again, not proof by itself that the controller is dead</td><td>Record when it drops; avoid full scans and benchmarks</td></tr>
+      <tr><td>Random disconnects</td><td>A failing controller, a cable, or an enclosure are all candidates</td><td>Change one connection variable at a time before condemning the drive</td></tr>
+      <tr><td>A volume shown as RAW / not accessible</td><td>A different presentation from the hardware signs above; treat it separately, and protect the data before any repair attempt</td><td>Capture the details below first; do not start with repair tools</td></tr>
+    </tbody>
+  </table>
+  <p>One named example shows why the cable row belongs in the table. A widely reported firmware bug bricked SanDisk Extreme and Extreme Pro portable SSDs, so a portable drive that vanishes may be a known firmware case, an enclosure problem, or a failing controller. Guessing wrong leads to the wrong fix.</p>
+
+  <h2>Read-only: the drive protecting what is left</h2>
+  <p>Read-only mode reads like a permissions problem. On an SSD it is better read as a failsafe: the drive has reached end of life and has stopped accepting writes so the data already stored can still be read. That makes the next step simple and time-limited.</p>
+  <p>Copy the data off. Do not try to clear the read-only state so the drive can go back into service, and do not keep using it as a working drive once the copy is done. A drive in failsafe has given a clear, comparatively gentle warning. Other failure signs on this site&rsquo;s list are less kind: boot problems, errors saving or reading files, poor performance, and blue screens.</p>
+  <p>SMART monitoring is the background check here. SSDs carry SMART monitoring for wear, bad sectors, unexpected power losses, and temperature, so a drive that has gone read-only should be retired on the symptom alone, without waiting for a tool to agree.</p>
+
+  <h2>Disappearing and wrong capacity: controller and firmware signatures</h2>
+  <p>A drive that is not detected, or does not show in BIOS, indicates controller or firmware failure. That is a hardware-level presentation, not a file-system problem, and software repair tools have nothing sound to work on.</p>
+  <p>Wrong capacity needs a steadier read. An SSD may enumerate with the wrong capacity, appear under a factory-mode identifier, disappear under load, become read-only, or return zero-filled regions, and not all of those presentations prove the controller itself is dead. Record the presentation precisely instead of summarising it as &ldquo;broken&rdquo; — the exact reported capacity and identifier are diagnostic information for anyone who handles the drive next.</p>
+  <p>Short paragraph, hard rule: a 0-byte drive gets no recovery software and no repeated restarts.</p>
+
+  <h2>Capture first: the five things to record</h2>
+  <p>Do this while the drive still identifies, before any tool touches it:</p>
+  <ol>
+    <li><strong>Model.</strong> Record the exact model the system reports.</li>
+    <li><strong>Reported capacity.</strong> Write down the capacity as shown, even if it is 0 bytes or clearly wrong.</li>
+    <li><strong>Interface.</strong> Note how the drive is connected.</li>
+    <li><strong>Firmware revision.</strong> Copy the revision exactly as reported.</li>
+    <li><strong>The event just before failure.</strong> Record what happened immediately before the symptom appeared.</li>
+    <li><strong>Copy reachable data.</strong> If files can still be read, copy the most important ones first, in priority order, to a different drive.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> a short written record with model, reported capacity, interface, and firmware revision, plus a note of what happened just before the failure — and, where reads allowed, a copy of the important data on another drive. Nothing has been updated, erased, or scanned to get there.</p>
+
+  <h2>The actions that make it worse</h2>
+  <p>Three actions turn a bad presentation into a final one:</p>
+  <ul>
+    <li><strong>Firmware update tools.</strong> Do not use them on a failing SSD. An update can lock the drive permanently.</li>
+    <li><strong>Secure erase and TRIM tools.</strong> Do not run secure-erase tools as diagnostics, and do not use benchmarks or repeated full scans when reads are already unstable.</li>
+    <li><strong>Repeated power-cycling.</strong> Do not keep restarting a 0-byte drive hoping it will appear, and do not point recovery software at a drive showing 0 bytes.</li>
+  </ul>
+  <p>That list conflicts with step-by-step repair guides that prescribe firmware and driver updates first. The reconciliation is the symptom: a healthy drive receiving a routine update is one situation; a drive that is read-only, disappearing, or reporting 0 bytes is another. On a drive in the second group, the recovery sources&rsquo; warning is the one to follow.</p>
+
+  <h2>Decide: replace, keep data only, or send it out</h2>
+  <p>Use the presentation, not hope, to choose:</p>
+  <ul>
+    <li><strong>Read-only, data copied:</strong> replace the drive. The failsafe has done its job; the drive does not return to service.</li>
+    <li><strong>Disconnects that follow a cable or enclosure change:</strong> the connection was the problem. Keep monitoring, because a failing controller remains on the list of candidates if the symptom returns on a known-good connection.</li>
+    <li><strong>Not detected, wrong capacity, or 0 bytes, with data you cannot lose:</strong> stop handling it and use a professional data-recovery service. Each extra power cycle or tool run is spent against a shrinking chance.</li>
+    <li><strong>Not detected, data already backed up:</strong> replace the drive. There is no repair step in this table for a controller or firmware failure.</li>
+  </ul>
+  <p>None of these outcomes requires the drive to be &ldquo;fixed&rdquo; first. The data copy and the written record are the wins available at this stage, and both are still available only while the drive can be read at all.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

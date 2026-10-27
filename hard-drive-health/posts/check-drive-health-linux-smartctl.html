@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Check Drive Health on Linux: smartctl Without the Guesswork — Hard Drive Health</title>
+<meta name="description" content="SMART is a drive's self-report, and PASSED is not a clean bill of health. The smartctl command sequence, the raw counters that decide replace-versus-keep, NVMe differences, and hidden-SMART workarounds.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>How to Check Drive Health on Linux: smartctl Without the Guesswork</h1>
+  <p class="meta">Drive monitoring &middot; Published 2026-10-27 &middot; Last updated 2026-10-27</p>
+
+  <p>SMART is the monitoring data a drive keeps about itself: wear, error counters, and whether any monitored value has crossed the threshold the firmware treats as failure. The Linux tool that reads it is <code>smartctl</code>, from smartmontools. A check takes four commands in a set order. Reading the output well takes one habit: trust the raw counters over the headline word.</p>
+
+  <p>That headline word is PASSED, and it is widely over-read. PASSED means the firmware is not reporting a current threshold failure. It does not rule out growing error counters, and it is not a promise about next month.</p>
+
+  <h2>First: aim at the whole disk, never a partition</h2>
+  <p>SMART data belongs to the physical disk, not to a partition. Use a whole-disk device such as <code>/dev/sda</code> or <code>/dev/nvme0n1</code> with smartctl. A partition name such as <code>/dev/sda1</code> is the wrong target: the counters live one level down, on the device itself.</p>
+  <p>Keep that distinction in every command below. Substitute your own whole-disk device for the examples.</p>
+
+  <h2>The four commands, in order</h2>
+  <ol>
+    <li><strong>Identify the drive.</strong> Run <code>smartctl -i /dev/sda</code> and confirm the model and capacity match the disk you mean to check. On NVMe, identity information targets the controller device: <code>smartctl -i /dev/nvme0</code>.</li>
+    <li><strong>Read the headline verdict.</strong> Run <code>smartctl -H /dev/sda</code>. The result is PASSED or FAILED. A FAILED drive should be treated as failed without waiting for confirmation from any other reading.</li>
+    <li><strong>Read the attributes or the health log.</strong> On a SATA drive, run <code>smartctl -A /dev/sda</code> and read the attribute table: ID, VALUE, WORST, THRESH, and RAW_VALUE. On NVMe, read the health log for the whole namespace device, <code>/dev/nvme0n1</code>; the fields differ, and the next sections cover them.</li>
+    <li><strong>Run a self-test, then read its result.</strong> An extended test starts with <code>smartctl -t long /dev/sda</code>, and the result is checked afterwards with <code>smartctl -l selftest</code>. A test adds evidence; it does not replace the counters in step 3.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the identity matches the intended disk, the <code>-H</code> verdict is written down, the raw values for the decision counters below have been checked rather than skimmed, and any self-test result has been read with <code>-l selftest</code>. Four outputs, one dated record.</p>
+
+  <h2>PASSED is not a verdict: the counters that decide</h2>
+  <p>Analyse the RAW_VALUE column first. It is the primary figure. The normalised VALUE, WORST, and THRESH columns can mislead, because some manufacturers use non-standard normalisation; a tidy normalised score can sit beside a raw counter that is quietly climbing.</p>
+  <p>The replace signals are a short list. Growing values in any of these point the same way — copy the data off and replace the disk:</p>
+  <ul>
+    <li><strong>Reallocated_Sector_Ct</strong> — sectors the drive has already retired and replaced.</li>
+    <li><strong>Current_Pending_Sector</strong> — sectors waiting, unreadable until they are rewritten or retired.</li>
+    <li><strong>Offline_Uncorrectable</strong> — errors the drive could not correct.</li>
+    <li><strong>Media and Data Integrity Errors</strong> — the NVMe-side counterpart, counted in the health log.</li>
+    <li><strong>Available Spare dropping toward its threshold</strong> — the reserve running out.</li>
+  </ul>
+  <p>One reading is a snapshot. Growth is the signal, which is why the dated record matters: the same counter higher at the next check is a decision already made.</p>
+
+  <h2>NVMe: a different health log</h2>
+  <p>NVMe drives do not present the ATA attribute table. Expect health-log fields instead, including percentage used, available spare, and media and data integrity errors. Judge them by the same logic as the SATA list: available spare falling toward threshold, and media errors appearing or growing, are copy-and-replace signals.</p>
+  <p>Percentage used needs calmer handling. It is a wear indicator to track over time, not a failure verdict on its own. Pair it with the spare and error fields before deciding anything.</p>
+  <p>Note the device-name split, because it trips people up. Identity information on NVMe targets <code>/dev/nvme0</code>, while SMART data for the namespace as a whole disk is addressed as <code>/dev/nvme0n1</code>. Both can be correct, for different commands.</p>
+
+  <h2>Raw-value traps that are not failures</h2>
+  <p>A high raw Hardware ECC Recovered count looks alarming and is not, by itself, a failure indicator. It is normal and informational, and high counts on Seagate drives are by design. Chasing that number alone can send a healthy drive to the bin.</p>
+  <p>The trap runs in both directions. A scary raw number may be routine for that maker, while a modest-looking counter on the decision list — reallocated or pending sectors — may be the real problem. Check the name of the counter before reacting to the size of the number.</p>
+  <p>For ongoing watch, smartd can alert on attribute changes, which beats remembering to re-run a manual check after the worry has faded.</p>
+
+  <h2>When SMART is hidden: USB, RAID, and virtual disks</h2>
+  <ol>
+    <li><strong>Try the SATA pass-through form for a USB-attached drive:</strong> <code>smartctl -d sat -A /dev/sda</code>, using your drive&rsquo;s whole-disk device. Some USB bridges pass SMART through this way; many do not.</li>
+    <li><strong>Read a refusal correctly.</strong> USB bridges, hardware RAID controllers, and virtual disks can hide SMART data. An unavailable result there is a limitation of the storage path, not evidence that the drive is healthy and not evidence that it has failed.</li>
+    <li><strong>Change the path, not the conclusion.</strong> Connect the drive directly, or through a bridge known to pass SMART, and run the four commands again. Hardware RAID member drives need controller-specific pass-through, which sits outside this procedure; treat that as an administrator task for that controller, not a failed check.</li>
+  </ol>
+
+  <h2>The replace decision, stated plainly</h2>
+  <p>Replace now: <code>-H</code> returns FAILED, or any decision counter is growing, or available spare is dropping to threshold. Copy data first, in priority order, then replace.</p>
+  <p>Keep and monitor: PASSED, decision counters flat between dated checks, and only known-benign raw values — the ECC pattern above — are high. Set the next check date when you record this one.</p>
+  <p>No verdict yet: SMART is hidden by the connection path. Fix the path and re-check before calling the drive either way.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

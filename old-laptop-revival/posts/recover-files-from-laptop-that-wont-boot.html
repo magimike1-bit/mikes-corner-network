@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recover Files From a Laptop That Won't Boot: USB Tools and Safe Steps — Old Laptop Revival</title>
+<meta name="description" content="A laptop that powers on but won't load Windows has not necessarily lost its files. Triage the drive first — healthy, failing, or locked — then use a live USB or a dock to copy files off safely, most important first.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Recover files from a laptop that won't boot: USB tools and safe steps</h1>
+  <p class="meta">Recovery &middot; 7 min read</p>
+
+  <p>The laptop powers on. The boot starts, stalls, loops, or gives up — and the desktop never arrives. That scene feels like data loss, but the two failures are different: an operating system that refuses to load is a software problem sitting on top of files that are usually still intact on the drive. A live USB environment can read those files without asking the broken system to start at all.</p>
+
+  <p><strong>The verdict, up top:</strong> if the drive is healthy and the failure is only the operating system, the files can normally be copied off with a live Linux USB, without opening the laptop and without changing anything on the drive. If the drive is physically failing, copying can finish it — that branch has stop signs, and they come first in the triage below. If the drive is locked by encryption and no key is available, there is no copy step to run. Three branches, three different procedures. Sorting out which branch applies is the first job, and it takes five minutes.</p>
+
+  <h2>Triage: three questions before you touch anything</h2>
+
+  <ul>
+    <li><strong>Does the laptop power on at all?</strong> The live-USB method works when the laptop powers on but Windows refuses to load. A completely dead machine skips to the dock route further down, because the drive has to be read by a different computer.</li>
+    <li><strong>What does the drive sound and feel like?</strong> Clicking, grinding, or beeping from the drive area, or a drive that spins up and then powers down repeatedly, are physical-failure signs. So is a drive that gets unusually hot. Any of those moves the job out of the main procedure and into the stop-signs section — read that section before proceeding, not after.</li>
+    <li><strong>Was the drive encrypted?</strong> If the laptop's drive was protected with an encryption tool, expect the recovery environment to find a locked drive rather than open folders. If a prompt asks for a recovery key during the steps below and that key is not available, stop at that prompt: there is no workaround step in this guide, and guessing, formatting, or initialising the drive puts the protected data at risk. That branch belongs to whoever holds the key, or to a technician.</li>
+  </ul>
+
+  <p>A healthy drive with a broken operating system goes to the live USB. A drive that cannot be read in the laptop goes to the dock. A drive showing physical-failure signs goes to a professional. Decide now, while nothing has been written to the drive yet.</p>
+
+  <h2>Build the live USB on a working computer</h2>
+
+  <ol>
+    <li>On a working computer, download a live Linux image — an Ubuntu-class distribution is the documented route — and write it to a USB stick with Rufus or balenaEtcher. The stick gets overwritten in the process, so use one with nothing needed on it.</li>
+    <li>Have the destination ready before booting anything: an external drive or a second, larger USB device with enough free space for the files being rescued. Files are never copied onto the drive they are being rescued from.</li>
+    <li>Insert the live USB into the failed laptop, power it on, and use the boot-menu key shown at startup to boot from the USB rather than the internal drive.</li>
+    <li>At the live environment's opening screen, choose <strong>Try Ubuntu</strong> — or <strong>Try Linux</strong>, depending on the distribution's wording — and not Install. The live version makes no changes to the drive holding the files; it runs entirely from the USB stick and memory.</li>
+  </ol>
+
+  <h2>Boot, mount, and copy — most important files first</h2>
+
+  <ol>
+    <li>Once the live desktop loads, attach the external destination drive and confirm it appears in the file manager alongside the laptop's internal drive.</li>
+    <li>Open the internal drive in the file manager and navigate to the user folders — documents, pictures, desktop, downloads — where personal files normally live.</li>
+    <li>Copy in priority order, not folder order: the irreplaceable files first (family photos, personal documents, anything with no other copy), then work files, then everything else. A marginal drive may not survive a full copy, and the order decides what is safe if it stops halfway.</li>
+    <li>Copy each batch from the internal drive to the external drive with the file manager, and let each batch finish before starting the next. Never save recovered data to the same medium it is being restored from — doing so may cause permanent data loss, overwriting the very files still waiting to be copied.</li>
+    <li>After each batch, open two or three of the copied files on the spot to confirm they are real, readable copies and not empty placeholders.</li>
+  </ol>
+
+  <p><strong>What success looks like:</strong> the important files exist on the external drive, they open correctly when checked from a working computer, and the internal drive was only ever read — nothing installed on it, nothing saved to it, nothing repaired on it. Only at that point is the original laptop a repair or reinstall project instead of a rescue.</p>
+
+  <h2>If the drive does not appear: the dock route</h2>
+
+  <p>Sometimes the laptop will not boot from USB, or the internal drive never shows up in the live session. The alternative is to take the drive out of the laptop and attach it to a working computer through a USB adapter, enclosure, or dock, then copy from there in the same priority order as above.</p>
+
+  <p>Two cautions govern this route. First, accessing a drive directly can lead to data overwriting, so work read-only in spirit: copy files off, and do not let the working computer repair, initialise, or reformat the drive, however helpfully it offers. Second, the dock is also a diagnostic. If the drive is missing from the connected-storage list on the second computer as well, it is likely physically flawed, and that is a specialist's job, not a reason to try a third computer. A drive not detected through an enclosure on a second computer is one of the documented stop signs, and it ends the DIY routes.</p>
+
+  <h2>Stop signs: when copying becomes destroying</h2>
+
+  <p>Stop and get professional help if any of the following are true — each one is a sign that further attempts spend the drive's remaining life instead of saving its files:</p>
+
+  <ul>
+    <li>The drive clicks, grinds, or beeps.</li>
+    <li>The drive is not detected on a second computer through an enclosure or dock.</li>
+    <li>The drive spins up, then powers down, repeatedly.</li>
+    <li>The drive gets unusually hot during use.</li>
+    <li>The drive does not appear in the list of connected storage in any environment it is attached to.</li>
+  </ul>
+
+  <p>A professional lab is not an admission of defeat on this list; it is the branch where the tools change. Every extra power-on of a physically failing drive is a gamble taken with the files as the stake, and the triage at the top of this guide exists so that gamble is recognised before the copying starts, not during it. For the far more common case — a healthy drive under a broken operating system — the live USB, a destination drive, and copying the irreplaceable files first is the whole job, and it leaves the laptop itself exactly as it was found: unbooted, but unharmed.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

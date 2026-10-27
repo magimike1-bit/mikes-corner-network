@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fix a Laptop That Keeps Losing Wi-Fi: Driver, Power, and Router Checks in Order — Old Laptop Revival</title>
+<meta name="description" content="A laptop that keeps dropping Wi-Fi usually fails for one of five reasons. Work through them in order — physical switch, adapter power management, the driver, the network stack, then the router — with each check stating what its result proves.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Fix a laptop that keeps losing Wi-Fi: driver, power, and router checks in order</h1>
+  <p class="meta">Connectivity &middot; 7 min read</p>
+
+  <p>A laptop that keeps losing Wi-Fi is usually failing for one of a short list of reasons: a hardware switch knocked off, Windows putting the wireless adapter to sleep, a driver that a silent update made worse, a tangled network stack, or a fault that was never in the laptop at all. The fixes are well known. What most advice leaves out is the order — and what each result proves. Work through the checks below in sequence, cheapest and most likely first, and stop when one of them holds. Each check ends with a verdict: what a pass rules out, and what a fail points to next.</p>
+
+  <h2>Before anything: the 60-second isolation questions</h2>
+
+  <p>Three questions, answered before any settings change, decide whether the rest of this guide even applies. The interruption can involve the laptop's adapter, Windows itself, the router, interference, or the internet provider — and laptop-side fixes cannot repair a router-side fault.</p>
+
+  <ul>
+    <li><strong>Do other devices drop too?</strong> If a phone or a second computer loses the same network at the same moments, the laptop is not the problem. Skip to Check 5.</li>
+    <li><strong>Does the laptop drop on other networks?</strong> Try a phone hotspot or another household's network for an hour. A laptop that holds there but drops at home is pointing at the home router, not at itself.</li>
+    <li><strong>Does a wired connection hold?</strong> If Ethernet is available, plug in and use the machine. A connection that stays up wired while Wi-Fi falls over narrows the fault to the wireless link specifically.</li>
+  </ul>
+
+  <p>While testing, also note the pattern. Drops that happen when the laptop sits idle suggest power management (Check 2). Drops that began right after a Windows update suggest the driver (Check 3). Drops everywhere, at random, on every network are the pattern that survives to the last section of this guide.</p>
+
+  <h2>Check 1: switch, forget, rejoin</h2>
+
+  <p>Many laptops carry a physical Wi-Fi switch — a slider on the side of the case, or a function-key combination. Bumping it disables the adapter at hardware level, and no software fix works until it is flipped back. This is the classic old-laptop trap: the machine gets carried by the edge where the slider sits, and Wi-Fi vanishes in a way that looks exactly like a driver failure.</p>
+
+  <ol>
+    <li>Look along the front and side edges of the case for a small slider with a wireless icon, and try the function-key row for a key marked with an antenna or aeroplane symbol, used with the Fn key.</li>
+    <li>If the switch was off, turn it on and reconnect. Test for a day before changing anything else — a second simultaneous fix would hide which one worked.</li>
+    <li>If the switch was already on, forget the home network in Wi-Fi settings and join it again fresh, re-entering the password.</li>
+  </ol>
+
+  <p><strong>What the result proves:</strong> if the connection now holds, the fault was the switch state or a stale saved network profile, and it is closed. If drops continue, the adapter itself is alive and associating — move on.</p>
+
+  <h2>Check 2: stop Windows putting the adapter to sleep</h2>
+
+  <p>The idle-drop signature — fine while typing, gone after a coffee break — is usually power management. Windows can turn the wireless adapter off to save power, and on an aging laptop the adapter does not always wake back up cleanly.</p>
+
+  <ol>
+    <li>Open Device Manager and expand Network adapters.</li>
+    <li>Double-click the wireless adapter, open the Power Management tab, and untick <em>Allow the computer to turn off this device to save power</em>.</li>
+    <li>In Wi-Fi settings, turn off <em>Random hardware addresses</em>, a setting the support record for these drops also flags.</li>
+    <li>Restart the laptop and let it sit idle past the point where drops used to happen.</li>
+  </ol>
+
+  <p><strong>What the result proves:</strong> drops that only happened after idle periods, now gone, were the adapter sleeping. Drops that continue while the machine is actively in use were never a power problem — the driver is next.</p>
+
+  <h2>Check 3: the driver — update, roll back, or clean-install</h2>
+
+  <p>The driver is the most-cited cause in the support record, and old laptops have a specific version of the problem: Windows Update can silently install a newer driver that does not play well with the specific hardware, so a machine that held its connection for years starts dropping the week after an update it never announced.</p>
+
+  <ol>
+    <li>Note the current driver version and date in Device Manager, on the adapter's Driver tab. A date that matches when the drops began is strong evidence by itself.</li>
+    <li>If the drops followed an update, use <em>Roll back driver</em> on that same tab and test.</li>
+    <li>Otherwise, download the current driver package from the laptop or adapter manufacturer's own site. When uninstalling the old driver, do not remove the driver files unless the downloaded package is already saved or an Ethernet connection is available — a laptop with no driver and no wired connection cannot go and fetch one.</li>
+    <li>Install the manufacturer's package, restart, and test on the home network.</li>
+    <li>Still dropping? In the adapter's advanced properties, set Roaming Aggressiveness to Medium, which can help intermittent disconnection, and set Wireless Mode to Auto, or to match the router's band.</li>
+  </ol>
+
+  <p><strong>What the result proves:</strong> a rollback that restores stability names the updated driver as the cause — note the version, because a later update can reinstall it. No change across update, rollback, and clean install means the driver layer is probably innocent.</p>
+
+  <h2>Check 4: reset the network stack</h2>
+
+  <p>Years of VPN tools, hotspot apps, security software, and half-removed utilities leave Windows' network stack — the Winsock catalogue and the TCP/IP configuration — carrying entries nothing owns any more. The reset rebuilds that layer to defaults. It removes saved customisations, so run it after the driver checks, not before.</p>
+
+  <ol>
+    <li>Open a terminal or Command Prompt as administrator.</li>
+    <li>Run, in order: <code>netsh winsock reset</code>, then <code>netsh int ip reset</code>, then <code>ipconfig /release</code>, <code>ipconfig /flushdns</code>, and <code>ipconfig /renew</code>.</li>
+    <li>Restart the laptop, rejoin the home network, and test through a normal day's use.</li>
+  </ol>
+
+  <p><strong>What the result proves:</strong> stability after the reset means the stack, not the hardware, was corrupt. Continued drops after a clean stack, a known-good driver, and disabled power management clear the laptop's software almost entirely — the remaining suspects are the router and the adapter hardware itself.</p>
+
+  <h2>Check 5: the router's side of the story</h2>
+
+  <ol>
+    <li>Restart the router, then test the laptop close to it, in the same room.</li>
+    <li>Test both bands separately: connect on the 2.4 GHz network, use it, then connect on the 5 GHz network and use that. A laptop that drops on one band and holds on the other has told you the problem is band-specific — range and interference on one side, compatibility on the other.</li>
+    <li>Repeat the other-network test from the isolation questions if it has not been done: an hour on a hotspot or a neighbour's network, doing the same things that trigger drops at home.</li>
+  </ol>
+
+  <p><strong>What the result proves:</strong> drops that follow the house rather than the laptop belong to the router, interference, or the provider — and no further laptop setting will change them. Drops that follow the laptop to every network, after all four checks above, point at the one suspect left.</p>
+
+  <h2>When the adapter itself is done</h2>
+
+  <p>An aging adapter can simply be failing: it passes every software check, drops on every network, and gets worse over months rather than changing with any update. At that point the decision is between replacing the internal wireless card and plugging in a USB Wi-Fi adapter. The USB route asks nothing of the laptop's insides and doubles as a final test — if a borrowed or inexpensive USB adapter holds the connection where the internal card drops, the diagnosis is confirmed before any larger spend. The internal replacement keeps the machine tidy and restores the built-in antennas, but it is the step to take once the evidence, not the guesswork, says the card is the fault. That is what the order above is for: by the time hardware money is on the table, every free cause has been ruled in or out by a result, not by hope.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

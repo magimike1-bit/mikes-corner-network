@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Rollback Plans: Undoing a Bad Run Safely — Using AI Agents</title>
+<meta name="description" content="There is no single undo button for a bad agent run. Version restore, compensating actions and a one-page abort plan cover different layers — plus a timed stop drill.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>AI agent rollback plans: undoing a bad run safely</h1>
+  <p class="meta">Safety &middot; 8 min read</p>
+<p>Can one button undo a bad agent run?</p>
+<p>No. Parts of a run can be restored, parts can only be corrected, and a few parts cannot be taken back at all. A rollback plan that pretends otherwise fails at the worst moment — during the incident, when someone reaches for an undo that covers an action it never covered. The workable plan names three layers in advance, and says plainly which actions sit in each one.</p>
+<h2>Three layers: what each one can and cannot reverse</h2>
+<table><tr><th>Layer</th><th>What it reverses</th><th>What it does not reverse</th></tr>
+<tr><td>Version or checkpoint restore</td><td>Files, configuration and the agent's own setup, returned to a previous version</td><td>Data changes made by the run, and anything that left the system</td></tr>
+<tr><td>Compensating actions</td><td>Data and task changes, by carrying out a planned opposite action</td><td>The original event itself — a correction follows it, the record keeps both</td></tr>
+<tr><td>Correction only</td><td>Nothing is reversed; the error is acknowledged and fixed forward</td><td>A sent email, a captured payment, a delivered webhook, an irreversible third-party call</td></tr></table>
+<p>The first layer has a second catch. A checkpoint restore is not the same as a production rollback: a published app restored to a checkpoint still has to be republished before users see the restored version. Treating “restored” as “live” leaves the bad version in front of users while the operator believes the incident is over.</p>
+<p>The second layer is the one most plans miss. Version rollback does not undo data changes. Data changes need their own opposite action, designed while the forward action is designed — not invented under pressure.</p>
+<h2>The one-page abort plan, written before the incident</h2>
+<p>Keep the plan to one page, stored where the person on duty can reach it without logging into the system that just failed. A complete plan covers five things: detection, shutdown, manual fallback, reversal of completed actions, and incident documentation.</p>
+<p>Detection names the signal that a run has gone wrong — wrong recipient, wrong record count, actions arriving faster than expected — and who can declare the abort. Shutdown is the fastest way to pause the agent, tested in the drill below. Manual fallback states how the underlying work continues by hand while the agent is stopped, even if the answer is “it waits.” Reversal points to the compensating-action list in the next section. Documentation is one short record: what ran, what was reversed, what was corrected, and what remains open.</p>
+<p>Then apply the decision rule that gives the page its teeth. Any action with no undo is a decision: add an approval step before that action, or accept the risk knowingly and write that acceptance on the page. An unlisted irreversible action is not a risk that was accepted. It is a gap that was missed.</p>
+<h2>Compensating actions: the undo built in advance</h2>
+<p>For every action the agent can take, write the forward action and its compensation as a pair:</p>
+<table><tr><th>Forward action</th><th>Compensating action</th></tr>
+<tr><td>Create a task or record</td><td>Delete or cancel that task or record</td></tr>
+<tr><td>Update a field</td><td>Restore the previous value — which means the previous value is saved before the update</td></tr>
+<tr><td>Send an external email</td><td>Send a correction — the original email is not recalled, it is followed by a fix</td></tr>
+<tr><td>Capture a payment or call a third-party service</td><td>No compensation exists; route the action through the approval rule above</td></tr></table>
+<p>One related safeguard belongs in the same list. Retried actions must not run twice. Idempotency — the property that repeating a request does not repeat its effect — is enforced by the tool runtime, not by the model. In plain terms: do not rely on the agent remembering that it already sent, created or charged something. The system underneath it has to carry that protection, and the abort plan should name where it lives.</p>
+<h2>Stop the run: the rollback procedure</h2>
+<ol>
+<li><strong>Revoke or pause the agent's write permission.</strong> Stopping new damage comes before understanding the damage. A paused agent cannot extend a bad run while the record is read.</li>
+<li><strong>Identify the change in the audit trail.</strong> List what the run actually did, in order, from the log — not from the plan it was supposed to follow.</li>
+<li><strong>Sort each action by layer.</strong> Version restore, compensating action, or correction only. Anything in the third group gets its correction drafted now, while the facts are fresh.</li>
+<li><strong>Roll back to the previous version where that layer applies.</strong> For a published app, restore to the checkpoint and republish; confirm which version users are actually seeing.</li>
+<li><strong>Carry out the compensating actions in reverse order.</strong> Last action undone first, using the pairs written in advance, and tick each one off the audit list.</li>
+<li><strong>Confirm recovery with health checks.</strong> Check the service, the data and one normal end-to-end task before declaring the incident closed.</li>
+<li><strong>Write the incident record.</strong> Detection signal, time to stop, what was reversed, what was corrected, and what stays open.</li></ol>
+<p>What success looks like: write access is paused within the time the drill measured, every audited action is marked restored, compensated or corrected, health checks pass, and no action is left in an unknown state. An action nobody can classify is a failed rollback, even if the visible damage looks small.</p>
+<h2>The stop drill: time it, fix what slowed you</h2>
+<p>Rollback should be rehearsed in staging on a schedule, and the small-operator version of that rehearsal is a timed stop drill. Pick a harmless test run. Start it. Declare an abort without warning, and time three intervals: noticing the problem, pausing write access, and completing the manual fallback step.</p>
+<p>The drill earns its time in one place: it exposes the slow step nobody suspected. A pause control buried in an admin screen, an audit log only one person can read, a compensating action that was never actually written — each surfaces in a drill at no cost, instead of during a real incident at full cost. Fix the slowest step, record the new times on the abort page, and drill again on the next cycle.</p>
+<h2>After the rollback: checks before the agent runs again</h2>
+<p>Do not restart on relief. Restart on evidence. The failure that caused the run goes into the agent's checks as a named case: the input that triggered it, the output that should have been caught, and the approval or stop rule that now sits in front of it. The compensating-action list gets any pair the incident proved was missing. The abort page gets the measured stop time from the real event, replacing the drill estimate.</p>
+<p>One last distinction keeps the next incident smaller. Restoring the agent is separate from trusting it. The first runs after a rollback stay on the narrowest permission and the closest supervision the setup allows, and widen only after clean runs — the same staged trust the original setup should have used.</p>
+<p><em>Sources, accessed October 25, 2026: ControlPlane, “AI Agents in Production” (rollback steps, version limits, staging rehearsal); dev.to, “AI Agent Rollback Plan” (compensating actions, idempotency in the tool runtime); CorranForce Designs, “AI Agent Rollback Plan” (plan coverage, no-undo decision rule, stop drill); AIReiter, Replit monitoring agent review (checkpoint restore versus production rollback, irreversible actions). Tool behaviour varies by platform; adapt the plan to the agent system in use.</em></p>
+<p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

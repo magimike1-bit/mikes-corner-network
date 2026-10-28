@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Write a Runbook an AI Agent Can Actually Follow — Using AI Agents</title>
+<meta name="description" content="An agent-readable runbook is a contract, not a prompt: goal, inputs, constraints, checkpoints, per-step pass/fail and a stop rule — plus the cold-run test that proves it.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>How to write a runbook an AI agent can actually follow</h1>
+  <p class="meta">Workflows &middot; 9 min read</p>
+<p>A runbook an agent can follow states six things the agent cannot guess: the goal, the inputs it may use, the constraints it must not cross, the checkpoints where it pauses, a pass or fail result for each step, and the rule that tells it to stop. A prompt that covers only the goal is not a runbook. It is a request, and the agent will fill every missing part with a plausible guess.</p>
+<p>That distinction explains why three common formats each fall short on their own. A prose prompt can carry intent. A machine-readable workflow can carry order and checks. An incident playbook can carry ownership and recovery. An agent-readable runbook needs parts of all three, stripped of the ceremony that only helps a human reader.</p>
+<h2>The six parts an agent cannot guess</h2>
+<p><strong>1. Goal and success criteria.</strong> A runbook prompt defines goals, constraints, success criteria, outputs and error handling. Write the goal as an end state that can be checked, not an activity. “Publish the update” is an activity. “The page shows the new price, the old price appears nowhere, and the change is logged” can be checked.</p>
+<p><strong>2. Inputs.</strong> Name the exact files, pages, accounts or records the step may use, and where they live. If an input is missing, the runbook should say whether the agent stops or asks. Silence on that point is where invented inputs come from.</p>
+<p><strong>3. Constraints.</strong> List what the agent must not do even if it would reach the goal faster: no publishing without a checkpoint, no role wider than the task needs, no deleting the original before a copy exists.</p>
+<p><strong>4. Steps with expected outputs.</strong> The incident-playbook format records steps with expected outputs, plus prerequisites before the first step starts. An expected output gives the next section its test: the step either produced that output or it did not.</p>
+<p><strong>5. Verification with pass/fail criteria.</strong> Each step ends in a stated result, not a feeling that it went well. The format also carries a verification section with pass/fail criteria separate from the steps themselves, so the check is written before the run, not improvised after it.</p>
+<p><strong>6. Rollback, owner and version.</strong> The same playbook format includes rollback, an owner and a version. For an agent runbook, rollback means the action to take on an error, named in advance. Owner and version look like paperwork until two versions of a runbook circulate and nobody can tell which one the agent followed.</p>
+<h2>Checkpoints and stop rules: where the agent must pause</h2>
+<p>A checkpoint is a planned pause, placed before an action that is hard or impossible to reverse. Guidance for runbook prompts puts stepwise checkpoints at exactly those points: pause before publishing or before irreversible actions, and specify rollback behaviour on errors.</p>
+<p>A stop rule is stricter than a checkpoint. A checkpoint asks for approval and then continues. A stop rule ends the run. Write both kinds explicitly, for three situations:</p>
+<ul>
+<li>The input does not match what the runbook describes — wrong file, wrong account, wrong record count.</li>
+<li>A step fails its pass/fail check twice, or fails in a way the runbook does not name.</li>
+<li>The next action is irreversible and its checkpoint approval has not been given.</li>
+</ul>
+<p>Machine-readable runbooks enforce the same idea in code. In the StateM format, transitions run checks before a transfer, and a blocking check failure keeps the agent in the current state, with the failure recorded for repair. The prose version of that behaviour is one sentence in the runbook: “If this check fails, do not proceed; record the failure and stop.”</p>
+<h2>Pass/fail at every step, not a verdict at the end</h2>
+<p>End-only checking has a specific failure mode. An early step drifts slightly, every later step builds on the drift, and the final check fails with no record of where the run went wrong. Per-step checks localise the failure to one step and one expected output.</p>
+<p>Keep each check binary and observable. “Page looks right” is neither. “Headline matches the approved text exactly, and the price field reads the new value” is both. Where a check needs a human eye, say so at that step instead of letting the agent grade its own visual work.</p>
+<p>A short before-and-after discipline, taken from a copyable WordPress workflow runbook, strengthens the checks. Before the run: a backup exists and a restore from it has been tested, and the agent is connected with the lowest role that works. After the run: compare the result directly, check the page at phone width, and confirm a log entry was written. Credentials given for a project are revoked at the end of that project.</p>
+<h2>Three real formats, compared</h2>
+<table><tr><th>Format</th><th>What it gives the agent</th><th>What it leaves out</th><th>Use it for</th></tr>
+<tr><td>Prose prompt runbook</td><td>Goal, constraints, success criteria, outputs, error handling, checkpoints</td><td>No enforced order; a skipped check is invisible</td><td>Single-agent tasks run under supervision</td></tr>
+<tr><td>YAML state machine (StateM)</td><td>Static workflow definition kept separate from per-run state; checks run before each transition and transitions are recorded</td><td>Harder for a non-technical owner to read and edit</td><td>Repeat runs where order and blocking checks must be enforced</td></tr>
+<tr><td>SRE incident playbook</td><td>Title and ID, trigger, impact and severity, prerequisites, expected outputs, verification, rollback, owner, version</td><td>Written for incidents and human responders, not routine agent tasks</td><td>High-impact or recovery work where ownership matters</td></tr></table>
+<p>That comparison is the decision framework for choosing a format. Start with the prose form. Move to the state-machine form when a run repeats often enough that skipped checks become a real risk. Borrow the playbook header — trigger, impact, rollback, owner, version — whenever the cost of a bad run is high, whichever body format sits underneath it. Practised playbooks matter: Google SRE practice, as summarised in the playbook source, puts the improvement at roughly threefold for mean time to recovery compared with improvising a response.</p>
+<h2>Prove it: the cold-run test</h2>
+<p>A runbook is not proven when it reads well. It is proven when a fresh run, with no help from the person who wrote it, passes its own checkpoints. Run the test like this:</p>
+<ol>
+<li><strong>Freeze the version.</strong> Save the runbook with its version noted, and use a low-stakes copy of the real inputs — a draft page, a test record, a secondary account.</li>
+<li><strong>Check the prerequisites.</strong> Backup exists and a restore has been tested. The agent is connected with the lowest role that works. Every named input is present.</li>
+<li><strong>Hand over only the runbook.</strong> No extra chat, no hints, no corrections mid-run. Anything the runner has to ask about is a gap in the document, and it gets written down.</li>
+<li><strong>Let each checkpoint do its job.</strong> At every pause, confirm the step's stated output is actually present before approving the next step.</li>
+<li><strong>Force one failure.</strong> Remove an input or use a wrong value on purpose. The correct behaviour is a recorded failure and a stop, in line with the stop rule — not a workaround.</li>
+<li><strong>Run the after checks.</strong> Compare the result directly against the goal, check any page at phone width, and confirm the log entry exists and names the runbook version.</li>
+<li><strong>Fix the document, not the memory.</strong> Every question, guess or workaround from the run becomes an edit to the runbook. Then run it cold once more.</li></ol>
+<p>What success looks like: the second cold run completes with no questions outside the runbook, every step records a pass, the forced failure stops the run cleanly, and the log entry lets a reader reconstruct what happened. If the runner needed oral help, the runbook failed the test — however good the final output looked.</p>
+<p><em>Sources, accessed October 25, 2026: CometAPI, “How to Use ChatGPT Agent Mode” (runbook prompt: goals, constraints, checkpoints, rollback on errors); StateM project on GitHub (YAML runbooks, before-transfer checks, recorded transitions); UiChemy, “AI Agent Workflow for Many WordPress Sites” (before/after checklists, lowest role, tested restore); beefed.ai, “Automated Runbooks for Incident Response” (playbook fields, verification, SRE practice). Tool behaviour varies by platform; adapt the format to the agent system in use.</em></p>
+<p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

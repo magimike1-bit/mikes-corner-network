@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connecting AI Agents to Your Calendar and Email Without Chaos — Using AI Agents</title>
+<meta name="description" content="Connected means specific permissions, not all-or-nothing access. Read-only first, a dedicated account as the sandbox, and write access earned one action type at a time.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Connecting AI agents to your calendar and email without chaos</h1>
+  <p class="meta">How-to &middot; 8 min read</p>
+<p>“Connected” means the agent holds specific permissions — called scopes — to act inside an account. One scope might allow it to read a calendar. A separate scope might allow it to send email. Those are different grants, given separately, and the chaos in most bad setups comes from treating them as a single switch: connect everything, at full strength, on the main account, on day one.</p>
+<p>The calmer definition runs the other way. Access is granted in stages, each stage is checked before the next begins, and the account at risk during the early stages is not the account daily life depends on.</p>
+<h2>Scopes in plain language</h2>
+<p>Least privilege is the governing idea: give scoped tokens or read-only roles aligned to the task, nothing wider. Modern permission systems support fine-grained scopes — reading a calendar and sending email can be authorised as separate grants, so an agent that summarises a schedule never needs the ability to send mail to do it.</p>
+<p>Two scope rules matter before any connection is made. First, credentials should not be long-lived; short-lived access limits the damage window if a token leaks. Second, tokens should never be exposed inside the prompts given to the model. A token pasted into instructions is a credential stored in conversation text, which is the opposite of keeping it contained.</p>
+<p>The practical test at every permission prompt is short. If a tool asks for access the task does not need, say no. A scheduling helper that requests full inbox access has failed that test, whatever its feature list promises.</p>
+<h2>Head to head: dedicated account vs your primary account</h2>
+<p><strong>Blast radius.</strong> Dedicated wins, and it is not close. Give the agent its own accounts — a secondary calendar shared only with it, a dedicated email address, and separate keys that can be revoked independently. A mistake there damages a sandbox. The same mistake on a primary account damages the real schedule and the real inbox.</p>
+<p><strong>Revocation.</strong> Dedicated wins again. Separate keys and accounts can be cut off one service at a time, without breaking the login daily life depends on. On a primary account, revoking the agent often means revoking a tangle of shared access and rebuilding it.</p>
+<p><strong>Convenience.</strong> Primary wins, honestly. The agent sees the real calendar immediately, with no sharing step and no second inbox to check. That convenience is the whole argument for the primary account — and it is an argument for the final stage, not the first one.</p>
+<p><strong>Testing quality.</strong> Dedicated wins on the point that matters most early. Real behaviour can be observed — drafts written, events proposed, summaries produced — without a wrong action reaching real guests or real correspondents. Scoping can go finer still: storage limited to a single folder, spreadsheets limited to specific files rather than whole accounts.</p>
+<table><tr><th>Question</th><th>Dedicated account</th><th>Primary account</th></tr>
+<tr><td>What breaks if the agent errs?</td><td>The sandbox calendar or inbox</td><td>The real schedule and correspondence</td></tr>
+<tr><td>Can access be revoked alone?</td><td>Yes — separate account and keys</td><td>Often tangled with personal access</td></tr>
+<tr><td>Setup effort</td><td>One extra account and a sharing step</td><td>None beyond the connection itself</td></tr>
+<tr><td>Best use</td><td>Stages one and two, and cautious setups long term</td><td>Only after the agent has proven the exact action type</td></tr></table>
+<h2>Stage one: read-only, on the dedicated account</h2>
+<p>Read-only access is the safe default for summaries, research and drafts. Stage one uses exactly that, on the dedicated account or secondary calendar: the agent can read events and messages, summarise a day, flag conflicts it can see, and draft replies it cannot send.</p>
+<p>The check at the end of stage one is behavioural. Summaries match the source material. Nothing was sent, moved or deleted — read-only access should make that structurally true, not just promised. If the platform cannot offer a true read-only grant for a service, that service stays unconnected until a later stage.</p>
+<h2>Stage two: drafts and proposals, nothing sent</h2>
+<p>Stage two adds creation without delivery. For email, the agent writes drafts for review. For calendar, it proposes events — title, time, guests listed — that a person confirms before anything is saved or invited.</p>
+<p>This is where the specific calendar and email failures get caught cheaply. A draft written as if it were final shows up as tone a reviewer can fix. A proposed invite with the wrong guest list is corrected before any invitation leaves. A conflict spotted from a fresh read, rather than a stale one, is visible in the proposal. Each failure costs a deleted draft instead of an apology.</p>
+<p>Promote out of stage two per action type, not per account. Drafting a routine reply well says nothing about booking meetings well. Each earns its own promotion.</p>
+<h2>Stage three: writes, one action type at a time</h2>
+<ol>
+<li><strong>Do the revocation check first.</strong> Before the first write is allowed, confirm exactly how this connection is revoked, and that revoking it does not disturb personal access. If the off switch cannot be found, the connection is not ready.</li>
+<li><strong>Pick one action type.</strong> Creating a calendar event, or sending one narrow class of email — not both in the same promotion.</li>
+<li><strong>Keep the scope matched to that action.</strong> A separate grant for the new ability, no long-lived credential, and no token placed inside a prompt.</li>
+<li><strong>Run a pre-flight check before each early write.</strong> For calendar: re-read the calendar immediately before creating the event, confirm the guests and time zone as shown in the proposal, then create. For email: confirm recipient, subject and final text match the approved draft exactly, then send.</li>
+<li><strong>Log every write.</strong> Action, time, target and result, in a place that gets reviewed — the same log the weekly check below reads.</li>
+<li><strong>Review after a fixed run of writes.</strong> Ten to twenty logged actions with no correction needed is a reasonable promotion signal for the next action type. Any wrong-recipient or wrong-time error sends that action type back to stage two.</li></ol>
+<p>What success looks like: every write in the log matches an approved proposal, no event exists that was not proposed first, no email differs from its approved draft, and the revocation path has been tested once for real. Full access, where it is used at all, belongs to tasks the agent has proven — proven in the log, action type by action type.</p>
+<h2>The revocation check and the weekly log review</h2>
+<p>Two habits keep a staged setup from quietly widening. The first is periodic revocation hygiene: list every account, calendar and key the agent holds, and remove any connection the current tasks no longer use. Access granted for a finished project and never withdrawn is the most common way a careful setup becomes a broad one.</p>
+<p>The second is a short weekly read of the write log. Look for three patterns: writes that do not match a proposal, action types creeping beyond the one that was promoted, and drafts being treated as finals anywhere in the flow. Any one of the three pauses new promotions until the cause is named.</p>
+<p>Services outside this topic stay outside the connection list entirely. Calendar and email are the proving ground precisely because their errors are visible and usually correctable. Prove the staged pattern there first.</p>
+<p><em>Sources, accessed October 25, 2026: Stytch, “Handling AI Agent Permissions” (least privilege, fine-grained OAuth scopes, short-lived tokens, tokens kept out of prompts); SSDNodes, “OpenClaw Use Cases” (dedicated accounts, secondary calendar, independently revocable keys, narrow storage scoping); SurePrompts, “AI Agent Guardrails” (read-only as the safe default, full access for proven tasks, refusing unneeded access). Tool behaviour varies by platform; adapt the stages to the agent system in use.</em></p>
+<p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for Recipes and Meal Ideas: From Fridge Contents to a Dinner Plan</title>
+<meta name="description" content="Photo or typed list? List first, correct the list, then plan — perishables first across the week, one shopping list, and the allergy and freshness checks AI cannot do.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">AI Starter Guide</a>
+    <p class="tagline">Plain-English introductions to using AI chatbots</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+
+  <h1>AI for Recipes and Meal Ideas: From Fridge Contents to a Dinner Plan</h1>
+  <p class="lede">It is 6 p.m. The fridge holds half a block of paneer, a bag of spinach, eggs, a jar that might be sauce or might be jam, and the usual condiments — and no plan. That scene is the whole problem this method solves, in a specific order: get an accurate list of what you have, correct it, and only then let the AI plan. Planning from a wrong list produces confident recipes for food you do not own.</p>
+  <p class="meta">Published 2026-10-28 &middot; Last updated 2026-10-28</p>
+
+<h2>Photo or list: which input to trust</h2>
+<p>The photo route is tempting: open the fridge, take a picture, ask for dinners. Open Loop News, which builds its method on that photo, is also clear about its weakness — prompt the AI to list every item it sees before planning anything, so mistakes can be caught early. A jar of sauce can pass for jam in a photo, and items hidden behind other things are missed entirely. The camera angle is not the fridge&rsquo;s contents.</p>
+<p>There is also a practical limit on the free route: Open Loop notes that ChatGPT&rsquo;s free plan allows 3 file uploads a day, as listed by OpenAI — so one good photo beats three hurried ones.</p>
+<table><caption>Photo-first versus list-first, head to head</caption><thead><tr><th></th><th>Photo first</th><th>List first (typed or corrected)</th></tr></thead><tbody>
+<tr><td>Speed of starting</td><td>Fastest — one picture</td><td>Slower — you type or correct the list</td></tr>
+<tr><td>Accuracy</td><td>Weakest link: look-alike jars misread, hidden items missed</td><td>Strongest: the plan is built only on items you confirmed</td></tr>
+<tr><td>Quantities</td><td>Hard to judge from an image</td><td>You state them, so the plan can allocate them</td></tr>
+<tr><td>Best use</td><td>A first draft of the list, nothing more</td><td>The actual planning step</td></tr>
+</tbody></table>
+<p>The verdict is not photo <em>or</em> list. It is photo <em>then</em> list: use the picture to draft the inventory, correct the draft against the real shelves, and plan from the corrected version.</p>
+
+<h2>The two-message method: list, correct, then plan</h2>
+<ol>
+<li><strong>Message one — inventory only.</strong> Send the fridge photo, or type what you can see, with this instruction: &ldquo;List every item you can identify, with quantities where you can estimate them. Do not suggest recipes yet.&rdquo; Keeping planning out of this message is the point: errors are cheap to fix in a list and expensive in a finished plan.</li>
+<li><strong>Correct the list against the real fridge.</strong> Stand in front of the open door and go line by line. Use the correction format Open Loop&rsquo;s method is built on: &ldquo;There is no [item it invented]; I also have [items it missed].&rdquo; Check behind the milk, inside the door shelves, and in the drawer — the places a photo cannot see.</li>
+<li><strong>Add the facts a photo never shows.</strong> Quantities (&ldquo;about 500 g paneer&rdquo;), anything already opened, and the use-by dates printed on the packaging of the perishables. These three details turn a recipe list into a plan.</li>
+<li><strong>Message two — now plan.</strong> Use the prompt pattern from EverydayAI: &ldquo;I have [your corrected ingredients]. Plan 5 simple dinners for [number] people ([dietary needs]) and give me a shopping list grouped by supermarket aisle.&rdquo; Add one instruction of your own: &ldquo;Use the perishables first, earliest in the week.&rdquo;</li>
+<li><strong>Audit the plan before you shop.</strong> Check each dinner against the corrected list: every ingredient is either something you have, in the quantity stated, or on the shopping list. EverydayAI gives the same check — verify that every recipe only uses ingredients you have or listed.</li>
+</ol>
+<p><strong>What success looks like:</strong> the plan&rsquo;s first two dinners use the most perishable items you listed, every ingredient in every recipe traces back to your corrected list or the shopping list, and the shopping list is grouped by supermarket aisle so one trip covers the week. If a recipe names an ingredient that appears in neither place, the plan has invented food — send it back for correction before shopping, not after cooking starts.</p>
+
+<h2>Plan the week perishables-first</h2>
+<p>Sequencing is where a chat plan beats a pile of separate recipes. A worked example from AnyFeast shows the mechanism plainly: the plan allocates exact quantities per dinner — 250 g of paneer on Monday and the remaining 250 g on Tuesday — and assigns Monday and Tuesday to the perishables, paneer and spinach, so they are used inside their use-by dates. Nothing exotic is happening there. Two ideas do the work: split a quantity across meals deliberately instead of using it all by accident, and put the shortest-lived ingredients at the front of the week.</p>
+<p>Ask for both explicitly. &ldquo;Allocate quantities per meal so nothing is half-used and forgotten, and order the dinners so the items with the earliest use-by dates come first.&rdquo; Then do the check the example itself insists on: look at the actual packaging and condition of every item. The dates in any worked example are assumptions for illustration, not storage guidance for your fridge — your packaging and your judgement outrank the plan.</p>
+
+<h2>The checks the AI cannot do for you</h2>
+<p><strong>Allergies are yours.</strong> EverydayAI states it directly: check allergies yourself. An AI plan does not know who is eating, and a dietary note in a prompt is an instruction, not a guarantee. Read every recipe in the plan against the allergies and medical dietary needs of the actual people at the table, every time, including plans that were fine last week — the ingredients change even when the prompt does not.</p>
+<p><strong>Freshness is yours.</strong> The AI works from your list. It cannot smell the milk, see the spinach has turned, or know the leftovers are a day older than you said. The packaging-and-condition check from the AnyFeast example belongs here too: if an item looks or smells off, it leaves the plan, and the plan gets revised — not the other way round.</p>
+<p><strong>Substitutions are a question, not an assumption.</strong> When the audit in step 5 catches a missing ingredient, ask the chat for a substitute using what you have, then re-run the allergy check on the revised recipe. A quiet substitution is how a safe plan becomes an unsafe one.</p>
+<p>None of this makes the tool less useful. It divides the work correctly: the AI is good at combinations, sequencing, and list-making from a corrected inventory. You are the only party who can verify the inventory, the dates, and the diners. Dinner plans built that way tend to survive contact with the actual fridge — which is, in the end, the only review that matters.</p>
+<p>— Dex Carter, Tech Writer</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>AI Starter Guide — plain-English introductions to AI chatbots. General information only, not professional advice. AI tools change quickly — verify current features on each provider's own site.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

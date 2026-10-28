@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi Dropping During Online Gaming: Latency, Jitter, and the Fixes That Work — Fix Your Wi-Fi</title>
+<meta name="description" content="A game that disconnects and a game that stutters are different faults. Tell them apart with a latency-under-load test, then fix in order: wire the machine, then SQM, then placement.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Wi-Fi dropping during online gaming: latency, jitter, and the fixes that work</h1>
+  <p class="meta">Troubleshooting &middot; Published October 28, 2026 &middot; Last updated October 28, 2026</p>
+
+  <p>Short answer first: &ldquo;my Wi-Fi drops when I game&rdquo; names two different
+  faults. In one, the connection itself breaks and the game disconnects. In the
+  other, the connection stays up but its delay swings wildly, so the game
+  stutters, teleports, and registers hits late. The fixes are not the same, and
+  applying the jitter fix to a disconnecting connection — or the other way
+  round — wastes an evening. Diagnose which fault you have before changing
+  any setting.</p>
+
+  <h2>Two words worth separating: latency and jitter</h2>
+  <p>Latency is the delay itself: how long data takes to travel between your
+  machine and the game server. Jitter is the variation in that delay from one
+  moment to the next. BroadbandSearch puts a usable scale on both: latency
+  under 30 ms is a good target, and over 100 ms is bad. A connection can post
+  a fine average latency and still play badly if the number keeps spiking —
+  that swing is jitter, and for competitive play the swing is usually the
+  problem, not the average.</p>
+  <p>That distinction explains a common frustration: a speed test that looks
+  excellent next to a game that feels broken. Speed tests report throughput —
+  how much data moves. They do not measure what happens to latency while the
+  connection is busy.</p>
+
+  <h2>Why a fast plan still stutters</h2>
+  <p>BroadbandSwitch makes the point with an extreme case: competitive lag is
+  usually jitter, not bandwidth, and bufferbloat under load can spike latency
+  even on a 900 Mbps line. Bufferbloat is the queue that builds up inside the
+  connection when something in the house — a download, a backup, a cloud sync
+  — saturates it. Packets for your game sit in that queue behind everything
+  else, so delay jumps exactly when the household is busiest. More megabits
+  do not empty the queue faster in the moments that matter, which is why a
+  plan upgrade is the wrong first purchase for this symptom.</p>
+  <p>So the two faults split cleanly. Disconnects point at the Wi-Fi link
+  itself between your machine and the router. Stutter under load points at
+  jitter and bufferbloat on a link that otherwise stays connected. The test
+  below tells them apart.</p>
+
+  <h2>The wiring numbers disagree — read them honestly</h2>
+  <p>Both latency sources agree that wiring the gaming machine helps. They do
+  not agree on how much, and the disagreement is worth showing rather than
+  smoothing over. BroadbandSearch says a wired connection typically reduces
+  latency by about 10–20 ms compared with Wi-Fi. Digital Citizen puts the
+  same change much higher, claiming Ethernet can cut ping by 30–50%.</p>
+  <p>Those figures are not directly comparable — one is an absolute number of
+  milliseconds, the other a percentage of a starting ping that varies by
+  connection — and neither source reconciles the two. Treat them as a range
+  of reported outcomes, not a promise. The check that matters is your own:
+  measure latency wired and wireless, idle and under load, and keep the
+  configuration that holds jitter down. That measurement is steps 2 to 5
+  below.</p>
+
+  <h2>Diagnose and fix, in order</h2>
+  <p>Work through these steps in sequence. Each step either identifies the
+  fault or removes one cause, and the order runs cheapest and most decisive
+  first.</p>
+  <ol>
+    <li><strong>Name the symptom during one bad session.</strong> Write down
+    which of these happened: the game disconnected or dropped you to a menu,
+    or the game stayed connected but stuttered, rubber-banded, or felt late.
+    Disconnects send you to step 7 eventually; stutter sends you to steps
+    2–6 first.</li>
+    <li><strong>Record an idle baseline.</strong> With the house quiet, note
+    the ping your game or a latency test reports. This is the number every
+    later test gets compared against.</li>
+    <li><strong>Now load the connection and measure again.</strong> Start a
+    large download or upload on another device, then repeat the same latency
+    check. This latency-under-load test is the diagnostic an ordinary speed
+    test cannot give you, because speed tests do not measure latency under
+    load.</li>
+    <li><strong>Read the two numbers together.</strong> A low idle ping that
+    spikes hard under load — pushing toward or past the 100 ms line — is the
+    bufferbloat pattern. A connection that drops out entirely, idle or loaded,
+    is a disconnect problem, and the load test is not the tool for it.</li>
+    <li><strong>Wire the machine that games.</strong> Run an Ethernet cable
+    from the router to the console or PC — draped along the floor for one
+    session is fine for testing — and repeat steps 2 and 3 wired. Compare the
+    wired latency against your wireless baseline; the sources put the typical
+    gain at about 10–20 ms, with one source claiming a larger percentage cut,
+    so judge by your own pair of numbers.</li>
+    <li><strong>If loaded latency still spikes, turn on SQM or QoS.</strong>
+    Log in to your router&rsquo;s admin page and look for a Quality of Service
+    or Smart Queue Management (SQM) setting. BroadbandSwitch identifies
+    SQM/QoS on the router as the control that tames bufferbloat, because it
+    manages the queue instead of letting one device&rsquo;s traffic fill it.
+    Enable it, then repeat the load test from step 3.</li>
+    <li><strong>If the fault is disconnects, isolate the Wi-Fi link.</strong>
+    Play one session on Wi-Fi in the same room as the router. If the drops
+    stop there, the link between rooms is the problem to solve — position and
+    obstructions, not your internet plan. If drops continue in the same room,
+    the fault sits with the router or the line, not the room.</li>
+    <li><strong>Re-run the full comparison before buying anything.</strong>
+    Idle and loaded, wired and wireless: four numbers. Keep the setup with
+    the smallest loaded swing, not just the lowest idle ping.</li>
+  </ol>
+
+  <h2>What success looks like</h2>
+  <p>Success is specific, and it is not a bigger speed-test result. With
+  another device deliberately loading the connection, your in-game latency
+  stays close to its idle value instead of spiking — variation stays small,
+  the reading stays well under 100 ms, and a full session completes with no
+  disconnects and no rubber-banding episodes. Wired, you should also see a
+  latency drop in the range the sources report, roughly 10–20 ms against your
+  wireless baseline. If the loaded number still swings wildly after wiring
+  and SQM, the remaining suspect is the line or service itself, and your four
+  recorded numbers are exactly the evidence to take to your provider.</p>
+
+  <h2>If only one change is possible</h2>
+  <p>Wire the gaming machine. It is the single step both sources endorse, it
+  helps the jitter fault and bypasses the disconnect fault at the same time,
+  and the test version costs one cable and ten minutes. SQM is the second
+  move, and it only matters if the load test in step 3 actually showed the
+  bufferbloat pattern. Skipping the diagnosis and buying bandwidth first is
+  the one move the evidence argues against: a 900 Mbps line can still
+  stutter, because the problem was never the size of the pipe.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

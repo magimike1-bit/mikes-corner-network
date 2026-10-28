@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Powerline Adapters vs MoCA: Using Your Home Wiring for a Wired Connection — Fix Your Wi-Fi</title>
+<meta name="description" content="Headline rates say 2 Gbps vs 2.5 Gbps. Measured results say 80–180 Mbps vs 850–1,200 Mbps. Audit your coax and circuits first, then buy the wiring your house already supports.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Powerline adapters vs MoCA: using your home wiring for a wired connection</h1>
+  <p class="meta">Buying decisions &middot; Published October 28, 2026 &middot; Last updated October 28, 2026</p>
+
+  <p>Which is better, powerline or MoCA? The honest version of the question
+  comes first: which wiring does your house already have in the right places?
+  Powerline sends data over electrical wiring. MoCA sends it over the coaxial
+  cable installed for television. Both promise a wired connection without
+  running new cable, but they run over different wires, so the contest is
+  decided by your walls before it is decided by any spec sheet.</p>
+
+  <h2>Headline speeds vs measured speeds</h2>
+  <p>Start with the numbers sellers lead with, because they mislead in a
+  specific direction. ITFix&rsquo;s comparison lists powerline at up to
+  2 Gbps with moderate reliability, and MoCA at up to 2.5 Gbps with high
+  reliability. On those figures the two look close — a 25% edge to MoCA.</p>
+  <p>Measured results tell a wider story. One practitioner account that ran
+  both in a real house reports powerline delivering 80–180 Mbps with jitter
+  spikes of 15–45 ms, while MoCA 2.5 delivered 850–1,200 Mbps at 3–6 ms
+  latency. For reference, the same account puts a Cat6 Ethernet run at under
+  1 ms. Two cautions belong with those measured figures: they come from a
+  single practitioner&rsquo;s house, not a lab, and powerline results in
+  particular swing with circuit conditions — ITFix itself notes powerline
+  varies with the wiring it runs over. Even allowing for that, the gap
+  between headline and measured is far larger for powerline than for MoCA,
+  and that asymmetry is the useful fact in the table below.</p>
+  <table>
+    <tr><th>Medium</th><th>Headline rate</th><th>Measured throughput</th><th>Measured latency / jitter</th></tr>
+    <tr><td>Powerline (AV2 class)</td><td>Up to 2 Gbps</td><td>80–180 Mbps</td><td>15–45 ms jitter spikes</td></tr>
+    <tr><td>MoCA 2.5 (over coax)</td><td>Up to 2.5 Gbps</td><td>850–1,200 Mbps</td><td>3–6 ms latency</td></tr>
+    <tr><td>Cat6 Ethernet (baseline)</td><td>—</td><td>—</td><td>Under 1 ms</td></tr>
+  </table>
+  <p>Headline rates: ITFix comparison table. Measured figures: one
+  practitioner&rsquo;s in-home results, so treat them as indicative, not
+  guaranteed. The baseline row is there to keep both honest: neither
+  borrowed-wiring option matches a dedicated Ethernet run, which remains the
+  reference when running a cable is actually possible.</p>
+
+  <h2>The coax audit: MoCA&rsquo;s conditions</h2>
+  <p>MoCA&rsquo;s strong measured numbers come with installation conditions,
+  and Hitron&rsquo;s MoCA guide names them. MoCA needs a filter at the point
+  where coax enters the home. It performs best over RG6 coax. And the
+  splitters in the path matter: splitters that are not MoCA-rated degrade
+  MoCA performance. A house with coax outlets in both the router room and
+  the target room, continuous cable between them, and MoCA-rated splitters
+  is a house where MoCA is the straightforward choice. A house where the
+  coax run is broken, repurposed, or split through old unrated hardware is
+  a house where the audit, not the adapter, is the first job.</p>
+
+  <h2>The circuit audit: powerline&rsquo;s conditions</h2>
+  <p>Powerline&rsquo;s condition is electrical topology. The practitioner
+  account warns that circuit breakers and RCDs attenuate the powerline
+  signal when the two adapters sit on different circuits — the signal loses
+  strength crossing between them. That account is from a UK home, so the
+  hardware names differ from a North American panel, but the underlying
+  principle it demonstrates is the one to audit: adapters on the same
+  circuit have the easiest path, and every breaker between the two outlets
+  is a suspect.</p>
+
+  <h2>The before-you-buy audit, step by step</h2>
+  <p>Run this audit before ordering anything. It takes one trip to the coax
+  outlets and one trip to the breaker panel, and its outcome picks the
+  product.</p>
+  <ol>
+    <li><strong>Check for coax in both rooms.</strong> You need a coax outlet
+    near the router and one in the room you want to wire. Both present?
+    MoCA stays on the table. Missing in either room? MoCA is out unless you
+    run coax, which defeats the purpose.</li>
+    <li><strong>Inspect the splitters on that coax path.</strong> Find the
+    splitters between the entry point and the two outlets and note whether
+    they are MoCA-rated. Unrated splitters degrade performance, so count
+    replacing them as part of the MoCA cost, not a surprise later.</li>
+    <li><strong>Locate the coax entry point.</strong> MoCA needs a filter
+    fitted where the coax enters the home. Confirm that point is accessible
+    in a basement, utility space, or outside box you can actually reach.</li>
+    <li><strong>Note the coax type if it is visible.</strong> RG6 is the
+    cable Hitron&rsquo;s guide calls for for best results.</li>
+    <li><strong>Now map the electrical side.</strong> At the breaker panel,
+    work out whether the outlet near the router and the outlet in the target
+    room are on the same circuit. Same circuit: powerline gets its best-case
+    conditions. Different circuits: expect the attenuation the practitioner
+    account describes, and weight the decision toward MoCA if the coax audit
+    passed.</li>
+    <li><strong>Decide from the audit, not the box.</strong> Coax present and
+    healthy points to MoCA. No coax but a shared circuit points to
+    powerline, bought with its measured 80–180 Mbps range in mind rather
+    than the 2 Gbps headline. Neither condition met? That is the audit
+    telling you the honest options are running Ethernet or improving the
+    Wi-Fi itself.</li>
+  </ol>
+
+  <h2>What success looks like</h2>
+  <p>For MoCA, success is a wired speed test in the target room landing in
+  the measured band the practitioner reported — several hundred megabits per
+  second, up toward 850–1,200 Mbps on a healthy run — with latency in single
+  digits, stable across repeated tests at different times of day. For
+  powerline, success is more modest and should be judged against its own
+  band: throughput somewhere in the 80–180 Mbps range that stays there when
+  the house is busy, rather than collapsing. In both cases, the wired
+  connection should hold steady through an evening of normal household use.
+  A result far below the relevant band on day one, with the audit conditions
+  met, is a return-the-adapters result, not a keep-tweaking result.</p>
+
+  <h2>The buy order</h2>
+  <p>MoCA first where the coax audit passes: its measured throughput is
+  roughly five times powerline&rsquo;s measured range, at a fraction of the
+  latency, and its reliability rating in the comparison table matches that
+  gap. Powerline where there is no usable coax but the two outlets share a
+  circuit — bought for what it measurably does, which is still a stable,
+  wired 80–180 Mbps in a room Wi-Fi serves badly. And keep the baseline in
+  view: if a Cat6 run is genuinely feasible, under 1 ms and no shared-medium
+  compromises beat both. The wiring you already own picks the winner. The
+  headline numbers were never going to.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Lag, Response Time, and Refresh Rate Explained for Budget Buyers — Budget Gaming Gear</title>
+<meta name="description" content="Three different measurements, one chain: frame-time arithmetic at 60, 144 and 240Hz, why the 1ms on the box is not comparable, and the cheapest lag fix for your setup.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Budget Gaming Gear</a>
+    <p class="tagline">Smart buying advice for gaming on a budget</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/index.html">&larr; All guides</a>
+  <h1>Input lag, response time, and refresh rate explained for budget buyers</h1>
+  <p class="meta">Buying guides &middot; 9 min read</p>
+
+  <p>Input lag is the delay between your input and the result appearing on screen. Response time is how long a pixel takes to change from one colour to another. Refresh rate is how many times per second the panel draws a new frame, measured in hertz (Hz). Three definitions, three different jobs — and a budget listing that prints all three numbers side by side, as if they were scores in the same contest. They are not. Read them as one chain instead, and the cheapest useful upgrade for your own setup usually becomes obvious.</p>
+
+  <h2>The chain: where milliseconds actually accumulate</h2>
+  <p>Picture the chain in order. Your game produces a frame. The display can only show that frame at its next redraw, and the gap between redraws is set by refresh rate. Once the frame starts drawing, each pixel still has to physically change colour, and that change is response time. Sitting around those two is the display's own processing — scaling, image modes, extra features — which adds input lag before the frame is shown at all.</p>
+  <p>That ordering matters for money. A faster panel cannot remove processing lag added before the frame reaches it, and a low-lag mode cannot make pixels change colour faster. Each purchase fixes one link. Buying for the wrong link is how a budget setup ends up with an expensive monitor and the same heavy feel it started with.</p>
+  <p>One clarification before the arithmetic: network ping belongs to a different chain entirely. Ping is the trip to a game server and back. Nothing in this guide shortens it, and no monitor purchase should be justified by it.</p>
+
+  <h2>Myth-check: the 1ms on the box</h2>
+  <p>The most repeated claim on a budget monitor box is &ldquo;1ms&rdquo;. Checked against the sources behind this guide, it does not survive as a comparison number.</p>
+  <p>First, the 1ms figure usually describes a single grey-to-grey (GtG) pixel transition — one change, under favourable conditions — while the average response across all colours is more likely 2–4ms. Second, advertised 1ms GtG is usually a best-case measurement taken under overdrive settings that introduce overshoot, the inverse-ghosting artefact that trades one blur for a bright halo. A usable panel keeps average GtG under 3ms with low overshoot, which is a different and less marketable sentence.</p>
+  <p>Third, some &ldquo;1ms&rdquo; claims are MPRT figures — a measurement tied to backlight behaviour — and MPRT claims are not comparable to real-world GtG measurements at all. Two monitors can both print 1ms on the box while measuring differently in use, because they are not printing the same measurement.</p>
+  <p>The buying rule that replaces the myth: ignore the headline response number as a way to rank two budget monitors. Look instead for an independently measured average GtG figure and an overdrive setting described as usable, without visible overshoot, at the refresh rate you will actually run.</p>
+
+  <h2>Frame-time arithmetic: what 60 to 144 to 240Hz really buys</h2>
+  <table>
+    <thead><tr><th>Spec</th><th>What it measures</th><th>The budget-relevant number</th></tr></thead>
+    <tbody>
+      <tr><td>Refresh rate</td><td>New frames drawn per second</td><td>60Hz = 16.67ms per frame; 144Hz = 6.94ms; 240Hz = 4.17ms</td></tr>
+      <tr><td>Response time (GtG)</td><td>One pixel changing colour</td><td>Box &ldquo;1ms&rdquo; is a best case; average across colours is more likely 2–4ms</td></tr>
+      <tr><td>Response time (MPRT)</td><td>A backlight-based motion figure</td><td>Not comparable to GtG — never rank a monitor by mixing the two</td></tr>
+      <tr><td>Input lag</td><td>Display processing before the frame is shown</td><td>On a TV, Game Mode can cut it from 50–100ms to 10–20ms</td></tr>
+    </tbody>
+  </table>
+  <p>Refresh rate also sets a floor for input lag, because a frame cannot be shown faster than the panel redraws. A 144Hz panel redraws every 6.94ms; a 240Hz panel every 4.17ms. Moving from 60Hz to 144Hz therefore removes up to 9.73ms of frame interval (16.67 − 6.94). Moving from 144Hz to 240Hz removes up to 2.77ms more (6.94 − 4.17).</p>
+  <p>Read those two steps as prices, not just numbers. The first step is where the large, cheap gain sits. The second step is real, but it buys roughly a quarter of the first step's reduction — which is why a budget buyer should be suspicious of paying a large premium for 240Hz over a good 144Hz panel, and why the sources' end-to-end example is instructive: a 144Hz LCD monitor chain totalling an estimated 19–31ms against 23–37ms for a 120Hz premium OLED TV, in a sim-racing estimate. Panel technology alone did not decide that comparison; the whole chain did.</p>
+  <p>Adaptive sync — FreeSync and G-Sync — belongs in this section rather than on a pedestal. It is part of the chain, matching the panel's redraw to the frames your system actually produces, and budget panels vary in whether and how they support it. Check support on the specific model; do not assume it from the price tier.</p>
+
+  <h2>The cheapest lag fix for your setup: a decision framework</h2>
+  <p>Work down this list in order. Stop at the first item that applies — it is almost always cheaper than the items below it.</p>
+  <ol>
+    <li><strong>Playing on a TV?</strong> Turn on Game Mode before spending anything. On the figures sourced for this guide, that single setting can cut display input lag from 50–100ms down to 10–20ms. No purchase in this guide removes that much lag for that little money — it is free.</li>
+    <li><strong>Still on a 60Hz display, with a system that can push past 60 frames per second?</strong> The 144Hz step is your purchase. It is the largest frame-interval reduction available (up to 9.73ms), and it is the mainstream budget tier rather than the premium one.</li>
+    <li><strong>Already at 144Hz?</strong> Do not chase 240Hz first for feel. Audit the other links: confirm the display is actually set to its rated refresh rate, use the overdrive setting that stays free of overshoot, and check that adaptive sync is supported and enabled for your source.</li>
+    <li><strong>Choosing between two budget monitors with identical &ldquo;1ms&rdquo; claims?</strong> Decide on the independently measured average response and overshoot behaviour, the adaptive-sync support, and the inputs — the things that differ in use — not on the number printed largest.</li>
+  </ol>
+  <p>What success looks like: your display settings show the panel's rated refresh rate, Game Mode (on a TV) or the monitor's low-lag mode is on, and you can name which link of the chain your last purchase improved. If you cannot name the link, the purchase was a guess.</p>
+
+  <h2>What to check on a listing before you believe it</h2>
+  <p>Three checks, all free, before any budget monitor leaves the shortlist. Does the response-time claim say GtG or MPRT — and if it does not say, treat it as marketing, not a measurement? Is there an independent measurement of average GtG and overshoot for this model, or only the manufacturer's best case? Does the panel support adaptive sync with your graphics card or console, in writing, on the specification page?</p>
+  <p>Specifications checked 2026-10-29 against the sources for this guide. Panel measurements vary by model, by overdrive setting, and by test method; the manufacturer's specification page and an independent measurement for the exact model govern over any general figure here.</p>
+
+  <p><em>General information only. This is an explainer, not a test report: no monitor was measured for this article, and the end-to-end chain figures quoted are the cited source's estimate for its own setup, not a promise for yours.</em></p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="disclaimer">Buying advice reflects the author's opinion and general guidance. Specs and prices change — always check current details with the retailer before you buy.</p>
+    <p>Budget Gaming Gear — buying advice for gaming on a budget.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

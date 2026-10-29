@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting Deadlines and Time Limits for AI Agent Runs</title>
+<meta name="description" content="Four different limits all get called a timeout: per-step timeouts, a whole-run deadline, step and turn caps, and work budgets. What each one stops, the real defaults checked in three frameworks' documentation, and how to pick your numbers.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+  <h1>Setting Deadlines and Time Limits for AI Agent Runs</h1>
+  <p class="lede">How long should an agent be allowed to run before something stops it? The honest answer is that there is no single clock to set. There are four different limits, they stop four different failures, and most runaway runs happen because only one of them was set — usually the wrong one.</p>
+  <p class="meta">Published 2026-10-29 &middot; Last updated 2026-10-29</p>
+
+<h2>Four limits that all get called a timeout</h2>
+<p>Start with the vocabulary, because the settings panels and framework documents use these words loosely. A <strong>per-step timeout</strong> bounds one unit of work: a single model request, or one tool call. A <strong>whole-run deadline</strong> bounds everything the run does, start to finish. A <strong>step or turn cap</strong> bounds how many rounds of work the agent may take, regardless of how long each round lasts. A <strong>work budget</strong> bounds the total the run may consume — requests, tool calls, tokens, or cost. Framework documentation keeps these separate for a reason: Pydantic AI, for example, documents a per-attempt timeout on a model request, a separate <code>request_timeout</code> that covers the whole request across every retry attempt and the reading of a streamed response, a tool-call timeout, and a run-level <code>timeout=</code> as distinct mechanisms with distinct failure modes.</p>
+<table><caption>The four limits, side by side</caption><thead><tr><th>Limit</th><th>What it bounds</th><th>What happens when it fires</th></tr></thead><tbody>
+<tr><td>Per-step timeout</td><td>One model request attempt, or one tool call</td><td>In Pydantic AI, a timed-out tool call hands the model a retried result reading &ldquo;Timed out after N seconds&rdquo;; a timed-out model request fails that request</td></tr>
+<tr><td>Whole-run deadline</td><td>Every model request, tool call, and hook in the run</td><td>The run is cancelled and, in Pydantic AI, raises <code>RunTimedOut</code> carrying everything the run completed</td></tr>
+<tr><td>Step / turn cap</td><td>The number of steps or turns, not the seconds</td><td>The OpenAI Agents SDK raises <code>MaxTurnsExceeded</code>; LangGraph raises <code>GraphRecursionError</code> when its step maximum is exhausted</td></tr>
+<tr><td>Work budget</td><td>Total requests, tool calls, tokens, or cost</td><td>Pydantic AI's <code>UsageLimits</code> raises <code>UsageLimitExceeded</code> when the run's total work crosses the line</td></tr>
+</tbody></table>
+<p>The row that surprises people is the third. A step cap counts steps. It says nothing about how long a step may take or what it may spend, which is why a run can sit comfortably inside its step cap and still run long. The cap's real job is narrower and vital: LangGraph's own reference states that its step maximum exists to prevent infinite loops. Loops are a count problem. Hanging tools and slow services are a time problem. Each limit earns its place by stopping the failure the others cannot.</p>
+
+<h2>The defaults, checked against the documentation</h2>
+<p>Defaults matter because most runs use them. Three checks against the frameworks' own documentation, made on 2026-10-29:</p>
+<ul>
+<li><strong>OpenAI Agents SDK:</strong> the run state records a default maximum of 10 turns before termination is forced. A turn is one AI invocation, including any tool calls it triggers. Passing <code>max_turns=None</code> disables the limit entirely — a deliberate choice that should never happen by accident.</li>
+<li><strong>LangGraph:</strong> the recursion limit caps the maximum number of steps in a single execution. Exhausting it raises <code>GraphRecursionError</code>, and the limit is raised by passing a higher <code>recursion_limit</code> in the run config.</li>
+<li><strong>Pydantic AI:</strong> even the plumbing has defaults — connecting to an MCP server defaults to a 5-second initialisation timeout, and a single MCP request defaults to a 300-second read timeout. A run can therefore be bounded by a default nobody on the team ever chose.</li>
+</ul>
+<p>None of these defaults is wrong. All of them are generic. A 10-turn cap that suits a question-answering agent will strangle a research agent that legitimately needs more rounds, and a 300-second read timeout is an eternity inside a run that was supposed to answer in under a minute.</p>
+
+<h2>Why per-step timeouts alone do not add up</h2>
+<p>The commonest configuration error is setting a timeout on each tool and assuming the run is bounded. It is not. Five tools with a ten-second timeout each make a fifty-second turn, and an agent can take many turns. The fix documented in practitioner writing on agent deadlines is a single run deadline that individual calls inherit: each call gets the smaller of its own normal maximum and the time actually remaining. A tool that would normally get ten seconds gets three if only three remain, so the run keeps its overall promise even when individual steps run slow.</p>
+<p>The same inheritance runs downward. In Pydantic AI, an agent run from inside a tool — a delegated sub-agent — inherits the parent run's deadline. Its own timeout can make that deadline earlier, never later. That one rule prevents the quietest deadline failure of all: a parent run that ends on time while the sub-agents it spawned keep working, and spending, underneath it. Per-tool budgets still matter within the deadline, because tools differ: one published example table gives a document search 5 seconds, an order lookup 3 seconds, a report generator 30 seconds, and sending email 8 seconds, with a 10-second default for everything else. A single uniform timeout is either too short for the report or too generous for the lookup.</p>
+
+<h2>Picking your numbers</h2>
+<p>One sizing rule covers the wall-clock deadline: base it on your longest normal run, plus headroom. Not the average run — the longest run that was still doing legitimate work. A deadline set at the average kills healthy long runs; a deadline set at the longest normal run plus headroom kills only the runs that have left normal behind. Apply the same logic to the step cap: count the steps a healthy run of this task actually takes, then set the cap above that count, not at a framework default chosen for somebody else's workload.</p>
+<p>Two structural rules complete the setup. First, an alert is not a brake. A dashboard or a notification tells a human, and the human may not be watching; a budget check sits in the path of every call and acts the moment the line is crossed. Keep the alerts, but let the limits do the stopping. Second, set limits at more than one level. A per-run limit catches the single runaway task. A per-agent daily budget catches the slower failure where every individual run looks reasonable and the total quietly is not.</p>
+
+<h2>Set the limits before the run: a short procedure</h2>
+<ol>
+<li><strong>Time three normal runs</strong> of the task, end to end, and note the step count of each. Use the longest time and the highest step count, not the averages.</li>
+<li><strong>Set the whole-run deadline</strong> at that longest normal time plus headroom, in the run settings or in the instruction you give the agent where the tool exposes no setting.</li>
+<li><strong>Set the step or turn cap</strong> above the highest healthy step count. If the tool shows a default — 10 turns in the OpenAI Agents SDK — decide whether it fits this task instead of inheriting it silently.</li>
+<li><strong>Set per-step timeouts</strong> for the slowest tools the run uses, sized to the tool: lookups get seconds, generators get longer, nothing gets unlimited.</li>
+<li><strong>Add the work budget</strong> where the platform offers one — a token, request, or cost ceiling per run — so a run that stays inside its time and step limits still cannot spend without bound.</li>
+<li><strong>Write down what should happen when a limit fires</strong>: stop and report, return partial results, or hand the task to a human. Decide now, not at the moment of the alert.</li>
+</ol>
+<p><strong>What success looks like:</strong> a normal run finishes untouched by every limit; a stuck run stops at the deadline with its completed work saved and a report you can act on; and no run — including any sub-agent it delegated to — continues past the deadline you set.</p>
+
+<h2>When a limit fires: keep the work, then decide</h2>
+<p>A fired limit is information, and the first job is not to waste what the run already did. A timed-out run is not necessarily an empty one: Pydantic AI's <code>RunTimedOut</code> carries everything the run completed, and that history can be passed into a new run as its message history to resume rather than restart. The equivalent habit in any tool is the same: read the partial output and the record of where the run stopped before deciding anything.</p>
+<p>Then make the decision the limit was bought to force. If the run was looping — repeating steps without progress — the step cap did its job; shrink or re-scope the task rather than raising the cap, because a loop given more steps is just a longer loop. If the run was progressing steadily and simply ran out of road, the task is bigger than its deadline: raise the limit deliberately, or split the task into two runs with a checkpoint between them. If one tool consumed the whole deadline, the per-step timeout for that tool is the fix, not the run deadline. What a fired limit should never produce is the reflex response — raising every number until the alerts stop. The numbers were the diagnosis. Treat them that way.</p>
+
+<p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

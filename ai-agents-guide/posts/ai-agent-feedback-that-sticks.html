@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Give an AI Agent Feedback It Will Actually Use — Using AI Agents</title>
+<meta name="description" content="The agent agreed, fixed it, and did it again next week — because the correction lived in a chat it never re-reads. Where a correction is stored decides whether it sticks, plus the second-time rule and a fresh-session test.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>How to give an AI agent feedback it will actually use</h1>
+  <p class="meta">Working With Agents &middot; 9 min read</p>
+<p>Why does an agent accept a correction, fix the output in front of you — and then make the identical mistake next week?</p>
+<p>Because the correction probably never reached the place the agent reads. A scheduled agent starts each run fresh, with no memory of the last three times it was told otherwise; a correction that is never written down anywhere durable is a conversation that evaporates the moment the run ends. The repeat mistake looks like a competence problem. It is a storage problem. Fixing it takes two skills: writing a correction the agent can act on, and putting that correction where it will be re-read.</p>
+<h2>First, the correction itself: what, why, and how</h2>
+<p>For the answer in front of you, a three-part formula does the work: what is wrong, why it is wrong, and how it should change. "Too technical — this is for people new to the topic — rewrite it in simple words, short sentences, with one everyday example" gives the agent a defect, a reason, and a direction. "Make it better" gives it none of the three, and vague feedback reliably produces vague improvements.</p>
+<p>Three habits sharpen the formula further. Be specific: name the length, tone, audience, or format instead of the feeling. Show an example of the target where you can — and an example of what to avoid, since a negative example fences off the failure you keep seeing. And correct one thing at a time: a stack of simultaneous instructions gets partially followed, and you cannot tell which part failed.</p>
+<p>That handles today's output. It does nothing for next week's run, because all of it happened inside a chat.</p>
+<h2>Where the correction lives decides whether it sticks</h2>
+<p>Corrections land in one of three places, and none of them is memory. The chat thread or run log: you typed the fix, the agent acknowledged it, the thread scrolled on — and a fresh run opens a new context and never re-reads it. The prompt or instruction text: patches accumulate there until they are buried, ignored, or deleted by someone who did not understand a line. Or nowhere: the output got fixed by hand, the corrected version went out, and from the agent's point of view the run succeeded.</p>
+<table><tr><th>Where the correction lives</th><th>Survives a new session or run?</th><th>Best used for</th></tr>
+<tr><td>The chat where the mistake happened</td><td>No — a fresh run starts from a new context</td><td>Fixing this one output, today</td></tr>
+<tr><td>Standing instructions the agent reads every time (its instruction file, brief, or runbook)</td><td>Yes, if the file is actually loaded each run</td><td>Rules that should apply to every future output</td></tr>
+<tr><td>A saved lesson: the correction, the reason why, and a count of occurrences</td><td>Yes, if the agent is set up to read relevant lessons before acting</td><td>Judgement calls where the reason matters more than the rule</td></tr>
+<tr><td>A mechanical check — a checklist, validator, or automatic block</td><td>Yes, and it does not rely on the agent remembering</td><td>Repeat or high-stakes errors that must be caught, not remembered</td></tr></table>
+<p>The middle rows hide a distinction worth keeping. A rule and a lesson are different objects. A rule states a condition: "classify by what the purchase is for, not by words in the vendor name" transfers to new cases; "put Vendor X under software" does not. A lesson keeps the why — the vendor name misled the classifier — which is what lets the agent handle the next misleading name instead of only the recorded one. Store the rule in the instructions; store the lesson, with its why, where the agent can pull it up for similar work.</p>
+<h2>The second-time rule: a procedure for repeat mistakes</h2>
+<p>The trigger is a count, so keep a log — one line per correction, dated. Without a log, nobody can say how many times a correction has been given, and the count is the whole mechanism:</p>
+<ol>
+<li><strong>First time: fix the output, and log the correction.</strong> Use the what/why/how formula, get today's work right, and write the one-line log entry while the details are fresh. A correction captured a week later is a correction half-remembered.</li>
+<li><strong>Second time: fix the instructions, not the output.</strong> The same correction twice means the problem is a missing rule, not a bad answer. Restate the correction as a general rule — condition, not example — and add it to the instructions, brief, or runbook the agent reads at the start of every run, in the same pass as the fix.</li>
+<li><strong>Before the next run, confirm the instructions are actually loaded.</strong> A rule in a file the setup never reads is the chat thread with extra steps.</li>
+<li><strong>Third time, or any error too costly to repeat once: stop relying on memory at all.</strong> Move the catch into a mechanism — a pre-send checklist the agent must complete, a validator, an approval step, or an automatic block where the tool supports one. Mechanical checks do not get tired and do not forget.</li>
+<li><strong>Retire stale lessons.</strong> Vendors rename things, policies change, corrections get superseded. Stored feedback needs an owner and an occasional review, or yesterday's lesson becomes tomorrow's repeat mistake.</li></ol>
+<p>What success looks like: the log shows the same correction stopping at one or two entries, new mistakes replacing repeats, and any third occurrence caught by a check rather than by you.</p>
+<h2>When the loop is the problem, not the feedback</h2>
+<p>Inside a single stuck session, more feedback can make things worse. A retry does not start clean: its context already contains the failed attempt, the frustrated correction, and the agent's explanation of what it thought it fixed — so attempts compound the noise instead of converging. Two rules follow. Never send "try again" or "still broken" twice in a row; a repeated low-information prompt changes nothing except the agent's confidence. And before another attempt, return the work to the last known-good state — the last version you recognised as right — instead of stacking a new attempt on top of a broken one. Then give the corrected instruction once, against the clean state.</p>
+<h2>Prove it stuck: the fresh-session test</h2>
+<p>Do not grade a correction by the agent's acknowledgement. Grade it by behaviour, in conditions that cannot cheat:</p>
+<ol>
+<li><strong>Open a new session or wait for the next scheduled run.</strong> The test only means something if the agent cannot lean on the chat where the correction happened.</li>
+<li><strong>Give a probe task that would trigger the old mistake</strong> — a new case of the same type, not the original example. Passing the original example proves memorisation of one case; passing a fresh case proves the rule transferred.</li>
+<li><strong>Check the output against the rule, not against your mood.</strong> A short pre-return checklist helps here too: does the output meet every stated requirement, does it avoid the previously identified mistakes, is anything required missing?</li>
+<li><strong>Record the result in the log.</strong> Probe passed: the correction is in force. Probe failed: that is occurrence number two (or three) — escalate it one row down the table instead of re-sending the same chat message.</li></ol>
+<p>None of this asks for a smarter model. It asks for corrections written as rules with reasons, stored where the agent reads, counted so repeats trigger escalation, and tested cold. Agents repeat the mistakes whose corrections evaporated. Write the correction down in the right place, and the mistakes it makes next week are at least new ones.</p>
+<p><em>Sources, accessed October 29, 2026: WhatsInAI, "How to Give AI Feedback That Improves Answers" (what/why/how formula, specificity, examples, one change at a time); Vilix, "Why Your Scheduled AI Agent Keeps Making the Same Mistake Every Run" (corrections land in the chat, the prompt, or nowhere; the stored correction, rule, and case history; capture at the point of failure, store the why, read before acting, retire stale lessons); note.com, "What I Stopped Doing When AI Kept Repeating the Same Mistakes" (first time fix the output and log it, second time fix the instructions, third time stop it mechanically); dev.to, "Why Your AI Coding Agent Ignores Your Team's Conventions" (a repeated correction is a missing line in the instruction file; enforce mechanically what can be checked mechanically); freeCodeCamp, "How to Break the AI Coding Agent Fix Loop" (failed attempts poison the next attempt; revert to the last known-good state); dev.to, "How to Prevent AI From Repeating Its Own Mistakes" (detect, classify, correct, record, prevent, evaluate, refine; pre-return verification checklist). Tool behaviour varies by platform; adapt the storage steps to the agent system in use.</em></p>
+<p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -317,3 +317,9 @@ a:focus-visible, .btn:focus-visible, .main-nav a:focus-visible,
 .cat-card:focus-visible, .feat-card:focus-visible {
   outline: 3px solid var(--amber-dark); outline-offset: 2px; border-radius: 4px;
 }
+/* Design review 2026-10-29: pipeline guide cards use .card, which had no rule (only .cat-card/.feat-card existed) — the newest guides rendered unstyled */
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; margin: 0 0 14px; }
+.card h3 { margin: 0 0 6px; font-size: 1.12rem; }
+.card h3 a { color: var(--navy); text-decoration: none; }
+.card h3 a:hover { color: var(--amber-dark); text-decoration: underline; }
+.card p { color: var(--muted); margin: 0; }

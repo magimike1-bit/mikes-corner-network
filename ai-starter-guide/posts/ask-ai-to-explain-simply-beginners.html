@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask AI to Explain It Simply: Set the Level, Then Check You Understood</title>
+<meta name="description" content="&quot;Explain like I'm five&quot; can cost accuracy. Ask instead for no assumed background, climb a three-pass level ladder, quote the sentence that loses you, and finish with a check.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">AI Starter Guide</a>
+    <p class="tagline">Plain-English introductions to using AI chatbots</p>
+  </div>
+</header>
+<main class="wrap post">
+  <p class="kicker">Guides</p>
+
+  <h1>Ask AI to Explain It Simply: Set the Level, Then Check You Understood</h1>
+  <p class="lede">Why does &ldquo;explain it like I&rsquo;m five&rdquo; so often produce an answer that feels simple but teaches you the wrong thing? Because a five-year-old&rsquo;s vocabulary is the wrong target. What you actually want is an explanation that assumes no background knowledge — and those are two different requests. This guide separates them, then gives you a three-pass ladder for climbing from plain words to real understanding, with a check at the top.</p>
+  <p class="meta">Published 2026-10-29 &middot; Last updated 2026-10-29</p>
+
+<h2>The short answer: simple is a setting, not a spell</h2>
+<p>There is no magic phrase. There is a level, and you set it in ordinary words: who the explanation is for, how much background it may assume (none, if you say so), how long it may run, and whether examples and analogies are welcome. A prompt built for exactly this job reads: &ldquo;Explain [topic] to me like I&rsquo;m a complete beginner. Use simple words and give me one example.&rdquo; Everything after that is refinement — a better level setting, a way to climb, and a way to check the climb worked.</p>
+<p>You do not need a special tool for any of it. Prompt add-ons and dedicated &ldquo;explain simply&rdquo; services exist, but the instruction itself is plain language any general chatbot already understands. Spend your effort on the level and the check, not on hunting for a button.</p>
+
+<h2>Why &lsquo;like I&rsquo;m five&rsquo; can make an answer worse</h2>
+<p>The popular shorthand has a documented flaw. One widely shared ELI5 setup — ELI5 stands for &ldquo;explain like I&rsquo;m five&rdquo; — still carries that phrase in its description, but its working instructions were deliberately changed to ask for an explanation aimed at &ldquo;someone who knows nothing about this topic.&rdquo; The reason given is direct: literally targeting a five-year-old&rsquo;s vocabulary tends to reduce the accuracy of the explanation. The retuned version strips out assumed background knowledge instead of performing child talk.</p>
+<p>The distinction matters in practice. Child vocabulary forces every idea into toy comparisons, and some ideas do not survive the squeeze — the analogy becomes the lesson, and the analogy is wrong at exactly the point you needed precision. No assumed background is different: the words can be adult, the sentences full-length, as long as every term is defined when it appears and nothing is treated as obvious. That is the version worth asking for.</p>
+
+<h2>Set the level in words the chatbot can use</h2>
+<p>A level the chatbot can actually follow has four parts. The ELI5 prompt guides converge on the same ingredients: name the level, add context, and ask for the shapes that help — examples, comparisons, analogies, and step-by-step order for processes.</p>
+<ol>
+<li><strong>Name the audience, honestly.</strong> &ldquo;For someone who knows nothing about this topic&rdquo; beats an age. If you do know a little, say what: &ldquo;I understand X, but not Y&rdquo; sets the floor far better than a birthday.</li>
+<li><strong>Cap the length.</strong> A short answer can be requested outright — three sentences maximum is a recognised way to force the essentials first. Length is a level control: shorter means fewer places for jargon to hide.</li>
+<li><strong>Ask for one concrete example and one comparison.</strong> Examples and analogies are the standard machinery of simple explanations — basic vocabulary, concrete examples, relatable analogies. One of each is enough; five analogies for one idea is fog, not clarity.</li>
+<li><strong>For a process, ask for steps in order.</strong> &ldquo;Step by step&rdquo; turns a wall of description into a sequence you can follow — and lets you point at the exact step where you got lost, which the next section uses.</li>
+</ol>
+<p>One caution from the tooling itself: a chatbot may need reminding to hold the level. Notes on one ELI5 implementation observe that the model sometimes needs reminders to maintain the simplified level throughout longer responses. If pass two starts sprouting unexplained terms, repeat the level instruction. That is normal maintenance, not a failed prompt.</p>
+
+<h2>The ladder: three passes, one topic</h2>
+<p>Do not ask for the perfect level once. Climb.</p>
+<table><caption>The three-pass explanation ladder</caption><thead><tr><th>Pass</th><th>What you ask</th><th>What you get</th><th>Move up when&hellip;</th></tr></thead><tbody>
+<tr><td>1. Plain</td><td>&ldquo;Explain this to someone who knows nothing about the topic. Simple words, one example, three to five sentences.&rdquo;</td><td>The shape of the idea — what it is and why it exists</td><td>You can repeat the gist in your own words</td></tr>
+<tr><td>2. Terms defined</td><td>&ldquo;Same explanation, but introduce the real terms, defining each one as it appears.&rdquo;</td><td>The vocabulary the rest of the world uses, attached to the plain version</td><td>You recognise the terms when you meet them elsewhere</td></tr>
+<tr><td>3. One level deeper</td><td>&ldquo;Go one level deeper on the part that matters most to me: [name it].&rdquo;</td><td>Detail where you need it, not spread evenly over everything</td><td>You can answer a question about it — the check below</td></tr>
+</tbody></table>
+<p>Levels can also be set by school-style anchors when those help — &ldquo;like I&rsquo;m 10,&rdquo; &ldquo;like I&rsquo;m in high school,&rdquo; or simply &ldquo;in three sentences&rdquo; are all recognised ways of pinning the level in one short phrase. Use whichever anchor you can judge. The test of a level is never the label; it is whether the next pass can start from where the last one left you.</p>
+
+<h2>Quote the sentence that loses you</h2>
+<p>When an explanation stalls, the weakest follow-up is &ldquo;I don&rsquo;t get it&rdquo; — it tells the chatbot nothing about where it lost you, so it repeats the whole thing louder. The stronger move, built into the step-by-step usage guides for simple-explanation tools, is surgical: if a part is unclear, quote it and ask again. Paste the exact sentence back, and ask what that sentence means, or which word in it is doing the confusing.</p>
+<p>This works because confusion is usually local. One undefined term, one skipped step, one analogy that does not map onto anything you know. Quoting isolates it. Two or three quoted sentences, resolved one at a time, will unblock an explanation that three full re-reads could not — and each answer arrives at exactly your level, because you just demonstrated where your level is.</p>
+
+<h2>Finish by checking the explanation landed</h2>
+<p>Simple feels like understood. It is not the same thing, so close the loop. Two checks, either is enough:</p>
+<ul>
+<li><strong>Ask for a short quiz.</strong> The usage guides for explanation tools offer this as a standard final step — a short quiz to check that you understood. Ask for three questions, answer them without scrolling up, and treat any miss as a pointer back to the pass that needs redoing.</li>
+<li><strong>Explain it back.</strong> Write two or three sentences in your own words and ask the chatbot where your version is wrong or incomplete. Your sentences are the evidence; a nod-along feeling is not.</li>
+</ul>
+<p><strong>What success looks like:</strong> you can state the idea in your own words, you know the real terms for its main parts, and you have answered — or explained — your way through one check without copying the chatbot&rsquo;s sentences. Anything less is a pleasant read, not yet an understanding.</p>
+
+<h2>When a simple answer is not enough on its own</h2>
+<p>Simplification always removes something: a condition, an exception, a &ldquo;usually.&rdquo; For curiosity, that trade is fine. For a decision — money, health, a contract, a safety step — the removed qualifier may be the part that mattered, and a fluent simple answer gives no sign of what it dropped.</p>
+<p>So treat the ladder as an entry point, not a verdict. AI can make mistakes even at plain levels, and the standing advice for beginners applies with full force here: double-check important information with reliable sources before acting on it. Use the simple explanation to learn what questions to ask, and the reliable source to answer the one you are about to act on. Understanding first, verification before consequences — in that order, both, every time it counts.</p>
+<p>— Dex Carter, Tech Writer</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>AI Starter Guide — plain-English introductions to AI chatbots. General information only, not professional advice. AI tools change quickly — verify current features on each provider's own site.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

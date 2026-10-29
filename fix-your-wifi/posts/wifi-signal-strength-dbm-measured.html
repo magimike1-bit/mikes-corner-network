@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi Signal Strength in dBm: What the Numbers Mean and How to Measure Yours — Fix Your Wi-Fi</title>
+<meta name="description" content="Full bars can still be bad Wi-Fi: RSSI measures strength, not clarity. Learn the dBm scale, reconcile the conflicting charts against per-use targets (-67 voice, -65 video, -70 data), and run a same-device walk-test of your own house.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Wi-Fi signal strength in dBm: what the numbers mean and how to measure yours</h1>
+  <p class="meta">Troubleshooting &middot; Published October 29, 2026 &middot; Last updated October 29, 2026</p>
+
+  <p>Start with the claim everyone repeats: if the signal is strong, the
+  Wi-Fi is good. It survives about one test. NC-Expert's engineering guide
+  to RSSI — the Received Signal Strength Indicator, the number behind the
+  bars — puts the correction bluntly: RSSI measures signal strength, not
+  signal clarity. A connection can be loud and still be hard to understand,
+  the way a shouted conversation in a noisy room is loud without being
+  clear. Signal-to-noise ratio (SNR), which compares the signal to the
+  background noise floor, is the clarity measure — and Data Alliance's
+  RSSI reference notes that a strong RSSI with a high noise floor can
+  still deliver poor performance. So the bars are not lying about strength.
+  They are just silent about everything else. The dBm number is still
+  worth learning — it is the only version of the bars you can compare
+  across rooms and act on — as long as you read it as a clue, not a
+  verdict.</p>
+
+  <h2>The scale: negative numbers, closer to zero wins</h2>
+  <p>RSSI is reported in dBm, decibel-milliwatts, and for Wi-Fi it is
+  almost always a negative number. Closer to zero means stronger: -45 dBm
+  is an excellent signal, -85 dBm is a weak one. That single inversion —
+  the bigger-looking negative number is the worse signal — is where most
+  misreading starts. Nobody's home Wi-Fi reads near zero; the working
+  range runs from about -30 dBm standing beside the router down to about
+  -90 dBm, where Data Alliance's chart puts the signal at or near the
+  noise floor and effectively unusable.</p>
+
+  <h2>One chart, three thresholds: reconciling the numbers</h2>
+  <p>Published charts disagree about the middle of the scale, so here are
+  the two worth reconciling. Data Alliance's chart grades the whole
+  range. NC-Expert's guide gives the design targets engineers use per
+  application. Put side by side, the apparent conflict dissolves: the
+  chart's "fair" and the engineer's "fine for data" are the same number
+  judged against different jobs.</p>
+  <table>
+    <tr><th>Reading</th><th>Chart grade (Data Alliance)</th><th>What it supports</th></tr>
+    <tr><td>-50 dBm</td><td>Excellent</td><td>Full-speed throughput; ideal for HD video and VoIP</td></tr>
+    <tr><td>-60 dBm</td><td>Good</td><td>Reliable connections, including streaming</td></tr>
+    <tr><td>-67 dBm</td><td>Minimum for reliable, timely delivery</td><td>The design target for voice</td></tr>
+    <tr><td>-65 dBm</td><td>Between good and the -67 line</td><td>The design target for collaboration and video</td></tr>
+    <tr><td>-70 dBm</td><td>Fair</td><td>Light browsing and email; the design target for general data — may struggle with latency-sensitive tasks</td></tr>
+    <tr><td>-80 dBm</td><td>Weak</td><td>Basic connectivity only; unreliable, prone to drops</td></tr>
+    <tr><td>-90 dBm</td><td>Very weak / unusable</td><td>At or near the noise floor</td></tr>
+  </table>
+  <p>The reconciliation rule: judge a reading against the strictest job
+  done in that spot. A desk where calls happen needs the -67 dBm voice
+  line, not the -70 dBm data line — and a room that only browses is
+  honestly served at -70 dBm, whatever a generic chart's colour band
+  says. One more caution from NC-Expert: below the comfortable range,
+  weaker RSSI forces slower modulation and more retransmissions, so a
+  marginal reading costs more than the number alone suggests.</p>
+
+  <h2>The walk-test: measure your own house, one device</h2>
+  <p>One warning before measuring, again from NC-Expert: RSSI is not
+  standardised across vendors. Different chipsets calculate it slightly
+  differently, so a phone and a laptop in the same spot can report
+  different numbers — ScienceInsights' explainer puts the normal
+  discrepancy at a few dB. That does not ruin home measurement. It just
+  sets the method: one device, every room, so every reading is comparable
+  with every other.</p>
+  <ol>
+    <li><strong>Pick the measuring device and stick with it.</strong> Use
+    the phone or laptop you will actually carry around the house. On a
+    Mac, hold the Option key and click the Wi-Fi icon in the menu bar to
+    see RSSI in dBm. On Windows, run <code>netsh wlan show interfaces</code>
+    in a command prompt — it reports Signal as a percentage rather than
+    dBm, so use an analyser tool if you want the dBm figure itself. On
+    Android, analyser apps show real-time dBm readings. On an iPhone,
+    Apple does not expose RSSI in a user-friendly way; the bars are the
+    rough approximation, so measure with a different device and judge the
+    iPhone by how it behaves in each room.</li>
+    <li><strong>Take a baseline beside the router.</strong> Stand next to
+    the router and record the reading. This is your house's version of
+    "as good as it gets" — expect something in the excellent range — and
+    every other room is measured as a fall from this number.</li>
+    <li><strong>Record each room where Wi-Fi actually matters.</strong>
+    The desk, the TV spot, the bedroom, the far office. Stand where the
+    device is used, not in the doorway, and write the number down rather
+    than trusting memory.</li>
+    <li><strong>Note the band for each reading.</strong> If your tools
+    show which band the device is on, record it beside the number. A room
+    is not one measurement; a strong reading on one band and a weak one
+    on the other is a common and useful split.</li>
+    <li><strong>Flag the rooms below their job's line.</strong> Using the
+    table above: below -67 dBm where calls and video happen, below
+    -70 dBm where only browsing happens, and anything near -80 dBm
+    anywhere is a coverage problem regardless of the job.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> a short written list — one
+  device, a baseline, and a dBm figure per important room — where every
+  room sits at or above the line for the strictest job done there, or is
+  named as a problem room with a number attached. "The back bedroom is at
+  -78 dBm" is a finding you can act on. "The Wi-Fi feels weak upstairs"
+  is not.</p>
+
+  <h2>What to do with your numbers</h2>
+  <p><strong>Every important room at -67 dBm or better, but things still
+  stutter:</strong> coverage is not your problem. Remember the myth this
+  article opened with — strength is not clarity. A strong reading with
+  poor performance points at noise and contention, not distance, and the
+  fixes live in channels and traffic, not in more coverage.</p>
+  <p><strong>One or two rooms between -70 and -80 dBm:</strong> that is
+  the placement zone. The signal is arriving, just thinly, so moving the
+  router or adding coverage aimed at those rooms is the proportionate
+  response — decided by the numbers you recorded, not by the room that
+  complains loudest.</p>
+  <p><strong>Any important room near -80 dBm or worse:</strong> treat it
+  as a coverage hole, not a marginal case. At that level the chart's own
+  grade is weak and unreliable, and small tweaks rarely recover that much
+  signal; the room needs the router closer, a node of its own, or a wire.</p>
+  <p>Measure once, on one device, and the house stops being a mystery of
+  bars. It becomes a list of numbers with lines drawn through the ones
+  that fail — which is all a good fix ever needed.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

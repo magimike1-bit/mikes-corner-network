@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethernet vs Wi-Fi for Your Desk Setup: Where a Cable Still Wins — Fix Your Wi-Fi</title>
+<meta name="description" content="Cable the desk, not the house: Ethernet latency runs 0.3–1 ms against Wi-Fi's 2–10 ms with spikes past 50 ms under congestion. A per-device decision for the docked laptop, the NAS, calls and gaming — and the printer that earns nothing.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Ethernet vs Wi-Fi for your desk setup: where a cable still wins</h1>
+  <p class="meta">Setup &middot; Published October 29, 2026 &middot; Last updated October 29, 2026</p>
+
+  <p>Direct answer: for a fixed desk, cable the machines that sit there
+  and leave everything portable on Wi-Fi. Not because Wi-Fi is slow — its
+  headline speeds are fine — but because the desk is the one place in the
+  house where a cable costs nothing in convenience and buys the one thing
+  Wi-Fi cannot guarantee: latency that stays put. The decision is
+  per-device, not per-house. This guide runs the two side by side, then
+  walks the desk device by device.</p>
+
+  <h2>The numbers: latency is the argument</h2>
+  <p>Gemwell's Ethernet explainer puts LAN latency at about 0.3–1 ms for a
+  wired connection against 2–10 ms for Wi-Fi. TRTech's comparison makes
+  the sharper point: latency, not headline speed, is the real Ethernet
+  win, because Wi-Fi latency can spike past 50 ms under congestion — the
+  busy-evening moment when everyone in the house is streaming and your
+  call is the thing that stutters. Averages flatter Wi-Fi; spikes are
+  what a desk worker actually feels.</p>
+  <table>
+    <tr><th></th><th>Gigabit Ethernet</th><th>Wi-Fi</th></tr>
+    <tr><td>Typical LAN latency</td><td>0.3–1 ms</td><td>2–10 ms</td></tr>
+    <tr><td>Latency under congestion</td><td>Holds near its typical range</td><td>Can spike past 50 ms</td></tr>
+    <tr><td>Real throughput</td><td>~940 Mbps TCP on a gigabit link</td><td>Shared airtime; falls as more devices talk</td></tr>
+    <tr><td>Duplex</td><td>Full-duplex: sends and receives at once</td><td>Half-duplex: one direction at a time on shared airtime</td></tr>
+  </table>
+  <p>Latency and duplex figures: Gemwell's Ethernet explainer. Congestion
+  spikes: TRTech. Read the throughput row carefully — a gigabit cable's
+  ~940 Mbps is delivered to one machine, while Wi-Fi's capacity is a
+  pool every nearby device draws from, one speaker at a time. At a desk,
+  where the machine does not move for eight hours, giving up that pool
+  for a private lane is nearly all upside.</p>
+
+  <h2>Device by device: who earns a cable</h2>
+  <p><strong>The docked laptop or desktop — cable it.</strong> This is the
+  machine that carries your calls, your uploads, and your working day. It
+  sits within a cable's reach of where a cable can live permanently, so
+  it collects the full latency win at zero daily cost.</p>
+  <p><strong>A NAS or regular large file transfers — cable it.</strong>
+  TRTech names local transfers as the other case where wired clearly
+  wins. Moving big files between a desk machine and network storage uses
+  the full-duplex lane in both directions, instead of taking turns on
+  shared airtime against the rest of the household.</p>
+  <p><strong>Calls and gaming at the desk — cable the machine.</strong>
+  These are the uses that feel a 50 ms spike rather than a slower average.
+  The win is not a faster headline speed; it is the spike going away.</p>
+  <p><strong>The printer and the smart speaker — leave them.</strong>
+  Nothing in the numbers above argues for cabling them. Their traffic is
+  small and indifferent to latency, and a cable buys them nothing while
+  adding one more run to manage. A decision framework that cables
+  everything has stopped being a framework.</p>
+
+  <h2>The laptop problem: the port may not exist</h2>
+  <p>The desk decision is easy; the connection point is the fiddly part.
+  Work through it as a short procedure:</p>
+  <ol>
+    <li><strong>Check the machine for an Ethernet port.</strong> Desktops
+    and older laptops usually have one. If yours does, the run is a single
+    cable from the router — or from a small desk switch, if several wired
+    devices share the desk — straight to the machine.</li>
+    <li><strong>If there is no port, route through the dock.</strong> A
+    laptop that already sits on a USB-C dock for its monitor and keyboard
+    takes its network connection through that dock or a USB-to-Ethernet
+    adapter: one cable into the dock, and the laptop is wired every time
+    it is docked, with nothing extra to plug in.</li>
+    <li><strong>Run one cable to the desk, not one per device.</strong>
+    Where a desktop, a docked laptop, and a NAS share a desk, a small
+    switch at the desk turns a single run from the router into a port for
+    each of them.</li>
+    <li><strong>Confirm the machine is actually using the wire.</strong>
+    With the cable connected, check the connection details in your system
+    settings and confirm the active connection is the wired one, then run
+    the task that used to stutter — a call, a large transfer — on it.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the desk machine shows a
+  wired connection whenever it is at the desk, calls hold steady through
+  the household's busy evening instead of stuttering when others stream,
+  and large transfers to local storage run at a steady rate rather than
+  rising and falling with the house's wireless traffic. If the machine
+  quietly falls back to Wi-Fi when docked, the dock connection — not the
+  idea — is what needs fixing.</p>
+
+  <h2>The hybrid desk: wired core, wireless edges</h2>
+  <p>The verdict, keyed to your desk. <strong>Cable it</strong> if the
+  machine is fixed, latency-sensitive, or moving large files locally:
+  the docked laptop, the desktop, the NAS. <strong>Leave it wireless</strong>
+  if it moves, trickles, or cannot feel a spike: the phone, the tablet,
+  the printer, the speaker. Whole-home rewiring is a different and much
+  larger project; nothing here needs it. One run to one desk captures
+  most of what Ethernet still wins — the spike-free call, the private
+  full-duplex lane — and leaves Wi-Fi doing what it is genuinely good at:
+  everything that was never sitting still anyway.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi in a Concrete or Brick Home: Getting Signal Through Dense Walls — Fix Your Wi-Fi</title>
+<meta name="description" content="You cannot punch Wi-Fi through concrete and brick, so route around it: per-material dB loss figures with their conflicts shown, nodes placed on the near side of the wall, and wired backhaul when the wall count is high.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Wi-Fi in a concrete or brick home: getting signal through dense walls</h1>
+  <p class="meta">Troubleshooting &middot; Published October 29, 2026 &middot; Last updated October 29, 2026</p>
+
+  <p>Picture the layout that defeats most routers: the router sits in a hallway
+  or living room, and the room that needs Wi-Fi is separated from it by one or
+  two walls that are not drywall — they are brick, block, or poured concrete.
+  In a wood-frame house the fix is usually placement. In a masonry house the
+  wall itself is the problem, and it is a problem with a price tag measured in
+  decibels. So can you get signal through dense walls? Not through, in any
+  useful sense. The working answer is to route around them: put the next
+  radio on the near side of the wall, give the signal a path through openings
+  instead of mass, and, when the wall count climbs, stop asking radios to
+  talk to each other through concrete at all and wire the link between
+  them instead.</p>
+
+  <h2>What a wall costs you: the dB figures, conflicts shown</h2>
+  <p>Attenuation — how much signal a material absorbs — is published in dB
+  (decibels) of loss per wall. The published tables do not agree, and the
+  disagreement is worth showing rather than smoothing over, because it tells
+  you how much trust to put in any single number.</p>
+  <table>
+    <tr><th>Material</th><th>Loss at 2.4 GHz</th><th>Loss at 5 GHz</th><th>Source</th></tr>
+    <tr><td>Brick</td><td>10–12 dB</td><td>20–25 dB</td><td>Wall-attenuation table (copyprogramming)</td></tr>
+    <tr><td>Concrete</td><td>15–25 dB</td><td>25–30 dB</td><td>Wall-attenuation table (copyprogramming)</td></tr>
+    <tr><td>Heavy concrete</td><td>~23 dB</td><td>~45 dB</td><td>TechInstalls wall guide</td></tr>
+  </table>
+  <p>Two patterns survive the conflict. First, every source puts 5 GHz loss
+  well above 2.4 GHz loss for the same wall — in the heavy-concrete case,
+  roughly double. A device that falls back to 2.4 GHz behind a masonry wall
+  is not being lazy; it is using the band that arrives with more of itself
+  intact. Second, the spread inside each row is real: the table's own notes
+  say the figures vary with thickness and construction, which is why one
+  source's concrete is another source's heavy concrete. Read any single
+  figure as the middle of a range, and expect a thick, dense wall to land at
+  the bad end of it.</p>
+  <p>Stack the walls and the arithmetic turns bleak quickly. Two concrete
+  walls at even the kinder 2.4 GHz figures can strip out 30–50 dB between
+  the router and the far room before distance takes its own share. That is
+  the context for everything below: no antenna trick recovers tens of dB.
+  The signal has to travel a different route.</p>
+
+  <h2>Why a stronger router is the wrong purchase</h2>
+  <p>TP-Link's guide to mesh Wi-Fi for thick walls makes the point plainly:
+  mesh fixes thick walls by node placement, not by stronger signal. A more
+  powerful single router pushes harder against the same dB loss, and the
+  wall takes the same cut out of the bigger number. The same logic convicts
+  the classic extender mistake — a range extender placed inside the dead
+  room, where the signal is already weakest, has almost nothing to repeat.
+  Hardware helps in a masonry home only when it changes the geometry:
+  more radios, each positioned where the signal is still strong, each
+  covering the rooms on its own side of the walls.</p>
+
+  <h2>The near-side rule, and the route-around procedure</h2>
+  <p>The placement rule, stated explicitly in the TechInstalls guide, is
+  this: place the node on the near side of the wall, where the signal is
+  still strong, rather than in the dead room. The node then serves the dead
+  room from the closest point at which it can still hear the rest of the
+  network clearly. Doorways and hallways matter here as test positions —
+  they are the spots on the near side where the path into the next room
+  crosses the least wall. Work through it in order:</p>
+  <ol>
+    <li><strong>Confirm the band in the problem room.</strong> Check whether
+    the struggling device is connected on 2.4 GHz or 5 GHz. Given the table
+    above, a 5 GHz connection behind two masonry walls is fighting the
+    highest-loss combination available; note which band each test below
+    uses.</li>
+    <li><strong>Put the node on the near side of the first bad wall.</strong>
+    Start with the mesh node or access point in the room the router is in,
+    or the hallway outside the problem room — wherever it still sits in
+    strong signal — not inside the dead room itself.</li>
+    <li><strong>Walk the candidate spots.</strong> Try the node near the
+    doorway of the problem room and at the hallway positions either side of
+    the wall. Small moves change which slice of wall the signal crosses;
+    test each spot with the actual device and the actual task that fails,
+    not a speed test at the node.</li>
+    <li><strong>Re-aim the antennas.</strong> Where the router or node has
+    external antennas, do not leave them all pointing the same way — vary
+    the angles. Different angles reach places a single orientation misses,
+    and behind masonry every recovered dB is spendable.</li>
+    <li><strong>Count the walls the backhaul has to cross.</strong> If the
+    node must talk back to the router through two or more masonry walls,
+    wireless backhaul is being asked to do the exact thing the table says
+    is expensive. That is the trigger for the next section.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the device in the problem
+  room holds its connection through an evening of normal use — calls stay
+  up, streams play without dropping to the lowest quality and stalling —
+  with the node sitting on the near side of the wall. If the connection is
+  fine near the node and collapses a few steps into the room, the node is
+  still on the wrong side of too much wall: move it closer to the doorway
+  line and retest before buying anything else.</p>
+
+  <h2>Wired backhaul: when wireless between nodes gives up</h2>
+  <p>TP-Link's thick-walls guide names wired Ethernet backhaul between
+  nodes as the most reliable fix for masonry homes, and the dB table shows
+  why. A cable crossing a concrete wall loses nothing to the wall at all.
+  The radios stop shouting at each other through 30–50 dB of loss and each
+  one only has to cover the rooms around it, most of them separated by
+  interior partitions rather than structural masonry. If an Ethernet run —
+  through a basement, a closet chase, or along a route the house already
+  offers — can reach the far side of the dense walls, it converts the
+  hardest version of this problem into an ordinary placement exercise.
+  Wireless backhaul remains the fallback where no cable route exists, and
+  it works when the near-side rule is respected; it is simply the first
+  thing the wall count overwhelms.</p>
+
+  <h2>The plan, by wall count</h2>
+  <p><strong>Two masonry walls between router and room:</strong> start free.
+  Confirm the band, place one node on the near side of the worst wall, walk
+  the doorway and hallway spots, vary the antenna angles. The figures say
+  this is a winnable fight — the loss is heavy but a well-placed node
+  shortens the through-wall path to a single crossing at close range.</p>
+  <p><strong>Four masonry walls, or a router separated from half the home
+  by concrete:</strong> skip ahead. Plan on wired backhaul to at least one
+  node on the far side of the masonry, and treat any wireless-backhaul
+  result as a bonus rather than the design. At that wall count the published
+  loss ranges say the radios would spend most of their signal budget just
+  reaching each other, before serving a single device.</p>
+  <p>The through-line is unglamorous: in a concrete or brick home, Wi-Fi is
+  a routing problem, not a power problem. Spend on position and cable
+  before spending on strength.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

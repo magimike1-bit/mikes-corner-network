@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bad USB Cables and Enclosures That Look Like a Dying Drive — Hard Drive Health</title>
+<meta name="description" content="Disconnects and I/O errors often blame the drive when the cable, port, power, or enclosure bridge is at fault. A one-variable-at-a-time swap protocol that makes the fault identify itself.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>Bad USB Cables and Enclosures That Look Like a Dying Drive</h1>
+  <p class="meta">Drive failure &middot; Published 2026-10-30 &middot; Last updated 2026-10-30</p>
+
+  <p>A drive that disconnects mid-copy, throws I/O errors, or vanishes and returns is usually read as a drive dying. Often it is not. The suspect list between your files and your computer is longer than one disk — and the cheapest items on it fail first.</p>
+
+  <p>That is the myth to check before any replacement is ordered. A recovery source that triages random disconnects puts the likely causes in this order: a failing USB cable, an underpowered USB port, a dying USB-to-SATA bridge chip, and only then the drive itself. The same source estimates roughly 60 percent of cases are the cable or the port, with the drive fine — a vendor estimate, not a measured statistic, but the ordering matches what the other sources describe.</p>
+
+  <h2>The symptom is real; the suspect is wrong</h2>
+  <p>Disconnects and read errors are genuine events. The error is in the attribution. A loose or faulty data cable, port, or power connection can cause I/O errors that look like drive failure, and an external drive stacks several of those connections into one product. Condemning the disk inside skips every layer wrapped around it.</p>
+  <p>So the job is isolation, not guessing. Change one item at a time, and watch what the fault does. If the errors follow the drive across connections, suspect the drive. If they follow one cable or one port, investigate that path instead.</p>
+
+  <h2>Know the chain: drive, bridge, cable, port, power</h2>
+  <p>An external drive is not one device. It is a storage drive, a USB-to-SATA or USB-to-NVMe bridge board, an enclosure, a cable, and often a power supply — and any one of them can fail.</p>
+  <table>
+    <thead><tr><th>Layer</th><th>How its failure looks</th><th>Distinguishing clue</th></tr></thead>
+    <tbody>
+      <tr><td>Cable</td><td>Disconnects, I/O errors</td><td>Cheap enclosure cables break internally long before the jacket shows damage; fault follows the cable to another drive or port</td></tr>
+      <tr><td>Port or hub</td><td>Drops at spin-up or during large transfers</td><td>Portable drives pull power from the port; when a port or hub cannot hold the current, voltage sags and the device drops</td></tr>
+      <tr><td>Bridge board</td><td>The whole drive disconnects while the disk inside is healthy</td><td>When the bridge resets, Windows sees the whole drive disconnect — described by one source as the single most misunderstood cause</td></tr>
+      <tr><td>OS power settings</td><td>Disconnects or spin-downs on a schedule, after idle time</td><td>USB selective suspend, hard-disk power-off settings, and macOS disk-sleep settings can switch a healthy drive off</td></tr>
+      <tr><td>The drive itself</td><td>Errors on every connection, clicking, SMART errors that follow it</td><td>The diagnosis left after the fault follows the drive, not the path</td></tr>
+    </tbody>
+  </table>
+  <p>One more bridge-board wrinkle: a USB-to-SATA adapter or enclosure may hide SMART details or report them confusingly. A blank or odd SMART reading through an enclosure is a limitation of the path, not evidence about the disk. Where practical, test the drive through a direct connection to get a reading you can trust.</p>
+
+  <h2>The swap protocol: one variable at a time</h2>
+  <p>Run the swaps in this order — cheapest and least invasive first. Stop as soon as the fault is identified, and copy important files off at any point where the drive is stable enough to allow it.</p>
+  <ol>
+    <li><strong>Swap the cable.</strong> Use a known-good cable, ideally the shortest one available. Retest with the same kind of transfer that failed before.</li>
+    <li><strong>Change the port, and remove the hub.</strong> Connect directly to a port on the computer, not through an unpowered hub or dock. Retest.</li>
+    <li><strong>Check the power path.</strong> If the drive uses its own adapter, confirm it is the correct one and firmly connected. Note whether drops happen at spin-up or during large transfers — that pattern points at power delivery.</li>
+    <li><strong>Change the enclosure or use a dock.</strong> A failing enclosure or SATA-to-USB bridge can make a healthy drive disconnect intermittently. Test the bare drive in a dock or a different enclosure.</li>
+    <li><strong>Go direct where practical.</strong> Connect the drive without the USB bridge — directly, on a desktop — and retest. This also exposes the SMART details the enclosure may have been hiding.</li>
+    <li><strong>Try a second computer.</strong> Same drive, same cable, different machine. A fault that stays behind belongs to the first computer, not the drive.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the fault has a home address. Either it followed one replaceable part — cable, port, hub, enclosure — and stopped when that part was swapped, or it followed the drive through every change, which is the result that justifies treating the drive itself as the problem.</p>
+
+  <h2>Reading the result: what follows what</h2>
+  <ul>
+    <li><strong>Fault follows the cable or port:</strong> replace that part. The drive was never the suspect.</li>
+    <li><strong>Fault follows the enclosure, drive healthy in a dock:</strong> replace the enclosure or bridge. Keep the drive.</li>
+    <li><strong>Fault disappears on a direct connection:</strong> the USB path was the problem, and you now have a SMART reading taken without the bridge in the way.</li>
+    <li><strong>Fault follows the drive everywhere:</strong> stop swapping accessories. The next section applies.</li>
+  </ul>
+
+  <h2>Power settings that imitate failure</h2>
+  <p>Before the last verdict, run one software pass. Windows USB selective suspend and hard-disk power-off settings can disconnect or spin down external drives, and macOS has disk-sleep settings with the same effect. A drive that drops after a predictable idle period, rather than under load, fits this pattern. Insufficient power and power management sit on the same cause list in the troubleshooting sources — check both before hardware is blamed.</p>
+  <p>Note the two different power patterns, because they point in opposite directions. Drops at spin-up or mid-transfer point at delivery: the port or hub cannot hold current. Drops after idle point at management: the operating system decided the drive could sleep.</p>
+
+  <h2>When it really is the drive: stop rules</h2>
+  <p>Isolation has an end, and it matters. Treat the drive itself as the problem, and switch from diagnosis to data protection, when the errors follow the drive across known-good cables, ports, and a direct connection — or when SMART errors appear on that direct connection, where no bridge is hiding or distorting them.</p>
+  <p>At that point the swap kit goes away. Copy the data off first, in priority order, and do not keep cycling connections on a drive that has identified itself. The protocol&rsquo;s value is that it makes this call evidence-based instead of a guess: every cheaper layer was eliminated, one variable at a time.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

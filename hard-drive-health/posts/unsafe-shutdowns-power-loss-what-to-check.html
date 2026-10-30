@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unsafe Shutdowns and Power Loss: What the Counter Means and What to Check After an Outage — Hard Drive Health</title>
+<meta name="description" content="The Unsafe Shutdowns counter records power lost without warning — it does not score damage. A baseline method, the media-error field that does signal harm, and an ordered after-outage check.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>Unsafe Shutdowns and Power Loss: What the Counter Means and What to Check After an Outage</h1>
+  <p class="meta">Drive health checks &middot; Published 2026-10-30 &middot; Last updated 2026-10-30</p>
+
+  <p>1. That is the most useful way to meet the Unsafe Shutdowns counter: as a count of one specific event, not a damage score. After a power outage, the number on your drive will have gone up. On its own, that tells you the outage reached the drive. It does not tell you the drive was harmed.</p>
+
+  <p>Verdict up top: record the counter, check the separate media-error field, then check the file system. Those are three different questions, and mixing them up is how a harmless outage turns into either panic or a missed warning.</p>
+
+  <h2>What the counter actually counts</h2>
+  <p>The definition is precise, and it comes from the NVMe health log specification. The Unsafe Shutdowns count is incremented when a shutdown notification is not received prior to loss of power. In plain terms: the drive was expecting a warning that power was about to go away, the warning never came, and it logged the event. The log itself is health information kept over the life of the controller and retained across power cycles, alongside power cycles and power-on hours.</p>
+  <table>
+    <thead><tr><th>Field</th><th>What it records</th><th>What it proves</th></tr></thead>
+    <tbody>
+      <tr><td>Unsafe Shutdowns</td><td>Power lost without a prior shutdown notification</td><td>That unclean power events happened — and how many</td></tr>
+      <tr><td>Media and Data Integrity Errors</td><td>Occurrences where the controller detected an unrecovered data integrity error — uncorrectable ECC, CRC checksum failure, or LBA tag mismatch</td><td>That data was actually affected — the damage signal</td></tr>
+      <tr><td>Power Cycles / Power-On Hours</td><td>How often the drive has powered up, and for how long in total</td><td>Context: whether the shutdown count is large for the drive&rsquo;s life, or small</td></tr>
+    </tbody>
+  </table>
+  <p>Names vary by drive and tool. The same event appears as &ldquo;unsafe shutdowns,&rdquo; &ldquo;unexpected power loss count,&rdquo; and similar labels depending on the tool reporting it — CrystalDiskInfo, HWiNFO, Hard Disk Sentinel, and manufacturer tools such as Samsung Magician are among the tools that surface it. Causes are equally broad: a power outage, a forced reset, battery failure, a system crash, an unstable power supply, or holding the power button all produce the same increment.</p>
+
+  <h2>SSD and HDD: different risks from the same outage</h2>
+  <p>The counter is shared; the risk underneath it is not. On an SSD, the exposed structure is the mapping table — the controller&rsquo;s index of where data actually sits in the flash. A sudden power loss on a drive without power-loss protection is a common trigger for mapping-table damage, after which the drive can disappear, lock up, or report something strange about itself, while the data may still be sitting in the flash chips, unreachable. A recovery source identifies firmware and mapping-table corruption as the most common SSD failure type its engineers see.</p>
+  <p>That is the severe case, and it announces itself as a symptom — a missing or misreporting drive — not as a counter value. A drive that reappears after an outage with its files intact has not shown that failure, whatever its counter says.</p>
+
+  <h2>After an outage: the ordered check</h2>
+  <ol>
+    <li><strong>Confirm the drive is present and reads.</strong> If the drive has disappeared, is read-only, or reports a wrong capacity, stop here: that is a symptom case, not a counter case. Copy what you can reach, and do not use repair tools that write to the drive as a health check.</li>
+    <li><strong>Record the Unsafe Shutdowns number.</strong> Write it down with the date and the cause you know about (&ldquo;outage, Oct 30&rdquo;). This becomes your baseline.</li>
+    <li><strong>Read the Media and Data Integrity Errors field.</strong> This is the field that separates a logged event from actual harm: it counts unrecovered integrity errors, not power events.</li>
+    <li><strong>Check the file system.</strong> CHKDSK&rsquo;s basic function is to scan the integrity of the file system and its metadata on a volume and fix logical file-system errors it finds. Guidance for the tool is to run it when Windows has shut down abnormally, such as after a power loss — with a backup in place first, because data can become unusable if it encounters problems it cannot repair.</li>
+    <li><strong>Open the files that were open.</strong> The document or project that was mid-save when power died is the likeliest casualty of an unclean shutdown. Verify it directly rather than assuming the drive-level checks cover it.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the drive present and reading, a dated baseline of the counter, a media-error count you have actually looked at, a file-system check completed, and the files that were open at the time verified by opening them. Five separate confirmations — not one green status word.</p>
+
+  <h2>When the count climbs on its own: the trend rule</h2>
+  <p>Here is the distinction the counter exists for. The counter alone does not prove data loss or SSD damage. But a rapidly increasing number can point to system stability problems, accidental power interruptions, or poor power behaviour from a USB enclosure. The baseline from step 2 is what makes that visible: a count that rises between two of your checks, with no outage, crash, or forced restart in between, is the drive reporting that power is disappearing without your knowledge.</p>
+  <p>Use the numbers this way:</p>
+  <ul>
+    <li><strong>Count rose by the number of outages you know about; media errors unchanged:</strong> log it and move on. The witness and the events match.</li>
+    <li><strong>Count rose with no event to match; media errors still unchanged:</strong> investigate the power path — supply, enclosure, crashes — before blaming the drive. The drive is the messenger here.</li>
+    <li><strong>Media errors rose, with or without a shutdown story:</strong> that is the damage lane. Back up first, and plan replacement on the strength of the error field, not the shutdown count.</li>
+  </ul>
+  <p>A single unsafe shutdown will not kill an SSD, absent a power surge or overheating. The counter&rsquo;s job is bookkeeping. Read it as a ledger — dated, compared, and matched against events — and it earns its place in the health log. Read it as a verdict, and it will mislead in both directions.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART Self-Tests Explained: Short, Long, and Conveyance — When to Run Each One — Hard Drive Health</title>
+<meta name="description" content="Short, long, and conveyance SMART self-tests answer different questions. A situation-to-test table, the smartctl procedure, how to read the self-test log, and when to run none of them.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>SMART Self-Tests Explained: Short, Long, and Conveyance — When to Run Each One</h1>
+  <p class="meta">Drive health checks &middot; Published 2026-10-30 &middot; Last updated 2026-10-30</p>
+
+  <p>Short, long, or conveyance — which SMART self-test should you actually run? The answer depends on the question you are asking the drive. A short test answers &ldquo;do the basics work?&rdquo; A long test answers &ldquo;can every part of the surface be read?&rdquo; A conveyance test answers a narrower question still: &ldquo;did moving this drive damage it?&rdquo;</p>
+
+  <p>Most guides stop at the commands. The commands are the easy part. Choosing the test, and reading the result line it leaves behind, is where the value sits.</p>
+
+  <h2>The three tests, side by side</h2>
+  <table>
+    <thead><tr><th>Test</th><th>What it checks</th><th>Typical time</th><th>Best for</th></tr></thead>
+    <tbody>
+      <tr><td>Short</td><td>Electrical and mechanical checks, plus a read/verify of a portion of the disk</td><td>About 2 minutes or less in one source&rsquo;s table; under ten minutes in another&rsquo;s, varying by manufacturer</td><td>A routine quick check; a first pass on a drive you have just connected</td></tr>
+      <tr><td>Long (extended)</td><td>The short test&rsquo;s checks extended to reading the entire disk surface</td><td>No fixed limit — duration scales with disk size; several hours on large drives</td><td>Suspected unreadable areas; a thorough check before trusting a drive with data</td></tr>
+      <tr><td>Conveyance</td><td>Damage incurred during transport</td><td>A few minutes</td><td>A drive that has just been shipped or moved — ATA drives only</td></tr>
+    </tbody>
+  </table>
+  <p>Two details in that table do real work. The short test reads only a portion of the disk, so its pass is a sample, not a survey. And the conveyance test is exclusive to ATA drives — asking an NVMe drive for one is asking for a test that does not exist on it.</p>
+
+  <h2>Match the test to the situation</h2>
+  <ul>
+    <li><strong>Routine check on a healthy drive:</strong> short. It is brief by design and can reliably confirm a faulty disk when the fault sits in the area it covers.</li>
+    <li><strong>A used drive before you trust it, or a suspected bad area:</strong> long. Only the long test reads the entire surface, so only it can find the unreadable sector hiding outside the short test&rsquo;s sample.</li>
+    <li><strong>A drive that just arrived by courier or moved house:</strong> conveyance, if it is an ATA drive. That is the one job this test exists for.</li>
+    <li><strong>A drive already reporting errors, clicking, or struggling to be read:</strong> none of them. See the limits below — this is the exception that matters most.</li>
+  </ul>
+
+  <h2>Run one: the procedure (smartctl)</h2>
+  <p>The documented smartctl flow, on Linux, for a drive that is stable and backed up:</p>
+  <ol>
+    <li><strong>Ask the drive how long its tests take.</strong> Run <code>sudo smartctl -c /dev/sdX</code> (replace sdX with your drive). The output lists a recommended polling time for each test — one recorded example shows 2 minutes for short, 157 minutes for extended, and 5 minutes for conveyance on the same drive.</li>
+    <li><strong>Start the test you chose.</strong> Run <code>sudo smartctl -t short /dev/sdX</code>, <code>-t long</code>, or <code>-t conveyance</code>. The test runs inside the drive, in the background, so other work can continue.</li>
+    <li><strong>Leave it alone while it runs.</strong> Tests can run while the drive is mounted, but expect some drop in performance. Do not stack a long test on top of other disk-intensive work — NAS software documentation warns against scheduling self-tests at the same time as a scrub or resilver, for the same reason.</li>
+    <li><strong>Read the log.</strong> Run <code>sudo smartctl -l selftest /dev/sdX</code> to see the results of the tests the drive has run.</li>
+    <li><strong>Abort only if you must.</strong> <code>sudo smartctl -X /dev/sdX</code> cancels a running test. An aborted test leaves an aborted result in the log — that is a record of your interruption, not a drive verdict.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the log&rsquo;s newest entry names the test you ran and reads &ldquo;Completed without error.&rdquo; Anything else is information of a different kind — read it with the next section.</p>
+
+  <h2>Reading the log: what the result line actually says</h2>
+  <p>The self-test log is a history, newest first. Three readings cover most of what home users will meet:</p>
+  <ul>
+    <li><strong>&ldquo;Completed without error&rdquo; after a long test</strong> is the strongest result a self-test gives: the whole surface was read. It still is not a promise about next month.</li>
+    <li><strong>&ldquo;Completed without error&rdquo; after a short test</strong> clears the sampled portion and the electrical and mechanical checks — and says nothing about the rest of the surface.</li>
+    <li><strong>A read failure</strong> means the drive found an area it could not read during the test. A failed self-test is a clear indication the drive should be replaced — copy data off first if it is not already backed up, and do not re-run tests hoping for a kinder result.</li>
+  </ul>
+
+  <h2>The limits: what no self-test can prove</h2>
+  <p>Self-tests are read-side diagnostics run by the drive on itself. Their limits follow from that. A short test cannot clear areas it never read. A long test adds read load for hours, which is why timing and scheduling matter. And a passing test today does not retire the ordinary rule of this site: monitoring matters because drives change.</p>
+  <p>The hard limit bears repeating plainly. Do not run self-tests on drives that are already reporting errors unless specifically instructed by support: the tests add load to a drive that is already struggling, and can stress it further. On a drive in that state, the correct sequence is data off first, diagnostics later — or never.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

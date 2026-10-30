@@ -312,3 +312,9 @@ a:focus-visible, .btn:focus-visible, .brand:focus-visible,
   background: var(--wash); border: 1px solid var(--line); border-radius: 999px;
   padding: 2px 8px; margin-bottom: 8px;
 }
+
+/* Design review 2026-10-30: dated pipeline sections (.posts with bare .card children) — same 2-col grid + rhythm as the main .cards grid */
+.posts:has(> .card) { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.posts:has(> .card) > h2 { grid-column: 1 / -1; }
+.posts:has(> .card) > .posts { grid-column: 1 / -1; }
+@media (max-width: 640px) { .posts:has(> .card) { grid-template-columns: 1fr; } }

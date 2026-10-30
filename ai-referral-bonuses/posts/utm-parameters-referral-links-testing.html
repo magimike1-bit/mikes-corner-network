@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTM Parameters for Referral Links: Testing Which Posts Actually Convert — AI Referral Bonuses</title>
+<meta name="description" content="UTM parameters measure the click; the programme dashboard measures the payout. A per-post naming convention, an end-to-end test procedure, and the three ways UTM data misleads referral publishers.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">AI Referral Bonuses</a><p class="tagline">Every verified AI referral &amp; affiliate bonus, in one filterable list</p><nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy-policy.html">Privacy</a></nav></div></header>
+<main class="wrap"><p><a href="/">&larr; All programs and guides</a></p>
+
+<h1>UTM Parameters for Referral Links: Testing Which Posts Actually Convert</h1>
+<p class="meta">Guides &middot; Published 2026-10-30 &middot; Last updated 2026-10-30</p>
+<p>A UTM parameter is a labelled tag added to the end of a URL. When someone clicks the tagged link, the tag values travel with the visit and are recorded by the analytics tool on the destination site. That definition carries the whole argument of this guide: a UTM records a click and the session that followed it. It does not record a referral payout. Publishers who keep those two facts in separate columns make good decisions about their posts; publishers who merge them end up crediting posts for conversions no programme ever paid on — or blaming posts for payouts a dashboard recorded under different rules.</p>
+<h2>Definitions first: what a UTM can and cannot prove</h2>
+<p>The standard set has five parameters. A referral-path guide to Google Analytics by Alejandro Rioja, checked on 2026-10-25, maps them as follows: <code>utm_source</code> says where the traffic came from, <code>utm_medium</code> says the channel type, <code>utm_campaign</code> names the campaign, <code>utm_content</code> distinguishes which version of a link was clicked, and <code>utm_term</code> carries a keyword. Verified against that mapping, the table below is the specification the rest of this guide uses.</p>
+<table>
+<thead><tr><th>Parameter</th><th>What it records</th><th>Referral use in this convention</th></tr></thead>
+<tbody>
+<tr><td><code>utm_source</code></td><td>Where the visitor came from</td><td>One consistent value per platform</td></tr>
+<tr><td><code>utm_medium</code></td><td>The channel type</td><td>The placement type: post, bio, newsletter, description</td></tr>
+<tr><td><code>utm_campaign</code></td><td>The campaign name</td><td>The programme or promotion being shared</td></tr>
+<tr><td><code>utm_content</code></td><td>Which version of a link</td><td>The specific post — this is the post ID slot</td></tr>
+<tr><td><code>utm_term</code></td><td>A keyword</td><td>Usually left unused outside paid search</td></tr>
+</tbody>
+</table>
+<p>UTMs work on links pointing at pages whose analytics you can read — your own posts and landing pages. The referral link a programme issues is that programme&rsquo;s own tracking instrument. Tag the routes to your content, and let the programme link inside the content stay as issued unless the programme&rsquo;s own documentation tells you otherwise.</p>
+<h2>The naming convention: five parameters, one post each</h2>
+<p>Post Affiliate Pro&rsquo;s tracking guidance gives a worked example — <code>utm_source=instagram</code>, <code>utm_medium=bio</code>, <code>utm_campaign=blackfriday</code> — and stresses the discipline underneath it: keep naming lowercase and consistent. A creator-focused guide from Sponsor4Me, also checked on 2026-10-25, adds the per-post piece: use one unique source value per platform, stick to it, and let <code>utm_content</code> carry the specific post, in the form <code>utm_content=reel-1</code>. Assembled into a convention for referral publishing:</p>
+<ul>
+<li><strong>Source:</strong> the platform name, lowercase, spelled the same way every time.</li>
+<li><strong>Medium:</strong> the placement type, from a short fixed list you write down once.</li>
+<li><strong>Campaign:</strong> the programme or seasonal push the post belongs to.</li>
+<li><strong>Content:</strong> a post identifier that never gets reused — a short slug or a numbered series per platform.</li>
+<li><strong>Term:</strong> blank, unless a paid keyword genuinely applies.</li>
+</ul>
+<p>Write the convention down where posts are drafted. A convention held in memory drifts within a month, and drifted values split one post&rsquo;s traffic across several report rows, which reads as several weak posts instead of one decent one.</p>
+<h2>Build and test one link, end to end</h2>
+<p>Google&rsquo;s free Campaign URL Builder generates tagged URLs, per Post Affiliate Pro&rsquo;s guidance — a sensible way to avoid hand-typing errors in a long query string. Whichever builder you use, test each new tagged link before the post ships:</p>
+<ol>
+<li><strong>Build the tagged URL</strong> for the destination page, using the convention above, and save the untagged original beside it.</li>
+<li><strong>Click the tagged link yourself</strong> from a separate browser session, the way a reader would arrive.</li>
+<li><strong>Check the analytics record.</strong> Tagged values appear in GA4&rsquo;s Traffic acquisition report, per Sponsor4Me&rsquo;s guide; confirm the session shows the source, medium, campaign, and content values you intended, spelled exactly as planned.</li>
+<li><strong>Follow the referral step.</strong> From the landed page, confirm the programme&rsquo;s referral link is present, unaltered, and working.</li>
+<li><strong>Log the post.</strong> Record the post identifier used in <code>utm_content</code>, the destination, and the date published, in the same log that tracks your programme dashboards.</li>
+</ol>
+<p><strong>What success looks like:</strong> one test click produces one analytics session carrying all four intended values with no spelling variants, and the post identifier in the log matches the value in the report character for character.</p>
+<h2>Head to head: UTM clicks vs programme-dashboard payouts</h2>
+<table>
+<thead><tr><th>Question</th><th>UTM data answers it</th><th>Only the dashboard answers it</th></tr></thead>
+<tbody>
+<tr><td>Which post sent the traffic?</td><td>Yes — by <code>utm_content</code> value</td><td>Rarely at post level</td></tr>
+<tr><td>Did a qualifying sign-up happen?</td><td>No</td><td>Yes, under the programme&rsquo;s attribution rules</td></tr>
+<tr><td>Will this be paid, and how much?</td><td>No</td><td>Yes — pending, approved, and paid states live there</td></tr>
+<tr><td>Which placement inside a page gets clicked?</td><td>Yes, if each placement carries a distinct content value</td><td>No</td></tr>
+</tbody>
+</table>
+<p>Read the two together on a fixed schedule. UTM data ranks your posts by the traffic they send. Dashboard data ranks programmes by what they actually paid. A post can win the first ranking and lose the second — strong clicks, weak fit between audience and offer — and that combination is a content decision, not a tracking error.</p>
+<h2>The three ways this data lies, and the coupon-code fallback</h2>
+<p><strong>Dark social.</strong> Links copied into messaging apps and private shares lose their context; Rioja&rsquo;s guide notes that untagged arrivals of this kind show up as (direct) / (none) in analytics. A post shared privately can be working while its report row looks empty.</p>
+<p><strong>Consent loss.</strong> The same guide notes that users who decline tracking do not appear in GA4 at all, undercounting traffic by 20–40% in high-consent regions. Treat GA4 counts as a floor, not a census, and compare posts against each other rather than against an imagined true total.</p>
+<p><strong>Stripped and mangled parameters.</strong> Redirects, link shorteners, and some in-app browsers can drop a query string. When a channel keeps stripping tags, fall back to a channel-specific mechanism the programme supports — a distinct link per placement where the programme allows several, or a unique coupon code per post where the programme offers codes. A code survives being read aloud, screenshotted, and retyped, which is exactly the journey that destroys a UTM.</p>
+<p>None of these failure modes is a reason to stop tagging. They are reasons to read tagged data as evidence with known gaps — strong for comparing your own posts against each other, weak as an absolute count, and never a substitute for the dashboard that decides pay.</p>
+<section class="note"><h2>Important: no income guarantees</h2><p>This article is general information, not financial or tax advice. Referral and affiliate rewards are never guaranteed income, and measurement cannot promise that any post will convert or that any programme will pay a particular amount. This guide quotes no specific referral bonus amounts or rates; programme terms and dashboard figures should be checked on the official programme page before they are relied on. Sources cited here were checked on 2026-10-25. Report any income you do receive as your local tax rules require.</p></section>
+<p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer"><div class="wrap"><p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p><p>AI Referral Bonuses — a directory of AI referral and affiliate programs. Bonus terms change frequently; always confirm current terms on the official program page. Content is for general information only.</p><p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p></div></footer>
+</body>
+</html>

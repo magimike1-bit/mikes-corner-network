@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key Rollover and Ghosting: What Fast Typists Actually Need (2KRO, 6KRO, NKRO) — Typing 101</title>
+<meta name="description" content="Rollover counts simultaneous keys, not speed. What 2KRO, 6KRO, and NKRO mean, how ghosting differs from jamming, the USB cap, and a test to run before buying.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">Typing 101</a><p class="tagline">Learn to touch type the right way — no apps to buy, no magic required</p><nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy-policy.html">Privacy</a></nav></div></header>
+<main class="wrap post"><a class="back" href="/">&larr; All guides</a><h1>Key Rollover and Ghosting: What Fast Typists Actually Need (2KRO, 6KRO, NKRO)</h1><p class="meta">Gear &amp; tech &middot; Published 2026-10-30 &middot; Last updated 2026-10-30</p>
+<p>“Full N-key rollover” sounds like a speed feature. It is not. Rollover is a count of how many keys a keyboard can report at the same moment, and ordinary typing — even fast typing — rarely holds more than a few keys down at once. The specification matters, but for a narrower set of typists than the box copy suggests. Here is what the numbers mean, how to tell a rollover failure from other faults, and how to test the keyboard already on your desk.</p>
+<h2>What the numbers mean: 2KRO, multi-key, 6KRO, NKRO</h2>
+<p>Key rollover is the ability of a keyboard to correctly handle several simultaneous keystrokes. A keyboard with n-key rollover — NKRO, or full key rollover — detects input from each key independently, regardless of how many other keys are being pressed. Limited keyboards make no such promise, and the limit is a property of the switch matrix underneath the keys, not of the switches you feel.</p>
+<table><caption>Rollover levels, verified against the specifications</caption><thead><tr><th>Rating</th><th>What it guarantees</th><th>Typical failure past the limit</th></tr></thead><tbody>
+<tr><td>2KRO</td><td>Any two keys reliably detected at once</td><td>A third key can create a phantom key</td></tr>
+<tr><td>Multi-key rollover</td><td>Roughly four- to five-key rollover on the most common key sequences</td><td>Uncommon combinations can still ghost or jam</td></tr>
+<tr><td>6KRO</td><td>Six keys registered at once</td><td>Inputs beyond six can be dropped</td></tr>
+<tr><td>Full NKRO</td><td>All keys — 104 on a full-size board — registered simultaneously</td><td>None from rollover; each key is isolated</td></tr>
+</tbody></table>
+<p>Most keyboards do not isolate every key. They use a matrix of switches without isolation diodes, on the assumption that only a limited number of keys will be held down at a time. Cleverer layouts study common sequences and place those keys so the common combinations stay safe, which is why a cheap board can type ordinary English all day and still fail an unusual three-key combination.</p>
+<h2>Why normal typing seldom reaches the limit</h2>
+<p>During normal typing, only one key is usually pressed at any given time, then released before the next is pressed. Two situations break that pattern. Modifier keys — Shift, Control — are intentionally held while another key is struck. And rapid typists sometimes press the next key before fully releasing the previous one, an overlap sometimes called rolling. That overlap is real, but it is an overlap of two, occasionally three keys — not ten.</p>
+<p>That is the point on which the buying guides disagree. One guide argues typists well above 100 WPM, and by its estimate those above roughly 120–130 WPM with a heavy overlap style, can occasionally hit rollover limits and see missing or jumbled characters. The specification itself points the other way for prose: the genuine high-count cases are not faster sentences but different input methods. Stenographic typing requires pressing multiple keys at once to form chords, and full NKRO is required for it. Braille keying requires as many as six keys pressed at once. Chording is a design requirement; prose overlap is a margin.</p>
+<h2>Ghosting vs jamming vs a dropped key</h2>
+<p>Three different failures hide behind “my keyboard missed a letter,” and only two of them are rollover problems.</p>
+<p><strong>Ghosting</strong> is a phantom: a key registers that was never pressed. It occurs on matrix keyboards when three keys forming three corners of a rectangle in the switch matrix are pressed together; the signal routes through those switches and falsely indicates the fourth corner. The fix at the hardware level is a diode in series with each switch, which blocks the false path.</p>
+<p><strong>Jamming</strong> is the opposite failure. Modern keyboards that detect a ghosting combination ignore the third key instead of registering a fourth — the first two keys jam the third. Nothing extra appears; a real press goes missing, and which combinations jam differs between brands and models.</p>
+<p><strong>A dropped keystroke past a stated limit</strong> is simpler again: a 6KRO board that stops reporting after six simultaneous keys is performing to its specification. Anti-ghosting language muddies all three. Anti-ghosting prevents phantom inputs, but a keyboard can advertise anti-ghosting without full NKRO — it has solved the ghost, not the count. Some gaming keyboards, meanwhile, give individual diodes only to the most frequently used keys, such as WASD and the arrow keys, leaving the rest of the matrix shared.</p>
+<h2>The USB detail that can cap an NKRO keyboard</h2>
+<p>Hardware rollover only counts if the full key status reaches the computer, and the USB connection has two modes. The boot protocol — used by very limited hosts such as a BIOS — is limited to eight modifier keys followed by a maximum of six key codes, which caps simultaneous presses no matter what the keyboard can scan. The HID report protocol, which operating systems use, imposes no such restriction and supports full NKRO. Some keyboards also enable NKRO only in a specific USB mode, so a board that tests as 6KRO in one mode may be telling the truth about its hardware and its setting at the same time.</p>
+<h2>Test your own keyboard before you buy anything</h2>
+<ol>
+<li><strong>Open a plain text file or an on-screen keyboard display</strong> that shows every key currently registered. You need to see held keys, not just typed characters.</li>
+<li><strong>Test the modifiers first.</strong> Hold Shift and type a sentence of capitals and punctuation. Then hold Control and press a shortcut combination. Every intended character should appear, with no extras.</li>
+<li><strong>Test common sequences.</strong> Press and hold three, then four, letter keys that occur together in ordinary words. Note exactly which combination misbehaves, if any does.</li>
+<li><strong>Classify any failure.</strong> An extra character you did not press is ghosting. A pressed key that never appears is jamming or a limit being reached. A single key that fails on its own, with nothing else held, is a faulty switch or connection — not rollover.</li>
+<li><strong>Check the mode before blaming the board.</strong> If the keyboard has an NKRO toggle or a USB mode setting, switch it, confirm the operating system is using the normal report protocol rather than a BIOS-style boot mode, and repeat the failing combination.</li>
+<li><strong>Repeat at your real typing speed.</strong> Type your fastest ordinary material for a few minutes and check for missing or extra characters in the same places.</li>
+</ol>
+<p><strong>What success looks like:</strong> every held combination registers exactly the keys you pressed — no phantom characters, no missing ones — in the mode you actually use, at the speed you actually type. A keyboard that passes has no rollover problem for you to solve with a purchase.</p>
+<h2>Who actually needs full NKRO — and who does not</h2>
+<p>Buy full NKRO if your input method is chording: stenotype, Braille keying, or any system built on pressing combinations as single inputs. There, per-switch diodes are not a premium extra; most music keyboards use isolation diodes to implement full rollover for the same reason, and the requirement is structural.</p>
+<p>For prose, decide by evidence. Most modern mechanical keyboards support anti-ghosting and at least 6-key rollover, with many offering full NKRO — so the feature often arrives anyway. But if your current keyboard passes the test above, a rollover upgrade buys a specification your typing never reaches. Spend on the fault you can demonstrate, not the one on the box.</p>
+<p>— Dex Carter, Tech Writer</p>
+<p><a href="/">Back to all guides &rarr;</a></p></main><footer class="site-footer"><div class="wrap"><p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p><p>Typing 101 — practical touch-typing lessons for beginners. Content is for general information only.</p><p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p></div></footer></body></html>

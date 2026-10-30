@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Fraud Checks: Spotting Duplicate and Altered Invoices — AI for Small Business</title>
+<meta name="description" content="Duplicates and altered invoices are two different problems: duplicates are caught by matching, alterations by noticing what changed against history. A side-by-side checklist a small business can run before buying a platform.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap article-layout">
+  <article class="article">
+    <p class="kicker">Finance &amp; Admin</p>
+    <h1>AI Fraud Checks: Spotting Duplicate and Altered Invoices</h1>
+    <p class="lede">Is the invoice in front of you a second copy of one you already paid, or is it the real invoice with one detail quietly changed? Those are different problems, and they need different checks. Duplicates are a matching problem. Alterations are a change-detection problem. Running only one check leaves the other door open.</p>
+    <p class="meta">Published 2026-10-30 &middot; Last updated 2026-10-30</p>
+
+<h2>Two frauds, two different checks</h2>
+<p>Start with the duplicate. Duplicate detection, as described in Ramp&rsquo;s accounts-payable guidance, works by scanning three fields on every incoming invoice: the invoice number, the vendor name, and the amount. If all three match an invoice already in the system, the new one is flagged before payment. Advanced AI tools go one step further and can catch manipulated duplicates — copies where a date has been altered or an invoice number changed to make the duplicate look new.</p>
+<p>An altered invoice fails that test by design. The number may be genuinely new and the amount plausible; what changed is something around the invoice — the bank account the money should go to, the payment terms, or the vendor itself. That is why a second kind of tool builds what one industry roundup calls a behavioural fingerprint: a record of a business&rsquo;s normal invoice and payment patterns, against which altered bank details, phantom vendors, and modified payment terms can be flagged in real time.</p>
+<p>One documented case shows why both checks matter at once. A single scanned PDF contained two invoices: one was a duplicate, and the second carried a swapped bank account. A typical optical-character-recognition-to-spreadsheet workflow would have paid both. The duplicate needed matching. The swapped account needed comparison against supplier history. Neither check substitutes for the other.</p>
+
+<h2>The duplicate checklist: matching what repeats</h2>
+<p>Run these checks on every invoice, before approval:</p>
+<ol>
+<li><strong>Match the three core fields.</strong> Compare invoice number, vendor name, and amount against invoices already recorded. An exact match on all three is a stop, not a coincidence to wave through.</li>
+<li><strong>Look for near-matches, not only exact ones.</strong> Check the same vendor and amount with a slightly different invoice number or date — the pattern used by manipulated duplicates.</li>
+<li><strong>Match against the order.</strong> Purchase-order matching — two-way and three-way — is the check that catches overbilling, quantity mismatches, and pricing errors, because the invoice is compared with what was actually ordered and received.</li>
+<li><strong>Hold the payment while a flag is open.</strong> A duplicate flag resolved after money leaves is a recovery job; resolved before, it is a two-minute check.</li>
+</ol>
+<h2>The alteration checklist: noticing what changed</h2>
+<p>Alterations are checked against history, not against the invoice itself:</p>
+<ol>
+<li><strong>Compare bank details with supplier history.</strong> The checking workflow in the case above compares bank accounts against supplier history, and invoices against their orders, before anything is approved. Any account that differs from the one previously paid gets verified through a channel you already trust — never through contact details printed on the invoice in question.</li>
+<li><strong>Flag changes to payment terms.</strong> Modified payment terms are one of the patterns a behavioural-fingerprint system flags. A sudden change in terms on an otherwise routine invoice deserves the same pause as a new bank account.</li>
+<li><strong>Watch for vendors that do not fit the pattern.</strong> Phantom vendors — suppliers with no history in your records — are the other flag that pattern-based checking raises. Vendor verification, in the systems that offer it, runs as a continuous background check on supplier accounts rather than a one-time setup step.</li>
+<li><strong>Treat the two lists differently.</strong> A duplicate can usually be resolved inside your own records. An alteration flag should be resolved with the supplier, out of band, before payment.</li>
+</ol>
+
+<h2>Head to head: platform, pattern layer, or your own checks</h2>
+<table>
+<thead><tr><th>Approach</th><th>How it catches duplicates</th><th>How it catches alterations</th><th>Fits when</th></tr></thead>
+<tbody>
+<tr><td>Full accounts-payable platform (Ramp class)</td><td>Scans invoice number, vendor name, and amount; advanced AI also catches manipulated duplicates with altered dates or numbers</td><td>Purchase-order matching catches overbilling, quantity, and pricing mismatches</td><td>Invoice volume is high enough that manual matching misses things</td></tr>
+<tr><td>Pattern-based layer on your existing system (Traild class)</td><td>Flags invoices that break the normal pattern for that supplier</td><td>Behavioural fingerprint flags altered bank details, phantom vendors, and modified payment terms in real time, with continuous vendor verification</td><td>You already run an accounting or ERP system and want a checking layer over it</td></tr>
+<tr><td>Your own documented workflow (spreadsheet plus AI extraction)</td><td>You run the three-field match yourself on every invoice</td><td>You compare bank accounts against supplier history and invoices against orders before approving, as in the documented case</td><td>You pay dozens of invoices, not thousands, and can keep the checklist disciplined</td></tr>
+</tbody>
+</table>
+<p>The trade-off is discipline against cost. The manual version uses tools a small business already has, but it only works on the days someone actually runs it. The platform versions run on every invoice whether the day is busy or not — and charge accordingly.</p>
+
+<h2>The bank-detail rule that stops the expensive one</h2>
+<p>If only one rule survives from this page, make it this one: <strong>no payment ever goes to a bank account that differs from the account on record for that supplier until the change has been verified independently.</strong> Duplicates cost you one payment, recovered with effort. A payment sent to a swapped account is the loss the documented case was built around, and it is the hardest to reverse. Put the rule in writing, name who can approve an account change, and make the approval sit with someone other than the person who entered the invoice.</p>
+<p><strong>What success looks like:</strong> every invoice in a payment run has passed the three-field duplicate match, every supplier bank account in the run matches the account previously paid or carries a recorded independent verification, and every flag raised was cleared before — not after — the money moved.</p>
+
+<h2>When the volume justifies paying for a platform</h2>
+<p>Use this decision framework, in order. First, count: if a person can run both checklists on every invoice without a backlog forming, the manual workflow is the proportionate tool. Second, look at your misses: a duplicate that reached payment, or a bank-detail change nobody noticed, is evidence the manual check is failing at your volume. Third, look at pattern risk: if suppliers, terms, and bank details change often enough that history comparison is itself a chore, a pattern-based layer earns its place. Pay for automation when the check you skip is the expensive one — and keep the bank-detail rule in force either way, because it costs nothing and stops the worst case.</p>
+<p>— Dex Carter, Tech Writer</p>
+    <section class="keep-reading"><h2>Keep reading: Finance &amp; Admin</h2><ul>
+      <li><a href="/articles/ai-invoice-capture.html">AI Invoice Capture and Document Processing</a></li>
+      <li><a href="/articles/ai-bookkeeping.html">AI Bookkeeping: Categorizing Transactions</a></li>
+      <li><a href="/articles/ai-expense-tracking.html">AI Expense Tracking</a></li>
+      <li><a href="/articles/ai-data-privacy.html">Data Privacy Basics with AI</a></li>
+    </ul></section>
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p><strong>AI Small Business Playbook</strong> — practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav><a href="/">Home</a><a href="/#guides">All guides</a><a href="/roi-calculator.html">ROI Calculator</a><a href="/ai-cost-simulator.html">Cost Simulator</a><a href="/about.html">About</a></nav>
+  <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

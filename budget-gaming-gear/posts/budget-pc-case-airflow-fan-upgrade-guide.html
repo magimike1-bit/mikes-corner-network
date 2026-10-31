@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget PC Case Airflow: How Many Fans You Actually Need — Budget Gaming Gear</title>
+<meta name="description" content="Delivered airflow, not fan count: a watts-to-CFM estimate, the filter loss, 120mm vs 140mm priced in Canada, and a one-fan-at-a-time upgrade procedure.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Budget Gaming Gear</a>
+    <p class="tagline">Smart buying advice for gaming on a budget</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/index.html">&larr; All guides</a>
+  <h1>Budget PC case airflow: how many fans you actually need</h1>
+  <p class="meta">Tech guides &middot; 7 min read</p>
+
+  <p>How many case fans does a budget gaming PC actually need — two, three, or a full set of six? The count is the wrong place to start. Cases overheat on delivered air, not on fan totals: air that survives the front mesh and the dust filter and reaches the graphics card. That quantity can be estimated from the system's wattage, checked against fan specifications, and improved one fan at a time, with a temperature log settling whether another fan is justified.</p>
+
+  <h2>The myth: more fans, lower temperatures</h2>
+  <p>The claim repeated in build threads is simple — fill every mount and temperatures fall. Published fan-count guidance disagrees past a low ceiling. Its rule for most mid-range builds is two to three fans: one intake at the front and one exhaust at the rear produce the basic push-pull path, a second front intake is the addition that most often helps a power-hungry graphics card or a high-TDP processor, and beyond three fans the returns diminish — more noise without significantly lower temperatures.</p>
+  <p>That ceiling is not a law. It is a statement about where the bottleneck sits.</p>
+  <p>In a typical budget case the bottleneck is the intake path: a solid or finely meshed front panel, a filter, and whatever cables cross the airstream. A fourth and fifth fan pushing against the same restriction mostly spin faster against it. Fix the path first — that is the spec work below — and the count question usually answers itself at two or three.</p>
+
+  <h2>Delivered air: the watts-to-CFM estimate</h2>
+  <p>CFM means cubic feet per minute: the volume of air a fan moves over time. One CFM is roughly 1.7 cubic metres per hour. The catch, stated plainly by the CFM explainer in the research packet: the rating on a fan's box is measured in free air — no mesh, no dust filter, no radiator. Put the fan behind a filtered intake and the path can cost roughly 30–40% of the rated output. Treat that range as a rough planning figure, because it varies by case. It is still far better than planning on the box number.</p>
+  <p>The same source runs the estimate that turns wattage into a shopping target. A system using about 450 W while gaming — an 8-core CPU and a mid-range GPU can reach that — needs about 79 CFM of <em>delivered</em> airflow to hold the air inside the case at most 10°C (18°F) above room temperature. Discount for the filter loss and the intake fans need a combined rating of roughly 120–130 CFM. Two decent 140 mm fans clear that bar. A single stock 120 mm fan does not.</p>
+  <p>Pressure balance is the second half of the estimate. Positive pressure — more intake capacity than exhaust — forces air out through the case's gaps instead of sucking unfiltered air, and dust with it, in through those gaps. A common configuration that achieves it: two 140 mm intakes at the front and one 120 mm exhaust at the rear. Direction follows the standard layout — front and bottom fans blow in, rear and top fans blow out — and each fan's direction can be confirmed by the airflow arrow on its frame before it is screwed down, not guessed after.</p>
+
+  <h2>120 mm vs 140 mm, priced</h2>
+  <p>Specifications first, from the manufacturers' published figures carried by the listings checked on 31 October 2026:</p>
+  <table>
+    <tr><th>Fan</th><th>Speed</th><th>Rated airflow</th><th>Static pressure</th><th>Price checked 31 Oct 2026</th></tr>
+    <tr><td>ARCTIC P12 PWM PST, 120 mm</td><td>200–1800 rpm</td><td>56.3 CFM</td><td>2.2 mmH₂O</td><td>C$17.68 (Best Buy Canada)</td></tr>
+    <tr><td>ARCTIC P14 PWM PST, 140 mm</td><td>200–1700 rpm</td><td>72.8 CFM</td><td>2.40 mmH₂O</td><td>Not priced in Canada in this run — specs only</td></tr>
+    <tr><td>ARCTIC P14 Max, 140 mm</td><td>400–2800 rpm</td><td>95.0 CFM</td><td>4.18 mmH₂O</td><td>C$22.99 (Amazon.ca)</td></tr>
+  </table>
+  <p>Static pressure — the force available to push air through resistance, measured in mmH₂O — is the figure that matters behind a filter or mesh. All three fans here are pressure-optimised designs, which is the correct family for filtered intakes.</p>
+  <p>The P12's listing adds two practical details. Speed is regulated by a 4-pin PWM connection, at 0 rpm below a 5% PWM signal. Its PST feature lets several fans share one motherboard header's signal — a real consideration on budget boards with few headers.</p>
+  <p>Now the arithmetic the table exists for. Two P12 intakes rate 112.6 CFM combined; discounted by the planning loss, they deliver roughly 68–79 CFM — just short of the 79 CFM target in the 450 W example. Two P14-class intakes rate 145.6 CFM and deliver roughly 87–102 CFM on the same discount — clear of the target with headroom. That, and not fashion, is the case for 140 mm intakes where the case accepts them: fewer fans, slower speeds, the same delivered air.</p>
+  <p>Where the case takes only 120 mm mounts, the honest options are a third intake if a mount exists, or accepting a slightly higher case-air temperature — a trade-off to make knowingly, with the log below, rather than by filling exhaust mounts at random.</p>
+  <p>The P14 Max earns a narrower mention. Its 95 CFM rating and 2800 rpm ceiling are real, and C$22.99 is a modest premium over the P12. But rated airflow at full speed is airflow bought with noise, and a first upgrade almost never needs it. It is the fan for a restrictive front panel that has already defeated ordinary intakes — a diagnosis, not a starting point.</p>
+
+  <h2>The upgrade procedure: add one fan, then measure</h2>
+  <ol>
+    <li><strong>Log the baseline.</strong> Record GPU and CPU temperatures after 20 minutes in the same game, at the same settings, noting room temperature if it can be measured. Same load every time — a different game is a different test.</li>
+    <li><strong>Check the mounts and headers before buying.</strong> Confirm which fan sizes the front of the case accepts (120 mm, 140 mm, or both), count free motherboard fan headers, and note whether the existing fans use PWM (4-pin) control. A PST fan can share a header's signal when headers run short.</li>
+    <li><strong>Clean the path first.</strong> Remove and clean the intake dust filter and clear cables out of the front airstream. This step costs nothing and changes the very restriction the estimate discounts for.</li>
+    <li><strong>Add one fan: a second front intake.</strong> Fit it blowing inward — arrow on the frame pointing into the case — and set its curve in the BIOS or motherboard software so it is quiet at desktop loads and rises with temperature.</li>
+    <li><strong>Repeat the identical load and compare.</strong> Same game, same settings, same duration. A clear drop means the intake path was the bottleneck and may now be fixed. No change means the limit sits elsewhere — a CPU cooler, a GPU cooler, or a front panel too solid for any fan behind it — and the next dollar belongs there, not in fan number three.</li>
+  </ol>
+  <p>What success looks like: the repeated log shows lower GPU or CPU temperatures under the identical load, at noise no worse than before. If temperatures fall only when the fans run at full speed and full volume, the upgrade has traded heat for noise — record that honestly and treat the result as a partial fix, not a win.</p>
+
+  <h2>Buy, wait, or skip: fan decisions by case</h2>
+  <p><strong>Buy one intake fan</strong> if the case shipped with a single rear exhaust, or a single front intake, and gaming temperatures are the complaint. That is the configuration the guidance and the arithmetic both point to first, and at the checked Canadian price of C$17.68 for a P12 PWM PST it is the cheapest experiment in PC cooling.</p>
+  <p><strong>Wait</strong> if the baseline log has not been taken yet. Without a before number, no after number can prove anything — the log comes first, the purchase second.</p>
+  <p><strong>Skip further fans</strong> if two intakes and one exhaust are already fitted and the log shows temperatures the parts are built to run at. Past that point the checked guidance is consistent: extra fans add noise and cost, not cooling. Spend the money where the log points instead.</p>
+
+  <p><em>Prices were checked on 31 October 2026 and will change. Fan ratings are manufacturers' free-air figures, as explained in the delivered-air section — real output behind a filter is lower. Temperature targets here are a planning method, not a guarantee for any individual build.</em></p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="disclaimer">Buying advice reflects the author's opinion and general guidance. Specs and prices change — always check current details with the retailer before you buy.</p>
+    <p>Budget Gaming Gear — buying advice for gaming on a budget.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

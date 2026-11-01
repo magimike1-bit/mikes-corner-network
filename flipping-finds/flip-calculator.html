@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will This Flip Make Money? — Flip Profit Calculator | Flipping Auction Finds</title>
-<meta name="description" content="Interactive flip profit calculator: enter what you paid at auction, pick your selling platform, and see fees, costs, profit, margin and break-even price — with every fee sourced.">
+<title>Will This Flip Make Money? Flip Profit Calculator | Flipping Auction Finds</title>
+<meta name="description" content="Interactive flip profit calculator: enter what you paid at auction, pick your selling platform, and see fees, costs, profit, margin and break-even price, with every fee sourced.">
 <link rel="stylesheet" href="style.css">
 <!--
   ADS: paste your Google AdSense code below (replace UA-XXXXX with your publisher ID),
@@ -84,23 +84,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
 
   <section class="calc-step">
     <h1 style="font-size:1.9rem;margin:.4em 0 .4em">Will this flip make money?</h1>
-    <p class="hint">Enter your all-in cost, answer a few questions, and the calculator adds the selling-side fees — platform fees and payment processing — then shows profit, margin and the break-even sale price. Every fee is labeled with its source and the date it was checked; every number stays adjustable.</p>
+    <p class="hint">Enter your all-in cost, answer a few questions, and the calculator adds the selling-side fees, platform fees and payment processing, then shows profit, margin and the break-even sale price. Every fee is labeled with its source and the date it was checked; every number stays adjustable.</p>
   </section>
 
   <section class="calc-step" id="step-category">
     <h2>1 &middot; What kind of item is it?</h2>
-    <p class="hint">This tunes the guidance (what ships, what moves locally) — the math is yours to adjust.</p>
+    <p class="hint">This tunes the guidance (what ships, what moves locally), the math is yours to adjust.</p>
     <div class="cat-grid" id="cat-grid"></div>
     <div class="input-note" id="cat-note" style="margin-top:10px;font-size:.9rem"></div>
   </section>
 
   <section class="calc-step">
     <h2>2 &middot; Answer a few questions</h2>
-    <p class="hint">Estimates are fine — every figure stays editable in step 3.</p>
+    <p class="hint">Estimates are fine, every figure stays editable in step 3.</p>
     <div class="input-grid">
       <div class="full"><label for="in-allin">All-in cost (CAD)</label>
         <input type="number" id="in-allin" min="0" step="0.01" placeholder="e.g. 65">
-        <div class="input-note"><strong>What counts as all-in:</strong> your hammer price, buyer's premium, gas/travel to pick up, your time, and shipping costs. One number — what the item truly cost you.</div></div>
+        <div class="input-note"><strong>What counts as all-in:</strong> your hammer price, buyer's premium, gas/travel to pick up, your time, and shipping costs. One number, what the item truly cost you.</div></div>
       <div><label for="in-sale">Expected sale price (CAD)</label>
         <input type="number" id="in-sale" min="0" step="0.01" placeholder="e.g. 120">
         <div class="input-note">What you expect the item to sell for, based on sold listings.</div></div>
@@ -127,7 +127,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
           <label class="radio-pill on"><input type="radio" name="pay" value="cash" checked> Cash / e-transfer</label>
           <label class="radio-pill"><input type="radio" name="pay" value="card"> Card processed</label>
         </div>
-        <div class="input-note">Cash or Interac e-transfer has no processing cost. Card processing is an estimate — adjust it.</div></div>
+        <div class="input-note">Cash or Interac e-transfer has no processing cost. Card processing is an estimate, adjust it.</div></div>
       <div><label for="in-days">Days you expect it to take to sell</label>
         <input type="number" id="in-days" min="0" step="1" placeholder="e.g. 14">
         <div class="input-note">Used only for the profit-per-day figure.</div></div>
@@ -135,7 +135,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
   </section>
 
   <section class="calc-step">
-    <h2>3 &middot; Your cost stack — check every line</h2>
+    <h2>3 &middot; Your cost stack, check every line</h2>
     <p class="hint">Auto-filled from the fee tables below. Change any rate or amount; totals update live. Sources and check dates are on each line.</p>
     <div class="fee-lines" id="fee-lines"></div>
 
@@ -155,18 +155,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
   </section>
 
   <section class="calc-step">
-    <h2>Fee reference — every number, with its source</h2>
+    <h2>Fee reference, every number, with its source</h2>
     <p class="hint">Checked 2026-09-28. Platforms change their fees; if a figure below looks stale, update the matching field in step 3.</p>
     <table class="fee-table">
       <thead><tr><th>Fee</th><th>Figure used</th><th>Source</th></tr></thead>
       <tbody>
-        <tr><td>Facebook Marketplace — local pickup</td><td>$0 selling fee <span class="src-tag reported">Reported</span></td><td>No selling fee on local-pickup sales; payment arranged directly with the buyer (multiple 2026 guides; Meta Help Center).</td></tr>
-        <tr><td>Facebook Marketplace — shipped</td><td>10% of buyer-paid total (item + shipping charged + tax Meta collects), min $0.80/order <span class="src-tag reported">Reported</span></td><td>Meta seller notice Mar 2024, effective 15 Apr 2024 — reported by SaleHoo (2026) and Wix (2026). Older guides still print the pre-2024 rate of 5%.</td></tr>
-        <tr><td>eBay Canada — final value fee, most categories</td><td>13.6% of item + shipping (+ tax) up to C$7,500, then 2.35% <span class="src-tag reported">Reported</span></td><td>Data EDE eBay.ca fee calculator, last reviewed 2026-03-26. Rates increased up to 0.35% on 3 Mar 2025. Category exceptions: e.g. books/movies/music 15.3%; consumer electronics 13.6% (no Store).</td></tr>
-        <tr><td>eBay Canada — per-order fee</td><td>C$0.30 (orders ≤ C$10) / C$0.40 (orders &gt; C$10) <span class="src-tag reported">Reported</span></td><td>Data EDE (2026-03); Plugbooks fee guide (2026-09). Payment processing is rolled into the final value fee under eBay Managed Payments.</td></tr>
-        <tr><td>Kijiji — basic listing/selling</td><td>$0 <span class="src-tag reported">Reported</span></td><td>Basic listings are free for general merchandise; optional paid visibility upgrades (Top Ad, Bump Up). Motors and real estate categories have their own paid fees (2026 guides).</td></tr>
-        <tr><td>Interac e-transfer</td><td>$0 <span class="src-tag estimate">Estimate</span></td><td>Free at most Canadian banks for personal accounts; some plans charge ~$1–$1.50 — adjust if yours does.</td></tr>
-        <tr><td>Card processing (typical flat rate)</td><td>2.65% <span class="src-tag estimate">Estimate</span></td><td>Typical flat-rate card processing; your processor may differ — adjust.</td></tr>
+        <tr><td>Facebook Marketplace, local pickup</td><td>$0 selling fee <span class="src-tag reported">Reported</span></td><td>No selling fee on local-pickup sales; payment arranged directly with the buyer (multiple 2026 guides; Meta Help Center).</td></tr>
+        <tr><td>Facebook Marketplace, shipped</td><td>10% of buyer-paid total (item + shipping charged + tax Meta collects), min $0.80/order <span class="src-tag reported">Reported</span></td><td>Meta seller notice Mar 2024, effective 15 Apr 2024, reported by SaleHoo (2026) and Wix (2026). Older guides still print the pre-2024 rate of 5%.</td></tr>
+        <tr><td>eBay Canada, final value fee, most categories</td><td>13.6% of item + shipping (+ tax) up to C$7,500, then 2.35% <span class="src-tag reported">Reported</span></td><td>Data EDE eBay.ca fee calculator, last reviewed 2026-03-26. Rates increased up to 0.35% on 3 Mar 2025. Category exceptions: e.g. books/movies/music 15.3%; consumer electronics 13.6% (no Store).</td></tr>
+        <tr><td>eBay Canada, per-order fee</td><td>C$0.30 (orders ≤ C$10) / C$0.40 (orders &gt; C$10) <span class="src-tag reported">Reported</span></td><td>Data EDE (2026-03); Plugbooks fee guide (2026-09). Payment processing is rolled into the final value fee under eBay Managed Payments.</td></tr>
+        <tr><td>Kijiji, basic listing/selling</td><td>$0 <span class="src-tag reported">Reported</span></td><td>Basic listings are free for general merchandise; optional paid visibility upgrades (Top Ad, Bump Up). Motors and real estate categories have their own paid fees (2026 guides).</td></tr>
+        <tr><td>Interac e-transfer</td><td>$0 <span class="src-tag estimate">Estimate</span></td><td>Free at most Canadian banks for personal accounts; some plans charge ~$1 to $1.50, adjust if yours does.</td></tr>
+        <tr><td>Card processing (typical flat rate)</td><td>2.65% <span class="src-tag estimate">Estimate</span></td><td>Typical flat-rate card processing; your processor may differ, adjust.</td></tr>
       </tbody>
     </table>
   </section>
@@ -179,8 +179,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.c
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
-    <p>Flipping Auction Finds — guides about buying liquidation lots and reselling for personal use. Content is for information only and is not financial advice; resale results vary and no income or profit is promised or guaranteed. Auction rules, fees, and payment terms differ by auction house — always read the terms of the sale before bidding.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>, redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>Flipping Auction Finds, guides about buying liquidation lots and reselling for personal use. Content is for information only and is not financial advice; resale results vary and no income or profit is promised or guaranteed. Auction rules, fees, and payment terms differ by auction house, always read the terms of the sale before bidding.</p>
     <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
   </div>
 </footer>

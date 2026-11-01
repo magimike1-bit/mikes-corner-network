@@ -96,18 +96,18 @@
   <div class="wrap">
     <h2 class="section-title">1. Sector overview</h2>
     <p class="section-sub">Why appointment businesses need different payment thinking.</p>
-    <p>A salon's money problems are calendar problems. The booking fills the chair; the payment has to follow without friction, whether that's a deposit at booking time, full payment at the chair, a no-show charge under a stated policy, or a tip added after the service. Every one of those flows touches <strong>card-on-file</strong> — and card-on-file done wrong is both a compliance risk and a customer-trust risk.</p>
+    <p>A salon's money problems are calendar problems. The booking fills the chair; the payment has to follow without friction, whether that's a deposit at booking time, full payment at the chair, a no-show charge under a stated policy, or a tip added after the service. Every one of those flows touches <strong>card-on-file</strong>, and card-on-file done wrong is both a compliance risk and a customer-trust risk.</p>
     <p>What makes this sector different:</p>
     <ul>
-      <li><strong>Card-on-file and tokens.</strong> Deposits and no-show charges require storing a reusable payment reference — a <strong>token</strong>, never the raw card number. Tokens live in your processor's vault; your booking platform references them. Ask about <strong>token portability</strong> before you change processors, or switching becomes a project.</li>
+      <li><strong>Card-on-file and tokens.</strong> Deposits and no-show charges require storing a reusable payment reference, a <strong>token</strong>, never the raw card number. Tokens live in your processor's vault; your booking platform references them. Ask about <strong>token portability</strong> before you change processors, or switching becomes a project.</li>
       <li><strong>No-show and late-cancellation policies.</strong> Charging a no-show fee is only defensible (and only worth the dispute risk) with a clear, stated policy the client agreed to at booking.</li>
-      <li><strong>Tips.</strong> Tip prompts at checkout need to be present but not pushy — and tip handling has payroll implications for commission-based staff.</li>
-      <li><strong>Retail product sales.</strong> Shampoo, styling products, and gift sets sold at the front desk are ordinary retail checkout — barcodes, inventory, and all.</li>
+      <li><strong>Tips.</strong> Tip prompts at checkout need to be present but not pushy, and tip handling has payroll implications for commission-based staff.</li>
+      <li><strong>Retail product sales.</strong> Shampoo, styling products, and gift sets sold at the front desk are ordinary retail checkout, barcodes, inventory, and all.</li>
       <li><strong>Gift cards.</strong> A meaningful revenue line for salons, and a liability until redeemed. Your system has to track balances honestly.</li>
     </ul>
     <div class="warn">
       <h3>⚠️ Never store raw card numbers</h3>
-      <p>Card capture must be <strong>tokenized</strong>: the card number goes to the processor's vault, and your systems keep only a token reference. If any part of your setup — a spreadsheet, a booking note field, an old terminal — holds actual card numbers, that's a PCI scope and breach-risk problem. See the <a href="pci-scope-guide.html">PCI scope guide</a> for the conceptual picture.</p>
+      <p>Card capture must be <strong>tokenized</strong>: the card number goes to the processor's vault, and your systems keep only a token reference. If any part of your setup, a spreadsheet, a booking note field, an old terminal, holds actual card numbers, that's a PCI scope and breach-risk problem. See the <a href="pci-scope-guide.html">PCI scope guide</a> for the conceptual picture.</p>
     </div>
   </div>
 </section>
@@ -115,11 +115,11 @@
 <section class="section alt">
   <div class="wrap">
     <h2 class="section-title">2. In-store hardware &amp; software</h2>
-    <p class="section-sub">A salon counter needs less hardware than a grocery lane — but the software connections matter more.</p>
+    <p class="section-sub">A salon counter needs less hardware than a grocery lane, but the software connections matter more.</p>
     <div class="trust-row">
-      <div class="trust"><div class="icon">💳</div><h3>Front-desk payment terminal</h3><p>The countertop terminal for in-person checkout: services, tips, and retail products. Ethernet or reliable Wi-Fi — pick the one your space actually supports.</p></div>
+      <div class="trust"><div class="icon">💳</div><h3>Front-desk payment terminal</h3><p>The countertop terminal for in-person checkout: services, tips, and retail products. Ethernet or reliable Wi-Fi, pick the one your space actually supports.</p></div>
       <div class="trust"><div class="icon">📋</div><h3>Booking tablet / workstation</h3><p>Runs the booking calendar: appointments, client records, reminders, and deposits. Often a tablet at the desk or a back-office PC.</p></div>
-      <div class="trust"><div class="icon">🖨️</div><h3>Receipt printer (optional)</h3><p>Thermal printer for clients who want a paper receipt. Many salons go email/SMS receipts only — a legitimate choice if your clientele prefers it.</p></div>
+      <div class="trust"><div class="icon">🖨️</div><h3>Receipt printer (optional)</h3><p>Thermal printer for clients who want a paper receipt. Many salons go email/SMS receipts only, a legitimate choice if your clientele prefers it.</p></div>
     </div>
     <p>Software side: the <strong>cloud booking platform</strong> is the operational hub (calendar, reminders, client records, gift cards, marketing). The <strong>processor's token vault</strong> holds the card tokens. The <strong>payment terminal</strong> bridges in-person checkout. <strong>Accounting</strong> and <strong>payroll/commissions</strong> close the loop. The critical rule: card data flows to the token vault, never into the booking platform's own database as raw numbers.</p>
   </div>
@@ -131,7 +131,7 @@
     <div class="svgmap" role="img" aria-label="Connection map: booking tablet and front-desk terminal; card data flows to the processor token vault; only tokens flow back to the cloud booking platform; optional receipt printer; reminders and no-show policy noted.">
     <svg viewBox="0 0 780 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
       <rect x="0" y="0" width="780" height="470" rx="14" fill="#F9F5ED"/>
-      <text x="24" y="34" font-size="15" font-weight="800" fill="#1F2937">Sample setup — 6-chair salon (connection map)</text>
+      <text x="24" y="34" font-size="15" font-weight="800" fill="#1F2937">Sample setup, 6-chair salon (connection map)</text>
       <!-- booking platform top centre -->
       <rect x="270" y="52" width="240" height="72" rx="12" fill="#C8A24A"/>
       <text x="390" y="80" font-size="14" font-weight="800" fill="#1F2937" text-anchor="middle">Cloud booking platform</text>
@@ -148,7 +148,7 @@
       <!-- token vault -->
       <rect x="520" y="170" width="220" height="72" rx="10" fill="#374151"/>
       <text x="630" y="196" font-size="12" font-weight="700" fill="#F9F5ED">Processor token vault</text>
-      <text x="630" y="214" font-size="11" fill="#D1D5DB">Holds card tokens —</text>
+      <text x="630" y="214" font-size="11" fill="#D1D5DB">Holds card tokens, </text>
       <text x="630" y="230" font-size="11" fill="#D1D5DB">never raw card numbers</text>
       <!-- card data edge: terminal -> vault -->
       <line x1="260" y1="294" x2="520" y2="216" stroke="#1B9E57" stroke-width="3"/>
@@ -175,24 +175,24 @@
     </div>
     <h3>Hardware list</h3>
     <ul class="hwlist">
-      <li><strong>Front-desk payment terminal</strong> — countertop terminal for in-person checkout, tips, and retail sales.</li>
-      <li><strong>Booking tablet or workstation</strong> — runs the cloud booking platform's calendar at the desk.</li>
-      <li><strong>Optional thermal receipt printer</strong> — USB; skip it if your clients prefer email/SMS receipts.</li>
-      <li><strong>Reliable internet</strong> — the booking platform is cloud-based; a flaky connection means a dead calendar.</li>
+      <li><strong>Front-desk payment terminal</strong>, countertop terminal for in-person checkout, tips, and retail sales.</li>
+      <li><strong>Booking tablet or workstation</strong>, runs the cloud booking platform's calendar at the desk.</li>
+      <li><strong>Optional thermal receipt printer</strong>. USB; skip it if your clients prefer email/SMS receipts.</li>
+      <li><strong>Reliable internet</strong>, the booking platform is cloud-based; a flaky connection means a dead calendar.</li>
     </ul>
     <h3>Layout notes</h3>
     <ul>
       <li>The desk is the whole operation: terminal, booking screen, and printer (if any) within one person's reach.</li>
-      <li>Put the terminal where the client can comfortably see the tip prompt and tap — not behind the desk where staff have to hand it over.</li>
+      <li>Put the terminal where the client can comfortably see the tip prompt and tap, not behind the desk where staff have to hand it over.</li>
       <li>If the terminal is on Wi-Fi, use your <strong>business</strong> network, never a guest network clients join.</li>
-      <li>Keep a charger at the desk if any device is a tablet — a dead booking screen at 9am ruins the day.</li>
+      <li>Keep a charger at the desk if any device is a tablet, a dead booking screen at 9am ruins the day.</li>
     </ul>
     <h3>Daily workflow</h3>
     <ol>
       <li><strong>Opening:</strong> terminal charged and connected; booking calendar loaded and today's appointments confirmed.</li>
-      <li><strong>Before appointments:</strong> automated reminders go out (your booking platform handles this — verify they're actually sending).</li>
+      <li><strong>Before appointments:</strong> automated reminders go out (your booking platform handles this, verify they're actually sending).</li>
       <li><strong>Checkout:</strong> in-person terminal payment, or a tokenized card-on-file charge for deposits and pre-paids.</li>
-      <li><strong>No-shows:</strong> charge the no-show fee <strong>only</strong> under your stated policy — and only against a token you captured with the client's agreement.</li>
+      <li><strong>No-shows:</strong> charge the no-show fee <strong>only</strong> under your stated policy, and only against a token you captured with the client's agreement.</li>
       <li><strong>Failed charges:</strong> contact the client for an updated payment method. Don't blind-retry a declined token; retries don't fix expired cards and they do annoy people.</li>
       <li><strong>Closing:</strong> run end-of-day reporting in the booking platform and reconcile against the terminal batch.</li>
     </ol>
@@ -204,9 +204,9 @@
     <h2 class="section-title">4. Setup guide</h2>
     <p class="section-sub">The order that avoids expensive rework.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><h3>Choose the booking platform</h3><p>This is your hub — calendar, reminders, client records, gift cards. Decide bundled vs. standalone (see integrations) before anything else.</p></div>
+      <div class="step"><div class="step-num">1</div><h3>Choose the booking platform</h3><p>This is your hub, calendar, reminders, client records, gift cards. Decide bundled vs. standalone (see integrations) before anything else.</p></div>
       <div class="step"><div class="step-num">2</div><h3>Settle the payments question</h3><p>If bundled, understand the processing cost hidden in the bundle. If standalone, choose a processor and confirm tokenization and token portability in writing.</p></div>
-      <div class="step"><div class="step-num">3</div><h3>Write your money policies</h3><p>Deposit amounts, no-show/late-cancellation fees, and refund rules — written, published, and agreed to at booking time.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Write your money policies</h3><p>Deposit amounts, no-show/late-cancellation fees, and refund rules, written, published, and agreed to at booking time.</p></div>
       <div class="step"><div class="step-num">4</div><h3>Install the desk</h3><p>Terminal, booking screen, optional printer. Connect, activate, and test a full checkout including a tip.</p></div>
       <div class="step"><div class="step-num">5</div><h3>Test card-on-file flows</h3><p>Capture a token, run a deposit, void it, and confirm only tokens (never card numbers) appear in your systems.</p></div>
       <div class="step"><div class="step-num">6</div><h3>Train the close</h3><p>End-of-day reconciliation: booking platform totals vs. terminal batch. Do it together the first week until it's habit.</p></div>
@@ -228,13 +228,13 @@
       <details>
         <summary>Booking tablet / workstation</summary>
         <div class="answer">
-          <p>Install or open your booking platform, sign in, and verify the calendar, client records, and reminder settings. Connect any card reader the platform uses for in-person capture — and confirm captured cards are tokenized (check that no full card numbers are visible anywhere in the platform). Test the reminder flow with your own phone number.</p>
+          <p>Install or open your booking platform, sign in, and verify the calendar, client records, and reminder settings. Connect any card reader the platform uses for in-person capture, and confirm captured cards are tokenized (check that no full card numbers are visible anywhere in the platform). Test the reminder flow with your own phone number.</p>
         </div>
       </details>
       <details>
         <summary>Receipt printer (optional)</summary>
         <div class="answer">
-          <p>Connect via USB to the desk workstation per your platform's supported list and print a test receipt. If you're going email/SMS-only instead, verify receipts actually arrive — check spam folders and test on both iPhone and Android before telling clients "you'll get it by text."</p>
+          <p>Connect via USB to the desk workstation per your platform's supported list and print a test receipt. If you're going email/SMS-only instead, verify receipts actually arrive, check spam folders and test on both iPhone and Android before telling clients "you'll get it by text."</p>
         </div>
       </details>
       <details>
@@ -253,15 +253,15 @@
     <div class="faq">
       <details>
         <summary>Card-on-file charge failed</summary>
-        <div class="answer"><p>Don't blind-retry. Check whether the token is expired or the card was replaced — the fix is an updated payment method from the client, not repeated attempts. If tokens are failing broadly, the issue is between your platform and the processor's vault: check the integration status before assuming client cards are the problem.</p></div>
+        <div class="answer"><p>Don't blind-retry. Check whether the token is expired or the card was replaced, the fix is an updated payment method from the client, not repeated attempts. If tokens are failing broadly, the issue is between your platform and the processor's vault: check the integration status before assuming client cards are the problem.</p></div>
       </details>
       <details>
         <summary>Booking calendar and payments don't match at close</summary>
         <div class="answer"><p>Compare the booking platform's day total against the terminal batch line by line. Usual causes: a no-show fee charged in the platform but never captured, a retail sale rung on the terminal but not the booking system, or a refund processed in one place and not the other. Fix the step that was skipped, not just the numbers.</p></div>
       </details>
       <details>
-        <summary>Terminal timed out — do I retry?</summary>
-        <div class="answer"><p><strong>Verify the transaction status before retrying.</strong> Check the terminal's transaction list and your booking platform. Retrying blind risks a double charge — and a double-charged client tells friends.</p></div>
+        <summary>Terminal timed out, do I retry?</summary>
+        <div class="answer"><p><strong>Verify the transaction status before retrying.</strong> Check the terminal's transaction list and your booking platform. Retrying blind risks a double charge, and a double-charged client tells friends.</p></div>
       </details>
       <details>
         <summary>Reminders aren't going out</summary>
@@ -278,25 +278,25 @@
 <section class="section">
   <div class="wrap">
     <h2 class="section-title">7. Hardware options reference</h2>
-    <p class="section-sub">Real products with links to the manufacturer's own pages (verified 2026-09-28). Models change — confirm compatibility with your booking platform before buying.</p>
+    <p class="section-sub">Real products with links to the manufacturer's own pages (verified 2026-09-28). Models change, confirm compatibility with your booking platform before buying.</p>
     <h3>Payment terminals</h3>
     <ul>
-      <li><strong>Moneris Go terminal</strong> — Moneris's countertop smart terminal for Canadian businesses: <a href="https://www.moneris.com/help/MGo-A920-R12-2021-WH-EN/UYT/Moneris_Go_terminal.htm">Moneris Go terminal help &amp; product page</a>.</li>
-      <li><strong>Helcim Smart Terminal</strong> — countertop smart terminal; Helcim publishes Canadian pricing on its own page (listed at CA$429 when checked 2026-09-28 — confirm current pricing before budgeting): <a href="https://www.helcim.com/start/ca/smart-terminal-pricing/">Helcim Smart Terminal pricing (Canada)</a>.</li>
-      <li><strong>Square POS (Canada)</strong> — Square's point-of-sale hardware and software for Canadian businesses; note that Square Appointments bundles booking with payments (see the bundled-platform note in integrations): <a href="https://squareup.com/ca/en/point-of-sale">Square POS (Canada)</a>.</li>
+      <li><strong>Moneris Go terminal</strong>. Moneris's countertop smart terminal for Canadian businesses: <a href="https://www.moneris.com/help/MGo-A920-R12-2021-WH-EN/UYT/Moneris_Go_terminal.htm">Moneris Go terminal help &amp; product page</a>.</li>
+      <li><strong>Helcim Smart Terminal</strong>, countertop smart terminal; Helcim publishes Canadian pricing on its own page (listed at CA$429 when checked 2026-09-28, confirm current pricing before budgeting): <a href="https://www.helcim.com/start/ca/smart-terminal-pricing/">Helcim Smart Terminal pricing (Canada)</a>.</li>
+      <li><strong>Square POS (Canada)</strong>. Square's point-of-sale hardware and software for Canadian businesses; note that Square Appointments bundles booking with payments (see the bundled-platform note in integrations): <a href="https://squareup.com/ca/en/point-of-sale">Square POS (Canada)</a>.</li>
     </ul>
     <h3>Receipt printers</h3>
     <ul>
-      <li><strong>Epson TM-T88VII</strong> — thermal receipt printer; Ethernet and USB models: <a href="https://epson.ca/For-Work/POS-System-Devices/POS-Printers/OmniLink-TM-T88VII-Single-station-Thermal-Receipt-Printer/p/C31CJ57052">Epson Canada TM-T88VII product page</a>.</li>
-      <li><strong>Star Micronics TSP143III series</strong> — compact thermal receipt printer with USB, Ethernet, Bluetooth, and Wi-Fi variants (manufacturer's regional product page): <a href="https://starmicronics.co.th/en/product/star-tsp143iii-series/">Star TSP143III product page</a>.</li>
+      <li><strong>Epson TM-T88VII</strong>, thermal receipt printer; Ethernet and USB models: <a href="https://epson.ca/For-Work/POS-System-Devices/POS-Printers/OmniLink-TM-T88VII-Single-station-Thermal-Receipt-Printer/p/C31CJ57052">Epson Canada TM-T88VII product page</a>.</li>
+      <li><strong>Star Micronics TSP143III series</strong>, compact thermal receipt printer with USB, Ethernet, Bluetooth, and Wi-Fi variants (manufacturer's regional product page): <a href="https://starmicronics.co.th/en/product/star-tsp143iii-series/">Star TSP143III product page</a>.</li>
     </ul>
     <h3>Payment extras</h3>
     <ul>
-      <li><strong>Square Reader (contactless + chip)</strong> — $59 CAD official — a mobile reader for chair-side checkout or off-site events: <a href="https://squareup.com/ca/en/point-of-sale">Square Canada</a>.</li>
+      <li><strong>Square Reader (contactless + chip)</strong>, $59 CAD official, a mobile reader for chair-side checkout or off-site events: <a href="https://squareup.com/ca/en/point-of-sale">Square Canada</a>.</li>
     </ul>
     <h3>Connectivity backup</h3>
     <ul>
-      <li><strong>Cradlepoint COR Wi-Fi 5</strong> — cellular failover router (~$2,076 CAD via DirectDial Canada); pair with a data plan such as Rogers Wireless Business Internet ($104.99/mo, official). Card-on-file bookings mean an outage still hurts: <a href="https://www.directdial.com/ca/item/cradlepoint-cor-wi-fi-5-ieee-802-11ac-cellular-ethernet-modem-wireless-router/ma1-0900600m-nna">DirectDial Canada listing</a>.</li>
+      <li><strong>Cradlepoint COR Wi-Fi 5</strong>, cellular failover router (~$2,076 CAD via DirectDial Canada); pair with a data plan such as Rogers Wireless Business Internet ($104.99/mo, official). Card-on-file bookings mean an outage still hurts: <a href="https://www.directdial.com/ca/item/cradlepoint-cor-wi-fi-5-ieee-802-11ac-cellular-ethernet-modem-wireless-router/ma1-0900600m-nna">DirectDial Canada listing</a>.</li>
     </ul>
   </div>
 </section>
@@ -304,9 +304,9 @@
 <section class="section alt">
   <div class="wrap">
     <div class="callout">
-      <h3>🔒 PCI scope: tokens keep you safer — if card data never touches your systems</h3>
+      <h3>🔒 PCI scope: tokens keep you safer, if card data never touches your systems</h3>
       <p>The whole point of tokenization is keeping raw card numbers out of your booking platform, your tablet, and your notes. Whether your systems fall inside or outside PCI scope depends on <strong>where card data flows</strong>: a properly tokenized setup keeps it inside the terminal and the processor's vault; anything that lets card numbers reach your other systems pulls them into scope.</p>
-      <p><a href="pci-scope-guide.html">Read the plain-language PCI scope guide →</a> (conceptual only — always check current official requirements with the PCI Security Standards Council.)</p>
+      <p><a href="pci-scope-guide.html">Read the plain-language PCI scope guide →</a> (conceptual only, always check current official requirements with the PCI Security Standards Council.)</p>
     </div>
   </div>
 </section>
@@ -317,21 +317,21 @@
     <p class="section-sub">Each integration below: what it is, why it matters, what it costs, and an honestly labelled illustrative ROI sketch.</p>
 
     <div class="bundle">
-      <h4>📌 Bundled booking platforms — a category of their own</h4>
+      <h4>📌 Bundled booking platforms, a category of their own</h4>
       <p>Many salon platforms bundle booking, reminders, client records, gift cards, marketing, <em>and</em> payment processing into one subscription. Examples include <strong>Vagaro, Fresha, Mindbody, GlossGenius, Square Appointments, Boulevard, Mangomint, and Zenoti</strong>. They're kept separate here deliberately, because the economics differ from standalone tools:</p>
       <ul>
-        <li><strong>The processing cost is hidden in the bundle.</strong> You pay one subscription (plus processing), which makes the true cost of payments hard to see — and hard to compare.</li>
+        <li><strong>The processing cost is hidden in the bundle.</strong> You pay one subscription (plus processing), which makes the true cost of payments hard to see, and hard to compare.</li>
         <li><strong>Switching processors means replacing the whole stack.</strong> With a bundled platform, you generally can't keep the booking software and swap in cheaper processing. Leaving the bundle means migrating calendars, client records, and gift-card balances.</li>
       </ul>
-      <p><strong>Cost:</strong> quote-based or tiered subscriptions; confirm current pricing with each vendor. When comparing, ask what the <em>effective</em> processing cost works out to — or <a href="audit.html">let the free audit</a> benchmark it against standalone options.</p>
+      <p><strong>Cost:</strong> quote-based or tiered subscriptions; confirm current pricing with each vendor. When comparing, ask what the <em>effective</em> processing cost works out to, or <a href="audit.html">let the free audit</a> benchmark it against standalone options.</p>
     </div>
 
     <h3>Standalone booking platform (unbundled)</h3>
-    <p><strong>What it is:</strong> calendar, reminders, and client records without locked-in processing — you pair it with the processor of your choice.</p>
+    <p><strong>What it is:</strong> calendar, reminders, and client records without locked-in processing, you pair it with the processor of your choice.</p>
     <p><strong>Benefits:</strong> you can shop processing rates competitively and switch processors without migrating your calendar.</p>
     <p><strong>Cost:</strong> quote-based subscriptions; confirm current pricing.</p>
     <div class="example">
-      <span class="tag">Illustrative example — not a promise</span>
+      <span class="tag">Illustrative example, not a promise</span>
       <h3>No-show reduction sketch</h3>
       <table>
         <tr><th>Item</th><th>Amount</th></tr>
@@ -340,11 +340,11 @@
         <tr><td>No-show rate: 10% → 4% (example)</td><td>18 recovered appointments</td></tr>
         <tr><td><strong>Recovered revenue (illustrative)</strong></td><td><strong>$1,350 / month</strong></td></tr>
       </table>
-      <p class="fine">Illustrative only — your appointment count, ticket, and achievable reduction will differ. Reminders plus a stated no-show policy drive this; software alone doesn't.</p>
+      <p class="fine">Illustrative only, your appointment count, ticket, and achievable reduction will differ. Reminders plus a stated no-show policy drive this; software alone doesn't.</p>
     </div>
 
     <h3>Marketing (email / SMS campaigns)</h3>
-    <p><strong>What it is:</strong> rebooking nudges, win-back offers, and promotions to your client list — sometimes built into the booking platform, sometimes standalone.</p>
+    <p><strong>What it is:</strong> rebooking nudges, win-back offers, and promotions to your client list, sometimes built into the booking platform, sometimes standalone.</p>
     <p><strong>Benefits:</strong> fills quiet days with clients you already have instead of discounting to strangers.</p>
     <p><strong>Cost:</strong> often bundled; standalone tools are quote-based.</p>
 
@@ -355,15 +355,15 @@
 
     <h3>Payroll / commissions</h3>
     <p><strong>What it is:</strong> staff pay with commission splits and tip reporting.</p>
-    <p><strong>Benefits:</strong> accurate, dispute-free paydays — commission math done by hand is where salon arguments start.</p>
+    <p><strong>Benefits:</strong> accurate, dispute-free paydays, commission math done by hand is where salon arguments start.</p>
     <p><strong>Cost:</strong> quote-based per pay run or per employee.</p>
-    <p class="roi-note">ROI sketches are illustrative examples to show how the math works — not quotes, guarantees, or predictions.</p>
+    <p class="roi-note">ROI sketches are illustrative examples to show how the math works, not quotes, guarantees, or predictions.</p>
   </div>
 </section>
 
 <section class="section alt">
   <div class="wrap">
-    <h2 class="section-title">10. Everything integrated — full system map</h2>
+    <h2 class="section-title">10. Everything integrated, full system map</h2>
     <p class="section-sub">How the pieces connect when it's all working.</p>
     <div class="flow">
       <span class="fnode"><b>Website / marketplace widget</b><br>online booking</span><span class="farrow">→</span>
@@ -385,25 +385,25 @@
       <span class="fnode"><b>Payroll / commissions</b><br>staff pay + tips</span>
       <span class="fnode"><b>Marketing</b><br>rebooking · win-back</span>
     </div>
-    <p>Card data travels <strong>terminal → processor vault</strong> only. Everything else — the booking platform, reminders, accounting — works with tokens and totals, never raw card numbers.</p>
+    <p>Card data travels <strong>terminal → processor vault</strong> only. Everything else, the booking platform, reminders, accounting, works with tokens and totals, never raw card numbers.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <h2 class="section-title">11. What normal looks like — planning ranges</h2>
-    <p class="section-sub">We found no credible published IT-spending benchmark specific to salons or appointment businesses — so instead of inventing one, here's how to think about it.</p>
+    <h2 class="section-title">11. What normal looks like, planning ranges</h2>
+    <p class="section-sub">We found no credible published IT-spending benchmark specific to salons or appointment businesses, so instead of inventing one, here's how to think about it.</p>
     <table class="bench">
       <tr><th>Business size (annual revenue)</th><th>What the stack typically looks like</th><th>Notes</th></tr>
       <tr><td>Under $500K</td><td>Booking platform subscription + terminal + basic accounting</td><td>Single location; often one subscription covers most of it.</td></tr>
-      <tr><td>$500K – $5M</td><td>Above, plus marketing tools, payroll/commissions, possibly multi-location booking</td><td>Costs scale with seats, locations, and message volume.</td></tr>
-      <tr><td>$5M – $50M</td><td>Multi-location platform, centralized reporting, dedicated marketing</td><td>Quote-based at this tier; negotiate as a group.</td></tr>
+      <tr><td>$500K, $5M</td><td>Above, plus marketing tools, payroll/commissions, possibly multi-location booking</td><td>Costs scale with seats, locations, and message volume.</td></tr>
+      <tr><td>$5M, $50M</td><td>Multi-location platform, centralized reporting, dedicated marketing</td><td>Quote-based at this tier; negotiate as a group.</td></tr>
       <tr><td>$50M+</td><td>Enterprise agreements across the stack</td><td>Procurement-led; see the enterprise note below.</td></tr>
     </table>
     <div class="example">
-      <span class="tag">Illustrative planning range — not a benchmark</span>
+      <span class="tag">Illustrative planning range, not a benchmark</span>
       <h3>Single-location salon stack sketch</h3>
-      <p>A single-location salon's software stack — booking subscription, payments, marketing messages, and accounting — <strong>often totals in the low hundreds of dollars per month</strong> before processing fees. This is an illustrative planning range to help you budget, <strong>not</strong> a published benchmark: your actual total depends on your platform tier, message volume, and locations. Processing fees sit on top and are frequently the largest line item — which is why <a href="audit.html">measuring your effective processing rate</a> matters more than optimizing a $40 subscription.</p>
+      <p>A single-location salon's software stack, booking subscription, payments, marketing messages, and accounting, <strong>often totals in the low hundreds of dollars per month</strong> before processing fees. This is an illustrative planning range to help you budget, <strong>not</strong> a published benchmark: your actual total depends on your platform tier, message volume, and locations. Processing fees sit on top and are frequently the largest line item, which is why <a href="audit.html">measuring your effective processing rate</a> matters more than optimizing a $40 subscription.</p>
     </div>
   </div>
 </section>
@@ -411,12 +411,12 @@
 <section class="section alt">
   <div class="wrap">
     <h2 class="section-title">12. How AI is changing this sector</h2>
-    <p class="section-sub">Real products, honestly framed. Prices below are third-party published comparison figures accessed 2026-09-28 and subject to change — confirm current pricing with the vendor.</p>
+    <p class="section-sub">Real products, honestly framed. Prices below are third-party published comparison figures accessed 2026-09-28 and subject to change, confirm current pricing with the vendor.</p>
     <ul>
-      <li><strong>Salonist AI Booking Intelligence</strong> — AI booking features from the salon software vendor Salonist, launched <strong>2026-09-15</strong> per the vendor's press release. Brand new: treat it as early and unproven until independent results exist.</li>
-      <li><strong>AI receptionists</strong> (answer missed calls, book appointments): <strong>Goodcall</strong> (from $79/month), <strong>Rosie</strong> (from $49/month), <strong>Dialzara</strong> (from $29/month), <strong>Smith.ai</strong> (around $150/month) — third-party published comparison figures, not vendor quotes.</li>
+      <li><strong>Salonist AI Booking Intelligence</strong>. AI booking features from the salon software vendor Salonist, launched <strong>2026-09-15</strong> per the vendor's press release. Brand new: treat it as early and unproven until independent results exist.</li>
+      <li><strong>AI receptionists</strong> (answer missed calls, book appointments): <strong>Goodcall</strong> (from $79/month), <strong>Rosie</strong> (from $49/month), <strong>Dialzara</strong> (from $29/month), <strong>Smith.ai</strong> (around $150/month), third-party published comparison figures, not vendor quotes.</li>
     </ul>
-    <p>The honest evaluation for any of these: <strong>missed-call recovery</strong>. If an AI receptionist answers the calls you'd otherwise miss and books even a few appointments a month you'd have lost, the math works; if your clients always book online anyway, it's shelfware. Test for 60–90 days against your actual booking data before committing.</p>
+    <p>The honest evaluation for any of these: <strong>missed-call recovery</strong>. If an AI receptionist answers the calls you'd otherwise miss and books even a few appointments a month you'd have lost, the math works; if your clients always book online anyway, it's shelfware. Test for 60 to 90 days against your actual booking data before committing.</p>
   </div>
 </section>
 
@@ -428,7 +428,7 @@
     </div>
     <div class="cta-band">
       <h2>Is your bundled platform's processing rate actually competitive?</h2>
-      <p>Send 3–6 months of processing statements. We'll find the overcharges — you keep half of the documented savings, and owe nothing if we find nothing.</p>
+      <p>Send 3 to 6 months of processing statements. We'll find the overcharges, you keep half of the documented savings, and owe nothing if we find nothing.</p>
       <a class="btn" href="audit.html">Start your free audit</a>
     </div>
   </div>
@@ -437,8 +437,8 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
-    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only, your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>, redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
     <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
       <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
     <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>

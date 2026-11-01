@@ -95,15 +95,15 @@
     <h2 class="section-title">1. Sector overview</h2>
     <p class="section-sub">Why hotel payments are a different animal from retail checkout.</p>
     <p>In a shop, a sale is one card tap and it's over. In a hotel, a single guest stay can involve four or five separate money events: a <strong>pre-authorization</strong> (a temporary hold on the card) at check-in, <strong>incremental authorizations</strong> if the guest's spending grows during the stay, <strong>room charges</strong> posted from the restaurant, bar, or spa to the guest's folio, and a final <strong>settlement</strong> (capturing the actual amount) at checkout. If any link in that chain is misconfigured, money leaks: holds that never release, authorizations that expire before settlement, or folio postings that land on the wrong room.</p>
-    <p>The property management system (PMS) is the hub of everything. Reservations, room assignments, folios, and the night audit all live there — and the payment terminals talk to the PMS through a payment interface rather than acting as standalone checkout devices. That makes <strong>compatibility between your terminals, your processor, and your PMS vendor</strong> the single most important purchasing decision. A terminal that works beautifully in a retail store can be the wrong device for a front desk if your PMS vendor doesn't support it.</p>
+    <p>The property management system (PMS) is the hub of everything. Reservations, room assignments, folios, and the night audit all live there, and the payment terminals talk to the PMS through a payment interface rather than acting as standalone checkout devices. That makes <strong>compatibility between your terminals, your processor, and your PMS vendor</strong> the single most important purchasing decision. A terminal that works beautifully in a retail store can be the wrong device for a front desk if your PMS vendor doesn't support it.</p>
     <p>Two more hotel-specific realities shape every decision in this guide:</p>
     <ul>
-      <li><strong>Guests bring their own network expectations.</strong> Your property runs guest Wi-Fi, and that traffic must never share a network with payments, the PMS, or the outlet POS. Segmentation isn't optional — it's the difference between a contained network and a breach that touches every system.</li>
+      <li><strong>Guests bring their own network expectations.</strong> Your property runs guest Wi-Fi, and that traffic must never share a network with payments, the PMS, or the outlet POS. Segmentation isn't optional, it's the difference between a contained network and a breach that touches every system.</li>
       <li><strong>Payment costs sit outside your IT budget.</strong> Processing fees rarely appear in formal technology spending figures, which is why two hotels with identical tech stacks can have wildly different total costs. Any honest cost comparison has to include processing.</li>
     </ul>
     <div class="warn">
       <h3>⚠️ Confirm terminal compatibility with your PMS vendor first</h3>
-      <p>Before you change processors, buy terminals, or sign anything: ask your PMS vendor which payment terminals and processors their payment interface supports. An incompatible terminal means the pre-authorization and folio-settlement flow above simply won't work — and you'll discover it at the worst possible moment. Get the answer <strong>in writing</strong>, and while you're at it, confirm <strong>token portability</strong> (whether card tokens move with you if you change processors later) in writing too.</p>
+      <p>Before you change processors, buy terminals, or sign anything: ask your PMS vendor which payment terminals and processors their payment interface supports. An incompatible terminal means the pre-authorization and folio-settlement flow above simply won't work, and you'll discover it at the worst possible moment. Get the answer <strong>in writing</strong>, and while you're at it, confirm <strong>token portability</strong> (whether card tokens move with you if you change processors later) in writing too.</p>
     </div>
   </div>
 </section>
@@ -113,13 +113,13 @@
     <h2 class="section-title">2. In-store hardware &amp; software</h2>
     <p class="section-sub">The roles each piece of equipment plays at the front desk and across the property.</p>
     <div class="trust-row">
-      <div class="trust"><div class="icon">🖥️</div><h3>Front-desk workstation</h3><p>The PC or terminal the front-desk team uses to run the PMS. Wired via Ethernet for reliability — this is not the device to put on Wi-Fi.</p></div>
+      <div class="trust"><div class="icon">🖥️</div><h3>Front-desk workstation</h3><p>The PC or terminal the front-desk team uses to run the PMS. Wired via Ethernet for reliability, this is not the device to put on Wi-Fi.</p></div>
       <div class="trust"><div class="icon">💳</div><h3>Countertop payment terminals</h3><p>Ethernet-connected terminals at the desk that talk to the PMS through the payment interface. These handle pre-authorizations, incremental authorizations, and checkout settlement.</p></div>
-      <div class="trust"><div class="icon">📱</div><h3>Mobile payment terminal</h3><p>For the pool bar, valet, room service, or anywhere away from the desk. Runs over cellular or the property's <em>operational</em> Wi-Fi — never guest Wi-Fi.</p></div>
+      <div class="trust"><div class="icon">📱</div><h3>Mobile payment terminal</h3><p>For the pool bar, valet, room service, or anywhere away from the desk. Runs over cellular or the property's <em>operational</em> Wi-Fi, never guest Wi-Fi.</p></div>
     </div>
     <div class="trust-row">
-      <div class="trust"><div class="icon">🔌</div><h3>Payment interface service</h3><p>Software (usually on your property LAN) that connects the PMS to the payment terminals and the processor. If this goes down, the desk can't take cards — even if the terminals look fine.</p></div>
-      <div class="trust"><div class="icon">🍽️</div><h3>Outlet POS</h3><p>The restaurant, bar, café, or spa POS. It posts charges to the guest's room folio in the PMS rather than settling them independently — that's what makes it hotel POS rather than restaurant POS.</p></div>
+      <div class="trust"><div class="icon">🔌</div><h3>Payment interface service</h3><p>Software (usually on your property LAN) that connects the PMS to the payment terminals and the processor. If this goes down, the desk can't take cards, even if the terminals look fine.</p></div>
+      <div class="trust"><div class="icon">🍽️</div><h3>Outlet POS</h3><p>The restaurant, bar, café, or spa POS. It posts charges to the guest's room folio in the PMS rather than settling them independently, that's what makes it hotel POS rather than restaurant POS.</p></div>
       <div class="trust"><div class="icon">🖨️</div><h3>Receipt printer &amp; cash drawer</h3><p>Folio receipts at checkout and a drawer for the cash that still moves at most front desks. The drawer typically connects through the printer's cash-drawer port.</p></div>
     </div>
     <p>On the software side, the stack is: <strong>PMS</strong> (system of record) → <strong>payment interface</strong> (connects PMS to processor) → <strong>processor</strong> (moves the money). Around that orbit the <strong>booking engine</strong> on your website, the <strong>channel manager</strong> that syncs rates and availability to online travel agencies, and <strong>accounting software</strong> that receives summarized revenue from the night audit.</p>
@@ -132,7 +132,7 @@
     <div class="svgmap" role="img" aria-label="Connection map: PMS at centre; front-desk workstation, payment interface with two countertop terminals and one mobile terminal, outlet POS, booking engine and channel manager feeding the PMS; guest Wi-Fi isolated in its own segment.">
     <svg viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
       <rect x="0" y="0" width="780" height="500" rx="14" fill="#F9F5ED"/>
-      <text x="24" y="34" font-size="15" font-weight="800" fill="#1F2937">Sample setup — 40-room boutique hotel (connection map)</text>
+      <text x="24" y="34" font-size="15" font-weight="800" fill="#1F2937">Sample setup, 40-room boutique hotel (connection map)</text>
       <!-- Guest wifi isolated zone -->
       <rect x="560" y="52" width="196" height="120" rx="10" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="7 5"/>
       <text x="572" y="76" font-size="12" font-weight="800" fill="#C0392B">GUEST WI-FI</text>
@@ -194,28 +194,28 @@
     </div>
     <h3>Hardware list</h3>
     <ul class="hwlist">
-      <li><strong>Front-desk workstation</strong> — one PC running the PMS, connected by Ethernet to the property LAN.</li>
-      <li><strong>Payment interface service</strong> — the PMS vendor's payment connector, running on the property LAN so the PMS and terminals can reach the processor.</li>
-      <li><strong>Two countertop payment terminals</strong> — Ethernet-connected, one per desk position, set up for pre-authorization and settlement through the PMS.</li>
-      <li><strong>One mobile payment terminal</strong> — cellular or property operational Wi-Fi for the pool bar, valet, or room service.</li>
-      <li><strong>Outlet POS</strong> — one station for the restaurant/bar, configured to post room charges to guest folios.</li>
-      <li><strong>Receipt printer + cash drawer</strong> — folio receipts at checkout; drawer triggered through the printer.</li>
-      <li><strong>Network switch + firewall</strong> — wired backbone for desk, interface service, and outlet POS; guest Wi-Fi on a fully separate segment.</li>
+      <li><strong>Front-desk workstation</strong>, one PC running the PMS, connected by Ethernet to the property LAN.</li>
+      <li><strong>Payment interface service</strong>, the PMS vendor's payment connector, running on the property LAN so the PMS and terminals can reach the processor.</li>
+      <li><strong>Two countertop payment terminals</strong>. Ethernet-connected, one per desk position, set up for pre-authorization and settlement through the PMS.</li>
+      <li><strong>One mobile payment terminal</strong>, cellular or property operational Wi-Fi for the pool bar, valet, or room service.</li>
+      <li><strong>Outlet POS</strong>, one station for the restaurant/bar, configured to post room charges to guest folios.</li>
+      <li><strong>Receipt printer + cash drawer</strong>, folio receipts at checkout; drawer triggered through the printer.</li>
+      <li><strong>Network switch + firewall</strong>, wired backbone for desk, interface service, and outlet POS; guest Wi-Fi on a fully separate segment.</li>
     </ul>
     <h3>Layout notes</h3>
     <ul>
       <li>Put the front-desk workstation, payment interface, and countertop terminals on <strong>wired Ethernet</strong>. The desk is the worst place in the building for a Wi-Fi dropout.</li>
-      <li>Keep the <strong>guest Wi-Fi network physically and logically separate</strong> from the PMS, POS, and payment networks — separate VLAN at minimum, with firewall rules blocking guest-to-operational traffic.</li>
-      <li>Place the two countertop terminals so each desk position has its own — staff shouldn't be reaching across each other (or guests) with a card terminal.</li>
+      <li>Keep the <strong>guest Wi-Fi network physically and logically separate</strong> from the PMS, POS, and payment networks, separate VLAN at minimum, with firewall rules blocking guest-to-operational traffic.</li>
+      <li>Place the two countertop terminals so each desk position has its own, staff shouldn't be reaching across each other (or guests) with a card terminal.</li>
       <li>The mobile terminal lives on <strong>cellular or the operational staff Wi-Fi</strong>, charged at the desk between uses. Never pair it to guest Wi-Fi.</li>
-      <li>The outlet POS needs a reliable path to the PMS for folio posting — wire it if the restaurant is anywhere near the network closet.</li>
+      <li>The outlet POS needs a reliable path to the PMS for folio posting, wire it if the restaurant is anywhere near the network closet.</li>
     </ul>
     <h3>Daily workflow</h3>
     <ol>
       <li><strong>Morning:</strong> confirm the payment interface service and both countertop terminals are online before the first check-in.</li>
       <li><strong>Check-in:</strong> run a pre-authorization for the room rate plus your incidentals policy amount.</li>
       <li><strong>During the stay:</strong> run incremental authorizations as the guest's folio balance grows (restaurant, spa, room service) so the hold keeps pace with spending.</li>
-      <li><strong>Checkout:</strong> settle (complete) the folio for the final amount — this captures the actual total and releases the difference on the hold.</li>
+      <li><strong>Checkout:</strong> settle (complete) the folio for the final amount, this captures the actual total and releases the difference on the hold.</li>
       <li><strong>Night audit:</strong> reconcile the PMS day totals against the outlet POS and the processor's settlement report. Investigate anything that doesn't match before it becomes tomorrow's problem.</li>
     </ol>
   </div>
@@ -226,9 +226,9 @@
     <h2 class="section-title">4. Setup guide</h2>
     <p class="section-sub">The order that avoids expensive rework.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><h3>Start with the PMS</h3><p>Choose or confirm your property management system first. Everything downstream — terminals, processor, integrations — must be compatible with it.</p></div>
+      <div class="step"><div class="step-num">1</div><h3>Start with the PMS</h3><p>Choose or confirm your property management system first. Everything downstream, terminals, processor, integrations, must be compatible with it.</p></div>
       <div class="step"><div class="step-num">2</div><h3>Get compatibility in writing</h3><p>Ask your PMS vendor which processors and terminal types their payment interface supports, and confirm token portability. Written, not verbal.</p></div>
-      <div class="step"><div class="step-num">3</div><h3>Choose the processor</h3><p>Pick from the PMS-supported list. This is also the moment to compare effective rates — a <a href="audit.html">free statement audit</a> tells you what you're really paying today.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Choose the processor</h3><p>Pick from the PMS-supported list. This is also the moment to compare effective rates, a <a href="audit.html">free statement audit</a> tells you what you're really paying today.</p></div>
       <div class="step"><div class="step-num">4</div><h3>Wire the property</h3><p>Run Ethernet to the desk, the interface-service host, and the outlet POS. Set up the guest Wi-Fi as a separate, isolated segment from day one.</p></div>
       <div class="step"><div class="step-num">5</div><h3>Install &amp; configure</h3><p>Set up terminals through the interface service, configure pre-auth amounts, incremental-auth rules, and folio posting from the outlet POS.</p></div>
       <div class="step"><div class="step-num">6</div><h3>Test the full stay</h3><p>Run a test reservation end to end: check-in pre-auth, a restaurant charge posted to the folio, an incremental auth, checkout settlement, and the night audit.</p></div>
@@ -244,37 +244,37 @@
       <details>
         <summary>Countertop payment terminal (Ethernet)</summary>
         <div class="answer">
-          <p>Place one terminal per desk position within comfortable reach of staff. Connect Ethernet to your property LAN switch and power. Complete the processor's activation (usually a code on screen plus a confirmation in their portal), then link the terminal to the PMS payment interface — your PMS vendor provides this step. Run a small test authorization and void it, then confirm the transaction appears in the PMS. Label each terminal (Desk A / Desk B) so troubleshooting later is unambiguous.</p>
+          <p>Place one terminal per desk position within comfortable reach of staff. Connect Ethernet to your property LAN switch and power. Complete the processor's activation (usually a code on screen plus a confirmation in their portal), then link the terminal to the PMS payment interface, your PMS vendor provides this step. Run a small test authorization and void it, then confirm the transaction appears in the PMS. Label each terminal (Desk A / Desk B) so troubleshooting later is unambiguous.</p>
         </div>
       </details>
       <details>
         <summary>Payment interface service</summary>
         <div class="answer">
-          <p>Install on a machine that stays on — a back-office PC or small server on the property LAN, not the front-desk workstation someone might reboot mid-shift. Give it a static IP or DHCP reservation, open only the firewall ports your PMS vendor specifies, and verify the PMS can reach it and it can reach the processor. Test a pre-authorization from the PMS; if it fails here, nothing at the desk will work.</p>
+          <p>Install on a machine that stays on, a back-office PC or small server on the property LAN, not the front-desk workstation someone might reboot mid-shift. Give it a static IP or DHCP reservation, open only the firewall ports your PMS vendor specifies, and verify the PMS can reach it and it can reach the processor. Test a pre-authorization from the PMS; if it fails here, nothing at the desk will work.</p>
         </div>
       </details>
       <details>
         <summary>Mobile payment terminal</summary>
         <div class="answer">
-          <p>Charge fully, connect to cellular or your operational staff Wi-Fi (never guest Wi-Fi), and complete processor activation. If it must work in the parking lot or poolside, verify signal strength at the actual spots staff will use it — not just at the desk. Set a home base at the front desk where it charges between uses, and confirm with your processor how mobile transactions settle alongside desk transactions.</p>
+          <p>Charge fully, connect to cellular or your operational staff Wi-Fi (never guest Wi-Fi), and complete processor activation. If it must work in the parking lot or poolside, verify signal strength at the actual spots staff will use it, not just at the desk. Set a home base at the front desk where it charges between uses, and confirm with your processor how mobile transactions settle alongside desk transactions.</p>
         </div>
       </details>
       <details>
         <summary>Outlet POS with folio posting</summary>
         <div class="answer">
-          <p>Install the outlet POS per your POS vendor's guide, then configure the PMS link for room-charge posting: the POS must be able to look up a guest by room number or name and post the charge to the correct folio. Test with a staff meal — post it to a test room, verify it lands on the right folio in the PMS, then void it. Train outlet staff on the "post to room" button specifically; it's the one they'll get wrong under pressure.</p>
+          <p>Install the outlet POS per your POS vendor's guide, then configure the PMS link for room-charge posting: the POS must be able to look up a guest by room number or name and post the charge to the correct folio. Test with a staff meal, post it to a test room, verify it lands on the right folio in the PMS, then void it. Train outlet staff on the "post to room" button specifically; it's the one they'll get wrong under pressure.</p>
         </div>
       </details>
       <details>
         <summary>Receipt printer &amp; cash drawer</summary>
         <div class="answer">
-          <p>Connect the printer to the front-desk workstation (USB) or network (Ethernet) per your PMS vendor's supported list. Connect the cash drawer to the printer's drawer-kick port. Print a test folio from the PMS and confirm the drawer opens on cash transactions. Keep a spare paper roll at the desk — the 11pm checkout rush is when you'll run out.</p>
+          <p>Connect the printer to the front-desk workstation (USB) or network (Ethernet) per your PMS vendor's supported list. Connect the cash drawer to the printer's drawer-kick port. Print a test folio from the PMS and confirm the drawer opens on cash transactions. Keep a spare paper roll at the desk, the 11pm checkout rush is when you'll run out.</p>
         </div>
       </details>
       <details>
         <summary>Guest Wi-Fi segmentation</summary>
         <div class="answer">
-          <p>Configure the guest network on its own VLAN with client isolation, firewalled off from the PMS, POS, and payment networks. Verify from a guest device that you cannot reach the PMS server, the interface service, or any terminal by IP. Re-check this after any router or access-point firmware update — updates have been known to reset VLAN settings.</p>
+          <p>Configure the guest network on its own VLAN with client isolation, firewalled off from the PMS, POS, and payment networks. Verify from a guest device that you cannot reach the PMS server, the interface service, or any terminal by IP. Re-check this after any router or access-point firmware update, updates have been known to reset VLAN settings.</p>
         </div>
       </details>
     </div>
@@ -287,19 +287,19 @@
     <div class="faq">
       <details>
         <summary>Terminal says "not connected" but looks powered on</summary>
-        <div class="answer"><p>Check the Ethernet cable and the switch port (link lights), then confirm the payment interface service is running — the terminal can look healthy while the interface it talks to is down. Restart the interface service first, then the terminal.</p></div>
+        <div class="answer"><p>Check the Ethernet cable and the switch port (link lights), then confirm the payment interface service is running, the terminal can look healthy while the interface it talks to is down. Restart the interface service first, then the terminal.</p></div>
       </details>
       <details>
         <summary>Pre-authorization works but checkout settlement fails</summary>
-        <div class="answer"><p>This is usually an expired or insufficient authorization: the hold may have lapsed, or the folio total now exceeds the authorized amount. Run an incremental authorization for the difference, then settle. If it persists, the issue is between the interface service and the processor — check the network path and firewall before calling anyone.</p></div>
+        <div class="answer"><p>This is usually an expired or insufficient authorization: the hold may have lapsed, or the folio total now exceeds the authorized amount. Run an incremental authorization for the difference, then settle. If it persists, the issue is between the interface service and the processor, check the network path and firewall before calling anyone.</p></div>
       </details>
       <details>
         <summary>Restaurant charge posted to the wrong room</summary>
-        <div class="answer"><p>Folio posting problems are a PMS-vendor issue first: verify the outlet POS is looking up the current room assignment (guests change rooms). Correct the folio in the PMS, and retrain on the room-lookup step — manual room-number entry is the usual culprit.</p></div>
+        <div class="answer"><p>Folio posting problems are a PMS-vendor issue first: verify the outlet POS is looking up the current room assignment (guests change rooms). Correct the folio in the PMS, and retrain on the room-lookup step, manual room-number entry is the usual culprit.</p></div>
       </details>
       <details>
         <summary>Duplicate charge after a timeout</summary>
-        <div class="answer"><p>After any timeout, <strong>verify the transaction's status before retrying</strong> — check the PMS folio and the processor's transaction list. Retrying blind is how guests get charged twice and how chargebacks start.</p></div>
+        <div class="answer"><p>After any timeout, <strong>verify the transaction's status before retrying</strong>, check the PMS folio and the processor's transaction list. Retrying blind is how guests get charged twice and how chargebacks start.</p></div>
       </details>
       <details>
         <summary>Night audit totals don't match the processor report</summary>
@@ -316,23 +316,23 @@
 <section class="section">
   <div class="wrap">
     <h2 class="section-title">7. Hardware options reference</h2>
-    <p class="section-sub">Real products with links to the manufacturer's own pages (verified 2026-09-28). Models change — confirm compatibility with your PMS vendor before buying.</p>
+    <p class="section-sub">Real products with links to the manufacturer's own pages (verified 2026-09-28). Models change, confirm compatibility with your PMS vendor before buying.</p>
     <h3>Payment terminals</h3>
     <ul>
-      <li><strong>Moneris Go terminal</strong> — Moneris's countertop smart terminal for Canadian businesses. Check Moneris's terminal overview for current models and availability: <a href="https://www.moneris.com/help/MGo-A920-R12-2021-WH-EN/UYT/Moneris_Go_terminal.htm">Moneris Go terminal help &amp; product page</a>.</li>
-      <li><strong>Helcim Smart Terminal</strong> — countertop smart terminal; Helcim publishes Canadian pricing on its own page (listed at CA$429 when checked 2026-09-28 — confirm current pricing before budgeting): <a href="https://www.helcim.com/start/ca/smart-terminal-pricing/">Helcim Smart Terminal pricing (Canada)</a>.</li>
+      <li><strong>Moneris Go terminal</strong>. Moneris's countertop smart terminal for Canadian businesses. Check Moneris's terminal overview for current models and availability: <a href="https://www.moneris.com/help/MGo-A920-R12-2021-WH-EN/UYT/Moneris_Go_terminal.htm">Moneris Go terminal help &amp; product page</a>.</li>
+      <li><strong>Helcim Smart Terminal</strong>, countertop smart terminal; Helcim publishes Canadian pricing on its own page (listed at CA$429 when checked 2026-09-28, confirm current pricing before budgeting): <a href="https://www.helcim.com/start/ca/smart-terminal-pricing/">Helcim Smart Terminal pricing (Canada)</a>.</li>
     </ul>
     <h3>Receipt printers</h3>
     <ul>
-      <li><strong>Epson TM-T88VII</strong> — the workhorse thermal receipt printer found at countless front desks; Ethernet and USB models available: <a href="https://epson.ca/For-Work/POS-System-Devices/POS-Printers/OmniLink-TM-T88VII-Single-station-Thermal-Receipt-Printer/p/C31CJ57052">Epson Canada TM-T88VII product page</a>.</li>
-      <li><strong>Star Micronics TSP143III series</strong> — compact thermal receipt printer with USB, Ethernet, Bluetooth, and Wi-Fi variants (manufacturer's regional product page): <a href="https://starmicronics.co.th/en/product/star-tsp143iii-series/">Star TSP143III product page</a>.</li>
+      <li><strong>Epson TM-T88VII</strong>, the workhorse thermal receipt printer found at countless front desks; Ethernet and USB models available: <a href="https://epson.ca/For-Work/POS-System-Devices/POS-Printers/OmniLink-TM-T88VII-Single-station-Thermal-Receipt-Printer/p/C31CJ57052">Epson Canada TM-T88VII product page</a>.</li>
+      <li><strong>Star Micronics TSP143III series</strong>, compact thermal receipt printer with USB, Ethernet, Bluetooth, and Wi-Fi variants (manufacturer's regional product page): <a href="https://starmicronics.co.th/en/product/star-tsp143iii-series/">Star TSP143III product page</a>.</li>
     </ul>
     <h3>Connectivity backup</h3>
     <ul>
-      <li><strong>Cradlepoint COR Wi-Fi 5</strong> — cellular failover router (~$2,076 CAD via DirectDial Canada); pair with a data plan such as Rogers Wireless Business Internet ($104.99/mo, official). When the main line drops, front-desk card payments keep flowing: <a href="https://www.directdial.com/ca/item/cradlepoint-cor-wi-fi-5-ieee-802-11ac-cellular-ethernet-modem-wireless-router/ma1-0900600m-nna">DirectDial Canada listing</a>.</li>
-      <li><strong>Square Reader (contactless + chip)</strong> — $59 CAD official — a mobile reader for events, the patio bar, or valet: <a href="https://squareup.com/ca/en/point-of-sale">Square Canada</a>.</li>
+      <li><strong>Cradlepoint COR Wi-Fi 5</strong>, cellular failover router (~$2,076 CAD via DirectDial Canada); pair with a data plan such as Rogers Wireless Business Internet ($104.99/mo, official). When the main line drops, front-desk card payments keep flowing: <a href="https://www.directdial.com/ca/item/cradlepoint-cor-wi-fi-5-ieee-802-11ac-cellular-ethernet-modem-wireless-router/ma1-0900600m-nna">DirectDial Canada listing</a>.</li>
+      <li><strong>Square Reader (contactless + chip)</strong>, $59 CAD official, a mobile reader for events, the patio bar, or valet: <a href="https://squareup.com/ca/en/point-of-sale">Square Canada</a>.</li>
     </ul>
-    <p class="roi-note">Scanner and cash-drawer models vary by POS vendor — use your POS vendor's supported-hardware list rather than buying generic. For anything not listed here, your PMS vendor's compatibility list outranks any recommendation.</p>
+    <p class="roi-note">Scanner and cash-drawer models vary by POS vendor, use your POS vendor's supported-hardware list rather than buying generic. For anything not listed here, your PMS vendor's compatibility list outranks any recommendation.</p>
   </div>
 </section>
 
@@ -341,7 +341,7 @@
     <div class="callout">
       <h3>🔒 PCI scope: where your card data flows matters</h3>
       <p>Whether your PMS and workstations fall inside or outside your PCI compliance scope depends on one thing: <strong>does card data pass through the PMS, or does it stay inside the payment terminal?</strong> A standalone or properly semi-integrated terminal keeps card data out of your other systems; a setup where card numbers flow through the PMS pulls far more of your network into scope.</p>
-      <p><a href="pci-scope-guide.html">Read the plain-language PCI scope guide →</a> (conceptual only — always check current official requirements with the PCI Security Standards Council.)</p>
+      <p><a href="pci-scope-guide.html">Read the plain-language PCI scope guide →</a> (conceptual only, always check current official requirements with the PCI Security Standards Council.)</p>
     </div>
   </div>
 </section>
@@ -354,9 +354,9 @@
     <h3>Channel manager</h3>
     <p><strong>What it is:</strong> software that pushes your rates and availability to online travel agencies (OTAs) and pulls reservations back into your PMS, keeping every channel in sync.</p>
     <p><strong>Benefits:</strong> no double-bookings, one place to manage rates, and less manual entry per reservation.</p>
-    <p><strong>Cost:</strong> quote-based — typically priced per property or per room per month. Confirm current pricing with vendors.</p>
+    <p><strong>Cost:</strong> quote-based, typically priced per property or per room per month. Confirm current pricing with vendors.</p>
     <div class="example">
-      <span class="tag">Illustrative example — not a promise</span>
+      <span class="tag">Illustrative example, not a promise</span>
       <h3>Direct-booking shift sketch</h3>
       <table>
         <tr><th>Item</th><th>Amount</th></tr>
@@ -381,13 +381,13 @@
     <p><strong>What it is:</strong> pricing tools that adjust your rates based on occupancy, seasonality, and demand signals.</p>
     <p><strong>Benefits:</strong> steadier occupancy and higher revenue per available room without manual rate changes.</p>
     <p><strong>Cost:</strong> quote-based; usually aimed at larger properties, with lighter tools emerging for independents.</p>
-    <p class="roi-note">ROI sketches are illustrative examples to show how the math works — not quotes, guarantees, or predictions.</p>
+    <p class="roi-note">ROI sketches are illustrative examples to show how the math works, not quotes, guarantees, or predictions.</p>
   </div>
 </section>
 
 <section class="section alt">
   <div class="wrap">
-    <h2 class="section-title">10. Everything integrated — full system map</h2>
+    <h2 class="section-title">10. Everything integrated, full system map</h2>
     <p class="section-sub">How the pieces connect when it's all working.</p>
     <div class="flow">
       <span class="fnode"><b>Website booking engine</b><br>direct reservations</span><span class="farrow">→</span>
@@ -406,22 +406,22 @@
       <span class="fnode"><b>Night audit</b><br>PMS ↔ POS ↔ processor</span><span class="farrow">→</span>
       <span class="fnode"><b>Accounting</b><br>summarized revenue</span>
     </div>
-    <p>Orbiting the PMS: <strong>housekeeping</strong> (room status), <strong>maintenance</strong> (work orders), <strong>guest messaging/CRM</strong>, and <strong>revenue management</strong> (rates). Guest Wi-Fi sits entirely outside this map — isolated, as in the sample setup above.</p>
+    <p>Orbiting the PMS: <strong>housekeeping</strong> (room status), <strong>maintenance</strong> (work orders), <strong>guest messaging/CRM</strong>, and <strong>revenue management</strong> (rates). Guest Wi-Fi sits entirely outside this map, isolated, as in the sample setup above.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <h2 class="section-title">11. What normal looks like — technology spending benchmarks</h2>
-    <p class="section-sub">Published IT-spending figures for context. Payment processing fees sit <em>outside</em> these formal IT budgets — add them separately when comparing total cost.</p>
+    <h2 class="section-title">11. What normal looks like, technology spending benchmarks</h2>
+    <p class="section-sub">Published IT-spending figures for context. Payment processing fees sit <em>outside</em> these formal IT budgets, add them separately when comparing total cost.</p>
     <table class="bench">
       <tr><th>Property size (annual revenue)</th><th>Typical technology spend (% of revenue)</th><th>Notes</th></tr>
       <tr><td>Under $500K</td><td>No credible exact benchmark</td><td>Small independents vary too widely; use qualitative planning, not a percentage.</td></tr>
-      <tr><td>$500K – $5M</td><td>≈ 1–3%</td><td>Typical small-property range.</td></tr>
-      <tr><td>$5M – $50M</td><td>≈ 2–3%</td><td>Mid-size properties and small groups.</td></tr>
-      <tr><td>$50M+</td><td>≈ 2–4%</td><td>Larger portfolios with more systems to run.</td></tr>
+      <tr><td>$500K, $5M</td><td>≈ 1 to 3%</td><td>Typical small-property range.</td></tr>
+      <tr><td>$5M, $50M</td><td>≈ 2 to 3%</td><td>Mid-size properties and small groups.</td></tr>
+      <tr><td>$50M+</td><td>≈ 2 to 4%</td><td>Larger portfolios with more systems to run.</td></tr>
     </table>
-    <p>A broad lodging benchmark often cited puts technology spend at <strong>under 3% of revenue</strong> (Hospitality Technology, 2022). Treat these as context for budgeting, not targets — and remember that processing fees, which can rival the whole IT budget, are not in these figures.</p>
+    <p>A broad lodging benchmark often cited puts technology spend at <strong>under 3% of revenue</strong> (Hospitality Technology, 2022). Treat these as context for budgeting, not targets, and remember that processing fees, which can rival the whole IT budget, are not in these figures.</p>
     <p>Wondering what you're really paying in processing? <a href="audit.html">The free audit measures your true effective rate</a> from your own statements.</p>
   </div>
 </section>
@@ -429,14 +429,14 @@
 <section class="section alt">
   <div class="wrap">
     <h2 class="section-title">12. How AI is changing this sector</h2>
-    <p class="section-sub">Real products, honestly framed. Prices below are third-party published figures accessed 2026-09-28 and subject to change — confirm current pricing with the vendor.</p>
+    <p class="section-sub">Real products, honestly framed. Prices below are third-party published figures accessed 2026-09-28 and subject to change, confirm current pricing with the vendor.</p>
     <ul>
-      <li><strong>Asksuite</strong> — AI chat for hotel websites that answers guest questions and pushes toward direct booking. Pricing is typically quote-based per property; third-party listings show plans starting around $300/month.</li>
-      <li><strong>HiJiffy</strong> — guest-messaging AI across web chat, WhatsApp, and social channels. Pricing quoted per property; third-party listings show around $200/month.</li>
-      <li><strong>Myma.ai</strong> — AI guest-experience platform for messaging and upsells. Third-party listings show around $100/month.</li>
-      <li><strong>GuestChat</strong> — AI chat focused on capturing direct bookings. Third-party listings show around $200/month.</li>
+      <li><strong>Asksuite</strong>. AI chat for hotel websites that answers guest questions and pushes toward direct booking. Pricing is typically quote-based per property; third-party listings show plans starting around $300/month.</li>
+      <li><strong>HiJiffy</strong>, guest-messaging AI across web chat, WhatsApp, and social channels. Pricing quoted per property; third-party listings show around $200/month.</li>
+      <li><strong>Myma.ai</strong>. AI guest-experience platform for messaging and upsells. Third-party listings show around $100/month.</li>
+      <li><strong>GuestChat</strong>. AI chat focused on capturing direct bookings. Third-party listings show around $200/month.</li>
     </ul>
-    <p>The honest way to evaluate any of these: <strong>measure direct-booking lift</strong>. If the tool costs $300/month and it shifts even a few room-nights a month from OTA commission to direct, it pays for itself; if it doesn't move the needle in 90 days, cancel it. AI chat is early — treat every vendor claim as a hypothesis to test on your own numbers, not a fact.</p>
+    <p>The honest way to evaluate any of these: <strong>measure direct-booking lift</strong>. If the tool costs $300/month and it shifts even a few room-nights a month from OTA commission to direct, it pays for itself; if it doesn't move the needle in 90 days, cancel it. AI chat is early, treat every vendor claim as a hypothesis to test on your own numbers, not a fact.</p>
   </div>
 </section>
 
@@ -444,11 +444,11 @@
   <div class="wrap">
     <div class="buried">
       <h2>Enterprise software landscape</h2>
-      <p>Large chains and portfolios run enterprise-grade property management suites with centralized reservations, revenue management, and multi-property reporting — a different market from the independent-property tools above, evaluated through analyst research rather than per-property trials. If you operate at that scale, analyst methodology such as <a href="https://www.gartner.com/en/research/methodologies/magic-quadrants-research">Gartner's Magic Quadrant research methodology</a> explains how those evaluations are constructed. For everyone else, this section can be safely ignored.</p>
+      <p>Large chains and portfolios run enterprise-grade property management suites with centralized reservations, revenue management, and multi-property reporting, a different market from the independent-property tools above, evaluated through analyst research rather than per-property trials. If you operate at that scale, analyst methodology such as <a href="https://www.gartner.com/en/research/methodologies/magic-quadrants-research">Gartner's Magic Quadrant research methodology</a> explains how those evaluations are constructed. For everyone else, this section can be safely ignored.</p>
     </div>
     <div class="cta-band">
       <h2>Paying too much to take cards at your front desk?</h2>
-      <p>Send 3–6 months of processing statements. We'll find the overcharges — you keep half of the documented savings, and owe nothing if we find nothing.</p>
+      <p>Send 3 to 6 months of processing statements. We'll find the overcharges, you keep half of the documented savings, and owe nothing if we find nothing.</p>
       <a class="btn" href="audit.html">Start your free audit</a>
     </div>
   </div>
@@ -457,8 +457,8 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only — your results will differ. This is not financial advice.</p>
-    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
+    <p class="disclaimer">FairRate Audit is an independent audit and consulting service. We are not a payment processor, bank, or financial institution, and we never hold your funds. Savings illustrations on this site are examples only, your results will differ. This is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>, redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining.</p>
     <p class="footer-nav"><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a>
       <a href="pos-services.html">POS services</a> · <a href="simulator.html">Cost simulator</a> · <a href="resources.html">Resources</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
     <p class="footer-nav footer-tools"><strong>Free tools:</strong> <a href="rate-calculator.html">Effective-rate calculator</a> · <a href="fee-tracker.html">Fee-creep tracker</a> · <a href="settlement-calculator.html">Settlement trap</a> · <a href="surcharge-tool.html">Surcharge tool</a> · <a href="transparency-wall.html">Rate transparency wall</a> · <a href="annual-report.html">Annual fee report</a> · <a href="alerts.html">Rate-change alerts</a> · <a href="referrals.html">Referrals</a> · <a href="how-we-get-paid.html">How we get paid</a> · <a href="account.html">My account</a></p>

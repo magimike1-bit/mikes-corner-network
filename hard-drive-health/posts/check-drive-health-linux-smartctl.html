@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to Check Drive Health on Linux: smartctl Without the Guesswork — Hard Drive Health</title>
+<title>How to Check Drive Health on Linux: smartctl Without the Guesswork | Hard Drive Health</title>
 <meta name="description" content="SMART is a drive's self-report, and PASSED is not a clean bill of health. The smartctl command sequence, the raw counters that decide replace-versus-keep, NVMe differences, and hidden-SMART workarounds.">
 <link rel="stylesheet" href="/style.css">
 </head>
@@ -43,13 +43,13 @@
 
   <h2>PASSED is not a verdict: the counters that decide</h2>
   <p>Analyse the RAW_VALUE column first. It is the primary figure. The normalised VALUE, WORST, and THRESH columns can mislead, because some manufacturers use non-standard normalisation; a tidy normalised score can sit beside a raw counter that is quietly climbing.</p>
-  <p>The replace signals are a short list. Growing values in any of these point the same way — copy the data off and replace the disk:</p>
+  <p>The replace signals are a short list. Growing values in any of these point the same way, copy the data off and replace the disk:</p>
   <ul>
-    <li><strong>Reallocated_Sector_Ct</strong> — sectors the drive has already retired and replaced.</li>
-    <li><strong>Current_Pending_Sector</strong> — sectors waiting, unreadable until they are rewritten or retired.</li>
-    <li><strong>Offline_Uncorrectable</strong> — errors the drive could not correct.</li>
-    <li><strong>Media and Data Integrity Errors</strong> — the NVMe-side counterpart, counted in the health log.</li>
-    <li><strong>Available Spare dropping toward its threshold</strong> — the reserve running out.</li>
+    <li><strong>Reallocated_Sector_Ct</strong>, sectors the drive has already retired and replaced.</li>
+    <li><strong>Current_Pending_Sector</strong>, sectors waiting, unreadable until they are rewritten or retired.</li>
+    <li><strong>Offline_Uncorrectable</strong>, errors the drive could not correct.</li>
+    <li><strong>Media and Data Integrity Errors</strong>, the NVMe-side counterpart, counted in the health log.</li>
+    <li><strong>Available Spare dropping toward its threshold</strong>, the reserve running out.</li>
   </ul>
   <p>One reading is a snapshot. Growth is the signal, which is why the dated record matters: the same counter higher at the next check is a decision already made.</p>
 
@@ -60,7 +60,7 @@
 
   <h2>Raw-value traps that are not failures</h2>
   <p>A high raw Hardware ECC Recovered count looks alarming and is not, by itself, a failure indicator. It is normal and informational, and high counts on Seagate drives are by design. Chasing that number alone can send a healthy drive to the bin.</p>
-  <p>The trap runs in both directions. A scary raw number may be routine for that maker, while a modest-looking counter on the decision list — reallocated or pending sectors — may be the real problem. Check the name of the counter before reacting to the size of the number.</p>
+  <p>The trap runs in both directions. A scary raw number may be routine for that maker, while a modest-looking counter on the decision list, reallocated or pending sectors, may be the real problem. Check the name of the counter before reacting to the size of the number.</p>
   <p>For ongoing watch, smartd can alert on attribute changes, which beats remembering to re-run a manual check after the worry has faded.</p>
 
   <h2>When SMART is hidden: USB, RAID, and virtual disks</h2>
@@ -72,17 +72,17 @@
 
   <h2>The replace decision, stated plainly</h2>
   <p>Replace now: <code>-H</code> returns FAILED, or any decision counter is growing, or available spare is dropping to threshold. Copy data first, in priority order, then replace.</p>
-  <p>Keep and monitor: PASSED, decision counters flat between dated checks, and only known-benign raw values — the ECC pattern above — are high. Set the next check date when you record this one.</p>
+  <p>Keep and monitor: PASSED, decision counters flat between dated checks, and only known-benign raw values, the ECC pattern above, are high. Set the next check date when you record this one.</p>
   <p>No verdict yet: SMART is hidden by the connection path. Fix the path and re-check before calling the drive either way.</p>
 
-  <p>— Dex Carter, Tech Writer</p>
+  <p>, Dex Carter, Tech Writer</p>
 
   <p><a href="/">Back to all guides &rarr;</a></p>
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
-    <p>Hard Drive Health — practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p>Hard Drive Health, practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
     <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
   </div>
 </footer>

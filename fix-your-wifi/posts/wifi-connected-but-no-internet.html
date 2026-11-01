@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi Connected but No Internet — Fix Your Wi-Fi</title>
+<meta name="description" content="Connected means your device reached the router — nothing more. Three observable tests (the 169.254 address, the one-device-or-all split, the DNS check) name the broken link, then one fix per link.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Wi-Fi connected but no internet: find which link in the chain broke</h1>
+  <p class="meta">Fixes &middot; 8 min read</p>
+
+  <p>Why does the Wi-Fi icon look perfectly healthy while nothing loads? Because
+  the icon reports on exactly one link: the hop between your device and the
+  router. TP-Link's own troubleshooting guide puts it plainly — a device
+  showing &ldquo;connected&rdquo; has reached the router, and the break sits
+  somewhere further up the chain: the router's address handout, the router
+  itself, the modem, or the provider. &ldquo;Connected, no internet&rdquo; is
+  not one fault with ten possible fixes. It is four different faults sharing
+  one symptom, and three quick tests tell them apart. Run the tests first.
+  The fix for the link that actually broke is usually short.</p>
+
+  <h2>The three tests that name the broken link</h2>
+  <p><strong>Test one: how many devices?</strong> Pick up a second device on
+  the same network and try to load anything. TP-Link's guide draws the split
+  the same way: if only one device has no internet, the problem is likely that
+  device's settings; if every device is affected, the problem is likely the
+  router, the modem, or the provider. This single observation halves the work
+  — a whole-house fault is never fixed by resetting one laptop.</p>
+  <p><strong>Test two: what address did the device get?</strong> On a Windows
+  PC, open Command Prompt, type <code>ipconfig</code>, and read the IPv4
+  Address under the Wi-Fi adapter. If it starts with <strong>169.254</strong>,
+  the router never gave the device an address at all. Microsoft documents
+  this fallback as Automatic Private IP Addressing (APIPA): the address range
+  169.254.0.0 to 169.254.255.255 is reserved for it, a Windows computer
+  assigns itself an address from that range when no DHCP server answers, and
+  such an address can only talk to other devices on the same local network —
+  it cannot reach the internet, by design. A 169.254 address is not a vague
+  error. It is the DHCP link, specifically, reporting itself broken.</p>
+  <p><strong>Test three: can names be resolved?</strong> If the address looks
+  normal (on most home networks it starts 192.168) and the router's admin
+  page opens in a browser, but websites fail to load, suspect DNS — the
+  system that translates a site's name into the address the device actually
+  visits. TP-Link's guide notes that a misconfigured DNS can leave a device
+  connected yet unable to load anything, even while the router and provider
+  are working. That combination — local network fine, names failing — is
+  the DNS link's fingerprint.</p>
+
+  <table>
+    <thead>
+      <tr><th>What the tests show</th><th>Broken link</th><th>Fix section</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Only one device fails; others browse normally</td><td>That device's settings</td><td>Steps 3–6</td></tr>
+      <tr><td>IPv4 address starts with 169.254</td><td>DHCP — the router never handed out an address</td><td>Steps 2–4</td></tr>
+      <tr><td>Normal address, admin page opens, sites fail by name</td><td>DNS</td><td>Step 5</td></tr>
+      <tr><td>Every device fails, including wired</td><td>Router, modem, or provider</td><td>Step 2, then escalation</td></tr>
+    </tbody>
+  </table>
+
+  <h2>The procedure, in order</h2>
+  <ol>
+    <li><strong>Run the three tests above and write down the results.</strong>
+    One device or all of them, the first four digits of the IPv4 address, and
+    whether the admin page opened. Change nothing until the pattern is on
+    paper — the pattern is what chooses the steps below.</li>
+    <li><strong>Restart the modem and router, in that order.</strong> Unplug
+    both. Wait at least 30 seconds. Plug the modem back in first and let its
+    lights settle, then plug in the router and give it a few minutes. A
+    restart is the documented first step for the whole-house pattern: it
+    clears the router's stalled address handouts and forces a fresh
+    connection to the provider. Retest before going further.</li>
+    <li><strong>If one device fails, forget its network and rejoin.</strong>
+    On Windows: Settings &gt; Network &amp; internet &gt; Wi-Fi &gt; Manage
+    known networks, select your network, choose Forget, then reconnect and
+    type the password again. On a phone: open the network's details in Wi-Fi
+    settings and choose Forget, then rejoin. Apple notes that after router
+    settings change, a device may need exactly this — forget and rejoin — so
+    it picks up the new settings instead of replaying stale ones.</li>
+    <li><strong>If the address was 169.254, renew it.</strong> Open Command
+    Prompt as administrator and run <code>ipconfig /release</code>, then
+    <code>ipconfig /renew</code>. Run <code>ipconfig</code> again: a normal
+    address means the router is handing out addresses again. If 169.254
+    comes back, the router's DHCP side is still not answering — restart the
+    router once more (step 2) and check its admin page for a disabled DHCP
+    server before touching the device again.</li>
+    <li><strong>If names were the failure, set DNS back to automatic.</strong>
+    On Windows, following TP-Link's documented path: Settings &gt; Network
+    and Internet &gt; Change adapter options, right-click the Wi-Fi
+    connection, choose Properties, then Internet Protocol Version 4
+    (TCP/IPv4), then Properties again, and select &ldquo;Obtain DNS server
+    address automatically&rdquo;. TP-Link's guide gives a public resolver,
+    8.8.8.8, as the alternative entry in the preferred DNS field. Test a
+    site by name after the change.</li>
+    <li><strong>Still stuck on one Windows device? Run the documented command
+    sequence.</strong> In an administrator Command Prompt, in this order:
+    <code>netsh winsock reset</code>, <code>netsh int ip reset</code>,
+    <code>ipconfig /release</code>, <code>ipconfig /renew</code>,
+    <code>ipconfig /flushdns</code> — the sequence Microsoft Support
+    publishes for this fault. Restart the PC and retest.</li>
+    <li><strong>Last resort on that device: Network reset.</strong> First
+    write down anything custom — a VPN setup, a fixed IP address — because
+    Network reset removes the network adapters and their settings, reinstalls
+    them with defaults after the restart, and VPN software may need to be
+    reinstalled. Microsoft's guidance is explicit that this should be the
+    last step tried. On Windows 11 the path is Settings &gt; Network &amp;
+    internet &gt; Advanced network settings &gt; Network reset &gt; Reset
+    now. Rejoin the Wi-Fi afterwards and retest.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the previously failing device
+  shows a normal IPv4 address instead of a 169.254 one, loads three different
+  websites by name in a row, and is still online after a restart of the
+  device itself. Every other device in the house was untouched and stayed
+  online throughout — that restraint is part of the success, because the
+  fault was one link, not the whole chain.</p>
+
+  <h2>When every device fails the wired test too: escalate with evidence</h2>
+  <p>Plug a computer into the modem or router by Ethernet cable and test
+  again. If wired browsing fails as well, and a proper restart changed
+  nothing, the remaining links are the modem's line and the provider — home
+  settings are finished. Call with the record from step 1 in hand: the fault
+  affects every device, wired included; the modem and router were restarted
+  in order at a stated time; the modem's internet light state; and how long
+  the outage has run. That record moves the call past the scripted reboot
+  suggestion, because the reboot in the script has already been done, in
+  order, with the result measured. Keep the record if it recurs — a pattern
+  of dated, wired failures is the evidence a provider cannot argue with.</p>
+
+  <p class="disclaimer">General information about home networking, not
+  professional IT advice. Router menus and modem lights vary by model; check
+  the manual for a specific device.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

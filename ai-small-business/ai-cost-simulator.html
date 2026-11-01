@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Cost Simulator — What Should AI Cost My Business? | AI Small Business Playbook</title>
+<title>AI Cost Simulator | What Should AI Cost My Business? | AI Small Business Playbook</title>
 <meta name="description" content="Build your small business's AI stack item by item: pick your business type, answer 3 questions, and see real AI tool prices next to the staff hours each one replaces. Estimates with labeled sources.">
 <link rel="stylesheet" href="/style.css">
 <!-- AdSense: ad code goes here -->
@@ -95,7 +95,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   <div class="wrap">
     <p class="kicker">Interactive tool · Canadian small business</p>
     <h1>What should AI cost your business?</h1>
-    <p class="lead">Pick your business type, answer 3 quick questions, and build a realistic AI stack item by item. Every price comes from a real product with a labeled source — and every tool is shown next to the staff hours it replaces, with the wage math visible.</p>
+    <p class="lead">Pick your business type, answer 3 quick questions, and build a realistic AI stack item by item. Every price comes from a real product with a labeled source, and every tool is shown next to the staff hours it replaces, with the wage math visible.</p>
     <div class="btn-row"><a class="btn ghost" href="#sim-start">Start building your stack</a></div>
   </div>
 </section>
@@ -111,7 +111,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 
 <section class="sim-step">
   <h2>2 · Answer 3 quick questions</h2>
-  <p class="hint">We build a realistic starting stack from your answers — everything stays adjustable below.</p>
+  <p class="hint">We build a realistic starting stack from your answers, everything stays adjustable below.</p>
 
   <div class="q-block" id="q-restaurant">
     <div class="input-grid">
@@ -132,7 +132,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   <div class="q-block" id="q-trades" style="display:none">
     <div class="input-grid">
       <div><label for="tr-crew">Crew size (incl. you)</label><input type="number" id="tr-crew" min="1" value="3"><div class="input-note">Field staff who can't answer the phone.</div></div>
-      <div><label for="tr-phone">Who answers the phone during jobs?</label><select id="tr-phone"><option value="me" selected>Me, between jobs</option><option value="office">Office staff</option><option value="nobody">Nobody — voicemail</option></select><div class="input-note">The #1 leak for trades: the job goes to whoever picks up.</div></div>
+      <div><label for="tr-phone">Who answers the phone during jobs?</label><select id="tr-phone"><option value="me" selected>Me, between jobs</option><option value="office">Office staff</option><option value="nobody">Nobody, voicemail</option></select><div class="input-note">The #1 leak for trades: the job goes to whoever picks up.</div></div>
       <div><label for="tr-invoicing">How do you invoice?</label><select id="tr-invoicing"><option value="app" selected>Invoicing app</option><option value="paper">Paper / spreadsheets</option><option value="accountant">Accountant handles it</option></select><div class="input-note">Paper invoicing is where AI capture earns its keep.</div></div>
     </div>
   </div>
@@ -148,7 +148,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   <div class="q-block" id="q-ecommerce" style="display:none">
     <div class="input-grid">
       <div><label for="ec-orders">Orders per month</label><input type="number" id="ec-orders" min="0" value="300"><div class="input-note">Drives support volume and catalog work.</div></div>
-      <div><label for="ec-support">Support messages per week</label><input type="number" id="ec-support" min="0" value="10"><div class="input-note">"Where's my order?" — the chatbot's job.</div></div>
+      <div><label for="ec-support">Support messages per week</label><input type="number" id="ec-support" min="0" value="10"><div class="input-note">"Where's my order?", the chatbot's job.</div></div>
       <div><label for="ec-books">Who does the books?</label><select id="ec-books"><option value="self" selected>Me, after hours</option><option value="bookkeeper">A bookkeeper</option><option value="accountant">Accountant only</option></select><div class="input-note">Decides whether invoice capture helps you.</div></div>
     </div>
   </div>
@@ -156,7 +156,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   <div class="q-block" id="q-salon" style="display:none">
     <div class="input-grid">
       <div><label for="sa-chairs">Chairs / service stations</label><input type="number" id="sa-chairs" min="1" value="8"><div class="input-note">Drives booking and phone volume.</div></div>
-      <div><label for="sa-onlinebooking">Online booking already?</label><select id="sa-onlinebooking"><option value="no" selected>No — phone/text only</option><option value="yes">Yes</option></select><div class="input-note">No online booking = the biggest single gap.</div></div>
+      <div><label for="sa-onlinebooking">Online booking already?</label><select id="sa-onlinebooking"><option value="no" selected>No, phone/text only</option><option value="yes">Yes</option></select><div class="input-note">No online booking = the biggest single gap.</div></div>
       <div><label for="sa-marketing">Who does marketing?</label><select id="sa-marketing"><option value="self" selected>Me, when I can</option><option value="none">Nobody</option><option value="agency">An agency</option></select><div class="input-note">Decides whether email tools help.</div></div>
     </div>
   </div>
@@ -164,7 +164,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   <div class="derive-summary" id="derive-summary" aria-live="polite"></div>
 
   <h3 style="margin:1.4em 0 .3em;font-size:1.05rem;color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Your wage baseline</h3>
-  <p class="hint">Every "hours replaced" figure below is converted with this number — change it to match your reality.</p>
+  <p class="hint">Every "hours replaced" figure below is converted with this number, change it to match your reality.</p>
   <div class="input-grid" style="max-width:420px">
     <div><label for="in-wage">Average hourly labor cost (CAD/hr)</label><input type="number" id="in-wage" min="0" step="0.5" value="25"><div class="input-note">Wage + overhead, or your own effective rate.</div></div>
   </div>
@@ -183,9 +183,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
     <div>
       <div class="typical-wrap">
         <button id="btn-typical" class="typical-btn">✨ Load a typical setup for my business type</button>
-        <div class="input-note" style="margin-top:8px">Zero-effort path: fills in a normal configuration. A starting point — not a recommendation. Adjust to match yours.</div>
+        <div class="input-note" style="margin-top:8px">Zero-effort path: fills in a normal configuration. A starting point, not a recommendation. Adjust to match yours.</div>
       </div>
-      <div class="tier" id="tier-core"><h3>✅ Essentials — the core stack</h3><p class="tier-sub">Tools with a proven small-business track record. Start here; most shops need only 2–3 of these.</p><div id="core-list"></div></div>
+      <div class="tier" id="tier-core"><h3>✅ Essentials, the core stack</h3><p class="tier-sub">Tools with a proven small-business track record. Start here; most shops need only 2 to 3 of these.</p><div id="core-list"></div></div>
       <div class="tier nice" id="tier-nice"><h3>💡 Nice to have</h3><p class="tier-sub">Genuinely useful for some, a luxury for most. Same honest pricing, visually de-emphasized.</p><div id="nice-list"></div></div>
     </div>
     <div class="sim-side">
@@ -195,7 +195,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
         <div class="row"><span>Staff hours freed / month</span><span class="val" id="t-hours">0</span></div>
         <div class="row"><span>Value of freed time</span><span class="val" id="t-value">$0</span></div>
         <div class="row grand"><span>Est. net monthly</span><span class="val" id="t-net">$0</span></div>
-        <p class="fine">Estimates from published pricing (see confidence labels). Freed time only becomes money if you redeploy it — serve more customers, cut overtime, drop a shift. Prices change: verify before you buy.</p>
+        <p class="fine">Estimates from published pricing (see confidence labels). Freed time only becomes money if you redeploy it, serve more customers, cut overtime, drop a shift. Prices change: verify before you buy.</p>
       </div>
     </div>
   </div>
@@ -206,8 +206,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
     <h2>Read this before you spend a dollar</h2>
     <ul>
       <li><strong>Start with one tool, not six.</strong> Every successful small-business AI story looks the same: one well-defined workflow, a measurable baseline, a human in the loop.</li>
-      <li><strong>Free tiers first.</strong> Most tools above have a free plan — run the free tier for a month and measure the hours before paying.</li>
-      <li><strong>Most "AI" wins are software wins.</strong> Salon no-shows fall 25–40% from automated SMS reminders — a 2015 technology. AI phone answering is the upgrade, not the foundation.</li>
+      <li><strong>Free tiers first.</strong> Most tools above have a free plan, run the free tier for a month and measure the hours before paying.</li>
+      <li><strong>Most "AI" wins are software wins.</strong> Salon no-shows fall 25 to 40% from automated SMS reminders, a 2015 technology. AI phone answering is the upgrade, not the foundation.</li>
       <li><strong>Your data is the blocker, not the model.</strong> An agent is only as good as the records feeding it. Clean item lists and digital invoices come before agents.</li>
     </ul>
   </div>
@@ -218,7 +218,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
     <div class="calc-teaser">
       <div>
         <h2>Picked a tool? Run the ROI math.</h2>
-        <p>Take the monthly cost from your stack above and plug it into the ROI calculator with your own hours — it'll show estimated payback time and net benefit.</p>
+        <p>Take the monthly cost from your stack above and plug it into the ROI calculator with your own hours, it'll show estimated payback time and net benefit.</p>
       </div>
       <a class="btn" href="/roi-calculator.html">Open the ROI calculator</a>
     </div>
@@ -227,24 +227,24 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 
 <section class="sim-step sources">
   <h2>Sources &amp; access dates</h2>
-  <p>All prices verified or re-verified on <strong>2026-09-28</strong>. "Official" = the vendor's own page; "Reported" = reputable third-party; "Estimate" = our clearly-labeled reasonable estimate; "Quote-based" = no published SMB price — get a quote.</p>
+  <p>All prices verified or re-verified on <strong>2026-09-28</strong>. "Official" = the vendor's own page; "Reported" = reputable third-party; "Estimate" = our clearly-labeled reasonable estimate; "Quote-based" = no published SMB price, get a quote.</p>
   <ul>
-    <li>ChatGPT Plus US$20/mo; free tier — <strong>official</strong> (OpenAI Help Center).</li>
-    <li>Shopify Magic: $0, included with every Shopify plan — <strong>official</strong> (Shopify App Store listing).</li>
-    <li>GlossGenius Standard US$24/mo, Gold US$48/mo — <strong>official</strong> (glossgenius.com blog, 2026).</li>
-    <li>Tidio: Free $0; Starter ~US$29/mo; Growth from ~US$59/mo — <strong>official</strong> (tidio.com blog, 2026).</li>
-    <li>7shifts: free Comp plan for small teams; Essentials ~US$40/mo/location; Pro ~US$80/mo/location — <strong>reported</strong> (ontheclock.com, posusa.com, emergent.sh, Sep 2026).</li>
-    <li>Slang.ai Core ~US$399/mo per location — <strong>reported</strong> (cloudtalk.io, maple.inc, G2, Sep 2026). Entry-tier phone agents ~US$66–79/mo (Goodcall-style); Dialzara from US$29/mo — <strong>reported</strong> (cloudtalk.io, Sep 2026).</li>
-    <li>Stockbot inventory forecasting: free plan; paid ~US$9–25/mo — <strong>reported</strong> (taranker.com, commoninja.com, 2026).</li>
-    <li>Otter.ai: Basic free; Pro ~US$17/mo per user — <strong>reported</strong> (castmagic.io, ecommerceparadise.com, MeetGeek, Sep 2026).</li>
-    <li>Mailchimp: Free (250 contacts); Essentials from ~US$13/mo; Standard from ~US$20/mo — <strong>reported</strong> (sendx.io, justpricing.com, smtpedia.com, Sep 2026).</li>
-    <li>Vagaro ~US$24–30/mo; Square Appointments free for solo — <strong>reported</strong> (glossgenius.com blog, cherdigitalanalytics.com, 2026).</li>
-    <li>QuickBooks/Xero AI invoice capture: $0 extra, built into plans — <strong>reported</strong> (widely documented; research 2026-09-28).</li>
-    <li>Scandit ShelfView: from ~US$199/mo starting tier — <strong>reported</strong> (published pricing tier; research 2026-09-28).</li>
-    <li>Hours-replaced figures: <strong>estimates</strong> unless noted — e.g. 42-seat Portland restaurant saved 10 staff hrs/wk at $89/mo (Medium, Jun 2026); scheduling 2–4 manager hrs/wk is a vendor-adjacent rule of thumb.</li>
-    <li>AI review-response drafting: <strong>quote-based</strong> — no published small-business benchmark found.</li>
+    <li>ChatGPT Plus US$20/mo; free tier, <strong>official</strong> (OpenAI Help Center).</li>
+    <li>Shopify Magic: $0, included with every Shopify plan, <strong>official</strong> (Shopify App Store listing).</li>
+    <li>GlossGenius Standard US$24/mo, Gold US$48/mo, <strong>official</strong> (glossgenius.com blog, 2026).</li>
+    <li>Tidio: Free $0; Starter ~US$29/mo; Growth from ~US$59/mo, <strong>official</strong> (tidio.com blog, 2026).</li>
+    <li>7shifts: free Comp plan for small teams; Essentials ~US$40/mo/location; Pro ~US$80/mo/location, <strong>reported</strong> (ontheclock.com, posusa.com, emergent.sh, Sep 2026).</li>
+    <li>Slang.ai Core ~US$399/mo per location, <strong>reported</strong> (cloudtalk.io, maple.inc, G2, Sep 2026). Entry-tier phone agents ~US$66 to 79/mo (Goodcall-style); Dialzara from US$29/mo, <strong>reported</strong> (cloudtalk.io, Sep 2026).</li>
+    <li>Stockbot inventory forecasting: free plan; paid ~US$9 to 25/mo, <strong>reported</strong> (taranker.com, commoninja.com, 2026).</li>
+    <li>Otter.ai: Basic free; Pro ~US$17/mo per user, <strong>reported</strong> (castmagic.io, ecommerceparadise.com, MeetGeek, Sep 2026).</li>
+    <li>Mailchimp: Free (250 contacts); Essentials from ~US$13/mo; Standard from ~US$20/mo, <strong>reported</strong> (sendx.io, justpricing.com, smtpedia.com, Sep 2026).</li>
+    <li>Vagaro ~US$24 to 30/mo; Square Appointments free for solo, <strong>reported</strong> (glossgenius.com blog, cherdigitalanalytics.com, 2026).</li>
+    <li>QuickBooks/Xero AI invoice capture: $0 extra, built into plans, <strong>reported</strong> (widely documented; research 2026-09-28).</li>
+    <li>Scandit ShelfView: from ~US$199/mo starting tier, <strong>reported</strong> (published pricing tier; research 2026-09-28).</li>
+    <li>Hours-replaced figures: <strong>estimates</strong> unless noted, e.g. 42-seat Portland restaurant saved 10 staff hrs/wk at $89/mo (Medium, Jun 2026); scheduling 2 to 4 manager hrs/wk is a vendor-adjacent rule of thumb.</li>
+    <li>AI review-response drafting: <strong>quote-based</strong>, no published small-business benchmark found.</li>
   </ul>
-  <p>Most AI tools bill in USD — your card statement will show the CAD equivalent at its own rate.</p>
+  <p>Most AI tools bill in USD, your card statement will show the CAD equivalent at its own rate.</p>
 </section>
 
 </div>
@@ -253,7 +253,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 <footer class="site-footer">
   <div class="wrap">
     <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
-    <p><strong>AI Small Business Playbook</strong> — practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <p><strong>AI Small Business Playbook</strong>, practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
     <nav>
       <a href="/index.html">Home</a>
       <a href="/index.html#guides">All guides</a>

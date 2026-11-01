@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Print Cost Calculator — What Does This Print Really Cost? | 3D Printing at Home</title>
-<meta name="description" content="Interactive true-cost-per-print calculator: pick your printer class, filament, and print time — get filament, electricity, wear, and failed-print costs with every number sourced.">
+<title>Print Cost Calculator | What Does This Print Really Cost? | 3D Printing at Home</title>
+<meta name="description" content="Interactive true-cost-per-print calculator: pick your printer class, filament, and print time, get filament, electricity, wear, and failed-print costs with every number sourced.">
 <link rel="stylesheet" href="style.css">
 <!-- AdSense: ad code goes here -->
 <style>
@@ -57,7 +57,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html">3D Printing at Home</a>
-    <p class="tagline">Practical 3D printing know-how for beginners — plain language, no hype</p>
+    <p class="tagline">Practical 3D printing know-how for beginners, plain language, no hype</p>
     <nav class="site-nav" aria-label="Site">
       <a href="index.html">Home</a>
       <a href="print-cost-calculator.html" class="active" aria-current="page">Cost calculator</a>
@@ -71,13 +71,13 @@
   <section class="intro">
     <h1>What does this print really cost?</h1>
     <p>Filament is only part of the story. Pick your printer, tell us about the print,
-    and the calculator works out filament, electricity, wear, and the failed prints you'll
-    inevitably have — every number labeled with its source or marked as an estimate. Adjust anything.</p>
+ and the calculator works out filament, electricity, wear, and the failed prints you'll
+ inevitably have, every number labeled with its source or marked as an estimate. Adjust anything.</p>
   </section>
 
   <section class="calc-step" id="step-printer">
     <h2>1 · Pick your printer</h2>
-    <p class="hint">Power draw drives the electricity line. Rated power is the manufacturer's maximum; the "typical average" is what printing actually draws most of the time — both stay adjustable below.</p>
+    <p class="hint">Power draw drives the electricity line. Rated power is the manufacturer's maximum; the "typical average" is what printing actually draws most of the time, both stay adjustable below.</p>
     <div class="pick-grid" id="printer-grid"></div>
   </section>
 
@@ -89,7 +89,7 @@
       <div>
         <label for="in-grams">Filament for this print (grams)</label>
         <input type="number" id="in-grams" min="0" step="1" value="50">
-        <div class="input-note">From your slicer estimate — includes supports and brim.</div>
+        <div class="input-note">From your slicer estimate, includes supports and brim.</div>
       </div>
       <div>
         <label for="in-hours">Print time (hours)</label>
@@ -101,7 +101,7 @@
 
   <section class="calc-step" id="step-tune">
     <h2>3 · Fine-tune the numbers</h2>
-    <p class="hint">Everything below starts from sourced defaults. Change any of them — the totals update live.</p>
+    <p class="hint">Everything below starts from sourced defaults. Change any of them, the totals update live.</p>
     <div class="calc-inputs">
       <div>
         <label for="in-watts">Average power draw while printing (watts)</label>
@@ -111,13 +111,13 @@
       <div>
         <label for="in-rate">Electricity rate (Ontario residential)</label>
         <select id="in-rate">
-          <option value="0.120" selected>Tiered — 12.0¢/kWh (first 1,000 kWh/mo)</option>
-          <option value="0.098">Time-of-use off-peak — 9.8¢/kWh</option>
-          <option value="0.157">Time-of-use mid-peak — 15.7¢/kWh</option>
-          <option value="0.203">Time-of-use on-peak — 20.3¢/kWh</option>
-          <option value="0.039">Ultra-low overnight — 3.9¢/kWh (11pm–7am)</option>
+          <option value="0.120" selected>Tiered, 12.0¢/kWh (first 1,000 kWh/mo)</option>
+          <option value="0.098">Time-of-use off-peak, 9.8¢/kWh</option>
+          <option value="0.157">Time-of-use mid-peak, 15.7¢/kWh</option>
+          <option value="0.203">Time-of-use on-peak, 20.3¢/kWh</option>
+          <option value="0.039">Ultra-low overnight, 3.9¢/kWh (11pm, 7am)</option>
         </select>
-        <div class="input-note">Ontario Energy Board Regulated Price Plan, effective Nov 1, 2025 – Oct 31, 2026 (accessed 2026-09-28). Off-peak / overnight printing is the cheapest window.</div>
+        <div class="input-note">Ontario Energy Board Regulated Price Plan, effective Nov 1, 2025, Oct 31, 2026 (accessed 2026-09-28). Off-peak / overnight printing is the cheapest window.</div>
       </div>
       <div>
         <label for="in-kgprice">Filament price ($/kg)</label>
@@ -127,7 +127,7 @@
       <div>
         <label for="in-wear">Wear &amp; maintenance allowance ($/print-hour)</label>
         <input type="number" id="in-wear" min="0" step="0.05" value="0.25">
-        <div class="input-note">Our estimate — nozzles, build plates, belts, and fans wear out. At $0.25/hr, 100 print-hours sets aside $25.</div>
+        <div class="input-note">Our estimate, nozzles, build plates, belts, and fans wear out. At $0.25/hr, 100 print-hours sets aside $25.</div>
       </div>
       <div>
         <label for="in-store">Store price of the same item ($, optional)</label>
@@ -142,7 +142,7 @@
             <input type="number" id="in-fail-pct" min="0" max="100" step="1" value="15" style="width:64px;display:inline-block;padding:6px 8px" aria-label="Failed-print risk percent">%
             of (filament + electricity) as expected waste</span>
         </div>
-        <div class="input-note">Our estimate: roughly 1 in 7 prints fails or needs a reprint. Set it to your own track record — or uncheck to skip it.</div>
+        <div class="input-note">Our estimate: roughly 1 in 7 prints fails or needs a reprint. Set it to your own track record, or uncheck to skip it.</div>
       </div>
     </div>
   </section>
@@ -163,28 +163,28 @@
   <section class="calc-step">
     <h2>Sources</h2>
     <ul class="src-list">
-      <li><strong>Creality Ender-3 V3 — rated power 350W.</strong> Creality official product specs, creality.com (accessed 2026-09-28). <span class="badge official">Official</span></li>
-      <li><strong>Bambu Lab A1 — rated power 350W.</strong> Retailer technical data sheet from Bambu's spec data (digitec.ch, accessed 2026-09-28). <span class="badge reported">Reported</span></li>
-      <li><strong>Bambu Lab P1S — max power 1000W@220V, 350W@110V.</strong> Bambu Lab official tech specs, bambulab.com (accessed 2026-09-28). Canada runs on ~110V, so the 350W figure applies. <span class="badge official">Official</span></li>
-      <li><strong>Ender-5 Plus class — rated power 504W.</strong> Third-party comparison spec table, 3dfila.com (accessed 2026-09-28). <span class="badge reported">Reported</span></li>
-      <li><strong>Bambu A1 / P1 average draw — 70W / 100W.</strong> Third-party power-consumption measurements: 0.07 kWh/h (A1), 0.10 kWh/h (P1) reported by call-3d.com (accessed 2026-09-28). <span class="badge reported">Reported</span></li>
-      <li><strong>Ender-3 class / large-format average draw — 120W / 180W.</strong> Our estimates: open-frame printers with 60–100°C beds typically average well under rated power once heat-up spikes pass. Adjustable. <span class="badge estimate">Estimate</span></li>
-      <li><strong>PLA $19.99/kg, PETG $19.99/kg.</strong> 3D Printing Canada "Budget PLA / Budget PETG Filament (with spool), 1.75mm, 1kg" — regular price, 3dprintingcanada.com (accessed 2026-09-28; page crawled 2026-09-27). <span class="badge reported">Reported</span></li>
+      <li><strong>Creality Ender-3 V3, rated power 350W.</strong> Creality official product specs, creality.com (accessed 2026-09-28). <span class="badge official">Official</span></li>
+      <li><strong>Bambu Lab A1, rated power 350W.</strong> Retailer technical data sheet from Bambu's spec data (digitec.ch, accessed 2026-09-28). <span class="badge reported">Reported</span></li>
+      <li><strong>Bambu Lab P1S, max power 1000W@220V, 350W@110V.</strong> Bambu Lab official tech specs, bambulab.com (accessed 2026-09-28). Canada runs on ~110V, so the 350W figure applies. <span class="badge official">Official</span></li>
+      <li><strong>Ender-5 Plus class, rated power 504W.</strong> Third-party comparison spec table, 3dfila.com (accessed 2026-09-28). <span class="badge reported">Reported</span></li>
+      <li><strong>Bambu A1 / P1 average draw, 70W / 100W.</strong> Third-party power-consumption measurements: 0.07 kWh/h (A1), 0.10 kWh/h (P1) reported by call-3d.com (accessed 2026-09-28). <span class="badge reported">Reported</span></li>
+      <li><strong>Ender-3 class / large-format average draw, 120W / 180W.</strong> Our estimates: open-frame printers with 60 to 100°C beds typically average well under rated power once heat-up spikes pass. Adjustable. <span class="badge estimate">Estimate</span></li>
+      <li><strong>PLA $19.99/kg, PETG $19.99/kg.</strong> 3D Printing Canada "Budget PLA / Budget PETG Filament (with spool), 1.75mm, 1kg", regular price, 3dprintingcanada.com (accessed 2026-09-28; page crawled 2026-09-27). <span class="badge reported">Reported</span></li>
       <li><strong>ABS $25.99/kg.</strong> Polymaker PolyLite ABS 1.75mm 1kg, amazon.ca listing snapshot (accessed 2026-09-28; crawl ~2026-05). <span class="badge reported">Reported</span></li>
       <li><strong>TPU $29.99/kg.</strong> DURAMIC 3D TPU 95A 1.75mm 1kg, amazon.ca listing snapshot (accessed 2026-09-28; crawl ~2026-04). <span class="badge reported">Reported</span></li>
-      <li><strong>Ontario electricity rates.</strong> Ontario Energy Board Regulated Price Plan via thecanadianwire.com, npei.ca, tillsonburghydro.ca — tiered 12.0¢/14.2¢, TOU 9.8¢/15.7¢/20.3¢, ULO overnight 3.9¢ (accessed 2026-09-28). New rates are announced mid-October 2026. <span class="badge reported">Reported</span></li>
-      <li><strong>Wear allowance $0.25/print-hour and 15% failed-print adder.</strong> Our estimates — labeled, adjustable, and toggleable. <span class="badge estimate">Estimate</span></li>
+      <li><strong>Ontario electricity rates.</strong> Ontario Energy Board Regulated Price Plan via thecanadianwire.com, npei.ca, tillsonburghydro.ca, tiered 12.0¢/14.2¢, TOU 9.8¢/15.7¢/20.3¢, ULO overnight 3.9¢ (accessed 2026-09-28). New rates are announced mid-October 2026. <span class="badge reported">Reported</span></li>
+      <li><strong>Wear allowance $0.25/print-hour and 15% failed-print adder.</strong> Our estimates, labeled, adjustable, and toggleable. <span class="badge estimate">Estimate</span></li>
     </ul>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
-    <p>3D Printing at Home — beginner guides to desktop 3D printing. Content is for
-    general information only. 3D printers involve hot surfaces (nozzle and heated bed),
-    moving parts, and sometimes fumes: follow your printer's manual, print in a
-    ventilated space, and keep children and pets clear of the machine.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>, redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>3D Printing at Home, beginner guides to desktop 3D printing. Content is for
+ general information only. 3D printers involve hot surfaces (nozzle and heated bed),
+ moving parts, and sometimes fumes: follow your printer's manual, print in a
+ ventilated space, and keep children and pets clear of the machine.</p>
   <p class="footer-nav"><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
 </div>
 </footer>

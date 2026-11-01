@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>True Cost of Ownership Simulator — What a Car Really Costs Over 5 Years</title>
-<meta name="description" content="Interactive simulator: pick a vehicle class, answer 3 questions, and see a sourced 5-year total cost of ownership — depreciation, fuel, insurance, maintenance, and financing — with every figure adjustable.">
+<title>True Cost of Ownership Simulator | What a Car Really Costs Over 5 Years</title>
+<meta name="description" content="Interactive simulator: pick a vehicle class, answer 3 questions, and see a sourced 5-year total cost of ownership, depreciation, fuel, insurance, maintenance, and financing, with every figure adjustable.">
 <link rel="stylesheet" href="/style.css">
 <!-- AdSense: ad code goes here -->
 <style>
@@ -82,9 +82,8 @@
 <main class="wrap sim-main">
   <section class="intro">
     <h1>What will this car really cost you?</h1>
-    <p>Pick a vehicle type, answer three questions, and get a 5-year total cost of ownership —
-    depreciation, fuel, insurance, maintenance, and financing — built from published Canadian
-    figures. Every number is sourced, dated, and adjustable.</p>
+    <p>Pick a vehicle type, answer three questions, and get a 5-year total cost of ownership, depreciation, fuel, insurance, maintenance, and financing, built from published Canadian
+ figures. Every number is sourced, dated, and adjustable.</p>
   </section>
 
   <section class="sim-step">
@@ -100,7 +99,7 @@
 
   <section class="sim-step">
     <h2>2 &middot; Answer 3 quick questions</h2>
-    <p class="hint">We build your cost breakdown from your answers — every figure stays adjustable below.</p>
+    <p class="hint">We build your cost breakdown from your answers, every figure stays adjustable below.</p>
     <div class="q-grid">
       <div class="q-card">
         <label class="q-label" for="in-km">Annual kilometres driven</label>
@@ -110,9 +109,9 @@
       <div class="q-card">
         <span class="q-label">How are you paying?</span>
         <div class="radio-row" role="radiogroup" aria-label="Financing">
-          <label><input type="radio" name="fin" value="cash" checked> Cash — full price up front</label>
-          <label><input type="radio" name="fin" value="financed"> Financed — loan with interest</label>
-          <label><input type="radio" name="fin" value="lease"> Leased — monthly payments</label>
+          <label><input type="radio" name="fin" value="cash" checked> Cash, full price up front</label>
+          <label><input type="radio" name="fin" value="financed"> Financed, loan with interest</label>
+          <label><input type="radio" name="fin" value="lease"> Leased, monthly payments</label>
         </div>
         <p class="q-note">Financing adds the interest cost; the loan principal is equity in a car you own.</p>
       </div>
@@ -127,12 +126,12 @@
       </div>
     </div>
     <div class="fin-inputs" id="fin-box" style="display:none">
-      <div><label for="in-down">Down payment (%)</label><input type="number" id="in-down" min="0" max="100" step="1" value="10"><p class="q-note">Your choice — no published "typical".<span class="src-tag yours">Yours</span></p></div>
+      <div><label for="in-down">Down payment (%)</label><input type="number" id="in-down" min="0" max="100" step="1" value="10"><p class="q-note">Your choice, no published "typical".<span class="src-tag yours">Yours</span></p></div>
       <div><label for="in-rate">Loan rate (APR %)</label><input type="number" id="in-rate" min="0" max="30" step="0.01"><p class="q-note" id="rate-note"></p></div>
       <div><label for="in-term">Loan term (months)</label><input type="number" id="in-term" min="12" max="96" step="6" value="60"><p class="q-note">60 months is a common term.<span class="src-tag estimate">Estimate</span></p></div>
     </div>
     <div class="fin-inputs" id="lease-box" style="display:none">
-      <div><label for="in-lease">Monthly lease payment ($)</label><input type="number" id="in-lease" min="0" step="10" placeholder="e.g. 550"><p class="q-note">Enter your lease quote — rates vary too widely for a default.<span class="src-tag yours">Yours</span></p></div>
+      <div><label for="in-lease">Monthly lease payment ($)</label><input type="number" id="in-lease" min="0" step="10" placeholder="e.g. 550"><p class="q-note">Enter your lease quote, rates vary too widely for a default.<span class="src-tag yours">Yours</span></p></div>
     </div>
   </section>
 
@@ -141,14 +140,14 @@
     <div class="legend">
       <span><span class="src-tag sourced">Sourced</span> published figure</span>
       <span><span class="src-tag estimate">Estimate</span> our reasonable estimate, labeled</span>
-      <span><span class="src-tag yours">Yours</span> your input — overrides the default</span>
+      <span><span class="src-tag yours">Yours</span> your input, overrides the default</span>
     </div>
     <div class="sim-columns">
       <div>
         <div class="q-card" style="margin-bottom:18px">
-          <span class="q-label">Adjust any assumption — totals update live</span>
+          <span class="q-label">Adjust any assumption, totals update live</span>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:10px">
-            <div><label class="q-label" for="in-years">Years of ownership</label><input type="number" id="in-years" min="1" max="10" step="1" value="5"><p class="q-note">1–10 years.<span class="src-tag yours">Yours</span></p></div>
+            <div><label class="q-label" for="in-years">Years of ownership</label><input type="number" id="in-years" min="1" max="10" step="1" value="5"><p class="q-note">1 to 10 years.<span class="src-tag yours">Yours</span></p></div>
             <div><label class="q-label" for="in-gas">Gas price ($/L)</label><input type="number" id="in-gas" min="0" step="0.01"><p class="q-note" id="gas-note"></p></div>
             <div><label class="q-label" for="in-elec">Electricity ($/kWh)</label><input type="number" id="in-elec" min="0" step="0.001"><p class="q-note" id="elec-note"></p></div>
             <div><label class="q-label" for="in-ins">Insurance ($/yr)</label><input type="number" id="in-ins" min="0" step="10"><p class="q-note" id="ins-note"></p></div>
@@ -191,26 +190,26 @@
 
   <section class="sim-step">
     <h2>Every number, traced</h2>
-    <p class="hint">All figures researched and accessed 2026-09-28. Defaults are starting points — your own numbers always win.</p>
+    <p class="hint">All figures researched and accessed 2026-09-28. Defaults are starting points, your own numbers always win.</p>
     <ul class="sources">
-      <li><strong>Fuel consumption</strong> — Natural Resources Canada, 2026 Fuel Consumption Guide (50th Anniversary Edition), 5-cycle lab ratings. Representative models: Mini Cooper Convertible 8.8 city / 6.4 hwy / 7.7 combined L/100km (compact); Honda CR-V 1.5L 8.4 / 7.1 / 7.8 (SUV); Ram 1500 4X4 13.2 / 9.9 / 11.7 (pickup); Hyundai Kona Electric 16.3 / 20.3 / 18.1 kWh/100km (EV). Combined rating = 55% city / 45% highway per NRCan methodology.</li>
-      <li><strong>Gas price: $1.81/L</strong> — Ontario regular unleaded average, week of September 21, 2026 (Ontario Ministry of Energy motor fuel prices, Kalibrate survey data).</li>
-      <li><strong>Electricity: $0.098/kWh</strong> — Ontario Energy Board regulated price, time-of-use off-peak, effective May 1 – October 31, 2026. Energy charge only; HST and delivery charges extra. New RPP prices effective November 1, 2026 had not been announced as of late September 2026.</li>
-      <li><strong>Depreciation curve</strong> — CAA Driving Costs data (Vincentric): ~30% value loss in year one; 60–70% over the first five years. Model residual by vehicle age: 70%, 60%, 52%, 46%, 40% for ages 1–5; ages 9+ are an extrapolated ~7%/yr decline (labeled estimate).</li>
-      <li><strong>Insurance: $2,164/yr</strong> — Financial Services Regulatory Authority of Ontario (FSRA), Ontario-wide average annual premium for private passenger vehicles, 12 months ending October 2025. FSRA publishes only this overall average — your class, record, and postal code move your real quote.</li>
-      <li><strong>Maintenance: $600/yr</strong> — midpoint of CAA's $500–$700/year range for routine scheduled maintenance (excludes tires and winter tires).</li>
-      <li><strong>New purchase price: $53,400</strong> — DesRosiers Automotive Consultants, average transaction price for new light vehicles in Canada, 2025 (DesRosiers also reported $49,500 for Q1 2026).</li>
-      <li><strong>Used purchase price: $36,690</strong> — AutoHebdo Q2 2026 price index (DesRosiers data, July 2026), average used-vehicle price in Canada. Modeled as a ~3-year-old vehicle for the depreciation curve.</li>
-      <li><strong>Loan rates</strong> — new 6.57% (Bank of Canada, average chartered-bank auto loan rate, April 2026); used 10.49% (2026 FCAC lender disclosures via industry reporting). Adjust to your actual offer.</li>
-      <li><strong>20,000 km/year</strong> — NRCan's standard annual driving distance used across the Fuel Consumption Guide.</li>
-      <li><strong>Use blends</strong> — mostly city 80/20, mixed 55/45 (NRCan combined definition), mostly highway 20/80. The blends are simulator assumptions; the underlying city/highway ratings are NRCan's.</li>
+      <li><strong>Fuel consumption</strong>. Natural Resources Canada, 2026 Fuel Consumption Guide (50th Anniversary Edition), 5-cycle lab ratings. Representative models: Mini Cooper Convertible 8.8 city / 6.4 hwy / 7.7 combined L/100km (compact); Honda CR-V 1.5L 8.4 / 7.1 / 7.8 (SUV); Ram 1500 4X4 13.2 / 9.9 / 11.7 (pickup); Hyundai Kona Electric 16.3 / 20.3 / 18.1 kWh/100km (EV). Combined rating = 55% city / 45% highway per NRCan methodology.</li>
+      <li><strong>Gas price: $1.81/L</strong>. Ontario regular unleaded average, week of September 21, 2026 (Ontario Ministry of Energy motor fuel prices, Kalibrate survey data).</li>
+      <li><strong>Electricity: $0.098/kWh</strong>. Ontario Energy Board regulated price, time-of-use off-peak, effective May 1, October 31, 2026. Energy charge only; HST and delivery charges extra. New RPP prices effective November 1, 2026 had not been announced as of late September 2026.</li>
+      <li><strong>Depreciation curve</strong>. CAA Driving Costs data (Vincentric): ~30% value loss in year one; 60 to 70% over the first five years. Model residual by vehicle age: 70%, 60%, 52%, 46%, 40% for ages 1 to 5; ages 9+ are an extrapolated ~7%/yr decline (labeled estimate).</li>
+      <li><strong>Insurance: $2,164/yr</strong>. Financial Services Regulatory Authority of Ontario (FSRA), Ontario-wide average annual premium for private passenger vehicles, 12 months ending October 2025. FSRA publishes only this overall average, your class, record, and postal code move your real quote.</li>
+      <li><strong>Maintenance: $600/yr</strong>, midpoint of CAA's $500 to $700/year range for routine scheduled maintenance (excludes tires and winter tires).</li>
+      <li><strong>New purchase price: $53,400</strong>. DesRosiers Automotive Consultants, average transaction price for new light vehicles in Canada, 2025 (DesRosiers also reported $49,500 for Q1 2026).</li>
+      <li><strong>Used purchase price: $36,690</strong>. AutoHebdo Q2 2026 price index (DesRosiers data, July 2026), average used-vehicle price in Canada. Modeled as a ~3-year-old vehicle for the depreciation curve.</li>
+      <li><strong>Loan rates</strong>, new 6.57% (Bank of Canada, average chartered-bank auto loan rate, April 2026); used 10.49% (2026 FCAC lender disclosures via industry reporting). Adjust to your actual offer.</li>
+      <li><strong>20,000 km/year</strong>. NRCan's standard annual driving distance used across the Fuel Consumption Guide.</li>
+      <li><strong>Use blends</strong>, mostly city 80/20, mixed 55/45 (NRCan combined definition), mostly highway 20/80. The blends are simulator assumptions; the underlying city/highway ratings are NRCan's.</li>
     </ul>
   </section>
 
   <section class="sim-step">
     <div class="cta-band">
       <h2>Want the reasoning behind these numbers?</h2>
-      <p>The guides below explain each cost category in plain language — what drives it and what you can do about it.</p>
+      <p>The guides below explain each cost category in plain language, what drives it and what you can do about it.</p>
       <a class="btn" href="/posts/depreciation-explained.html">Read the depreciation guide</a>
       <p style="margin:1em 0 0"><a href="/posts/fuel-insurance-and-maintenance-math.html" style="color:var(--accent)">Fuel, insurance &amp; maintenance math</a> &middot; <a href="/posts/new-vs-used-cost-comparison.html" style="color:var(--accent)">New vs used comparison</a></p>
     </div>
@@ -218,8 +217,8 @@
 </main>
 <footer class="site-footer">
   <div class="wrap">
-    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a> — redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
-    <p>True Cost of a Car — practical guides to the real cost of car ownership. Content is for information only and is not financial advice.</p>
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>, redeem code <strong>S8ZG1Q</strong> in Settings within 48 hours of joining and we both get 1 billion Muse tokens.</p>
+    <p>True Cost of a Car, practical guides to the real cost of car ownership. Content is for information only and is not financial advice.</p>
   <p class="footer-nav"><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
 </div>
 </footer>

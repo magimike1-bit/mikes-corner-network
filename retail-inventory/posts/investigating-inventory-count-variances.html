@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigating Inventory Count Variances: Triage the Cause Before Adjusting the Record — Retail Inventory Management</title>
+<meta name="description" content="Size the variance first, apply one tolerance-plus-dollar threshold, work six causes in cost order with theft last, and close every variance with a reason code.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Retail Inventory Management</a>
+    <p class="tagline">Practical inventory habits for independent retailers</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Investigating inventory count variances: a triage order that finds the cause before anyone adjusts the record</h1>
+  <p class="meta">Counting &amp; accuracy &middot; 7 min read</p>
+
+  <p>The count is short, so someone must have taken it. That is the
+  first conclusion most shops reach — and the least likely one. A count
+  variance is a signal with several plausible parents: a short
+  delivery signed for unchecked, stock sitting one bin over from where
+  the system thinks it lives, a transfer nobody posted, a case counted
+  as units. Theft is on the list, but published guidance is blunt about
+  its place on it: unauthorised removal should be concluded only after
+  the evidence has been reviewed, not assumed at the first short count.
+  What follows is a triage — the cheapest checks first, the record
+  adjusted last.</p>
+
+  <h2>The stop line first: do not adjust the record yet</h2>
+  <p>The instinct to correct the system figure to match the count, on
+  the spot, destroys the evidence the investigation needs. Two moves
+  come before any adjustment. First, control movements in the affected
+  area: pause or tightly track receipts, transfers, returns and sales
+  of that item while the check runs, and pin down the cutoff — the
+  exact moment the count describes, and every posting that landed
+  around it. A receipt posted an hour after the count closes a
+  "variance" that never existed. Second, freeze the original figures:
+  system quantity, counted quantity, counter's name, date. An
+  adjustment made later should add to that record, never replace
+  it.</p>
+  <p>Kill criterion, stated plainly: if the shop's habit is to overwrite
+  the system number at every count, stop — that habit is the first
+  defect to fix, ahead of any single variance. Counts that are
+  routinely overwritten teach the system nothing, and the same
+  discrepancies return wearing the same face.</p>
+
+  <h2>Size it before you solve it</h2>
+  <p>Three numbers decide how much investigation a variance has
+  earned.</p>
+  <ul>
+    <li><strong>Unit variance</strong> = physical quantity − system
+    quantity. Negative is short, positive is over — and overages are
+    investigated too, because an overage today is usually another
+    item's shortage or a receiving error that has not surfaced
+    yet.</li>
+    <li><strong>Variance percent</strong> = unit variance ÷ system
+    quantity × 100. The same five units are 9.6% of a 52-unit line and
+    under 1% of a 520-unit line; the first is a broken process, the
+    second may be a rounding habit.</li>
+    <li><strong>Value variance</strong> = unit variance × unit cost.
+    Percent says how wrong the count is; dollars say how much the
+    error matters.</li>
+  </ul>
+  <p>Illustrative: a line counted at 47 against a system figure of 52
+  is −5 units, −9.6%, and −$60 at a $12 unit cost. For accuracy
+  reporting over a whole count, use absolute variances — total absolute
+  unit variance against total system quantity counted — so shortages
+  and overages cannot cancel each other into a falsely healthy
+  score.</p>
+
+  <h2>One threshold rule: investigate, or adjust and log</h2>
+  <p>Published tolerance guidance for cycle counts runs at 2%–5%:
+  tight for expensive or low-piece-count items, looser for cheap bulk
+  lines. Most operators pair it with a dollar threshold, because a 1%
+  variance on a high-value line is real money. Combined into one rule
+  a small shop can post on the stockroom wall:</p>
+  <table>
+    <thead>
+      <tr><th>Result</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Inside 2% <em>and</em> under the shop's dollar threshold</td>
+        <td>Adjust the record, log it with a reason code, move on</td>
+      </tr>
+      <tr>
+        <td>Outside 5%, <em>or</em> over the dollar threshold at any percent</td>
+        <td>Investigate before adjusting — work the cause list below</td>
+      </tr>
+      <tr>
+        <td>Between 2% and 5%</td>
+        <td>Investigate if the item is high-value, fast-moving, or has varied before; otherwise adjust and log</td>
+      </tr>
+      <tr>
+        <td>Any variance on a line that also varied last count</td>
+        <td>Investigate regardless of size — repetition is the signal</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>The dollar threshold is the shop's own number — set it where an
+  unexplained loss starts to hurt, and write it down. A threshold that
+  lives in someone's head moves with their mood.</p>
+
+  <h2>Work the causes in cost order</h2>
+  <p>Each step below is cheaper than the one after it, and each is a
+  documented procedure, not a hunch.</p>
+  <ol>
+    <li><strong>Recount, blind.</strong> A second person counts the item
+    without being told the expected figure, and counts its neighbours
+    on the same shelf. Interrupted counts, double counts and counts
+    taken from the wrong facing are the cheapest explanation there
+    is.</li>
+    <li><strong>Check the other locations.</strong> Stock physically
+    present but in an unrecorded, adjacent, staging or exception
+    location reads as a shortage at its home location. Look in the
+    receiving area, the returns shelf, and the bin next door before
+    concluding anything is missing.</li>
+    <li><strong>Check unposted movements.</strong> Transfers, returns,
+    disposals and sales that happened physically but were posted late,
+    twice, or not at all. Review the item's recent transactions:
+    recent sale, return or transfer first.</li>
+    <li><strong>Check receiving.</strong> Compare what arrived against
+    the purchase order and the invoice, delivery by delivery: short
+    shipments, over-receipts and receipts posted against the wrong
+    order all enter here. Group the gaps by supplier — a supplier
+    short on three deliveries in ten, while others run one in twenty,
+    is a supplier conversation, not a staff conversation.</li>
+    <li><strong>Check status and identity.</strong> Damaged, expired or
+    quarantined stock counted as available; returns put back without
+    being booked; units of measure confused — a case received as units,
+    a pack sold as singles; similar labels, duplicate item codes or
+    wrong pack sizes sending transactions to the wrong SKU. Count the
+    look-alike variants nearby as part of the same check.</li>
+    <li><strong>Only then, loss.</strong> If every check above comes
+    back clean, the remaining explanations are damage that was never
+    recorded and unauthorised removal. At that point the shop has a
+    time window and a transaction trail to look at — evidence, rather
+    than a suspicion aimed at whoever counted.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> every investigated
+  variance ends in one of three states — found (the stock or the
+  posting error located), explained (a cause identified and a process
+  fix named), or written off (adjusted with the loss accepted and
+  recorded). A variance that ends as "adjusted, unknown" two counts
+  running is the procedure failing, not the staff.</p>
+
+  <h2>Close it with a reason code</h2>
+  <p>Every adjustment, investigated or not, lands in a variance log:
+  date, SKU, system figure, counted figure, unit and value variance,
+  the cause found, and the adjustment made. Short reason codes keep it
+  fast — RCPT for receiving, LOC for location, MOVE for unposted
+  movement, UOM for unit-of-measure, DMG for damage or status, CNT for
+  counting error, UNK for unexplained. One discipline sits underneath
+  the log: never enter a guessed quantity to make a variance
+  disappear. A record corrected with data nobody verified is worse
+  than a variance left open — clean data is what every later count,
+  reorder and report depends on, and an invented figure quietly
+  poisons all three. Where the system keeps an adjustment history —
+  one major platform retains 180 days of changes per product, with who
+  made each change and why — use it; the log and the history should
+  tell the same story.</p>
+
+  <h2>The pattern review: what the log is for</h2>
+  <p>A single variance is an incident. The log, reviewed monthly or
+  quarterly, turns incidents into patterns: variances clustering on
+  one supplier point at receiving; on one category, at labelling or
+  unit-of-measure; on one movement type, at a posting step nobody
+  owns. Fix the pattern and the counts get quieter on their own. The
+  review has one question per cluster — what is the cheapest process
+  change that stops this code recurring? — and one measure of success:
+  the same reason code, on the same lines, should be rarer next
+  quarter than this one. If it is not, the fix was a hope, and the log
+  has done its second job: proving it.</p>
+
+  <p>— Sterling Cole, Money Writer — Earning Desk</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Retail Inventory Management — practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

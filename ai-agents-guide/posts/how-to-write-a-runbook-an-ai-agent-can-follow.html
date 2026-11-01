@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to Write a Runbook an AI Agent Can Actually Follow — Using AI Agents</title>
-<meta name="description" content="An agent-readable runbook is a contract, not a prompt: goal, inputs, constraints, checkpoints, per-step pass/fail and a stop rule — plus the cold-run test that proves it.">
+<title>How to Write a Runbook an AI Agent Can Actually Follow | Using AI Agents</title>
+<meta name="description" content="An agent-readable runbook is a contract, not a prompt: goal, inputs, constraints, checkpoints, per-step pass/fail and a stop rule, plus the cold-run test that proves it.">
 <link rel="stylesheet" href="/style.css">
 <!-- AdSense: ad code goes here -->
 </head>
@@ -32,7 +32,7 @@
 <p>A checkpoint is a planned pause, placed before an action that is hard or impossible to reverse. Guidance for runbook prompts puts stepwise checkpoints at exactly those points: pause before publishing or before irreversible actions, and specify rollback behaviour on errors.</p>
 <p>A stop rule is stricter than a checkpoint. A checkpoint asks for approval and then continues. A stop rule ends the run. Write both kinds explicitly, for three situations:</p>
 <ul>
-<li>The input does not match what the runbook describes — wrong file, wrong account, wrong record count.</li>
+<li>The input does not match what the runbook describes, wrong file, wrong account, wrong record count.</li>
 <li>A step fails its pass/fail check twice, or fails in a way the runbook does not name.</li>
 <li>The next action is irreversible and its checkpoint approval has not been given.</li>
 </ul>
@@ -46,25 +46,25 @@
 <tr><td>Prose prompt runbook</td><td>Goal, constraints, success criteria, outputs, error handling, checkpoints</td><td>No enforced order; a skipped check is invisible</td><td>Single-agent tasks run under supervision</td></tr>
 <tr><td>YAML state machine (StateM)</td><td>Static workflow definition kept separate from per-run state; checks run before each transition and transitions are recorded</td><td>Harder for a non-technical owner to read and edit</td><td>Repeat runs where order and blocking checks must be enforced</td></tr>
 <tr><td>SRE incident playbook</td><td>Title and ID, trigger, impact and severity, prerequisites, expected outputs, verification, rollback, owner, version</td><td>Written for incidents and human responders, not routine agent tasks</td><td>High-impact or recovery work where ownership matters</td></tr></table>
-<p>That comparison is the decision framework for choosing a format. Start with the prose form. Move to the state-machine form when a run repeats often enough that skipped checks become a real risk. Borrow the playbook header — trigger, impact, rollback, owner, version — whenever the cost of a bad run is high, whichever body format sits underneath it. Practised playbooks matter: Google SRE practice, as summarised in the playbook source, puts the improvement at roughly threefold for mean time to recovery compared with improvising a response.</p>
+<p>That comparison is the decision framework for choosing a format. Start with the prose form. Move to the state-machine form when a run repeats often enough that skipped checks become a real risk. Borrow the playbook header, trigger, impact, rollback, owner, version, whenever the cost of a bad run is high, whichever body format sits underneath it. Practised playbooks matter: Google SRE practice, as summarised in the playbook source, puts the improvement at roughly threefold for mean time to recovery compared with improvising a response.</p>
 <h2>Prove it: the cold-run test</h2>
 <p>A runbook is not proven when it reads well. It is proven when a fresh run, with no help from the person who wrote it, passes its own checkpoints. Run the test like this:</p>
 <ol>
-<li><strong>Freeze the version.</strong> Save the runbook with its version noted, and use a low-stakes copy of the real inputs — a draft page, a test record, a secondary account.</li>
+<li><strong>Freeze the version.</strong> Save the runbook with its version noted, and use a low-stakes copy of the real inputs, a draft page, a test record, a secondary account.</li>
 <li><strong>Check the prerequisites.</strong> Backup exists and a restore has been tested. The agent is connected with the lowest role that works. Every named input is present.</li>
 <li><strong>Hand over only the runbook.</strong> No extra chat, no hints, no corrections mid-run. Anything the runner has to ask about is a gap in the document, and it gets written down.</li>
 <li><strong>Let each checkpoint do its job.</strong> At every pause, confirm the step's stated output is actually present before approving the next step.</li>
-<li><strong>Force one failure.</strong> Remove an input or use a wrong value on purpose. The correct behaviour is a recorded failure and a stop, in line with the stop rule — not a workaround.</li>
+<li><strong>Force one failure.</strong> Remove an input or use a wrong value on purpose. The correct behaviour is a recorded failure and a stop, in line with the stop rule, not a workaround.</li>
 <li><strong>Run the after checks.</strong> Compare the result directly against the goal, check any page at phone width, and confirm the log entry exists and names the runbook version.</li>
 <li><strong>Fix the document, not the memory.</strong> Every question, guess or workaround from the run becomes an edit to the runbook. Then run it cold once more.</li></ol>
-<p>What success looks like: the second cold run completes with no questions outside the runbook, every step records a pass, the forced failure stops the run cleanly, and the log entry lets a reader reconstruct what happened. If the runner needed oral help, the runbook failed the test — however good the final output looked.</p>
+<p>What success looks like: the second cold run completes with no questions outside the runbook, every step records a pass, the forced failure stops the run cleanly, and the log entry lets a reader reconstruct what happened. If the runner needed oral help, the runbook failed the test, however good the final output looked.</p>
 <p><em>Sources, accessed October 25, 2026: CometAPI, “How to Use ChatGPT Agent Mode” (runbook prompt: goals, constraints, checkpoints, rollback on errors); StateM project on GitHub (YAML runbooks, before-transfer checks, recorded transitions); UiChemy, “AI Agent Workflow for Many WordPress Sites” (before/after checklists, lowest role, tested restore); beefed.ai, “Automated Runbooks for Incident Response” (playbook fields, verification, SRE practice). Tool behaviour varies by platform; adapt the format to the agent system in use.</em></p>
-<p>— Dex Carter, Tech Writer</p>
+<p>, Dex Carter, Tech Writer</p>
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
-    <p>Using AI Agents — beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p>Using AI Agents, beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
     <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
   </div>
 </footer>

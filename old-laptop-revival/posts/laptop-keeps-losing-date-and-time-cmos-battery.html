@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laptop Keeps Losing Its Date and Time: Confirm the CMOS Battery Before You Open the Case — Old Laptop Revival</title>
+<title>Laptop Keeps Losing Its Date and Time: Confirm the CMOS Battery Before You Open the Case | Old Laptop Revival</title>
 <meta name="description" content="A laptop that forgets the date is not always a dead CMOS battery. Rule out Windows time sync first, run the unplug test, then identify which of the three battery forms your laptop actually has.">
 <link rel="stylesheet" href="/style.css">
 <!-- AdSense: ad code goes here -->
@@ -20,7 +20,7 @@
   <h1>Laptop keeps losing its date and time: is it really the CMOS battery?</h1>
   <p class="meta">Troubleshooting &middot; 7 min read</p>
 
-  <p>Why does an old laptop wake up thinking it is years in the past? The short answer is that the clock is kept alive by a small battery when the machine is off, and that battery is a wear item. The longer answer — the one that saves you opening the case for nothing — is that a wrong clock has three possible owners: Windows time synchronisation, the main battery on newer designs, and the CMOS battery itself. They are checked in that order here, cheapest first.</p>
+  <p>Why does an old laptop wake up thinking it is years in the past? The short answer is that the clock is kept alive by a small battery when the machine is off, and that battery is a wear item. The longer answer, the one that saves you opening the case for nothing, is that a wrong clock has three possible owners: Windows time synchronisation, the main battery on newer designs, and the CMOS battery itself. They are checked in that order here, cheapest first.</p>
 
   <h2>First, rule out Windows</h2>
 
@@ -31,20 +31,20 @@
     <li>Check the Windows Time service, the component that synchronises the clock with internet time servers. In <code>services.msc</code>, find Windows Time: its startup type should be Automatic or Automatic (Trigger Start) and its status should be Running. If that service is disabled, the PC may never update its clock correctly, however healthy the battery is.</li>
   </ol>
 
-  <p>If the clock now holds across restarts while the laptop stays plugged in, the battery was never the problem. The distinguishing test for the battery is what happens with no power at all — which is the next step.</p>
+  <p>If the clock now holds across restarts while the laptop stays plugged in, the battery was never the problem. The distinguishing test for the battery is what happens with no power at all, which is the next step.</p>
 
   <h2>The confirmation test, laptop version</h2>
 
-  <p>The CMOS battery — CMOS stands for complementary metal-oxide-semiconductor, the chip whose settings and clock it powers — only does its job when every other power source is gone. So the test removes them:</p>
+  <p>The CMOS battery. CMOS stands for complementary metal-oxide-semiconductor, the chip whose settings and clock it powers, only does its job when every other power source is gone. So the test removes them:</p>
 
   <ol>
     <li>Enter the BIOS or UEFI setup at startup, set the correct date, time, and year, then save and exit.</li>
     <li>Shut the laptop down. Unplug the charger and remove the main battery if it is removable.</li>
-    <li>Leave the machine off and unpowered for 2–3 hours.</li>
+    <li>Leave the machine off and unpowered for 2 to 3 hours.</li>
     <li>Reconnect power, start the machine, and check the date and time before Windows can correct them from the internet.</li>
   </ol>
 
-  <p><strong>What the result proves:</strong> a clock that survived unplugged is being kept alive correctly, and the fault sits in software. A date that has reset — classically to an old default such as 1 January 2009, at 00:00 — is the signature of a CMOS battery that can no longer hold the clock. Boot messages point the same way: CMOS Read Error, CMOS Checksum Error, CMOS Battery Failure, and System battery voltage is low are all listed as signs the battery needs replacement.</p>
+  <p><strong>What the result proves:</strong> a clock that survived unplugged is being kept alive correctly, and the fault sits in software. A date that has reset, classically to an old default such as 1 January 2009, at 00:00, is the signature of a CMOS battery that can no longer hold the clock. Boot messages point the same way: CMOS Read Error, CMOS Checksum Error, CMOS Battery Failure, and System battery voltage is low are all listed as signs the battery needs replacement.</p>
 
   <h2>Three forms the battery takes in a laptop</h2>
 
@@ -53,7 +53,7 @@
   <table>
     <tr><th>Form</th><th>How to recognise it</th><th>What replaces it</th></tr>
     <tr><td>Coin cell in a holder</td><td>A round cell, most commonly a CR2032, held by a metal clip or bar on the board</td><td>The same cell type, printed on the cell itself; slide the old cell out from under the clip without bending the clip</td></tr>
-    <tr><td>Wrapped two-wire pack</td><td>A small black disc wrapped in heat shrink, connected by a two-wire lead — on one documented model it sits just below the fan</td><td>A pack with the same connector and part number, unplugged and swapped as a unit</td></tr>
+    <tr><td>Wrapped two-wire pack</td><td>A small black disc wrapped in heat shrink, connected by a two-wire lead, on one documented model it sits just below the fan</td><td>A pack with the same connector and part number, unplugged and swapped as a unit</td></tr>
     <tr><td>No separate battery</td><td>The model's hardware maintenance manual lists no CMOS or RTC battery at all</td><td>Nothing to swap: these boards take RTC power from the main battery, backed by capacitors with limited capacity, so a weak or removed main battery is the thing to fix</td></tr>
   </table>
 
@@ -63,7 +63,7 @@
 
   <h2>Record your settings before you swap</h2>
 
-  <p>Replacing the battery clears the settings it was keeping. Before the old cell comes out, enter setup and note anything non-default you rely on — boot order is the usual one, along with any drive or security settings you changed when the machine was set up. After the swap, those values are re-entered by hand and saved before exiting setup. Two minutes of notes now is what separates a battery swap from an afternoon of re-diagnosing a machine that suddenly boots in the wrong order.</p>
+  <p>Replacing the battery clears the settings it was keeping. Before the old cell comes out, enter setup and note anything non-default you rely on, boot order is the usual one, along with any drive or security settings you changed when the machine was set up. After the swap, those values are re-entered by hand and saved before exiting setup. Two minutes of notes now is what separates a battery swap from an afternoon of re-diagnosing a machine that suddenly boots in the wrong order.</p>
 
   <p>While the battery is out, inspect its holder. A rarer cause of the same symptom is loose or broken contacts in the battery compartment: clips that no longer grip the cell can interrupt power even with a fresh battery fitted.</p>
 
@@ -71,10 +71,10 @@
 
   <ol>
     <li>Shut the laptop down, unplug it, and remove the main battery if it is removable.</li>
-    <li>Open the bottom cover and locate the battery, using the model's manual if it is not visible — if the manual lists no CMOS battery, stop here and reread the third row of the table above.</li>
+    <li>Open the bottom cover and locate the battery, using the model's manual if it is not visible, if the manual lists no CMOS battery, stop here and reread the third row of the table above.</li>
     <li>For a coin cell: ease the edge of the cell up and out of its socket with your fingers, without bending the retaining clip.</li>
     <li>For a wrapped pack: unplug its two-wire connector from the board; do not pull on the wires themselves.</li>
-    <li>Fit the replacement of the same type, in the same orientation, and confirm it is seated — clipped firmly, or the connector fully home.</li>
+    <li>Fit the replacement of the same type, in the same orientation, and confirm it is seated, clipped firmly, or the connector fully home.</li>
     <li>Reassemble, reconnect power, and start the machine.</li>
   </ol>
 
@@ -88,13 +88,13 @@
 
   <p><strong>What success looks like:</strong> after hours with no power connected, the laptop starts with the correct date and time already showing, no CMOS error messages appear, and the settings recorded before the swap are still in place a week later.</p>
 
-  <p>— Dex Carter, Tech Writer</p>
+  <p>, Dex Carter, Tech Writer</p>
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
-    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
-    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+    <p>Old Laptop Revival, practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists, a repair shop can finish the job.</p>
     <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
   </div>
 </footer>

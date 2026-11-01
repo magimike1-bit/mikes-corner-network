@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Turn an Old Laptop Into a Dedicated Writing Machine: Three Routes, Compared — Old Laptop Revival</title>
+<title>Turn an Old Laptop Into a Dedicated Writing Machine: Three Routes, Compared | Old Laptop Revival</title>
 <meta name="description" content="Three ways to lock an old laptop down to writing: Windows Assigned Access, a plain writing account with a fullscreen editor, or lightweight Linux. The edition gate, the app limits, and the draft-export workflow, compared.">
 <link rel="stylesheet" href="/style.css">
 <!-- AdSense: ad code goes here -->
@@ -20,20 +20,20 @@
   <h1>Turn an old laptop into a dedicated writing machine: three routes, compared</h1>
   <p class="meta">Repurposing &middot; 8 min read</p>
 
-  <p>3 routes lead to the same desk: a laptop that opens onto a blank page and nothing else. They differ in how hard the lock is, what the laptop must already run, and how easily the machine becomes a normal computer again. This guide takes them in order of strictness — Windows Assigned Access, a separate writing account, and lightweight Linux — and gives each one its gate check before its setup, because the strictest route is also the one most likely to be unavailable on the laptop in your drawer.</p>
+  <p>3 routes lead to the same desk: a laptop that opens onto a blank page and nothing else. They differ in how hard the lock is, what the laptop must already run, and how easily the machine becomes a normal computer again. This guide takes them in order of strictness. Windows Assigned Access, a separate writing account, and lightweight Linux, and gives each one its gate check before its setup, because the strictest route is also the one most likely to be unavailable on the laptop in your drawer.</p>
 
   <h2>Route one: Assigned Access, the single-app lock</h2>
 
-  <p><strong>The gate.</strong> Assigned Access is a Windows feature that configures a device as a kiosk: a single Universal Windows Platform (UWP) application, or Microsoft Edge, runs in full screen, the signed-in account can use nothing else, and if the app is closed it restarts automatically. Microsoft lists the editions that support Assigned Access as Pro and Enterprise / Enterprise LTSC — Windows Home is not among them. Two further requirements apply to the kiosk experience: User Account Control must be enabled, and you must sign in at the machine itself, because the kiosk experience is not supported over a remote desktop connection.</p>
+  <p><strong>The gate.</strong> Assigned Access is a Windows feature that configures a device as a kiosk: a single Universal Windows Platform (UWP) application, or Microsoft Edge, runs in full screen, the signed-in account can use nothing else, and if the app is closed it restarts automatically. Microsoft lists the editions that support Assigned Access as Pro and Enterprise / Enterprise LTSC. Windows Home is not among them. Two further requirements apply to the kiosk experience: User Account Control must be enabled, and you must sign in at the machine itself, because the kiosk experience is not supported over a remote desktop connection.</p>
 
   <p>Check the edition first: Settings &gt; System &gt; About. A spare laptop running Windows Home ends this route before it starts, and no setting inside Home unlocks it.</p>
 
   <p><strong>The setup.</strong> On an edition that passes the gate:</p>
 
   <ol>
-    <li>Install the writing app first, and note the app-type limit: the kiosk experience runs a UWP app or Edge. A classic desktop editor cannot be the single kiosk app through this route — writers who need one should read route two instead.</li>
+    <li>Install the writing app first, and note the app-type limit: the kiosk experience runs a UWP app or Edge. A classic desktop editor cannot be the single kiosk app through this route, writers who need one should read route two instead.</li>
     <li>Sign in as an administrator and open Settings &gt; Accounts &gt; Other users, then start the kiosk setup.</li>
-    <li>Create or choose a local standard user account for writing — not your administrator account.</li>
+    <li>Create or choose a local standard user account for writing, not your administrator account.</li>
     <li>Assign the writing app to that account and finish the wizard.</li>
     <li>Sign in as the writing account to test: the configuration takes effect the next time the targeted user signs in, and the app should launch full screen on its own.</li>
   </ol>
@@ -44,28 +44,28 @@
 
   <h2>Route two: a writing account, on any Windows edition</h2>
 
-  <p><strong>The gate.</strong> None. A separate standard account needs no particular Windows edition, which is why this is the route most spare laptops will actually use. The lock is softer — the writer signs into an account that contains only writing tools, while the rest of the computer remains one sign-out away. Route one's source makes the honest version of this trade: if notifications and open tabs are the main issue, a focus-level fix may be enough; a full kiosk addresses a device that invites multitasking as a whole.</p>
+  <p><strong>The gate.</strong> None. A separate standard account needs no particular Windows edition, which is why this is the route most spare laptops will actually use. The lock is softer, the writer signs into an account that contains only writing tools, while the rest of the computer remains one sign-out away. Route one's source makes the honest version of this trade: if notifications and open tabs are the main issue, a focus-level fix may be enough; a full kiosk addresses a device that invites multitasking as a whole.</p>
 
   <p><strong>The setup.</strong></p>
 
   <ol>
-    <li>Create a new local standard account named for the job — Writing is a perfectly good name.</li>
+    <li>Create a new local standard account named for the job. Writing is a perfectly good name.</li>
     <li>Sign into it once and install one writing app. FocusWriter is a fitting default: a free, open-source word processor, released under the GPL licence, built around a full-screen workspace whose menus stay hidden until the mouse moves to the edge of the screen. It offers daily writing goals, spell-checking, live statistics, multiple open documents, and automatic session restore.</li>
     <li>Remove or sign out of everything else in this account: no mail, no chat clients, no browser profile signed into anything.</li>
     <li>Set the writing app to start at sign-in, so the account opens onto the page.</li>
-    <li>Keep all files for the account in one drafts folder — the export step at the end of this guide depends on it.</li>
+    <li>Keep all files for the account in one drafts folder, the export step at the end of this guide depends on it.</li>
   </ol>
 
   <p><strong>What success looks like:</strong> the writing account's desktop holds one app and one folder, a writing session starts without closing or muting anything first, and nothing in the account asks for attention that is not the document.</p>
 
   <h2>Route three: lightweight Linux, tested before it is installed</h2>
 
-  <p><strong>The gate.</strong> A Linux route ignores the Windows edition entirely and suits a laptop whose Windows install is itself part of the clutter. The discipline is the test: a lightweight distribution can be tried from a live USB before anything is erased, and the writing app named in route two is a Linux program as readily as a Windows one — FocusWriter's project ships for both worlds, so the drafting environment can stay identical whichever side of this comparison a writer lands on.</p>
+  <p><strong>The gate.</strong> A Linux route ignores the Windows edition entirely and suits a laptop whose Windows install is itself part of the clutter. The discipline is the test: a lightweight distribution can be tried from a live USB before anything is erased, and the writing app named in route two is a Linux program as readily as a Windows one. FocusWriter's project ships for both worlds, so the drafting environment can stay identical whichever side of this comparison a writer lands on.</p>
 
   <p><strong>The setup.</strong></p>
 
   <ol>
-    <li>Back up anything on the laptop that matters, even for a test — the install step later is the destructive one.</li>
+    <li>Back up anything on the laptop that matters, even for a test, the install step later is the destructive one.</li>
     <li>Boot the distribution from USB and write a real session in it: keyboard, screen brightness, sleep and wake, and saving a file are the four things to verify on the actual hardware.</li>
     <li>Install only if the live session passes, then add the writing app and nothing else.</li>
     <li>Create the same single drafts folder discipline as route two.</li>
@@ -91,23 +91,23 @@
   <ol>
     <li>Write in an app that exports to plain text or Markdown, so no draft depends on one program to be readable.</li>
     <li>Keep every draft in the single folder set up in your route.</li>
-    <li>At the end of a session, copy the folder to a USB drive or your main machine — the published kiosk setup this guide draws on works exactly this way, transferring saved files to the main machine later for editing, formatting, or publishing.</li>
+    <li>At the end of a session, copy the folder to a USB drive or your main machine, the published kiosk setup this guide draws on works exactly this way, transferring saved files to the main machine later for editing, formatting, or publishing.</li>
     <li>Open the transferred file on the main machine once, immediately. A transfer that has never been opened is a hope, not a backup.</li>
   </ol>
 
-  <p><strong>What success looks like:</strong> today's draft, written on the locked-down laptop, is open and readable on your main machine within a minute of the session ending — with the writing phase and the editing phase still kept apart, which was the point of the machine.</p>
+  <p><strong>What success looks like:</strong> today's draft, written on the locked-down laptop, is open and readable on your main machine within a minute of the session ending, with the writing phase and the editing phase still kept apart, which was the point of the machine.</p>
 
   <h2>Which route, decided</h2>
 
-  <p>Check the Windows edition and let it speak first. Pro or Enterprise on the spare: route one, if the writing app fits the UWP-or-Edge limit. Home, or a desktop editor you will not give up: route two, today, at no cost beyond setup time. A Windows install too tired to tidy: route three, after the live-USB test passes. Purpose-built writing hardware exists — dedicated writerDeck devices, down to an open-source DIY kit listed at $129 — but buying one to solve a problem a drawer laptop already solves is spending money to avoid a setup wizard.</p>
+  <p>Check the Windows edition and let it speak first. Pro or Enterprise on the spare: route one, if the writing app fits the UWP-or-Edge limit. Home, or a desktop editor you will not give up: route two, today, at no cost beyond setup time. A Windows install too tired to tidy: route three, after the live-USB test passes. Purpose-built writing hardware exists, dedicated writerDeck devices, down to an open-source DIY kit listed at $129, but buying one to solve a problem a drawer laptop already solves is spending money to avoid a setup wizard.</p>
 
-  <p>— Dex Carter, Tech Writer</p>
+  <p>, Dex Carter, Tech Writer</p>
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
-    <p>Old Laptop Revival — practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
-    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists — a repair shop can finish the job.</p>
+    <p>Old Laptop Revival, practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists, a repair shop can finish the job.</p>
     <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
   </div>
 </footer>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Your AI Chatbot Remembers: Review, Correct, or Delete It — AI Starter Guide — AI Starter Guide</title>
+<meta name="description" content="ChatGPT and Gemini memory explained for beginners: the three layers that get called memory, a side-by-side of the controls checked 2026-11-01, and a review-correct-delete procedure.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">AI Starter Guide</a>
+    <p class="tagline">Plain-English introductions to using AI chatbots</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>What your AI chatbot remembers: review, correct, or delete it</h1>
+  <p class="meta">Settings &amp; privacy &middot; Published 2026-11-01 &middot; Last updated 2026-11-01</p>
+
+  <p>Start with the myth, because it points the wrong way twice. The first version says the chatbot remembers everything you have ever typed, forever. The second says it remembers nothing at all, so there is nothing to manage. Neither survives the documentation.</p>
+  <p>The model itself remembers nothing. Large language models are stateless — each request runs without built-in recollection of the one before — and what feels like memory is a separate system sitting around the model, which retrieves details and feeds them back in as context. That distinction is the whole guide. A separate system can be opened, read, corrected and emptied. A mysterious one cannot.</p>
+
+  <h2>Three different things get called memory</h2>
+  <p><strong>Saved memories</strong> are the explicit layer: details you ask the chatbot to remember, or that it saves as useful context. In ChatGPT, OpenAI is explicit that saved memories are stored separately from chat history — a point with a sharp consequence, covered below.</p>
+  <p><strong>Chat-history reference</strong> is the looser layer. With it on, ChatGPT can use relevant information from past conversations to personalise future responses, and what it derives can change as it updates what seems most useful. Gemini has the equivalent idea under its own naming, and Google notes Gemini can learn from past chats to understand more about the user.</p>
+  <p><strong>Standing instructions</strong> are the layer you wrote yourself. OpenAI draws the line plainly: memory is different from custom instructions, which are direct guidance you provide about what the chatbot should know and how it should respond. Instructions are not memories the system gathered; they are orders you gave.</p>
+  <p>Two screens are in circulation for ChatGPT, which confuses beginners reading older guides. Depending on the account, the controls may appear as a single memory control with a <strong>memory summary</strong> — a high-level written view of what the system may use — or as toggles for Reference saved memories and Reference chat history with a list of saved items. OpenAI warns that if a setting described in its help is not visible, it may not be available for that account yet. An absent toggle is a rollout fact, not a mistake on your part.</p>
+
+  <h2>ChatGPT and Gemini, side by side</h2>
+  <table>
+    <tr><th>Question</th><th>ChatGPT (OpenAI)</th><th>Gemini (Google)</th></tr>
+    <tr><td>Where are the controls?</td><td>Settings &rarr; Personalization &rarr; Memory</td><td>Settings &rarr; Personal Intelligence; the memory summary sits under Personal Intelligence &rarr; Memory summary on a computer</td></tr>
+    <tr><td>Who can use remembered-facts features?</td><td>Controls vary by plan, region, platform and workspace</td><td>Over 18, a personal Google Account (not work, school or supervised), a Google AI plan for the remember-facts feature, and Memory turned on; Google listed that feature as US-only at the time of its help page</td></tr>
+    <tr><td>How do you see what is kept?</td><td>The memory summary — a high-level view that does not necessarily include every detail — or ask the chatbot what it remembers</td><td>The memory summary, which can be viewed, edited and deleted; it can also be viewed with the prompt &ldquo;What do you know about me?&rdquo;</td></tr>
+    <tr><td>How do you correct a wrong detail?</td><td>Edit the summary, highlight text and provide a correction, or correct a saved memory from its controls</td><td>Correct it in the chat in natural language, or update the memory summary</td></tr>
+    <tr><td>What is the one-off escape hatch?</td><td>A temporary chat, which does not create or update memories</td><td>Check the current app for its temporary-chat option before relying on it; Google&rsquo;s help for remembered facts does not promise the same behaviour in every surface</td></tr>
+  </table>
+  <p>Read the table for the pattern, not just the paths. Both systems separate <em>what was gathered</em> from <em>what you ordered</em>, both give you a summary view rather than a complete ledger, and both make availability depend on account type and region. Any third chatbot you try will organise the same three ideas under different names — find its summary view first.</p>
+
+  <h2>The review, correct, delete procedure</h2>
+  <p>Run this on ChatGPT first, where the controls are best documented, then repeat the pattern in any other chatbot you use.</p>
+  <ol>
+    <li>Open <strong>Settings &rarr; Personalization &rarr; Memory</strong> and read the memory summary before changing anything. Surprise is information: a detail you never knowingly shared arrived via chat-history reference.</li>
+    <li>Correct what is wrong rather than deleting everything. Enter the correction in the summary&rsquo;s text field, or highlight the wrong text and provide the correction. Do the same for any saved memory that is out of date.</li>
+    <li>For a detail that should simply stop surfacing, use <strong>Don&rsquo;t mention this again</strong> where it is offered — and understand its limit: it reduces future references but does not delete the original source.</li>
+    <li>To remove remembered information properly, delete it at every layer it lives in: the saved memory or summary entry, the chat where you first shared it, any saved file in Library or Space that repeats it, and disconnect a connected app that holds it if you no longer want the chatbot to reach it.</li>
+    <li>If the decision is &ldquo;no memory at all,&rdquo; use <strong>Delete and turn off memory</strong> from the summary&rsquo;s more-options menu. It deletes the remembered information shown and turns Memory off. It does not delete your past chats — that is a separate job, in your chat history.</li>
+    <li>Know the clock on chat-history reference: turning it off schedules the information remembered from past chats for deletion from OpenAI&rsquo;s systems within 30 days, while the original chats remain until you delete them. Turning it off does not delete your saved memories; the layers really are separate switches.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the summary contains nothing you would be surprised to read aloud, every wrong detail carries its correction, and you can name which layers you cleared — because you cleared them one by one, on purpose.</p>
+
+  <h2>Keep it on, turn it off, or go one-off</h2>
+  <ul>
+    <li><strong>Keep memory on</strong> when the same preferences recur — answer format, ongoing projects, the context you otherwise retype weekly. That repetition is exactly what the feature exists to remove.</li>
+    <li><strong>Turn it off</strong> when the account is shared, the work is sensitive, or the summary keeps collecting details you would not choose to store. Turning Memory off does not delete past chats, and turning it back on later can create new remembered information from chats still in your history — so pair the switch with the delete procedure above.</li>
+    <li><strong>Use a one-off chat</strong> for a single sensitive question inside an otherwise useful account. In ChatGPT, choose the temporary chat&rsquo;s personalisation setting before the conversation starts — including Unpersonalized if you do not want it to use existing memories — because that choice cannot be changed afterwards. Temporary chats do not create or update memories; saving one converts it into a regular chat, with regular rules.</li>
+  </ul>
+
+  <h2>What memory cannot do for you</h2>
+  <p>Memory does not retain every detail from every conversation, and the summary is not a complete record — OpenAI says it may omit details, and that the system decides which available information is relevant to a given response. So never treat the chatbot as the archive of record for anything that matters. The contract, the booking, the medical note: those live in the original document, and memory is a convenience layer that points back toward them, sometimes inaccurately.</p>
+  <p>One more boundary, stated by OpenAI itself: turning Memory or personalisation off does not disable limited safety and security uses of context in rare, high-risk situations. Those uses are separate from personalisation controls. Knowing that line exists is part of managing the feature honestly — control what the controls actually control, and let the monthly five-minute review above handle the rest.</p>
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>AI Starter Guide — plain-English introductions to AI chatbots. General information only, not professional advice. AI tools change quickly — verify current features on each provider's own site.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

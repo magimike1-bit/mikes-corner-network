@@ -50,7 +50,7 @@
 </script>
 </head>
 <body>
-<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships, right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
@@ -75,20 +75,20 @@
     <h1 class="page-title">Figma Seat Pricing Decoded: Full vs Dev vs Collaborator (2026)</h1>
     <p class="section-sub">Published <time datetime="2026-10-11">2026-10-11</time></p><figure class="post-figure">
   <img class="post-image" src="../images/figma-seat-pricing-decoded.jpg" alt="Designer seen from behind at a desk with two large monitors" loading="lazy" width="1920" height="1280">
-  <figcaption>Every editor counts — the seat type is what matters.</figcaption>
+  <figcaption>Every editor counts, the seat type is what matters.</figcaption>
 </figure>
 
 
-    <p>Figma's 2025 pricing revamp replaced the old editor/viewer split with three seat types — Full, Dev, and Collaborator — and most teams are still paying for the wrong mix. The expensive failure mode isn't picking the wrong plan; it's the accidental upgrade, where a well-meaning commenter edits one frame and lands on your invoice as a full seat. This guide decodes the seat taxonomy, shows exactly how that trap works, and gives you the audit procedure that keeps the bill honest.</p>
+    <p>Figma's 2025 pricing revamp replaced the old editor/viewer split with three seat types. Full, Dev, and Collaborator, and most teams are still paying for the wrong mix. The expensive failure mode isn't picking the wrong plan; it's the accidental upgrade, where a well-meaning commenter edits one frame and lands on your invoice as a full seat. This guide decodes the seat taxonomy, shows exactly how that trap works, and gives you the audit procedure that keeps the bill honest.</p>
 
     <h2>The three seat types and what each costs</h2>
-    <p>Since the revamp (effective March 11, 2025), everyone in a Figma organization holds one of three seats. Prices below are per user per month on annual billing, in USD, as reported in 2025–2026 guides:</p>
+    <p>Since the revamp (effective March 11, 2025), everyone in a Figma organization holds one of three seats. Prices below are per user per month on annual billing, in USD, as reported in 2025 to 2026 guides:</p>
     <div class="compare-scroll">
     <table class="tiers compare-table">
       <thead><tr><th scope="col">Seat type</th><th scope="col">≈ USD/mo</th><th scope="col">≈ CAD/mo</th><th scope="col">What it's for</th></tr></thead>
       <tbody>
       <tr><td><strong>Full</strong></td><td>$16</td><td>$22.82</td><td>Designers: full editing in Figma Design, FigJam, Slides, and Dev Mode</td></tr>
-      <tr><td><strong>Dev</strong></td><td>$25</td><td>$35.65</td><td>Developers: Dev Mode inspection, code snippets, handoff tooling — no design editing</td></tr>
+      <tr><td><strong>Dev</strong></td><td>$25</td><td>$35.65</td><td>Developers: Dev Mode inspection, code snippets, handoff tooling, no design editing</td></tr>
       <tr><td><strong>Collaborator</strong></td><td>$5</td><td>$7.13</td><td>PMs, stakeholders: comment, review, light collaboration</td></tr>
       </tbody>
     </table>
@@ -96,7 +96,7 @@
     <p>CAD estimates use the mid-market rate of 1 USD = 1.42616 CAD, checked 2026-10-11. The plan tiers sit above the seats: Professional (the per-seat plan most small teams use), Organization (~$55/mo), and Enterprise (~$90/mo), with seat prices varying slightly by tier. Note the counterintuitive bit: the Dev seat costs <em>more</em> than the Full seat, because it's priced for the handoff value it delivers, not for the permissions it grants.</p>
 
     <h2>The accidental-upgrade trap</h2>
-    <p>Here's how the trap works. A product manager with a free Collaborator seat opens a design file to leave feedback, notices a typo, and fixes it directly — one small edit. Under the seat model introduced in the 2025 revamp, editing (not just viewing or commenting) is what triggers a billable seat, so that one edit can move them onto your invoice. Multiply by every stakeholder who "just fixes one thing" and a 10-person design team can quietly carry 15–20 billed seats.</p>
+    <p>Here's how the trap works. A product manager with a free Collaborator seat opens a design file to leave feedback, notices a typo, and fixes it directly, one small edit. Under the seat model introduced in the 2025 revamp, editing (not just viewing or commenting) is what triggers a billable seat, so that one edit can move them onto your invoice. Multiply by every stakeholder who "just fixes one thing" and a 10-person design team can quietly carry 15 to 20 billed seats.</p>
     <p>The trap has two accomplices. First, <strong>permission sprawl</strong>: teams that never tightened file permissions after the 2025 revamp kept everyone at edit-capable access, so the upgrade path stays open. Second, <strong>the billing-date mechanic</strong>: Figma counts editors on your monthly billing date. An accidental editor who gets downgraded the day <em>after</em> the billing date still costs you a full month.</p>
     <p>The defense is role hygiene, not vigilance: default new members to the cheapest seat that lets them do their job, restrict edit access on production design files to actual designers, and route feedback through comments (which don't trigger upgrades) instead of direct edits.</p>
 
@@ -111,33 +111,33 @@
       <li><strong>Open the team page → Members tab.</strong> This is the source of truth for who Figma will bill.</li>
       <li><strong>Filter by role.</strong> Set the Design role and FigJam role filters to "Editors" (or "All") to surface every billed user.</li>
       <li><strong>Challenge each editor.</strong> For every name: does this person edit designs as their job? Developers go to Dev seats, stakeholders to Collaborator, and anyone who only commented last month gets downgraded.</li>
-      <li><strong>Downgrade to Viewer-restricted.</strong> Flip accidental editors to Viewer-restricted on Design and FigJam <em>before</em> the billing date — downgrades after the date don't help until next cycle.</li>
-      <li><strong>Check the admins.</strong> Admins don't need a full seat — a viewer or viewer-restricted seat keeps them off the invoice entirely while retaining admin access.</li>
+      <li><strong>Downgrade to Viewer-restricted.</strong> Flip accidental editors to Viewer-restricted on Design and FigJam <em>before</em> the billing date, downgrades after the date don't help until next cycle.</li>
+      <li><strong>Check the admins.</strong> Admins don't need a full seat, a viewer or viewer-restricted seat keeps them off the invoice entirely while retaining admin access.</li>
     </ol>
-    <p><strong>What success looks like:</strong> the billed-editor count on the Members tab matches your actual designer + developer headcount, with zero stakeholder names in the editor list. If the count drops after your audit, the difference is what the trap was costing you — at ~$16–$25 a seat, five accidental editors run $80–$125/month, or roughly $1,000–$1,500 a year.</p>
+    <p><strong>What success looks like:</strong> the billed-editor count on the Members tab matches your actual designer + developer headcount, with zero stakeholder names in the editor list. If the count drops after your audit, the difference is what the trap was costing you, at ~$16 to $25 a seat, five accidental editors run $80 to $125/month, or roughly $1,000 to $1,500 a year.</p>
 
     <h2>Who actually needs which seat</h2>
     <ul>
       <li><strong>Full ($16):</strong> anyone who creates or edits designs, prototypes, or design-system components. Designers, and usually design-adjacent marketers who build in Figma.</li>
-      <li><strong>Dev ($25):</strong> engineers who live in Dev Mode — inspecting specs, pulling code snippets, tracking handoff status. If a developer only <em>looks</em> at designs occasionally, a Collaborator seat plus screenshots is cheaper.</li>
-      <li><strong>Collaborator ($5):</strong> product managers, founders, clients, and stakeholders who review and comment. The moment they start editing regularly, that's a signal to re-evaluate — not to let the auto-upgrade decide for you.</li>
+      <li><strong>Dev ($25):</strong> engineers who live in Dev Mode, inspecting specs, pulling code snippets, tracking handoff status. If a developer only <em>looks</em> at designs occasionally, a Collaborator seat plus screenshots is cheaper.</li>
+      <li><strong>Collaborator ($5):</strong> product managers, founders, clients, and stakeholders who review and comment. The moment they start editing regularly, that's a signal to re-evaluate, not to let the auto-upgrade decide for you.</li>
     </ul>
-    <p>The cheapest Figma bill isn't the smallest plan — it's the right seats on the right people, audited monthly. Set a recurring calendar reminder two days before your billing date; it's the highest-ROI ten minutes in your SaaS stack.</p>
+    <p>The cheapest Figma bill isn't the smallest plan, it's the right seats on the right people, audited monthly. Set a recurring calendar reminder two days before your billing date; it's the highest-ROI ten minutes in your SaaS stack.</p>
 
     <h2>FAQ</h2>
     <h3>How much does a Figma dev seat cost?</h3>
-    <p>About $25/user/month on annual billing, versus ~$16 for a Full seat and ~$5 for a Collaborator seat. Prices reported in 2025–2026 guides; confirm on Figma's pricing page.</p>
+    <p>About $25/user/month on annual billing, versus ~$16 for a Full seat and ~$5 for a Collaborator seat. Prices reported in 2025 to 2026 guides; confirm on Figma's pricing page.</p>
     <h3>Why was I charged for extra Figma seats?</h3>
     <p>Most likely an accidental upgrade: a user who edits a design file (not just views or comments) is moved to a billable seat automatically. Check the Members tab for editors you didn't intend to bill.</p>
     <h3>How do I downgrade a Figma seat before the billing date?</h3>
-    <p>Open the team page, go to the Members tab, filter by Design/FigJam role to find billed editors, and downgrade them to Viewer-restricted before your monthly billing date — Figma only counts editors on the billing date.</p>
-    <p class="fine">This guide is general business information, not financial advice. Seat prices reported 2025–2026 — always confirm current pricing on Figma's own site before buying.</p>
+    <p>Open the team page, go to the Members tab, filter by Design/FigJam role to find billed editors, and downgrade them to Viewer-restricted before your monthly billing date. Figma only counts editors on the billing date.</p>
+    <p class="fine">This guide is general business information, not financial advice. Seat prices reported 2025 to 2026, always confirm current pricing on Figma's own site before buying.</p>
   </div>
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
-    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <p class="footer-brand">PlanPrice, verified B2B software pricing and deals.</p>
     <nav class="footer-nav">
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
@@ -148,7 +148,7 @@
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
     </nav>
-    <p class="fine">Prices verified 2026-10-11 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions — partnerships are still being set up.</p>
+    <p class="fine">Prices verified 2026-10-11 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions, partnerships are still being set up.</p>
   </div>
 </footer>
 </body>

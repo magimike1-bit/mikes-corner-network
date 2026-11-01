@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keeping Online and In-Store Stock in Sync: One Available Number, Checked Against the Spec — Retail Inventory Management</title>
+<title>Keeping Online and In-Store Stock in Sync: One Available Number, Checked Against the Spec | Retail Inventory Management</title>
 <meta name="description" content="Verify the sellable number against the official inventory states, compare three sync architectures by oversell window, and test the setup with a simultaneous purchase.">
 <link rel="stylesheet" href="/style.css">
 <!-- AdSense: ad code goes here -->
@@ -21,20 +21,20 @@
   <p class="meta">Stockroom systems &middot; 7 min read</p>
 
   <p>A customer buys the last blue jacket on the website. An hour
-  earlier, the same jacket sold at the shop counter. The refund and the
-  apology email are already written in everything but fact — so which
-  number failed? Not the shelf count: the jacket really was there, once.
-  The number that failed is the one the website sold from, and keeping
-  that number honest is a specification problem before it is a software
-  purchase. This piece checks the specification first — what
-  "available" actually means, in the platform's own definitions — then
-  compares the three setups a small shop can run, then the guardrails
-  and the test that prove the setup works.</p>
+ earlier, the same jacket sold at the shop counter. The refund and the
+ apology email are already written in everything but fact, so which
+ number failed? Not the shelf count: the jacket really was there, once.
+ The number that failed is the one the website sold from, and keeping
+ that number honest is a specification problem before it is a software
+ purchase. This piece checks the specification first, what
+ "available" actually means, in the platform's own definitions, then
+ compares the three setups a small shop can run, then the guardrails
+ and the test that prove the setup works.</p>
 
   <h2>The number customers buy from is Available, not On hand</h2>
-  <p>Shopify's Help Center — the definitions below are its wording,
-  checked against the official inventory-states page — splits every
-  product at every location into five states:</p>
+  <p>Shopify's Help Center, the definitions below are its wording,
+ checked against the official inventory-states page, splits every
+ product at every location into five states:</p>
   <table>
     <thead>
       <tr><th>State</th><th>What it means</th></tr>
@@ -42,7 +42,7 @@
     <tbody>
       <tr>
         <td>On hand</td>
-        <td>All units at the location — the total of Committed, Unavailable and Available</td>
+        <td>All units at the location, the total of Committed, Unavailable and Available</td>
       </tr>
       <tr>
         <td>Available</td>
@@ -50,11 +50,11 @@
       </tr>
       <tr>
         <td>Committed</td>
-        <td>Units set aside that cannot be sold — in an unfulfilled order, reserved in a draft order, or in a transfer marked ready to ship</td>
+        <td>Units set aside that cannot be sold, in an unfulfilled order, reserved in a draft order, or in a transfer marked ready to ship</td>
       </tr>
       <tr>
         <td>Unavailable</td>
-        <td>Units stocked at the location but held back — damaged, quality control, or safety stock</td>
+        <td>Units stocked at the location but held back, damaged, quality control, or safety stock</td>
       </tr>
       <tr>
         <td>Incoming</td>
@@ -63,17 +63,16 @@
     </tbody>
   </table>
   <p>The verification this table makes possible takes five minutes and
-  catches the most expensive sync error there is: a channel selling
-  from the wrong state. If the website's sellable figure can include
-  committed units, the shop will sell jackets it has already promised
-  to someone else. If it includes incoming, it will sell stock that has
-  not arrived — and may not. If damaged units sit in Available instead
-  of Unavailable, they are for sale. The identity to hold onto is the
-  one in the first row: on hand is a sum, and only one part of it —
-  Available — is safe to sell from. Other platforms name the states
-  differently, but any setup worth trusting can answer the same five
-  questions: what is physically here, what is promised, what is held,
-  what can be sold, what is merely expected.</p>
+ catches the most expensive sync error there is: a channel selling
+ from the wrong state. If the website's sellable figure can include
+ committed units, the shop will sell jackets it has already promised
+ to someone else. If it includes incoming, it will sell stock that has
+ not arrived, and may not. If damaged units sit in Available instead
+ of Unavailable, they are for sale. The identity to hold onto is the
+ one in the first row: on hand is a sum, and only one part of it. Available, is safe to sell from. Other platforms name the states
+ differently, but any setup worth trusting can answer the same five
+ questions: what is physically here, what is promised, what is held,
+ what can be sold, what is merely expected.</p>
 
   <h2>Three architectures, three oversell windows</h2>
   <p>Every small shop selling in person and online runs one of three
@@ -86,7 +85,7 @@
       <tr>
         <td>How it works</td>
         <td>Each channel keeps its own stock number</td>
-        <td>Counts exported and imported between systems on a schedule — daily or weekly in the manual version</td>
+        <td>Counts exported and imported between systems on a schedule, daily or weekly in the manual version</td>
         <td>Every channel reads and writes one central inventory, updating automatically at each sale</td>
       </tr>
       <tr>
@@ -110,57 +109,56 @@
     </tbody>
   </table>
   <p>Update speed is the measurable difference between the second and
-  third columns. Market leaders are reported updating digital inventory
-  every five minutes or less, with live calls for high-velocity items;
-  an hourly batch leaves a risk window twelve times that size, and a
-  daily spreadsheet import leaves a window no apology process can
-  outrun. Before buying anything, a shop can audit which architecture
-  it actually has — genuinely unified, or only loosely connected
-  through periodic batch syncs. That difference, not the brand of
-  software, determines the overselling risk being carried.</p>
+ third columns. Market leaders are reported updating digital inventory
+ every five minutes or less, with live calls for high-velocity items;
+ an hourly batch leaves a risk window twelve times that size, and a
+ daily spreadsheet import leaves a window no apology process can
+ outrun. Before buying anything, a shop can audit which architecture
+ it actually has, genuinely unified, or only loosely connected
+ through periodic batch syncs. That difference, not the brand of
+ software, determines the overselling risk being carried.</p>
 
   <h2>The guardrails that do the actual work</h2>
   <p>A shared pool narrows the window; guardrails close what is left.</p>
   <ul>
     <li><strong>Reserve at checkout.</strong> The moment a shopper buys,
-    those units are allocated and the available quantity drops for
-    every channel — the standard behaviour in unified setups, and the
-    single mechanism that turns "the same minute" from a double sale
-    into a sold-out message for the second buyer.</li>
+ those units are allocated and the available quantity drops for
+ every channel, the standard behaviour in unified setups, and the
+ single mechanism that turns "the same minute" from a double sale
+ into a sold-out message for the second buyer.</li>
     <li><strong>A display buffer on fast movers.</strong> Show the item
-    as out of stock online while a small number remain — one published
-    example uses two units — so timing gaps, a damaged unit, or a
-    counting error cannot be sold. The buffer is a deliberate lie of
-    two units, told to protect every other promise the shop makes.</li>
+ as out of stock online while a small number remain, one published
+ example uses two units, so timing gaps, a damaged unit, or a
+ counting error cannot be sold. The buffer is a deliberate lie of
+ two units, told to protect every other promise the shop makes.</li>
     <li><strong>Per-channel caps.</strong> Set a maximum available
-    quantity per channel instead of exposing 100% of stock everywhere.
-    If one channel surges — a marketplace promotion, a viral post —
-    the cap acts as a circuit breaker while the other channels keep
-    their share.</li>
+ quantity per channel instead of exposing 100% of stock everywhere.
+ If one channel surges, a marketplace promotion, a viral post, the cap acts as a circuit breaker while the other channels keep
+ their share.</li>
     <li><strong>Returns stay out of Available until checked.</strong>
     Returned goods are kept separate until someone has inspected them
     and they are ready to sell again. A return scanned straight back
     into available stock sells a possibly damaged unit to the next
     customer.</li>
     <li><strong>Bundles sell their components.</strong> A kit's stock
-    must be linked to the items inside it, so selling the kit reduces
-    the components and selling the last component closes the kit. An
-    unlinked bundle is a second, invisible stock count — the separate-
-    counts problem rebuilt inside one system.</li>
+ must be linked to the items inside it, so selling the kit reduces
+ the components and selling the last component closes the kit. An
+ unlinked bundle is a second, invisible stock count, the separate-
+ counts problem rebuilt inside one system.</li>
   </ul>
-  <p>Two yes answers on the failure side of that list — manual updates
-  somewhere, separate numbers somewhere, unlinked bundles, returns
-  re-entering unchecked — are a published rule of thumb that a central
-  inventory with automatic sync will likely pay for itself in saved
-  refunds and saved customers.</p>
+  <p>Two yes answers on the failure side of that list, manual updates
+ somewhere, separate numbers somewhere, unlinked bundles, returns
+ re-entering unchecked, are a published rule of thumb that a central
+ inventory with automatic sync will likely pay for itself in saved
+ refunds and saved customers.</p>
 
   <h2>Set it up and test it like you mean it</h2>
   <ol>
     <li><strong>Clean the item records first.</strong> Sync propagates
-    whatever it is given, faster. Duplicate items, near-identical
-    listings for the same product, and quantities nobody trusts should
-    be fixed before channels are connected — connecting first spreads
-    the mess to every storefront at sync speed.</li>
+ whatever it is given, faster. Duplicate items, near-identical
+ listings for the same product, and quantities nobody trusts should
+ be fixed before channels are connected, connecting first spreads
+ the mess to every storefront at sync speed.</li>
     <li><strong>Pick the source of truth.</strong> One system holds the
     inventory; the till and the website read from it. Write down which
     system it is. "Both, mostly" is the separate-counts architecture
@@ -181,44 +179,44 @@
     counter at the same moment, then attempt a third purchase on each
     channel. Both third attempts should fail as sold out.</li>
     <li><strong>Audit weekly.</strong> Sync systems drift: a channel
-    quietly disconnected, a return workflow bypassed. A short weekly
-    check — a few shelf counts against the system, the oversell and
-    cancellation count for the week — catches drift while it is still
-    cheap.</li>
+ quietly disconnected, a return workflow bypassed. A short weekly
+ check, a few shelf counts against the system, the oversell and
+ cancellation count for the week, catches drift while it is still
+ cheap.</li>
   </ol>
   <p><strong>What success looks like:</strong> the third purchase in
-  step 6 cannot be made, available figures on both channels agree with
-  a physical count of the test items, and a returned item sits outside
-  Available until it has been checked. Manual counting does not
-  disappear in a synced shop — it changes jobs, from building the
-  record to auditing a record worth trusting.</p>
+ step 6 cannot be made, available figures on both channels agree with
+ a physical count of the test items, and a returned item sits outside
+ Available until it has been checked. Manual counting does not
+ disappear in a synced shop, it changes jobs, from building the
+ record to auditing a record worth trusting.</p>
 
   <h2>Bottom line: unify, batch, or stay manual</h2>
   <p><strong>Stay manual</strong> if there is genuinely one channel, or
-  the online side sells stock the shop floor never touches — there is
-  no shared number to keep honest. <strong>Batch, deliberately,</strong>
+ the online side sells stock the shop floor never touches, there is
+ no shared number to keep honest. <strong>Batch, deliberately,</strong>
   if a second channel is new, order volume is low, and the sellers are
   slow: name the interval, know the window it leaves, and set the
-  display buffer to cover it. <strong>Unify</strong> — one pool,
-  reservation at checkout, states verified — the moment two channels
-  sell the same physical stock at any real volume, because from that
-  point every oversell is an architecture decision the shop is making
-  daily, not an accident. Treat overselling as a customer-service
-  problem and the refunds become a recurring cost line. Treat it as
-  the architecture problem it is, and it mostly stops happening.
-  Fancier options — fulfilling online orders from store shelves, for
-  instance — belong strictly after this: they add one more claimant
-  to the same stock, and only a sync that has passed its own test can
-  carry it.</p>
+  display buffer to cover it. <strong>Unify</strong>, one pool,
+ reservation at checkout, states verified, the moment two channels
+ sell the same physical stock at any real volume, because from that
+ point every oversell is an architecture decision the shop is making
+ daily, not an accident. Treat overselling as a customer-service
+ problem and the refunds become a recurring cost line. Treat it as
+ the architecture problem it is, and it mostly stops happening.
+ Fancier options, fulfilling online orders from store shelves, for
+ instance, belong strictly after this: they add one more claimant
+ to the same stock, and only a sync that has passed its own test can
+ carry it.</p>
 
-  <p>— Dex Carter, Tech Writer</p>
+  <p>, Dex Carter, Tech Writer</p>
 
   <p><a href="/">Back to all guides &rarr;</a></p>
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
-    <p>Retail Inventory Management — practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+    <p>Retail Inventory Management, practical guidance for independent retailers. Content is for information only, not professional advice.</p>
     <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
   </div>
 </footer>

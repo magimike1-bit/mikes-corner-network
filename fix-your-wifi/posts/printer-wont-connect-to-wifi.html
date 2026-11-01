@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Printer Won't Connect to Wi-Fi — Fix Your Wi-Fi</title>
-<meta name="description" content="A printer failure is one of three stages — it can't see the network, the join is rejected, or it joined and nothing can find it. The printer's own test page names the stage; each stage has its own fix.">
+<title>Printer Won't Connect to Wi-Fi | Fix Your Wi-Fi</title>
+<meta name="description" content="A printer failure is one of three stages, it can't see the network, the join is rejected, or it joined and nothing can find it. The printer's own test page names the stage; each stage has its own fix.">
 <link rel="stylesheet" href="/style.css">
 <!-- AdSense: ad code goes here -->
 </head>
@@ -27,14 +27,14 @@
   <p class="meta">Fixes &middot; 8 min read</p>
 
   <p>The printer is probably not broken. Printers fail to join Wi-Fi at three
-  distinct stages, and the stages look identical from across the room — a
-  blinking light and no printing — while needing completely different fixes.
-  Stage one: the printer never sees your network in its list. Stage two: it
-  sees the network, you enter the password, and the join is rejected. Stage
-  three: the printer joins happily, reports itself connected, and no computer
-  or phone can find it. Restarting everything, the usual advice, treats none
-  of these specifically. The printer already knows which stage it failed at,
-  and it will print that information on a test page. Start there.</p>
+ distinct stages, and the stages look identical from across the room, a
+ blinking light and no printing, while needing completely different fixes.
+ Stage one: the printer never sees your network in its list. Stage two: it
+ sees the network, you enter the password, and the join is rejected. Stage
+ three: the printer joins happily, reports itself connected, and no computer
+ or phone can find it. Restarting everything, the usual advice, treats none
+ of these specifically. The printer already knows which stage it failed at,
+ and it will print that information on a test page. Start there.</p>
 
   <h2>Read the stage off the printer's own test page</h2>
   <p>Most wireless printers can print a network configuration page or a
@@ -49,16 +49,16 @@
       <tr><th>Stage</th><th>What you observe</th><th>Where the fault sits</th></tr>
     </thead>
     <tbody>
-      <tr><td>1 — Cannot see it</td><td>Your network name is missing from the printer's list</td><td>Band, channel, or a hidden name — the router checklist below</td></tr>
-      <tr><td>2 — Join rejected</td><td>Network is listed, password entered, connection fails</td><td>Password, security mode, or a router block</td></tr>
-      <tr><td>3 — Joined but invisible</td><td>Printer says connected; computers and phones cannot find it</td><td>Different network than the device, or discovery blocked</td></tr>
+      <tr><td>1. Cannot see it</td><td>Your network name is missing from the printer's list</td><td>Band, channel, or a hidden name, the router checklist below</td></tr>
+      <tr><td>2. Join rejected</td><td>Network is listed, password entered, connection fails</td><td>Password, security mode, or a router block</td></tr>
+      <tr><td>3. Joined but invisible</td><td>Printer says connected; computers and phones cannot find it</td><td>Different network than the device, or discovery blocked</td></tr>
     </tbody>
   </table>
   <p>One cause sits underneath stage three so often that HP lists it among
-  the common ones: the printer is not on the same Wi-Fi network as the
-  computer or phone trying to print. A printer that joined the guest network,
-  or a 2.4 GHz network with a different name from the one the phone is on,
-  is connected — and unreachable.</p>
+ the common ones: the printer is not on the same Wi-Fi network as the
+ computer or phone trying to print. A printer that joined the guest network,
+ or a 2.4 GHz network with a different name from the one the phone is on,
+ is connected, and unreachable.</p>
 
   <h2>The fix procedure, by stage</h2>
   <ol>
@@ -66,13 +66,13 @@
     the stage, the exact network name shown, and any failure line. Every step
     below keys off that page; reprint it after a fix attempt instead of
     guessing whether anything changed.</li>
-    <li><strong>Stage 1 — make the network visible to the printer.</strong>
-    Move the printer into the same room as the router for setup; distance
-    and walls can be sorted out after it joins. Then work the router
-    checklist in the next section — band, channel, and name broadcasting are
-    the three settings that hide a network from a printer while every phone
-    in the house sees it fine.</li>
-    <li><strong>Stage 2 — re-enter the password where you can see it.</strong>
+    <li><strong>Stage 1, make the network visible to the printer.</strong>
+ Move the printer into the same room as the router for setup; distance
+ and walls can be sorted out after it joins. Then work the router
+ checklist in the next section, band, channel, and name broadcasting are
+ the three settings that hide a network from a printer while every phone
+ in the house sees it fine.</li>
+    <li><strong>Stage 2, re-enter the password where you can see it.</strong>
     Printer keypads mangle passwords silently, so use a path that shows the
     characters. On Canon models, the documented route is the Network icon on
     the HOME screen, then Wi-Fi, then Wi-Fi setup, then Manual connect:
@@ -82,28 +82,27 @@
     select the network and enter the password there. Passwords are
     case-sensitive on both.</li>
     <li><strong>Stage 2, if the correct password still fails:</strong> Canon's
-    documented next step is to turn the printer off, unplug the wireless
-    router for 15 seconds, plug it back in, wait for it to come back fully,
-    and try the join again. If it still fails on an HP, restore the printer's
-    network settings — Setup, then Network, then Restore Network Defaults —
-    and run the Wireless Setup Wizard again from a clean slate; the printer
-    may be replaying stale settings from a previous network.</li>
-    <li><strong>Stage 3 — put printer and device on the same network, by
-    name.</strong> Compare the SSID printed on the configuration page with
+ documented next step is to turn the printer off, unplug the wireless
+ router for 15 seconds, plug it back in, wait for it to come back fully,
+ and try the join again. If it still fails on an HP, restore the printer's
+ network settings. Setup, then Network, then Restore Network Defaults, and run the Wireless Setup Wizard again from a clean slate; the printer
+ may be replaying stale settings from a previous network.</li>
+    <li><strong>Stage 3, put printer and device on the same network, by
+ name.</strong> Compare the SSID printed on the configuration page with
     the network name shown in the phone or computer's Wi-Fi settings. They
     must match exactly. If the printer landed on a guest network or on a
     differently named band, reconnect it to the main network using the step
     3 path, then reprint the configuration page to confirm the name.</li>
     <li><strong>Stage 3, names match but discovery still fails:</strong> check
-    the router for the settings that isolate devices from each other — a
-    guest network's client isolation, or MAC address filtering left on.
-    Apple's router guidance notes that MAC filtering can block devices;
-    a filter list built for computers routinely forgets the printer. Move
-    the printer to the main, non-isolated network rather than punching
-    exceptions into the guest one.</li>
-    <li><strong>Print a real page from two devices</strong> — one computer,
-    one phone — as the finishing test, not a printer self-test. A self-test
-    proves the printer works. It says nothing about the network.</li>
+ the router for the settings that isolate devices from each other, a
+ guest network's client isolation, or MAC address filtering left on.
+ Apple's router guidance notes that MAC filtering can block devices;
+ a filter list built for computers routinely forgets the printer. Move
+ the printer to the main, non-isolated network rather than punching
+ exceptions into the guest one.</li>
+    <li><strong>Print a real page from two devices</strong>, one computer,
+ one phone, as the finishing test, not a printer self-test. A self-test
+ proves the printer works. It says nothing about the network.</li>
   </ol>
 
   <h2>The router checklist printers actually fail on</h2>
@@ -112,35 +111,33 @@
   disabled or the router is running 5 GHz only, the printer's wizard shows
   nothing. Enable 2.4 GHz during setup.</p>
   <p><strong>Channel.</strong> The same guidance puts the printer's 2.4 GHz
-  channel support at channels 1 to 11. A router set to channel 12 or 13 —
-  legal in many regions, invisible to the printer — produces a stage-one
-  failure with no error anywhere. Set the 2.4 GHz channel to Auto, or
-  explicitly to a channel from 1 to 11.</p>
+ channel support at channels 1 to 11. A router set to channel 12 or 13, legal in many regions, invisible to the printer, produces a stage-one
+ failure with no error anywhere. Set the 2.4 GHz channel to Auto, or
+ explicitly to a channel from 1 to 11.</p>
   <p><strong>Security mode.</strong> Apple's recommended-settings page advises
-  WPA3 Personal where everything supports it, and WPA2/WPA3 Transitional
-  for compatibility with older devices — the transitional mode lets an older
-  device join with WPA2 while newer ones use WPA3. A WPA3-only setting is a
-  classic stage-two rejection for an older printer: the password is right
-  and the join still fails.</p>
+ WPA3 Personal where everything supports it, and WPA2/WPA3 Transitional
+ for compatibility with older devices, the transitional mode lets an older
+ device join with WPA2 while newer ones use WPA3. A WPA3-only setting is a
+ classic stage-two rejection for an older printer: the password is right
+ and the join still fails.</p>
   <p><strong>Name broadcasting.</strong> A hidden network does not appear in
   any setup wizard. Either turn SSID broadcast on while you set the printer
   up, or use the printer's manual-entry option, if it offers one, and type
   the name exactly.</p>
 
   <p><strong>What success looks like:</strong> the reprinted configuration
-  page shows the printer connected to the household's main network name —
-  the same name the computer and phone show — the wireless light is steady
-  rather than blinking, and a real document prints from both a computer and
-  a phone without moving either device or the printer. If stage two survives
-  the password check, the router restart, and the security-mode change, the
-  remaining suspect is the printer's wireless hardware, and the test page
-  from step 1 is the evidence to take to the manufacturer's support.</p>
+ page shows the printer connected to the household's main network name, the same name the computer and phone show, the wireless light is steady
+ rather than blinking, and a real document prints from both a computer and
+ a phone without moving either device or the printer. If stage two survives
+ the password check, the router restart, and the security-mode change, the
+ remaining suspect is the printer's wireless hardware, and the test page
+ from step 1 is the evidence to take to the manufacturer's support.</p>
 
   <p class="disclaimer">General information about home networking, not
   professional IT advice. Menu names vary by printer model; check the
   manual for a specific device.</p>
 
-  <p>— Dex Carter, Tech Writer</p>
+  <p>, Dex Carter, Tech Writer</p>
 </main>
 <footer class="site-footer">
   <div class="wrap">

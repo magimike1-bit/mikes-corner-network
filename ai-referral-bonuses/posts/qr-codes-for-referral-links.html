@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Codes for Referral Links: When a Scan Counts, and When It Vanishes | AI Referral Bonuses</title>
+<meta name="description" content="A scan is a click, not a channel: no separate scan counter, the distinct landing page fix, ad blocker and storage failure modes, and why print permanence changes the destination choice.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">AI Referral Bonuses</a><p class="tagline">Every verified AI referral &amp; affiliate bonus, in one filterable list</p><nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy-policy.html">Privacy</a></nav></div></header>
+<main class="wrap"><p><a href="/">&larr; All programs and guides</a></p>
+
+<h1>QR Codes for Referral Links: When a Scan Counts, and When It Vanishes</h1>
+<p class="meta">Guides &middot; Published 2026-11-02 &middot; Last updated 2026-11-02</p>
+<p>Can a printed QR code earn referral commissions, and can you prove it did? The first half is easy. The second half is where the myth sits. Marketing guides talk about scans as a channel with its own metrics, as if the code reported back separately from the link inside it. Checked against the documentation of the systems that actually run these programs, a scan is not a channel. It is a click wearing a printed costume, with all the strengths and blind spots that implies.</p>
+<h2>What a scan actually does, verified</h2>
+<p>WooCommerce&rsquo;s official documentation for its affiliate and referral plugin states the mechanism directly: a QR code turns an affiliate&rsquo;s referral link into something that can be printed, displayed, or shown on a screen, and the scan is tracked exactly like a click. The same page verifies the consequences. A scan opens the referral link in the visitor&rsquo;s browser, so attribution, cookie duration, and commission rules are identical to a tap on the same link. Affiliatly&rsquo;s help documentation describes the same method from the promoter side: a scan forwards the visitor to the store, connects the visit with the affiliate, and an order earns a commission with the same settings as link tracking. It also notes the method works well for partners without a website, which is the genuine use case: events, packaging, business cards, and a market stall sign, places a link cannot be tapped because there is no screen text to tap.</p>
+<table>
+<thead><tr><th>Question</th><th>Verified answer</th><th>Source system</th></tr></thead>
+<tbody>
+<tr><td>Does a scan get its own attribution rules?</td><td>No. Same attribution, cookie duration, and commission rules as a click</td><td>WooCommerce</td></tr>
+<tr><td>Is there a scan counter in reports?</td><td>No. Scans count as clicks and are indistinguishable from taps</td><td>WooCommerce</td></tr>
+<tr><td>Does the code expire?</td><td>No. The image does not expire, and neither does the link inside it</td><td>WooCommerce</td></tr>
+<tr><td>Does the commission setting differ?</td><td>No. Same settings as link tracking</td><td>Affiliatly</td></tr>
+</tbody>
+</table>
+<h2>Make the print campaign measurable before printing</h2>
+<p>The indistinguishability row is the one that costs money. If the flyer, the bio link, and the post all point at the same referral link, the report shows one pile of clicks and the print run&rsquo;s contribution is unknowable. WooCommerce&rsquo;s documentation gives the fix: generate a code for a distinct landing page, one used only by that printed campaign, so its numbers stand apart in the link report. Build the campaign in that order:</p>
+<ol>
+<li><strong>Choose a destination only print will use,</strong> a page or link variant that no online post points to.</li>
+<li><strong>Generate the referral link for that destination first,</strong> then create the QR code from that exact link. In the WooCommerce flow the link must exist before the code can be created, and the code is created fresh each time rather than stored, so save the downloaded image carefully.</li>
+<li><strong>If the program offers no built in code,</strong> use a plain QR generator on the same distinct link, and treat the result as untrusted until step 4 passes.</li>
+<li><strong>Print one copy and scan it with a phone,</strong> exactly as a reader would. WooCommerce&rsquo;s guidance is explicit: test the printed code before committing to a print run, keep a clear margin around it, and prefer short URLs, because codes for short links scan more easily than codes for long ones.</li>
+<li><strong>Confirm the landing.</strong> The scan should arrive at the intended page with your referral link intact, not at a homepage or an error.</li>
+</ol>
+<p><strong>What success looks like:</strong> a scan of the printed proof lands on the print only destination, and a click on that destination&rsquo;s link appears in your report, proving the chain works before hundreds of copies make any error permanent.</p>
+<h2>The scans tracking never sees</h2>
+<p>Three failure modes sit between a scan and a recorded referral. Affiliatly warns that if the visitor uses an ad blocker, the click might not be tracked, because some plugins prevent the tracking code from working. A guide to how affiliate links work, checked on 2026-11-02, adds the browser side: storage and consent settings affect which referral information can be retained, and cleared storage or a device change can break tracking even inside the referral window. Print adds a third, slower failure. The person who scans at a stall may buy a week later on a laptop, through no link at all. None of this argues against print. It argues for reading print results as a floor: the tracked number is the minimum the campaign produced, never the total.</p>
+<h2>Print is permanent: the code outlives the campaign</h2>
+<p>The verified non expiry cuts both ways. A code on packaging keeps working while the link works, which is free distribution. It also keeps circulating after a program changes its terms, cuts its rate, or ends, and paper cannot be edited after the fact. The decision framework is therefore about destination control. Point printed codes at a destination you control, such as your own page carrying the current referral link, when the program&rsquo;s rules allow it, and a terms change becomes a page edit instead of a reprint. Point them directly at a program link only for short lived material you can physically retrieve or let expire, like an event handout. The longer the paper will live, the more control the destination needs.</p>
+<section class="note"><h2>Important: no income guarantees</h2><p>This article is general information, not financial or tax advice. Referral and affiliate rewards are never guaranteed income, and a working QR code cannot promise that a scan will convert or be credited. Always check a program&rsquo;s terms before printing its link in any form, since some programs restrict promotion methods. Behaviour described here was checked against vendor documentation on 2026-11-02 and can change with software updates. Report any income you do receive as your local tax rules require.</p></section>
+<p>, Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer"><div class="wrap"><p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p><p>AI Referral Bonuses, a directory of AI referral and affiliate programs. Bonus terms change frequently; always confirm current terms on the official program page. Content is for general information only.</p><p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p></div></footer>
+</body>
+</html>

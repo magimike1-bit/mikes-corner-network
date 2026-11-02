@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Your Backup Restore: A Check That Proves Your Files Can Come Back | Hard Drive Health</title>
+<meta name="description" content="A backup job that reports success has not proved anything yet. Restore a small sample set to a separate folder, open every file, check an older backup date, and log the result.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>Test Your Backup Restore: A Check That Proves Your Files Can Come Back</h1>
+  <p class="meta">Backups &middot; Published 2026-11-02 &middot; Last updated 2026-11-02</p>
+
+  <p>When did a file last actually come back from your backup? Not when the backup last ran. When a restore last finished, with a file on screen, opened and readable. If the answer needs thinking about, the backup is currently a hope rather than a system. This guide turns it into a system in one short sitting.</p>
+
+  <p>The official guidance is blunt on this point. The US Cybersecurity and Infrastructure Security Agency, CISA, states that regularly backing up data and testing the ability to restore it is a critical part of a cybersecurity strategy, and its backup guidance tells readers to test backup procedures so data can be restored both fully and partially, with the ability to roll back data at least seven days. A home backup deserves the same test, at home scale.</p>
+
+  <h2>What a green backup status actually proves</h2>
+  <p>A completed job proves a copy operation ran. It does not prove the copy contains the folder you care about, that the files inside open, that an older backup date survived, or that you remember the password if the backup is encrypted. Each of those is a separate failure, and each has bitten people whose dashboards showed green the whole time.</p>
+  <p>A restore test checks the four layers separately:</p>
+  <ul>
+    <li><strong>Reach:</strong> the backup drive or service can be opened at all, today, with the credentials on hand.</li>
+    <li><strong>Coverage:</strong> a file changed this week is present in a recent backup.</li>
+    <li><strong>Retention:</strong> a file is present in an older backup date, not only in the newest one.</li>
+    <li><strong>Usability:</strong> restored files open in the programs that created them, with content intact.</li>
+  </ul>
+
+  <h2>Pick the sample set before touching anything</h2>
+  <p>A useful test restores a small, deliberate sample rather than whatever file happens to be nearby. A practical restore test set includes one recent file and one folder from a restore point at least 30 days old, restored to an isolated target, with each file opened in its native application and the time and result recorded. At home, adjust the older point to the oldest date your backup keeps if 30 days is beyond its retention, and say so in the log.</p>
+  <table>
+    <thead><tr><th>Sample</th><th>Layer it proves</th><th>Pick</th></tr></thead>
+    <tbody>
+      <tr><td>A document edited this week</td><td>Coverage</td><td>Recent backup date</td></tr>
+      <tr><td>A photo folder</td><td>Usability at folder scale</td><td>Older backup date, 30 days back if available</td></tr>
+      <tr><td>One file from a folder rarely opened</td><td>Coverage beyond the obvious folders</td><td>Recent backup date</td></tr>
+      <tr><td>The file you would miss most</td><td>Reach plus usability</td><td>Whichever date offers it</td></tr>
+    </tbody>
+  </table>
+  <p>Four samples are enough. A test small enough to repeat beats a heroic full restore that happens once and never again.</p>
+
+  <h2>The restore test, step by step</h2>
+  <ol>
+    <li><strong>Create a test folder somewhere separate.</strong> A new folder on the desktop named Restore Test, with the date, works. Restores in this procedure go there, never over the originals, so a failed test cannot damage the live files.</li>
+    <li><strong>On Windows, restore the recent document with File History.</strong> Microsoft documents the path: open File Explorer, go to the folder that contains the file, right click the folder name and select Restore previous versions, pick a version from the list, then expand Restore and select Restore to, choosing the test folder. Microsoft warns that plain Restore replaces the current version and the replacement cannot be undone, which is exactly why Restore to exists and why the test uses it.</li>
+    <li><strong>Restore the older folder the same way, from the older date.</strong> In the Previous Versions list, choose a version from the older backup date rather than the newest one. If no older version is listed, retention is shorter than assumed. Log that as a finding, not a pass.</li>
+    <li><strong>On a Mac, restore with Time Machine.</strong> Apple documents the path: open a window for the item to restore, for a deleted Documents file that means opening the Documents folder, open Time Machine, use the arrows and timeline to browse backups, select the item, and click Restore. Restored items return to their original location, so for a test, first copy or rename any current file with the same name, then open the restored copy and confirm it is the version expected.</li>
+    <li><strong>Open every restored file in its own program.</strong> A document opens in its editor, a photo opens full size, a spreadsheet opens with its figures visible. A file that restores but will not open is a failed sample, however clean the copy progress bar looked.</li>
+    <li><strong>Check the encrypted backup unlocks.</strong> If the backup drive is encrypted, the test is also the moment the password or recovery key gets used. Enter it from wherever it is stored. If nobody can produce it, the backup is locked storage, and that finding outranks every other result in the log.</li>
+    <li><strong>Time the restore and write the log entry.</strong> Note how long the sample took. That number, scaled up, is the first honest estimate of how long a real recovery day would run.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> every sample sits in the test folder or its checked location, every file opens in its native program with content intact, one sample came from an older backup date, the encryption password was produced without a hunt, and a dated log entry records all of it.</p>
+
+  <h2>Scoring the result without flattering it</h2>
+  <p>Score each layer separately. Reach, coverage, retention, usability: pass or fail, no partial credit blended into a single comforting word. A test that passes coverage and fails retention has found a real problem, a backup that only protects last week. A test that fails reach because the drive will not mount has found the biggest problem of all, early, on a quiet day, which is the entire point of testing.</p>
+  <p>Fix one failed layer, then retest only that layer within the week. The retest is part of the result. A failure that gets fixed and retested is the system working as designed.</p>
+
+  <h2>The log entry to keep</h2>
+  <p>Keep the log where the backup itself is described, a note file, a planner page, a notebook. Five lines per test are enough:</p>
+  <ul>
+    <li>Date of test, and backup dates sampled.</li>
+    <li>Samples restored, and where they were restored to.</li>
+    <li>Each file opened: yes or no, per file.</li>
+    <li>Time taken, and any failure found, in plain words.</li>
+    <li>Date chosen for the next test.</li>
+  </ul>
+  <p>CISA describes the 3-2-1 rule as three copies of important files, on two different types of storage media, with one copy stored off site. The restore test is what keeps that structure honest. Copies that have never been opened are arithmetic. Copies that restored, opened, and got logged on 2026-11-02 are a backup.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health, practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

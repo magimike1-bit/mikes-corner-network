@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UDMA CRC Error Count: Is It the Cable or the Drive? | Hard Drive Health</title>
+<meta name="description" content="SMART attribute 199 counts errors on the interface cable, not on the platters. Record a baseline, change one thing at a time, and read whether the count still climbs.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>UDMA CRC Error Count: Is It the Cable or the Drive? A Baseline Test That Settles It</h1>
+  <p class="meta">Drive health checks &middot; Published 2026-11-02 &middot; Last updated 2026-11-02</p>
+
+  <p>A high UDMA CRC Error Count does not mean the drive surface is failing. That is the myth to clear away first. Attribute 199 counts errors in data transfer via the interface cable, as determined by the Interface Cyclic Redundancy Check, usually shortened to ICRC. The suspect is the path between drive and computer: cable, connectors, port, or the drive interface itself. The platters and the flash memory are a different question, answered by different attributes.</p>
+
+  <p>That distinction changes the first move. Replacing a drive whose cable was loose wastes money and copies data for no reason. Ignoring a count that is still climbing misses a connection fault that will keep interrupting transfers. The count on its own settles neither case. Its movement, after one controlled change, settles both.</p>
+
+  <h2>What attribute 199 counts, and what its neighbours count</h2>
+  <p>In the Seagate SMART attribute specification, attribute 199 is listed as Ultra DMA CRC Error Count, with attribute ID 199 and hex code C7. SMART tools may label it UDMA CRC Error Count, UltraDMA CRC Error Count, or attribute C7. The labels differ. The counter is the same.</p>
+  <table>
+    <thead><tr><th>Attribute</th><th>What it records</th><th>First suspect</th></tr></thead>
+    <tbody>
+      <tr><td>199 UDMA CRC Error Count</td><td>Errors in data transfer via the interface cable, detected by ICRC</td><td>Cable, seating, port, or interface</td></tr>
+      <tr><td>197 Pending sectors</td><td>Sectors the drive suspects and has not yet resolved</td><td>The storage surface itself</td></tr>
+      <tr><td>198 Uncorrectable sectors</td><td>Sectors that could not be read correctly</td><td>The storage surface itself</td></tr>
+    </tbody>
+  </table>
+  <p>Read 199 beside 197 and 198, never instead of them. A drive can carry a large CRC count from one bad cable years ago and have clean sector attributes today. A drive can also have a zero CRC count and growing pending sectors. Each attribute answers its own question, and mixing the answers produces the wrong repair.</p>
+
+  <h2>Why the absolute number misleads</h2>
+  <p>The CRC counter does not reset. A fixed cable leaves a permanent number behind, so the figure on screen today may be history rather than a live fault. Only a rising count shows an active problem. Forum reports from drive owners make the same point from the other side: UDMA CRC errors are communication errors between the drive and the host, they typically involve the drive, the SATA cable, or the motherboard, and the absolute count matters less than whether it keeps increasing.</p>
+  <p>So there is no safe number and no doomed number. A count of 3 that rose this week deserves action. A count of 800 that has not moved in a year is a record of a fault that may already be fixed. Anyone quoting a threshold without asking for two readings, taken on two dates, is guessing.</p>
+
+  <p>Short paragraph, plain rule: one reading is a photograph. Two readings are evidence.</p>
+
+  <h2>The baseline and swap procedure</h2>
+  <ol>
+    <li><strong>Back up first if the data matters.</strong> Any drive under suspicion gets copied before it gets handled. The cable work below involves powering down and reseating connectors.</li>
+    <li><strong>Record the baseline.</strong> Open your SMART tool, note the raw value for attribute 199, and note attributes 197 and 198 beside it. Write the date next to the numbers. A screenshot saved with the date in the file name does the same job.</li>
+    <li><strong>Power down fully.</strong> Shut the computer down, switch off the power supply if it has a switch, and give the drive a moment to stop.</li>
+    <li><strong>Change exactly one thing.</strong> Reseat the data cable at both ends, drive end and motherboard or controller end, until each connector sits firmly. If a spare data cable is on hand, swapping the cable counts as the one change for this round. Do not also change the port in the same round.</li>
+    <li><strong>Use the machine normally for several days.</strong> Copy some large files if you want the interface worked harder than idle use works it. Note any disconnects or transfer errors with their dates.</li>
+    <li><strong>Read attribute 199 again and compare.</strong> Same tool, same drive, raw value against the dated baseline from step 2.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the raw value at the second reading matches the baseline exactly, attributes 197 and 198 have not risen, and no disconnects were logged during the test days. The fault was in the connection you reseated or replaced, and the old count is now just history.</p>
+
+  <h2>Reading the result: the decision table</h2>
+  <table>
+    <thead><tr><th>Second reading</th><th>Verdict</th><th>Next step</th></tr></thead>
+    <tbody>
+      <tr><td>199 unchanged, 197 and 198 unchanged</td><td>Connection fault, now fixed</td><td>Log the new baseline and check monthly</td></tr>
+      <tr><td>199 still climbing after a reseat</td><td>Fault still in the path</td><td>Next round, change the cable if you have not, or move to a different port, one change only</td></tr>
+      <tr><td>199 climbing after cable and port changes</td><td>Drive interface or controller now the likely suspect</td><td>Test the drive on another computer if one is available, and plan replacement if it climbs there too</td></tr>
+      <tr><td>199 stable but 197 or 198 rising</td><td>Separate surface problem</td><td>Stop cable work, back up, and treat the drive itself as failing</td></tr>
+    </tbody>
+  </table>
+  <p>The one variable rule is what makes this table usable. Change the cable, the port, and the drive bay in a single afternoon and a stopped count tells you a fix happened somewhere, without telling you where. That matters the day the fault returns and you need to know which part to touch first.</p>
+
+  <h2>Where USB enclosures fit</h2>
+  <p>An external drive adds parts to the path: a USB cable, an enclosure bridge, and often a separate power supply. The same logic applies, with one caution. Some enclosures and bridges do not pass full SMART data through at all, so a missing attribute 199 on an external drive may mean the bridge hides it, not that the count is zero. If the tool shows no SMART table for an external drive, the baseline test belongs on a direct internal connection, or it does not happen. A monitoring program running in the background helps here, because an SSD gives no audible warning as it ages, and a counter that only gets read during a crisis has no baseline to compare against.</p>
+
+  <h2>The decision, stated plainly</h2>
+  <p>Treat attribute 199 as a witness for the connection, not a verdict on the drive. Record it, change one part of the path, read it again. Still and stable means the repair worked and the number can be ignored as history. Still climbing after cable and port rounds means the suspicion moves, with evidence, to the drive interface or the controller. And if the sector attributes start moving at any point, the question has changed entirely: copy the data off and replace the drive, whatever the cable was doing.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health, practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

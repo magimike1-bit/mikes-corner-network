@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Version Control: Tracking Prompt and Tool Changes | Using AI Agents</title>
+<meta name="description" content="A version is the whole behaviour record, not just the prompt: prompt text, tool list, model settings, and the state it ran against, tracked at three levels with a change procedure and a rollback copy.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>AI agent version control: tracking prompt and tool changes</h1>
+  <p class="meta">Workflows &middot; 8 min read</p>
+<p>Version control for an AI agent means one thing: every change to how the agent behaves is numbered, dated, described in one line, and reversible. That covers more than the prompt. A version that records only the prompt text will not tell you why the agent changed its behaviour last Tuesday, because the change may have been a new tool, a swapped model, or a setting, none of which appear in the prompt at all. Track the whole behaviour record, at the lightest level that still lets you restore it, and a regression becomes a lookup instead of a reconstruction.</p>
+<h2>What belongs in one version: the four parts, checked</h2>
+<p>Agent versioning, as the term is used in production guidance, captures every meaningful change to an agent, its prompt, tools, model, and guardrails, as a distinct, labelled version you can pin, compare against earlier ones, and restore on demand. Checked against that definition, a complete version record has four parts:</p>
+<table><tr><th>Part of the version</th><th>What to record</th><th>What breaks if you skip it</th></tr>
+<tr><td>Prompt and instructions</td><td>The full prompt text, with the version string written inside it so the label travels with any copy</td><td>You know something changed, not what; two copies in two apps disagree about which one is live</td></tr>
+<tr><td>Tools</td><td>The tool list, plus each tool's schema: its name, its inputs, and what it is allowed to write to</td><td>A new tool or a changed input field alters behaviour invisibly, because no prompt line moved</td></tr>
+<tr><td>Model and settings</td><td>The exact model ID, temperature, and token limits in force for that version</td><td>The agent degrades with no edit on your side, and you debug your own text for a change that happened underneath it</td></tr>
+<tr><td>State reference</td><td>Which memory and data state the version ran against, or at minimum the date the state snapshot was taken</td><td>You restore old instructions over new, half changed data, and call it a rollback</td></tr></table>
+<p>The fourth row is the one most tracking setups miss. Guidance on agent state is blunt about it: three things have to be versioned for a revert to actually restore the agent, the configuration, the state and memory it works over, and the run traces that show what it did. Reverting the prompt while the agent keeps acting on stale or half changed memory has not rolled anything back. For a small setup, the state reference can be one line in the log, the memory backup dated the same day as the version. It does not need to be elegant. It needs to exist.</p>
+<p>Tool changes deserve the same rigour as prompt changes for a structural reason. A structured snapshot of an agent includes its tool registry alongside the system prompt, model ID, temperature, and max tokens, plus metadata such as timestamp, cost, and latency. Text diff tools handle this badly: a changed variable name in a prompt template can look like a full rewrite, and two versions of a tool schema cannot be merged the way two lines of prose can. Record tool changes in plain language in the log, one line per change, rather than relying on a diff to explain them later.</p>
+<h2>Three tracking levels, and what each one buys</h2>
+<table><tr><th>Level</th><th>How it works</th><th>Rollback looks like</th><th>Fits</th></tr>
+<tr><td>1. Change log</td><td>A dated folder of prompt files plus a log with five fields per version: version number, date, what changed, why, and who approved it</td><td>Copy the previous file back into the tool, by hand</td><td>One operator, one or two agents</td></tr>
+<tr><td>2. Prompt registry</td><td>A prompt platform versions every save automatically and marks one version live with a label such as production</td><td>Move the production label back to the earlier version</td><td>Several agents, or anyone else editing prompts</td></tr>
+<tr><td>3. Versioned state</td><td>Configuration, memory state, and run traces are all versioned and linked, so a version and the world it ran against restore together</td><td>Restore the pinned version and its state snapshot as one operation</td><td>Agents that write to real records, where a bad run has a cost</td></tr></table>
+<p>Level 2 is well documented in current tooling. LangWatch, for example, starts a new prompt at version 1 and creates a new, incremented version on every update, automatically. Individual versions cannot be deleted, only entire prompts, and the version list shows timestamps and commit messages. Its prompts also carry a scope: project scope keeps changes inside one project, while organization scope shares a prompt across projects, where a change can affect other work and may need conflict resolution. Tooling in the same class assigns each prompt a version ID and uses labels such as production and latest to control which version running code pulls, so a rollback is a label change instead of a paste. Registry tooling aimed at developers goes further on lineage: in MLflow, the application version record links out to the code commit, the configuration parameters, and the exact prompt versions the application loaded, and each run trace is tied to both.</p>
+<p>One warning applies at every level: the history your platform keeps on its own is not version control. One widely used automation platform keeps workflow versions from the last 24 hours for all users, the last five days on its Pro plan, and full history only on Enterprise. That covers this week's mistake. It is not a record of what your agent was told to do six months ago, and it disappears exactly when an old change is finally traced.</p>
+<h2>The change procedure</h2>
+<p>Whatever level you run, the procedure for a single change is the same four moves, and each one is cheap:</p>
+<ol>
+<li><strong>Label the new version before you edit.</strong> Name, version number, and date, with the version string inside the prompt itself. Open the log row now: version, date, what is about to change, why, and who approved it.</li>
+<li><strong>Change one thing.</strong> One instruction, one tool, or one setting per version, never a bundle. If tone, a required field, and output length all change in one release and quality drops, there are three suspects and no way to question them separately.</li>
+<li><strong>Record the model and tool state for the version.</strong> Note the exact model ID the agent calls and whether it is a preview model. Note any tool added, removed, or given a changed schema, in one plain language line.</li>
+<li><strong>Check the new version against a fixed test set.</strong> Keep 10 to 20 real inputs in a file, including the badly formatted ones, and run every new version against all of them before it goes live. The set stays fixed, or you are comparing two versions on two different exams.</li>
+<li><strong>Keep the rollback copy outside the tool.</strong> Store the last known good version, prompt, tool list, and settings together, somewhere that still works when the platform is the problem.</li>
+<li><strong>Rehearse the restore once.</strong> Delete the live prompt from the tool and put it back from your copy. A rollback that has never been tested is a plan, not a rollback.</li></ol>
+<p>What success looks like: for any date you choose, you can answer three questions in under a minute. Which version was live? What changed in it, in one line? Where is the copy you would restore? If any answer needs a search through chat windows and notes apps, the tracking is not finished yet.</p>
+<h2>Trade-offs</h2>
+<p>The change log costs minutes per release and nothing in tooling, and its weakness is discipline: skip one row and the record has a hole exactly where the incident will land. The registry removes the clerical work and adds a dependency; your history now lives inside a vendor's system, with its scopes and retention rules, which is why the level 1 habit of an outside rollback copy is worth keeping even after you move up. Versioned state is the only level that makes a restore complete, and it is also the heaviest to run, justified when the agent writes to records someone would pay to repair.</p>
+<p>The cost of skipping all three shows up in rollback frequency. DevRev, reporting Forrester's Agent Control Plane research, puts the rollback rate at 47 percent for teams operating agents without automated evaluation coverage, against 9 percent for teams with full coverage. The fixed test set in step 4 is the small operator's version of that coverage: versions that are checked before they ship need rescuing far less often.</p>
+<p>One more distinction keeps the record honest. Publishing and deploying are not the same event: publishing makes a version active in the registry, and deploying connects that active version to a channel where it does work. Log both, with dates. A version can sit published and undeployed for a week, and a later investigation that cannot separate the two will blame the wrong change.</p>
+<h2>Which level do you need</h2>
+<p>Decide by editors and consequences, not by ambition. One person running one or two agents, where a bad output is an annoyance: level 1, done properly, is the whole job. More than one person editing, or prompts shared across projects: level 2, because automatic versioning and scope controls remove the arguments a shared log cannot settle. An agent that writes to customer records, sends messages, or moves money: level 3 thinking from the start, even if the first implementation is a dated state backup beside the change log, because restoring instructions without the state they ran against is the failure this entire practice exists to prevent. And at every level, log the model: providers give at least six months of notice before retiring generally available models, but preview models can be retired with as little as two weeks of notice, so the model line in your record is the early warning you will otherwise not get.</p>
+<p><em>Sources, accessed November 2, 2026: CorranForce Designs, prompt version control without a Git repo (five field change log, LOCK method, platform history windows, model retirement notice); DevRev, AI agent versioning and state management (version definition, configuration plus state plus traces, publishing versus deploying, Forrester rollback rates); LangWatch documentation, prompt version control (automatic versioning, scopes, version list); Databricks documentation, MLflow prompt registry (prompt and application version lineage); Mech, version control for AI agents (structured snapshots, limits of text diffs). Features and retention windows vary by platform and plan; check your own tool before relying on a window.</em></p>
+<p>, Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents, beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

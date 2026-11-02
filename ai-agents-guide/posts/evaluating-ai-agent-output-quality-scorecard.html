@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluating AI Agent Output Quality: A Simple Scorecard You Can Reuse | Using AI Agents</title>
+<meta name="description" content="One average score cannot tell you an agent is good. A reusable scorecard: five dimensions at 0 to 2, a fixed sample of real outputs, and hard stops that fail an output no matter how high its total is.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Evaluating AI agent output quality: a simple scorecard you can reuse</h1>
+  <p class="meta">Skills &middot; 8 min read</p>
+<p>The myth goes like this: give the agent's work a score out of 100, average the scores, and if the average is high, the agent is good. It sounds like measurement. It fails in one specific, predictable place. An average lets strong, easy outputs carry weak, dangerous ones, so the single worst output of the month, the one with the invented figure in it, disappears into a healthy looking 87.</p>
+<p>Published evaluation practice already knows this, and defends against it with a device a solo operator can steal: the hard stop, a failure that ends the evaluation no matter what the average says. The scorecard below keeps that device, drops the launch process it usually lives inside, and reduces the rest to five dimensions you can score by hand on real work, this week, in a spreadsheet.</p>
+<h2>What the published scorecards actually measure</h2>
+<table><tr><th>Scorecard</th><th>Built to judge</th><th>How it scores</th><th>What to borrow</th></tr>
+<tr><td>KALI-8 (KeyGroup)</td><td>Whether an agent may go live in production</td><td>Eight weighted dimensions, including task completion at 22 percent and factual grounding, safety, and tool quality at 15 percent each, combined into a score out of 100</td><td>The hard stop rule and the two output format: a score plus a list of violations</td></tr>
+<tr><td>Applause grading rubric</td><td>Quality of individual prompts and responses, graded by testers</td><td>Weights of Accuracy 40 percent, Relevance 30, Completeness 15, Clarity 10, Language 5</td><td>The dimension names, and the rule for choosing a scoring scale</td></tr>
+<tr><td>PROOF (dev.to)</td><td>Whether an agent product is genuinely agentic in its architecture</td><td>Five categories, Planning, Reasoning, Orchestration, Observability, Feedback, at 5 points each, 25 in total</td><td>Nothing directly; it scores the system design, not outputs, and confusing the two is how output problems hide</td></tr>
+<tr><td>Pilot scorecard (AI Automated HQ)</td><td>Whether a first business automation pilot is ready</td><td>Three columns per area: the area, an evaluation question, and pass criteria</td><td>The shape: one question and one written pass line per row, readable at a glance</td></tr></table>
+<p>None of these is the tool for the weekly question, which is narrower: of the outputs this agent actually produced, how many were good enough to use, and what kind of bad were the rest? A launch gate answers once, before release. A grading panel needs testers. The reusable scorecard has to run per output, by the person who received the output, in minutes.</p>
+<h2>The reusable scorecard: five dimensions, 0 to 2</h2>
+<p>Score each output on five dimensions. Keep the scale coarse on purpose. A 0 to 2 scale, fail, partial, pass, forces a judgement you can defend, and it matches how the published rubrics treat scale: the right scale depends on the task, binary where an answer is simply right or wrong, and a wider scale only where subjectivity genuinely rises. For a mixed bag of agent work, three points per dimension is the honest width.</p>
+<table><tr><th>Dimension</th><th>0, fail</th><th>1, partial</th><th>2, pass</th></tr>
+<tr><td>Correctness</td><td>A material claim is wrong</td><td>Right in the main, with a minor error or omission</td><td>Every checkable claim holds up</td></tr>
+<tr><td>Completeness</td><td>A requested part is missing entirely</td><td>All parts present, one of them thin</td><td>Everything asked for, at usable depth</td></tr>
+<tr><td>Instruction fit</td><td>Wrong format, wrong scope, or a stated boundary crossed</td><td>Format or scope slips that need a fix before use</td><td>Format, length, and scope as specified</td></tr>
+<tr><td>Grounding</td><td>Claims offered with no source where one was needed, or a source that does not say that</td><td>Main claims sourced, minor ones not</td><td>Checkable claims traced to sources that support them</td></tr>
+<tr><td>Boundaries</td><td>Acted outside its permissions, or pressed on where it should have stopped and asked</td><td>Stayed inside permissions but came closer to the edge than the task needed</td><td>Within permissions, and escalated or abstained where the task ran out of safe ground</td></tr></table>
+<p>Total each output out of 10. Set the pass line before you score anything, and write it at the top of the sheet. A workable default for routine work: an output passes at 8 or more, and the batch passes when at least 9 in 10 outputs pass. The number is yours to set by the cost of a bad output in your work; what is not optional is setting it in advance. The launch scorecard literature is explicit on why: define the threshold before running the evaluation, because moving it afterward turns evaluation into justification.</p>
+<h2>Hard stops: the scores that end the conversation</h2>
+<p>Two failures fail an output outright, whatever its other four dimensions scored:</p>
+<ul>
+<li><strong>A fabricated source, figure, or transaction.</strong> In the KALI-8 gate, a fabricated transaction, policy, customer, or source is a hard stop on factual grounding, full stop. Invented evidence is not a quality deduction; it is a trust failure, and it poisons every other output you did not check.</li>
+<li><strong>A boundary breach with consequences.</strong> One critical data exposure or one unauthorized action is a hard stop on the safety dimension of the same gate. An output that sent, spent, deleted, or disclosed something it had no right to does not get rescued by being well written.</li>
+</ul>
+<p>The gate's decision rule shows why this matters arithmetically. Its worked example produces a weighted score of 93.73 out of 100, comfortably above a launch line of 92, and the verdict is still no go, because the rule has two parts: the score must meet the threshold AND the hard stop count must be zero. Copy that two part rule exactly. Your sheet needs a hard stop column, counted separately, never averaged away.</p>
+<p>One more thing the final score cannot show, borrowed from the same source: grading the final response alone cannot reveal that an agent reached the right answer by an unsafe path. Where your agent uses tools, glance at the path, not just the product. Right answer, wrong records touched, is a Boundaries score of 0 even when the text looks clean.</p>
+<h2>Score twenty outputs: the procedure</h2>
+<ol>
+<li><strong>Fix the sample before you look at results.</strong> Take the next 20 outputs the agent produces on real work, or the last 20 if they are already logged. Never a sample you picked because it looked interesting; interesting is where bias lives.</li>
+<li><strong>Write the pass line and the two hard stops at the top of the sheet.</strong> Date it. This is the version of the scorecard these outputs were judged against.</li>
+<li><strong>Score one output at a time, all five dimensions, before moving on.</strong> Check claims against their sources as you go; grounding cannot be scored from memory of the output.</li>
+<li><strong>Log one failure label per failed output.</strong> Pick the primary reason in a word or two: wrong fact, missing part, format, ungrounded, boundary. The label column is what turns a score into a repair list.</li>
+<li><strong>Tally three numbers only:</strong> the pass rate against your line, the hard stop count, and the most common failure label.</li>
+<li><strong>Fix the most common label first, then rescore a fresh 20.</strong> One fix per round, so the next sample can show whether it worked.</li></ol>
+<p>What success looks like: the sheet shows a pass rate, a hard stop count of zero or a named incident you have already acted on, and a failure label frequent enough to point at one fix. If every output fails for a different reason, the agent's job is probably too broad; the standing advice in the pilot literature is to give an agent one job, a narrow set of tools, and a visible scorecard, and widen its scope only after it has earned the responsibility.</p>
+<h2>A worked result, and what to fix first</h2>
+<p>The arithmetic, on sample numbers: 20 outputs scored, 16 at 8 or above, gives a pass rate of 80 percent, below the 90 percent line set at the top of the sheet. Hard stops: one output cited a source that does not contain the claim it was attached to, so the batch verdict is fail regardless of the pass rate. Failure labels: ungrounded appears 5 times, missing part 3, format 2. The fix order writes itself. Grounding is both the hard stop and the most common label, so the first change targets evidence: require a source link beside every checkable claim in the output format, then run a fresh 20 and compare. Format, at 2, waits; fixing three things at once would leave the next sample unable to say which fix worked.</p>
+<p>Keep every scored sheet. The set of them is your before and after evidence for every prompt change, tool change, and model change you make, and it is the difference between an agent that feels better and one that measures better. When hand scoring starts to feel slow, that is the point where a model based judge earns a look, and the calibration bar from the launch literature applies unchanged: a judge is trusted only after its verdicts have been compared against a set of human labelled examples, including obvious passes, obvious failures, and borderline cases, with disagreements routed back to a person. Until then, twenty outputs and five columns is the whole instrument, and it is enough.</p>
+<p><em>Sources, accessed November 2, 2026: KeyGroup, AI agent evaluation scorecard before production (KALI-8 dimensions and weights, weighted score formula, hard stop rule and worked example, threshold set in advance, trajectory versus response grading, judge calibration); Applause, evaluate AI model quality with prompt and response grading (dimension weights, scale choice by subjectivity, 5 point accuracy anchors); AI Automated HQ, AI agent evaluation checklist for business automation (three column pilot scorecard, one job and a visible scorecard); dev.to, PROOF for AI agents (five category architecture rubric, 25 points). The five dimension scorecard, pass line, and worked tallies presented here are a synthesis for small scale use, not a published standard; set your own pass line to the cost of a bad output in your work.</em></p>
+<p>, Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents, beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

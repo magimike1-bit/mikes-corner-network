@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choosing AI Agent Memory Settings: What to Keep, Summarize, and Delete | Using AI Agents</title>
+<meta name="description" content="Memory settings are three decisions, not one toggle: keep stable facts verbatim, summarize detail that stops mattering, and delete on a schedule, including the copies a simple delete leaves behind.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Choosing AI agent memory settings: what to keep, summarize, and delete</h1>
+  <p class="meta">Basics &middot; 8 min read</p>
+<p>Your agent remembers your old address, your previous employer's name, and a project that ended months ago, and it keeps offering all three back to you. Which of them should it keep word for word, which should survive only as a summary, and which should be gone entirely?</p>
+<p>That is the real memory question. The settings screens make it look like one toggle, on or off. Underneath, every item in memory deserves one of three treatments, and the right treatment follows from two properties of the item: how long it stays true, and how much damage the exact wording does if it is wrong or exposed. Sort by those two properties and the settings choose themselves.</p>
+<h2>Three buckets for everything an agent remembers</h2>
+<table><tr><th>Bucket</th><th>What belongs there</th><th>Why this treatment</th></tr>
+<tr><td>Keep, verbatim</td><td>Stable facts and standing preferences: your name as you write it, your timezone, output formats you always want, tools you use daily</td><td>They change rarely, they are used constantly, and a paraphrase can quietly alter them</td></tr>
+<tr><td>Summarize</td><td>Long running context whose detail has stopped mattering: finished project history, past decisions and their reasons, recurring topics from old chats</td><td>The gist still helps the agent work with you; the word for word record mostly adds bulk and exposure</td></tr>
+<tr><td>Delete</td><td>Anything time bound and past its date, anything sensitive that never needed keeping, duplicates of a fact that has since changed, one off details from a single task</td><td>Stale facts get used as if current, and kept sensitive details are a standing risk with no offsetting use</td></tr></table>
+<p>Summarize is the bucket people use least, because products rarely label it that way, but the mechanism is common. Summary memory works by periodically compressing a conversation history into a running summary while the most recent exchanges stay in full. Know its price before you rely on it: the compression is lossy. Exact numbers, specific requests, and nuanced preferences can disappear in summarization. So the rule is strict. If losing the exact figure would change a decision, the item belongs in Keep, in full, or in your own files outside the agent. Summaries are for context, never for records.</p>
+<p>The opposite failure also exists. Some memory keeps only the last stretch of a conversation and drops the rest, so a fact mentioned early simply vanishes. Neither extreme is a setting you chose; both are defaults you inherited. The buckets above are how you impose a choice on them.</p>
+<h2>What the two big products actually let you set</h2>
+<p>In ChatGPT, the controls live at Settings, then Personalization, then Memory, and depending on plan, region, and platform they can include separate switches for referencing saved memories and for referencing chat history, a memory summary, and a Manage view. Treat those as three different decisions, because they are. Saved memories are explicit items, stored separately from chat history. Reference chat history lets the product draw on past conversations more loosely, and that derived information can change as the product updates what it finds useful. The summary is a high level view of what may be used to personalize responses, and it does not necessarily include every detail the system can reference, so reviewing only the summary is reviewing a dashboard, not the store.</p>
+<p>Claude sorts memory differently, as individual topics. Each topic sits in Settings, under Memory, where it can be read, edited, or deleted one at a time, and memory is on by default, including on free accounts. Two of its defaults are worth copying into your own rules whatever product you use. Sensitive topics are excluded by default: memory about health, race, ethnicity, religious beliefs, politics, and gender identity is not saved unless the user opts in, and some items, government ID numbers among them, are never saved at all, whatever the settings say.</p>
+<p>Both products also offer the genuine no memory option for a single conversation. A temporary chat in ChatGPT does not create or update memories, even with personalization on. Claude's incognito chats, started from the ghost icon, stay out of memory the same way. One off sensitive work belongs there, not in a memory you then have to hunt down and delete.</p>
+<h2>The delete that is not a delete: chasing the copies</h2>
+<p>Here is the trap this whole guide exists to warn about. In ChatGPT, deleting the chat where you shared a detail does not automatically delete the saved memory that was created from that chat. The two live in separate stores. A complete removal means deleting the item in each place it survives: the saved memory itself, the memory summary entry, the original chat, any saved file in the product's library that contains it, and any connected app that holds the source. OpenAI also notes it may retain logs of deleted saved memories for up to 30 days for safety and debugging, so deleted means removed from use first and gone from every system later.</p>
+<p>The engineering literature on agent memory makes the same point in stronger language. A delete control that removes one row but leaves a summary, a cache, a backup, or an export behind is not a complete deletion. Every derived copy of a memory, each summary it fed, each stored copy in another format, needs its own place in the deletion path. When you test a delete, test the result, not the button: ask the agent about the detail in a fresh conversation and see whether it resurfaces.</p>
+<p>Two smaller controls follow from this. First, turning memory off is not deleting. In ChatGPT, switching Memory off does not delete past chats, and if it is switched on again later, new remembered information can be created from chats still in the history. Claude draws the same line with different words: pausing memory keeps the stored topics while stopping their use, while resetting deletes them permanently and cannot be undone. Know which of the three states, off, paused, or deleted, you actually put each product in.</p>
+<p>Second, one time bound control is worth using precisely. Turning off Reference chat history in ChatGPT schedules the information remembered from past chats for deletion from OpenAI's systems within 30 days, while the chats themselves remain in your history and your saved memories stay untouched. It is the surgical option: history derived memory goes, explicit saved memories stay.</p>
+<h2>The monthly memory review, step by step</h2>
+<p>Memory drifts because it accumulates quietly. A short review on a fixed cadence keeps the three buckets honest:</p>
+<ol>
+<li><strong>Open the full memory list, not just the summary.</strong> In ChatGPT that is Settings, Personalization, Memory, then Manage; in Claude, Settings, Memory, Topics. Ask the agent what it remembers about you as well, and compare the two views.</li>
+<li><strong>Correct before you delete.</strong> Any fact that has changed gets edited or replaced in place. The maintenance rule for agent memory is explicit overwrite: an updated fact replaces the old one, it does not sit beside it, because two versions of your budget or your address guarantee the wrong one gets used eventually.</li>
+<li><strong>Move finished context to the summary bucket.</strong> Projects that ended, decisions whose detail no longer matters: keep the outcome and the reason, let the blow by blow go.</li>
+<li><strong>Delete the expired and the never needed.</strong> Time bound facts past their date, one task details, and anything sensitive that arrived without a purpose. Engineering guidance on memory retention is blunt here: do not store a candidate memory until a concrete future use justifies keeping it, and do not let something the model inferred about you, such as a health condition, harden into a durable fact without a purpose you chose.</li>
+<li><strong>Chase the copies of anything sensitive you deleted.</strong> Check the source chat, saved files, and connected sources, using the list in the section above.</li>
+<li><strong>Verify in a fresh conversation.</strong> Ask about one corrected fact and one deleted fact. The correction should appear; the deletion should not.</li></ol>
+<p>What success looks like: every item in the list is current, each changed fact exists exactly once, nothing time bound survives its date, and a fresh conversation confirms both halves, corrections live, deletions gone. Fifteen minutes is a generous budget once the first pass is done.</p>
+<h2>Settings to choose today, by how you use the agent</h2>
+<p>For everyday personal use, keep saved memories on, keep the list short and explicit, and run the monthly review; that combination is where memory earns its keep, in preferences and standing facts you would otherwise retype weekly. For client or confidential work, narrow the scope: use the product's project level memory where it exists, keep sensitive topics excluded, and route one off confidential sessions through temporary or incognito chats so nothing is written down in the first place. For shared devices or shared accounts, turn memory off entirely; a memory list written by two people is wrong for both of them. And whatever you choose, set retention by purpose, the principle the engineering guidance insists on: working state lasts as long as the task, preferences last while they are visible and correctable, and nothing lasts forever by default.</p>
+<p><em>Sources, accessed November 2, 2026: OpenAI Help Center, Memory in ChatGPT (settings path, saved memories stored separately from chat history, full removal across sources, 30 day log retention, temporary chats); Engadget, how to edit Claude's memory (topics in Settings, sensitive topics excluded by default, pause versus reset, incognito); QubitTool, AI agent memory and the right to erasure (six questions before storing, deletion across derived copies, retention by purpose); GetAIBook, how to add memory to AI agents (summary memory and lossy compression, expiry, explicit overwrite, usage based archival). Controls and availability vary by plan, region, and platform; if a setting named here is not visible in your account, it may not be available to you yet.</em></p>
+<p>, Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents, beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Does Bluetooth Slow Your Typing Down? The Report Rate, Checked | Typing 101</title>
+<meta name="description" content="A 1 ms report rate is not 1 ms total delay. The G613 specification sheet checked, report interval separated from total latency, and the keystroke interval arithmetic at 40 to 120 WPM.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">Typing 101</a><p class="tagline">Learn to touch type the right way, no apps to buy, no magic required</p><nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy-policy.html">Privacy</a></nav></div></header>
+<main class="wrap post"><a class="back" href="/">&larr; All guides</a>
+<h1>Does Bluetooth Slow Your Typing Down? The Report Rate, Checked</h1>
+<p class="meta">Gear &middot; Published 2026-11-02 &middot; Last updated 2026-11-02</p>
+<p>Wireless keyboards lag, wired keyboards do not. That sentence gets repeated everywhere, usually with a table of millisecond figures attached. The figures are the problem. They present one number, the report rate, as if it were the whole delay between your finger and the screen, and the tables circulating online rarely name a test method or a specification sheet. Here is the claim rebuilt from the one place a manufacturer has to print both numbers side by side.</p>
+<h2>What the specification sheet actually says</h2>
+<p>The Logitech G613 is a useful test case because it connects three ways: by cable class USB performance through its LIGHTSPEED receiver, and by Bluetooth. Logitech describes LIGHTSPEED as an end to end optimised wireless solution delivering a 1 ms report rate, and the keyboard specification table states the polling and response figures directly: up to 1000 Hz polling, response time of 1 ms at 1000 Hz on USB, and 8 ms at 125 Hz on Bluetooth.</p>
+<table><caption>One keyboard, three connections, manufacturer specification figures</caption><thead><tr><th>Connection on the G613</th><th>Report or polling rate</th><th>Report interval</th><th>What the figure covers</th></tr></thead><tbody>
+<tr><td>USB (through receiver or wired class connection)</td><td>1000 Hz</td><td>1 ms</td><td>How often the keyboard reports key state to the computer</td></tr>
+<tr><td>LIGHTSPEED 2.4 GHz receiver</td><td>1 ms report rate (manufacturer figure)</td><td>1 ms</td><td>The same reporting step, over the proprietary radio link</td></tr>
+<tr><td>Bluetooth</td><td>125 Hz</td><td>8 ms</td><td>The same reporting step, over Bluetooth</td></tr>
+</tbody></table>
+<p>Two things survive this check. First, on this specification sheet the 2.4 GHz receiver mode matches the USB report rate exactly; wireless does not automatically mean slower reporting. Second, Bluetooth reports eight times less often. Both statements are about one step in the chain. Neither one is a measurement of total delay.</p>
+<h2>Report rate is an interval, not the whole delay</h2>
+<p>Latency, defined plainly, is the total delay between pressing a key and seeing the character appear on screen, including transmission time. That total is a sum: the switch registering, the keyboard scanning and reporting, the radio or cable carrying the report, and the computer and program displaying the character. The report rate governs one term of that sum. A 1000 Hz keyboard can wait at most 1 ms for its next report slot; a 125 Hz Bluetooth keyboard can wait at most 8 ms. At most, because a key pressed just before a report slot waits almost no time at all.</p>
+<p>So the honest comparison between the two wireless modes on this board is not 1 ms versus some large invented figure. It is a worst case extra wait of about 7 ms on Bluetooth, inside a total that neither specification sheet prints. Any table that quotes a single total latency for Bluetooth as a category, without a named keyboard and a named test, is giving you a number nobody measured in a way you can check. Two such claims were cut from this article for exactly that reason.</p>
+<h2>What 8 ms means at typing speed</h2>
+<p>Typing has its own clock, and it is much slower than either report rate. A word in typing tests is five characters including spaces, so speed converts directly into the gap between keystrokes:</p>
+<table><caption>Keystroke intervals, by arithmetic from the five character word</caption><thead><tr><th>Typing speed</th><th>Characters per minute</th><th>Average gap between keystrokes</th><th>Bluetooth report interval (8 ms) as a share of the gap</th></tr></thead><tbody>
+<tr><td>40 WPM</td><td>200</td><td>300 ms</td><td>About 3 percent</td></tr>
+<tr><td>80 WPM</td><td>400</td><td>150 ms</td><td>About 5 percent</td></tr>
+<tr><td>120 WPM</td><td>600</td><td>100 ms</td><td>About 8 percent</td></tr>
+</tbody></table>
+<p>Even at 120 WPM, a fast professional speed, keystrokes arrive about 100 ms apart, and the Bluetooth reporting step can add at most 8 ms of waiting inside that gap, usually less. That arithmetic is why the same guide literature that warns about Bluetooth also concedes that most users cannot detect small typing lag differences between modern wired and 2.4 GHz wireless keyboards. For prose typing, the connection is rarely the bottleneck. For rhythm critical gaming inputs, where actions are timed against a screen refresh rather than against the next letter of a word, the same 7 ms can matter, and that is a different article.</p>
+<h2>The delay that actually bites typists</h2>
+<p>The lag typists do notice tends to come from state changes, not steady state reporting: the first keystroke after a keyboard has gone idle, a receiver plugged into the back of a computer under a desk, or a Bluetooth connection shared with several other devices. None of those appear on a specification sheet, which is why the only useful next step is a test on your own desk, with your own machine, rather than a better table from the internet.</p>
+<h2>Test your own keyboard in three passes</h2>
+<ol>
+<li><strong>Fix the test.</strong> Choose one 3 minute typing test and one document you type in every day. Use the same test, at the same length, for every pass.</li>
+<li><strong>Pass one: cable or receiver close.</strong> Connect by cable if the keyboard allows it, or place the 2.4 GHz receiver on a short extension lead near the keyboard. Record net speed, accuracy, and any keystrokes that felt late.</li>
+<li><strong>Pass two: receiver where it really lives.</strong> Put the receiver back in its normal port and repeat the test. A score drop here points at placement, not at wireless itself.</li>
+<li><strong>Pass three: Bluetooth, including a wake up.</strong> Repeat the test on Bluetooth. Then leave the keyboard idle for several minutes and type a first sentence, noting whether the first characters arrive together in a bunch.</li>
+<li><strong>Compare like with like.</strong> Judge the three passes on accuracy and on the wake up behaviour first, and on raw speed second. A single test bounces; run any doubtful pass twice.</li>
+</ol>
+<p><strong>What success looks like:</strong> the three passes land within a few WPM of each other and the wake up sentence arrives character by character. If Bluetooth alone stumbles on the wake up, use the receiver for the desk and keep Bluetooth for the second device, which is what the dual connection on boards like the G613 is for. If every pass feels equally late, the connection was never the problem, and the next suspects are the program and the machine, not the keyboard.</p>
+<h2>FAQ</h2>
+<h3>Is a 2.4 GHz receiver as fast as a cable for typing?</h3>
+<p>On the G613 specification sheet, yes at the reporting step: the LIGHTSPEED receiver mode carries a 1 ms report rate, the same figure as the 1000 Hz USB mode. Total delay includes more than reporting, but for typing speeds the reporting step is the part the connection controls.</p>
+<h3>Should a fast typist avoid Bluetooth?</h3>
+<p>The arithmetic says no for prose. At 120 WPM the average gap between keystrokes is about 100 ms, and a Bluetooth report interval of 8 ms fits inside it with room to spare. Test the wake up behaviour of your specific board instead of rejecting the connection on a category figure.</p>
+<h3>Why does my wireless keyboard sometimes type in bursts?</h3>
+<p>Burst delivery after a pause points at the keyboard or the connection waking up, or at interference on the path, rather than at the steady report rate. The three pass test above separates those causes: if bursts happen only after idle time and only on one connection, you have found the step to change.</p>
+<p>, Dex Carter, Tech Writer</p>
+<p><a href="/">Back to all guides &rarr;</a></p></main><footer class="site-footer"><div class="wrap"><p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p><p>Typing 101, practical touch-typing lessons for beginners. Content is for general information only.</p><p class="footer-nav"><a href="/about.html">About</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="/privacy-policy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms of Use</a></p></div></footer></body></html>

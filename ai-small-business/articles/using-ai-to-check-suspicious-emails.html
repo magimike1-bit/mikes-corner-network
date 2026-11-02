@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Using AI to Check Suspicious Emails: A Second Reader for a Small Business Inbox</title>
+<meta name="description" content="An AI assistant cannot authenticate a suspicious email, but it can list the warning signs in a minute. The business routine: prepare the message safely, ask for signs rather than a verdict, and hold every money request for out-of-band verification.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap article-layout">
+  <article class="article">
+    <p class="kicker">Operations</p>
+    <h1>Using AI to Check Suspicious Emails: A Second Reader for a Small Business Inbox</h1>
+    <p class="lede">A suspicious email lands in a shared inbox and somebody has to decide, today, whether it is safe to act on. An AI assistant can read it slowly and list what the sender is really asking for. It cannot tell you the message is genuine. This guide builds the routine that keeps those two jobs separate.</p>
+    <p class="meta">Published 2026-11-02 &middot; Last updated 2026-11-02</p>
+
+<h2>Can an AI assistant tell you whether an email is a scam?</h2>
+<p>Not definitively, and any tool that promises a definitive answer is overselling. What an assistant can do, quickly and usefully, is read a suspicious message the way a careful colleague would: slowly, looking for the specific things the sender is trying to get you to do. Phishing is attackers tricking owners or employees into clicking harmful links, opening fake emails, or downloading malicious attachments, and those actions can expose sensitive information or install malware. The scale is not trivial. Phishing topped the list of the five most reported cybercrimes in the FBI 2024 Internet Crime Report, with 193,407 complaints.</p>
+<p>So the assistant earns a place in the routine, but a limited one. It is a second reader. The decision still comes from rules you set in advance, and the most important rule is simple: no chat window clears a request for money, bank details, or credentials. Ever.</p>
+
+<h2>What the assistant can and cannot see</h2>
+<p>Start with what changed. AI written phishing no longer gives itself away with clumsy grammar, so spelling and polish tell you almost nothing now. The warning signs that still work are about the sender, the request, and the pressure: an unexpected ask, urgent language, a link that does not belong, a greeting that could be addressed to anyone. CISA notes that a generic greeting such as Dear Valued Customer, paired with a signature block that carries no contact information, is an indicator of phishing, because a trusted organization will normally address you by name and provide its contact information. An assistant is genuinely good at listing those signs from the text in front of it.</p>
+<p>Now the limits, because they shape the whole procedure. A pasted message is flat text. It does not carry the real destination of a link, only the words the link displays. It does not carry the authentication results your mail system checked on arrival. SPF lists which servers may send mail for a domain, DKIM adds a cryptographic signature to messages, and DMARC tells receiving servers what to do when those checks fail, and none of that machinery is visible in a copied paragraph. The sender address itself can deceive: a phishing address may imitate a legitimate business by altering or omitting a few characters, and even a real looking address can be spoofed. The assistant can flag a domain that looks wrong. It cannot authenticate the one that looks right.</p>
+<p>One more limit matters in a business inbox. Phishing text can try to manipulate an AI that reads the mail, for example by hiding instructions inside the message. A sentence buried in a long fake invoice that tells the reader to ignore the warning signs is aimed at your checker, not at you. That is a practical reason to ask the assistant for observations, never for obedience, and to treat a glowing all clear with more suspicion than a list of concerns.</p>
+
+<h2>Prepare the message before you paste anything</h2>
+<ol>
+<li><strong>Pause, and touch nothing.</strong> Do not click links, open attachments, or reply. Replying confirms the address is live, and the check needs none of those actions.</li>
+<li><strong>Copy the words, not the links.</strong> Copy the message text into a document first. The destination of a link stays behind, which is exactly where it should stay.</li>
+<li><strong>Strip your own details.</strong> Remove names, account numbers, and any codes before pasting. Never paste a password or a one time code anywhere. The assistant needs the wording and the request, not your identifiers.</li>
+<li><strong>Record the sender address exactly as shown.</strong> Character by character. The altered or omitted characters in an imitation address are evidence, and they vanish if you retype from memory.</li>
+<li><strong>Check link destinations yourself, without clicking.</strong> Hover the mouse over each link to see where the URL leads. That reading is yours to make, not the assistant's, because pasted text cannot show it.</li>
+<li><strong>Describe attachments, never forward them for opening.</strong> Note the file name and type in your own words. Do not ask the assistant to open a suspicious link or file to see what is there. Check the domain instead.</li>
+</ol>
+<p><strong>What success looks like:</strong> the assistant receives a clean block of text with no passwords, no codes, no account numbers, and no live links, plus your own note of the exact sender address and the real link destinations you read on hover.</p>
+
+<h2>Run the check: ask for warning signs, not a verdict</h2>
+<p>The prompt decides the quality of the answer. A yes or no question gets a confident guess. A warning sign question gets evidence you can weigh. Use a prompt in this shape: <em>&ldquo;Here is the text of an email I have not clicked or replied to, with personal details removed. Sender shown as: [address]. List every warning sign of a scam you can see, explain what the sender seems to want me to do, and say plainly where you cannot be sure. Do not tell me it is safe.&rdquo;</em></p>
+<p>Two follow ups are worth the extra minute. First, ask whether the sender domain matches the organization the message claims to be from, while remembering that even real looking addresses can be spoofed, so a match settles nothing. Second, ask the assistant to name the single action the message most wants: a payment, a password, a bank detail change, a download. Naming the prize clarifies the decision, because the decision rule below is keyed to the action, not to how the message feels.</p>
+<p>Short version: the assistant sorts. You decide.</p>
+
+<h2>Decide by rule: the three outcomes</h2>
+<table><caption>The decision rule for every checked message</caption><thead><tr><th>What the message asks for</th><th>Outcome</th><th>Rule</th></tr></thead><tbody>
+<tr><td>Information you would happily give a stranger, no links needed</td><td>Proceed with care</td><td>Answer through your normal channel, not by replying to the checked message</td></tr>
+<tr><td>A login, a file download, or access to an account</td><td>Verify out of band first</td><td>Go to the service through your own bookmark or app; never through the message</td></tr>
+<tr><td>Money, a payment, a bank detail change, or credentials</td><td>Hold, verify, then decide</td><td>Confirm through a contact method you already hold, whatever the assistant said</td></tr>
+<tr><td>Anything already clicked, opened, or answered</td><td>Treat as an incident</td><td>Change passwords, contact the bank if money is involved, and log it</td></tr>
+</tbody></table>
+<p>The hold row carries the whole system. CISA's instruction for business staff is direct: verify a message that feels off not by replying, and not by using any phone number or link inside the message, but through a known contact method you already have, such as a number stored on your computer, or a number found through a search engine. For a supplier bank change, check previous statements for contact information rather than anything connected to the request. The assistant's opinion does not shorten that step. It only tells you how carefully to take it.</p>
+<p>If someone already acted, the order matters. Change any password that might have been revealed, on every account where the same password was used. If financial accounts may be compromised, contact the financial institution immediately. Then report and delete the message itself: suspected phishing gets reported and deleted, every time, because the report protects the next inbox it lands in. Finally, log the outcome where the team can see it: date, sender, what was asked, what the check found, and what was decided. Staff cannot follow a reporting habit they have never been shown, so name the person suspicious mail goes to, and keep that name current. CISA makes the same point for small businesses generally: employees should know to whom and how to report suspicious emails.</p>
+<p><em>General information for small business owners, not security advice for a specific incident. If money has already moved or an account is compromised, contact your bank and your IT provider first, then work through the checks here.</em></p>
+<p>, Dex Carter, Tech Writer</p>
+
+    <section class="keep-reading"><h2>Keep reading: Operations</h2><ul>
+      <li><a href="/articles/ai-route-planning.html">AI Route Planning for Deliveries and Service Calls</a></li>
+      <li><a href="/articles/ai-scheduling.html">AI Scheduling and Staff Rotas Without the Headache</a></li>
+      <li><a href="/articles/ai-inventory.html">Inventory Forecasting with AI for Small Shops</a></li>
+    </ul></section>
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p><strong>AI Small Business Playbook</strong>, practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav><a href="/">Home</a><a href="/#guides">All guides</a><a href="/roi-calculator.html">ROI Calculator</a><a href="/ai-cost-simulator.html">Cost Simulator</a><a href="/about.html">About</a></nav>
+  <p class="footer-nav"><a href="/about.html">About</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

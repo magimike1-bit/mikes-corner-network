@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Reorder Reminders for Small Business: Time the Nudge to When Customers Run Out</title>
+<meta name="description" content="A reminder sent 30 days after every order is wrong in both directions. Work out days of supply per product, check it against real repeat orders, suppress recent buyers, and run a break-even test with a kill criterion before automating.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap article-layout">
+  <article class="article">
+    <p class="kicker">Sales</p>
+    <h1>AI Reorder Reminders for Small Business: Time the Nudge to When Customers Run Out</h1>
+    <p class="lede">One number decides whether reorder reminders pay: the day each customer's supply actually runs out. Get that day from pack size and real repeat orders, let AI help with the interval math and the drafting, and hold the whole program to a break-even test with a stop rule set in advance.</p>
+    <p class="meta">Published 2026-11-02 &middot; Last updated 2026-11-02</p>
+
+<h2>Thirty days is the wrong answer for almost everyone</h2>
+<p>30 days after every order is the reminder timing most small businesses start with, and it is wrong in both directions at once. A reorder reminder email works when it lands just before the customer runs out, and that date is different for every product. Sent on a fixed day, the reminder reaches some people with half a bag left and others a week after they ran out and bought elsewhere. The fix is arithmetic first, automation second, and AI only where it genuinely saves time: estimating intervals from your own order history and drafting a short, specific message.</p>
+
+<h2>Step 1: work out days of supply for each product</h2>
+<ol>
+<li><strong>List only the products that get used up.</strong> A consumable reminder fits coffee and tea, supplements, pet food, skincare, water filter cartridges, and printer ink. It does not fit durable goods such as furniture or cookware, or seasonal items bought once a year. Products that fail this test leave the program now, not after a disappointing send.</li>
+<li><strong>Run the formula per product and per pack size.</strong> Days of supply equals units per pack divided by units used per day. A 60 capsule bottle taken at 2 capsules a day lasts 30 days. Multiply by the quantity in the order, because two bottles last twice as long as one, and treat each pack size as its own cycle.</li>
+<li><strong>Write the number beside the product, where staff can see it.</strong> A spreadsheet column is enough at this stage. The estimate now lives in the business, not in one person's head.</li>
+</ol>
+
+<h2>Step 2: check the label math against real orders</h2>
+<p>Label use is usually the maximum, so real customers often use a product more slowly and run out later than the formula says. Your orders are the correction. For each product, find the customers who bought it two or more times, calculate the days between each pair of orders, and take the median, the middle value, which a few unusual buyers cannot drag around the way they drag an average. If the median runs longer than the label cycle, move the reminder later. If it runs shorter, move it earlier. If a product has too few repeat orders to judge, keep the label date and revisit it once more data exists.</p>
+<p>This is the first place AI earns its fee. Paste an anonymized order export (product, date, quantity, a customer number, no names and no contact details) and ask the assistant to group by customer and product, list the gaps between orders, and return the median gap per product. Check its arithmetic on two or three customers by hand before trusting the table. A simpler starting point also works: pick a fixed delay, such as 30 days after the order, measure the reorders it produces, and adjust the timing from the results. Either way, the store's own repeat order gaps are the evidence. Averages from other businesses are not.</p>
+
+<h2>Step 3: set the reminder day and the suppression list</h2>
+<ol>
+<li><strong>Subtract delivery time and a buffer.</strong> Reminder day equals days of supply, minus processing days plus transit days, minus a buffer. Worked through: a 30 day product with 1 processing day, 4 transit days, and a 5 day buffer gets its reminder on day 20, early enough that the reorder arrives before the last dose.</li>
+<li><strong>Build the suppression list before the first send.</strong> Exclude anyone who placed a new order containing the product since the original order, anyone whose order was refunded, anyone with an active subscription for the product, and anyone who unsubscribed. Add customers whose product is currently out of stock. Check the list against order history before every send, not once at setup.</li>
+<li><strong>Confirm consent, identification, and unsubscribe.</strong> Send only to people who agreed to marketing messages. For Canadian businesses, the CRTC states the requirements plainly: a commercial electronic message needs prior consent from the recipient, express or implied, identification and contact information for the sender, and a working unsubscribe mechanism. Other countries set their own rules, so check the law where your customers are.</li>
+</ol>
+<p><strong>What success looks like:</strong> every product in the program has a days of supply figure checked against real orders, a reminder day with delivery time subtracted, and a suppression list that removes recent buyers, refunds, subscribers, and the unsubscribed before any message leaves.</p>
+
+<h2>Step 4: let AI draft, keep the send rules human</h2>
+<p>The message itself is short work, and it should stay short. Keep the reminder specific: the product name, how many days since the order, one link back to the product, and a line telling anyone who already reordered to ignore it. Leave out a default discount, because customers who would reorder anyway should not be trained to wait for one. Leave out fake countdown timers. Leave out claims about health or results, especially for supplements. Stick to the product and the date.</p>
+<p>AI drafting help is real but narrow: turning your product facts and the customer's first name and last product into a clean two or three sentence message, and producing a calmer second reminder for people who meant to reorder and did not. The rules around the message stay human and fixed: who is suppressed, when it sends, and how often. One reminder plus at most one follow up is a program. A weekly drip is a nuisance with a logo.</p>
+
+<h2>The honest math and the kill criterion</h2>
+<p>Now price the program before automating it further. The costs are the tool fee, if any, plus your time: building the product table once, then checking suppressions and results each week. The return is only the margin on reorders the reminders actually cause, and the honest measure is the share of recipients who purchase within seven days of the reminder, with each order credited to at most one message and refunds subtracted.</p>
+<table><caption>Break even test, with a labelled worked example</caption><thead><tr><th>Line</th><th>Your figure</th><th>Worked example</th></tr></thead><tbody>
+<tr><td>Monthly tool cost</td><td>Insert the price you are quoted</td><td>$30 (assumed for the example)</td></tr>
+<tr><td>Monthly time cost</td><td>Hours per month, times your hourly cost</td><td>1 hour at $25 = $25</td></tr>
+<tr><td>Total monthly cost</td><td>Tool plus time</td><td>$55</td></tr>
+<tr><td>Margin per reorder</td><td>Order value minus product and delivery cost</td><td>$14 (assumed for the example)</td></tr>
+<tr><td>Reorders needed to break even</td><td>Total cost divided by margin, rounded up</td><td>$55 divided by $14 = 4 reorders a month</td></tr>
+</tbody></table>
+<p>The worked example is a scenario, not a forecast: the tool price and the margin are assumptions stated so the arithmetic can be checked, and your figures replace them. What the table gives you is a decision rule. If your due list each month is smaller than the break even count, the program cannot pay at that tool price, and the spreadsheet version, run by hand once a week, is the right size. If the due list is several times the break even count, automation has something real to earn on.</p>
+<p>Set the kill criterion before the first send, while stopping is still cheap. Run three reminder cycles. If the reorders that land within seven days of a reminder do not cover the monthly cost in two of those three cycles, stop, and keep only the products whose intervals proved consistent. Some products will fail a second test no matter how they are timed: a replenishment candidate needs customers buying it more than once within six months, on a roughly consistent interval. If consumption timing is random, reminders cannot be timed accurately, and that product leaves the program. Walking away from the products that do not fit is what keeps the ones that do fit profitable.</p>
+<p><em>General information only, not financial or legal advice. Consent and messaging rules differ by country and change over time; check the current rules for the places your customers live before you send.</em></p>
+<p>, Sterling Cole, Money Writer. Earning Desk</p>
+
+    <section class="keep-reading"><h2>Keep reading: Sales</h2><ul>
+      <li><a href="/articles/ai-lead-followup.html">AI Lead Follow-Up: Reply in Minutes, Not Days</a></li>
+      <li><a href="/articles/ai-crm-entry.html">Automating CRM Data Entry with AI</a></li>
+      <li><a href="/articles/ai-lead-scoring.html">Simple AI Lead Scoring for Small Teams</a></li>
+    </ul></section>
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p><strong>AI Small Business Playbook</strong>, practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav><a href="/">Home</a><a href="/#guides">All guides</a><a href="/roi-calculator.html">ROI Calculator</a><a href="/ai-cost-simulator.html">Cost Simulator</a><a href="/about.html">About</a></nav>
+  <p class="footer-nav"><a href="/about.html">About</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

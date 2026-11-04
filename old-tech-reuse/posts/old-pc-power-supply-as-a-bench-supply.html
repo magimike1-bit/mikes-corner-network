@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn an Old PC Power Supply into a Bench Supply | Old Tech, New Life</title>
+<meta name="description" content="An old ATX power supply is not a free lab supply, but through a fused breakout board, with the case never opened, it becomes a useful fixed-voltage bench supply. The rails, the procedure, and the limits that decide whether it is enough.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Turn an old PC power supply into a bench supply: the no-open route, and its real limits</h1>
+  <p class="meta">Repurpose &middot; 7 min read</p>
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>An old ATX power supply is often described as a free lab supply. That claim
+  does not survive a spec check. A lab supply lets its user dial a voltage, set
+  a current limit, and trust the output to stop when a circuit shorts. An ATX
+  supply does none of that: its rails are fixed at the day it was built. What
+  does survive is still worth having. Through a plug-in breakout board, with
+  the case never opened, a retired supply becomes a tidy fixed-voltage bench
+  supply for the jobs that only ever need 3.3V, 5V or 12V. This guide builds it
+  that way and states the limits plainly.</p>
+
+  <p><em>Safety first, because it shapes the whole procedure:</em> the inside of
+  a power supply carries high voltage that can be dangerous or lethal, which is
+  why this build never opens the case. Every step below happens outside the
+  box, through its connectors.</p>
+
+  <h2>What the donor actually offers: the rails, verified</h2>
+  <p>Most desktop supplies run from about 150W to 500W, and the label on the
+  side of the unit is the spec sheet that matters: it lists the current each
+  rail can deliver. One documented build reads its donor's label as 28A on the
+  3.3V rail, 35A on 5V, 16A on 12V and under 1A on each negative rail, which is
+  the usual shape of these units: strong positive rails, token negative ones.
+  Read your own label before planning any load, because the numbers vary by
+  unit.</p>
+  <p>This is also why spare supplies are worth shelf space in the first
+  place: power supplies have changed little over the years, a saved unit with
+  enough watts on its label covers jobs a new purchase would otherwise be
+  needed for, and an adapter board costs far less than a whole new supply.
+  Keep the mains cord with the unit when it is stored. Computer power cords
+  have not changed in years, and a saved cord is the one that gets dug out
+  when a supply comes back into service.</p>
+  <table>
+    <tr><th>Wire colour</th><th>Output</th><th>Notes</th></tr>
+    <tr><td>Orange</td><td>+3.3V</td><td>Logic power for modern boards and sensors</td></tr>
+    <tr><td>Red</td><td>+5V</td><td>The classic project rail</td></tr>
+    <tr><td>Yellow</td><td>+12V</td><td>Fans, motors, LED strips, radios</td></tr>
+    <tr><td>Blue</td><td>-12V</td><td>Low current; check the label before relying on it</td></tr>
+    <tr><td>Black</td><td>Ground</td><td>Shared by every output</td></tr>
+    <tr><td>Green</td><td>Power-On signal</td><td>The supply starts when this wire is connected to ground</td></tr>
+    <tr><td>Purple</td><td>+5V standby</td><td>Live whenever the unit is plugged in, at about 500mA, even with the main outputs off</td></tr>
+    <tr><td>Grey</td><td>Power-Ok signal</td><td>Sits at +5V once the outputs have settled within tolerance</td></tr>
+  </table>
+  <p>Two facts in that table run the rest of the build. The green Power-On wire
+  is how a motherboard starts the supply, so any bench conversion has to handle
+  that connection. And the purple standby rail means a plugged-in supply is
+  never fully off, which is why the finished unit gets unplugged at the wall
+  when the bench is done for the day.</p>
+
+  <h2>Two routes, compared</h2>
+  <p>The popular tutorials take the other route: cut the main connector off,
+  group the loose wires by colour, and wire them to posts, sometimes inside the
+  opened case. It works, and it is permanent, fiddly and hard to reverse. The
+  breakout board route plugs the supply's own connector onto a small board and
+  leaves the supply untouched.</p>
+  <table>
+    <tr><th>Question</th><th>Cut-and-wire conversion</th><th>Breakout board (XH-M229 class)</th></tr>
+    <tr><td>Case opened?</td><td>Often, in the common tutorials</td><td>Never; the board plugs onto the 20-pin or 24-pin connector</td></tr>
+    <tr><td>Outputs</td><td>Whichever posts the builder fits</td><td>3.3V, 5V, 12V and -12V, four output sets with binding posts</td></tr>
+    <tr><td>Per-output protection</td><td>None beyond the supply's own shutdown</td><td>A replaceable 5A fuse on each channel</td></tr>
+    <tr><td>Starting the supply</td><td>A hand-wired switch between the green wire and ground</td><td>An onboard power switch and indicator</td></tr>
+    <tr><td>Reversible?</td><td>No; the connector is cut off</td><td>Yes; unplug the board and the supply is a PC supply again</td></tr>
+  </table>
+  <p>Boards of this class accept both 20-pin and 24-pin supplies and present the
+  rails through terminal blocks or binding posts, which is the whole appeal:
+  the conversion is an accessory, not a modification.</p>
+
+  <h2>The no-open procedure, in order</h2>
+  <ol>
+    <li><strong>Read the label and choose the donor.</strong> Note the total watts and the amps on the 12V and 5V rails. A unit with a damaged case, a cut cable or a seized fan is a recycler, not a donor. <em>Check:</em> the label is legible and the main connector is a standard 20-pin or 24-pin plug.</li>
+    <li><strong>Unplug it and let it sit.</strong> Disconnect the supply from the wall and leave it unconnected for several minutes so it discharges before any handling. The case stays closed at every step. <em>Check:</em> the mains cord is out and coiled beside the unit, not still in the wall.</li>
+    <li><strong>Plug the main connector onto the breakout board.</strong> Seat the 24-pin (or 20-pin) plug fully on the board's ATX port. Nothing is cut and nothing is opened. <em>Check:</em> the plug latch clicks and the plug does not rock.</li>
+    <li><strong>Plan for a minimum load before the first switch-on.</strong> These supplies are switch-mode designs that need some load to regulate properly. As a starting point from documented builds: older units regulate around a 5 ohm, 10W resistor across the 5V rail, newer ones around a 22 ohm, 10W resistor across the 12V rail. The resistor must be rated at least 10W; an underrated one can overheat badly. If the board you bought carries its own load provision, follow its manual instead. <em>Check:</em> the load resistor is fitted, rated, and positioned where its heat harms nothing.</li>
+    <li><strong>Switch on at the board and meter every output before connecting any project.</strong> Measure 3.3V, 5V, 12V and -12V against a black ground terminal with a multimeter. <em>Check:</em> each output reads at its labelled voltage, steady, with the board's power indicator lit. An output that is missing or far off its label value means the load step needs revisiting, or the donor is retired.</li>
+    <li><strong>Connect the project, respecting the channel fuse.</strong> Each breakout channel is fused at 5A. That fuse is the budget for everything on that channel combined, and it is never replaced with a larger one. <em>Check:</em> the project's expected draw, from its own label or manual, sits comfortably under 5A on its channel.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the board switches the supply on
+  and off cleanly, all four rails meter at their labelled voltages under the
+  planned minimum load, the channel fuse stays intact with the project running,
+  and unplugging the board returns the supply to ordinary PC duty unchanged.</p>
+
+  <h2>The limits that decide whether this is enough</h2>
+  <p>Fixed means fixed. The outputs are the rails in the table, plus a handful
+  of in-between voltages available by measuring across two rails, such as 7V
+  between +12V and +5V, or 24V between +12V and -12V. Those are party tricks
+  with a shared ground, not adjustable outputs, and no dial changes any of
+  them. A genuine bench supply, by contrast, sets voltage and current with an
+  encoder across a range such as 0 to 30V and 0 to 5A, holds constant-voltage
+  or constant-current mode, and lets the user disable the output while a load
+  stays connected.</p>
+  <p>Current limiting is the sharper limit. On the ATX build, protection means
+  two things: the supply's own short-circuit shutdown, which trips after the
+  fault, and the breakout board's 5A channel fuse. Nothing lets the user say
+  this circuit may draw 200mA and no more. A bench supply's overcurrent
+  protection does exactly that: set it, and a short stops the output and raises
+  an alarm before the circuit under test cooks. Prototype work on unfamiliar
+  boards is where that difference stops being academic.</p>
+  <p>Two smaller costs ride along. The cooling fan responds to load and needs
+  moving air, so the unit cannot be buried under bench clutter. And the
+  standby rail stays live while the unit is plugged in, so wall unplugging is
+  part of the shutdown routine, not an optional extra.</p>
+
+  <h2>Bottom line: bench supply, fixed-voltage helper, or recycle it</h2>
+  <p><strong>Build it</strong> when the work is fixed-voltage by nature: fans,
+  LED strips, motors, radios, routers and boards that run on 5V or 12V all
+  day. For that work the converted supply is honest, tidy and nearly free.
+  <strong>Buy the adjustable bench supply instead</strong> when the work is
+  prototyping, fault-finding, or anything where a settable current limit is
+  the difference between a blown fuse and a blown project. <strong>Recycle
+  the donor</strong> when the label is unreadable, the case or cables are
+  damaged, or the rails will not meter at their labelled values under load.
+  A retired supply earns its bench place on the jobs its fixed rails actually
+  fit, and no further.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Tech, New Life. DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn an Old Laptop Screen into a Standalone Monitor | Old Tech, New Life</title>
+<meta name="description" content="A harvested laptop panel becomes a monitor only when the controller board matches its interface, pinout and logic voltage. Check the panel specs first, total the real cost against a new portable monitor, then hook it up in order.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Turn an old laptop screen into a standalone monitor: match the panel first, then buy the board</h1>
+  <p class="meta">Repurpose &middot; 7 min read</p>
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>Yes, a dead laptop's screen can work as a standalone monitor, and the panel is
+  free. The part that decides success is not the removal, it is the match: a
+  controller board has to agree with the panel on interface, pinout, logic voltage
+  and resolution before power ever reaches it. Get the match wrong and the screen
+  stays black. Get the logic voltage wrong and the panel can be damaged at the
+  first power-up. This guide runs the checks in the order that prevents both.</p>
+
+  <h2>Read the panel before buying anything: the spec check</h2>
+  <p>Start with the panel itself, not a shopping cart. If the donor laptop still
+  boots, run it once and confirm the screen shows a clean image with no lines,
+  flicker or dark patches. A panel that is already faulty stays faulty on a new
+  board, and the board money is wasted.</p>
+  <p>Then remove the panel and read the label on its back. Record the full model
+  number including the suffix. The suffix is not decoration: one documented
+  conversion notes that on a panel marked LP133WX1 TL A1, the TL and A1 part is
+  what decides which controller board and cable match. Two panels with the same
+  size and resolution can still need different boards, so the datasheet for that
+  exact model is the next stop. From it, note six things: the interface type, the
+  pin count and pinout, the panel logic voltage, the native resolution, the
+  backlight type, and the timing range. Every later choice reads from that list.</p>
+  <p>One result ends the project early. If the datasheet shows a CCFL backlight,
+  the panel needs a separate high-voltage inverter, and that inverter works at
+  several hundred to over a thousand volts. That is a stop condition for a
+  kitchen-table conversion, not a challenge. LED-backlit panels are the ones this
+  procedure is for.</p>
+
+  <h2>LVDS versus eDP, side by side</h2>
+  <p>The fork most guides skip is the interface. Older laptop panels speak LVDS,
+  modern ones speak eDP, and the two are different electrical protocols. An LVDS
+  board will not light an eDP panel, and an eDP board will not light an LVDS
+  panel. Pin count does not settle it, because the same 30-pin connector can
+  carry either signal.</p>
+  <table>
+    <tr><th>Check</th><th>LVDS panel</th><th>eDP panel</th></tr>
+    <tr><td>Typical source</td><td>Older laptops, industrial panels</td><td>Modern laptops and tablets</td></tr>
+    <tr><td>Signal</td><td>Differential pairs with a separate clock</td><td>Derived from DisplayPort, clock embedded</td></tr>
+    <tr><td>Ceiling</td><td>Up to 1080p at 60Hz in dual-channel form</td><td>Up to 5.4Gbps in HBR2 form; 1080p, 2K, 4K and beyond</td></tr>
+    <tr><td>Connectors seen</td><td>Commonly 40-pin at 1366x768, also 30-pin and 20-pin</td><td>Commonly 30-pin, also 40-pin for higher resolutions</td></tr>
+    <tr><td>Cable</td><td>Twisted-pair harness</td><td>Thin flat or micro-coax cable</td></tr>
+    <tr><td>Board rule</td><td colspan="2">The board output must match the panel interface exactly, and its maximum resolution must be at least the panel's native resolution</td></tr>
+  </table>
+  <p>Voltage is the second trap. A controller board usually takes 12V in, but the
+  panel logic voltage is a separate setting, commonly 3.3V, 5V or 12V, chosen by
+  a jumper on most universal boards. The factory default is not always 3.3V. If
+  a 3.3V panel is powered with the jumper set to 5V or 12V, its logic chip can
+  burn out the instant power is applied. The jumper gets set from the datasheet
+  before the panel is connected, never after a first try.</p>
+
+  <h2>The real cost, dated and totalled</h2>
+  <p>Guides quote the board price as if it were the project price. It is not,
+  because the kits leave parts out. Prices below were checked on November 4,
+  2026, at Canadian listings.</p>
+  <table>
+    <tr><th>Item</th><th>Price (Nov 4, 2026)</th><th>What is and is not in the box</th></tr>
+    <tr><td>LVDS controller kit for LP156WH3(TL), 15.6 inch, 1366x768, 40-pin</td><td>C$49.51 at Amazon.ca</td><td>Board, LVDS signal cable and keyboard included. No power adapter listed in the kit contents</td></tr>
+    <tr><td>eDP controller kit for B156XTN07.0, 15.6 inch, 1366x768, 30-pin</td><td>C$55.03 at Amazon.ca</td><td>Board, signal cable and keyboard included. The listing requires a separate 12V adapter rated above 2A</td></tr>
+    <tr><td>ViewSonic VA1653 portable monitor, new</td><td>C$116 at DirectDial Canada</td><td>15.6-inch IPS panel at 1920x1080, built-in stand, speakers and protective case all included</td></tr>
+  </table>
+  <p>So the conversion starts at roughly C$50 to C$55 and still needs a 12V
+  adapter and some kind of stand or frame before it is a monitor; a documented
+  build makes the same point, noting the board arrived with neither a power
+  supply nor a frame. The new portable monitor at C$116 is a 1080p IPS panel
+  with the stand and case already solved.</p>
+  <p>The honest comparison is therefore
+  not free panel versus C$116. It is a 1366x768 panel, in the common case, plus
+  a kit, plus an adapter, plus a stand, against C$116 finished. The conversion
+  wins clearly when the harvested panel is 1920x1080 or better. At 1366x768 it
+  wins on waste avoided and on price only if an adapter and a stand are already
+  in the drawer.</p>
+
+  <h2>The hookup procedure, in order</h2>
+  <ol>
+    <li><strong>Verify the panel in the donor.</strong> Power the laptop and look for a clean, even image. <em>Check:</em> no lines, no flicker, no dark corners. A failed panel ends the project here, at zero cost.</li>
+    <li><strong>Remove the panel and record the full model number.</strong> The label is on the back of the panel, suffix included. Photograph it before the screws go back in a tray. <em>Check:</em> the recorded number matches the label character for character.</li>
+    <li><strong>Pull the datasheet and fill in the six checks.</strong> Interface, pinout, logic voltage, native resolution, backlight type, timing. <em>Check:</em> the backlight is LED. A CCFL result stops the build, per the safety note above.</li>
+    <li><strong>Order a kit matched to the full model number.</strong> The workable kits bundle the controller board, the correct signal cable and the keypad board. Buying the board alone and guessing the cable is how mismatches happen. <em>Check:</em> the listing names your exact panel model, not just its size.</li>
+    <li><strong>Set the logic-voltage jumper before connecting the panel.</strong> Match it to the datasheet figure, 3.3V, 5V or 12V. <em>Check:</em> the jumper position is confirmed against the board's markings, with power off.</li>
+    <li><strong>Connect in order, power last.</strong> Signal cable from panel to board, keypad board to its header, HDMI cable from the source to the board, and the 12V adapter only after the rest is seated. <em>Check:</em> every connector is fully home and the panel cable is not strained or folded sharply.</li>
+    <li><strong>Power on and set the native resolution.</strong> Feed the panel its exact native resolution from the source, then use the keypad to open the on-screen display and set brightness. <em>Check:</em> text is sharp edge to edge at the native resolution, with no scaling blur and no duplicated or split image.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the panel wakes with the source,
+  shows its native resolution sharply, holds brightness settings through the
+  keypad, and survives a power cycle with the same picture. If the image is
+  present but dark, the fault is usually the backlight connection. If there is
+  no image at all, the fault is usually the interface, pinout or resolution
+  match, in that order.</p>
+
+  <h2>Trade-offs the guides leave out</h2>
+  <p>A finished conversion is still a bare panel. It has no case, no VESA mount
+  and no protection for the cable at its back, so it suits a fixed desk or a
+  workbench far better than a bag. Kits can also arrive with a second interface
+  cable that has to be swapped in before the display works, which reads like a
+  dead board until the swap is tried. And the result is fixed to whatever the
+  panel was: a dim 1366x768 TN panel from a budget laptop stays a dim 1366x768
+  screen, now with an HDMI input. The board adds a port, not panel quality.</p>
+
+  <h2>Bottom line: build it, buy the portable monitor, or recycle the panel</h2>
+  <p><strong>Build it</strong> when the panel is verified working, LED-backlit,
+  and 1920x1080 or better, and a kit names the exact model. That is the case the
+  arithmetic and the waste argument both support. <strong>Buy the portable
+  monitor</strong> when the panel is 1366x768 and an adapter and stand would
+  both need buying: the C$116 finished unit is close enough in total cost, and
+  it arrives with a warranty and a case. <strong>Recycle the panel</strong>
+  when it is CCFL-backlit, faulty in the donor, or matched by no kit listing.
+  The screen gets its second job only when the specs say it can.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Tech, New Life. DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

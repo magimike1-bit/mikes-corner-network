@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Capture Card Check: Passthrough Is Not Capture | Budget Gaming Gear</title>
+<meta name="description" content="Capture and passthrough are two different signals. Verified specs for four budget capture cards, the USB bandwidth arithmetic, the HDCP step, and a five step pre-buy check.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Budget Gaming Gear</a>
+    <p class="tagline">Smart buying advice for gaming on a budget</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/index.html">&larr; All guides</a>
+  <h1>Budget capture card check: passthrough is not capture</h1>
+  <p class="meta">Buying guides &middot; 8 min read</p>
+
+  <p>A capture card handles two signals, and the box usually prints the better one. Capture is what the card records and sends to the streaming PC. Passthrough is what the card sends onward to the screen the player actually watches. On one card in the table below, capture tops out at 1080p60 while passthrough reaches 4K60 with variable refresh rate intact. On another, both signals stop at 1080p60, so the card quietly becomes the ceiling for the whole setup. A player on a 144 Hz monitor who buys on the headline number can downgrade their own screen and never see a warning about it.</p>
+
+  <h2>Capture vs passthrough, verified model by model</h2>
+  <p>Every row in this table comes from a manufacturer document or an official product page checked on 4 November 2026, not from a roundup summary. The distinction that matters sits in the last three columns: what reaches the gaming screen, at what frame rate, and whether variable refresh rate, the anti-tearing feature consoles and PCs call VRR, survives the trip.</p>
+  <table>
+    <tr><th>Card</th><th>USB connection</th><th>Capture, maximum</th><th>Passthrough, maximum</th><th>VRR passthrough</th></tr>
+    <tr><td>AVerMedia Live Gamer Mini GC311</td><td>USB 2.0, Micro USB</td><td>1080p60</td><td>1080p60</td><td>No. The GC311 documentation states it does not support high refresh rates or HDR.</td></tr>
+    <tr><td>NZXT Signal HD60</td><td>USB 3.2 Gen 1, Type-C</td><td>1080p60</td><td>4K60, 1440p60, 1080p60. The manual lists 60 fps as the top figure at every resolution.</td><td>Not listed in the manual specifications checked.</td></tr>
+    <tr><td>Elgato HD60 X</td><td>USB-C 3.2 Gen 1, 5 Gbps</td><td>4K30, 1440p60, 1080p60 with HDR10</td><td>4K60 with HDR10, 1440p120, 1080p240</td><td>Yes</td></tr>
+    <tr><td>AVerMedia StreamLine Mini+ GC311G2</td><td>USB 3.0, Type-C</td><td>1080p60</td><td>4K60 HDR, 1440p144 HDR, 1080p240 HDR</td><td>Not stated in the official reviewer guide checked.</td></tr>
+  </table>
+  <p>Read the NZXT row carefully, because it is the trap in its purest form. The Signal HD60 accepts a 4K60 input and passes 4K60 to a monitor, which sounds like a high refresh card until the manual frame rates are lined up: 60 fps is the ceiling at 4K, at 1440p, and at 1080p. A 1440p144 monitor behind that card receives a 1440p60 signal.</p>
+  <p>The Elgato HD60 X, by contrast, passes 1440p at 120 fps and 1080p at 240 fps, with VRR listed in its manual specifications. The newer AVerMedia GC311G2 passes 1440p144 and 1080p240 in HDR according to its official reviewer guide, while still capturing at 1080p60.</p>
+  <p>High refresh passthrough and modest capture can live in the same small box. They just as often do not, and the price tag does not say which.</p>
+  <p>One status check belongs in this section. Elgato own product page for the HD60 X is headed Discontinued, and the page points buyers to a successor, the 4K S, which Elgato states can capture 4K at 60 frames per second and capture up to 1440p144 or 1080p240. The HD60 X remains a useful spec reference, and Elgato states it still supports the card, but a discontinued model sold at a full new price is a poor buy when its replacement exists. Check status on the manufacturer page before paying for any card a roundup recommends.</p>
+
+  <h2>The USB pipe underneath: why cheap cards compress</h2>
+  <p>The second check is the cable between the card and the PC. An uncompressed 1080p60 signal needs roughly 3 Gbps of bandwidth. USB 2.0 offers a theoretical maximum of 480 Mbps, about one sixth of that figure.</p>
+  <p>A USB 2.0 card therefore has to compress the picture before sending it, typically as MJPEG, and that compression costs image quality and adds processing delay to the captured feed. USB 3.0, at 5 Gbps, has room for uncompressed YUY2 or NV12 video at 1080p60, which is why the USB generation printed on the spec sheet predicts the capture quality better than the resolution printed on the box.</p>
+  <p>The GC311 shows the honest version of the USB 2.0 compromise. It records 1080p60 over a USB 2.0 Micro USB connection because it carries a built-in H.264 hardware encoder: the card compresses the video itself, in MPEG 4 format with hardware encoding, instead of asking the PC processor to do it.</p>
+  <p>The trade is visible in the rest of its spec sheet. Passthrough also stops at 1080p60, there is no HDR and no high refresh support, and the card cannot capture a signal with HDCP copy protection enabled.</p>
+  <p>In exchange, the price checked at Canada Computers on 4 November 2026 was C$89.99, shown with a C$50.00 saving, although the listing was sold out online and at all locations at check time. For a 1080p60 console and a 60 Hz screen, that is a coherent budget product. For anything faster, its ceiling becomes the setup ceiling.</p>
+  <p>No Canadian price is claimed for the other three cards in the table, because no Canadian listing for them was verified in the research for this guide. A price that cannot be sourced stays out, and readers comparing in a store should treat the passthrough column, not the discount sticker, as the deciding row.</p>
+
+  <h2>Set it up and prove it: the documented procedure</h2>
+  <p>This is a setup guide, so it carries steps. The connections and the HDCP step below follow the manufacturers documentation for the cards in the table.</p>
+  <ol>
+    <li>On a PlayStation console, turn HDCP off in the system settings first. The AVerMedia GC311 documentation states plainly that the card cannot capture HDCP protected signals, and that HDCP must be disabled on PS4 and PS5 consoles for capture to work.</li>
+    <li>Run an HDMI cable from the console or gaming PC output to the capture card port marked IN. The cards in the table take an unencrypted HDMI signal on that port.</li>
+    <li>Run a second HDMI cable from the card port marked OUT to the gaming monitor or TV. This passthrough leg is the signal the player watches, so it is the leg to verify against the table above.</li>
+    <li>Connect the card to the streaming PC by USB. Match the generation the card expects: a USB 3 class card belongs in a USB 3 port, or its capture feed falls back to the smaller pipe described in the USB section.</li>
+    <li>Open the capture software, add the card as the video capture device, and set the capture format to 1080p60. UVC cards such as the GC311 are plug and play, so the card should appear as a device with no separate driver install.</li>
+  </ol>
+  <p>What success looks like: the gaming screen shows the game at the resolution and refresh rate the monitor was bought for, with VRR still active where the card and screen support it, while the capture preview in the software runs at a steady 1080p60 at the same time. If the screen has dropped to 60 Hz, the passthrough ceiling of the card is the first suspect, not the console and not the cable. Swap the card out of the chain for one minute and the screen settings will confirm it.</p>
+
+  <h2>Buy, wait, or skip, keyed to your screen</h2>
+  <p><strong>60 Hz screen, 1080p console, first stream:</strong> a USB 2.0 hardware encoder card at the GC311 level covers the job, provided the passthrough cap of 1080p60 matches the screen. Buy on a verified price and a return window, since stock at the checked Canadian listing was sold out.</p>
+  <p><strong>120 Hz or 144 Hz screen, or a VRR television:</strong> passthrough is the purchase. Shortlist only cards whose manufacturer documents list the frame rate and, where it matters, VRR by name: the GC311G2 and HD60 X class on paper, with the HD60 X discontinued status checked before paying. A card whose manual caps passthrough at 60 fps, however good its capture, is a downgrade sold as an upgrade.</p>
+  <p><strong>Recording at 4K, or capturing high frame rates:</strong> skip the whole 1080p60 capture tier. Elgato states its 4K S captures 4K60 and high frame rate formats the older card could only pass through, and that is the class of product the job needs.</p>
+  <p>Two signals, two checks, one minute with the manual before the money moves. That minute is the entire difference between a capture card that serves a setup and one that quietly sets its limits.</p>
+
+  <p><em>Prices and specifications were checked on 4 November 2026 from the manufacturer documents and the retailer listing cited in the table and text, and both change without notice. The one Canadian price quoted here, C$89.99 for the AVerMedia GC311 at Canada Computers, was a sale price on a listing sold out at check time. No Canadian price is claimed for the other cards discussed.</em></p>
+
+  <p>— Dex Carter, Tech Writer</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="disclaimer">Buying advice reflects the author's opinion and general guidance. Specs and prices change, always check current details with the retailer before you buy.</p>
+    <p>Budget Gaming Gear, buying advice for gaming on a budget.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

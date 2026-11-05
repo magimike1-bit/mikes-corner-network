@@ -1,0 +1,146 @@
+{
+  "site": "planprice.ca",
+  "registry_version": 1,
+  "variables": {
+    "prices_verified_date": {
+      "value": "2026-10-25",
+      "as_of": "2026-10-25",
+      "source": "Last full verification sweep (data/sweeps/2026-10-25.json; data/verification-log.json updated 2026-10-25). The 2026-11-02 sweep file is a products.json snapshot that carried dates forward; it is NOT a verification date.",
+      "review_cadence_days": 30
+    },
+    "products_tracked_count": {
+      "value": 49,
+      "as_of": "2026-10-25",
+      "source": "data/products.json (49 products) as of the 2026-10-25 sweep",
+      "review_cadence_days": 30
+    }
+  },
+  "page_checked_dates": {
+    "compare/accounting.html": {
+      "date": "2026-09-30",
+      "members": [
+        "freshbooks",
+        "quickbooks",
+        "wave",
+        "xero"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/square-vs-stripe.html": {
+      "date": "2026-09-30",
+      "members": [
+        "square",
+        "stripe"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/semrush-vs-ahrefs.html": {
+      "date": "2026-09-30",
+      "members": [
+        "semrush",
+        "ahrefs"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/bigcommerce-vs-shopify.html": {
+      "date": "2026-09-30",
+      "members": [
+        "bigcommerce",
+        "shopify"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/cal-com-vs-calendly.html": {
+      "date": "2026-10-25",
+      "members": [
+        "cal-com",
+        "calendly"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/capsule-vs-pipedrive.html": {
+      "date": "2026-10-10",
+      "members": [
+        "capsule-crm",
+        "pipedrive"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/deel-vs-wagepoint.html": {
+      "date": "2026-10-23",
+      "members": [
+        "deel",
+        "wagepoint"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/freshbooks-vs-zoho-books.html": {
+      "date": "2026-10-12",
+      "members": [
+        "freshbooks",
+        "zoho-books"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/housecall-pro-vs-jobber.html": {
+      "date": "2026-09-30",
+      "members": [
+        "housecall-pro",
+        "jobber"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/mailchimp-vs-klaviyo.html": {
+      "date": "2026-10-20",
+      "members": [
+        "mailchimp",
+        "klaviyo"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/notion-vs-clickup.html": {
+      "date": "2026-10-15",
+      "members": [
+        "notion",
+        "clickup"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/square-vs-lightspeed.html": {
+      "date": "2026-10-20",
+      "members": [
+        "square",
+        "lightspeed"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/toast-vs-square.html": {
+      "date": "2026-10-20",
+      "members": [
+        "toast",
+        "square"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/trello-vs-clickup.html": {
+      "date": "2026-10-12",
+      "members": [
+        "trello",
+        "clickup"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    },
+    "compare/wave-vs-zoho-books.html": {
+      "date": "2026-10-12",
+      "members": [
+        "wave",
+        "zoho-books"
+      ],
+      "basis": "min(member last_verified); chain: data/sweeps/*.json then data/compare-vendors.json"
+    }
+  },
+  "rules": {
+    "compare_page_date": "min of member products' last_verified",
+    "site_date": "variables.prices_verified_date"
+  }
+}

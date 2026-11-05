@@ -8,11 +8,12 @@ import { slugify } from "./slugify.mjs";
 import { tierSavings, allSavings, firstYear } from "./savings.mjs";
 import { rankByAvg, rankByReviews } from "./review-rank.mjs";
 import { fmtDate, isStale } from "./freshness.mjs";
+import { PRICES_VERIFIED_DATE, comparePageDate } from "./site-data.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HOST = process.env.SITE_HOST || "staging.planprice.local";
 const SITE_URL = `https://${HOST}`;
-const CHECKED = "2026-09-30";
+const CHECKED = PRICES_VERIFIED_DATE;
 
 const data = JSON.parse(readFileSync(join(ROOT, "data", "products.json"), "utf8"));
 const products = data.products;
@@ -872,6 +873,7 @@ function fitBlock(p) {
  * components and strings as the deal pages. The F5 first-year-cost item is
  * appended to each column's facts strip (compare pages only). */
 function compareSetPage(set) {
+  const pageDate = comparePageDate(set.slug);
   const cols = set.products
     .map((p) => `<section class="compare-col" id="cmp-${esc(p.slug)}" aria-label="${esc(p.name)}">
       <h2 class="compare-col-name"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></h2>
@@ -884,7 +886,7 @@ function compareSetPage(set) {
     .join("\n");
   return `${head(
     `${set.title} — PlanPrice`,
-    `${set.title}: compare verified pricing, current deals, and user feedback side by side. Prices checked ${CHECKED}.`,
+    `${set.title}: compare verified pricing, current deals, and user feedback side by side. Prices checked ${pageDate}.`,
     `/compare/${set.slug}.html`
   )}
 ${header("/compare.html")}
@@ -892,7 +894,7 @@ ${header("/compare.html")}
   <div class="wrap">
     <p class="breadcrumbs"><a href="/compare.html">Compare</a> › ${esc(set.title)}</p>
     <h1 class="page-title">${esc(set.title)}</h1>
-    <p class="section-sub">${set.products.length} products, side by side · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <p class="section-sub">${set.products.length} products, side by side · prices checked <time datetime="${pageDate}">${pageDate}</time></p>
     <div class="compare-cols">
       ${cols}
     </div>

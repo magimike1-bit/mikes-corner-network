@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changing Your Router's DNS Settings | Fix Your Wi-Fi</title>
+<meta name="description" content="Changing DNS will not make a slow plan faster. It changes who answers name lookups, what gets filtered, and how reliable lookups are. Pick by job, change it once at the router, then verify.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Changing your router's DNS settings: what it fixes, what it cannot, and how to verify it</h1>
+  <p class="meta">Setup &middot; 8 min read</p>
+
+  <p>Start with the claim worth checking, because most guides for this setting
+  lead with it: change your DNS and your internet gets faster. The honest
+  version is narrower. A DNS server converts domain names into IP addresses,
+  and computers communicate and access the internet using those addresses,
+  as NETGEAR's own support documentation puts it. That conversion happens
+  once, at the start of a connection. Avast's guide to this exact setting
+  states the limit plainly: the DNS server you use does not technically
+  impact the speed of your internet connection, although it can affect how
+  quickly certain pages load, and switching to a resolver with lower latency
+  can make browsing feel smoother. Download speed after a connection is
+  established is not part of the bargain. If a speed test shows a slow plan,
+  a weak signal, or a congested evening line, no resolver change repairs
+  any of those. What a DNS change genuinely controls is three other things:
+  who answers your lookups, whether known bad sites get filtered out at the
+  lookup, and whether lookups keep working when your provider's resolver
+  has a bad day. Those are real reasons to change it. They are just not
+  bandwidth.</p>
+
+  <h2>One lookup, start to finish</h2>
+  <p>Type a site name and the device asks a DNS resolver for the address
+  behind the name. The resolver answers, the device connects to that
+  address, and from that moment the resolver is out of the conversation
+  until the next new name appears. By default, most internet service
+  providers automatically assign their DNS server addresses to the router,
+  and every device on the network uses the router's resolver. That default
+  is why the router is the right place to make the change: edit it once
+  there and the updated configuration applies to every phone, laptop,
+  console, and smart device in the house, instead of being repeated device
+  by device. It is also why the change is easy to undo. The default has a
+  name in the settings, Get Automatically from ISP, and returning to it is
+  a single selection.</p>
+
+  <h2>Pick by job, not by brand</h2>
+  <p>Public resolvers are not interchangeable, and the difference that
+  matters is filtering, which is decided by the exact address you type.
+  Google's own FAQ describes Google Public DNS as a free, global
+  resolution service, and states that as a resolver and caching server it
+  does not perform blocking or filtering of any kind, except for certain
+  domains in rare cases. Cloudflare makes the same split inside one
+  brand: its launch post for 1.1.1.1 for Families explains that the
+  standard 1.1.1.1 resolver is designed for direct, fast DNS resolution,
+  not for blocking or filtering content, and that filtering arrives only
+  with the Families addresses. Read the table by the job in the first
+  column, then take the addresses from the row that matches it.</p>
+  <table>
+    <thead>
+      <tr><th>The job</th><th>Resolver</th><th>Primary</th><th>Secondary</th><th>Filtering</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Leave it as the provider set it</td><td>ISP automatic</td><td colspan="2">Assigned by the provider</td><td>Whatever the provider applies</td></tr>
+      <tr><td>Plain resolution, no filtering</td><td>Google Public DNS</td><td>8.8.8.8</td><td>8.8.4.4</td><td>None, except certain domains in rare cases, per Google</td></tr>
+      <tr><td>Plain resolution, privacy first resolver</td><td>Cloudflare 1.1.1.1</td><td>1.1.1.1</td><td>1.0.0.1</td><td>None, designed for direct resolution</td></tr>
+      <tr><td>Block known malware sites</td><td>Cloudflare for Families, malware only</td><td>1.1.1.2</td><td>1.0.0.2</td><td>Malware domains blocked</td></tr>
+      <tr><td>Block malware and adult content</td><td>Cloudflare for Families, full</td><td>1.1.1.3</td><td>1.0.0.3</td><td>Malware and adult content blocked</td></tr>
+      <tr><td>Block malware and phishing</td><td>Quad9</td><td>9.9.9.9</td><td>149.112.112.112</td><td>Malware and phishing domains blocked</td></tr>
+    </tbody>
+  </table>
+  <p>Two notes on the table. First, the Cloudflare Families service is
+  free for home use, and Cloudflare publishes matching IPv6 pairs for both
+  filtering levels, 2606:4700:4700::1112 and 2606:4700:4700::1002 for
+  malware only, and 2606:4700:4700::1113 and 2606:4700:4700::1003 for
+  malware plus adult content, for routers that expose IPv6 DNS fields.
+  Second, Google notes that queries are routed to the nearest location
+  advertising its anycast addresses, which is a reliability and lookup
+  latency point, not a promise about your plan speed. Quad9 is operated
+  by a Swiss public benefit, not for profit foundation, and its blocking
+  covers domains associated with malware and phishing.</p>
+
+  <h2>Before you change anything: record and test</h2>
+  <p>Two minutes of recording turns this from a guess into an experiment.
+  Open the router's internet settings page and note whether DNS is set to
+  automatic, and, if any addresses are already typed in, copy them down
+  exactly. That record is the revert path. Then run one quick check on a
+  computer: load a site you visit daily and note whether the pause, if
+  there is one, happens before the page starts loading or while it loads.
+  A pause before anything appears, repeated across several different
+  sites, is the lookup shaped problem this change can plausibly help. A
+  page that starts fast and loads slowly is a connection shaped problem,
+  and the resolver is not its cause. If every site fails outright while
+  the connection itself reports connected, treat that as a fault to
+  diagnose first, since a resolver change made mid fault destroys the
+  evidence.</p>
+
+  <h2>The change, step by step</h2>
+  <p>The worked path below is NETGEAR's documented one, from its support
+  article on setting static DNS servers, last updated July 7, 2025. Other
+  brands place the same two fields under their internet or WAN settings;
+  the labels to look for are the ones in step 4.</p>
+  <ol>
+    <li><strong>Connect and open the admin page.</strong> Launch a web
+    browser on a computer or Wi-Fi device connected to the router, and
+    visit www.routerlogin.net. Enter the router username and password.
+    NETGEAR lists the defaults as admin and password; use your changed
+    credentials if you set them, as you should have.</li>
+    <li><strong>Open Internet settings.</strong> On the BASIC page that
+    displays, select Internet. The Internet Setup page appears.</li>
+    <li><strong>Find the DNS section.</strong> Scroll to the section
+    headed Domain Name Server (DNS) Address. It will usually show Get
+    Automatically from ISP selected, which matches the record you made
+    in the previous section.</li>
+    <li><strong>Switch to manual and enter both addresses.</strong>
+    Select the radio button for Use These DNS Servers. Type the primary
+    address from your chosen table row in the first field and the
+    secondary address in the second. Enter both: the secondary is the
+    fallback the router uses if the primary does not answer.</li>
+    <li><strong>Apply.</strong> Click Apply. NETGEAR confirms the
+    settings are saved. Devices may take a short while to pick up the
+    new resolver as they renew their connection details; reconnecting a
+    device to the Wi-Fi forces the pickup immediately.</li>
+    <li><strong>Leave IPv6 alone unless the fields are already in
+    use.</strong> If the router shows separate IPv6 DNS fields set to
+    automatic, changing only IPv4 is the cleaner single change. If you
+    set IPv6 DNS manually, use the matching IPv6 pair for the same
+    filtering level from the table notes, never a mixed pair.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> every device still loads
+  websites by name, a fresh lookup on a reconnected device works on the
+  first try, and, if you chose a filtering row, a known test category for
+  that filter is refused while ordinary sites load normally. If names
+  stop resolving anywhere in the house, success has not happened, and
+  the revert in the final section is the next step, not a second guess
+  at the addresses.</p>
+
+  <h2>Verify the new resolver is answering</h2>
+  <p>Saved settings are not proof. Routers can hold a page of settings
+  that devices quietly ignore because a device carries its own manual
+  DNS entry, which overrides the router's. Verify on one ordinary
+  device, not on a device you have previously customised. Reconnect it
+  to the Wi-Fi, load three different websites by name, and confirm each
+  loads. Then check the device's connection details: the DNS server it
+  reports should be the router's address or the resolver you set,
+  depending on how the router hands the setting out, and in neither
+  case should it show the old provider resolver you recorded earlier.
+  If you chose a Cloudflare Families row, run Cloudflare's own test:
+  visit malware.testcategory.com, and, for the full filtering row,
+  nudity.testcategory.com. Cloudflare's documentation says a domain
+  classified as malicious returns the address 0.0.0.0 instead of the
+  real address, so the test page refusing to load is the filter
+  working, and the page loading normally means the device is not
+  using the filtering resolver yet.
+  If the old address still appears, that device has its own manual
+  entry, and the router change is working for the rest of the house
+  while that one device opts out. That is a finding, not a failure:
+  clear the device's manual entry if you want it covered.</p>
+
+  <h2>When to change it back</h2>
+  <p>Revert to Get Automatically from ISP, using the record from before
+  the change, in three situations. First, any device loses name
+  resolution after the change and a reconnect does not restore it.
+  Second, a service you rely on behaves oddly only after the change,
+  such as a work connection or a provider TV app that expects the
+  provider's resolver. Third, a week of normal use shows no difference
+  in the lookup pause you recorded, which means the original symptom
+  was never a resolver problem and the default was doing its job. None
+  of these outcomes is a defeat. The change costs nothing, takes
+  minutes, and is fully reversible, and the record you kept means the
+  house returns to exactly the configuration it started from, not an
+  approximation of it.</p>
+
+  <p class="disclaimer">General information about home networking, not
+  professional IT advice. Router menus vary by model; check the manual
+  for the exact DNS fields on a specific device.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

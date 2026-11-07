@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting Up Router Parental Controls | Fix Your Wi-Fi</title>
+<meta name="description" content="Router parental controls work when they are built by profile: one profile per child, every device assigned, a bedtime set, and a bypass audit afterwards. TP-Link paths, the free vs paid split, and the private MAC trap.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Setting up router parental controls: profiles, bedtime schedules, and the bypass audit</h1>
+  <p class="meta">Setup &middot; 9 min read</p>
+
+  <p>Yes, the router can enforce bedtime, and it takes about ten minutes to
+  set up, provided it is built in the right order. Create one profile per
+  child, assign every device that child uses to the profile, set the time
+  rules and the content rules on the profile, and then audit the setup the
+  way a determined kid would. Skip the audit and the most common outcome is
+  a schedule that looks correct in the app and quietly applies to nothing,
+  for a reason the router maker states in its own guide and most roundups
+  never mention: the device's private MAC address setting. This guide uses
+  TP-Link's documented HomeShield flow as the worked example, because
+  TP-Link publishes both the procedure and its limits. The shape of the
+  job, profile, devices, schedule, audit, is the same on other brands.</p>
+
+  <h2>What the router can and cannot do</h2>
+  <p>Router controls act on devices using your Wi-Fi, at the point where
+  their traffic leaves the house. Within that reach, the documented
+  TP-Link feature set covers specifying time periods when a profile's
+  devices can access the internet, setting a bedtime where the internet
+  is cut off for those devices, and blocking websites. Outside that reach,
+  the limits are structural. A phone that switches to mobile data is no
+  longer on your Wi-Fi, and the U.S. Federal Trade Commission's Net Cetera
+  guide makes the general version of the point: the filters installed on
+  a home computer will not limit what kids can do on a mobile device. The
+  same guide is blunt about the human limit, too. Parental controls can
+  be effective for younger tweens, but many middle school kids have the
+  technical know how to get around those controls, and the FTC's first
+  recommendation is not a setting at all: the best way to protect kids
+  online is to talk to them, and communicate expectations. Treat the
+  router rules as the fence, and the conversation as the reason the fence
+  rarely gets tested.</p>
+
+  <h2>Free vs paid on TP-Link HomeShield: the vendor's own split</h2>
+  <p>TP-Link's screen time guide, published September 24, 2026, splits its
+  own features into a free Basic tier and a paid Advanced Parental
+  Controls tier, and the split decides whether a household needs to pay
+  anything at all. Archer routers run this through the Tether app and
+  Deco mesh systems through the Deco app, both powered by HomeShield.
+  Not every TP-Link model has HomeShield; the guide notes that older and
+  entry level units may only have basic controls in the web interface,
+  so check the model before planning around the app.</p>
+  <table>
+    <thead>
+      <tr><th>Feature</th><th>Free, Basic</th><th>Advanced, paid</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Separate profile per child, with age presets</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Bedtime schedule</td><td>One schedule, the same every day</td><td>Different times per day</td></tr>
+      <tr><td>Daily time limits</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Offtime, blocked hours inside the day</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Reward time, granted extra minutes</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Instant pause of a profile's internet</td><td>Yes</td><td>Yes</td></tr>
+    </tbody>
+  </table>
+  <p>Read the table as a decision. A household whose whole policy is
+  internet off at the same time every night, plus a pause button for
+  homework, is fully served by the free tier. The paid tier earns its
+  money only when the policy itself is more complicated: a later Friday
+  bedtime, a daily hour budget, or blocked homework hours. TP-Link
+  offers new users a one month free trial of Advanced, which is long
+  enough to learn whether the family actually uses the extra rules
+  before paying for them.</p>
+
+  <h2>Set it up, step by step</h2>
+  <p>The steps follow TP-Link's FAQ for setting parental controls through
+  the Tether app, which covers both HomeShield routers and models
+  without it. Menu names vary a little by model, and TP-Link says so
+  itself: some features in parental control may vary by model.</p>
+  <ol>
+    <li><strong>Fix the device identity first.</strong> On each phone or
+    tablet the rules must catch, turn off the private MAC address
+    feature for your home network, or set it to a fixed address where
+    the system offers that choice. TP-Link's instruction is direct:
+    make sure the Private MAC Address is disabled on your clients,
+    otherwise the parental control may not take effect. Rules attach to
+    a device address, and a device that changes its address is a device
+    the rules no longer recognise. On Apple devices this setting lives
+    per network, at Settings, then Wi-Fi, then the More Info button next
+    to your home network name, then Private Wi-Fi Address.</li>
+    <li><strong>Open the app and sign in.</strong> Open the TP-Link Tether
+    app and sign in to your TP-Link account, or register one. For a Deco
+    system, the same job lives in the Deco app's Parental Controls
+    area.</li>
+    <li><strong>Create one profile per child.</strong> Add a profile,
+    enter the child's name, select the age the profile is for, pick an
+    avatar, and tap Next. Age selection matters because the content
+    filtering presets hang off it. One profile per child, never one
+    shared family profile: schedules differ by child, and a shared
+    profile forces one bedtime on everyone.</li>
+    <li><strong>Assign every device that child uses.</strong> Select the
+    devices for the profile from the connected devices list: phone,
+    tablet, console, laptop, and the borrowed or handed down device
+    everyone forgets. An unassigned device has no rules at all, which
+    is the most ordinary bypass in the house.</li>
+    <li><strong>Set the content rules.</strong> Choose the filtering the
+    profile applies and block specific websites where the app offers a
+    block list. Keep the list short and deliberate; a long list built in
+    one sitting usually contains mistakes that surface as a school site
+    failing at homework time.</li>
+    <li><strong>Set Time Limits and Bedtime.</strong> Set how long the
+    profile's devices can be online, where your tier allows it, and set
+    the No Internet Bedtime, the nightly window where access is cut off
+    for those devices. On the free tier the bedtime is one schedule,
+    the same every day. Different times for weekdays, weekends, or
+    custom days require Advanced Parental Controls, per TP-Link's
+    guide.</li>
+    <li><strong>Save, then test immediately.</strong> Apply the profile,
+    pick up one of the child's devices, and confirm that browsing works
+    now and that the assigned device appears under the profile in the
+    app. A rule that was never tested is a hope, not a control. The
+    full test at the real cutoff time is the audit below.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> at the set bedtime, the
+  child's phone, tablet, and console lose internet on Wi-Fi at the same
+  minute, adult devices and smart home gear on other profiles or no
+  profile keep working untouched, and in the morning the child's devices
+  come back on their own without anyone opening the app. If only some
+  devices stop, the audit names the usual causes in order.</p>
+
+  <h2>The bypass audit: three ways the rules silently fail</h2>
+  <p>Run this audit on the first night, not after a month of assumed
+  compliance.</p>
+  <p><strong>One, the address changed.</strong> Apple documents that a
+  device uses a different MAC address for each Wi-Fi network by default,
+  and that on iOS 18 and later the per network setting offers Off, Fixed,
+  or Rotating, with Rotating changing the private address every two
+  weeks. A device set to Rotating can therefore drift out of its profile
+  on schedule, doing exactly what its privacy feature promises. Apple
+  also documents that erasing the device or resetting its network
+  settings gives it a different private address the next time it joins.
+  If a profile suddenly shows a stranger device in the connected list
+  with no rules, it is usually the same phone wearing a new address.
+  The repair is step 1 of the procedure: Fixed or Off for the home
+  network only, leaving the privacy feature on everywhere else.</p>
+  <p><strong>Two, the traffic left the network.</strong> Turn Wi-Fi off on
+  the child's phone during bedtime hours and try to load a page. If it
+  loads, the phone is on mobile data and no router setting can change
+  that outcome. The FTC's guidance points at the layer that can: the
+  wireless carrier and the phone's own settings offer choices for
+  privacy and child safety controls, and that is where the mobile half
+  of the policy has to live.</p>
+  <p><strong>Three, a device was never assigned.</strong> Walk the
+  connected devices list in the app against the devices in the house. A
+  new tablet, a replacement phone, or a console that joined after setup
+  day sits outside every profile until someone adds it. New device day
+  is the moment to repeat step 4, because the router will not guess
+  which child a new device belongs to.</p>
+
+  <h2>If your router has no parental controls: the DNS fallback</h2>
+  <p>Older routers, and some provider supplied gateways, have no profile
+  system at all. The fallback that still works at the network level is
+  filtered DNS. Cloudflare's 1.1.1.1 for Families blocks domains
+  associated with malware, or malware plus adult content, across the
+  whole network when the router's primary and secondary DNS are set to
+  1.1.1.2 and 1.0.0.2 for malware only, or 1.1.1.3 and 1.0.0.3 for both.
+  It is free, and it applies to every device at once, which is both its
+  strength and its limit: there are no profiles, no bedtimes, and no
+  per child differences, and it filters adults on the same terms as
+  kids. Use it as the floor under a house with no better tool, not as a
+  substitute for profiles where profiles exist.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>Does pausing the whole network at night work just as
+  well?</strong> It works, and it also pauses doorbells, cameras,
+  thermostats, and any adult working late. Profiles exist so the cutoff
+  lands only on the devices it is meant for. Schedule profiles, never
+  the whole network, unless the house genuinely wants a full shutdown
+  and accepts the smart home going dark with it.</p>
+  <p><strong>The bedtime rule stopped working after a phone update. What
+  changed?</strong> Start with the address. System updates can return a
+  device's private Wi-Fi address setting to its default, and Apple
+  documents that resetting network settings produces a different
+  private address at the next join. Check the setting on that device
+  for your home network, confirm the address the router sees matches
+  the device in the profile, and the rule usually returns without any
+  change to the schedule itself.</p>
+
+  <p class="disclaimer">General information about home networking, not
+  professional IT advice or child safety advice. Router apps and menus
+  vary by model; check the manual for a specific device.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

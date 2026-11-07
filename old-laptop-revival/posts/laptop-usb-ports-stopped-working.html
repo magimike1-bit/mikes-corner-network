@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptop USB Ports Stopped Working: Isolate the Fault in Order | Old Laptop Revival</title>
+<meta name="description" content="When a laptop's USB ports stop working, the pattern is the diagnosis. A known-good device, one test outside Windows, Microsoft's power and driver steps in order, and the I/O board question for one dead side.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Laptop Revival</a>
+    <p class="tagline">That dusty laptop in the closet still has life in it</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Laptop USB ports stopped working: is it the port, the device, or Windows?</h1>
+  <p class="meta">Troubleshooting &middot; 8 min read</p>
+
+  <p>Is the port actually dead? That question has four different answers, and each one leads to a different fix. One dead port is a hardware problem in a single socket. Every port dead at once is almost never four hardware problems; it is one shared cause, in Windows, in power management, or in the controller. One device failing in every port is usually the device or its cable. And ports that work until the laptop sleeps, then vanish, are a power setting until proven otherwise. Guessing which one you have, and uninstalling drivers on a guess, wastes an afternoon. The pattern is the diagnosis, and it takes five minutes to collect.</p>
+
+  <h2>Step one: collect the pattern with a known-good device</h2>
+
+  <ol>
+    <li>Pick a test device you know works: a basic wired mouse or a flash drive, the simpler the better. Disconnect everything else USB from the laptop first, including docks, hubs, adapters, printers, and controllers, so nothing else can complicate the result.</li>
+    <li>Plug the test device directly into each physical port on the laptop, one at a time, and note which ports recognise it.</li>
+    <li>Plug the device that originally failed into a different computer, if one is available, and note whether it works there.</li>
+    <li>Look inside each suspect port with a torch before concluding anything. Dust or dirt packed inside a port can stop a plug seating fully, and Microsoft's own guidance for clearing it is a can of compressed air, not a metal tool.</li>
+  </ol>
+
+  <table>
+    <tr><th>Pattern</th><th>Where the fault lives</th><th>Go to</th></tr>
+    <tr><td>Test device works in every port; the original device fails everywhere, including on another computer</td><td>The device or its cable</td><td>Replace the cable first, then judge the device</td></tr>
+    <tr><td>One port dead, the rest fine with the test device</td><td>That socket, or the board behind it</td><td>The I/O board section below</td></tr>
+    <tr><td>Every port on one side dead, the other side fine</td><td>That side's I/O board or its ribbon cable</td><td>The I/O board section below</td></tr>
+    <tr><td>Every port dead in Windows</td><td>Windows, power management, or the controller</td><td>The fork test below</td></tr>
+    <tr><td>Ports work after a restart, then drop out after sleep or on battery</td><td>A power setting</td><td>The Windows fixes, power steps first</td></tr>
+  </table>
+
+  <h2>The fork: does USB work outside Windows?</h2>
+
+  <p>Before uninstalling anything, run the one test that splits the problem in half. Restart the laptop and enter the BIOS or UEFI setup screen, or the Windows Recovery Environment, and check whether a USB keyboard or mouse works there. Those screens run before Windows loads, so they test the hardware and firmware without Windows in the way.</p>
+
+  <p>If USB works there but fails once Windows is up, the hardware has largely cleared itself and the investigation belongs with Windows drivers, configuration, or a recent system change. If USB fails there too, no driver reinstall will help, and the fault is firmware, power, or hardware. One caution keeps this test honest: a port delivering power proves very little. A device can light up and charge while Windows still cannot detect or communicate with it, a detection process called USB enumeration. Power at the port is not the same as a working port.</p>
+
+  <h2>If it works outside Windows: the fixes, in order</h2>
+
+  <p>Work these in the order given, testing after each one, and stop when the ports come back. Changing three settings at once leaves no way to know which one mattered, and one of these steps has a side effect worth knowing about before you use it.</p>
+
+  <ol>
+    <li><strong>Scan for hardware changes.</strong> Microsoft's first method for an unresponsive port is Device Manager's scan: open Device Manager, select Action, then Scan for hardware changes. The computer can recognise the device on that port afterwards. Microsoft notes a port can stop responding after a device has been quickly and repeatedly inserted and removed, and this is the gentlest reset for exactly that state.</li>
+    <li><strong>Restart properly.</strong> If the scan changes nothing, restart the laptop. If the failures only appear after a shutdown and startup, turning Fast Startup off is the follow-up step in Microsoft's sequence. It lives in Power Options under "Choose what the power button does", behind "Change settings that are currently unavailable".</li>
+    <li><strong>Read the error before clearing it.</strong> If Windows shows "USB device not recognized", open Device Manager, find the device marked with a yellow exclamation point, open its Properties, and read the error code under Device status. Microsoft's guidance starts from that code: the device reported a problem, or the driver did, and the code is what separates those two.</li>
+    <li><strong>Stop Windows powering the hubs down.</strong> In Device Manager, expand Universal Serial Bus controllers. For each USB Root Hub, open Properties, go to the Power Management tab, and unmark "Allow the computer to turn off this device to save power". This is the step for ports that drop devices after sleep or idle time.</li>
+    <li><strong>Disable USB selective suspend.</strong> Open Power Options, choose Change plan settings for the active plan, then Change advanced power settings, expand USB settings, and set the USB selective suspend setting to Disabled. Know the trade before you leave it off: Microsoft warns that disabling selective suspend affects every USB host controller driver on the system, so it touches all ports and connected devices, and it costs some battery life. If it changes nothing, turn it back on.</li>
+    <li><strong>Reinstall the controllers.</strong> In Device Manager, right-click each USB Root Hub under Universal Serial Bus controllers and choose Uninstall device. Then restart. Windows recognises the root hubs as new devices on the way back up and installs their drivers automatically. Your keyboard and mouse will stop responding partway through this step if they are USB devices, which is expected; the restart is what brings them back.</li>
+    <li><strong>Update what is left.</strong> Back in Device Manager, right-click each USB Root Hub, choose Update driver, then "Search automatically for updated driver software", and restart again. If Windows Update offers nothing newer, the laptop maker's support page for your exact model is the remaining source, under chipset drivers.</li>
+  </ol>
+
+  <p>One more power check sits alongside these, straight from Microsoft's sequence: unplug the laptop's charger, restart the machine, reconnect the USB device, and only then plug the charger back in. It sounds like nothing, and it clears a stuck power state often enough that Microsoft lists it as a method in its own right.</p>
+
+  <h2>If the pattern is power, treat the hub as a test</h2>
+
+  <p>Some failures only happen with hungry devices: an external hard drive that spins up and vanishes, a phone that charges slowly or not at all. Windows sometimes says so directly, with a notification that the USB device might need more power. Microsoft lists what that notification means: the PC may have a low battery and has temporarily limited the power it will provide, it may already be providing power to other connected devices and has limited what is left for the new one, or the device simply requires more power than the PC can provide.</p>
+
+  <p>That list turns the remedies into a diagnosis. Plug the laptop into mains power and disconnect every other USB device, then test the hungry device again. If it works on mains and fails on battery, the port is fine and the limit is the battery state. If it still fails, connect it through a powered hub, a hub with its own mains adapter. A device that works through a powered hub but not through any port on the laptop has told you the ports are not supplying what it needs, while a device that fails even then is pointing back at itself or its cable.</p>
+
+  <h2>If one whole side is dead: the I/O board question</h2>
+
+  <p>Here is the fact about older laptops that the Windows checklists never reach. The ports are not all soldered to the main board. On many models, the ports on one side sit on a small separate circuit board, an I/O board or daughterboard, joined to the main board by a flat ribbon cable. On the HP Pavilion 14-cf0014dx, for example, that daughterboard carries the USB and headphone ports for the left side, and the maker's repair route for left-side USB problems is to replace that board, not the main board.</p>
+
+  <p>That construction explains a pattern no software setting can produce: every port on one side dead, the other side perfect, with the headphone socket on the dead side often gone as well because it shares the board. Inside the machine, the check is the ribbon cable. Its connector is a ZIF socket, released by lifting a small locking flap with the tip of a spudger; a cable that is not fully seated in that socket takes the whole side down with it, because every signal between those ports and the main board passes through it. Reseating it costs nothing. If reseating changes nothing and the board itself has failed, the board is a small, model-specific part held by a few screws, two of them at 6.7mm on the HP example, and it lifts out once the ribbon cable is released. The service manual for your exact model shows whether your machine is built this way and names the part.</p>
+
+  <p>The boundary of this section matters. A single port that is physically bent, loose in the chassis, or scorched is a different problem: a port soldered directly to the main board is board-level soldering work, and that is a repair shop job, not a home procedure. Forcing plugs into a damaged socket to test it one more time can turn that repairable board into a short circuit.</p>
+
+  <p><strong>What success looks like:</strong> the known-good device is recognised in every port, the originally failing device either works or has been proven faulty on a second computer, and the ports still work after the laptop has slept and woken and after a run on battery. A fix that only survives until the next sleep was a power setting wearing a disguise.</p>
+
+  <h2>The stop rules</h2>
+
+  <p>Stop and reassess if the pattern changes while you work; a fault that moves is information, not bad luck. Stop if every port fails outside Windows as well as inside it, because the remaining causes are firmware and hardware, and repeated driver work will not touch them. And if the machine is otherwise due a decision about its future, weigh the I/O board route honestly: a documented board swap or ribbon reseat is a modest job on a machine with years left, while main board soldering on a laptop already struggling with everything else is money spent in the wrong place.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Laptop Revival, practical guides for extending the life of aging laptops. Content is for information only, not professional repair advice.</p>
+    <p class="safety-note">Safety first: unplug the laptop and remove the battery where possible before opening it. Back up your data before any upgrade, never force connectors, and stop if something resists, a repair shop can finish the job.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

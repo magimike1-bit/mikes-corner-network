@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minimum Display Quantities and Backstock Triggers for a Small Shop | Retail Inventory Management</title>
+<meta name="description" content="Set a minimum display quantity per facing, a backstock pull trigger, and a reorder point as three separate numbers: a worked facing, the cash cost of overfilled slow shelves, and when the right display minimum is one or zero.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Retail Inventory Management</a>
+    <p class="tagline">Practical inventory habits for independent retailers</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Minimum display quantities and backstock triggers: three shelf numbers, not one</h1>
+  <p class="meta">Shelf stock &middot; 8 min read</p>
+
+  <p>12 units fit the facing, 3 sell on a good day, and 5 are sitting in the
+  backroom. How many belong on the shelf tonight? Most small shops answer that
+  question with one number, usually whatever the low stock alert in the point
+  of sale is set to, and that single number is asked to do three different
+  jobs at once. It decides how the shelf should look, when someone should walk
+  to the backroom, and when the shop should spend money on more stock. Those
+  are three decisions, they count three different pools of stock, and mixing
+  them is how a shelf ends up full of the wrong units while the right ones sit
+  in a box, or how a routine top up turns into a purchase order nobody needed.</p>
+
+  <h2>Three numbers, three different jobs</h2>
+  <p>The chain retailers have a name for the first number. A minimum display
+  quantity, also called a minimum presentation quantity, is the set of sizes
+  and quantities a store is expected to carry at all times, set so the size
+  run stays available and the presentation holds together. Allocation software
+  builds it as a profile per store type. A single shop does not need the
+  profile. It needs the same idea at the scale of one facing, plus two numbers
+  the chain definition never mentions, because in a chain the other two live
+  in different departments.</p>
+  <table>
+    <tr><th>Number</th><th>Pool it counts</th><th>Action it fires</th></tr>
+    <tr><td>Display minimum</td><td>Units on that facing only</td><td>None by itself. It is the floor the shelf is not supposed to fall below, for availability and for how the shelf reads.</td></tr>
+    <tr><td>Pull trigger</td><td>Units on that facing, checked at a stated round</td><td>A walk to the backroom. Stock moves forward from backstock to the facing, up to shelf capacity.</td></tr>
+    <tr><td>Reorder point</td><td>Total stock: shelf plus backstock, all locations</td><td>A purchase decision. New money goes out, sized by lead time and sales rate.</td></tr>
+  </table>
+  <p>The reorder point is the number most point of sale guides teach, and it
+  is a total stock number by construction. Square's small business guide puts
+  it plainly: a par level is how much you want on hand, a reorder point tells
+  you when to order more, and the reorder point is average daily unit sales
+  multiplied by supplier lead time in days, plus safety stock. Four units a
+  day, a seven day lead time, and ten units of safety stock give a reorder
+  point of 38 units. Nothing in that formula knows or cares how many of the
+  38 are on the shelf and how many are in the back. That is correct for
+  buying. It is useless as a shelf rule, and a shelf rule is useless as a
+  buying rule.</p>
+  <p>Enterprise replenishment software keeps a related pair, a minimum and a
+  maximum, and the logic is worth borrowing even though the software is not.
+  In Quant's manual, minimum and maximum can be set as days of reserve or as
+  fixed volumes: stock expected to fall below the minimum generates an order
+  up to the maximum. The maximum can come straight from the planogram, where
+  it means the number of products that fit the fixture based on its
+  dimensions, so an order can never exceed the display space that exists.</p>
+  <p>Translated to a small shop: the shelf maximum is not a policy choice, it is
+  a measurement. The display minimum is the policy choice, and it lives
+  between a presentation floor and that measured capacity.</p>
+
+  <h2>The runbook: set the display minimum facing by facing</h2>
+  <ol>
+    <li><strong>Measure the capacity.</strong> Fill the facing the way it is
+    meant to look, neither crammed nor staged for a photo, and count the
+    units. That count is the shelf maximum. A facing that holds 12 holds 12;
+    a display minimum above 12 is a fiction that will generate pointless
+    backroom trips.</li>
+    <li><strong>Set the presentation floor.</strong> This is the smallest
+    quantity that still reads as stocked for that product. Enterprise systems
+    encode the same instinct: Blue Yonder's slow mover replenishment respects
+    a minimum presentation rule of at least 2 units to face a shelf even when
+    the demand math says 1, so the store does not look empty. For a stackable
+    staple the floor may be 3 or 4. For a single boxed item it may be 1.</li>
+    <li><strong>Work out the cover the shelf needs between pull rounds.</strong>
+    Decide how often this category gets a pull round, daily, twice a week,
+    weekly, and multiply the interval in days by average daily sales for the
+    item. Twice weekly rounds and 1.5 sales a day need about 5 to 6 units of
+    cover, because the shelf has to survive three to four days between
+    rounds.</li>
+    <li><strong>Take the larger of floor and cover, capped at capacity.</strong>
+    That is the display minimum. Worked example, labelled illustrative: a
+    notebook facing holds 12, sells about 1.5 a day, and gets pull rounds on
+    Tuesday and Friday. Cover is 6, the presentation floor is 3, so the
+    display minimum is 6. If cover had come out at 14, the answer would not
+    be 14; it would be a capacity of 12 and a shorter interval between
+    rounds.</li>
+    <li><strong>Set the pull trigger at the display minimum, and check it only
+    at the round.</strong> At each round, a facing at or below its display
+    minimum gets pulled up to capacity, or to whatever the backstock can
+    spare. A facing above its minimum is left alone. Checking at rounds, not
+    continuously, is what keeps the job to minutes: nobody is restocking one
+    unit at a time all day, and nobody is pulling stock forward that the
+    shelf does not yet need.</li>
+    <li><strong>Write both numbers on the shelf label or the category
+    sheet.</strong> A minimum that lives in one person's head changes every
+    time a different person works the round. The label carries capacity and
+    minimum, for example 12 and 6, and the pull decision becomes reading,
+    not judgement.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> pick ten facings at random.
+  For each one, a staff member can state the capacity and the display minimum
+  from the label, say whether the last round pulled stock for it, and point
+  to where the backstock for it lives. If any of the three answers is a
+  guess, the numbers exist on paper only.</p>
+
+  <h2>When the shelf trigger fires but the backstock is empty</h2>
+  <p>A pull round that finds an empty backstock shelf is not a failed pull.
+  It is the moment the third number takes over, and the two decisions must
+  not be blurred. The worked example in Puter's replenishment guide makes
+  the distinction concrete: a storefront holds 6 units and should hold at
+  least 12, a shortfall of 6, while the warehouse holds 46 against its own
+  minimum of 20, leaving 26 above minimum. Moving 6 refills the shelf with
+  no purchase, and the business total stays exactly where it was, 64 units.
+  The move is recorded as a move, not a receipt, because a receipt would
+  claim new stock arrived. When the warehouse sits exactly at its minimum
+  and every other location is at minimum too, there is nothing above minimum
+  to move, and pulling anyway only shifts the shortage to a different shelf.
+  That is the buying question, and it is answered on total stock: shelf plus
+  backstock against the reorder point, with lead time in the arithmetic.</p>
+  <p>One practical consequence follows. A low stock alert from the point of
+  sale, such as the daily stock alert Square sends listing items that are low
+  or out of stock, fires on total stock. It belongs to the reorder decision.
+  Treating it as a pull trigger sends staff to a backroom that may be empty,
+  and treating a shelf gap as a buying signal orders stock the shop already
+  owns. Keep the alert, by all means, but file it under buying.</p>
+
+  <h2>When the right display minimum is one, or zero</h2>
+  <p>The display minimum is a default, not a law, and four common cases argue
+  for setting it at 1, or keeping the item off the open shelf entirely:</p>
+  <table>
+    <tr><th>Case</th><th>Display minimum</th><th>Why</th></tr>
+    <tr><td>High value or easily pocketed</td><td>1, or none on the open shelf</td><td>One unit proves availability; the rest belong in a case or the backroom, where a loss costs less.</td></tr>
+    <tr><td>Bulky, one is a full facing</td><td>1</td><td>Capacity and minimum are the same number; a second unit has nowhere honest to go.</td></tr>
+    <tr><td>Slow fringe sizes and variants</td><td>1</td><td>Toolio's allocation guidance prefers open stock in single units for fringe sizes because fixed quantities pile up as leftovers; one on the shelf keeps the size offered without stocking the tail.</td></tr>
+    <tr><td>Dated or perishable</td><td>Cover only, never capacity</td><td>Enterprise min and max logic caps the maximum by shelf life for the same reason: stock placed to look full can expire in place.</td></tr>
+  </table>
+  <p>The money case for low minimums on slow lines is easy to understate
+  because it arrives in small amounts. Illustrative arithmetic: 40 slow
+  facings, each habitually filled with 4 units more than its sales justify,
+  at an average cost of $6 a unit, parks $960 of cash on shelves. That cash
+  earns nothing there, it cannot restock a proven seller, and the units
+  absorb handling and shelf wear while they wait. Blue Yonder makes the same
+  point from the other end for slow movers generally: holding stock centrally
+  and moving it only on a specific need releases cash and avoids ordering
+  just in case. The small shop version of a central pool is the backroom,
+  and the display minimum is the valve between the two.</p>
+
+  <h2>The stop line</h2>
+  <p>Set it when the numbers are first written down. If a facing has not sold
+  through its display minimum in 30 days, the minimum is cut to the
+  presentation floor at the next round, and the freed units go back to
+  backstock where they stop pretending to be a display. If it still has not
+  sold through the floor quantity in the following 30 days, the facing
+  itself is the problem: the item leaves the shelf plan, the space goes to a
+  line that turns, and any reorder point for the item is suspended until the
+  backstock is gone. A display minimum that never gets tested by a sale is
+  not protecting revenue. It is rent paid in stock for space that could be
+  selling.</p>
+  <p><em>General information on inventory methods, not financial advice.
+  Worked facing figures and the cash example are illustrative; published
+  definitions, formulas, and examples are attributed where they
+  appear.</em></p>
+
+  <p>— Sterling Cole, Money Writer — Earning Desk</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Retail Inventory Management, practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

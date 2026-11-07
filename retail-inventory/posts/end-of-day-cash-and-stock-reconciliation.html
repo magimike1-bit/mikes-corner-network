@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>End-of-Day Reconciliation for a Small Shop: Cash, Card Batch, and Stock Exceptions | Retail Inventory Management</title>
+<meta name="description" content="Close the day with three reconciliations on one sheet: cash against expected cash, the card batch against the POS total, and the stock exceptions cleared or logged before the register session locks, with a worked drawer and a variance stop line.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Retail Inventory Management</a>
+    <p class="tagline">Practical inventory habits for independent retailers</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>End-of-day reconciliation: close the cash, the card batch, and the stock exceptions together</h1>
+  <p class="meta">Daily operations &middot; 8 min read</p>
+
+  <p>A drawer that balances is not a closed day. It is one number agreeing
+  with another number, and it says nothing about the return sitting behind
+  the counter that never went back into stock, the damaged unit the system
+  still offers for sale, or the card batch that is $42 higher than the point
+  of sale total because one sale was keyed as cash. Most closing guides treat
+  the close as a cash exercise with a lockup attached, and the stock record
+  quietly inherits every mistake the day made. This close runs three
+  reconciliations in one fixed order, cash, card batch, and stock
+  exceptions, and finishes all three before the register session is closed,
+  because in at least one major system that session cannot be reopened once
+  it is.</p>
+
+  <h2>The stop line, set before anyone counts</h2>
+  <p>Sterling's rule for any daily money routine: write the exit conditions
+  while nobody is tired, defensive, or looking at a specific variance.
+  Published guidance offers a starting point, not a policy: POS Solutions
+  suggests variances under a few dollars are logged and monitored, larger
+  ones trigger recounts and manager review, and material differences are
+  escalated the same day, not weeks later. A shop still has to pick its own
+  number, in dollars, per drawer, and write down what happens at each
+  level. The framework later in this piece gives the three levels. The stop
+  line sits underneath them:</p>
+  <ul>
+    <li><strong>Three closes over threshold in any rolling ten trading
+    days</strong> for the same drawer ends solo closing for that drawer. A
+    second person counts or verifies until ten consecutive clean closes
+    rebuild the record.</li>
+    <li><strong>Any variance the closer cannot explain with a document</strong>,
+    a payout slip, a refund record, a batch report, stops the close from
+    being signed as explained. It is logged as unexplained, with an owner
+    and a morning deadline. Signing an unexplained variance as routine is
+    the point where a control becomes a ritual.</li>
+    <li><strong>Any stock exception involving a held item, a transfer, or a
+    damaged unit still shown as sellable</strong> is cleared or logged
+    before lockup, every night, no carry over by memory. If it is still
+    open at the third consecutive close, the item is counted in full and the
+    record corrected from the count, not from estimates.</li>
+  </ul>
+  <p>None of this accuses anyone of anything. Variances are evidence about
+  a process first: training gaps, a payout habit that skips the record, a
+  price file that is wrong. Theft is a separate question with its own
+  procedure, and it is not answered by a closing sheet.</p>
+
+  <h2>Three reconciliations, in this order</h2>
+  <p>End-of-day reconciliation, in the standard definition, compares what
+  the point of sale says happened, in sales, refunds, payouts, and payments,
+  against what actually happened in the till, the card batches, and the bank
+  deposits. Split that definition by where each kind of money and stock
+  actually lives, and the order of work sets itself.</p>
+  <table>
+    <tr><th>Reconciliation</th><th>System figure</th><th>Physical figure</th><th>Timing trap</th></tr>
+    <tr><td>Cash</td><td>Expected cash for the session</td><td>The blind counted drawer, by denomination, float separated</td><td>A payout or cash refund missing from the record makes an honest drawer look short</td></tr>
+    <tr><td>Card batch</td><td>Point of sale card total for the trading day</td><td>The terminal batch total for the same period</td><td>Bank settlement lands later, net of fees. Matching the bank deposit tonight manufactures a false variance</td></tr>
+    <tr><td>Stock exceptions</td><td>What the stock record now claims</td><td>Returns, damaged units, holds, and transfers physically present in the shop</td><td>Corrected tomorrow, the exception has already fed a reorder, a promise, or an online availability figure tonight</td></tr>
+  </table>
+  <p>The cash arithmetic is one line. Expected cash equals the opening float,
+  plus cash sales, minus cash refunds, minus cash payouts or withdrawals.
+  Square's drawer sessions show the same components: starting cash, cash
+  sales, cash refunds, cash paid in and out, and the expected cash amount.
+  Worked drawer, labelled illustrative: float $150.00, cash sales $486.25,
+  cash refunds $22.00, one recorded payout of $18.00 for cleaning supplies.
+  Expected cash is $150.00 plus $486.25, minus $22.00, minus $18.00, which
+  equals $596.25. The blind
+  count comes to $591.25. The drawer is $5.00 short, and because every
+  component is documented, the $5.00 is a question about change giving or a
+  miscount, not a mystery about the whole day. Record the difference every
+  day, even when it is small: the closing guidance is explicit that
+  consistent small variances are often the first visible sign of a training
+  issue or a chronic process error.</p>
+  <p>The card batch reconciliation is a match, not a count. Close the batch
+  on each terminal, take its total for card sales and refunds, and match it
+  against the point of sale card total for the same trading period. The two
+  should agree tonight. The bank deposit should not be forced to agree
+  tonight: card money lives in terminals, processor batches, and bank
+  deposits, and the net deposit is matched to the bank later, taking fees
+  into account. Shops that chase the bank figure at close invent a variance
+  out of settlement timing and then stop trusting real ones.</p>
+
+  <h2>The close, step by step</h2>
+  <ol>
+    <li><strong>End trading cleanly.</strong> No open, parked, or draft
+    transactions belong to today when the reports run. Close time means the
+    final transaction has settled in the records, not the time printed on
+    the door, because a last minute return can change cash, card totals,
+    tax, inventory, and store credit in one action.</li>
+    <li><strong>Run the reports while the drawer stays shut.</strong> The end
+    of day summary with totals by payment type, plus the refunds, voids, and
+    discount or price change reports. A correct grand total can hide a card
+    sale entered as cash, so tenders are reviewed separately, never as one
+    lump.</li>
+    <li><strong>Work the stock exceptions before touching the session
+    close.</strong> Walk the counter, the returns spot, and the back door.
+    Returns go back to sellable stock or to the damaged location, with the
+    stock record matching the decision. Damaged units come out of sellable
+    stock tonight. Items held for a customer get a record or stop being
+    treated as held. A transfer box left on the counter gets received
+    properly or logged as in transit, not shelved from memory. Refunds,
+    voids, and price overrides from the reports get a line each: item,
+    amount or quantity, and what was observed.</li>
+    <li><strong>Count the drawer blind.</strong> The expected figure exists,
+    printed or saved, but the person counting does not see it. Count by
+    denomination, record the counted total first, separate the float that
+    stays for tomorrow, and only then compare. If the figures disagree,
+    recount once from the beginning. Nobody adds cash, removes an overage,
+    or edits a worksheet to force a zero.</li>
+    <li><strong>Close the card batches and match them.</strong> Batch total
+    against point of sale card total, per terminal. A mismatch is written
+    as a tested statement, in the form the closing checklist guidance
+    recommends: card batch exceeds point of sale card total by a stated
+    amount, with the register and time attached. Not: the register is
+    wrong.</li>
+    <li><strong>Log every variance and exception that survives.</strong> Each
+    entry carries the register, the time, the amount, the receipt or
+    transaction reference, what the closer observed, and the name of the
+    person who will review it. Facts on the log, guesses labelled as
+    guesses or left off.</li>
+    <li><strong>Close the register session.</strong> Only now. In Shopify
+    POS, closing a session means entering the counted cash, setting the
+    float that stays, and reviewing the completion screen where counted and
+    expected should match, and after a session is closed it cannot be
+    reopened or edited. In Square, ending a drawer merely ends the session,
+    while closing it records the actual counted amount, so the counted close
+    is the one to use. Either way, the session is the lock on the day's
+    record, which is exactly why the stock work sits before it.</li>
+    <li><strong>Prepare the deposit and hand over.</strong> The deposit
+    amount comes from the completed cash worksheet, not from a fresh count
+    with different assumptions. Record the amount, the bag or envelope
+    identifier, the date, who prepared it, and who verified it, and seal it
+    before the physical lockup tasks begin.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the whole close takes the 10
+  to 15 minutes the guidance budgets for a well set up small shop, and the
+  opener can answer three questions from the sheet alone: what varied, what
+  is still open, and whose name is on each open item. A close that needs the
+  closer in the room to explain it has not finished.</p>
+
+  <h2>Variance triage: log it, recount it, or escalate it tonight</h2>
+  <table>
+    <tr><th>Level</th><th>Test</th><th>Action</th></tr>
+    <tr><td>Log</td><td>At or under the shop threshold, first occurrence, components all documented</td><td>Record the amount, the drawer, and the probable cause if one is visible. No recount beyond the standard second count. Watch the pattern column.</td></tr>
+    <tr><td>Recount and review</td><td>Over threshold, or the second occurrence inside ten trading days at any size</td><td>Recount by denomination, verify the float, check every payout and refund against its record, and review the session's cash activity before the deposit is sealed.</td></tr>
+    <tr><td>Escalate tonight</td><td>Material amount by the shop's written definition, any undocumented component, or a card batch mismatch with no transaction reference</td><td>The owner or manager is told the same night with the log entry attached. Memory fades and the trail cools; a week-old variance is usually a permanent one.</td></tr>
+  </table>
+  <p>Two habits keep the triage honest. First, each register closes
+  separately, with its own report and its own count, and cash is never mixed
+  between tills before counting, so a variance belongs to a drawer and a
+  session instead of to the day in general. Second, roles are named: the
+  cashier counts and records the drawer, a supervisor or the owner reviews
+  the reconciliation and signs off. Where one person closes alone, the
+  sealed deposit and the log get an independent review at opening, which is
+  weaker than a second person at night and still far stronger than no
+  review at all. Session discipline helps more than suspicion: a register
+  session left open too long makes even the system's own expected cash and
+  discrepancy reports inaccurate, so sessions close at every store close and
+  every staff change, without exceptions for quiet days.</p>
+
+  <h2>What the opener receives</h2>
+  <p>The handoff is a single sheet, paper or digital, with five things on
+  it: the signed sales and tender close; the blind count, the expected
+  amount, and the recorded variance; the sealed deposit record and where it
+  is held; the exception log covering cash, card, and stock, with a named
+  follow-up owner on every open line; and notes on returns, damages, holds,
+  transfers, or equipment problems that the opening team will meet before
+  the closer is awake to ask. That is the whole product of the close. A
+  store is not closed when the lights go off. It is closed when the money,
+  the card record, and the stock record have each been brought to a known
+  state, and the person opening tomorrow can prove it from the sheet
+  without making a phone call.</p>
+  <p><em>General information on closing and reconciliation procedures, not
+  financial or accounting advice. The worked drawer figures are
+  illustrative; published procedures and definitions are attributed where
+  they appear. Tax record requirements vary, so confirm record keeping
+  obligations with a qualified adviser.</em></p>
+
+  <p>— Sterling Cole, Money Writer — Earning Desk</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Retail Inventory Management, practical guidance for independent retailers. Content is for information only, not professional advice.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

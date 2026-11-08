@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repeat Delay and Repeat Rate: Two Settings, Three Different Problems | Typing 101</title>
+<meta name="description" content="Doubled letters have three causes and only one is a setting. The sharp tap test that tells them apart, what the Windows and macOS sliders actually do, and a counted way to tune them.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">Typing 101</a><p class="tagline">Learn to touch type the right way, no apps to buy, no magic required</p><nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy-policy.html">Privacy</a></nav></div></header>
+<main class="wrap post"><a class="back" href="/">&larr; All guides</a>
+<h1>Repeat Delay and Repeat Rate: Two Settings, Three Different Problems</h1>
+<p class="meta">Settings &middot; Published 2026-11-08 &middot; Last updated 2026-11-08</p>
+<p>Why does a keyboard type two letters for one press, and why does holding Backspace sometimes delete half a word? Both complaints lead to the same two settings, repeat delay and repeat rate, but only one of the three usual causes is actually a settings problem. Adjusting sliders for the other two wastes an afternoon. Diagnosis comes first, and it takes about thirty seconds.</p>
+<h2>The sharp tap test: which problem is yours?</h2>
+<p>Doubled letters have two very different hardware and software causes, plus a third behaviour that is not a fault at all. A troubleshooting guide that specialises in this fault separates them with a single observation: what one sharp tap does.</p>
+<table><caption>One tap, three diagnoses</caption><thead><tr><th>What you see</th><th>Cause</th><th>First move</th></tr></thead><tbody>
+<tr><td>Two presses register for one sharp, clean tap</td><td>Switch chatter: the contact bounces and sends two presses for one</td><td>Hardware route: clean the switch, check firmware, replace the switch; settings will not fix it</td></tr>
+<tr><td>One press for a sharp tap, two when the finger lingers slightly</td><td>Repeat delay set too short: a normal press is being read as a held key</td><td>Settings route: lengthen the repeat delay</td></tr>
+<tr><td>Doubling happens in only one program</td><td>The program or an extension, not the keyboard and not the operating system</td><td>Test the same key in a plain text field before changing anything global</td></tr>
+<tr><td>On a Mac, holding a letter shows a small menu of accented characters</td><td>Press and hold, working as designed: the accent menu replaces repeating for letter keys</td><td>Nothing is broken; doubled letters on a Mac are almost never a repeat setting</td></tr>
+</tbody></table>
+<p>The test has a stricter form for doubtful cases. Press a key firmly, release cleanly, wait half a second, and repeat. Genuine chatter still doubles some of those presses. A short repeat delay never doubles a clean tap, because the key was never held. Ordinary text carries the same signature: chatter doubles the same letter every time, whatever the typing speed, while a settings problem doubles whichever key the finger happened to linger on. Run the tap test now, before opening any settings panel, and write down which row of the table matched. Every step after this one depends on that row.</p>
+<h2>What the two settings actually control</h2>
+<p>Microsoft's own description of the pair is short. The repeat rate controls how quickly a character repeats when you hold down a key. The repeat delay controls how long you have to hold down a key before it starts repeating. Both are adjusted with sliders. That is the whole mechanism: one timer before repeating starts, one speed once it has started.</p>
+<p>Hold that plain description against what circulates online and a gap appears. Popular how-to pages attach exact millisecond bands to these sliders and cite resolution percentages, task time improvements and ergonomic figures for them. The controls themselves offer no numbers to set: Windows presents Repeat delay from Long to Short and Repeat rate from Slow to Fast, and macOS presents the same pair as unnumbered sliders. A recommendation to set a delay of a specific number of milliseconds cannot be followed on either system, and the statistics attached to such recommendations name no study a reader can check. Two claims of that kind were cut from this article rather than repeated. What can be verified is the slider, the direction to move it, and the result in a counted test. That is enough to tune with.</p>
+<h2>Tune Windows, one notch at a time</h2>
+<ol>
+<li><strong>Open the classic dialog.</strong> Press Win+R, type <em>control keyboard</em> and press Enter. Searching for keyboard in the Start menu reaches the same Control Panel settings. The dialog carries both sliders and a test box.</li>
+<li><strong>Record the starting positions.</strong> Note where Repeat delay and Repeat rate sit before touching them. A change you cannot undo is a change you cannot evaluate.</li>
+<li><strong>For doubled letters on lingering presses, move Repeat delay one notch toward Long.</strong> Change nothing else in this pass.</li>
+<li><strong>For runaway repeats, where holding a key floods the line, move Repeat rate one notch toward Slow.</strong> Letters running away and letters doubling are different symptoms; treat the one you have.</li>
+<li><strong>Click Apply and test in the dialog's own test box,</strong> holding a key and tapping a few, then run the counted passage test in the next section before moving another notch.</li>
+</ol>
+<h2>Tune macOS, and the accent menu exception</h2>
+<p>On a Mac the path is Apple menu, System Settings, then Keyboard in the sidebar. Two sliders live there: Key repeat rate, which sets how quickly supported keys repeat after repeating begins, and Delay until repeat, which sets how long the first pause lasts. Drag Delay until repeat toward Long to cure doubling on lingering presses, and Key repeat rate toward Slow if held keys run away. Moving the Key repeat rate slider all the way to the left turns key repeat off entirely, so keep it to the right of Off unless off is the goal. Changes apply immediately, with no restart or sign out, and any text field, TextEdit for example, confirms the new behaviour at once. One Mac specific warning: if the sliders cannot be changed at all, the machine may be managed by an employer or school, and the administrator is the route, not a workaround. And recall the exception from the diagnosis table: holding a letter key on macOS opens the accent menu instead of repeating, by design, so a Mac that appears not to repeat letters is usually healthy.</p>
+<h2>Measure the fix in a fixed passage</h2>
+<p>Feel is a poor instrument here, because a typist adapts to a new delay within a page and then reports that everything feels fine or everything feels wrong. Count instead:</p>
+<ol>
+<li><strong>Choose one passage of about 100 words</strong> and save it. Use the same passage for every measurement.</li>
+<li><strong>Type it once at normal speed before changing any setting.</strong> Count two things in the result: doubled letters, and characters lost to an over long Backspace hold.</li>
+<li><strong>Change one slider by one notch,</strong> following the Windows or macOS steps above, and type the same passage again. Count the same two things.</li>
+<li><strong>Keep the change only if the fault count falls without the other count rising.</strong> A longer delay that cures doubling but makes Backspace overshoot is a trade, not a fix; split the difference with the repeat rate instead.</li>
+<li><strong>Stop at the first setting pair with a fault count of zero or one across the passage.</strong> Perfect exists here; chasing snappier holds past a clean count is how the doubling comes back.</li>
+</ol>
+<p><strong>What success looks like:</strong> one passage, typed at working speed, with no doubled letters and no overshot deletions, on settings you recorded and can restore.</p>
+<h2>When the settings are not the problem</h2>
+<p>If the sharp tap test pointed at chatter, the settings route is closed and the hardware route is short: clean around and inside the switch, check the maker's firmware for debounce improvements, and replace the switch on a hot swap board. While that is pending, Windows Filter Keys can act as a stopgap. Under Settings, Accessibility, Keyboard, Filter Keys has its own repeat settings and an option to ignore quick keystrokes, filtering presses that arrive too close together. It slows normal typing, so it earns its place only until the switch is fixed. The decision rule for the whole article fits in one line: clean taps that double mean hardware, lingering presses that double mean the delay slider, runaway holds mean the rate slider, and a Mac accent menu means nothing was wrong.</p>
+<p>, Dex Carter, Tech Writer</p>
+<p><a href="/">Back to all guides &rarr;</a></p></main>
+<footer class="site-footer"><div class="wrap"><p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p><p>Typing 101, practical touch-typing lessons for beginners. Content is for general information only.</p><p class="footer-nav"><a href="/about.html">About</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="/privacy-policy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms of Use</a></p></div></footer></body></html>

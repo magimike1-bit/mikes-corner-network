@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMR vs CMR Drive Health: Same SMART, Different Warning Signs to Watch | Hard Drive Health</title>
+<meta name="description" content="SMR and CMR drives report the same SMART counters. The difference is behaviour: which slowdowns are shingled rewriting, which signals mean failure on either type, and how to check your model.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>SMR vs CMR Drive Health: Same SMART, Different Warning Signs to Watch</h1>
+  <p class="meta">Drive types &middot; Published 2026-11-09 &middot; Last updated 2026-11-09</p>
+
+  <p>Your drive slows to a crawl during a long copy. Is it failing, or is it shingled? That question is the whole SMR versus CMR health problem. The two recording methods report health the same way, through the same SMART counters. They behave differently under writes, so the same symptom can mean a busy drive on one type and a dying drive on the other. This guide separates the two.</p>
+
+  <h2>Which one is in your machine? Check the list, not the label colour</h2>
+  <p>Recording type is a property of the exact model, not of the brand or the box colour. The reliable check takes two steps and uses the makers&rsquo; own publications.</p>
+  <ol>
+    <li><strong>Get the full model number.</strong> Read it from the drive label or from your SMART tool output. A family name alone cannot answer the question, because single families ship in both types.</li>
+    <li><strong>Match it against the manufacturer list or specification sheet.</strong> Seagate publishes a CMR and SMR list by family and capacity. Western Digital recording type is settled the same way, by matching the full model number against the Recording technology row in the manufacturer specification sheet.</li>
+    <li><strong>Treat an unclear result as SMR for planning.</strong> One NAS guide states the cautious version of this rule plainly: if a drive does not clearly say CMR, assume it is not.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> you hold a full model number and a list or specification entry that names its recording type. Anything less is a guess.</p>
+  <p>Concrete entries show why the model check matters. Seagate lists its 3.5 inch BarraCuda line as CMR at 12TB, 16TB, 20TB, and 24TB, and as SMR at 4TB and 8TB, so the same family name covers both methods depending on capacity. Its NAS lines are uniform by contrast: IronWolf is listed as CMR from 2TB to 16TB and IronWolf Pro as CMR from 2TB to 24TB. The 2.5 inch lines lean the other way, with BarraCuda listed as SMR at 2TB and 4TB and FireCuda as SMR at 1TB and 2TB. For Western Digital, a September 2026 check of the product briefs lists the WD Red models WD20EFAX, WD30EFAX, WD40EFAX, and WD60EFAX as device managed SMR, and the WD Red Plus range as CMR.</p>
+
+  <h2>How each one writes, and why it matters for health</h2>
+  <table>
+    <thead><tr><th></th><th>CMR</th><th>SMR</th></tr></thead>
+    <tbody>
+      <tr><td>Track layout</td><td>Tracks written side by side, without overlap</td><td>Tracks overlapped like roof shingles, which packs more capacity into the same area</td></tr>
+      <tr><td>Rewriting existing data</td><td>A track can be rewritten on its own</td><td>Overlapping tracks must be rearranged, so sustained writing carries extra internal work</td></tr>
+      <tr><td>Reading</td><td>Normal</td><td>Normal. Reading an SMR drive is fine</td></tr>
+      <tr><td>Best fit workload</td><td>Mixed and random write work, including array rebuilds</td><td>Sequential or easily sequentialized work: media repositories, backup tiers, and archives written once and read occasionally, per Seagate</td></tr>
+      <tr><td>Health reporting</td><td colspan="2">The same SMART approach on both: recording type changes write behaviour, not the meaning of the error counters</td></tr>
+    </tbody>
+  </table>
+  <p>Seagate describes the density mechanism directly: SMR increases areal density through track overlay. That overlay is the source of every behaviour difference in the next section. Nothing about it changes what a reallocated sector or a media error means, which is why the failure section later in this guide applies to both columns of the table equally.</p>
+
+  <h2>Behaviour that looks like failure but is the recording method</h2>
+  <p>On an SMR drive, a long write that starts at full speed and then falls sharply is the expected pattern under load. Once the drive&rsquo;s buffer fills, write speed drops while it shuffles the overlapping tracks around. A large backup, a bulk file move onto existing data, or a sync that rewrites many files can all produce that shape: fast start, long slow tail, recovery after the drive gets idle time to finish its internal rearrangement.</p>
+  <p>The extreme version of the same behaviour is the array rebuild. Western Digital explained, in its own statement on its device managed SMR drives, that sustained random writes during a ZFS resilver leave those drives without enough idle time to carry out their internal data management tasks, resulting in significantly lower performance, and it directed ZFS users to its CMR based Red Plus and Red Pro lines. Retail and NAS coverage adds the operational consequence: a rebuild onto an SMR drive can take days instead of hours, and some SMR drives have been dropped from arrays mid rebuild after appearing unresponsive.</p>
+  <p>The health reading rule follows from the mechanism. Judge an SMR drive&rsquo;s write behaviour after idle time, not during the worst hour of a sustained write. A slowdown that clears once the drive rests, with error counters flat, fits the recording method. A slowdown that persists at idle is a different signal and belongs in the next section.</p>
+
+  <h2>Signals that mean failure on either type</h2>
+  <p>Recording type buys an SMR drive an explanation for slow sustained writes. It buys no explanation at all for error growth. On both SMR and CMR drives, treat these the same way:</p>
+  <ul>
+    <li><strong>Error counters appearing or climbing between dated checks,</strong> including reallocated or pending sectors and media errors where the drive reports them. Growth is the signal, on either recording type.</li>
+    <li><strong>A failed overall SMART health verdict</strong> from the drive itself. No recording method produces that as a side effect of normal writing.</li>
+    <li><strong>Slowdowns that persist when the drive is idle and lightly loaded,</strong> especially paired with any counter movement. The SMR explanation needs sustained writes to work, and idle removes them.</li>
+    <li><strong>Files that will not read back, or a drive that drops offline under read load.</strong> Reads are normal work for both types, so read side trouble gets no SMR pass.</li>
+  </ul>
+  <p>When any of those appear, the sequence is the site standard one and does not change with recording type: copy the data off first, in priority order, then replace the drive. Diagnosing further on a drive with growing errors spends the drive&rsquo;s remaining good hours on tests instead of on your files.</p>
+
+  <h2>If you keep an SMR drive: a monitoring routine</h2>
+  <p>Plenty of SMR drives live useful lives in the jobs Seagate names for them, written once and read occasionally. Keeping one healthy is mostly a matter of watching the right few things:</p>
+  <ol>
+    <li><strong>Keep a dated SMART baseline.</strong> Record the error counters when the drive goes into service, then recheck on a schedule. On an SMR drive the baseline matters more, not less, because behaviour alone is noisy evidence.</li>
+    <li><strong>Leave idle time after large writes.</strong> A bulk load followed by rest lets the drive complete the internal rearrangement its slow tail was signalling. Judging or benchmarking the drive immediately after a bulk write measures the rearrangement, not the drive.</li>
+    <li><strong>Prefer sequential, batched writes where you can choose.</strong> Large copies in one pass suit the method better than many small rewrites scattered across the day.</li>
+    <li><strong>Keep free space comfortable.</strong> A nearly full drive gives its own management routines less room to work, and on an SMR drive that pressure shows up first as longer slow tails after writes. Treat lengthening tails, checked against your baseline, as a prompt to free space or move the workload.</li>
+    <li><strong>Never assign it rebuild duty in an array.</strong> That is the one workload the manufacturer statement and the field reports agree on, and no monitoring routine makes it a good idea.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> a dated baseline on file, error counters flat between checks, write slowdowns that match sustained write periods and clear after rest, and a workload that stays in the write once, read occasionally pattern the drive was built for.</p>
+
+  <h2>The buying decision, in one short framework</h2>
+  <p>For a single drive holding backups or an archive that changes rarely, a verified SMR model is a reasonable, monitored choice. For anything that rewrites constantly, and for any drive that would take part in a RAID or ZFS rebuild, buy CMR and verify the exact model on the maker list before paying, because the family names in this market have carried both methods at different capacities. The verification step is the whole game: two minutes with a model number and a manufacturer list prevents the most common SMR surprise, which is discovering the recording type from the behaviour of a drive already full of your data.</p>
+
+  <p>, Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health, practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

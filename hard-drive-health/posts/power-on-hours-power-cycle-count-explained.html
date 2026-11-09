@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power-On Hours and Power Cycle Count, Explained: Age Clocks, Not Health Scores | Hard Drive Health</title>
+<meta name="description" content="SMART attributes 9 and 12 count powered time and power cycles. What they mean, the minutes unit trap, the NVMe wording, and why neither one is a health score.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>Power-On Hours and Power Cycle Count, Explained: Age Clocks, Not Health Scores</h1>
+  <p class="meta">SMART, explained &middot; Published 2026-11-09 &middot; Last updated 2026-11-09</p>
+
+  <p>A used drive shows 40,000 power on hours and the listing starts to look like a warning. It is not one. Power on hours and power cycle count are age clocks. They record how long a drive has been powered and how often it has been switched on, and neither counter, on its own, scores the health of the drive or carries a published number where healthy becomes failing.</p>
+
+  <h2>The myth: a big hours number means a dying drive</h2>
+  <p>The myth survives because the numbers feel like odometer readings with a red zone. No red zone is published for these two counters. Acronis, in its reference for attribute 12, calls power cycle count an informational parameter and states that it does not directly indicate imminent drive failure. A specialist guide to SSD attributes reaches the same practical conclusion for both counters: a drive with a high number of power on hours is not necessarily unhealthy, frequent power cycles do not automatically indicate a fault, and neither value should be used alone to determine remaining SSD lifespan.</p>
+  <p>What the counters do well is describe a life. Read together, they show whether a drive lived switched on around the clock in one machine or was started and stopped daily in another. That history helps you judge a used drive and interpret other readings. It does not replace those readings.</p>
+
+  <h2>What each counter actually counts</h2>
+  <p><strong>Power-On Hours, SMART attribute 9.</strong> Backblaze defines it simply as the count of hours in the power on state. The raw value is the figure to read. It climbs whenever the drive is powered, whether or not anyone is writing files at the time, which is why a lightly used backup drive in an always on machine can show a large total.</p>
+  <p><strong>Power Cycle Count, SMART attribute 12.</strong> Backblaze defines it as the number of times the disk is powered off and then powered back on, cumulative over the life of the drive. Acronis adds that the count covers full power on and off cycles. Restarts, shutdowns, and power cuts that end in a fresh start all feed the same total.</p>
+  <p>Two neighbours are often confused with these. Start stop behaviour and load cycles are separate counters with their own meanings, and unexpected power loss has its own counter as well: Backblaze lists SMART 174 as Unexpected Power Loss Count, for unclean shutdowns. A rising power cycle count by itself does not tell you whether those cycles were tidy shutdowns or hard cuts. For that question, the unexpected loss counter is the relevant neighbour, where the drive reports it.</p>
+
+  <h2>First check the unit, then do the one useful calculation</h2>
+  <p>Before any maths, confirm the unit. The smartmontools documentation makes a point most explainers skip: the names and meanings of attributes, and the interpretation of their raw values, are not specified by any standard, and different manufacturers sometimes use the same attribute ID for different purposes. Concretely, some disks use attribute 9 to store power on time in minutes rather than hours. Smartctl can correct that reading with its vendor option, and applies the correction automatically when the drive model is in the smartmontools database.</p>
+  <p>The practical consequence is blunt. A raw attribute 9 value of 40,000 read as hours describes a drive powered for well over four years in total. The same raw value recorded in minutes describes under 28 days. Until the unit is confirmed for the model in front of you, any age conclusion drawn from the number is a guess wearing a lab coat.</p>
+  <ol>
+    <li><strong>Read both raw values</strong> from your SMART tool, attribute 9 and attribute 12, and note the tool and the date.</li>
+    <li><strong>Confirm the attribute 9 unit</strong> for that drive model. If your tool is smartctl, check whether it reports the model as known to its database, which is when vendor corrections are applied automatically.</li>
+    <li><strong>Divide hours by cycles</strong> to get average powered hours per cycle. Worked example, using invented round numbers for illustration only: 24,000 hours across 1,200 cycles gives an average of 20 hours per cycle, the pattern of a machine left on most of the day. The same 24,000 hours across 12,000 cycles gives 2 hours per cycle, the pattern of a machine switched on for short sessions.</li>
+    <li><strong>Write the pair down with the date.</strong> A single reading is a snapshot. A second reading months later shows the rate of change, which is what turns these counters into useful context.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> you can state the drive&rsquo;s powered hours, its cycle count, the confirmed unit for hours, and the average hours per cycle, each from a dated record rather than from memory.</p>
+
+  <h2>SATA attributes and NVMe fields, side by side</h2>
+  <table>
+    <thead><tr><th></th><th>SATA and ATA drives</th><th>NVMe drives</th></tr></thead>
+    <tbody>
+      <tr><td>Powered time</td><td>Attribute 9, Power-On Hours, raw value in hours for most drives, with vendor unit exceptions</td><td>Power On Hours field in the SMART health information log</td></tr>
+      <tr><td>Power cycles</td><td>Attribute 12, Power Cycle Count, cumulative over the life of the drive</td><td>Power Cycles field in the same health log</td></tr>
+      <tr><td>Counting quirk</td><td>Raw value interpretation is vendor specific and not set by a standard</td><td>Power On Hours may not include time the controller was powered in a non-operational power state</td></tr>
+      <tr><td>Who decides the set</td><td colspan="2">Per Backblaze, for each model the manufacturer decides which SMART attributes to populate, from a numbered range of 1 to 255 with raw and normalized values</td></tr>
+    </tbody>
+  </table>
+  <p>The NVMe quirk deserves a sentence of its own. The NVMe health log documentation notes that its Power On Hours figure may exclude time spent powered in a non-operational power state. Two drives with identical real histories can therefore report different hours if one idles in low power states the log does not count. Cross comparing hours between a SATA drive and an NVMe drive, or between brands, is approximate at best.</p>
+
+  <h2>What to pair these counters with before deciding anything</h2>
+  <p>Age clocks earn their keep as context for the counters that do carry decision weight. Before keeping, selling, or retiring a drive based in part on its hours, read the pair alongside the error and wear evidence your tool exposes for that drive type, and look for growth between dated checks rather than reacting to a single large lifetime total.</p>
+  <p>A workable decision framework, stated plainly:</p>
+  <ul>
+    <li><strong>High hours, low cycles, clean error counters:</strong> a long, steady service life. Judge the drive on its error and wear readings, keep backups current, and schedule the next dated check.</li>
+    <li><strong>Modest hours, very high cycles:</strong> a stop and start life, common for a daily use laptop drive. Again, a usage pattern rather than a verdict.</li>
+    <li><strong>Any hours or cycles, with error counters appearing or growing:</strong> the errors make the decision, not the age clocks. Copy data off first, then replace.</li>
+    <li><strong>Hours figure that makes no sense for the drive&rsquo;s known age:</strong> suspect the unit trap first. Recheck the model specific interpretation before concluding anything.</li>
+  </ul>
+
+  <h2>A short recording routine you can keep</h2>
+  <p>Once per check, record five items in one line: the date, attribute 9 with its confirmed unit, attribute 12, the average hours per cycle, and the one or two error counters your tool shows for that drive. Four of those five take under a minute to copy. The payoff arrives at the second and third check, when change over time becomes visible and these two much quoted counters finally do the only job they were ever suited for, which is telling the story of how the drive has lived while other evidence decides how it is doing.</p>
+
+  <p>, Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health, practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

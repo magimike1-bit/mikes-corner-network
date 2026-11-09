@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Check Drive Health on a Chromebook: Crosh Tests and Their Limits | Hard Drive Health</title>
+<meta name="description" content="The Diagnostics app has no storage check. The crosh storage tests that do exist, their exact pass messages, the storage_status readout, and why eMMC Chromebooks return nothing.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Hard Drive Health</a>
+    <p class="tagline">Catch drive problems early, back up like you mean it</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/posts/the-3-2-1-backup-rule.html">The 3-2-1 backup rule</a>
+      <a href="/backup-planner.html">Backup planner</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+<a class="back" href="/">&larr; All guides</a>
+  <h1>How to Check Drive Health on a Chromebook: Crosh Tests and Their Limits</h1>
+  <p class="meta">Drive health checks &middot; Published 2026-11-09 &middot; Last updated 2026-11-09</p>
+
+  <p>Can you check drive health on a Chromebook? Yes, but not where most people look first. The built in Diagnostics app does not test storage at all. The storage check lives in crosh, the Chrome shell, as two test commands plus a SMART readout. On Chromebooks with eMMC storage, even those return nothing, and knowing that limit upfront saves an afternoon of chasing a result that was never coming.</p>
+
+  <h2>The short answer: Diagnostics does not check storage</h2>
+  <p>Google describes the Diagnostics app as a way to check for hardware and connection problems such as battery, CPU, memory, or Wi-Fi issues. Its categories are Battery, Connectivity, CPU, Memory, and Keyboard. Storage is not one of them. The battery section reports health, cycle count, and electrical current, and the CPU section runs stress, cache, floating point accuracy, and prime search tests. Useful tools, neither of which says anything about the drive.</p>
+  <p>Two version facts matter here. Diagnostics is only available on Chrome OS devices with version 90 and up, per Google. And crosh needs no special mode for these tests: Acer documents its crosh diagnostic utilities as usable on Chromebooks and Chromeboxes without enabling developer mode.</p>
+  <p>One more boundary is worth stating plainly. Chrome OS is based on Linux, but crosh does not recognize most Linux commands, as Dell notes in its crosh guide. The familiar desktop route of installing smartmontools and pointing smartctl at the internal drive is not the route this article can document from its sources, so it does not pretend otherwise. What follows is the documented Chrome OS route, with its limits kept visible.</p>
+
+  <h2>Before you test: back up local files first</h2>
+  <p>A storage test is read focused, but the reason for running one is usually a worry, and worry is the wrong moment to discover that the only copy of a file lives on the device under test. Copy anything local that matters, especially the Downloads folder and any Linux or Android app files you would miss, to external storage or cloud storage before you start.</p>
+  <p>Close open programs and tabs before running the storage test as well. CTL includes that step in its crosh procedure, and it keeps a slow, busy device from muddying a result you are about to make a decision from.</p>
+
+  <h2>The crosh procedure, step by step</h2>
+  <ol>
+    <li><strong>Open crosh.</strong> Open the Chrome browser, then press Ctrl, Alt, and T together. Crosh opens in a new browser tab.</li>
+    <li><strong>Read the SMART status first.</strong> Type <code>storage_status</code> and press Enter. Dell defines this command as reading the storage device SMART health status, vendor attributes, and error log. Save or note what it reports before you run any test, because a test result means more next to a dated status readout.</li>
+    <li><strong>Run the short test.</strong> Type <code>storage_test_1</code> and press Enter. Dell defines it as a short offline SMART test.</li>
+    <li><strong>Run the readability test.</strong> Type <code>storage_test_2</code> and press Enter. Dell defines it as an extensive readability test. Expect it to take longer than the short test, and leave the device alone while it runs.</li>
+    <li><strong>Record the exact result text.</strong> Write down the result line from each test word for word, with the date. The next section gives the pass wording to compare against.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the short test reports the pass text in the next section, the readability test reports zero bad blocks, and you have a dated note of both results plus the storage_status output. Three records, one sitting.</p>
+
+  <h2>Read the result: pass strings, failures, and the empty result</h2>
+  <table>
+    <thead><tr><th>Command</th><th>Pass result</th><th>Failure sign</th></tr></thead>
+    <tbody>
+      <tr><td><code>storage_test_1</code></td><td>&ldquo;Completed without error&rdquo;</td><td>One or more &ldquo;FAILING NOW&rdquo; statuses. Acer notes the storage device may be defective in that case.</td></tr>
+      <tr><td><code>storage_test_2</code></td><td>&ldquo;Pass completed, 0 bad blocks found&rdquo;</td><td>Any failures or bad blocks shown. Acer notes the storage device may be defective in that case.</td></tr>
+      <tr><td>Either test on eMMC storage</td><td>No result is returned</td><td>Not a failure and not a pass. The test does not run on eMMC.</td></tr>
+    </tbody>
+  </table>
+  <p>The eMMC row is the one readers get wrong. CTL states the limit directly: the crosh diagnostic tool for testing storage health does not work on devices with eMMC memory, and its own Chromebooks carry eMMC while only its Chromebox may carry an SSD. Acer says the same thing from the other side: on a device with eMMC storage, the test will not return any results. An empty result on an eMMC machine tells you about the storage type, not about the health of the storage.</p>
+  <p>That distinction changes the follow up. A failed test on an SSD equipped device is evidence. No result on an eMMC device is no evidence, and treating it as either reassurance or alarm would be a guess.</p>
+
+  <h2>storage_status: the readout most guides skip</h2>
+  <p>Most how to guides stop at the two tests. The status command is the more informative half of the toolkit, because Dell defines it as returning three things at once: SMART health status, vendor attributes, and the error log. A test tells you whether a run passed. A status readout tells you what the drive has been recording about itself, which is the material a support conversation or a replace decision actually rests on.</p>
+  <p>Read it in that order. Note the headline health status first. Then scan the vendor attributes for anything the readout itself flags, rather than hunting for a single magic number. Then check the error log for entries, because a log that is gaining entries between dated checks is a trend, and a trend is a stronger signal than any one snapshot.</p>
+
+  <h2>What each outcome means you do next</h2>
+  <p><strong>Both tests pass and the status readout is clean:</strong> keep the dated record, keep backups running, and repeat the check when symptoms appear or at your next routine review. A pass is a result for today, not a lifetime verdict.</p>
+  <p><strong>A test fails or shows FAILING NOW:</strong> treat local files as at risk. Copy data off first while the device still cooperates, then contact the Chromebook manufacturer with the exact result text and your storage_status output saved. Google directs readers to the manufacturer for further help on failed hardware tests, and the dated wording is what makes that conversation short.</p>
+  <p><strong>No result, because the device has eMMC storage:</strong> you have no drive health verdict from crosh, and no setting changes that. Protect the data instead: keep local files backed up as routine, watch for symptoms such as repeated freezes or files that will not open, and put the question to the manufacturer if symptoms persist. Dell also notes there are no preboot diagnostics on Chrome OS, with troubleshooting done from inside the operating system, so there is no hidden boot menu test waiting as a backup plan.</p>
+  <p>The honest summary is narrower than most guides admit. On an SSD equipped Chromebook, crosh gives a real, documented storage check in about four commands. On an eMMC model, the same commands give nothing, and the correct response to nothing is backup discipline, not a third party health score.</p>
+
+  <p>, Dex Carter, Tech Writer</p>
+
+  <p><a href="/">Back to all guides &rarr;</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Hard Drive Health, practical guides for everyday computer owners. Content is for information only, not professional advice. Back up your data regularly; for irreplaceable data on a failing drive, use a professional data-recovery service.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

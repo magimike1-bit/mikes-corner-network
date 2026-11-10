@@ -35,9 +35,11 @@ ONLY the exact generated template phrasings:
 Anything else containing "checked <date>" is article prose with its own
 check date (guides/, glossary/, calculators/, ...) and is NEVER stamped:
 no blanket replacement of "checked <date>" happens anywhere in this script.
-Deals pages (deals/<slug>.html) are not stamped at all for per-product
-facts/pills — those dates are data-driven per product; only the shared
-footer above applies there.
+Deals pages (deals/<slug>.html) are not stamped for per-product
+facts/pills — those dates are data-driven per product; the shared footer
+applies there, plus (PP-DEAL-META-AUDIT-GAP) the meta description's
+" Checked <date> by the PlanPrice research team." suffix when present,
+stamped to the product's canonical date.
 
 Safety
 ------
@@ -82,7 +84,7 @@ def _sub_count(pattern: re.Pattern, text: str, make_repl) -> tuple:
     return pattern.sub(repl, text), count
 
 
-def stamp_text(rel: str, text: str, registry: dict) -> tuple:
+def stamp_text(rel: str, text: str, registry: dict, canon: dict = None) -> tuple:
     """Return (new_text, {pattern_name: changed_count}) for one file."""
     site = site_data.site_date(registry)
     counts: dict = {}
@@ -93,7 +95,19 @@ def stamp_text(rel: str, text: str, registry: dict) -> tuple:
 
     if rel.startswith("deals/"):
         # deals/<slug>.html: per-product facts/pills are data-driven; the
-        # shared footer (above) is the only stamp on these pages.
+        # shared footer (above) plus the META checked-date suffix
+        # (PP-DEAL-META-AUDIT-GAP) are the stamps on these pages. The meta
+        # suffix carries the product's canonical date; pages whose meta has
+        # no suffix are left untouched (the form is never invented).
+        if canon:
+            slug = Path(rel).stem
+            expected = canon.get(slug)
+            if expected:
+                text, counts["deal meta checked"] = _sub_count(
+                    site_data.META_CHECKED_RE,
+                    text,
+                    lambda m: f"{m.group('prefix')}{expected}{m.group('suffix')}",
+                )
         return text, counts
 
     if rel.startswith("compare/"):
@@ -126,7 +140,8 @@ def plan_and_stamp(root: Path, dry_run: bool) -> tuple:
     for page in compare_pages:
         site_data.registry_page_date(registry, page.stem)  # raises if missing
 
-    mismatches = site_data.cross_check_registry(root, registry=registry)
+    canon = site_data.canonical_product_dates(root)
+    mismatches = site_data.cross_check_registry(root, registry=registry, canon=canon)
     if mismatches:
         raise site_data.SiteDataError(
             "registry page_checked_dates disagrees with recomputation from data files: "
@@ -140,7 +155,7 @@ def plan_and_stamp(root: Path, dry_run: bool) -> tuple:
             original = path.read_text(encoding="utf-8")
         except OSError as exc:
             raise site_data.SiteDataError(f"cannot read {path}: {exc}") from exc
-        new_text, counts = stamp_text(rel, original, registry)
+        new_text, counts = stamp_text(rel, original, registry, canon)
         if new_text != original:
             planned.append((path, rel, new_text, {k: v for k, v in counts.items() if v}))
 

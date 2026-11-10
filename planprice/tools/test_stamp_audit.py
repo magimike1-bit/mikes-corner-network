@@ -219,6 +219,68 @@ class AuditTests(FixtureTestCase):
         self.assertIn("no findings", result.stdout)
 
 
+class MetaCheckedFormTests(FixtureTestCase):
+    """PP-DEAL-META-AUDIT-GAP: the deal-page meta checked suffix."""
+
+    ALPHA_META_OK = (
+        '<meta name="description" content="Alpha pricing, plans and features.'
+        ' Checked 2026-10-25 by the PlanPrice research team.">'
+    )
+    ALPHA_META_STALE = (
+        '<meta name="description" content="Alpha pricing, plans and features.'
+        ' Checked 2026-09-30 by the PlanPrice research team.">'
+    )
+
+    def _write_alpha(self, meta):
+        body = (
+            meta
+            + '<div class="facts-item"><dt>Verified</dt><dd>Prices verified '
+            + '<time datetime="{d}">Oct 25, 2026</time></dd></div>'.format(d=SITE_DATE)
+            + FOOTER.format(d=SITE_DATE)
+        )
+        (self.root / "deals" / "alpha.html").write_text(body)
+
+    def test_audit_passes_correct_meta_date(self):
+        self._write_alpha(self.ALPHA_META_OK)
+        result = self.audit()
+        self.assertNotIn("deal meta checked date", result.stdout + result.stderr)
+
+    def test_audit_flags_wrong_meta_date(self):
+        self._write_alpha(self.ALPHA_META_STALE)
+        result = self.audit()
+        self.assertIn("c:deal meta checked date", result.stdout)
+
+    def test_audit_ignores_suffix_free_meta(self):
+        self._write_alpha('<meta name="description" content="Alpha pricing.">')
+        result = self.audit()
+        self.assertNotIn("deal meta checked date", result.stdout + result.stderr)
+
+    def test_stamp_fixes_wrong_meta_date_and_is_idempotent(self):
+        self._write_alpha(self.ALPHA_META_STALE)
+        first = self.stamp()
+        self.assertEqual(first.returncode, 0, first.stderr)
+        text = (self.root / "deals" / "alpha.html").read_text()
+        self.assertIn("Checked 2026-10-25 by the PlanPrice research team.", text)
+        second = self.stamp()
+        self.assertIn("0 replacement(s) total", second.stdout)
+
+    def test_audit_flags_wrong_meta_date_in_products_json(self):
+        import json as _json
+
+        products = {
+            "site": {},
+            "products": [
+                {
+                    "slug": "alpha",
+                    "meta_description": "Alpha pricing. Checked 2026-09-30 by the PlanPrice research team.",
+                }
+            ],
+        }
+        (self.root / "data" / "products.json").write_text(_json.dumps(products))
+        result = self.audit()
+        self.assertIn("c:deal meta checked date (products.json)", result.stdout)
+
+
 class RealTreeTests(unittest.TestCase):
     def test_cadence_far_future_flags_prices_verified_date_stale(self):
         result = run_tool(

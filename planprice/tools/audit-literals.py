@@ -44,6 +44,7 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import json
 import re
 import sys
 from pathlib import Path
@@ -157,6 +158,12 @@ class Auditor:
         for found in claims:
             if found != expected:
                 self.add("c:deal verified date", rel, expected, found)
+        # PP-DEAL-META-AUDIT-GAP: the meta-description checked suffix, when
+        # present, must carry the same canonical date. Absence is fine (12
+        # of 49 pages carry no suffix by design).
+        for m in site_data.META_CHECKED_RE.finditer(text):
+            if m.group("date") != expected:
+                self.add("c:deal meta checked date", rel, expected, m.group("date"))
 
     def check_cadence(self):
         for name, variable in (self.registry.get("variables") or {}).items():
@@ -174,6 +181,37 @@ class Auditor:
                     f"{name} as_of {as_of_raw} ({age} days old)",
                 )
 
+    def check_products_meta(self):
+        # PP-DEAL-META-AUDIT-GAP: since PP-GEN-DRIFT the deal-page metas are
+        # generated from products.json meta_description, so the source data
+        # is audited too — a wrong suffix date there is caught before a
+        # regen can publish it. Absent file or absent suffix: nothing to
+        # judge (the form is never invented).
+        path = self.root / "data" / "products.json"
+        if not path.exists():
+            return
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            self.add(
+                "c:deal meta checked date (products.json)",
+                "data/products.json",
+                "parseable products.json",
+                f"unparseable: {exc}",
+            )
+            return
+        for p in data.get("products") or []:
+            meta = p.get("meta_description") or ""
+            expected = self.canon.get(p.get("slug"))
+            for m in site_data.META_CHECKED_RE.finditer(meta):
+                if expected is not None and m.group("date") != expected:
+                    self.add(
+                        "c:deal meta checked date (products.json)",
+                        f"data/products.json#{p.get('slug')}",
+                        expected,
+                        m.group("date"),
+                    )
+
     def run(self) -> list:
         for mismatch in site_data.cross_check_registry(
             self.root, registry=self.registry, canon=self.canon
@@ -181,6 +219,7 @@ class Auditor:
             self.add("registry", "data/site-data.json", "registry agrees with recomputation", mismatch)
         for path in sorted(self.root.rglob("*.html")):
             self.check_file(path)
+        self.check_products_meta()
         self.check_cadence()
         return self.findings
 

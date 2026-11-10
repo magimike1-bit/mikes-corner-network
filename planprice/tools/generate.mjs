@@ -400,9 +400,20 @@ function fromPrice(p, strong = true, mode = PRICE_MODE.STANDARD) {
     if (m) {
       // Batch-template related rows show the amount alone plus a trailing
       // space ("From $139.95 ") — a distinct convention of that generation.
-      if (mode === PRICE_MODE.AMOUNT) return `From <strong>${esc(m[0])}</strong> `;
+      // PP-PRICE-DISPLAY still applies to flag amounts (a % rate or $0 is
+      // THE price, not a floor): those rows drop the "From" too.
+      if (mode === PRICE_MODE.AMOUNT) {
+        const restAmt = start.slice(m[0].length);
+        const isFlagAmt = /^[\d.]+%/.test(m[0]) || /^C?\$0(?:\.00)?$/.test(m[0]) || /free/i.test(restAmt);
+        return isFlagAmt ? `<strong>${esc(m[0])}</strong> ` : `From <strong>${esc(m[0])}</strong> `;
+      }
       const price = strong ? `<strong>${esc(m[0])}</strong>` : esc(m[0]);
-      return `From ${price}${esc(start.slice(m[0].length))}`;
+      // PP-PRICE-DISPLAY: "From" reads wrong on single/flag values — a $0
+      // or free starting price and a transaction rate are THE price, not a
+      // range floor. Drop the prefix for those; keep it for tiered prices.
+      const rest = start.slice(m[0].length);
+      const isFlag = /^[\d.]+%/.test(m[0]) || /^C?\$0(?:\.00)?$/.test(m[0]) || /free/i.test(rest);
+      return isFlag ? `${price}${esc(rest)}` : `From ${price}${esc(rest)}`;
     }
     if (mode === PRICE_MODE.AMOUNT) {
       const w = start.match(/^[A-Za-z]+/);
@@ -413,6 +424,8 @@ function fromPrice(p, strong = true, mode = PRICE_MODE.STANDARD) {
   const t = p.pricing_tiers[0];
   if (t.cadence === "quote") return esc(t.price);
   const price = strong ? `<strong>${esc(t.price)}</strong>` : esc(t.price);
+  // PP-PRICE-DISPLAY: same flag rule on the tier-derived line.
+  if (t.cadence === "free" || /^C?\$0(?:\.00)?$/.test(t.price)) return `${price} ${esc(t.cadence)}`;
   return `From ${price} ${esc(t.cadence)}`;
 }
 

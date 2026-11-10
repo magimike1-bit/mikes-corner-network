@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie-Based vs Server-Side Referral Tracking: Why the Stated Window Is Not the Real Window | AI Referral Bonuses</title>
+<meta name="description" content="A program&rsquo;s stated cookie window is a rule; the browser&rsquo;s cookie lifetime is storage. WebKit caps client-side cookies at 7 days. Cookie, pixel, postback, and code methods compared, plus a verification procedure.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">AI Referral Bonuses</a><p class="tagline">Every verified AI referral &amp; affiliate bonus, in one filterable list</p><nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy-policy.html">Privacy</a></nav></div></header>
+<main class="wrap"><p><a href="/">&larr; All programs and guides</a></p>
+
+<h1>Cookie-Based vs Server-Side Referral Tracking: Why the Stated Window Is Not the Real Window</h1>
+<p class="meta">Guides &middot; Published 2026-11-10 &middot; Last updated 2026-11-10</p>
+<p>Does a 90-day cookie window mean the browser keeps your referral cookie for 90 days? No, and the gap between those two ideas is where unpaid referrals live. The window is a rule the program sets: how long after a click a purchase still earns commission. The lifetime is a storage fact: how long the identifier that proves the click survives in the visitor&rsquo;s browser. A sale is credited only when both hold at the moment of purchase. Program pages advertise the first number. Browsers control the second.</p>
+<h2>Two numbers, one sale</h2>
+<p>Post Affiliate Pro&rsquo;s tracking method reference, checked in November 2026, describes the standard mechanism. When a visitor clicks an affiliate link, the tracking system stores a cookie in the visitor&rsquo;s browser holding the affiliate ID, a timestamp, and often a campaign or sub-ID reference. If the visitor buys before the cookie expires, the system reads the cookie and attributes the sale. Programs set that duration anywhere from 24 hours to 90 days, which is the range the terms pages quote. GoHighLevel&rsquo;s affiliate policy, in this site&rsquo;s directory, awards commissions on a last-click basis within a 90-day window and decides attribution from available tracking data. Available is the operative word. The rule promises 90 days of eligibility. It says nothing about 90 days of storage.</p>
+<h2>The mechanisms that carry a referral</h2>
+<p>A tracking method is the process that connects a referral to a recorded action and assigns credit under the program&rsquo;s attribution rules. Four methods do most of the work, and the reference notes that most mature programs use at least two in combination.</p>
+<table>
+<thead><tr><th>Method</th><th>Relies on</th><th>Immune to cookie blocking</th><th>Works across devices</th><th>Complexity</th></tr></thead>
+<tbody>
+<tr><td>Cookie-based</td><td>Browser cookie storage</td><td>No</td><td>No</td><td>Low</td></tr>
+<tr><td>Pixel</td><td>A page-load event in the browser</td><td>No</td><td>No</td><td>Low to medium</td></tr>
+<tr><td>Server-to-server postback</td><td>A server-to-server HTTP call</td><td>Yes</td><td>Yes, with an identity match</td><td>High</td></tr>
+<tr><td>Coupon or promo code</td><td>Code entry at checkout</td><td>Yes</td><td>Yes</td><td>Low</td></tr>
+</tbody>
+</table>
+<p>Pixel tracking places a small invisible image or JavaScript snippet on the confirmation page; when that page loads, it fires the conversion data back to the platform. Its weakness is the same browser dependence as the cookie: ad blockers, privacy browsers, and script blockers can stop it firing, a tab closed before the page loads loses the conversion, and offline or in-app purchases are out of reach without extra infrastructure. Server-to-server tracking, also called postback tracking, removes the browser from the confirmation step. The click ID is captured at the click and stored in the advertiser&rsquo;s database alongside the visitor&rsquo;s session. At purchase, the advertiser&rsquo;s backend sends a direct HTTP request to the platform&rsquo;s server carrying the affiliate ID, click ID, order value, and transaction reference. No cookie is needed and no pixel needs to fire. The cost is real integration work: developer resources, thorough testing, and a recovery path, because a failed postback can miss the event unless retries or reconciliation catch it.</p>
+<h2>What the browser does to the cookie</h2>
+<p>The primary source here is WebKit, the engine behind Safari. Its Intelligent Tracking Prevention 2.1 post states the rule plainly: all persistent client-side cookies, meaning persistent cookies created through document.cookie, are capped to a seven day expiry. The cap covers cookies created in first-party contexts as well as in third-party iframes. Session cookies are not affected. A cookie set with a shorter expiry keeps its shorter expiry. Cookies set in HTTP responses sit in a separate category in the post&rsquo;s framing, which is why it gives server-set, Secure and HttpOnly cookies as the pattern authentication uses.</p>
+<p>Now do the arithmetic on the two sourced numbers. A program states a 90-day window. A tracking cookie written by a script in Safari can live 7 days. If that cookie is the only record of the click, as much as 83 of the 90 stated days depend on storage the browser cap does not preserve. That is not an argument that every program loses those sales. Programs that record the click on their own server at signup, or confirm conversions by postback, are not relying on the capped cookie. It is an argument for asking which design a program uses before treating its stated window as your window. GoHighLevel&rsquo;s policy shows how programs allocate the risk when the answer is unfavourable: it states the program is not responsible for tracking failures caused by improperly formatted links, users clearing cookies, private browsing, or anything else that prevents the affiliate link from working correctly.</p>
+<h2>Verify the method before you promote the program</h2>
+<p>Post Affiliate Pro&rsquo;s reference closes with checks publishers should run before joining a program. Turned into a procedure, they take about fifteen minutes per program:</p>
+<ol>
+<li><strong>Ask what carries the attribution.</strong> Cookies alone, or a server-side method with a cookie fallback? The answer decides how much of the stated window is storage-backed.</li>
+<li><strong>Fit the window to the purchase cycle.</strong> A short window on a product people research for weeks loses sales no method can recover. Compare the stated window against how long your audience actually takes to buy.</li>
+<li><strong>Check the attribution model.</strong> Last-click is the default in most platforms, and it favours coupon sites, the last stop before checkout, over content that introduced the customer. Know which side of that rule your content sits on.</li>
+<li><strong>Check cross-device coverage.</strong> If your audience reads on mobile and buys on desktop, a cookie-only program cannot connect those sessions. Server-side tracking with a user identity match can.</li>
+<li><strong>Read the tracking limitations clause in the terms.</strong> It states, in the program&rsquo;s own words, which failures are your loss. Cleared cookies and private browsing are the clauses to look for.</li>
+<li><strong>Run a click test.</strong> Click your own link in a private window and confirm you land on the intended page with the referral parameter intact. Do not buy through your own link to test the rest; read the dashboard&rsquo;s click record instead.</li>
+</ol>
+<p><strong>What success looks like:</strong> for each program you promote, you can name the method that carries your attribution, the stated window, and the clause that governs tracking failures, and your click test produced a recorded click on the right landing page.</p>
+<h2>When the code beats the link</h2>
+<p>One method in the table needs no browser cooperation at all. Coupon tracking assigns a unique code to each publisher, and entry of that code at checkout attributes the sale regardless of whether a cookie exists, a pixel fired, or a click was recorded. It works when the customer switches devices, and when the promotion was spoken rather than clicked, which is why it is the dominant pattern for podcast and influencer promotion. Its failure modes are human instead of technical: it pays nothing when the customer forgets or skips the code, and codes leak to aggregator sites, where they credit the publisher for sales their content never influenced. For spoken, printed, and video promotion, a code is not a fallback. It is the only mechanism in the table whose attribution survives the channel.</p>
+<section class="note"><h2>Important: no income guarantees</h2><p>This article is general information, not financial or tax advice. Referral and affiliate rewards are never guaranteed income, and no tracking method can promise that a referral will be recorded or credited. Browser behaviour and program terms described here were checked against the named sources in November 2026 and can change with browser and platform updates; confirm current terms on the official program page. Report any income you do receive as your local tax rules require.</p></section>
+<p>, Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer"><div class="wrap"><p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p><p>AI Referral Bonuses, a directory of AI referral and affiliate programs. Bonus terms change frequently; always confirm current terms on the official program page. Content is for general information only.</p><p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p></div></footer>
+</body>
+</html>

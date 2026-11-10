@@ -121,7 +121,14 @@
         "founded_place": "Toronto",
         "hq": "Toronto, Ontario"
       },
-      "meta_description": "FreshBooks verified list pricing and current promotions. Simple invoicing and accounting built for Canadian freelancers and small teams."
+      "meta_description": "FreshBooks verified list pricing and current promotions. Simple invoicing and accounting built for Canadian freelancers and small teams.",
+      "meter": {
+        "unit": "Billable clients",
+        "counts": "Active and archived clients both count toward the plan limit; deleted clients do not. Lite allows 5 billable clients, Plus 50, and Premium and Select are unlimited.",
+        "seats": "Every plan includes 1 user. Additional team members cost $11/month each; the Select plan includes 2 team member accounts.",
+        "checked": "2026-11-10",
+        "source": "FreshBooks pricing page and FreshBooks support (How does archive or delete work?), checked 2026-11-10"
+      }
     },
     {
       "slug": "monday",
@@ -185,7 +192,12 @@
           "Gets expensive as teams grow; essentials locked behind Pro/Enterprise tiers."
         ]
       },
-      "meta_description": "Monday.com verified list pricing and current promotions. Visual project boards and workflows for teams of any size."
+      "meta_description": "Monday.com verified list pricing and current promotions. Visual project boards and workflows for teams of any size.",
+      "seat_buckets": {
+        "rule": "Bucket pricing: plans start at a minimum of 3 seats, then seats ascend in multiples of 5. A team of 4 pays for 5 seats; a team of 6 pays for 10.",
+        "checked": "2026-11-10",
+        "source": "monday.com support (Plans and pricing for monday.com), checked 2026-11-10"
+      }
     },
     {
       "slug": "semrush",
@@ -485,7 +497,14 @@
           "Pricing is seen as expensive for micro-businesses."
         ]
       },
-      "meta_description": "Xero verified list pricing and current promotions. Cloud accounting with unlimited users on every plan. Checked 2026-09-30 by the PlanPrice research team."
+      "meta_description": "Xero verified list pricing and current promotions. Cloud accounting with unlimited users on every plan. Checked 2026-09-30 by the PlanPrice research team.",
+      "entry_cap": {
+        "cap": "Early allows 20 invoices and 5 bills per month.",
+        "counting": "The invoice limit applies to approving and sending invoices, and transactions initiated by app partners may automatically contribute to the limit (Xero pricing page footnote).",
+        "next_tier": "Growing",
+        "checked": "2026-11-10",
+        "source": "Xero pricing page, checked 2026-11-10"
+      }
     },
     {
       "slug": "square",
@@ -1302,7 +1321,14 @@
       "meta_description": "ClickUp verified list pricing and current promotions. All-in-one work app: tasks, docs, goals and time tracking. Checked 2026-10-15 by the PlanPrice research team.",
       "canadian_note": "ClickUp bills in USD; Canadian buyers pay conversion on top of list.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-15"
+      "batch_checked_date": "2026-10-15",
+      "guest_billing": {
+        "included": "The Unlimited plan includes 5 permission controlled guest seats for a one member workspace, plus 2 more for each member invited. Business plans include 10, plus 5 per member.",
+        "autocharge": "If you run out of permission controlled guest seats and invite a permission controlled guest, a paid member seat is added and charged automatically. Adding a view only guest to a Team also converts them to a permission controlled guest.",
+        "internal": "People who use your organization's email domain or SSO cannot be added as guests; they are converted to limited members and charged at the member rate. View only guests are free and unlimited.",
+        "checked": "2026-11-10",
+        "source": "ClickUp Help Center (Pricing per user role and plan; Guest-type user roles), checked 2026-11-10"
+      }
     },
     {
       "slug": "notion",

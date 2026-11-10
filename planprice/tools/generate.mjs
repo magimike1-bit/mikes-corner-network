@@ -5,7 +5,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { startPriceNumeric, startPriceText } from "./price-parse.mjs";
 import { slugify } from "./slugify.mjs";
-import { tierSavings, allSavings, firstYear, seatYearCosts, fmtMoney, TEAM_SIZES } from "./savings.mjs";
+import { tierSavings, allSavings, firstYear, seatYearCosts, fmtMoney, TEAM_SIZES, billedSeats, numOf, sigilOf } from "./savings.mjs";
 import { rankByAvg, rankByReviews } from "./review-rank.mjs";
 import { fmtDate, isStale } from "./freshness.mjs";
 import { PRICES_VERIFIED_DATE, comparePageDate } from "./site-data.mjs";
@@ -1010,7 +1010,7 @@ ${header(batch ? null : "/")}
         <p><strong>Canadian note:</strong> ${esc(p.canadian_note)}</p>` : ""}
       </section>
       ${batch ? pricingTable(p).replace("</tr></tbody>", "</tr>\n</tbody>") : pricingTable(p)}${!batch && pageExtras[`deals/${p.slug}`] ? `
-      ${pageExtras[`deals/${p.slug}`]}` : ""}${batch ? `
+      ${pageExtras[`deals/${p.slug}`]}` : ""}${meterSection(p)}${batch ? `
       ${extraFor(`deals/${p.slug}`).trimStart()}
       ${verificationBox(p, true)}
       ${priceHistorySection(p, true)}` : `
@@ -1220,6 +1220,94 @@ function directoriesSection() {
 }
 
 const transparencyCache = new Map();
+/* "What counts toward the price" sections (Batch F: PP-METER-DEFINITION,
+ * PP-ENTRY-CAP-REAL-PRICE, PP-GUEST-AUTOCHARGE, PP-SEAT-BUCKET-COST).
+ * Rendered only for products carrying the verified data fields; every
+ * statement comes from the field text, which is sourced from the vendor's
+ * own pricing or help pages with a check date (see data/products.json). */
+function meterSection(p) {
+  const blocks = [];
+  if (p.meter) {
+    blocks.push(`      <section class="section meter">
+        <h2>What counts toward the price</h2>
+        <p><strong>Meter:</strong> ${esc(p.meter.unit)}. ${esc(p.meter.counts)}</p>
+        <p><strong>Seats:</strong> ${esc(p.meter.seats)}</p>
+        <p class="section-sub">Meter definition checked ${esc(p.meter.checked)} against the vendor's published pricing and help pages.</p>
+      </section>`);
+  }
+  if (p.entry_cap) {
+    const next = (p.pricing_tiers || []).find((t) => t.name === p.entry_cap.next_tier);
+    const nextLine = next ? `<p><strong>Real entry price:</strong> if you regularly pass the cap, budget for ${esc(next.name)} at ${esc(next.price)}${/^\//.test(next.cadence || "") ? esc(next.cadence) : ` ${esc(next.cadence || "")}`} instead of the entry price.</p>` : "";
+    blocks.push(`      <section class="section meter">
+        <h2>The entry plan cap</h2>
+        <p>${esc(p.entry_cap.cap)} ${esc(p.entry_cap.counting)}</p>
+        ${nextLine}
+        <p class="section-sub">Cap rules checked ${esc(p.entry_cap.checked)} against the vendor's published pricing page.</p>
+      </section>`);
+  }
+  if (p.guest_billing) {
+    blocks.push(`      <section class="section meter">
+        <h2>Guest billing: an invite can add a paid seat</h2>
+        <p>${esc(p.guest_billing.included)}</p>
+        <p>${esc(p.guest_billing.autocharge)}</p>
+        <p>${esc(p.guest_billing.internal)}</p>
+        <p class="section-sub">Guest billing rules checked ${esc(p.guest_billing.checked)} against the vendor's published help pages.</p>
+      </section>`);
+  }
+  if (p.seat_buckets) {
+    const seatTiers = (p.pricing_tiers || [])
+      .filter((t) => /per seat/.test(t.cadence || "") && Number.isFinite(numOf(t.price)))
+      .map((t) => ({ name: t.name, amount: numOf(t.price), sigil: sigilOf(t.price) }));
+    const top = seatTiers[seatTiers.length - 1];
+    let table = "";
+    if (seatTiers.length && top) {
+      const head = seatTiers.map((t) => `<th>${esc(t.name)} per month</th>`).join("");
+      const rows = [];
+      for (let n = 1; n <= 25; n++) {
+        const b = billedSeats(n);
+        const cells = seatTiers.map((t) => `<td>${fmtMoney(t.sigil, b * t.amount)}</td>`).join("");
+        const eff = fmtMoney(top.sigil, (b * top.amount) / n);
+        rows.push(`<tr><td>${n}</td><td>${b}</td>${cells}<td>${eff}</td></tr>`);
+      }
+      table = `
+        <div class="table-scroll"><table class="price-table bucket-table">
+          <thead><tr><th>People on the team</th><th>Seats billed</th>${head}<th>Effective cost per person on ${esc(top.name)}</th></tr></thead>
+          <tbody>
+${rows.join("\n")}
+          </tbody>
+        </table></div>
+        <p class="section-sub">Monthly totals use the per seat prices billed annually from the pricing table above. Effective cost per person divides the ${esc(top.name)} monthly total by the people actually using it.</p>`;
+    }
+    blocks.push(`      <section class="section meter">
+        <h2>Seat buckets: billed seats vs people</h2>
+        <p>${esc(p.seat_buckets.rule)}</p>${table}
+        <p class="section-sub">Bucket rule checked ${esc(p.seat_buckets.checked)} against the vendor's published support pages.</p>
+      </section>`);
+  }
+  return blocks.join("\n");
+}
+
+/* One-line flags for compare pages: members carrying any Batch F field. */
+function compareMeterLines(set) {
+  const lines = [];
+  for (const entry of set.products || []) {
+    const p = typeof entry === "object" ? entry : productBySlug.get(entry);
+    if (!p) continue;
+    if (p.meter) lines.push(`<li><strong>${esc(p.name)}:</strong> metered on ${esc(p.meter.unit.toLowerCase())}; ${esc(p.meter.counts)}</li>`);
+    if (p.entry_cap) lines.push(`<li><strong>${esc(p.name)}:</strong> ${esc(p.entry_cap.cap)} ${esc(p.entry_cap.counting)}</li>`);
+    if (p.guest_billing) lines.push(`<li><strong>${esc(p.name)}:</strong> ${esc(p.guest_billing.autocharge)}</li>`);
+    if (p.seat_buckets) lines.push(`<li><strong>${esc(p.name)}:</strong> ${esc(p.seat_buckets.rule)}</li>`);
+  }
+  if (!lines.length) return "";
+  return `
+    <section class="section meter-flags">
+      <h2>What counts toward the price</h2>
+      <ul>
+${lines.join("\n")}
+      </ul>
+    </section>`;
+}
+
 function transparencySection(category) {
   if (transparencyCache.has(category)) return transparencyCache.get(category);
   const members = products.filter((p) => p.category === category);
@@ -1279,7 +1367,7 @@ ${header("/compare.html")}
       ${cols}
     </div>
     ${firstYearSection(set)}
-    ${alternativesSection(set)}
+    ${alternativesSection(set)}${compareMeterLines(set)}
     ${transparencySection(set.category)}
     ${directoriesSection()}
   </div>

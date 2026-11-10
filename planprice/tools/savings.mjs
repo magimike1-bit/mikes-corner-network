@@ -23,13 +23,13 @@ export function fmtMoney(sigil, n) {
   return `${sigil}${body}`;
 }
 
-const numOf = (s) => {
+export const numOf = (s) => {
   const m = String(s).replace(/,/g, "").match(/\d+(?:\.\d+)?/);
   return m ? parseFloat(m[0]) : NaN;
 };
 
 // Leading non-digit run of a price string: "$9" -> "$", "C$49" -> "C$".
-const sigilOf = (s) => {
+export const sigilOf = (s) => {
   const m = String(s).match(/^[^\d]+/);
   return m ? m[0].trim() : "";
 };
@@ -209,4 +209,14 @@ export function firstYear(p) {
   return {
     text: `${fmtMoney(sigilOf(t.price), fy)}/yr (${t.price} ${t.cadence} × 12)${seatQ}`,
   };
+}
+
+/* Billed seats under monday.com-style bucket pricing (PP-SEAT-BUCKET-COST,
+ * verified on monday.com support, checked 2026-11-10): plans start at a
+ * minimum of 3 seats, then ascend in multiples of 5. A team of 4 is billed
+ * for 5 seats; a team of 6 for 10. */
+export function billedSeats(n) {
+  if (!Number.isFinite(n) || n < 1) return null;
+  if (n <= 3) return 3;
+  return Math.ceil(n / 5) * 5;
 }

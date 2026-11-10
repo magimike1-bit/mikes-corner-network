@@ -1,30 +1,138 @@
 {
     "sets": [
         {
+            "slug": "accounting",
+            "title": "FreshBooks vs QuickBooks Online vs Wave vs Xero",
             "products": [
                 "freshbooks",
                 "quickbooks",
                 "wave",
                 "xero"
-            ],
-            "slug": "accounting",
-            "title": "FreshBooks vs QuickBooks Online vs Wave vs Xero"
+            ]
         },
         {
+            "slug": "square-vs-stripe",
+            "title": "Square vs Stripe",
             "products": [
                 "square",
                 "stripe"
-            ],
-            "slug": "square-vs-stripe",
-            "title": "Square vs Stripe"
+            ]
         },
         {
+            "slug": "semrush-vs-ahrefs",
+            "title": "Semrush vs Ahrefs",
             "products": [
                 "semrush",
                 "ahrefs"
+            ]
+        },
+        {
+            "slug": "square-vs-lightspeed",
+            "title": "Square vs Lightspeed",
+            "products": [
+                "square",
+                "lightspeed"
             ],
-            "slug": "semrush-vs-ahrefs",
-            "title": "Semrush vs Ahrefs"
+            "editorial": true
+        },
+        {
+            "slug": "toast-vs-square",
+            "title": "Toast vs Square",
+            "products": [
+                "toast",
+                "square"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "freshbooks-vs-zoho-books",
+            "title": "FreshBooks vs Zoho Books",
+            "products": [
+                "freshbooks",
+                "zoho-books"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "wave-vs-zoho-books",
+            "title": "Wave vs Zoho Books",
+            "products": [
+                "wave",
+                "zoho-books"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "mailchimp-vs-klaviyo",
+            "title": "Mailchimp vs Klaviyo",
+            "products": [
+                "mailchimp",
+                "klaviyo"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "trello-vs-clickup",
+            "title": "Trello vs ClickUp",
+            "products": [
+                "trello",
+                "clickup"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "capsule-vs-pipedrive",
+            "title": "Capsule CRM vs Pipedrive",
+            "products": [
+                "capsule-crm",
+                "pipedrive"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "bigcommerce-vs-shopify",
+            "title": "BigCommerce vs Shopify",
+            "products": [
+                "bigcommerce",
+                "shopify"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "cal-com-vs-calendly",
+            "title": "Cal.com vs Calendly",
+            "products": [
+                "cal-com",
+                "calendly"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "deel-vs-wagepoint",
+            "title": "Deel vs Wagepoint",
+            "products": [
+                "deel",
+                "wagepoint"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "housecall-pro-vs-jobber",
+            "title": "Housecall Pro vs Jobber",
+            "products": [
+                "housecall-pro",
+                "jobber"
+            ],
+            "editorial": true
+        },
+        {
+            "slug": "notion-vs-clickup",
+            "title": "Notion vs ClickUp",
+            "products": [
+                "notion",
+                "clickup"
+            ],
+            "editorial": true
         }
     ]
 }

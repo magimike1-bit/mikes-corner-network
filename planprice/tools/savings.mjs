@@ -74,7 +74,7 @@ export function tierSavings(t) {
     save,
     saveText,
     perSeat,
-    callout: `Pay annually: ${sigil}${A}${aUnit} instead of ${sigil}${M}${mUnit} — saves ${saveText}/yr${seatQ}`,
+    callout: `Pay annually: ${sigil}${A}${aUnit} instead of ${sigil}${M}${mUnit}, saves ${saveText}/yr${seatQ}`,
     stripLine: (name, tierName) =>
       `${name} — ${tierName}: save ${saveText}/yr${seatQ}`,
   };

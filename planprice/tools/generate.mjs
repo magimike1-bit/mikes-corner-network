@@ -24,14 +24,45 @@ const products = data.products;
  * product or missing source renders nothing (honest gap, never a guess). */
 const reviewScores = JSON.parse(readFileSync(join(ROOT, "data", "review-scores.json"), "utf8"));
 
+/* ---- Committed-only page content absorbed at PP-GEN-DRIFT (2026-11-10) ----
+ * data/page-images.json: {"<page key>": ["<figure class=\"post-figure\">…</figure>", …]}
+ * extracted verbatim from the committed (live) pages; figFor() returns the
+ * page's figures glued the way the committed pages glue them (figure block
+ * + two blank lines), or "" when the page has none.
+ * data/page-extras.json: {"<page key>": "<section …>…</section>"} — the
+ * hand-written guide/guidance sections the committed listing pages carry
+ * (category buying-guidance, canadian/deals/free/compare/top-rated guides),
+ * extracted verbatim; emitted at the committed position per page type. */
+const pageImages = JSON.parse(readFileSync(join(ROOT, "data", "page-images.json"), "utf8"));
+const pageExtras = JSON.parse(readFileSync(join(ROOT, "data", "page-extras.json"), "utf8"));
+const figFor = (key) => {
+  const figs = pageImages[key];
+  return figs && figs.length ? figs.join("\n") + "\n\n" : "";
+};
+const extraFor = (key) => (pageExtras[key] ? "\n    " + pageExtras[key] : "");
+
+/* data/compare-vendors.json: vendor-summary rows whose "start" field is the
+ * committed deals-index price convention (see the deals-index writer). */
+const compareVendors = new Map(
+  JSON.parse(readFileSync(join(ROOT, "data", "compare-vendors.json"), "utf8")).map((e) => [e.slug, e])
+);
+
 /* ---- Head-to-head compare sets (PP-SECTIONS) ----
  * data/compare.json: {sets: [{slug, title, products}]}. Membership is
  * explicit and authorable; new products in products.json do NOT auto-join.
  * Build FAILS on: unknown product slug, cross-category set, duplicate or
  * non-kebab slug, wrong member count (2–4), or a title that is not the
- * mechanical " vs "-join of the product names (no editorial wording). */
+ * mechanical " vs "-join of the product names (no editorial wording).
+ * PP-GEN-DRIFT (2026-11-10): sets flagged "editorial": true are the 12
+ * hand-written pair pages under compare/ (editorial H1s and prose, NOT
+ * generated columns). They are validated and listed on the compare index
+ * like the generated sets, but the generator NEVER writes their pages
+ * (same treatment as the article guides, R4e) and they do not create
+ * head-to-head links on deal/category pages. compareSets below holds only
+ * the generated sets; allCompareSets holds all 15 for the index. */
 const productBySlug = new Map(products.map((p) => [p.slug, p]));
 const compareSets = [];
+const allCompareSets = [];
 {
   const cfg = JSON.parse(readFileSync(join(ROOT, "data", "compare.json"), "utf8"));
   const seen = new Set();
@@ -58,12 +89,15 @@ const compareSets = [];
       throw new Error(
         `compare.json: set "${set.slug}" title is not the mechanical vs-join of product names`
       );
-    compareSets.push({
+    const entry = {
       slug: set.slug,
       title: set.title,
       products: members,
       category: members[0].category,
-    });
+      editorial: !!set.editorial,
+    };
+    allCompareSets.push(entry);
+    if (!entry.editorial) compareSets.push(entry);
   }
 }
 
@@ -75,6 +109,8 @@ for (const s of compareSets)
   for (const p of s.products)
     if (!setByProductSlug.has(p.slug)) setByProductSlug.set(p.slug, s);
 const setForSlug = (slug) => setByProductSlug.get(slug) || null;
+// Distinct categories, sorted (used by category pages and the homepage chips).
+const categories = [...new Set(products.map((p) => p.category))].sort();
 // Compare sets whose members all belong to the category (banner lookup).
 const setsForCategory = (cat) => compareSets.filter((s) => s.category === cat);
 
@@ -142,7 +178,7 @@ const anyAffiliateLive = products.some(affiliateLive);
 const AFFILIATE_BLUNT =
   "The product links on PlanPrice are affiliate links: if you buy through them, we may earn a commission at no extra cost to you.";
 const AFFILIATE_INTERIM =
-  "PlanPrice is funded by affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors — when affiliate links go live, this page will say so, and buying through them will never cost you extra.";
+  "PlanPrice is funded by affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors, when affiliate links go live, this page will say so, and buying through them will never cost you extra.";
 
 /* ---- Freshness flags (PP-PRICE-DROP-FLAGS) ----
  * Diff current prices/deals against the most recent monthly sweep snapshot
@@ -161,6 +197,56 @@ function loadPriorSweep() {
 }
 
 const priorSweep = loadPriorSweep();
+
+/* ---- Price history (PP-GEN-DRIFT) ----
+ * Every deal page carries a Price history table built from ALL sweep files
+ * in data/sweeps/ whose sweep_date is on or before the site CHECKED date
+ * (the 2026-11-02 snapshot postdates the 2026-10-25 verification date and,
+ * per the site-data registry note, is a carried-forward snapshot, not a
+ * verification sweep — including it would fabricate a 2026-11-02 check).
+ * Rows sorted by sweep date; a product absent from a sweep gets no row. */
+const allSweeps = (() => {
+  const dir = join(ROOT, "data", "sweeps");
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")))
+    .filter((s) => s.sweep_date && s.sweep_date <= CHECKED)
+    .sort((a, b) => (a.sweep_date < b.sweep_date ? -1 : 1));
+})();
+
+// slug -> sweep rows, built once (priceHistorySection looks up, never rescans).
+const sweepRowsBySlug = (() => {
+  const map = new Map();
+  for (const s of allSweeps) {
+    for (const e of s.products || []) {
+      if (!map.has(e.slug)) map.set(e.slug, []);
+      map.get(e.slug).push({ date: s.sweep_date, start_price_text: e.start_price_text, deal_headline: e.deal_headline });
+    }
+  }
+  return map;
+})();
+
+function priceHistorySection(p, batch = false) {
+  const rows = (sweepRowsBySlug.get(p.slug) || []).map((e) => `<tr>
+      <th scope="row">${esc(e.date)}</th>
+      <td>${esc(e.start_price_text)}</td>
+      <td>${esc(e.deal_headline || "No public promo")}</td>
+    </tr>`);
+  if (!rows.length) return "";
+  return `<section class="section price-history">
+      <h2>Price history</h2>
+      <p>What our verification snapshots recorded for ${esc(p.name)}. Snapshots are periodic checks, not a continuous feed, a change between two dates happened somewhere in between.</p>
+      <div class="table-scroll">
+      <table class="tiers">
+        <caption>${esc(p.name)}. PlanPrice verification snapshots.</caption>
+        <thead><tr><th scope="col">Checked</th><th scope="col">Starting price</th><th scope="col">Promo recorded</th></tr></thead>
+        <tbody>${rows.join("\n")}
+</tbody>
+      </table>
+      </div>${batch ? "\n      <p class=\"fine\">First PlanPrice snapshot for this vendor, future verification sweeps will add points here.</p>" : p.history_stable_fine ? "\n      <p class=\"fine\">No price changes recorded since Sep 2026, the starting price and promo status above have been stable across every snapshot we hold.</p>" : ""}
+    </section>`;
+}
 const priceFlags = {}; // slug -> array of "price-drop" | "new-deal"
 if (!priorSweep) {
   console.log(
@@ -206,16 +292,6 @@ const isExpiredDeal = (p) =>
 
 // Deals that are live right now: non-null and not expired.
 const liveDeals = (ps) => ps.filter((p) => p.deal && !isExpiredDeal(p));
-const expiredDeals = (ps) => ps.filter(isExpiredDeal);
-
-// Spotlight rule (§5): product with a non-null live deal and the lowest
-// sort_priority; tie → products.json array order. Omitted when none qualify.
-function spotlightProduct() {
-  const cands = liveDeals(products).map((p, i) => ({ p, i }));
-  if (cands.length === 0) return null;
-  cands.sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
-  return cands[0].p;
-}
 
 /* ---- Vendor reviews (PP-VENDOR-REVIEWS) ----
  * Optional per-product `reviews` object in products.json: {strengths, weaknesses}.
@@ -284,7 +360,7 @@ function canadianLine(p) {
   const founded = c.founded
     ? `founded in ${esc(c.founded_place)} (${esc(c.founded)})`
     : `founded in ${esc(c.founded_place)}`;
-  return `<p class="canadian-note">🇨🇦 Canadian company — ${founded}, headquartered in ${esc(c.hq)}.</p>`;
+  return `<p class="canadian-note">🇨🇦 Canadian company, ${founded}, headquartered in ${esc(c.hq)}.</p>`;
 }
 
 function canadianBadge(p) {
@@ -306,7 +382,33 @@ function esc(s) {
 // (6 new-vendor products added 2026-10-09 lack tiers) — previously the
 // generator CRASHED on these and the committed pages shipped a broken
 // "From " with no price. Honest "Pricing on request" instead of a guess.
-function fromPrice(p, strong = true) {
+// Price display modes for fromPrice(): STANDARD is the full line, PAREN keeps
+// the compare-vendors parenthetical, AMOUNT shows the amount alone with a
+// trailing space (the batch generation's related-row convention).
+const PRICE_MODE = { STANDARD: false, PAREN: "paren", AMOUNT: "amount" };
+
+function fromPrice(p, strong = true, mode = PRICE_MODE.STANDARD) {
+  // PP-GEN-DRIFT: the committed site derives the starting-price line from
+  // data/compare-vendors.json "start" (paren suffix stripped, amount bolded)
+  // wherever a CV entry exists — that convention, not the pricing_tiers
+  // cadence text, is what the committed facts strips and directory rows
+  // show (e.g. Wave "From $0 free", Sage 50 "From C$916 per year").
+  const cvEntry = compareVendors.get(p.slug);
+  if (cvEntry && typeof cvEntry.start === "string") {
+    const start = mode === PRICE_MODE.PAREN ? cvEntry.start : cvEntry.start.replace(/\s*\(.*?\)\s*$/, "");
+    const m = start.match(/^(C?\$[\d,.]+(?:\s*\+\s*\S+)?|[\d.]+%(?:\s*\+\s*\S+)?)/);
+    if (m) {
+      // Batch-template related rows show the amount alone plus a trailing
+      // space ("From $139.95 ") — a distinct convention of that generation.
+      if (mode === PRICE_MODE.AMOUNT) return `From <strong>${esc(m[0])}</strong> `;
+      const price = strong ? `<strong>${esc(m[0])}</strong>` : esc(m[0]);
+      return `From ${price}${esc(start.slice(m[0].length))}`;
+    }
+    if (mode === PRICE_MODE.AMOUNT) {
+      const w = start.match(/^[A-Za-z]+/);
+      if (w) return `From <strong>${esc(w[0])}</strong> `;
+    }
+  }
   if (!p.pricing_tiers || !p.pricing_tiers.length) return "Pricing on request";
   const t = p.pricing_tiers[0];
   if (t.cadence === "quote") return esc(t.price);
@@ -330,33 +432,6 @@ function vendorHost(url) {
 // Homepage blocks
 // ---------------------------------------------------------------------------
 
-function trustStrip() {
-  const live = liveDeals(products).length;
-  return `<div class="trust-strip">
-  <div class="wrap trust-strip-inner">
-    <span class="trust-stat"><strong>${products.length}</strong> products tracked</span>
-    <span class="trust-dot" aria-hidden="true">·</span>
-    <span class="trust-stat"><strong>${live}</strong> live deals</span>
-    <span class="trust-dot" aria-hidden="true">·</span>
-    <span class="trust-stat">Prices checked <time datetime="${CHECKED}">${CHECKED}</time></span>
-  </div>
-</div>`;
-}
-
-function spotlightBlock(p) {
-  if (!p) return "";
-  return `<section class="spotlight">
-  <div class="wrap">
-    <p class="kicker spotlight-kicker">Deal spotlight</p>
-    <h2 class="spotlight-name"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></h2>
-    <p class="spotlight-deal">${esc(p.deal.headline)}</p>
-    <p class="spotlight-tag">${esc(p.tagline)}</p>
-    <p class="spotlight-verify">✓ Vendor-verified <time datetime="${esc(p.deal.verified_date)}">${esc(p.deal.verified_date)}</time> — source: <a href="${esc(p.deal.source_url)}" target="_blank" rel="noopener">${vendorHost(p.deal.source_url)}</a>.</p>
-    <p><a class="btn" href="/deals/${esc(p.slug)}.html">See pricing &amp; deal</a></p>
-  </div>
-</section>`;
-}
-
 /* Price/freshness flag badges (PP-PRICE-DROP-FLAGS). Rendered only when the
  * sweep diff actually produced a flag for the slug — never invented. */
 function flagBadges(p) {
@@ -370,7 +445,7 @@ function flagBadges(p) {
     .join(" ");
 }
 
-function dirRow(p) {
+function dirRow(p, priceFn = null) {
   const live = p.deal && !isExpiredDeal(p);
   const flags = flagBadges(p);
   return `<li class="dir-row${live ? " has-deal" : ""}" data-slug="${esc(p.slug)}">
@@ -380,7 +455,7 @@ function dirRow(p) {
       <p class="dir-row-best"><strong>Best for:</strong> ${esc(p.best_for)}</p>
     </div>
     <div class="dir-row-side">
-      <p class="dir-row-price">${fromPrice(p)}</p>
+      <p class="dir-row-price">${priceFn ? priceFn(p) : fromPrice(p)}</p>
       <p class="dir-row-badge">${dealBadge(p)}${flags ? " " + flags : ""}${canadianBadge(p)} <span class="verified-pill">✓ Verified ${esc(p.last_verified)}</span></p>
     </div>
   </li>`;
@@ -410,7 +485,7 @@ function filterForm(includeCategory = true, facets = {}) {
   const showCanadian = facets.canadian !== false;
   let catField = "";
   if (includeCategory) {
-    const cats = [...new Set(products.map((p) => p.category))].sort();
+    const cats = categories;
     const opts = [`<option value="all">All categories</option>`]
       .concat(cats.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`))
       .join("\n          ");
@@ -432,7 +507,7 @@ function filterForm(includeCategory = true, facets = {}) {
           <select id="f-sort" name="sort">
             <option value="featured">Featured</option>
             <option value="price-asc">Price: low to high</option>
-            <option value="name-asc">Name A–Z</option>
+            <option value="name-asc">Name A, Z</option>
           </select>
         </label>
       </div>
@@ -440,125 +515,266 @@ function filterForm(includeCategory = true, facets = {}) {
     </form>`;
 }
 
-/* Homepage wrapper: the homepage filter sits in <section class="section">
- * with no .wrap of its own, so it keeps the filterBlock() wrap (byte-stable
- * output — index.html must not change beyond nav/CSS). */
-function filterBlock(includeCategory = true, facets = {}) {
-  return `<div class="wrap">
-    ${filterForm(includeCategory, facets)}
-  </div>`;
-}
-
-function directorySections() {
-  const cats = [...new Set(products.map((p) => p.category))].sort();
-  const sections = cats
-    .map((c) => {
-      const items = products
-        .map((p, i) => ({ p, i }))
-        .filter(({ p }) => p.category === c)
-        .sort((a, b) => sortPriority(a.p) - sortPriority(b.p) || a.i - b.i);
-      const rows = items.map(({ p }) => dirRow(p)).join("\n");
-      return `<section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
-    <h2 class="dir-cat-title"><a href="/categories/${slugify(c)}.html">${esc(c)}</a></h2>
-    <ul class="dir-rows">${rows}</ul>
-  </section>`;
-    })
-    .join("\n");
-  return `<div class="wrap" id="all-deals">
-    <h2 class="section-title">Browse all deals</h2>
-    <p class="section-sub">${products.length} products, grouped by category. Every deal claim links to the vendor's own page.</p>
-    ${sections}
-  </div>`;
-}
-
-function compareTable() {
-  const rows = products
-    .map((p) => {
-      const promo = p.deal && !isExpiredDeal(p)
-        ? `<span class="badge deal">${esc(p.deal.headline)}</span>`
-        : `<span class="badge none">No public promo</span>`;
-      return `<tr>
-      <th scope="row"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></th>
-      <td>${esc(p.category)}</td>
-      <td class="price">${fromPrice(p, false)}</td>
-      <td>${promo}</td>
-      <td><time datetime="${esc(p.last_verified)}">${esc(p.last_verified)}</time></td>
-    </tr>`;
-    })
-    .join("\n");
-  return `<section class="compare section">
-  <div class="wrap">
-    <h2 class="section-title">Every deal, side by side</h2>
-    <p class="section-sub">All ${products.length} products in one table — the same data as the rows above, for scanners.</p>
-    <div class="compare-scroll">
-    <table class="tiers compare-table">
-      <caption class="sr-only">Comparison of all ${products.length} tracked products: price, promotion, and verification date.</caption>
-      <thead><tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">From price</th><th scope="col">Current promo</th><th scope="col">Verified</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    </div>
-  </div>
-</section>`;
-}
-
-function howWeVerify() {
-  return `<section class="verify-steps section">
-  <div class="wrap">
-    <h2 class="section-title">How we verify</h2>
-    <ol class="verify-steps-list">
-      <li><strong>Check the vendor's own pricing page.</strong> We read current list prices straight from the vendor's public pricing page — not a review, not an aggregator.</li>
-      <li><strong>Link every deal claim.</strong> When a vendor runs a public promotion, the headline links to the vendor's own page so you can confirm the offer yourself.</li>
-      <li><strong>Re-check on a schedule.</strong> Every product's prices and promos are re-verified regularly, and each page shows the date it was last checked.</li>
-    </ol>
-  </div>
-</section>`;
-}
-
-// Conditional per §11: rendered only when the data contains expired deals.
-// Empty today; the mechanism exists for the first deal that lapses.
-function expiredSection() {
-  const gone = expiredDeals(products);
-  if (gone.length === 0) return "";
-  const rows = gone.map((p) => dirRow(p)).join("\n");
-  return `<section class="section expired" aria-label="Expired deals">
-  <div class="wrap">
-    <h2 class="section-title">Expired deals</h2>
-    <p class="section-sub">Promotions we verified that have since ended. Kept on record so the archive stays honest.</p>
-    <ul class="dir-rows">${rows}</ul>
-  </div>
-</section>`;
-}
-
 function indexPage() {
-  return `${head(
-    "PlanPrice — Verified B2B Software Deals & Pricing",
-    "PlanPrice tracks verified list prices and promotions for " +
-    products.length +
-    " essential B2B software products. Every deal is checked against the vendor's own site.",
-    "/",
-    "\n" + IMPACT_TAG + '\n<script src="/filter.js" defer></script>'
-  )}
-${header("/")}
+  // PP-GEN-DRIFT (R5): the committed 2026-10-11 homepage restructure is the
+  // template (hero, featured-deal editorial cards, tools grid, guide list,
+  // category chips, how-we-verify, page-local <style>, and its own header
+  // nav). Dynamic slots only: product count in the meta description, the
+  // live-deal count in the hero CTA and trust strip, the registry CHECKED
+  // date, the hero figure (page-images.json), and the category chips with
+  // computed counts. Featured cards are editorial picks and stay static.
+  const homeChips = categories
+    .map((c) => `        <li><a href="/categories/${slugify(c)}.html">${esc(c)} (${products.filter((p) => p.category === c).length})</a></li>`)
+    .join("\n");
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlanPrice | Verified B2B Software Deals &amp; Pricing</title>
+<meta name="description" content="PlanPrice tracks verified list prices and promotions for ${products.length} essential B2B software products. Every deal is checked against the vendor's own site.">
+<link rel="canonical" href="${SITE_URL}/">
+<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="PlanPrice | Verified B2B Software Deals &amp; Pricing">
+<meta property="og:description" content="PlanPrice tracks verified list prices and promotions for ${products.length} essential B2B software products. Every deal is checked against the vendor's own site.">
+<meta property="og:url" content="${SITE_URL}/">
+<meta property="og:image" content="${SITE_URL}/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PlanPrice | Verified B2B Software Deals &amp; Pricing">
+<meta name="twitter:description" content="PlanPrice tracks verified list prices and promotions for ${products.length} essential B2B software products. Every deal is checked against the vendor's own site.">
+<meta name="twitter:image" content="${SITE_URL}/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<meta name='impact-site-verification' value='d3933dd0-8d52-4dd7-b099-5f505aec37fa'>
+<script src="/filter.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "${CF_BEACON_TOKEN}"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+/* Homepage-only section styles (2026-10-11 restructure). Page-local: nothing
+   here touches style.css or other pages. */
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 18px 0; }
+.tool-card { display: block; border: 1px solid var(--line, #e9dfc9); border-radius: 12px; padding: 16px; background: #fffdf8; }
+.tool-card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.tool-card p { margin: 0 0 10px; font-size: 0.95rem; }
+.guide-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; margin: 18px 0; list-style: none; padding: 0; }
+.guide-list li { border: 1px solid var(--line, #e9dfc9); border-radius: 10px; padding: 12px 14px; background: #fff; }
+.guide-list a { font-weight: 700; }
+.guide-list p { margin: 6px 0 0; font-size: 0.92rem; }
+.cat-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; list-style: none; padding: 0; }
+.cat-chips a { display: inline-block; padding: 8px 14px; border: 1px solid var(--line, #e9dfc9); border-radius: 999px; background: #fff; text-decoration: none; font-size: 0.92rem; }
+.cat-chips a:hover { border-color: #166534; }
+
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 6px; }
+.btn-secondary { background: transparent; color: #166534; border: 2px solid #166534; }
+.btn-secondary:hover { background: #166534; color: #fff; }
+.hero .post-figure img { max-height: 420px; object-fit: cover; width: 100%; }
+.featured-deals { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0 4px; }
+.featured-deal { border: 1px solid var(--line, #e9dfc9); border-radius: 12px; padding: 18px; background: #fffdf8; }
+.featured-deal h3 { margin: 0 0 6px; font-size: 1.15rem; }
+.featured-deal .src { font-size: .85rem; color: #6b6252; }
+@media (max-width: 700px) { .featured-deals { grid-template-columns: 1fr; } }
+.tool-card { transition: border-color .18s ease, transform .18s ease; }
+.tool-card:hover { border-color: #166534; transform: translateY(-3px); }
+.tool-icon { font-size: 1.6rem; line-height: 1.3; }
+.guide-list li { transition: border-color .18s ease; }
+.guide-list li:hover { border-color: #166534; }
+.verify-strip-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.verify-strip-list li { font-size: .93rem; }
+@media (max-width: 700px) { .verify-strip-list { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships, right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/deals.html" class="active">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/marketing.html">Marketing</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/calculators.html">Calculators</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
 <section class="hero">
   <div class="wrap">
     <p class="kicker">Verified pricing · Checked ${CHECKED}</p>
     <h1>B2B software deals, with the receipts.</h1>
-    <p class="lead">Real list prices and current promotions — every deal claim links to the vendor's own page so you can check it yourself.</p>
+    <p class="lead">Real list prices and current promotions, every deal claim links to the vendor's own page so you can check it yourself.</p>
+    <div class="hero-ctas"><a class="btn" href="/deals.html">Browse ${liveDeals(products).length} verified deals</a><a class="btn btn-secondary" href="/tools/deal-verifier.html">Verify a deal free</a></div>${figFor("index").trim()}
+
+
   </div>
 </section>
-${trustStrip()}
+<div class="trust-strip">
+  <div class="wrap trust-strip-inner">
+    <span class="trust-stat"><strong>${products.length}</strong> products tracked</span>
+    <span class="trust-dot" aria-hidden="true">·</span>
+    <span class="trust-stat"><strong>${liveDeals(products).length}</strong> live deals</span>
+    <span class="trust-dot" aria-hidden="true">·</span>
+    <span class="trust-stat">Promos re-verified <time datetime="${CHECKED}">${CHECKED}</time></span>
+  </div>
+</div>
 <main>
-  ${spotlightBlock(spotlightProduct())}
-  <p class="savers-pointer wrap">See the <a href="/deals.html#biggest-savers">biggest annual-billing savings</a> across all tracked products.</p>
-  <section class="section directory">
-    ${filterBlock()}
-    ${directorySections()}
+    <section class="section featured" aria-label="Featured deals">
+    <div class="wrap">
+      <h2 class="section-title">Featured deals</h2>
+      <p class="section-sub">Live promotions we've confirmed on the vendor's own site. <a href="/deals.html">See all current promos</a>.</p>
+      <div class="featured-deals">
+        <div class="featured-deal">
+          <p class="kicker">Deal spotlight</p>
+          <h3><a href="/deals/freshbooks.html">FreshBooks</a></h3>
+          <p><strong>80% off for 4 months</strong> for new subscribers</p>
+          <p>Simple invoicing and accounting built for Canadian freelancers and small teams.</p>
+          <p class="src">✓ Vendor-verified <time datetime="2026-10-25">2026-10-25</time>, source: <a href="https://www.freshbooks.com/en-ca/pricing" target="_blank" rel="noopener">www.freshbooks.com</a>.</p>
+          <p><a class="btn" href="/deals/freshbooks.html">See pricing &amp; deal</a></p>
+        </div>
+        <div class="featured-deal">
+          <p class="kicker">Verified promo</p>
+          <h3><a href="/deals/quickbooks.html">QuickBooks Online</a></h3>
+          <p><strong>90% off</strong> for new subscribers (Lite C$2/mo, list C$20)</p>
+          <p>The accounting suite most Canadian accountants already know.</p>
+          <p class="src">✓ Vendor-verified <time datetime="2026-10-25">2026-10-25</time>, details on the deal page.</p>
+          <p><a class="btn" href="/deals/quickbooks.html">See pricing &amp; deal</a></p>
+        </div>
+        <div class="featured-deal">
+          <p class="kicker">New promo</p>
+          <h3><a href="/deals/xero.html">Xero</a></h3>
+          <p><strong>80% off your first 3 months</strong> for new customers</p>
+          <p>Cloud accounting with unlimited users on every plan.</p>
+          <p class="src">✓ Vendor-verified <time datetime="2026-10-25">2026-10-25</time>, source: <a href="https://www.xero.com/ca/pricing-plans" target="_blank" rel="noopener">www.xero.com</a>.</p>
+          <p><a class="btn" href="/deals/xero.html">See pricing &amp; deal</a></p>
+        </div>
+        <div class="featured-deal">
+          <p class="kicker">New promo</p>
+          <h3><a href="/deals/shopify.html">Shopify</a></h3>
+          <p><strong>$1/month for 3 months</strong> for new merchants (Basic, Grow and Advanced)</p>
+          <p>The default storefront platform for selling online.</p>
+          <p class="src">✓ Vendor-verified <time datetime="2026-10-25">2026-10-25</time>, source: <a href="https://www.shopify.com" target="_blank" rel="noopener">www.shopify.com</a>.</p>
+          <p><a class="btn" href="/deals/shopify.html">See pricing &amp; deal</a></p>
+        </div>
+        <div class="featured-deal">
+          <p class="kicker">New promo</p>
+          <h3><a href="/deals/mailchimp.html">Mailchimp</a></h3>
+          <p><strong>15% off your first 12 months</strong> (accounts with 10,000+ contacts)</p>
+          <p>Email and SMS marketing for growing lists.</p>
+          <p class="src">✓ Vendor-verified <time datetime="2026-10-25">2026-10-25</time>, source: <a href="https://mailchimp.com" target="_blank" rel="noopener">mailchimp.com</a>.</p>
+          <p><a class="btn" href="/deals/mailchimp.html">See pricing &amp; deal</a></p>
+        </div>
+
+      </div>
+    </div>
   </section>
-  ${compareTable()}
-  ${howWeVerify()}
-  ${expiredSection()}
+  <section class="section tools-feature" aria-label="Free pricing tools">
+    <div class="wrap">
+      <h2 class="section-title">Free pricing tools</h2>
+      <p class="section-sub">Free interactive tools built on our verified pricing data, plus twenty small business calculators. No sign-up, everything runs in your browser. <a href="/tools.html">See all tools</a>.</p>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-icon" aria-hidden="true">🔍</div>
+          <h3><a href="/tools/deal-verifier.html">Deal Verifier</a></h3>
+          <p>A vendor claims "50% off"? See the real percentage off, the true annual cost, and red flags, checked against verified list prices.</p>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" aria-hidden="true">📈</div>
+          <h3><a href="/tools/renewal-hike-checker.html">Renewal Hike Checker</a></h3>
+          <p>Your renewal went up. Enter last year's and this year's totals for the real percentage change and a plain-English read.</p>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" aria-hidden="true">🧾</div>
+          <h3><a href="/tools/fee-decoder.html">Fee Decoder</a></h3>
+          <p>Paste pricing-page fine print; get hidden-cost phrases highlighted with plain-English explainers. Private by design.</p>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" aria-hidden="true">🧱</div>
+          <h3><a href="/tools/stack-budget-builder.html">Stack Budget Builder</a></h3>
+          <p>Pick one product per category and watch your whole software stack's monthly and annual cost add up.</p>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" aria-hidden="true">🎯</div>
+          <h3><a href="/tools/tier-finder.html">Tier Finder</a></h3>
+          <p>Six questions, one honest answer: free, starter, or professional tier, with the reasoning shown.</p>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" aria-hidden="true">🧮</div>
+          <h3><a href="/tools/true-cost-calculator.html">True Cost Calculator</a></h3>
+          <p>Compare per-seat vs flat-rate pricing for your team size, with CAD conversion and year-two projections.</p>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" aria-hidden="true">📊</div>
+          <h3><a href="/calculators.html">Small Business Calculators</a></h3>
+          <p>Twenty free calculators beyond software pricing: break-even, Canadian payroll cost, HST/GST, freelance rates, CAC, LTV, runway, and more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section home-guides" aria-label="Buying guides">
+    <div class="wrap">
+      <h2 class="section-title">Buying guides</h2>
+      <p class="section-sub">The playbooks behind the tools, how to negotiate, when vendors discount, and where the hidden fees live. <a href="/guides.html">All 150 guides</a>.</p>
+      <ul class="guide-list">
+        <li><a href="/guides/negotiate-saas-renewal.html">How to Negotiate Your SaaS Renewal (and What Discounts to Ask For)</a><p>When to start, what to ask for, and realistic discount ranges for Canadian small businesses.</p></li>
+        <li><a href="/guides/stack-saas-discounts.html">How to Stack SaaS Discounts Without Breaking Terms</a><p>Which discounts legitimately combine: annual billing, promo codes, nonprofit pricing, referral credits.</p></li>
+        <li><a href="/guides/saas-discount-calendar.html">When SaaS Actually Goes on Sale: A Deal-Timing Guide</a><p>Black Friday season, fiscal year-end, new year, back-to-school, the vendor discount calendar.</p></li>
+        <li><a href="/guides/annual-vs-monthly-math.html">Annual vs Monthly Billing: The Prepay Math for Small Businesses</a><p>Break-even months, effective discount rates, and the cash-flow trade-off of paying annually.</p></li>
+        <li><a href="/guides/hidden-payment-fees.html">Hidden Fees in Payment Processing (What Canadian Businesses Actually Pay)</a><p>Beyond the headline rate: the fees that inflate what Canadian businesses actually pay.</p></li>
+        <li><a href="/guides/per-seat-vs-flat-pricing.html">Per-Seat vs Flat-Rate Pricing: Which Actually Costs Less?</a><p>Real math on per-seat, flat-rate, and usage-based pricing, and the crossover point.</p></li>
+      </ul>
+    </div>
+  </section>
+    <section class="section browse" aria-label="Browse by category">
+    <div class="wrap">
+      <h2 class="section-title">Browse by category</h2>
+      <p class="section-sub">${products.length} products across ${categories.length} categories. <a href="/deals.html">See all ${products.length} products on Deals →</a></p>
+      <ul class="cat-chips">
+${homeChips}
+      </ul>
+    </div>
+  </section>
+  <section class="verify-steps section">
+  <div class="wrap">
+    <h2 class="section-title">How we verify</h2>
+    <ol class="verify-steps-list verify-strip-list">
+      <li><strong>Check the vendor's own pricing page.</strong> We read current list prices straight from the vendor's public pricing page, not a review, not an aggregator.</li>
+      <li><strong>Link every deal claim.</strong> When a vendor runs a public promotion, the headline links to the vendor's own page so you can confirm the offer yourself.</li>
+      <li><strong>Re-check on a schedule.</strong> Every product's prices and promos are re-verified regularly, and each page shows the date it was last checked.</li>
+    </ol>
+  </div>
+</section>
+  
 </main>
-${footer()}`;
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice, verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/verified.html">Verification log</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-10-25 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions, partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -569,22 +785,25 @@ ${footer()}`;
  * product's last_verified as an absolute date ("Sep 30, 2026" — idempotent,
  * never "days ago"). The optional `extra` slot lets compare pages append
  * the F5 first-year-cost item without touching deal pages. */
-function factsStrip(p, extra = "") {
+function factsStrip(p, extra = "", batch = false) {
   const promo = p.deal && !isExpiredDeal(p)
     ? `<span class="badge deal">${esc(p.deal.headline)}</span>`
-    : "No public promo — standard list prices";
+    : "No public promo, standard list prices";
   const flags = flagBadges(p);
   const expiry = p.deal && p.deal.end_date
     ? `<div class="facts-item"><dt>Offer ends</dt><dd><time datetime="${esc(p.deal.end_date)}">${esc(p.deal.end_date)}</time></dd></div>`
     : "";
   return `<dl class="facts-strip">
-    <div class="facts-item"><dt>Starting price</dt><dd>${fromPrice(p)}</dd></div>
+    <div class="facts-item"><dt>Starting price</dt><dd>${fromPrice(p, true, p.hand_built ? PRICE_MODE.PAREN : PRICE_MODE.STANDARD)}</dd></div>
     <div class="facts-item"><dt>Current promo</dt><dd>${promo}${flags ? " " + flags : ""}</dd></div>
     <div class="facts-item"><dt>Category</dt><dd>${esc(p.category)}</dd></div>
     <div class="facts-item"><dt>Verified</dt><dd>Prices verified <time datetime="${esc(p.last_verified)}">${esc(fmtDate(p.last_verified))}</time></dd></div>
-    <div class="facts-item"><dt>Vendor</dt><dd><a href="${esc(p.vendor_homepage)}" target="_blank" rel="noopener">${vendorHost(p.vendor_homepage)}</a></dd></div>
+    <div class="facts-item"><dt>Vendor</dt><dd><a href="${esc(p.vendor_homepage)}" target="_blank" rel="noopener">${vendorHost(p.vendor_homepage)}</a></dd></div>${expiry || extra ? `
     ${expiry}${extra}
-  </dl>`;
+  </dl>` : batch ? `
+  </dl>` : `
+    
+  </dl>`}`;
 }
 
 /* F3: "Deal verified <date>" for deals with a verified_date; when the deal
@@ -595,7 +814,7 @@ function dealVerifiedLine(p) {
   if (!(p.deal && p.deal.verified_date)) return "";
   const vd = p.deal.verified_date;
   const badge = isStale(vd, CHECKED)
-    ? ` <span class="badge stale">Re-check before buying — last verified ${esc(fmtDate(vd))}</span>`
+    ? ` <span class="badge stale">Re-check before buying, last verified ${esc(fmtDate(vd))}</span>`
     : "";
   return `<p class="deal-verified">Deal verified <time datetime="${esc(vd)}">${esc(fmtDate(vd))}</time>${badge}</p>`;
 }
@@ -609,7 +828,7 @@ function firstYearItem(p) {
   return `<div class="facts-item"><dt>First-year cost (starting tier)</dt><dd>${esc(fy.text)}</dd></div>`;
 }
 
-function verificationBox(p) {
+function verificationBox(p, batch = false) {
   const base = `<aside class="verify">
       <h2>Deal verification</h2>`;
   if (p.deal && !isExpiredDeal(p)) {
@@ -631,7 +850,7 @@ function verificationBox(p) {
     </aside>`;
   }
   return `${base}
-      <p>No public promotion found (checked ${CHECKED}). Prices below are standard list.</p>
+      <p>No public promotion found (checked ${batch ? esc(p.batch_checked_date || p.last_verified) : CHECKED}). Prices ${batch ? "shown are" : "below are"} standard list.</p>
     </aside>`;
 }
 
@@ -680,39 +899,35 @@ function pricingTable(p) {
         <tbody>${rows}</tbody>
       </table>
       </div>
-      <p class="fine">Always confirm on the vendor's pricing page before purchasing — plans and prices change.</p>
+      <p class="fine">Always confirm on the vendor's pricing page before purchasing, plans and prices change.</p>
     </section>`;
 }
 
 /* PP-NON-AFFILIATE-VENDORS: products with affiliate status "none" get a
  * plain outbound button — never "sponsored", never an affiliate URL — plus a
- * blunt no-relationship line. Pending-approval behavior below is unchanged. */
-function cta(p) {
+ * blunt no-relationship line. PP-GEN-DRIFT (2026-11-10, R2): every other
+ * non-live product (pending-approval, or no affiliate object at all) renders
+ * the plain vendor-link form the committed tree uses — a real link to the
+ * vendor homepage plus the direct-link fine print. The old inert "#"
+ * placeholder button is gone; it never matched the live site. */
+function cta(p, batch = false) {
   if (affiliateLive(p)) {
     if (p.affiliate.url) {
       return `<a href="${esc(p.affiliate.url)}" class="btn affiliate-cta" data-program="${esc(p.affiliate.program)}" target="_blank" rel="sponsored noopener">Check the current price</a>
     <p class="fine">${AFFILIATE_BLUNT} See our <a href="/disclosure.html">affiliate disclosure</a>.</p>`;
     }
-    console.warn(`WARN: ${p.slug} has a live affiliate status but no affiliate URL in data — rendering the placeholder CTA.`);
+    console.warn(`WARN: ${p.slug} has a live affiliate status but no affiliate URL in data — rendering the plain vendor-link CTA.`);
   }
   if (affiliateNone(p)) {
     return `<a href="${esc(p.vendor_homepage)}" class="btn vendor-cta" target="_blank" rel="noopener">Visit ${esc(p.name)} →</a>
-    <p class="fine no-affiliate">PlanPrice has no affiliate relationship with ${esc(p.name)} — we earn nothing if you choose them.</p>`;
+    <p class="fine no-affiliate">PlanPrice has no affiliate relationship with ${esc(p.name)}, we earn nothing if you choose them.</p>`;
   }
-  // PP-SERP-DESC-PAGES (2026-10-11): products added by the AdSense remediation
-  // have no affiliate object at all — they shipped with this exact hand-patched
-  // pattern (see deals/pipedrive.html at 9d2e3c6), so the generator now emits it.
-  if (!p.affiliate) {
-    return `<!-- AFFILIATE PLACEHOLDER: light when Joseph approves -->
-    <a href="${esc(p.vendor_homepage)}" class="btn" target="_blank" rel="noopener">Check the current price</a>
+  return `${batch ? "" : `<!-- AFFILIATE PLACEHOLDER: light when Joseph approves -->
+    `}<a href="${esc(p.vendor_homepage)}" class="btn" target="_blank" rel="noopener">Check the current price</a>
     <p class="fine">Direct link to the vendor site. See our <a href="/disclosure.html">affiliate disclosure</a>.</p>`;
-  }
-  return `<!-- AFFILIATE PLACEHOLDER: light when Joseph approves -->
-    <a href="#" class="btn affiliate-cta" data-program="${esc(p.affiliate.program)}" data-status="pending-approval">Check the current price</a>
-    <p class="fine">Affiliate link pending approval — this button is inert for now. See our <a href="/disclosure.html">affiliate disclosure</a>.</p>`;
 }
 
-function relatedRows(p) {
+function relatedRows(p, batch = false) {
   const rel = products
     .filter((q) => q.slug !== p.slug)
     .sort((a, b) => Number(b.category === p.category) - Number(a.category === p.category))
@@ -723,7 +938,7 @@ function relatedRows(p) {
       <p class="dir-row-tag">${esc(r.tagline)}</p>
     </div>
     <div class="dir-row-side">
-      <p class="dir-row-price">${fromPrice(r)}</p>
+      <p class="dir-row-price">${batch ? fromPrice(r, true, p.batch_amount_related ? PRICE_MODE.AMOUNT : PRICE_MODE.PAREN) : fromPrice(r)}</p>
       <p class="dir-row-badge">${dealBadge(r)}</p>
     </div>
   </li>`)
@@ -741,44 +956,58 @@ function relatedRows(p) {
 }
 
 function dealPage(p) {
+  const batch = !!p.batch_template;
+  const slotBare = batch || !!p.hand_built;
+  const canLine = canadianLine(p);
   return `${head(
-    `${p.name} Pricing & Deals (Verified ${p.last_verified}) — PlanPrice`,
-    // PP-SERP-DESC-PAGES (2026-10-11): meta decoupled from the .lead tagline —
-    // the trailing "Checked {date}" sentence pushed 12 pages to 156-187 chars.
-    // New form lands at 103-136 chars; visible page copy is unchanged.
-    `${p.name} verified list pricing and current promotions. ${p.tagline}`,
-    `/deals/${p.slug}.html`
+    `${p.name} Pricing & Deals (Verified ${p.last_verified}) | PlanPrice`,
+    // PP-GEN-DRIFT (R10): the committed SERP copy wins. products.json carries
+    // a per-product meta_description extracted verbatim from the committed
+    // deal pages (incl. the " Checked <date> by the PlanPrice research team."
+    // suffix on 37 of them); the PP-SERP-DESC-PAGES formula remains only as
+    // the fallback for a future product that has no extracted meta yet.
+    p.meta_description || `${p.name} verified list pricing and current promotions. ${p.tagline}`,
+    `/deals/${p.slug}.html`,
+    "",
+    { bare: batch, noTrunc: !!p.meta_description }
   )}
-${header("/")}
+${header(batch ? null : "/")}
 <main>
   <div class="wrap">
     <p class="breadcrumbs"><a href="/">All deals</a> › ${esc(p.name)}</p>
     <article class="product">
       <p class="card-cat">${esc(p.category)}</p>
       <h1>${esc(p.name)}</h1>
-      <p class="lead">${esc(p.tagline)}</p>
-      ${canadianLine(p)}
+      <p class="lead">${esc(p.lead || p.tagline)}</p>${figFor(`deals/${p.slug}`)}${canLine ? `
+      ${canLine}` : slotBare ? "" : "\n      "}
       <div class="facts-wrap">
-        ${factsStrip(p)}
+        ${factsStrip(p, "", batch)}
       </div>
-      <section class="section overview">
-        ${p.similar_to ? `<p class="similar-to">Think of it as: <strong>${esc(p.similar_to)}</strong>.</p>` : ""}
+      <section class="section overview">${p.similar_to ? `
+        <p class="similar-to">Think of it as: <strong>${esc(p.similar_to)}</strong>.</p>` : slotBare ? "" : "\n        "}
         <p>${esc(p.description)}</p>
-        <p><strong>Best for:</strong> ${esc(p.best_for)}</p>
+        <p><strong>Best for:</strong> ${esc(p.best_for)}</p>${p.canadian_note ? `
+        <p><strong>Canadian note:</strong> ${esc(p.canadian_note)}</p>` : ""}
       </section>
-      ${pricingTable(p)}
+      ${batch ? pricingTable(p).replace("</tr></tbody>", "</tr>\n</tbody>") : pricingTable(p)}${!batch && pageExtras[`deals/${p.slug}`] ? `
+      ${pageExtras[`deals/${p.slug}`]}` : ""}${batch ? `
+      ${extraFor(`deals/${p.slug}`).trimStart()}
+      ${verificationBox(p, true)}
+      ${priceHistorySection(p, true)}` : `
       ${reviewsSection(p)}
       ${scoreSection(p)}
       ${verificationBox(p)}
       ${claimBlock(p)}
-      <section class="section cta-block">
-        ${cta(p)}
+      ${priceHistorySection(p)}`}
+      <section class="section cta-block">${batch ? `
+    ${cta(p, batch)}` : `
+        ${cta(p, batch)}`}
       </section>
-      ${relatedRows(p)}
+      ${relatedRows(p, batch)}
     </article>
   </div>
 </main>
-${footer()}`;
+${footer()}${batch ? "\n" : ""}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -810,7 +1039,7 @@ function categoryPage(c) {
   const n = items.length;
   const plural = n === 1 ? "" : "s";
   return `${head(
-    `${c} Pricing & Deals — PlanPrice`,
+    `${c} Pricing & Deals | PlanPrice`,
     `${c} software: verified pricing and current promotions. ${n} product${plural} tracked, checked ${CHECKED}.`,
     `/categories/${slugify(c)}.html`,
     '\n<script src="/filter.js" defer></script>'
@@ -820,9 +1049,9 @@ ${header(null)}
   <div class="wrap" id="all-deals">
     <p class="breadcrumbs"><a href="/">All deals</a> › ${esc(c)}</p>
     <h1 class="page-title">${esc(c)}</h1>
-    <p class="section-sub">${n} product${plural} tracked · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <p class="section-sub">${n} product${plural} tracked · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>${figFor(`categories/${slugify(c)}`)}
     <p class="guide-banner"><a href="/guides/${slugify(c)}.html">Buyer's guide: how to choose ${esc(c)} software</a></p>
-    ${h2hBannerLink(c)}
+    ${h2hBannerLink(c)}${extraFor(`categories/${slugify(c)}`)}
     ${filterForm(false)}
     <section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
       <ul class="dir-rows">${rows}</ul>
@@ -835,15 +1064,15 @@ ${footer()}`;
 /* Compare index: mechanical list of the 3 sets. Set titles are the
  * vs-joined product names (validated mechanical in the loader above). */
 function compareIndexPage() {
-  const items = compareSets
+  const items = allCompareSets
     .map((s) => `<li class="compare-row">
       <h2 class="compare-row-title"><a href="/compare/${esc(s.slug)}.html">${esc(s.title)}</a></h2>
-      <p class="compare-row-meta">${esc(s.category)} · ${s.products.length} products</p>
+      <p class="compare-row-meta">${s.editorial ? s.category : esc(s.category)} · ${s.products.length} products</p>
     </li>`)
     .join("\n");
   return `${head(
-    "Compare — PlanPrice",
-    `Head-to-head comparisons of rival B2B software: verified pricing, current deals, and user feedback side by side. ${compareSets.length} comparisons tracked.`,
+    "Compare | PlanPrice",
+    `Head-to-head comparisons of rival B2B software: verified pricing, current deals, and user feedback side by side. ${allCompareSets.length} comparisons tracked.`,
     "/compare.html"
   )}
 ${header("/compare.html")}
@@ -851,7 +1080,7 @@ ${header("/compare.html")}
   <div class="wrap">
     <p class="breadcrumbs"><a href="/">All deals</a> › Compare</p>
     <h1 class="page-title">Compare</h1>
-    <p class="section-sub">${compareSets.length} head-to-head comparisons tracked</p>
+    <p class="section-sub">${allCompareSets.length} head-to-head comparisons tracked</p>${extraFor("compare-index")}
     <ul class="compare-rows">${items}</ul>
   </div>
 </main>
@@ -885,7 +1114,7 @@ function compareSetPage(set) {
     </section>`)
     .join("\n");
   return `${head(
-    `${set.title} — PlanPrice`,
+    `${set.title} | PlanPrice`,
     `${set.title}: compare verified pricing, current deals, and user feedback side by side. Prices checked ${pageDate}.`,
     `/compare/${set.slug}.html`
   )}
@@ -894,7 +1123,7 @@ ${header("/compare.html")}
   <div class="wrap">
     <p class="breadcrumbs"><a href="/compare.html">Compare</a> › ${esc(set.title)}</p>
     <h1 class="page-title">${esc(set.title)}</h1>
-    <p class="section-sub">${set.products.length} products, side by side · prices checked <time datetime="${pageDate}">${pageDate}</time></p>
+    <p class="section-sub">${set.products.length} products, side by side · prices checked <time datetime="${pageDate}">${pageDate}</time></p>${figFor(`compare/${set.slug}`)}
     <div class="compare-cols">
       ${cols}
     </div>
@@ -916,7 +1145,7 @@ function saversStrip() {
   const items = top
     .map(
       (s) =>
-        `<li class="saver-row"><a href="/deals/${esc(s.slug)}.html">${esc(s.name)}</a> — ${esc(s.tier)}: ${esc(s.saveText)}</li>`
+        `<li class="saver-row"><a href="/deals/${esc(s.slug)}.html">${esc(s.name)}</a>. ${esc(s.tier)}: ${esc(s.saveText)}</li>`
     )
     .join("\n");
   return `<section class="section savers" id="biggest-savers" aria-label="Biggest annual-billing savings">
@@ -946,7 +1175,7 @@ function dealsPage() {
     ? `<ul class="dir-rows">${rows}</ul>`
     : `<p class="section-sub">No active promos right now — check back after the next price sweep.</p>`;
   return `${head(
-    "Current promos — PlanPrice",
+    "Current promos | PlanPrice",
     `Current promotions on B2B software: ${n} active promo${plural}, verified against vendor sites. Checked ${CHECKED}.`,
     "/deals.html",
     '\n<script src="/filter.js" defer></script>'
@@ -956,7 +1185,7 @@ ${header("/deals.html")}
   <div class="wrap" id="all-deals">
     <p class="breadcrumbs"><a href="/">All deals</a> › Current promos</p>
     <h1 class="page-title">Current promos</h1>
-    <p class="section-sub">${n} active promo${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <p class="section-sub">${n} active promo${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>${extraFor("deals")}
     ${saversStrip()}
     ${filterForm(false, { dealsOnly: false })}
     <section class="dir-cat" id="cat-deals" aria-label="Current promos">
@@ -982,8 +1211,8 @@ function canadianPage() {
   const plural = n === 1 ? "" : "s";
   const rows = items.map(({ p }) => dirRow(p)).join("\n");
   return `${head(
-    "Canadian vendors — PlanPrice",
-    `Canadian B2B software vendors: ${n} verified Canadian ${n === 1 ? "company" : "companies"} — list prices and promos checked ${CHECKED}.`,
+    "Canadian vendors | PlanPrice",
+    `Canadian B2B software vendors: ${n} verified Canadian ${n === 1 ? "company" : "companies"}, list prices and promos checked ${CHECKED}.`,
     "/canadian.html",
     '\n<script src="/filter.js" defer></script>'
   )}
@@ -992,7 +1221,7 @@ ${header("/canadian.html")}
   <div class="wrap" id="all-deals">
     <p class="breadcrumbs"><a href="/">All deals</a> › Canadian vendors</p>
     <h1 class="page-title">Canadian vendors</h1>
-    <p class="section-sub">${n} Canadian vendor${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <p class="section-sub">${n} Canadian vendors · each row shows its own verification date</p>${extraFor("canadian")}
     ${filterForm(false, { canadian: false })}
     <section class="dir-cat" id="cat-canadian" aria-label="Canadian vendors">
       <ul class="dir-rows">${rows}</ul>
@@ -1026,7 +1255,7 @@ function freePage() {
       const tierBlocks = freeTiers
         .map(
           (t) =>
-            `<p class="free-tier"><strong>${esc(t.name)}</strong> — ${esc(t.price)}</p>\n      <p class="free-notes">${esc(t.notes)}</p>`
+            `<p class="free-tier"><strong>${esc(t.name)}</strong>, ${esc(t.price)}</p>\n      <p class="free-notes">${esc(t.notes)}</p>`
         )
         .join("\n      ");
       return `<li class="dir-row free-card" data-slug="${esc(p.slug)}">
@@ -1039,8 +1268,8 @@ function freePage() {
     })
     .join("\n");
   return `${head(
-    "Free to start — PlanPrice",
-    `Start free: ${n} products with a $0 tier — verified pricing, checked ${CHECKED}.`,
+    "Free to start | PlanPrice",
+    `Start free: ${n} products with a $0 tier, verified pricing, checked ${CHECKED}.`,
     "/free.html"
   )}
 ${header("/free.html")}
@@ -1048,7 +1277,7 @@ ${header("/free.html")}
   <div class="wrap" id="all-deals">
     <p class="breadcrumbs"><a href="/">All deals</a> › Free to start</p>
     <h1 class="page-title">Free to start</h1>
-    <p class="section-sub">${n} products with a free tier · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <p class="section-sub">${n} products with a free tier · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>${extraFor("free")}
     <section class="dir-cat" id="cat-free" aria-label="Free to start">
       <ul class="dir-rows">${cards}</ul>
     </section>
@@ -1066,6 +1295,20 @@ function topRatedPage() {
   const byAvg = rankByAvg(products, reviewScores);
   const byReviews = rankByReviews(products, reviewScores);
   const n = byAvg.length;
+  const SCORES_CHECKED = reviewScores.checked;
+  // R4d: the committed "How this leaderboard is built" section, with its
+  // hard-coded date/counts parameterized from the live score data.
+  const monday = byReviews.find((r) => r.slug === "monday");
+  const plausible = byAvg.find((r) => r.slug === "plausible");
+  const ratedGuide = (pageExtras["top-rated"] || "")
+    .replace("the 16 products PlanPrice currently tracks", `the ${n} products PlanPrice currently tracks`)
+    .replace("re-checked on 2026-09-30", `re-checked on ${SCORES_CHECKED}`)
+    .replace("23,267 (Monday.com)", monday ? `${monday.totalReviews.toLocaleString("en-US")} (Monday.com)` : "23,267 (Monday.com)")
+    // The worked example in the prose ("A 4.6 average built on 12 reviews
+    // (Plausible) ... a 4.7 built on ...") must track the same rank rows the
+    // leaderboard renders, or the guide contradicts the page it sits on.
+    .replace("A 4.6 average built on 12 reviews (Plausible)", plausible ? `A ${plausible.avgText} average built on ${plausible.totalReviews} reviews (Plausible)` : "A 4.6 average built on 12 reviews (Plausible)")
+    .replace("than a 4.7 built on", monday ? `than a ${monday.avgText} built on` : "than a 4.7 built on");
   const avgRows = byAvg
     .map((r) => `<li class="rated-row">${esc(r.line)}</li>`)
     .join("\n      ");
@@ -1073,8 +1316,8 @@ function topRatedPage() {
     .map((r) => `<li class="rated-row">${esc(r.mostLine)}</li>`)
     .join("\n      ");
   return `${head(
-    "Top rated — PlanPrice",
-    `The highest-rated B2B software by verified G2 and Capterra scores: ${n} products ranked. Scores checked ${CHECKED}.`,
+    "Top rated | PlanPrice",
+    `The highest-rated B2B software by verified G2 and Capterra scores: ${n} products ranked. Scores checked ${SCORES_CHECKED}.`,
     "/top-rated.html"
   )}
 ${header("/top-rated.html")}
@@ -1082,7 +1325,7 @@ ${header("/top-rated.html")}
   <div class="wrap">
     <p class="breadcrumbs"><a href="/">All deals</a> › Top rated</p>
     <h1 class="page-title">Top rated</h1>
-    <p class="section-sub">${n} products ranked by average G2/Capterra score · scores checked <time datetime="${CHECKED}">${CHECKED}</time></p>
+    <p class="section-sub">${n} products ranked by average G2/Capterra score · scores checked <time datetime="${SCORES_CHECKED}">${SCORES_CHECKED}</time></p>${ratedGuide ? "\n    " + ratedGuide : ""}
     <section class="section rated" aria-label="Highest average score">
       <h2 class="section-title">Highest average score</h2>
       <ol class="rated-list">
@@ -1095,7 +1338,7 @@ ${header("/top-rated.html")}
       ${revRows}
       </ol>
     </section>
-    <p class="fine">Averages are the mean of each product's available G2 and Capterra scores — not a PlanPrice rating. Scores checked ${CHECKED}.</p>
+    <p class="fine">Averages are the mean of each product's available G2 and Capterra scores, not a PlanPrice rating. Scores checked ${SCORES_CHECKED}.</p>
   </div>
 </main>
 ${footer()}`;
@@ -1122,7 +1365,7 @@ ${header("/guides.html")}
   <div class="wrap wrap-prose">
     <p class="breadcrumbs"><a href="/">All deals</a> › <a href="/guides.html">Buyer's guides</a> › ${esc(c)}</p>
     <h1 class="page-title">${esc(g.title)}</h1>
-    <p class="section-sub">Last updated <time datetime="${esc(g.updated)}">${esc(g.updated)}</time></p>
+    <p class="section-sub">${g.published ? `Published <time datetime="${esc(g.published)}">${esc(g.published)}</time> · ` : ""}Last updated <time datetime="${esc(g.updated)}">${esc(g.updated)}</time></p>${figFor(`guides/${g.slug}`)}
     ${paras(g.intro)}
     ${sections}
     <h2>Quick checklist</h2>
@@ -1130,35 +1373,11 @@ ${header("/guides.html")}
       ${g.checklist.map((li) => `<li>${esc(li)}</li>`).join("\n")}
     </ul>
     <h2>${esc(c)} products on PlanPrice</h2>
-    <p>Every ${esc(c)} product we track — see verified pricing and current promotions on each deal page:</p>
+    <p>Every ${esc(c)} product we track, see verified pricing and current promotions on each deal page:</p>
     <ul>
       ${productLinks}
     </ul>
     <p><a href="/categories/${slugify(c)}.html">Browse all ${esc(c)} software →</a></p>
-  </div>
-</main>
-${footer()}`;
-}
-
-function guidesIndexPage() {
-  const items = guidesData
-    .map((g) => `<li class="guide-row">
-      <h2 class="guide-row-title"><a href="/guides/${esc(g.slug)}.html">${esc(g.title)}</a></h2>
-      <p>${esc(g.meta_description)}</p>
-    </li>`)
-    .join("\n");
-  return `${head(
-    "Buyer's Guides — PlanPrice",
-    `How to choose business software: ${guidesData.length} buyer's guides covering accounting, CRM, ecommerce, field service, HR, payments, SEO, scheduling, and work management.`,
-    "/guides.html"
-  )}
-${header("/guides.html")}
-<main>
-  <div class="wrap">
-    <p class="breadcrumbs"><a href="/">All deals</a> › Buyer's guides</p>
-    <h1 class="page-title">Buyer's guides</h1>
-    <p class="section-sub">${guidesData.length} guides · how to choose, not what to buy</p>
-    <ul class="guide-rows">${items}</ul>
   </div>
 </main>
 ${footer()}`;
@@ -1177,7 +1396,7 @@ function glossaryTermPage(t) {
   // slice(0,157)+"…" = 158 chars, often mid-word).
   const metaDesc = truncMeta(t.definition);
   return `${head(
-    `${t.term} — Pricing glossary — PlanPrice`,
+    `${t.term} | Pricing glossary | PlanPrice`,
     metaDesc,
     `/glossary/${t.slug}.html`
   )}
@@ -1188,7 +1407,7 @@ ${header("/glossary.html")}
     <h1 class="page-title">${esc(t.term)}</h1>
     <p class="glossary-definition"><strong>Definition:</strong> ${esc(t.definition)}</p>
     <h2>Why it matters when comparing prices</h2>
-    <p>${esc(t.why_it_matters)}</p>
+    <p>${esc(t.why_it_matters)}</p>${t.extra_html || ""}
     ${relatedSection}
     <p><a href="/glossary.html">← All glossary terms</a></p>
   </div>
@@ -1205,7 +1424,7 @@ function glossaryIndexPage() {
     </li>`)
     .join("\n");
   return `${head(
-    "B2B Software Pricing Glossary — PlanPrice",
+    "B2B Software Pricing Glossary | PlanPrice",
     "Plain-English definitions of B2B software pricing terms: seat-based pricing, tiered pricing, usage-based pricing, freemium, SLAs, and more.",
     "/glossary.html"
   )}
@@ -1237,8 +1456,11 @@ function truncMeta(s, max = 155) {
   return cut + "…";
 }
 
-function head(title, description, path, extraHead = "") {
-  description = truncMeta(description);
+function head(title, description, path, extraHead = "", opts = {}) {
+  // PP-GEN-DRIFT: opts.noTrunc keeps an extracted committed meta verbatim
+  // (the batch deal pages carry untruncated SERP copy); opts.bare omits the
+  // OG/AdSense HTML comments (the batch deal-page template never had them).
+  if (!opts.noTrunc) description = truncMeta(description);
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1246,8 +1468,7 @@ function head(title, description, path, extraHead = "") {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${esc(SITE_URL + path)}">
-<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
+<link rel="canonical" href="${esc(SITE_URL + path)}">${opts.bare ? "" : "\n<!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->"}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PlanPrice">
 <meta property="og:title" content="${esc(title)}">
@@ -1260,10 +1481,10 @@ function head(title, description, path, extraHead = "") {
 <meta name="twitter:image" content="${esc(SITE_URL + '/og-image.jpg')}">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" type="image/png" href="/favicon.png">
-<!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).
+${opts.bare ? "" : `<!-- AdSense account verification (Joseph's AdSense signup, 2026-10-01).
      Publisher ID is public by design — AdSense requires it in page source.
      Ad units and ads.txt only AFTER Google approves the account. -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+`}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
      crossorigin="anonymous"></script>${extraHead}${beaconTag()}
 </head>`;}
 
@@ -1297,7 +1518,7 @@ function header(active) {
 <div class="disclosure-bar">${
   anyAffiliateLive
     ? `PlanPrice may earn a commission if you buy through links on this page. <a href="/disclosure.html">Read our affiliate disclosure</a>.`
-    : `PlanPrice is setting up affiliate partnerships — right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.`
+    : `PlanPrice is setting up affiliate partnerships, right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.`
 }</div>
 <header class="site-header">
   <div class="wrap header-inner">
@@ -1311,6 +1532,7 @@ function header(active) {
       ${nav("/compare.html", "Compare")}
       ${nav("/guides.html", "Guides")}
       ${nav("/glossary.html", "Glossary")}
+      ${nav("/search.html", "Search")}
       ${nav("/disclosure.html", "Disclosure")}
       ${nav("/about.html", "About")}
     </nav>
@@ -1321,12 +1543,14 @@ function header(active) {
 function footer() {
   return `<footer class="site-footer">
   <div class="wrap">
-    <p class="footer-brand">PlanPrice — verified B2B software pricing and deals.</p>
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice, verified B2B software pricing and deals.</p>
     <nav class="footer-nav">
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
       <a href="/guides.html">Guides</a>
       <a href="/glossary.html">Glossary</a>
+      <a href="/verified.html">Verification log</a>
       <a href="/disclosure.html">Affiliate disclosure</a>
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -1334,7 +1558,7 @@ function footer() {
     <p class="fine">Prices verified ${CHECKED} by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. ${
       anyAffiliateLive
         ? "PlanPrice may earn a commission on qualifying purchases."
-        : "PlanPrice currently earns no affiliate commissions — partnerships are still being set up."
+        : "PlanPrice currently earns no affiliate commissions, partnerships are still being set up."
     }</p>
   </div>
 </footer>
@@ -1352,22 +1576,37 @@ function aboutBody() {
   const funding = anyAffiliateLive
     ? `<p>PlanPrice is funded by affiliate commissions: when you buy through a link on this site, we may earn a commission at no extra cost to you. See our <a href="/disclosure.html">affiliate disclosure</a> for the full explanation.</p>`
     : `<p>${AFFILIATE_INTERIM}</p>`;
+  // PP-GEN-DRIFT (R4a): body extracted verbatim from the committed about.html
+  // (incl. the How we verify prices / What PlanPrice doesn't do / AI
+  // disclosure sections). Only two dynamic slots: the funding paragraph
+  // (affiliate-state conditional, as before) and the site-wide verification
+  // date claim, which now follows the registry date (was a stale 2026-09-30
+  // literal in the committed prose).
   return `<section class="section"><div class="wrap">
-      <p>PlanPrice is a deals directory for business software. We track list prices and current promotions for the tools small businesses actually buy — accounting, CRM, ecommerce, point of sale, scheduling, and more.</p>
+      <p>PlanPrice is a deals directory for business software. We track list prices and current promotions for the tools small businesses actually buy, accounting, CRM, ecommerce, point of sale, scheduling, and more.</p>
       <p><strong>Our standard:</strong> every discount headline on this site links to the vendor's own page. If we couldn't find a public promotion, the page says so plainly instead of dressing up standard list prices as a deal.</p>
-      <p><strong>Review scores:</strong> deal pages show aggregate user ratings from third-party review sites (G2 and Capterra) — these are not PlanPrice's own ratings. We re-check every score during the monthly verification sweep; each score shows its source and the date it was last checked.</p>
+      <p><strong>Review scores:</strong> deal pages show aggregate user ratings from third-party review sites (G2 and Capterra), these are not PlanPrice's own ratings. We re-check every score during the monthly verification sweep; each score shows its source and the date it was last checked.</p>
       <p>Prices are checked by the PlanPrice research team and dated. Vendors change prices and promotions without notice, so always confirm on the vendor's pricing page before purchasing.</p>
       ${funding}
+    </div></section><section class="section"><div class="wrap">
+      <h2>How we verify prices</h2>
+      <p>Every price on PlanPrice is checked against the vendor's own pricing page by the research team, and the check date is printed next to the price, the current site-wide verification date is ${CHECKED}. When a vendor runs a public promotion, the deal page shows the promo terms and links to the vendor's own offer page; when no public promotion exists, the page says so plainly instead of dressing up list prices as a deal. Prices are re-checked on a regular sweep, and the verified date moves with each pass.</p>
+      <p>Review scores work the same way: the G2 and Capterra aggregates shown on deal pages are third-party user ratings, not PlanPrice's own opinions, and each score is re-checked during the verification sweep with its source and check date shown. Scores describe other users' experience; they don't include pricing, and a high score on an expensive tool doesn't make it the right tool for a tight budget.</p>
+      <h2>What PlanPrice doesn't do</h2>
+      <p>PlanPrice doesn't sell software and doesn't take a cut of anything you buy, right now our affiliate partnerships are still being set up, so every outbound link is a plain link to the vendor (see the <a href="/disclosure.html">affiliate disclosure</a>). We don't invent prices, fabricate promotions, or publish "deals" we couldn't find on the vendor's own site. And we're a pricing directory, not an advisor: nothing here is financial or tax advice, and the final price is always whatever the vendor's own checkout shows.</p>
+      <p>Spot something wrong? A price that changed, a promo that ended, a product we should track, <a href="/contact.html">tell us</a>. Corrections get re-checked against the vendor's site, and the page gets updated when the correction checks out.</p>
+    <h2>AI disclosure</h2>
+      <p>AI assists with content production on this site, under human direction and review.</p>
     </div></section>`;
 }
 
 function disclosureBody() {
   const status = anyAffiliateLive
     ? `<p>PlanPrice is reader-supported. ${AFFILIATE_BLUNT}</p>`
-    : `<p><strong>Current status: no affiliate links are live yet.</strong> PlanPrice is reader-supported: our plan is to fund the site through affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors — no commissions are being earned. When affiliate links go live, this page will say so, and buying through them will never cost you extra.</p>`;
+    : `<p><strong>Current status: no affiliate links are live yet.</strong> PlanPrice is reader-supported: our plan is to fund the site through affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors, no commissions are being earned. When affiliate links go live, this page will say so, and buying through them will never cost you extra.</p>`;
   const statusBullet = anyAffiliateLive
     ? `<li>We label affiliate links as affiliate links. If a link earns us a commission, the page says so.</li>`
-    : `<li>Right now, zero commissions are being earned. Deal-page buttons are plain outbound links to vendors we have no affiliate relationship with — no commissions are earned, and outbound links go straight to the vendor.</li>`;
+    : `<li>Right now, zero commissions are being earned. Deal-page buttons are plain outbound links to vendors we have no affiliate relationship with, no commissions are earned, and outbound links go straight to the vendor.</li>`;
   return `<section class="section"><div class="wrap">
       ${status}
       <p><strong>What this means in practice:</strong></p>
@@ -1380,7 +1619,7 @@ function disclosureBody() {
       <p>As of our current check (${CHECKED}), ${
         anyAffiliateLive
           ? "affiliate partnerships are active and earning commissions."
-          : "affiliate partnerships are still being established and no commissions are being earned yet. Buttons on deal pages are plain outbound links that go straight to the vendor."
+          : "affiliate partnerships are still being established and no commissions are being earned yet. Buttons on deal pages are plain outbound links that go straight to the vendor, they are not placeholders."
       }</p>
       <p>If you have questions about how we make money: ${
         anyAffiliateLive
@@ -1397,7 +1636,7 @@ function disclosureBody() {
  * when a token is set — never ship it while the beacon is inert. */
 function privacyBody() {
   const analytics = CF_BEACON_TOKEN
-    ? `<li><strong>No cookies set by us.</strong> We measure site visits with Cloudflare Web Analytics — a cookieless, privacy-first measurement tool that sets no cookies and collects no personal data.</li>`
+    ? `<li><strong>No cookies set by us.</strong> We measure site visits with Cloudflare Web Analytics, a cookieless, privacy-first measurement tool that sets no cookies and collects no personal data.</li>`
     : `<li><strong>No cookies set by us.</strong> Our pages do not use analytics cookies or tracking pixels.</li>`;
   return `<section class="section"><div class="wrap">
       <p><strong>Last updated: ${CHECKED}.</strong></p>
@@ -1405,8 +1644,8 @@ function privacyBody() {
       <ul>
         <li><strong>No accounts, no signups, no email capture.</strong> There is nothing to subscribe to and nothing to log into.</li>
         ${analytics}
-        <li><strong>Third parties.</strong> Our hosting provider may log basic server data (IP address, pages requested) for security. When affiliate links go live, clicking one takes you to the vendor's site, which is governed by that vendor's privacy policy — not ours.</li>
-        <li><strong>Advertising.</strong> We've signed up for Google AdSense and placed the account-verification code on our pages, but ads aren't showing yet — they start only if Google approves this site. When they do, Google and its partners may use cookies — including the DoubleClick cookie — to show personalized ads based on your visits to this site and other sites. You can opt out of personalized advertising at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>. Visitors in the European Economic Area, the UK, and Switzerland will see a consent message from Google's certified consent management platform before personalized ads can show.</li>
+        <li><strong>Third parties.</strong> Our hosting provider may log basic server data (IP address, pages requested) for security. When affiliate links go live, clicking one takes you to the vendor's site, which is governed by that vendor's privacy policy, not ours.</li>
+        <li><strong>Advertising.</strong> We've signed up for Google AdSense and placed the account-verification code on our pages, but ads aren't showing yet, they start only if Google approves this site. When they do, Google and its partners may use cookies, including the DoubleClick cookie, to show personalized ads based on your visits to this site and other sites. You can opt out of personalized advertising at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>. Visitors in the European Economic Area, the UK, and Switzerland will see a consent message from Google's certified consent management platform before personalized ads can show.</li>
       </ul>
       <p>We do not sell personal information because we do not collect any. If you contact us about the site, we use your message only to respond.</p>
     </div></section>`;
@@ -1416,6 +1655,7 @@ function privacyBody() {
  * Static page, mailto link only — no form, no email capture, no
  * response-time promise (per brief open Q2/Q3). */
 function contactBody() {
+  // PP-GEN-DRIFT (R4a): body extracted verbatim from the committed contact.html.
   return `<section class="section"><div class="wrap">
       <p>The best way to reach the PlanPrice team is email: <a href="mailto:magimike4@gmail.com">magimike4@gmail.com</a>.</p>
       <p><strong>Good reasons to write:</strong></p>
@@ -1425,34 +1665,40 @@ function contactBody() {
         <li>Questions about how we verify prices and review scores</li>
         <li>Feedback on the site itself</li>
       </ul>
-      <p>We read every message. There is no contact form and no mailing list — just email.</p>
+      <p>We read every message. There is no contact form and no mailing list, just email.</p>
+      <h2>What to include</h2>
+      <p>For pricing corrections, include the vendor and plan name, the price you saw, the date you saw it, and a link to the vendor's pricing page where you saw it, that lets us re-check the correction in one pass instead of trading emails. A screenshot of the vendor's pricing page helps when the price differs by region or account type. For product or category suggestions, tell us the product name and what it does; for site feedback, tell us which page you were on and what was unclear or missing.</p>
+      <p>The more specific the report, the faster the fix: "QuickBooks Online's Simple Start plan shows C$32/month on the vendor's Canadian pricing page as of October 6" is actionable in minutes, while "your QuickBooks price looks off" needs a full re-verification from scratch. If you're a vendor with a correction or a public promotion we missed, include a link to the public offer page, we only list promotions we can verify on the vendor's own site.</p>
+      <h2>What happens next</h2>
+      <p>Every message is read by a person on the PlanPrice team. Pricing corrections get re-checked against the vendor's own site: if the correction checks out, the page is updated and the verified date moves; if the price we show is still the one the vendor lists, we'll say so. Product suggestions go onto the tracking shortlist, and site feedback gets folded into the next round of page improvements.</p>
+      <p>There's no contact form, no mailing list, and no ticket system, just email, answered by the people who maintain the pages. We won't promise a reply time we can't guarantee, but corrections that affect a published price get priority, because an out-of-date price is the one thing this site can't afford to carry.</p>
     </div></section>`;
 }
 
 const STATIC_PAGES = {
   "about.html": {
-    title: "About PlanPrice — PlanPrice",
+    title: "About PlanPrice | PlanPrice",
     description: "What PlanPrice is: a B2B software deals directory where every price and promotion is verified against the vendor's own site.",
     path: "/about.html",
     h1: "About PlanPrice",
     body: aboutBody()
   },
   "disclosure.html": {
-    title: "Affiliate Disclosure — PlanPrice",
+    title: "Affiliate Disclosure | PlanPrice",
     description: "PlanPrice's affiliate disclosure: how we earn money and what it means for our deal listings.",
     path: "/disclosure.html",
     h1: "Affiliate Disclosure",
     body: disclosureBody()
   },
   "privacy-policy.html": {
-    title: "Privacy Policy — PlanPrice",
+    title: "Privacy Policy | PlanPrice",
     description: "PlanPrice privacy policy: what data we collect (almost nothing) and how we use it.",
     path: "/privacy-policy.html",
     h1: "Privacy Policy",
     body: privacyBody()
   },
   "terms.html": {
-    title: "Terms of Use — PlanPrice",
+    title: "Terms of Use | PlanPrice",
     description: "PlanPrice terms of use: informational content, pricing accuracy, and affiliate relationships.",
     path: "/terms.html",
     h1: "Terms of Use",
@@ -1468,7 +1714,7 @@ const STATIC_PAGES = {
     </div></section>`
   },
   "contact.html": {
-    title: "Contact PlanPrice — PlanPrice",
+    title: "Contact PlanPrice | PlanPrice",
     description: "Contact the PlanPrice team by email.",
     path: "/contact.html",
     h1: "Contact PlanPrice",
@@ -1484,18 +1730,42 @@ ${footer()}`;
 }
 
 function sitemap() {
-  const paths = ["/", "/about.html", "/disclosure.html", "/privacy-policy.html", "/terms.html",
-    "/contact.html",
-    "/deals.html", "/canadian.html", "/free.html", "/top-rated.html",
-    ...products.map(p => `/deals/${p.slug}.html`),
-    ...[...new Set(products.map(p => `/categories/${slugify(p.category)}.html`))].sort(),
+  // PP-GEN-DRIFT (R4e): the sitemap preserves the EXISTING sitemap.xml's URL
+  // set, order, and per-entry elements (changefreq/priority included) — the
+  // committed sitemap lists ~150 article-guide URLs and the 12 editorial
+  // compare pages that this generator does not write, and dropping them at
+  // regen would de-index live pages. lastmod is refreshed to CHECKED only
+  // for pages this generator itself writes; every other entry is kept
+  // byte-verbatim. On a tree with no existing sitemap, fall back to the
+  // generated set.
+  const generatedPaths = new Set([
+    "/", "/about.html", "/disclosure.html", "/privacy-policy.html", "/terms.html",
+    "/contact.html", "/deals.html", "/canadian.html", "/free.html", "/top-rated.html",
+    ...products.filter((p) => !p.hand_built).map((p) => `/deals/${p.slug}.html`),
+    ...[...new Set(products.map((p) => `/categories/${slugify(p.category)}.html`))].sort(),
     "/compare.html",
-    ...compareSets.map(s => `/compare/${s.slug}.html`),
-    "/guides.html",
-    ...guidesData.map(g => `/guides/${g.slug}.html`),
+    ...compareSets.filter((x) => !x.editorial).map((x) => `/compare/${x.slug}.html`),
+    ...guidesData.map((g) => `/guides/${g.slug}.html`),
     "/glossary.html",
-    ...glossaryData.map(t => `/glossary/${t.slug}.html`)];
-  const urls = paths.map(p => `  <url>\n    <loc>${SITE_URL}${p}</loc>\n    <lastmod>${CHECKED}</lastmod>\n  </url>`).join("\n");
+    ...glossaryData.map((t) => `/glossary/${t.slug}.html`),
+  ]);
+  const existingPath = join(ROOT, "sitemap.xml");
+  if (existsSync(existingPath)) {
+    const existing = readFileSync(existingPath, "utf8");
+    const blocks = existing.match(/<url>[\s\S]*?<\/url>/g);
+    if (blocks && blocks.length) {
+      const out = blocks.map((b0) => {
+        const b = "  " + b0;
+        const loc = (b.match(/<loc>([^<]+)<\/loc>/) || [])[1] || "";
+        const path = loc.startsWith(SITE_URL) ? loc.slice(SITE_URL.length) : loc;
+        if (!generatedPaths.has(path)) return b;
+        return b.replace(/<lastmod>[^<]*<\/lastmod>/, `<lastmod>${CHECKED}</lastmod>`);
+      });
+      return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${out.join("\n")}\n</urlset>\n`;
+    }
+  }
+  const paths = [...generatedPaths];
+  const urls = paths.map((p) => `  <url>\n    <loc>${SITE_URL}${p}</loc>\n    <lastmod>${CHECKED}</lastmod>\n  </url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 
@@ -1503,19 +1773,26 @@ function robots() {
   return `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
 }
 
+let filesWritten = 0;
 function write(path, content) {
   const full = join(ROOT, path);
   mkdirSync(dirname(full), { recursive: true });
   writeFileSync(full, content, "utf8");
+  filesWritten += 1;
 }
 
 write("index.html", indexPage());
-for (const p of products) write(`deals/${p.slug}.html`, dealPage(p));
+// Hand-built deal pages (products.json hand_built) carry custom pricing tables
+// the data model cannot reproduce (dual price columns, fee-schedule captions).
+// Like the editorial compare pairs, the generator validates their data but
+// never overwrites the committed page. PP-GEN-DRIFT ruling, 2026-11-10.
+for (const p of products) {
+  if (!p.hand_built) write(`deals/${p.slug}.html`, dealPage(p));
+}
 for (const [file, cfg] of Object.entries(STATIC_PAGES)) write(file, staticPage(file, cfg));
 
 // Category browse pages (one per distinct products[].category), the compare
 // index, and the head-to-head set pages (PP-SECTIONS).
-const categories = [...new Set(products.map((p) => p.category))].sort();
 for (const c of categories) write(`categories/${slugify(c)}.html`, categoryPage(c));
 write("compare.html", compareIndexPage());
 for (const s of compareSets) write(`compare/${s.slug}.html`, compareSetPage(s));
@@ -1528,7 +1805,10 @@ write("top-rated.html", topRatedPage());
 // AdSense-readiness content (PP-ADSENSE-READINESS): contact page (via
 // STATIC_PAGES above), buyer's guides, and the pricing glossary.
 for (const g of guidesData) write(`guides/${g.slug}.html`, guidePage(g));
-write("guides.html", guidesIndexPage());
+// PP-GEN-DRIFT (R4e): guides.html is a hand-built grouped index of ~150
+// article guides — the generator does NOT write it (or the article guide
+// pages). The sitemap fallback builds its page inventory from guidesData
+// directly; no rendered guides index is kept in the generator.
 for (const t of glossaryData) write(`glossary/${t.slug}.html`, glossaryTermPage(t));
 write("glossary.html", glossaryIndexPage());
 write("sitemap.xml", sitemap());
@@ -1543,20 +1823,38 @@ write(
   JSON.stringify(
     {
       check_date: CHECKED,
-      products: products.map((p) => ({
+      // PP-GEN-DRIFT (R6b): the committed index derives priceText/priceSort
+      // from data/compare-vendors.json "start" (paren suffix stripped,
+      // "From " prefixed for price-like starts; non-price starts such as
+      // "Custom" pass through). This reproduces the committed values for
+      // all 22 legacy entries — including the 5 formerly tier-less products
+      // and wagepoint, whose tier text differs — and extends the same
+      // convention to the full 49. Fallback: price-parse on pricing_tiers.
+      products: products.map((p) => {
+        const cvEntry = compareVendors.get(p.slug);
+        let priceText = startPriceText(p);
+        let priceSort = startPriceNumeric(p);
+        if (cvEntry && typeof cvEntry.start === "string" && cvEntry.start) {
+          const start = cvEntry.start.replace(/\s*\(.*?\)\s*$/, "");
+          const num = start.replace(/,/g, "").match(/\d+(?:\.\d+)?/);
+          priceSort = num ? parseFloat(num[0]) : null;
+          priceText = /^\$|^C\$|^\d/.test(start) ? `From ${start}` : start;
+        }
+        return {
         slug: p.slug,
         name: p.name,
         category: p.category,
-        priceText: startPriceText(p),
-        priceSort: startPriceNumeric(p),
+        priceText,
+        priceSort,
         dealHeadline: p.deal && !isExpiredDeal(p) ? p.deal.headline : null,
         country: p.canadian ? "CA" : null,
         url: `/deals/${p.slug}.html`,
-      })),
+        };
+      }),
     },
     null,
-    2
+    1
   ) + "\n"
 );
 
-console.log(`Generated ${3 + products.length + Object.keys(STATIC_PAGES).length + categories.length + 1 + compareSets.length + 2 + guidesData.length + 1 + glossaryData.length + 1} HTML files + sitemap.xml + robots.txt + data/deals-index.json for host ${HOST}`);
+console.log(`Generated ${filesWritten} files (HTML + sitemap.xml + robots.txt + data/deals-index.json) for host ${HOST}`);

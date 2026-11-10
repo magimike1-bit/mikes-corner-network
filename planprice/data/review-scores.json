@@ -1,41 +1,41 @@
 {
-  "checked": "2026-10-14",
+  "checked": "2026-11-10",
   "scores": {
     "ahrefs": {
       "capterra": {
         "score": 4.7,
-        "reviews": 585,
+        "reviews": 580,
         "url": "https://www.capterra.com/p/176340/Ahrefs/"
       },
       "g2": {
         "score": 4.5,
-        "reviews": 717,
+        "reviews": 723,
         "url": "https://www.g2.com/products/ahrefs/reviews"
       }
     },
     "big-cartel": {
       "g2": {
         "score": 4.6,
-        "reviews": 101,
+        "reviews": 105,
         "url": "https://www.g2.com/products/big-cartel/reviews"
       }
     },
     "calendly": {
       "capterra": {
         "score": 4.7,
-        "reviews": 4164,
+        "reviews": 4159,
         "url": "https://www.capterra.com/p/148036/Calendly"
       },
       "g2": {
         "score": 4.7,
-        "reviews": 2649,
+        "reviews": 2679,
         "url": "https://www.g2.com/products/calendly/reviews"
       }
     },
     "freshbooks": {
       "capterra": {
         "score": 4.5,
-        "reviews": 4529,
+        "reviews": 4523,
         "url": "https://www.capterra.com/p/142390/FreshBooks/reviews/"
       },
       "g2": {
@@ -47,12 +47,12 @@
     "hubspot": {
       "capterra": {
         "score": 4.5,
-        "reviews": 4491,
+        "reviews": 4484,
         "url": "https://www.capterra.com/p/152373/HubSpot-CRM/reviews/"
       },
       "g2": {
         "score": 4.4,
-        "reviews": null,
+        "reviews": 16040,
         "url": "https://www.g2.com/products/hubspot/reviews"
       }
     },
@@ -66,24 +66,24 @@
     "jobber": {
       "capterra": {
         "score": 4.6,
-        "reviews": 1487,
+        "reviews": 1489,
         "url": "https://www.capterra.com/p/127994/Jobber/alternatives/"
       },
       "g2": {
         "score": 4.6,
-        "reviews": 529,
+        "reviews": 533,
         "url": "https://www.g2.com/products/jobber/reviews"
       }
     },
     "monday": {
       "capterra": {
         "score": 4.6,
-        "reviews": 6123,
+        "reviews": 6114,
         "url": "https://www.capterra.com/p/147657/monday-com"
       },
       "g2": {
         "score": 4.7,
-        "reviews": 17263,
+        "reviews": 17905,
         "url": "https://www.g2.com/products/monday-com/reviews"
       }
     },
@@ -94,72 +94,72 @@
         "url": "https://www.capterra.com/p/187430/Plausible-Insights/"
       },
       "g2": {
-        "score": 4.5,
-        "reviews": 4,
+        "score": 4.9,
+        "reviews": 6,
         "url": "https://www.g2.com/products/plausible-analytics/reviews"
       }
     },
     "quickbooks": {
       "g2": {
         "score": 4,
-        "reviews": 3891,
+        "reviews": 3901,
         "url": "https://www.g2.com/products/quickbooks-online/reviews"
       }
     },
     "semrush": {
       "capterra": {
         "score": 4.6,
-        "reviews": 2329,
+        "reviews": 2321,
         "url": "https://www.capterra.com/p/151962/SEMrush/reviews/"
       },
       "g2": {
         "score": 4.4,
-        "reviews": 4069,
+        "reviews": 4304,
         "url": "https://www.g2.com/products/semrush/reviews"
       }
     },
     "shopify": {
       "g2": {
         "score": 4.4,
-        "reviews": 5146,
+        "reviews": 5153,
         "url": "https://www.g2.com/products/shopify/reviews"
       }
     },
     "square": {
-      "capterra": {
-        "score": 4.6,
-        "reviews": 3039,
-        "url": "https://www.capterra.com/p/121583/AccuPOS-Point-Of-Sale-Software/alternatives/"
-      },
       "g2": {
         "score": 4.5,
         "reviews": 176,
         "url": "https://www.g2.com/products/square-payments/reviews"
+      },
+      "capterra": {
+        "score": 4.6,
+        "reviews": 3034,
+        "url": "https://www.capterra.com/p/275802/Square-Point-of-Sale/reviews/"
       }
     },
     "stripe": {
       "capterra": {
         "score": 4.6,
-        "reviews": 3388,
+        "reviews": 3384,
         "url": "https://www.capterra.com/p/123889/Stripe/"
       },
       "g2": {
         "score": 4.2,
-        "reviews": 460,
+        "reviews": 465,
         "url": "https://www.g2.com/products/stripe-stripe-payments/reviews"
       }
     },
     "wave": {
       "g2": {
         "score": 4.3,
-        "reviews": 329,
+        "reviews": 327,
         "url": "https://www.g2.com/products/wave/reviews"
       }
     },
     "xero": {
       "g2": {
         "score": 4.4,
-        "reviews": 1837,
+        "reviews": 1849,
         "url": "https://www.g2.com/products/xero/reviews"
       }
     }

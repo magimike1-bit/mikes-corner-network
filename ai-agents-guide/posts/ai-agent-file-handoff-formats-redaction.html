@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giving an AI Agent Files to Work On: Formats, Redaction, and Handoff Checks | Using AI Agents</title>
+<meta name="description" content="Supported does not mean readable. Choose a format the agent can read, redact a copy including the hidden layer, and verify the handoff with a receipt check and a re-search.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Giving an AI agent files to work on: formats, redaction, and handoff checks</h1>
+  <p class="meta">Working with files &middot; 9 min read</p>
+<p>Can the agent actually read the file you are about to send it?</p>
+<p>That question comes before format, before redaction, and before the task itself. A file can be a supported type and still give the agent almost nothing: a scanned contract with no text layer, a spreadsheet where merged headings detach numbers from their labels, or a redacted copy that is not the file that was actually uploaded. This guide treats a handoff as three jobs with three checks. Choose a format the agent can read. Remove what it must not see, from a copy. Then prove the clean file is the one it received.</p>
+<h2>Start with the selectable text test</h2>
+<p>Open the file and try to select a sentence with your cursor and copy it. If that works, the file holds real text and an agent will almost always read it cleanly. If the text is baked into a photo or a scan, the agent has to run optical character recognition, often shortened to OCR, and accuracy drops with skew, noise, and low resolution.</p>
+<p>That one test explains most bad file results. A native PDF, exported from a document or a report tool, carries a text layer. A scanned PDF is a picture of pages. Both end in .pdf, and only one of them behaves like text.</p>
+<p>Run the same suspicion over spreadsheets. A clean grid reads well: one header row, one value per cell, no merged cells. Multi-tab workbooks and merged or pivot style layouts can scramble which number belongs to which label, quietly, with no error message to warn you.</p>
+<h2>Choose the format by the job, not by habit</h2>
+<table><tr><th>What you are handing over</th><th>Format that fits</th><th>What to check first</th></tr>
+<tr><td>Prose the agent should read, summarise, or rewrite</td><td>Plain text or Markdown where you control the source, PDF or DOCX where layout is the source</td><td>Selectable text, headings still in order, no tracked changes carrying old wording</td></tr>
+<tr><td>A table of figures the agent should calculate from</td><td>CSV, or a clean spreadsheet with one header row</td><td>One value per cell, no merged headings, no second table hidden lower down</td></tr>
+<tr><td>Structured records, settings, or API output</td><td>JSON or another plain text format from the source list</td><td>Keys named plainly, no credentials or tokens left in the records</td></tr>
+<tr><td>A scan or a photo of a document</td><td>The scan, only if the job is about the image itself</td><td>Expect OCR errors, and plan a human check on names, dates, and amounts</td></tr></table>
+<p>The pattern in the table is simple. Formats close to plain text parse the most reliably. One format guide puts it this way: for prose, plain text or Markdown gives the fewest tokens and the cleanest extraction, and for tabular data CSV is the right choice. That is advice about reading quality, not a rule that every PDF must be converted. If the layout itself carries meaning, such as a signed form or a statement, keep the PDF and accept that the agent is reading a document, not a data file.</p>
+<p>Check the receiving tool before you convert anything. OpenAI lists the common ChatGPT formats as DOCX, PDF, TXT, Markdown, HTML, and JSON for documents and text, and XLSX, XLS, CSV, and TSV for spreadsheets. It also states a limit set worth knowing before a large handoff: documents and presentations are capped at 512 MB per file, text and document files are capped at 2 million tokens per file, that token limit does not apply to spreadsheets, and CSV files and spreadsheets sit at approximately 50 MB. A native Google Docs file, ending in .gdoc, cannot be uploaded directly at all. Export it as PDF or DOCX first.</p>
+<p>Those numbers are one vendor's, checked on November 10, 2026. Other tools set their own. The transferable habit is to check the limit page of the tool you are actually using before you assemble a large pack, not after an upload fails halfway through a job.</p>
+<h2>Redact a copy, never the original, and remove the hidden layer too</h2>
+<p>Redaction means the sensitive content is removed from the file, not covered. A black rectangle drawn over text can leave the words selectable, searchable, and copyable underneath it. The same failure hides in places readers never look: comments, tracked changes, document properties, headers and footers, hidden text, and custom XML data can all carry names and earlier wording out of the file with the visible page looking clean.</p>
+<p>For Office files, Microsoft's Document Inspector is the built in tool for that hidden layer. Microsoft recommends running it on a copy of the original, because data it removes is not always possible to restore. In the copy, the path is File, then Info, then Check for Issues, then Inspect Document. Review the results and select Remove All next to the categories you want gone, which can include comments and revision marks, document properties and personal information, headers, footers and watermarks, hidden text, and custom XML data.</p>
+<p>For a PDF, use a redaction tool, not a drawing tool. Adobe's documented path in Acrobat is All tools, then Redact a PDF, then Redact text and images. Mark the text or image, select Apply, and in the dialog that follows choose whether to sanitize and remove hidden information. Save through the Save Sanitized Document dialog, under a new name. Sanitizing is the PDF equivalent of the inspector pass: it is the step that deals with information that is not sitting visibly on the page.</p>
+<p>Decide what must go before you start marking. Names, direct contact details, account and reference numbers, credentials, and internal comments are the usual categories, but the list belongs to your task. An agent summarising a contract rarely needs the other party's bank details. An agent checking a statement does need amounts and dates. Redaction that removes the data the job depends on produces a clean file and a useless answer, so write the keep list beside the remove list.</p>
+<h2>The handoff procedure, in order</h2>
+<ol>
+<li><strong>Write the job in one sentence.</strong> Name what the agent should produce from the file, and what it should never do with it, such as contacting anyone named in it.</li>
+<li><strong>Pick the format from the table above.</strong> Convert only when the conversion improves reading: prose to text or Markdown, a messy workbook to one clean CSV per table, a .gdoc export to PDF or DOCX.</li>
+<li><strong>Run the selectable text test.</strong> Select and copy a sentence and one figure. If either fails, treat the file as a scan and add a human check on names, dates, and amounts.</li>
+<li><strong>Make the working copy and redact it.</strong> Work on a copy, remove the visible items on your list, then run Document Inspector on Office files or sanitize on PDFs so the hidden layer goes too.</li>
+<li><strong>Re-search the redacted copy.</strong> Search the finished file for each removed name, number, and address, plus one distinctive phrase from a removed comment. Every search should return nothing.</li>
+<li><strong>Name files so versions cannot be confused.</strong> Use a name that says what the file is and that it is the redacted copy, and keep the original out of the upload folder entirely.</li>
+<li><strong>Upload only the redacted copy, then ask for a receipt check.</strong> Ask the agent to state the file name it received, the number of pages or rows it can read, and the first heading or column names. Compare that reply with the copy you meant to send.</li>
+<li><strong>Clean up saved copies when the job ends.</strong> A file saved in a tool's library can outlive the chat. OpenAI notes that deleting a chat does not delete a file saved separately in Library or Space, so delete that saved copy separately if it should not stay.</li></ol>
+<p>What success looks like: searches for every removed item return nothing in the copy, the agent's receipt check names the redacted file and the expected page or row count, and the original is not in the folder the agent can reach. If any of those three fails, stop and fix the file, not the prompt.</p>
+<h2>Treat the file as untrusted content, including your own files</h2>
+<p>A file can carry instructions as well as information. OWASP calls this indirect prompt injection: an LLM accepts input from external sources that an attacker can control, such as websites or files, and that content changes its behaviour. The hostile text does not need to be visible or even readable to a person, as long as the model parses it, and the underlying reason is structural: LLMs do not segregate instructions and external data from each other.</p>
+<p>That risk is highest with files that came from someone else: a supplier document, a forwarded email export, a downloaded template. Before a handoff, scan for instruction shaped lines, text addressed to an assistant, requests to ignore earlier directions, or requests to send, reveal, or delete anything. Delete or quarantine anything you cannot explain. Then set the boundary in your own instruction: the file is data to work on, and directions inside it are not directions to follow. That sentence helps, but it is a limit on damage, not a guarantee, so keep the agent's permissions narrow for file jobs that came from outside.</p>
+<h2>When not to hand the file over at all</h2>
+<p>Some files should stay out. A file whose sensitive content cannot be removed without destroying the job, a file you are not permitted to share with the tool in question, and a scan so poor that names and figures cannot be checked after OCR are all stop cases. The alternative is usually smaller, not harder: extract the few pages or rows the job needs, redact that extract, and hand over only that. A narrow handoff is easier to redact, easier to verify, and easier to delete afterwards.</p>
+<p><em>Sources, accessed November 10, 2026: OpenAI Help Center, Uploading files and audio to ChatGPT (supported formats, 512 MB document limit, 2 million token cap for text and document files, approximately 50 MB for CSV and spreadsheets, .gdoc export, saved file deletion); Adobe Acrobat help, Redact sensitive content in PDFs (Redact a PDF path, Apply, sanitize and remove hidden information, Save Sanitized Document); Microsoft Support, Remove hidden data and personal information by inspecting documents (Document Inspector categories, use on a copy, File, Info, Check for Issues, Inspect Document); OWASP Gen AI Security Project, LLM01 Prompt Injection (indirect injection through websites or files, content need not be human readable, instructions and external data are not segregated); Convertlo, Best File Format for AI (plain text and Markdown for prose, CSV for tabular data, scanned PDF needs OCR); MemX, Which File Types Can AI Actually Read (selectable text test, simple grid spreadsheets, merged cells). Tool behaviour and limits vary by platform; check the tool you use.</em></p>
+<p>, Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents, beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

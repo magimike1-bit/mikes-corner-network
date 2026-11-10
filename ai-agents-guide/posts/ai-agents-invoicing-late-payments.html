@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agents for Invoicing and Late Payments: What to Automate and What to Keep Manual | Using AI Agents</title>
+<meta name="description" content="Intuit reports paid 4 days sooner on AI reminders, with limits in its own footnote. Automate reminders, drafting and matching, and keep disputes, plans, fees and write-offs manual.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>AI agents for invoicing and chasing late payments: what to automate and what to keep manual</h1>
+  <p class="meta">Money &middot; 10 min read</p>
+<p>4 days sooner is the number Intuit puts on its AI invoicing tools, and it deserves a careful read before it decides anything for you. Intuit says businesses get paid 4 days sooner on average, and its own footnote narrows that claim: it is based on US customers using outstanding invoice notifications and AI drafted reminders, compared with customers sending standard reminders, from March 2025 to March 2026. That is a vendor average for reminder users, not a promise for your ledger, and not a reason to automate the parts of invoicing where a wrong automated move costs a customer.</p>
+<p><em>General information only, not financial, business, or tax advice. Late payment terms, interest, and fees depend on what the customer agreed to and on the law that applies to the contract; check yours before charging anything.</em></p>
+<h2>Sort the whole cycle first: automate, draft for approval, keep manual</h2>
+<table><tr><th>Stage of the cycle</th><th>Setting</th><th>Why it sits there</th></tr>
+<tr><td>Watching due dates and flagging aging invoices</td><td>Automate</td><td>Rule based, high volume, and easy to check against the ledger</td></tr>
+<tr><td>Scheduled reminders before and after the due date</td><td>Automate, inside a written schedule</td><td>Persistence is the value; the wording and the stop points are set by you in advance</td></tr>
+<tr><td>Drafting an invoice from a statement of work or sales order</td><td>Draft for approval</td><td>QuickBooks drafts invoices for review, which keeps a person on amounts and tax lines before anything sends</td></tr>
+<tr><td>Matching a payment to invoices, including part payments</td><td>Automate the match, review the exceptions</td><td>A collection agent can match payments as they arrive and stop the chase; unmatched and partial cases need eyes</td></tr>
+<tr><td>Answering a simple question about an invoice</td><td>Automate, with a handoff rule</td><td>Due date and amount questions are factual; the moment a reply questions the invoice itself, it leaves this row</td></tr>
+<tr><td>A dispute, a hardship message, or a request to change payment details</td><td>Keep manual</td><td>The agent stops chasing and hands over the full thread; an agent should never argue about money</td></tr>
+<tr><td>A payment plan, a settlement, or a write-off</td><td>Keep manual</td><td>Each one gives away money or rights, and each needs a person to agree it</td></tr>
+<tr><td>Adding late interest or a late fee</td><td>Keep manual</td><td>You can only collect what the customer agreed to, so the contract, not the software, decides whether a charge exists</td></tr></table>
+<p>Read the table as a boundary, not a feature list. One accounts receivable guide summarises the same split in one line: let AI do the chasing, and keep the deciding. Another puts the manual list explicitly: a person should still agree any write-off, settlement, new payment plan, or statutory interest claim above a set amount, and an agent should not threaten legal action, change payment details, or keep chasing a disputed invoice.</p>
+<h2>The setup runbook, in order</h2>
+<ol>
+<li><strong>Clean the inputs first.</strong> Every customer needs a current email address on the contact record, and every invoice you want chased needs to be marked as sent. Xero states both conditions plainly, and a reminder system working from stale contacts automates the wrong conversation very efficiently.</li>
+<li><strong>Write the reminder schedule before turning anything on.</strong> Xero ships with three default reminders and allows up to five in total, each set a number of days before the due date, on the day at 0 days, or after it. QuickBooks, in beta, drafts invoices for your review and, with your approval, sends prioritised payment reminders for anything unpaid, with limited monthly capacity per account. Set fewer reminders than the maximum and leave the last step to a person.</li>
+<li><strong>Set the floor and the links.</strong> Use the setting that skips reminders for amounts owing under a chosen amount, so a trivial balance never triggers a firm message. Include the online invoice link, and the PDF link if your customers pay from attachments, so every reminder carries its own way to pay.</li>
+<li><strong>Write the escalation words yourself.</strong> Friendly before the due date, direct after it, firm at the final automated step, and each message states the invoice number, the amount, and the due date. An agent can adjust tone to a customer's history inside that frame; it does not invent a new frame for a long standing customer at midnight.</li>
+<li><strong>Set the stop rules as settings, not intentions.</strong> A reply that disputes the invoice, promises a date, reports hardship, or asks to change bank details pauses the sequence and routes the thread to you. Payment arriving, in full or as a logged part payment, also stops the chase for that invoice.</li>
+<li><strong>Run the first cycle on a small set.</strong> Pick a handful of ordinary invoices, watch every draft and send for one cycle, and check the ledger against the reminders that actually went out before widening it.</li></ol>
+<p>What success looks like: every reminder that sent names the right invoice, amount, and customer, no disputed invoice received a second chase, and the aging list at the end of the cycle is shorter for reasons you can point to, payment or an agreed plan, not silence.</p>
+<h2>What the automated chase should look like, day by day</h2>
+<p>A Canadian accounts receivable guide suggests a cadence that maps cleanly onto an automated schedule, while naming it as a suggested habit rather than a government rule: invoice the day the work is done and state the due date on the invoice, send a friendly reminder at day 1 past due, make a phone call at day 7 and ask for a payment date, send a firm written notice at day 14, and reach a decision at day 30 on a payment plan, collections, or a write-off.</p>
+<p>Notice where the automation sits in that sequence. Days 1 and 14 are written reminders, well suited to a schedule. Day 7 is a phone call, a person asking a question and hearing the answer. Day 30 is a decision. A collection agent can support the edges of those human steps: watching every open invoice, logging promises and keeping them visible, adapting the next reminder to what was promised, and forecasting what is likely to arrive this week. The promise log matters more than the reminder count. A customer who promised Friday and missed it is a different case from a customer who never replied, and the follow up should say so.</p>
+<p>Respect the ceiling of the tool you own. After Xero's fifth reminder, the built in sequence has nothing left to say, which is the correct outcome if you designed it that way: the invoice returns to a person with its full history attached. An invoice that reaches the end of the automated sequence is not a failure of automation. It is the automation reporting that the remaining problem is not forgetfulness.</p>
+<h2>The decisions that stay manual, and why each one does</h2>
+<p><strong>Disputes.</strong> A disputed invoice may be wrong. Chasing it harder before checking it turns a billing error into a relationship error, which is why the dispute rule in collection guides is immediate: stop, hand over the thread, and let a person establish whether the amount is owed at all.</p>
+<p><strong>Payment plans and settlements.</strong> A plan trades time for a higher chance of being paid in full, and a settlement trades amount for certainty. Both are pricing decisions about your own money. An agent can draft the instalments once you choose them, track whether each instalment lands, and flag a missed one the same day. It does not offer the plan.</p>
+<p><strong>Late interest and fees.</strong> The contract decides this, not the reminder software. The Canadian guide is blunt: check what the contract says before charging anything, because you can only collect what the customer agreed to. If your terms were silent, the honest automated behaviour is to send the reminder without an invented charge and let a person decide whether to raise terms on the next contract instead.</p>
+<p><strong>Write-offs.</strong> Write off a debt after real attempts to collect, and keep the file behind the decision: invoices, emails, and notices. That record is also what makes a plan, a settlement, or any later step defensible, so the agent's job here is filing, not deciding.</p>
+<p><strong>Changing payment details.</strong> A request to pay a different account is a fraud pattern as well as a clerical task. It stays manual, verified through a channel you already trust, every time, with no exception for a familiar name in the email header.</p>
+<h2>The kill criterion, written before the first reminder sends</h2>
+<p>Decide the stop line while the system is still a draft. A workable version has three parts. First, a time and result line: after 60 days of automated chasing on ordinary invoices, compare days to payment and the value still aging against the 60 days before it. If neither moved, the problem is terms, customer selection, or invoice accuracy, not reminder frequency, and more automation will not fix it. Second, a damage line: one complaint that a reminder chased a paid or disputed invoice pauses the whole sequence until the cause is found, because that error means the inputs, not the wording, are broken. Third, an amount ceiling: any single invoice above a figure you set by hand leaves the automated track at the first missed date and gets a person from the start.</p>
+<p>The earning case for this setup was never the software fee, which this article does not quote because no verified plan price was retrieved for it. The case is the owner hours returned by not writing routine reminders, minus the hours spent reviewing exceptions, and that arithmetic only stays honest if the manual list above stays manual. Automate the persistence. Keep the deciding. That split is the whole product.</p>
+<p><em>Sources, accessed November 10, 2026: Intuit, What's new in QuickBooks, Fall 2026 (AI powered invoices in beta in Essentials through Advanced, drafts for review, prioritised reminders with approval, limited monthly capacity, 4 days sooner basis, US customers, March 2025 to March 2026); Xero Central, Set up and add invoice reminders (three default reminders, up to five, contact email and marked as sent conditions, minimum amount and invoice link options); Pryme, AI for accounts receivable (reminder, matching and escalation behaviour, manual agreement for write-offs, settlements, plans and interest claims, no legal threats or payment detail changes); Unlok, Chasing Unpaid Invoices With an AI Agent (watching open invoices, escalating reminders, promise logging, dispute handoff); Tax-Services.ca, Accounts Receivable Tips for Canadian Small Business (invoice the day work is done, day 1, 7, 14 and 30 cadence as a suggested habit, agreed interest only, keep the file); Matchless Marketing, Should You Let AI Chase Your Unpaid Invoices (reminders and first drafts for AI, plans and disputes for a person). This article is general information, not financial or tax advice.</em></p>
+<p>, Sterling Cole, Money Writer. Earning Desk</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents, beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

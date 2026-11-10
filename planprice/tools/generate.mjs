@@ -221,7 +221,12 @@ const sweepRowsBySlug = (() => {
   for (const s of allSweeps) {
     for (const e of s.products || []) {
       if (!map.has(e.slug)) map.set(e.slug, []);
-      map.get(e.slug).push({ date: s.sweep_date, start_price_text: e.start_price_text, deal_headline: e.deal_headline });
+      map.get(e.slug).push({
+        date: s.sweep_date,
+        start_price_text: e.start_price_text,
+        deal_headline: e.deal_headline,
+        start_price_numeric: e.start_price_numeric,
+      });
     }
   }
   return map;
@@ -779,6 +784,8 @@ ${homeChips}
       <a href="/guides.html">Guides</a>
       <a href="/glossary.html">Glossary</a>
       <a href="/verified.html">Verification log</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/price-changes.html">Price changes</a>
       <a href="/disclosure.html">Affiliate disclosure</a>
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -1198,6 +1205,20 @@ function firstYearSection(set) {
     </section>`;
 }
 
+/** PP-SPONSOR-DISCLOSE: short "how other directories rank" explainer for
+ * compare pages. Facts are from the directories' own published pages,
+ * checked 2026-11-10: Capterra's transparency page states it earns referral
+ * fees for sponsored profiles and that sponsored profiles may appear first
+ * on its product listings; G2's own plan pages state it sells advertising
+ * in sponsored positions on category and competitor pages, and that paying
+ * does not change its organic ranking or Grid scores. No other claims. */
+function directoriesSection() {
+  return `<section class="section directories">
+      <h2>How other directories rank</h2>
+      <p>On Capterra, vendors pay referral fees for sponsored profiles, and Capterra's own transparency page says sponsored profiles may appear first on its product listings. On G2, vendors can buy advertising in sponsored positions on category and competitor pages; G2 says paying does not change its organic ranking or Grid scores. On PlanPrice, no vendor can pay for placement: listings run in our editorial featured order, every listing shows its verified starting price or is marked Custom where no list price is published, and our full method is on the <a href="/methodology.html">methodology page</a>.</p>
+    </section>`;
+}
+
 const transparencyCache = new Map();
 function transparencySection(category) {
   if (transparencyCache.has(category)) return transparencyCache.get(category);
@@ -1260,6 +1281,7 @@ ${header("/compare.html")}
     ${firstYearSection(set)}
     ${alternativesSection(set)}
     ${transparencySection(set.category)}
+    ${directoriesSection()}
   </div>
 </main>
 ${footer()}`;
@@ -1684,6 +1706,8 @@ function footer() {
       <a href="/guides.html">Guides</a>
       <a href="/glossary.html">Glossary</a>
       <a href="/verified.html">Verification log</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/price-changes.html">Price changes</a>
       <a href="/disclosure.html">Affiliate disclosure</a>
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -1808,6 +1832,126 @@ function contactBody() {
     </div></section>`;
 }
 
+/** PP-SPONSOR-DISCLOSE + PP-POSITION-VERIFY: the methodology page. One page
+ * carries both items: how listings are ordered and never sold, how affiliate
+ * status is labelled, and the "About our data" verification explainer
+ * (cadence, sources, quote-only flags, price-change tracking). Claims about
+ * PlanPrice are limited to what the site actually does today; claims about
+ * Capterra and G2 are the vendor-sourced facts noted at directoriesSection. */
+function methodologyBody() {
+  const affiliateLine = anyAffiliateLive
+    ? `<li><strong>Affiliate status is labelled per listing.</strong> Where a link can earn PlanPrice a commission, the listing says so. See the <a href="/disclosure.html">affiliate disclosure</a>.</li>`
+    : `<li><strong>Affiliate status is labelled per listing.</strong> No affiliate links are live today, so no listing earns PlanPrice a commission. When that changes, each affected listing will say so. See the <a href="/disclosure.html">affiliate disclosure</a>.</li>`;
+  return `<section class="section"><div class="wrap">
+      <h2>How listings are ordered</h2>
+      <ul>
+        <li><strong>Order is never sold.</strong> No vendor can pay to appear, to rank higher, or to be featured on PlanPrice. There are no sponsored placements anywhere on this site.</li>
+        <li><strong>Default ordering is our editorial featured order.</strong> Category and directory pages present tools in the order our research team features them. Every listing shows its verified starting price, or is marked Custom where the vendor publishes no list price, and every listing shows what the tool is best for. The deals directory can be re-sorted by price. Alternatives tables on compare pages are ordered by aggregate review score.</li>
+        ${affiliateLine}
+        <li><strong>Review scores are aggregate and attributed.</strong> Where we show G2 or Capterra scores, we show the average, the review count, and the date we checked them. We do not adjust scores.</li>
+      </ul>
+      <h2>About our data</h2>
+      <ul>
+        <li><strong>Every price comes from the vendor's own published pricing.</strong> A person on our team reads the vendor's pricing page and records the price and the date. Vendor-submitted list prices and press releases are not sources.</li>
+        <li><strong>Checks are dated, per product.</strong> Deal pages show when each price was last verified, and the <a href="/verified.html">verification log</a> keeps the full record. A monthly sweep re-checks the catalogue; the registry date for the current catalogue is ${CHECKED}.</li>
+        <li><strong>Quote-only pricing is flagged, not guessed.</strong> When a vendor does not publish a price, our tables say so. We never estimate a hidden price.</li>
+        <li><strong>Changes are tracked in the open.</strong> Our <a href="/price-changes.html">price changes</a> page logs starting-price and promotion changes between sweeps, with dates, and every deal page carries its own price history table.</li>
+        <li><strong>Corrections are welcome.</strong> If a price here does not match the vendor's page, tell us through the <a href="/contact.html">contact page</a> and we will re-check it.</li>
+      </ul>
+      <h2>How other directories rank</h2>
+      <p>On Capterra, vendors pay referral fees for sponsored profiles, and Capterra's own transparency page says sponsored profiles may appear first on its product listings, identified by their link-out buttons. On G2, vendors can buy advertising in sponsored positions on category and competitor pages; G2 says paying does not change its organic ranking or Grid scores. We publish those mechanics because buyers deserve to know how any directory they use makes its ordering decisions, including ours.</p>
+    </div></section>`;
+}
+
+/** PP-PRICE-CHANGE-TRACKER: the public change log. Derived from the same
+ * sweep snapshots as the deal-page price history tables (allSweeps, sweep
+ * dates on or before CHECKED). A price change means the recorded starting
+ * price NUMBER changed between consecutive sweeps that both captured it;
+ * wording refinements of the same price are our own capture edits, not
+ * vendor changes, and transitions to or from an uncaptured sweep row are
+ * gaps, not changes. Promotion changes are deal_headline diffs. */
+function priceChangeEntries() {
+  // Iterates sweepRowsBySlug (built once from allSweeps, rows in sweep-date
+  // order) rather than rescanning the sweep files.
+  const entries = [];
+  for (const [slug, rows] of sweepRowsBySlug) {
+    const p = productBySlug.get(slug);
+    const name = p ? p.name : slug;
+    for (let i = 1; i < rows.length; i++) {
+      const a = rows[i - 1];
+      const b = rows[i];
+      if (a.start_price_numeric != null && b.start_price_numeric != null && a.start_price_numeric !== b.start_price_numeric) {
+        entries.push({ date: b.date, slug, name, kind: "Starting price", from: a.start_price_text, to: b.start_price_text });
+      }
+      if ((a.deal_headline || null) !== (b.deal_headline || null)) {
+        entries.push({ date: b.date, slug, name, kind: "Promotion", from: a.deal_headline || "No public promo", to: b.deal_headline || "No public promo" });
+      }
+    }
+  }
+  return entries.sort((x, y) => (x.date < y.date ? 1 : x.date > y.date ? -1 : x.name.localeCompare(y.name)));
+}
+
+function priceChangesPage() {
+  const entries = priceChangeEntries();
+  const firstDate = allSweeps.length ? allSweeps[0].sweep_date : CHECKED;
+  const lastDate = allSweeps.length ? allSweeps[allSweeps.length - 1].sweep_date : CHECKED;
+  const priceCount = entries.filter((e) => e.kind === "Starting price").length;
+  const rows = entries
+    .map((e) => `<tr>
+      <th scope="row"><time datetime="${esc(e.date)}">${esc(e.date)}</time></th>
+      <td><a href="/deals/${esc(e.slug)}.html">${esc(e.name)}</a></td>
+      <td>${esc(e.kind)}</td>
+      <td>${esc(e.from)}</td>
+      <td>${esc(e.to)}</td>
+    </tr>`)
+    .join("\n");
+  const table = entries.length
+    ? `<div class="table-scroll">
+      <table class="tiers">
+        <caption>Recorded changes between PlanPrice verification sweeps.</caption>
+        <thead><tr><th scope="col">Date recorded</th><th scope="col">Vendor</th><th scope="col">What changed</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+        <tbody>${rows}
+</tbody>
+      </table>
+      </div>`
+    : `<p>No changes recorded yet.</p>`;
+  return `${head(
+    "Price Changes | PlanPrice",
+    "PlanPrice price changes: a dated log of starting-price and promotion changes for tracked B2B software vendors, from our verification sweeps.",
+    "/price-changes.html"
+  )}
+${header("/price-changes.html")}
+<main>
+  <div class="wrap">
+    <h1 class="page-title">Price and promotion changes</h1>
+    <p class="section-sub">What changed, when we recorded it, and what it changed from. Sweeps on record: ${esc(firstDate)} to ${esc(lastDate)}.</p>
+    <section class="section">
+      <p>Our monthly sweeps re-read every tracked vendor's published starting price and current promotion. This page logs the differences between consecutive sweeps. A starting-price change means the recorded price itself moved; a promotion change means the vendor's headline offer rotated, started, or ended. Wording refinements in our own notes are not vendor changes and are never logged here.</p>
+      <p><strong>Starting prices:</strong> ${
+        priceCount
+          ? `${priceCount} recorded change${priceCount === 1 ? "" : "s"} in the window on record.`
+          : `no tracked vendor has changed its starting list price in the window on record (${esc(firstDate)} to ${esc(lastDate)}). Promotions rotate far more often than list prices move, which is exactly why both are logged.`
+      }</p>
+      ${table}
+      <p class="fine">Each vendor's full sweep history, including unchanged checks, is in the price history table on its <a href="/deals.html">deal page</a>. How we verify is on the <a href="/methodology.html">methodology page</a>.</p>
+    </section>
+    <section class="section">
+      <h2>Reading fee-change fine print</h2>
+      <p>List prices are the visible part of a software bill. The changes that cost real money usually arrive as fee and term changes, announced in emails and help-centre notices rather than on pricing pages. When a vendor announces a change, five things are worth checking before the effective date:</p>
+      <ul>
+        <li><strong>Grandfathering.</strong> Does the change apply to your current plan, or only to new subscribers? Notices often say existing customers keep their rate for a period, sometimes until the next renewal. The period and its end date are the operative facts.</li>
+        <li><strong>Renewal repricing.</strong> Many plans renew at the then-current rate. A price rise announced mid-term may not touch you until renewal, which makes the renewal date, not the announcement date, your decision deadline.</li>
+        <li><strong>Per-transaction fees.</strong> Payment and usage fees can change separately from subscription prices: a percentage point here, a fixed cent amount there. On high transaction volume, a small fee change can outweigh a subscription change.</li>
+        <li><strong>What counts toward your tier.</strong> Tiered plans reprice when a meter's definition changes, for example which contacts, seats, or transactions count. A definition change can move your bill without any price changing.</li>
+        <li><strong>The notice itself.</strong> Change notices are usually binding under the terms you already accepted, and continued use after the effective date counts as acceptance. Save the notice, note the effective date, and compare at least one alternative before it arrives.</li>
+      </ul>
+      <p>PlanPrice records the published side of these changes: list prices and promotions on the dates we check them. Contract-specific terms, such as a negotiated rate or a grandfathered plan, live in your vendor agreement, which is always the final authority for your own bill.</p>
+    </section>
+  </div>
+</main>
+${footer()}`;
+}
+
 const STATIC_PAGES = {
   "about.html": {
     title: "About PlanPrice | PlanPrice",
@@ -1822,6 +1966,13 @@ const STATIC_PAGES = {
     path: "/disclosure.html",
     h1: "Affiliate Disclosure",
     body: disclosureBody()
+  },
+  "methodology.html": {
+    title: "How PlanPrice Ranks and Verifies | PlanPrice",
+    description: "PlanPrice methodology: how listings are ordered, why order is never sold, how affiliate status is labelled, and how every price is verified.",
+    path: "/methodology.html",
+    h1: "How PlanPrice ranks and verifies",
+    body: methodologyBody()
   },
   "privacy-policy.html": {
     title: "Privacy Policy | PlanPrice",
@@ -1874,6 +2025,7 @@ function sitemap() {
   const generatedPaths = new Set([
     "/", "/about.html", "/disclosure.html", "/privacy-policy.html", "/terms.html",
     "/contact.html", "/deals.html", "/canadian.html", "/free.html", "/top-rated.html",
+    "/methodology.html", "/price-changes.html",
     ...products.filter((p) => !p.hand_built).map((p) => `/deals/${p.slug}.html`),
     ...[...new Set(products.map((p) => `/categories/${slugify(p.category)}.html`))].sort(),
     "/compare.html",
@@ -1935,6 +2087,10 @@ write("canadian.html", canadianPage());
 // Overnight-5 collection pages (PP-OVERNIGHT-5): /free.html + /top-rated.html.
 write("free.html", freePage());
 write("top-rated.html", topRatedPage());
+// PP-PRICE-CHANGE-TRACKER: the public change log page (data-derived from
+// the sweep snapshots, so it is written directly rather than via
+// STATIC_PAGES).
+write("price-changes.html", priceChangesPage());
 // AdSense-readiness content (PP-ADSENSE-READINESS): contact page (via
 // STATIC_PAGES above), buyer's guides, and the pricing glossary.
 for (const g of guidesData) write(`guides/${g.slug}.html`, guidePage(g));

@@ -21,8 +21,8 @@ Findings (each printed with file + expected + found):
           "promos checked <ISO>.", "verified pricing, checked <ISO>.") on
           all other pages (expected: the site date)
       Article prose "checked <date>" lines outside these forms are the
-      articles' own check dates and are deliberately NOT audited — the
-      audit only judges what the stamp pass owns.
+      articles' own check dates; since PP-ARTICLE-CHECKED-DATES they are
+      audited against the article-level record (see (e)).
       deals/<slug>.html per-product contexts are excluded here; they are
       checked under (c).
   (c) deals/<slug>.html: "Prices verified <time datetime=\\"D\\">..." and
@@ -31,6 +31,12 @@ Findings (each printed with file + expected + found):
       claiming no date at all is a finding too.
   (d) Cadence: for each registry variable, if --today minus as_of exceeds
       review_cadence_days, the variable is reported stale.
+  (e) PP-ARTICLE-CHECKED-DATES: every guides/*.html article's "Prices
+      checked" claim dates are recomputed (tools/article_checks.py) and
+      compared with data/article-checks.json. Drift between prose and
+      record, a missing record or a missing file, or a recorded date
+      after --today is a finding. The record never rewrites prose; it
+      guards the per-article facts the editorial process owns.
   Also: the registry's page_checked_dates map must agree with a
   recomputation from the data files (site_data.cross_check_registry).
 
@@ -51,6 +57,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import site_data  # noqa: E402
+import article_checks  # noqa: E402
 
 # Stamped-form patterns are shared with stamp-dates.py via site_data
 # (named-group layout: prefix / date / attr / inner / suffix). ISO is
@@ -165,6 +172,69 @@ class Auditor:
             if m.group("date") != expected:
                 self.add("c:deal meta checked date", rel, expected, m.group("date"))
 
+    def check_article_checks(self):
+        # PP-ARTICLE-CHECKED-DATES (finding class e): the article-level
+        # record must agree with a fresh extraction from the prose, and
+        # no recorded check date may lie in the future.
+        path = self.root / "data" / "article-checks.json"
+        if not path.exists():
+            self.add(
+                "e:article checked dates",
+                "data/article-checks.json",
+                "record file present",
+                "missing (run tools/article_checks.py --write)",
+            )
+            return
+        try:
+            record = json.loads(path.read_text(encoding="utf-8")).get("articles") or {}
+        except Exception as exc:
+            self.add(
+                "e:article checked dates",
+                "data/article-checks.json",
+                "parseable article-checks.json",
+                f"unparseable: {exc}",
+            )
+            return
+        guides_dir = self.root / "guides"
+        files = {p.stem: p for p in guides_dir.glob("*.html")} if guides_dir.exists() else {}
+        for slug in sorted(set(record) | set(files)):
+            rel = f"guides/{slug}.html"
+            if slug not in files:
+                self.add("e:article checked dates", rel, "article file present", "record has no file")
+                continue
+            if slug not in record:
+                self.add("e:article checked dates", rel, "record entry present", "missing from data/article-checks.json")
+                continue
+            fresh = article_checks.article_record(files[slug].read_text(encoding="utf-8"))
+            if fresh["dates"] != record[slug].get("dates"):
+                self.add(
+                    "e:article checked dates",
+                    rel,
+                    f"record dates {record[slug].get('dates')}",
+                    f"prose dates {fresh['dates']} (re-run tools/article_checks.py --write)",
+                )
+            if fresh["flags"] != (record[slug].get("flags") or []):
+                self.add(
+                    "e:article checked dates",
+                    rel,
+                    f"record flags {record[slug].get('flags')}",
+                    f"prose flags {fresh['flags']} (re-run tools/article_checks.py --write)",
+                )
+            for d in record[slug].get("dates") or []:
+                day = d + "-01" if len(d) == 7 else d
+                try:
+                    when = datetime.date.fromisoformat(day)
+                except ValueError:
+                    self.add("e:article checked dates", rel, "ISO date in record", f"unparseable {d!r}")
+                    continue
+                if when > self.today:
+                    self.add(
+                        "e:article checked dates",
+                        rel,
+                        f"check date on or before {self.today.isoformat()}",
+                        f"record claims {d}",
+                    )
+
     def check_cadence(self):
         for name, variable in (self.registry.get("variables") or {}).items():
             as_of_raw = variable.get("as_of")
@@ -220,6 +290,7 @@ class Auditor:
         for path in sorted(self.root.rglob("*.html")):
             self.check_file(path)
         self.check_products_meta()
+        self.check_article_checks()
         self.check_cadence()
         return self.findings
 

@@ -1475,6 +1475,20 @@
         "no-claim"
       ]
     },
+    "salesforce-total-cost-beyond-licence": {
+      "dates": [
+        "2026-11-10"
+      ],
+      "claims": [
+        {
+          "raw_head": "Prices checked 2026-11-10",
+          "dates": [
+            "2026-11-10"
+          ]
+        }
+      ],
+      "flags": []
+    },
     "salon-spa-software-pricing": {
       "dates": [
         "2026-10-12"

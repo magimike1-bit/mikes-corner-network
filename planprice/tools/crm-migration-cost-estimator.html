@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Migration Cost Estimator | PlanPrice</title>
+<meta name="description" content="Free estimator: what switching CRM actually costs in work hours and dollars. Data cleanup, test imports, validation, training, downtime, and parallel-run licences, from clearly labelled planning figures.">
+<link rel="canonical" href="https://planprice.ca/tools/crm-migration-cost-estimator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PlanPrice">
+<meta property="og:title" content="CRM Migration Cost Estimator | PlanPrice">
+<meta property="og:description" content="Estimate the work and cost of a CRM migration: cleanup, imports, validation, training, parallel licences.">
+<meta property="og:url" content="https://planprice.ca/tools/crm-migration-cost-estimator.html">
+<meta property="og:image" content="https://planprice.ca/og-image.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- AdSense account verification (2026-10-01).
+     Publisher ID is public by design — AdSense requires it in page source.
+     Ad units and ads.txt only AFTER Google approves the account. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041438524909240"
+     crossorigin="anonymous"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6ff87ae657ed400c827b091d871dc609"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+<div class="disclosure-bar">PlanPrice is setting up affiliate partnerships, right now, links on this page are plain vendor links. <a href="/disclosure.html">Read our affiliate disclosure</a>.</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><img src="/logo.svg" alt="PlanPrice" height="34"></a>
+    <nav class="main-nav">
+      <a href="/">All deals</a>
+      <a href="/deals.html">Deals</a>
+      <a href="/canadian.html">Canadian</a>
+      <a href="/free.html">Free</a>
+      <a href="/top-rated.html">Top rated</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/search.html">Search</a>
+      <a href="/disclosure.html">Disclosure</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wrap-prose">
+    <p class="breadcrumbs"><a href="/">All deals</a> › CRM Migration Cost Estimator</p>
+    <h1 class="page-title">CRM Migration Cost Estimator</h1>
+    <p class="section-sub">The licence is the easy part of switching CRM. This estimator prices the work: cleaning the data, running test imports, validating, training the team, and paying for two systems while you parallel run.</p>
+    <div class="calc-wrap">
+      <div class="calc-field">
+        <label for="m-records">Records to migrate (contacts, companies, deals, tickets)</label>
+        <input type="number" id="m-records" value="5000" min="0" max="10000000" step="100">
+      </div>
+      <div class="calc-field">
+        <label for="m-complexity">Data complexity</label>
+        <select id="m-complexity">
+          <option value="0.75">Simple: standard fields, few duplicates</option>
+          <option value="1" selected>Standard: some custom fields, normal mess</option>
+          <option value="2">Complex: many custom objects, attachments, years of duplicates</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="m-users">People to train on the new CRM</label>
+        <input type="number" id="m-users" value="10" min="1" max="10000">
+      </div>
+      <div class="calc-field">
+        <label for="m-rate">Blended hourly rate for the work (C$)</label>
+        <input type="number" id="m-rate" value="75" min="0" step="5">
+      </div>
+      <div class="calc-field">
+        <label for="m-parallel">Parallel run: months paying for both CRMs</label>
+        <input type="number" id="m-parallel" value="2" min="0" max="12">
+      </div>
+      <div class="calc-field">
+        <label for="m-seatcost">Combined per seat monthly cost, old plus new CRM (C$)</label>
+        <input type="number" id="m-seatcost" value="120" min="0" step="5">
+      </div>
+      <div class="calc-results" id="m-results" aria-live="polite"></div>
+    </div>
+    <h2 class="section-title" style="margin-top:28px">How the estimate is built</h2>
+    <p>Every rate below is a <strong>PlanPrice editorial planning figure</strong>, a fixture for budgeting, not a vendor quote and not any vendor's published price. Vendors do not publish migration rates; anyone quoting you an exact migration price without seeing your data is guessing. The fixtures:</p>
+    <ul>
+      <li><strong>Data cleanup:</strong> 1 hour per 250 records (dedupe, field fixes, format normalization), scaled by the complexity you pick.</li>
+      <li><strong>Test imports and the real run:</strong> 1 hour per 1,000 records for mapping, test imports, the production run, and spot checks, scaled by complexity.</li>
+      <li><strong>Validation and fixes:</strong> half an hour per 250 records after import, comparing counts and samples against the old system, scaled by complexity.</li>
+      <li><strong>Training:</strong> 2 hours per person, a workshop plus first week floor support.</li>
+      <li><strong>Cutover coordination:</strong> a flat 4 hours for the go live window, freeze, final import, and go or no go checks.</li>
+      <li><strong>Parallel licences:</strong> your seats × your combined per seat cost × the parallel months you enter. This line uses your numbers only.</li>
+    </ul>
+    <p>Totals are shown as a planning range, 25% under to 25% over the fixture math, because real migrations land inside a band, not on a point. For the reasoning behind each cost line, read our guide on <a href="/guides/data-migration-costs-switching-tools.html">data migration costs when switching tools</a>, and the <a href="/guides/salesforce-total-cost-beyond-licence.html">total cost worksheet</a> for what the new system costs after the move.</p>
+    <h2 class="section-title" style="margin-top:28px">Related tools</h2>
+    <ul>
+      <li><a href="/tools/true-cost-calculator.html">True Cost Calculator</a>, compare per-seat vs flat-rate pricing for the CRM you are moving to.</li>
+      <li><a href="/tools/stack-budget-builder.html">Stack Budget Builder</a>, price your whole software stack, not just one comparison.</li>
+      <li><a href="/tools.html">All free pricing tools</a></li>
+    </ul>
+    <p class="fine">Estimates only, for planning. The hourly fixtures are PlanPrice editorial figures, checked 2026-11-10; they are not vendor published rates and no vendor endorses them. Always scope a real migration against your actual data before committing.</p>
+  </div>
+</main>
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const fmt = n => 'C$' + Math.round(n).toLocaleString('en-CA');
+  const hrs = n => (Math.round(n * 10) / 10).toLocaleString('en-CA');
+  function calc() {
+    const records = Math.max(0, +$('m-records').value || 0);
+    const cx = +$('m-complexity').value || 1;
+    const users = Math.max(1, +$('m-users').value || 1);
+    const rate = Math.max(0, +$('m-rate').value || 0);
+    const parallel = Math.max(0, +$('m-parallel').value || 0);
+    const seatCost = Math.max(0, +$('m-seatcost').value || 0);
+    const lines = [
+      ['Data cleanup', (records / 250) * cx],
+      ['Test imports and migration run', (records / 1000) * cx],
+      ['Validation and fixes', (records / 500) * cx],
+      ['Training', users * 2],
+      ['Cutover coordination', 4]
+    ];
+    let totalHours = 0;
+    let rows = '';
+    for (const [name, h] of lines) {
+      totalHours += h;
+      rows += '<tr><td>' + name + '</td><td>' + hrs(h) + ' h</td><td>' + fmt(h * rate) + '</td></tr>';
+    }
+    const labour = totalHours * rate;
+    const licences = users * seatCost * parallel;
+    const total = labour + licences;
+    rows += '<tr><td>Parallel-run licences (' + parallel + ' mo)</td><td></td><td>' + fmt(licences) + '</td></tr>';
+    $('m-results').innerHTML =
+      '<table><thead><tr><th>Work line</th><th>Hours</th><th>Cost</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<p>Total work: <strong>' + hrs(totalHours) + ' hours</strong>. Estimated migration cost: <strong>' + fmt(total * 0.75) + ' to ' + fmt(total * 1.25) + '</strong> (fixture midpoint ' + fmt(total) + ').</p>' +
+      '<p class="fine">Licence overlap is often the line teams forget: ' + parallel + ' month(s) of paying for both systems is in the total above.</p>';
+  }
+  ['m-records','m-complexity','m-users','m-rate','m-parallel','m-seatcost'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-brand">PlanPrice, verified B2B software pricing and deals.</p>
+    <nav class="footer-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/verified.html">Verification log</a>
+      <a href="/disclosure.html">Affiliate disclosure</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+    <p class="fine">Prices verified 2026-10-25 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions, partnerships are still being set up.</p>
+  </div>
+</footer>
+</body>
+</html>

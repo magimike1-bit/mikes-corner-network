@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Spreadsheet Cleanup for Small Business: Fix the List Without Breaking It | AI for Small Business</title>
+<meta name="description" content="AI can fix formatting mess in a customer or product list, but duplicates are where it can quietly do damage. What Copilot Clean Data, Gemini in Sheets, and a chatbot upload each actually do, plus a flag, count, and sample procedure that proves the cleaned file is complete.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap article-layout">
+  <article class="article">
+    <p class="kicker">Operations</p>
+    <h1>AI Spreadsheet Cleanup for Small Business: Fix the List Without Breaking It</h1>
+    <p class="lede">Can AI clean a messy customer list without quietly damaging it? For formatting mess, yes, and the tools are already inside Excel and Google Sheets. For duplicates, only with a rule the marketing skips: the AI flags, a person decides, and the row counts have to prove nothing went missing.</p>
+    <p class="meta">Published 2026-11-10 &middot; Last updated 2026-11-10</p>
+
+<h2>Can AI clean this list without quietly damaging it?</h2>
+<p>The honest answer splits in two. The formatting problems that make a spreadsheet unreliable, the same name typed three ways, numbers stored as text so totals come out wrong, stray spaces that break lookups, are exactly what the built in tools are documented to find. Microsoft describes its Clean Data feature in Excel as offering three suggestion types: inconsistent text, inconsistent number formats, and extra spaces. Those are safe fixes because each one arrives as a suggestion you accept or ignore.</p>
+<p>Duplicates are the dangerous half. Two rows that look alike may be one customer entered twice, or two different customers who happen to share a name. A documented failure mode from production cleanup work is over eager deduplication merging two rows for the same name at different companies into one record. The second documented failure is quieter: rows dropped by the model entirely, found only because someone checked the row counts at the end. So the question is never whether the AI can clean the list. It is whether you can prove the cleaned list is still complete.</p>
+
+<h2>What each route actually does, checked</h2>
+<p><strong>Copilot Clean Data in Excel.</strong> Per Microsoft Support, this version of Clean Data runs in Excel for the web and Windows and is available to Copilot customers, with a gradual rollout that means it might not yet be available in some countries or regions. You open it from the Clean Data item in the Data tab. Inconsistent text covers variations of the same value, such as mixed uppercase and lowercase or differences in punctuation, which can cause wrong aggregations. Inconsistent number format covers columns mixing text and number formatted cells, which can produce incorrect calculations. Extra spaces covers leading, trailing, and between values spaces. The documented working limits matter: it works best with tabular data of up to 100 columns and 50,000 rows, works best when the data is formatted as an Excel table, and initially performs best in English. Microsoft also labels this the initial release and warns it might not behave as you anticipate, which is a vendor telling you to review the suggestions, in writing.</p>
+<p><strong>Gemini in Google Sheets.</strong> Google describes Gemini in Sheets as able to create tables, generate formulas, and structure and clean data, and to spot inconsistencies across numerical values, text, and other cell contents. Its enhanced Smart Fill can populate text fields automatically when an existing pattern is present, which standardizes entries that follow a pattern already in your data. Premium AI including Gemini in Sheets is now part of Google Workspace plans. On privacy, Google states that content in Sheets is not shared with outsiders and is not used to train generative AI models outside your organization without permission.</p>
+<p><strong>Uploading the file to a chatbot.</strong> A general assistant such as ChatGPT can inspect an uploaded spreadsheet and help identify duplicate rows, inconsistent date formats, extra spaces, capitalization differences, and missing values, working with XLSX, XLS, CSV, and TSV files, and the cleaned table can be downloaded as CSV. The catch is control: the file leaves your spreadsheet, the work happens out of sight, and OpenAI itself recommends reviewing generated code, outputs, assumptions, and methods when the tool performs data analysis. That route suits a one off list you can afford to check line by line. It is the wrong route for the master customer file you cannot reconstruct.</p>
+
+<h2>Three routes side by side</h2>
+<table>
+<thead><tr><th>Route</th><th>What it is documented to fix</th><th>Where the data stays</th><th>Fits when</th></tr></thead>
+<tbody>
+<tr><td>Copilot Clean Data in Excel</td><td>Three suggestion types only: inconsistent text, inconsistent number formats, extra spaces; best up to 100 columns and 50,000 rows</td><td>Inside your workbook, fixes applied suggestion by suggestion</td><td>Your list already lives in Excel and the mess is formatting, not structure</td></tr>
+<tr><td>Gemini in Google Sheets</td><td>Structure and clean data, spot inconsistencies, generate formulas, pattern based fill with enhanced Smart Fill</td><td>Inside Google Workspace, under your existing controls and permissions</td><td>Your list already lives in Sheets and you hold a Workspace plan</td></tr>
+<tr><td>Chatbot file upload</td><td>Broader one off transformations: duplicates flagged, dates standardized, values extracted, result downloaded as CSV</td><td>The file is uploaded to the assistant and the result downloaded</td><td>A one time cleanup of a copy, never the only copy, with time to review the output</td></tr>
+<tr><td>No AI baseline: Power Query or OpenRefine</td><td>Repeatable rule based cleanup; OpenRefine adds duplicate clustering and is free and open source</td><td>On your machine, in Excel or as a standalone tool</td><td>The same mess arrives on a schedule and the rules can be written once and reused</td></tr>
+</tbody>
+</table>
+<p>Cost sits where you would expect. The built in routes ride on subscriptions many businesses already hold, and one comparison that checked vendor sites in August 2026 listed the Copilot add on from US$18 per user per month on top of Microsoft 365. Verify the price in your own account before you spend, because plan names and rollout status are both moving. The upload route can start on a free tier, and its real cost is the review time the output demands.</p>
+
+<h2>The cleanup procedure: fix, flag, then prove it</h2>
+<ol>
+<li><strong>Copy first, and count.</strong> Save a copy of the original file under a dated name and never open it for editing again. Record the row count of the working copy before any fix runs. That number is your proof later.</li>
+<li><strong>Format the data as a table.</strong> In Excel, select a cell in the data and use Home, then Format as Table, the setup Microsoft says Clean Data works best with. A defined table also makes the before and after counts unambiguous.</li>
+<li><strong>Run the formatting fixes as suggestions.</strong> Open Clean Data from the Data tab, or ask Gemini to clean and spot inconsistencies in Sheets. Apply suggestions one type at a time, text, then number formats, then spaces, and skim what changes each time rather than accepting a whole batch blind.</li>
+<li><strong>Flag duplicates, never delete them in the same pass.</strong> Add a column called Possible duplicate and have the AI mark rows that look like the same customer or product. Ask for the suspected duplicates as a list first, the same instruction the upload guides recommend, instead of asking for deletion.</li>
+<li><strong>Decide the flagged rows yourself, on a strong key.</strong> Merge only exact matches on a field that cannot repeat by accident, such as an account number or a full email address. Two rows sharing only a name stay separate until a person confirms they are one record. Fuzzy matches go to a review list, not to the merge.</li>
+<li><strong>Prove the result before it replaces anything.</strong> Recount the rows. The after count should equal the before count minus only the merges you approved, one by one. Then recheck a sample: pick 20 rows spread across the file and compare each against the original copy, including one total or sum you knew was right before the cleanup.</li>
+</ol>
+<p><strong>What success looks like:</strong> the original file is untouched, every formatting fix was accepted as a visible suggestion, every merged duplicate has a human decision behind it, and the row counts reconcile exactly, approved merges and nothing else.</p>
+
+<h2>When the honest answer is not AI at all</h2>
+<p>Two situations point away from the AI button. The first is repetition: if the same messy export lands every week, a one off cleanup treats the symptom. Production cleanup guidance makes the same point from the other side, fix the source, with validated entry forms or a repeatable rules based cleanup in Power Query or OpenRefine, so the same issues stop arriving. The second is sensitivity: a list carrying customer contact details deserves the route that keeps it inside the tools and permissions you already run, which for most small businesses means the built in Excel or Sheets route on a copy, not an upload to a general chatbot. AI earns its place on the formatting mess and on flagging the maybes. The decisions, and the proof, stay human.</p>
+<p>, Dex Carter, Tech Writer</p>
+    <section class="keep-reading"><h2>Keep reading: Operations</h2><ul>
+      <li><a href="/articles/ai-invoice-capture.html">AI Invoice Capture and Document Processing</a></li>
+      <li><a href="/articles/ai-inventory.html">Inventory Forecasting with AI for Small Shops</a></li>
+      <li><a href="/articles/ai-meeting-notes.html">AI Meeting Notes and Action Items</a></li>
+      <li><a href="/articles/ai-sop-drafting.html">Drafting Standard Operating Procedures with AI</a></li>
+    </ul></section>
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p><strong>AI Small Business Playbook</strong>, practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav><a href="/">Home</a><a href="/#guides">All guides</a><a href="/roi-calculator.html">ROI Calculator</a><a href="/ai-cost-simulator.html">Cost Simulator</a><a href="/about.html">About</a></nav>
+  <p class="footer-nav"><a href="/about.html">About</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

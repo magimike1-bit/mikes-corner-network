@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://funny-baking.pages.dev/sitemap.xml
+Sitemap: https://funny-baking-2ns2e.kinsta.page/sitemap.xml

@@ -5,7 +5,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { startPriceNumeric, startPriceText } from "./price-parse.mjs";
 import { slugify } from "./slugify.mjs";
-import { tierSavings, allSavings, firstYear } from "./savings.mjs";
+import { tierSavings, allSavings, firstYear, seatYearCosts, fmtMoney, TEAM_SIZES } from "./savings.mjs";
 import { rankByAvg, rankByReviews } from "./review-rank.mjs";
 import { fmtDate, isStale } from "./freshness.mjs";
 import { PRICES_VERIFIED_DATE, comparePageDate } from "./site-data.mjs";
@@ -1069,6 +1069,7 @@ ${header(null)}
     <section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
       <ul class="dir-rows">${rows}</ul>
     </section>
+    ${transparencySection(c)}
   </div>
 </main>
 ${footer()}`;
@@ -1114,6 +1115,122 @@ function fitBlock(p) {
  * scoreSection() (renders nothing on a missing entry) — the identical
  * components and strings as the deal pages. The F5 first-year-cost item is
  * appended to each column's facts strip (compare pages only). */
+
+/* ---- Compare-page additions (PP-FIRSTYEAR-COST, FEAT-PP-ALTERNATIVES-TABLE,
+ * PP-VERIFY-TABLE) ----
+ * All three render only from verified data already on the page's inputs
+ * (products.json tiers, review-scores.json). Gaps render as honest labels,
+ * never estimates. */
+
+// Aggregate review row per scored product (review-rank rules: mean of the
+// available G2/Capterra scores, total review count), keyed by slug.
+const scoreRowBySlug = new Map(rankByAvg(products, reviewScores).map((r) => [r.slug, r]));
+
+function alternativesSection(set) {
+  const inSet = new Set(set.products.map((p) => p.slug));
+  const alts = products
+    .filter((p) => p.category === set.category && !inSet.has(p.slug))
+    .map((p) => ({ p, row: scoreRowBySlug.get(p.slug) || null }))
+    .sort((a, b) => {
+      if (a.row && b.row)
+        return b.row.avg - a.row.avg || b.row.totalReviews - a.row.totalReviews || a.p.name.localeCompare(b.p.name);
+      if (a.row) return -1;
+      if (b.row) return 1;
+      return a.p.name.localeCompare(b.p.name);
+    });
+  if (!alts.length) return "";
+  const rows = alts
+    .map(({ p, row }) => `<tr>
+      <th scope="row"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></th>
+      <td>${fromPrice(p, false)}</td>
+      <td>${row ? `${esc(row.avgText)} average · ${row.totalReviews.toLocaleString("en-US")} reviews` : "Not enough reviews"}</td>
+      <td>${esc(p.best_for || "")}</td>
+    </tr>`)
+    .join("\n");
+  return `<section class="section alternatives">
+      <h2>Other ${esc(set.category)} options to compare</h2>
+      <p>Same category, not part of this comparison. Starting prices are verified list prices. Review scores average each product's G2 and Capterra ratings, checked ${esc(reviewScores.checked)}.</p>
+      <div class="table-scroll">
+      <table class="tiers">
+        <caption>Other ${esc(set.category)} products tracked by PlanPrice.</caption>
+        <thead><tr><th scope="col">Product</th><th scope="col">Starting price</th><th scope="col">Review score</th><th scope="col">Best for</th></tr></thead>
+        <tbody>${rows}
+</tbody>
+      </table>
+      </div>
+    </section>`;
+}
+
+function firstYearSection(set) {
+  const sized = [];
+  const excluded = [];
+  for (const p of set.products) {
+    const r = seatYearCosts(p);
+    if (!r) continue;
+    if (r.excluded === "usage-metered") excluded.push(`${p.name} (priced by usage meter)`);
+    else if (r.excluded === "per-transaction") excluded.push(`${p.name} (per-transaction pricing)`);
+    else if (r.excluded === "user-banded") excluded.push(`${p.name} (priced in user bands)`);
+    else if (r.excluded === "composite-price") excluded.push(`${p.name} (base plus per-person pricing)`);
+    else if (r.excluded) excluded.push(p.name);
+    else sized.push({ p, r });
+  }
+  if (!sized.length) return "";
+  const rows = sized
+    .map(({ p, r }) => `<tr>
+      <th scope="row"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a> (${esc(r.tier)})</th>
+      ${TEAM_SIZES.map((s) => `<td class="price">${esc(fmtMoney(r.sigil, r.costs[s]))}</td>`).join("")}
+    </tr>`)
+    .join("\n");
+  const note = excluded.length
+    ? `\n      <p class="fine">Not shown: ${esc(excluded.join("; "))}. Their first-year cost depends on usage, so no seat-based figure is honest. See the pricing tables above.</p>`
+    : "";
+  return `<section class="section first-year">
+      <h2>First-year cost at standard team sizes</h2>
+      <p>Each product's starting paid tier at list price, before taxes, for a full first year. Flat-rate plans cost the same at every size shown; per-seat plans scale with the team.</p>
+      <div class="table-scroll">
+      <table class="tiers">
+        <caption>First-year list cost by team size. PlanPrice, from verified pricing.</caption>
+        <thead><tr><th scope="col">Product (starting paid tier)</th>${TEAM_SIZES.map((s) => `<th scope="col">${s} seats</th>`).join("")}</tr></thead>
+        <tbody>${rows}
+</tbody>
+      </table>
+      </div>${note}
+    </section>`;
+}
+
+const transparencyCache = new Map();
+function transparencySection(category) {
+  if (transparencyCache.has(category)) return transparencyCache.get(category);
+  const members = products.filter((p) => p.category === category);
+  if (!members.length) return "";
+  const rows = members
+    .map((p) => {
+      const tiers = p.pricing_tiers || [];
+      const publishes = tiers.some((t) => t.cadence !== "quote" && /\d/.test(String(t.price)));
+      return `<tr>
+      <th scope="row"><a href="/deals/${esc(p.slug)}.html">${esc(p.name)}</a></th>
+      <td>${publishes ? "Yes, list prices published" : "Quote only"}</td>
+      <td>${fromPrice(p, false)}</td>
+      <td><time datetime="${esc(p.last_verified || "")}">${esc(p.last_verified || "")}</time></td>
+    </tr>`;
+    })
+    .join("\n");
+  const html = `<section class="section transparency">
+      <h2>Who publishes pricing in ${esc(category)}</h2>
+      <p>Whether each vendor posts list prices on its own pricing page, from PlanPrice's verification records. Verified pricing, not vendor-submitted list prices: every figure here was read from the vendor's published page on the date shown.</p>
+      <div class="table-scroll">
+      <table class="tiers">
+        <caption>${esc(category)} pricing transparency. PlanPrice verification records.</caption>
+        <thead><tr><th scope="col">Vendor</th><th scope="col">Publishes list prices?</th><th scope="col">Verified starting price</th><th scope="col">Prices verified</th></tr></thead>
+        <tbody>${rows}
+</tbody>
+      </table>
+      </div>
+    </section>`;
+  transparencyCache.set(category, html);
+  return html;
+}
+
 function compareSetPage(set) {
   const pageDate = comparePageDate(set.slug);
   const cols = set.products
@@ -1140,6 +1257,9 @@ ${header("/compare.html")}
     <div class="compare-cols">
       ${cols}
     </div>
+    ${firstYearSection(set)}
+    ${alternativesSection(set)}
+    ${transparencySection(set.category)}
   </div>
 </main>
 ${footer()}`;

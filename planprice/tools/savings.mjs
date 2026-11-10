@@ -108,6 +108,90 @@ export function allSavings(products) {
   return out;
 }
 
+/** Cadence classifiers shared by seatYearCosts() and firstYear() so the
+ * per-transaction and banded rules live in exactly one place. */
+export const TEAM_SIZES = [5, 10, 25];
+const isTxnCadence = (cad) => /transaction/.test(String(cad || "").toLowerCase());
+const hasTxnTier = (tiers) => tiers.some((x) => isTxnCadence(x.cadence));
+const isBandedCadence = (cad) => /per year,\s*\d/.test(String(cad || "").toLowerCase());
+
+/**
+ * PP-FIRSTYEAR-COST: first-year cost of a product's starting PAID tier at
+ * standard team sizes (5/10/25 seats), from verified list prices only.
+ * Returns { tier, costs: {5,10,25}, sigil } or { excluded: reason } or null
+ * when no paid tier exists. Per-seat/user/employee/contractor cadences
+ * scale with seats; flat monthly cadences annualize x12; per-year cadences
+ * are already annual. Usage-metered cadences (contacts, subscribers,
+ * sends, profiles), per-transaction pricing, user-banded cadences
+ * (a price that covers a band of users, not one user), and composite
+ * prices (a base plus a per-person charge) are excluded with a reason —
+ * never estimated. A dollar monthly minimum stated in the tier's notes
+ * floors the monthly figure before annualizing.
+ */
+export function seatYearCosts(p, sizes = TEAM_SIZES) {
+  const tiers = p.pricing_tiers || [];
+  // A product whose core starting offer is a per-transaction rate is
+  // transaction-priced for this table's purpose, even if it also sells
+  // add-on subscriptions (Square POS: free + 2.9% + 30c, with Appointments
+  // plans as a separate line). Pricing the add-on here would mislead.
+  const first = tiers[0];
+  if (first && isTxnCadence(first.cadence)) {
+    return { excluded: "per-transaction" };
+  }
+  // Same conclusion when the starting tier is free software whose notes
+  // carry the per-transaction processing rate (Square POS: "$0 free",
+  // notes "2.6% + 15c per transaction") — the paid tiers that follow are
+  // add-on lines, not the core offer.
+  if (
+    first &&
+    String(first.cadence || "").toLowerCase() === "free" &&
+    /per transaction/.test(String(first.notes || "").toLowerCase())
+  ) {
+    return { excluded: "per-transaction" };
+  }
+  const parsed = tiers.map((x) => ({
+    t: x,
+    cad: String(x.cadence || "").toLowerCase(),
+    n: numOf(x.price),
+  }));
+  const hit = parsed.find(
+    (x) => x.cad !== "quote" && x.cad !== "free" && !isTxnCadence(x.cad) && Number.isFinite(x.n) && x.n > 0
+  );
+  if (!hit) {
+    // Tiers exist but none is a payable subscription (all free/quote/
+    // transaction): report per-transaction when a transaction tier exists.
+    if (hasTxnTier(tiers)) return { excluded: "per-transaction" };
+    return null;
+  }
+  const { t, cad, n } = hit;
+  if (isBandedCadence(cad)) return { excluded: "user-banded" };
+  if (/contacts|subscribers|sends|profiles/.test(cad)) return { excluded: "usage-metered" };
+  // A composite price ("C$20 + C$4/employee") has two components; taking
+  // only the first number would understate the cost, so it is excluded
+  // rather than estimated.
+  if (String(t.price).includes("+")) return { excluded: "composite-price" };
+  // The per-seat signal can live in the price string instead of the
+  // cadence (Setmore Pro: "$5/user", cadence "per month").
+  const perSeat = /seat|user|employee|contractor/.test(`${cad} ${t.price}`);
+  const perYear = /per year/.test(cad) && !/per month/.test(cad);
+  // A dollar monthly minimum stated in the tier's verified notes floors
+  // the monthly figure (Humi Payroll: $7 per employee, "$70/month
+  // minimum" — at 5 employees the floor, not the product, sets the cost).
+  const minMatch = /\$([\d,]+(?:\.\d{1,2})?)\/month minimum/.exec(String(t.notes || ""));
+  const monthlyMin = minMatch ? Number(minMatch[1].replace(/,/g, "")) : null;
+  const costs = {};
+  for (const s of sizes) {
+    let v;
+    if (perYear) v = perSeat ? n * s : n;
+    else {
+      const monthly = perSeat ? n * s : n;
+      v = (monthlyMin != null ? Math.max(monthly, monthlyMin) : monthly) * 12;
+    }
+    costs[s] = Math.round(v * 100) / 100;
+  }
+  return { tier: t.name, costs, sigil: sigilOf(t.price) };
+}
+
 /**
  * F5: first-year cost for a product's starting tier.
  * Skipped (null) when the starting price is null/quote/free or the cadence
@@ -117,7 +201,7 @@ export function firstYear(p) {
   const t = p.pricing_tiers && p.pricing_tiers[0];
   if (!t) return null;
   const cad = String(t.cadence || "").toLowerCase();
-  if (cad === "quote" || cad === "free" || /transaction/.test(cad)) return null;
+  if (cad === "quote" || cad === "free" || isTxnCadence(cad)) return null;
   const n = startPriceNumeric(p);
   if (n == null) return null;
   const fy = Math.round(n * 12 * 100) / 100;

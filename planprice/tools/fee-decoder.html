@@ -75,6 +75,20 @@ mark.fee-hit { background: #fef08a; padding: 0 2px; border-radius: 3px; }
         <p class="fine">Paste some text and press "Decode fees" to scan it.</p>
       </div>
     </div>
+
+    <h2 class="section-title" style="margin-top:28px">How Payment Fees Decompose</h2>
+    <p>Card processing is sold in two structures, and this decoder exists because the fine print rarely names which one you are reading. Under flat rate pricing, the processor charges one blended rate on every transaction, simple to predict, and blind to the fact that cheap debit and premium rewards cards cost the processor very different amounts underneath. Under interchange plus pricing, you pay the card networks' interchange fee, which varies by card type, plus the processor's stated margin on top. The margin is the only negotiable part, and it is the number worth comparing. Average ticket size matters because both structures add a fixed fee per transaction: on small tickets the fixed fee can outweigh the percentage, and on large tickets it nearly disappears.</p>
+    <h2 class="section-title" style="margin-top:28px">Worked Example: CAD 40,000 A Month, Two Structures</h2>
+    <p>Take CAD 40,000 of monthly card volume across 800 transactions, an average ticket of CAD 50. On Stripe's flat rate of 2.9 percent plus CAD 0.30 per transaction (checked 2026-10-20), the percentage costs CAD 1,160 and the fixed fees cost CAD 240, for CAD 1,400 total. On Helcim's interchange plus structure, the published margin on the first CAD 50,000 of monthly card present volume is 0.4 percent plus CAD 0.08 per transaction over interchange (checked 2026-10-26); for Visa Consumer cards Helcim publishes a combined rate of 1.75 percent plus CAD 0.08, which on the same volume is CAD 700 plus CAD 64, CAD 764. The gap is the ticket mix: a month heavy in premium rewards cards narrows it, a month heavy in basic cards and Interac widens it, which is why the decoder asks what you sell and how customers pay.</p>
+    <h2 class="section-title" style="margin-top:28px">Sources And Limitations</h2>
+    <p>Sources: Stripe Canada pricing, checked 2026-10-20, and Helcim's published tier structure, checked 2026-10-26, both recorded in the PlanPrice research store from the vendors' own pages. Limitations: interchange varies by card, industry, and transaction type, so any single combined rate is an illustration, not a quote. The decoder estimates from the text you paste; your processor statement is the only exact record of what you pay today.</p>
+    <h2 class="section-title" style="margin-top:28px">Frequently Asked Questions</h2>
+    <h3>What Is Interchange Plus?</h3>
+    <p>Pricing where the processor passes through the card networks' interchange fees at cost and adds a fixed, stated margin. The margin is the part you can negotiate and compare.</p>
+    <h3>Why Does Average Ticket Matter?</h3>
+    <p>Every transaction carries a fixed fee on top of the percentage. At a CAD 10 ticket, a 30 cent fixed fee is 3 percent by itself; at CAD 100 it is 0.3 percent.</p>
+    <h3>Is Flat Rate Ever The Better Deal?</h3>
+    <p>Yes, for low volume, simple setups, or a ticket mix heavy in premium cards, flat rate can cost the same or less and is far easier to predict. Run your own statement through both structures before switching.</p>
     <noscript>
       <p><strong>This tool needs JavaScript to scan text.</strong> When you read a pricing page yourself, watch for these common hidden-cost signals: one-time onboarding or setup fees; minimum seat or user counts; overage rates when you exceed plan limits; annual-only billing with no monthly option; auto-renewal at "then-current" prices; early-termination or cancellation fees; paid add-ons that are effectively required; support limited to higher tiers; data migration or export fees; and currency conversion surcharges on USD billing. See our <a href="/guides/hidden-payment-fees.html">hidden fees guide</a> for the full rundown.</p>
     </noscript>

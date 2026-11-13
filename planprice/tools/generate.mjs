@@ -5,7 +5,9 @@
 // write or resurrect these. price-changes.html (its Check Type column and
 // spot check rows come from the verification log, not the sweep diffs),
 // verified.html, guides.html and the article guides under guides/,
-// authors/mike.html, and every page deleted in Batch 2 (marketing.html,
+// authors/mike.html, reports/canadian-saas-pricing-2026.html (a hand built
+// first party data publication; the generator has no reports template),
+// and every page deleted in Batch 2 (marketing.html,
 // the 5 ads-arbitrage guides, and the 9 category guides under guides/
 // whose content merged into categories/*.html as How to Choose sections,
 // now stored in data/page-extras.json as categories-howto/<slug>).
@@ -685,6 +687,12 @@ function indexPage() {
   </div>
 </div>
 <main>
+    <section class="section" aria-label="Featured report">
+    <div class="wrap">
+      <h2 class="section-title">From Our Own Price Checks</h2>
+      <p class="section-sub">Our first party data publication: the <a href="/reports/canadian-saas-pricing-2026.html">Canadian SaaS Pricing Report 2026</a> reports what our dated price checks across 184 tracked vendors actually showed, including the five real list price changes of fall 2026.</p>
+    </div>
+</section>
     <section class="section featured" aria-label="Featured deals">
     <div class="wrap">
       <h2 class="section-title">Featured deals</h2>
@@ -1888,6 +1896,7 @@ function aboutBody() {
       <p>PlanPrice is edited by <a href="/authors/mike.html">Mike</a>, a retail IT professional who has spent more than ten years in IT vendor management.</p>
       <p>That background is the working basis for this site. Vendor management means reading vendor pricing pages, plan tiers, and contract terms as a day job, and comparing what vendors publish against what they actually charge. PlanPrice applies the same reading to the business software prices and promotions tracked here.</p>
       <p>Mike directs what PlanPrice covers and reviews the prices, guides, and deal pages before they are published. When a reader reports a price that looks wrong, the correction comes to Mike, gets re-checked against the vendor's own site, and the page is updated when the correction checks out. See the <a href="/contact.html">Contact page</a> for how to send a correction.</p>
+      <p>The checking work is also published as data in its own right: the <a href="/reports/canadian-saas-pricing-2026.html">Canadian SaaS Pricing Report 2026</a> is built entirely from PlanPrice's own dated price checks.</p>
     <h2>AI disclosure</h2>
       <p>AI tools assist with content production on this site. Mike, the editor of PlanPrice, directs that work and reviews the content before it is published.</p>
     </div></section>`;
@@ -2009,7 +2018,7 @@ function methodologyBody() {
       <p>Step 2, the current promotion. The vendor's own offer pages are checked for a public promotion. When a public promotion exists, the deal page shows the promotion terms and links to the vendor's own offer page. When no public promotion exists, the deal page says so plainly instead of presenting standard list prices as a deal.</p>
       <p>Step 3, the review scores. The product's aggregate user ratings on G2 and Capterra are recorded with the score, the number of reviews behind it, the source, and the date checked. How those scores are used, and how they are not used, is set out in the Review Scores section below.</p>
       <p>Step 4, publication with dates. The deal page is published or updated with the check date printed next to the price and next to the scores. A page keeps its older date wherever its pricing has not been re-checked. PlanPrice never re-dates a page it did not actually re-verify.</p>
-      <p>Step 5, the public record. Each check is entered in the <a href="/verified.html">Verification Log</a> with the date, the product, the type of check, and what was found. Price and promotion changes between sweeps are recorded on the <a href="/price-changes.html">Price Changes page</a>, and every deal page carries its own price history table.</p>
+      <p>Step 5, the public record. Each check is entered in the <a href="/verified.html">Verification Log</a> with the date, the product, the type of check, and what was found. Price and promotion changes between sweeps are recorded on the <a href="/price-changes.html">Price Changes page</a>, and every deal page carries its own price history table. The method is published worked, not just described: the <a href="/reports/canadian-saas-pricing-2026.html">Canadian SaaS Pricing Report 2026</a> applies it to the full store of dated checks.</p>
       <h2>Review Scores From G2 And Capterra</h2>
       <p>Deal pages show aggregate user ratings from two third party review sites, G2 and Capterra. Those scores are labelled with their source on every page where they appear, for three reasons:</p>
       <ol>

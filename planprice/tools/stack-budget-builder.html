@@ -64,7 +64,7 @@
     <h1 class="page-title">Stack Budget Builder</h1>
     <p class="section-sub">Pick one product per category, choose a pricing tier, and watch your whole software stack's monthly and annual cost add up, using the list prices PlanPrice verified on each vendor's own site (checked 2026-09-30).</p>
     <p class="section-sub">Tool data comes from the deal pages. Prices were last checked in the full sweep dated 2026-09-30, with spot checks logged since then in the <a href="/verified.html">verification log</a>.</p>
-    <p class="fine">Tier prices are verified list prices: most come from our <a href="/deals.html">deal directory</a> data (checked 2026-09-30); Pipedrive, Wagepoint, and Knit tiers come from the PlanPrice research store (vendor's own pages, checked 2026-10-11). Zoho CRM, Acuity Scheduling, and Setmore are not listed because we have not verified their tier-by-tier pricing yet, see their <a href="/deals.html">deal pages</a> for starting prices. Prices marked C$ are billed in Canadian dollars; $ prices are USD, converted at a typical card rate (≈1.37 CAD, a rule of thumb; your card's rate may differ). Payroll base prices exclude per-employee add-ons, noted in the tier name.</p>
+    <p class="fine">Tier prices are verified list prices: most come from our <a href="/deals.html">deal directory</a> data (checked 2026-09-30); Pipedrive tiers come from the PlanPrice research store (vendor's own pages, checked 2026-10-11); Wagepoint and Knit tiers were rechecked 2026-11-13 against the vendors' published schedules. Zoho CRM, Acuity Scheduling, and Setmore are not listed because we have not verified their tier-by-tier pricing yet, see their <a href="/deals.html">deal pages</a> for starting prices. Prices marked C$ are billed in Canadian dollars; $ prices are USD, converted at a typical card rate (≈1.37 CAD, a rule of thumb; your card's rate may differ). Payroll base prices exclude per-employee add-ons, noted in the tier name.</p>
     <div class="calc-wrap">
       <div class="calc-controls">
         <div class="calc-field">
@@ -87,6 +87,20 @@
       <div class="calc-totals" id="s-totals" aria-live="polite"></div>
       <div class="calc-bench" id="s-bench" aria-live="polite"></div>
     </div>
+
+    <h2 class="section-title" style="margin-top:28px">How A Stack Budget Is Assembled</h2>
+    <p>The builder prices a software stack the way the bills actually arrive: one product per category, at the tier you pick, with per seat prices multiplied by seats, annual prices divided by twelve, and US dollar prices converted at the stated card rate so the total reads in one currency. What a sane stack looks like depends on size. A solo operator usually needs accounting, payments, and one scheduling or client tool, and can run near zero in subscription fees by starting on free tiers. A team of five adds a real CRM, shared work management, and paid tiers where free caps start to bind. At fifteen seats, per seat pricing dominates everything, and the stack decision that matters most is which products charge per seat at all.</p>
+    <h2 class="section-title" style="margin-top:28px">Worked Example: A Solo Starter Stack</h2>
+    <p>A solo consultant starts with Wave Starter at CAD 0 (checked 2026-10-27) for accounting and invoicing, Square for payments at 2.5 percent per in person transaction (checked 2026-11-03), which costs nothing until a card is charged, and Calendly Standard at USD 10 per seat per month on annual billing (checked 2026-10-23) for booking. The subscription total is USD 10 per month, USD 120 per year, and the only other cost is the percentage on card volume actually taken. That is the shape of a sane starter stack: fixed costs near zero, variable costs that scale with revenue, and nothing bought ahead of need.</p>
+    <h2 class="section-title" style="margin-top:28px">Sources And Limitations</h2>
+    <p>Sources: tier prices in the builder's catalogue are verified list prices from the PlanPrice deal directory and the PlanPrice research store, each dated in the catalogue notes; the payroll tiers for Wagepoint and Knit were rechecked 2026-11-13 against the vendors' published schedules. Limitations: payroll base prices exclude per employee add ons, which are noted in the tier names but not modelled in the totals, and US dollar conversion uses a typical card rate of about 1.37 CAD, so your card's actual rate will move US dollar lines slightly.</p>
+    <h2 class="section-title" style="margin-top:28px">Frequently Asked Questions</h2>
+    <h3>What Should A Small Team's Stack Cost?</h3>
+    <p>The builder's benchmark bands are a rule of thumb: most solo operators run under CAD 150 per month in subscriptions, and teams of two to ten commonly land between CAD 150 and CAD 600, before per transaction payment fees.</p>
+    <h3>Why Pick Only One Product Per Category?</h3>
+    <p>Overlapping tools are the most common stack waste. One product per category forces the comparison that matters, which product earns the slot, before any money is committed.</p>
+    <h3>Does The Total Include Payment Processing?</h3>
+    <p>Percentage based processing is listed on the payment product's tiers but cannot be totalled without your card volume. Add your expected monthly volume times the rate to the subscription total for a full picture.</p>
     <noscript>
       <p><strong>This tool needs JavaScript to add up your stack.</strong> The method it uses is simple: for each category, take the tier's list price, multiply by seats for per-seat pricing, divide by 12 for annual pricing, convert USD prices at roughly 1.37 CAD, and sum the rows. The annual total is the monthly total × 12. To price a stack by hand, start from the verified tier tables on our <a href="/deals.html">deal pages</a>.</p>
     </noscript>
@@ -100,7 +114,7 @@
     {slug:"hubspot",name:"HubSpot",category:"CRM & Marketing",
      tiers:[
       {name:"Free Tools",price:"$0",cadence:"free"},
-      {name:"Starter",price:"$15",cadence:"per seat/month"},
+      {name:"Starter",price:"$20",cadence:"per seat/month"},
       {name:"Sales Hub Professional",price:"$90",cadence:"per seat/month"},
       {name:"Marketing Hub Professional",price:"$890",cadence:"per month"},
      ]},
@@ -120,9 +134,9 @@
      ]},
     {slug:"semrush",name:"Semrush",category:"SEO & Marketing",
      tiers:[
-      {name:"Pro",price:"$139.95",cadence:"per month"},
-      {name:"Guru",price:"$249.95",cadence:"per month"},
-      {name:"Business",price:"$499.95",cadence:"per month"},
+      {name:"SEO",price:"$139",cadence:"per month"},
+      {name:"Semrush One Starter",price:"$199",cadence:"per month"},
+      {name:"Pro+",price:"$299",cadence:"per month"},
      ]},
     {slug:"shopify",name:"Shopify",category:"Ecommerce",
      tiers:[
@@ -135,8 +149,15 @@
     {slug:"wave",name:"Wave",category:"Accounting",
      tiers:[
       {name:"Starter",price:"$0",cadence:"free"},
-      {name:"Pro",price:"$19",cadence:"per month"},
+      {name:"Pro",price:"C$25",cadence:"per month"},
       {name:"Payments",price:"2.9% + 60¢",cadence:"per transaction"},
+     ]},
+    {slug:"zoho-books",name:"Zoho Books",category:"Accounting",
+     tiers:[
+      {name:"Free",price:"$0",cadence:"free"},
+      {name:"Standard",price:"C$15",cadence:"per month"},
+      {name:"Professional",price:"C$30",cadence:"per month"},
+      {name:"Premium",price:"C$40",cadence:"per month"},
      ]},
     {slug:"quickbooks",name:"QuickBooks Online",category:"Accounting",
      tiers:[
@@ -177,8 +198,8 @@
     {slug:"humi",name:"Humi",category:"HR & Payroll",
      tiers:[
       {name:"Core HR platform",price:"Custom",cadence:"quote"},
-      {name:"Payroll",price:"$7",cadence:"per employee/month"},
-      {name:"Managed Payroll",price:"$30",cadence:"per employee/month"},
+      {name:"Payroll \u2014 C$70/month minimum applies",price:"C$7",cadence:"per employee/month"},
+      {name:"Managed Payroll \u2014 C$500/month minimum applies",price:"C$30",cadence:"per employee/month"},
      ]},
     {slug:"ahrefs",name:"Ahrefs",category:"SEO & Marketing",
      tiers:[
@@ -212,21 +233,25 @@
       {name:"Premium (annual billing)",price:"$59",cadence:"per user/month"},
       {name:"Ultimate (annual billing)",price:"$79",cadence:"per user/month"},
      ]},
-    /* Wagepoint tiers: wagepoint.com legal service-fee schedule (vendor's own),
-       checked 2026-10-11, packet wagepoint-vs-humi-vs-knit-payroll-pricing.
-       Base prices shown; per-employee add-ons (+C$4 Solo / +C$6 Unlimited)
-       are noted in the tier name but not modelled in the total. */
+    /* Wagepoint tiers: Wagepoint 2.0 Service Fee Schedule (last updated
+       2026-10-22) and the Wagepoint pricing page, checked 2026-11-13.
+       Base prices shown; per-employee add-ons (+C$4 Lite / +C$6 Core /
+       +C$10 Plus) are noted in the tier name but not modelled in the total. */
     {slug:"wagepoint",name:"Wagepoint",category:"HR & Payroll",
      tiers:[
-      {name:"Solo \u2014 base + C$4 per employee",price:"C$20",cadence:"per month"},
-      {name:"Unlimited \u2014 base + C$6 per employee",price:"C$40",cadence:"per month"},
+      {name:"Lite \u2014 base + C$4 per employee",price:"C$20",cadence:"per month"},
+      {name:"Core \u2014 base + C$6 per employee",price:"C$40",cadence:"per month"},
+      {name:"Plus \u2014 base + C$10 per employee",price:"C$80",cadence:"per month"},
      ]},
-    /* Knit tier: knitpeople.com (vendor's own blog), checked 2026-10-11,
-       packet wagepoint-vs-humi-vs-knit-payroll-pricing. Base price shown;
-       +C$6 per employee noted but not modelled in the total. */
+    /* Knit tiers: Knit published pricing, checked 2026-11-13. Base prices
+       shown; per-employee add-ons (+C$6 Lite / +C$8 Complete) are noted in
+       the tier name but not modelled in the total. Concierge is unpriced
+       (contact sales for a quote). */
     {slug:"knit-people",name:"Knit People",category:"HR & Payroll",
      tiers:[
-      {name:"Complete \u2014 base + C$6 per employee",price:"C$39",cadence:"per month"},
+      {name:"Lite \u2014 base + C$6 per employee",price:"C$40",cadence:"per month"},
+      {name:"Complete \u2014 base + C$8 per employee",price:"C$50",cadence:"per month"},
+      {name:"Concierge",price:"Custom",cadence:"quote"},
      ]},
   ];
   var CATEGORIES = ["Accounting","CRM & Marketing","Ecommerce","Field Service","HR & Payroll","Payments & POS","Scheduling","SEO & Marketing","Work Management"];

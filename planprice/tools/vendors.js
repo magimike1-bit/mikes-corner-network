@@ -23,6 +23,7 @@ var VENDORS = [
   {slug:"big-cartel",name:"Big Cartel",category:"Ecommerce",catSlug:"ecommerce",priceSort:0,priceText:"From $0 free"},
   {slug:"pipedrive",name:"Pipedrive",category:"CRM & Marketing",catSlug:"crm-marketing",priceSort:14,priceText:"From $14 per user/month"},
   {slug:"zoho-crm",name:"Zoho CRM",category:"CRM & Marketing",catSlug:"crm-marketing",priceSort:0,priceText:"From $0 free"},
+  {slug:"zoho-books",name:"Zoho Books",category:"Accounting",catSlug:"accounting",priceSort:0,priceText:"From $0 free"},
   {slug:"wagepoint",name:"Wagepoint",category:"HR & Payroll",catSlug:"hr-payroll",priceSort:20,priceText:"From C$20 per month"},
   {slug:"knit-people",name:"Knit People",category:"HR & Payroll",catSlug:"hr-payroll",priceSort:40,priceText:"From C$40 per month"},
   {slug:"acuity",name:"Acuity Scheduling",category:"Scheduling",catSlug:"scheduling",priceSort:20,priceText:"From $20 per month"},

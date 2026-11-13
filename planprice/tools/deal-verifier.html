@@ -97,6 +97,20 @@
       <label class="calc-check"><input type="checkbox" id="v-checkoutdiff"> <span>The price shown at checkout differs from the advertised price.</span></label>
       <div class="calc-results" id="v-results" aria-live="polite"></div>
     </div>
+
+    <h2 class="section-title" style="margin-top:28px">How The Verifier Checks A Deal</h2>
+    <p>The verifier tests a quoted deal in a fixed order. First, the price: it normalises the list price and the offer price to the same period, one year, one month, or one time, and computes the real discount as (list minus offer) divided by list. Second, the snapshot: the list price is compared with the verified prices PlanPrice holds from checking the vendor's own site, so a discount calculated off an inflated "was" price shows up as a smaller real saving. Third, the terms: promotion status and tier fit, including whether the offer shows an end date and whether the checkout price matches the advertised price, the two checks most likely to catch a deal that is not what it claims.</p>
+    <h2 class="section-title" style="margin-top:28px">Worked Example: A Pass And A Fail</h2>
+    <p>QuickBooks EasyStart lists at CAD 30 per month in Canada (checked 2026-10-27). A quote offering EasyStart at CAD 3 per month for the first six months matches the vendor's published promotion, 90 percent off for six months for new subscribers, and then returns to the CAD 30 list price: that quote passes, with a first year cost of CAD 198, not the CAD 36 the headline suggests. A quote advertising "50 percent off forever, CAD 15 per month" fails the same check: no such ongoing rate exists on the vendor's published list, so the claim rests on a price the vendor does not publish. The discount percentage was never the problem in either case; the period and the list price were.</p>
+    <h2 class="section-title" style="margin-top:28px">Sources And Limitations</h2>
+    <p>Sources: verified list prices come from the PlanPrice deal directory, each price checked against the vendor's own site and dated on its deal page; the QuickBooks reading above was checked 2026-10-27. Limitations: snapshots are periodic, so a vendor can change a price between our check and your quote. The vendor's own pricing page is the final authority, the same standard the verifier applies to the quote.</p>
+    <h2 class="section-title" style="margin-top:28px">Frequently Asked Questions</h2>
+    <h3>What Discounts Should I Distrust On Sight?</h3>
+    <p>Very large discounts with no end date, discounts calculated off a list price higher than the vendor publishes, and prices that change at checkout.</p>
+    <h3>Does A Verified Deal Mean The Vendor Is Endorsed?</h3>
+    <p>No. The verifier checks arithmetic and published terms only. Fit for your business is a separate question.</p>
+    <h3>What Should I Do When A Check Fails?</h3>
+    <p>Ask the vendor, in writing, which published list price the discount is calculated from and when the offer price ends. A legitimate offer survives both questions.</p>
     <noscript>
       <p><strong>This tool needs JavaScript to do the math.</strong> The idea is simple: take the vendor's list price and the offer price, normalize both to an annual total, and the real discount is (list − offer) ÷ list. Watch out for discounts of 70% or more with no end date (often an inflated "was" price), and prices that change at checkout. See our guides <a href="/guides/stack-saas-discounts.html">How to stack SaaS discounts</a> and <a href="/guides/saas-discount-calendar.html">The SaaS discount calendar</a> for the full playbook.</p>
     </noscript>

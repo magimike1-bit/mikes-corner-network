@@ -10,7 +10,11 @@
 //   P1 `Billed annually ($M/month if billed monthly)` + tier price $A  → (M-A)*12  (monday, calendly)
 //   P2 `$A/month billed annually` + tier price $M                    → (M-A)*12  (shopify)
 //   P3 `$Y/year if billed annually` + tier price $M/month            → M*12-Y    (wave)
-//   P4 `C$M/month` price + `C$A/month with annual prepayment`        → (M-A)*12  (jobber)
+//   P4 `$M/month` price + `$A/month with annual prepayment`          → (M-A)*12  (jobber)
+//        (sigil may be C$, $, or a spelled-out USD prefix; the annual
+//        rate may be stated per user/month and, on flat tiers, for a
+//        stated team size. Jobber was repriced from CAD to USD list
+//        prices in Batch 2 Deploy 2, so the pattern follows the data.)
 //   `~N% off with annual billing` (semrush) → NO dollar computation; notes render verbatim only.
 import { startPriceNumeric } from "./price-parse.mjs";
 
@@ -59,8 +63,10 @@ export function tierSavings(t) {
     // P3: notes state the annual total ($Y); the tier price is the monthly rate ($M).
     A = numOf(m[1]); M = price; aUnit = "/yr"; mUnit = "/mo";
     save = M * 12 - A;
-  } else if ((m = notes.match(/C\$([\d,]+(?:\.\d+)?)\/month with annual prepayment/))) {
-    // P4: notes state the annual-prepayment rate (C$A); the tier price is the month-to-month rate (C$M).
+  } else if ((m = notes.match(/(?:C\$|\$|USD )([\d,]+(?:\.\d+)?)(?: per user)?\/month[^.]*with annual prepayment/))) {
+    // P4: notes state the annual-prepayment rate (A, in the tier's own
+    // currency: C$, $, or a spelled-out USD amount); the tier price is
+    // the month-to-month rate (M) in the same currency.
     A = numOf(m[1]); M = price; aUnit = "/mo"; mUnit = "/mo";
     save = (M - A) * 12;
   } else {

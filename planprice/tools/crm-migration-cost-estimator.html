@@ -90,6 +90,18 @@
       <li><strong>Parallel licences:</strong> your seats × your combined per seat cost × the parallel months you enter. This line uses your numbers only.</li>
     </ul>
     <p>Totals are shown as a planning range, 25% under to 25% over the fixture math, because real migrations land inside a band, not on a point. For the reasoning behind each cost line, read our guide on <a href="/guides/data-migration-costs-switching-tools.html">data migration costs when switching tools</a>, and the <a href="/guides/salesforce-total-cost-beyond-licence.html">total cost worksheet</a> for what the new system costs after the move.</p>
+
+    <h2 class="section-title" style="margin-top:28px">Worked Example: A Simple Migration, Priced Two Ways</h2>
+    <p>Market benchmarks recorded in the PlanPrice research store (checked 2026-10-12, labelled as benchmarks, not vendor quotes) put a simple CRM data migration service in the low thousands of dollars, with a mid estimate of USD 2,500, and a CRM consultant's mid rate at USD 200 per hour. At that rate, USD 2,500 buys about twelve hours of expert time, which matches what a clean, small migration takes: mapping, a test import, the production run, and spot checks. Run the same move through the estimator above with your own record count and blended rate to see where your numbers land against that benchmark. The cautionary case from the same store readings: a 50,000 record migration budgeted at USD 40,000 that actually cost USD 108,000 once cleanup, timeline overruns, fixes, and lost selling time were counted. The gap was not the licence; it was the data.</p>
+    <h2 class="section-title" style="margin-top:28px">Sources And Limitations</h2>
+    <p>Sources: the benchmark figures above are PlanPrice research store readings (entity saas-general, checked 2026-10-12), drawn from published migration service pricing and consultant rate surveys. The estimator's own per record effort figures are PlanPrice editorial planning figures, stated in the section above, not vendor prices. Limitations: migrations fail on data quality, not arithmetic. Attachments, custom objects, and years of duplicates move a job out of the simple band entirely, and no estimator can see your data the way a test import can.</p>
+    <h2 class="section-title" style="margin-top:28px">Frequently Asked Questions</h2>
+    <h3>What Does A Bad Migration Cost?</h3>
+    <p>In the cautionary case recorded above, USD 108,000 against a USD 40,000 budget on a 50,000 record move. Most of the overrun was cleanup and lost time, not software.</p>
+    <h3>How Long Should The Parallel Run Last?</h3>
+    <p>One full business cycle for the processes the CRM carries, usually one to two months. Shorter risks cutting over before a monthly process has run once in the new system.</p>
+    <h3>Can We Migrate Without A Consultant?</h3>
+    <p>Small, clean datasets often can, using the new vendor's import tools. The benchmark rate above is the comparison: price your own hours honestly against it before deciding.</p>
     <h2 class="section-title" style="margin-top:28px">Related tools</h2>
     <ul>
       <li><a href="/tools/true-cost-calculator.html">True Cost Calculator</a>, compare per-seat vs flat-rate pricing for the CRM you are moving to.</li>

@@ -12,7 +12,7 @@ var VENDORS = [
   {slug:"shopify",name:"Shopify",category:"Ecommerce",catSlug:"ecommerce",priceSort:5,priceText:"From $5 per month"},
   {slug:"wave",name:"Wave",category:"Accounting",catSlug:"accounting",priceSort:0,priceText:"From $0 free"},
   {slug:"quickbooks",name:"QuickBooks Online",category:"Accounting",catSlug:"accounting",priceSort:30,priceText:"From C$30 per month"},
-  {slug:"xero",name:"Xero",category:"Accounting",catSlug:"accounting",priceSort:25,priceText:"From $25 per month"},
+  {slug:"xero",name:"Xero",category:"Accounting",catSlug:"accounting",priceSort:10,priceText:"From $10 per month"},
   {slug:"square",name:"Square",category:"Payments & POS",catSlug:"payments-pos",priceSort:0,priceText:"From $0 free"},
   {slug:"calendly",name:"Calendly",category:"Scheduling",catSlug:"scheduling",priceSort:0,priceText:"From $0 free"},
   {slug:"jobber",name:"Jobber",category:"Field Service",catSlug:"field-service",priceSort:49,priceText:"From C$49 per month"},

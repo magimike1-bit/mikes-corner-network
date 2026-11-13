@@ -99,7 +99,7 @@
     <noscript>
       <p><strong>This tool needs JavaScript to do the math.</strong> The idea is simple: take the vendor's list price and the offer price, normalize both to an annual total, and the real discount is (list − offer) ÷ list. Watch out for discounts of 70% or more with no end date (often an inflated "was" price), and prices that change at checkout. See our guides <a href="/guides/stack-saas-discounts.html">How to stack SaaS discounts</a> and <a href="/guides/saas-discount-calendar.html">The SaaS discount calendar</a> for the full playbook.</p>
     </noscript>
-    <p class="fine">Estimates only, always confirm current pricing on the vendor's own site. Verified list prices come from our <a href="/deals.html">deal directory</a>, checked 2026-09-30.</p>
+    <p class="fine">Estimates only, always confirm current pricing on the vendor's own site. Verified list prices come from our <a href="/deals.html">deal directory</a>, each price checked against the vendor's own site.</p>
   </div>
 </main>
 <script src="vendors.js"></script>
@@ -193,7 +193,7 @@
       var verifiedMonthly = vendor.priceSort;
       var ratio = offerMonthly / verifiedMonthly;
       if (ratio >= 0.9 && ratio <= 1.1) {
-        flags.push("<div class=\"calc-ok\"><strong>Matches our verified price.</strong> Your normalized offer (" + fmt(offerMonthly) + "/mo) lines up with the starting list price we verified on " + vendor.name + "'s own site (" + vendor.priceText + ", checked 2026-09-30).</div>");
+        flags.push("<div class=\"calc-ok\"><strong>Matches our verified price.</strong> Your normalized offer (" + fmt(offerMonthly) + "/mo) lines up with the starting list price we verified on " + vendor.name + "'s own site (" + vendor.priceText + ").</div>");
       } else if (ratio < 0.5) {
         flags.push("<div class=\"calc-flag\"><strong>Unusually low vs our verified price.</strong> Your normalized offer (" + fmt(offerMonthly) + "/mo) is well under the starting price we verified (" + vendor.priceText + "). Confirm it is the same plan and term before you buy — it may be a different tier, a per-seat figure, or a first-year intro rate.</div>");
       }

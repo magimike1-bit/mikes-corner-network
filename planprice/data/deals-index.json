@@ -75,8 +75,8 @@
    "slug": "xero",
    "name": "Xero",
    "category": "Accounting",
-   "priceText": "From $25 per month",
-   "priceSort": 25,
+   "priceText": "From $10 per month",
+   "priceSort": 10,
    "dealHeadline": "80% off your first 3 months for new customers",
    "country": null,
    "url": "/deals/xero.html"

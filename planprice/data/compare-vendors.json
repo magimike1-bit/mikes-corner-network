@@ -216,23 +216,28 @@
   "name": "Xero",
   "category": "Accounting",
   "url": "/deals/xero.html",
-  "verified": "2026-09-30",
+  "verified": "2026-11-13",
   "deal": "80% off your first 3 months for new customers",
-  "start": "$25 per month",
+  "start": "$10 per month",
   "tiers": [
    {
+    "name": "Simple",
+    "price": "$10",
+    "cadence": "per month"
+   },
+   {
     "name": "Early",
-    "price": "$25",
+    "price": "$27",
     "cadence": "per month"
    },
    {
     "name": "Growing",
-    "price": "$55",
+    "price": "$59",
     "cadence": "per month"
    },
    {
     "name": "Established",
-    "price": "$90",
+    "price": "$97",
     "cadence": "per month"
    }
   ]

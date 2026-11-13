@@ -1,6 +1,13 @@
 {
- "updated": "2026-10-25",
+ "updated": "2026-11-13",
  "entries": [
+  {
+   "date": "2026-11-13",
+   "item": "Xero",
+   "type": "pricing-verified",
+   "detail": "US list prices re-verified against the vendor's own pricing page and corrected: Early $25 to $27, Growing $55 to $59, Established $90 to $97. A new entry tier, Simple at $10 per month, now sits below Early; starting prices and page dates updated.",
+   "url": "/deals/xero.html"
+  },
   {
    "date": "2026-10-25",
    "item": "HubSpot",

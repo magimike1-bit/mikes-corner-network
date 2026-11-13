@@ -456,20 +456,26 @@
       "similar_to": "the Mac to QuickBooks' PC",
       "pricing_tiers": [
         {
+          "name": "Simple",
+          "price": "$10",
+          "cadence": "per month",
+          "notes": "Unlimited users; basic bookkeeping with invoices, bills, and profit and loss tracking; USD."
+        },
+        {
           "name": "Early",
-          "price": "$25",
+          "price": "$27",
           "cadence": "per month",
           "notes": "Unlimited users; 20 invoices/quotes and 5 bills per month; USD."
         },
         {
           "name": "Growing",
-          "price": "$55",
+          "price": "$59",
           "cadence": "per month",
           "notes": "Unlimited users; unlimited invoices and bills; USD."
         },
         {
           "name": "Established",
-          "price": "$90",
+          "price": "$97",
           "cadence": "per month",
           "notes": "Unlimited users; multi-currency and project tracking; USD."
         }
@@ -484,7 +490,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-11-13",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -497,7 +503,7 @@
           "Pricing is seen as expensive for micro-businesses."
         ]
       },
-      "meta_description": "Xero verified list pricing and current promotions. Cloud accounting with unlimited users on every plan. Checked 2026-09-30 by the PlanPrice research team.",
+      "meta_description": "Xero verified list pricing and current promotions. Cloud accounting with unlimited users on every plan. Checked 2026-11-13 by the PlanPrice research team.",
       "entry_cap": {
         "cap": "Early allows 20 invoices and 5 bills per month.",
         "counting": "The invoice limit applies to approving and sending invoices, and transactions initiated by app partners may automatically contribute to the limit (Xero pricing page footnote).",

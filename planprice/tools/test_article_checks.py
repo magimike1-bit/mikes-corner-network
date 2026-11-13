@@ -13,11 +13,11 @@ def dates(html):
 
 CASES = [
     # footer form, single ISO
-    ('<p class="fine">Prices checked 2026-10-25 by the PlanPrice research team. Always', ["2026-10-25"]),
+    ('<p class="fine">Prices checked 2026-10-25 by Mike, editor of PlanPrice. Always', ["2026-10-25"]),
     # dual ISO (the entry's named edge case)
-    ("Prices checked 2026-10-05 and 2026-10-11 by the PlanPrice research team.", ["2026-10-05", "2026-10-11"]),
+    ("Prices checked 2026-10-05 and 2026-10-11 by Mike, editor of PlanPrice.", ["2026-10-05", "2026-10-11"]),
     # triple ISO
-    ("Prices checked 2026-09-17, 2026-10-05, and 2026-10-11 by the PlanPrice research team.", ["2026-09-17", "2026-10-05", "2026-10-11"]),
+    ("Prices checked 2026-09-17, 2026-10-05, and 2026-10-11 by Mike, editor of PlanPrice.", ["2026-09-17", "2026-10-05", "2026-10-11"]),
     # range: both endpoints
     ("Prices checked 2026-09-18 to 2026-10-12.", ["2026-09-18", "2026-10-12"]),
     # long form with source-note colon: secondary ISO dates after the colon excluded
@@ -33,7 +33,7 @@ CASES = [
     # meta-description form stops at the attribute quote
     ('<meta name="description" content="Guide. Prices checked 2026-10-11.">', ["2026-10-11"]),
     # post-sweep date (the entry's other named edge case)
-    ("Prices checked 2026-11-03 by the PlanPrice research team.", ["2026-11-03"]),
+    ("Prices checked 2026-11-03 by Mike, editor of PlanPrice.", ["2026-11-03"]),
     # no claim at all
     ("<p>Nothing about checks here.</p>", []),
     # bare month with no following year: dropped from dates, claim flagged
@@ -51,7 +51,7 @@ rec = ac.article_record("Prices checked October 25, 2026 and September.")
 assert rec["flags"] == ["unparsed-claim"], rec
 rec = ac.article_record("<p>No claim.</p>")
 assert rec["flags"] == ["no-claim"], rec
-rec = ac.article_record('<p class="fine">Prices checked 2026-10-25 by the PlanPrice research team.</p>')
+rec = ac.article_record('<p class="fine">Prices checked 2026-10-25 by Mike, editor of PlanPrice.</p>')
 assert rec["flags"] == [], rec
 
 if fails:

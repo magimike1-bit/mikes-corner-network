@@ -223,7 +223,7 @@ const mechanical = [
   ...products.map(
     (p) =>
       new RegExp(
-        `^${escRe(p.name)} verified list pricing and current promotions\\. ${escRe(p.tagline)} Checked ${dateRe} by the PlanPrice research team\\.$`
+        `^${escRe(p.name)} verified list pricing and current promotions\\. ${escRe(p.tagline)} Checked ${dateRe} by Mike, editor of PlanPrice\\.$`
       )
   ),
   ...products.map((p) => new RegExp(`^All deals › ${escRe(p.name)}$`)),

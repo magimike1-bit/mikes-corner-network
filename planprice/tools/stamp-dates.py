@@ -9,7 +9,7 @@ is out of scope.
 What is stamped
 ---------------
 All pages:
-  * Footer: "Prices verified <ISO> by the PlanPrice research team"
+  * Footer: "Prices verified <ISO> by Mike, editor of PlanPrice"
     -> registry prices_verified_date.
 compare/<slug>.html (that page's registry date from page_checked_dates):
   * "Prices checked <ISO>" / "prices checked <ISO>" (plain text, including
@@ -38,7 +38,7 @@ no blanket replacement of "checked <date>" happens anywhere in this script.
 Deals pages (deals/<slug>.html) are not stamped for per-product
 facts/pills — those dates are data-driven per product; the shared footer
 applies there, plus (PP-DEAL-META-AUDIT-GAP) the meta description's
-" Checked <date> by the PlanPrice research team." suffix when present,
+" Checked <date> by Mike, editor of PlanPrice." suffix when present,
 stamped to the product's canonical date.
 
 Safety

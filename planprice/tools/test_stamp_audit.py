@@ -23,7 +23,7 @@ SITE_DATE = "2026-10-25"
 STALE = "2026-09-30"
 
 FOOTER = (
-    '<p class="fine">Prices verified {d} by the PlanPrice research team. '
+    '<p class="fine">Prices verified {d} by Mike, editor of PlanPrice. '
     "Always confirm current pricing.</p>"
 )
 
@@ -160,7 +160,7 @@ class StampTests(FixtureTestCase):
         page.write_text(
             '<meta content="Prices checked {d}.">'
             '<p>prices checked <time datetime="{d}">{d}</time></p>'
-            '<p class="fine">Prices checked {d} by the PlanPrice research team.</p>'.format(
+            '<p class="fine">Prices checked {d} by Mike, editor of PlanPrice.</p>'.format(
                 d=SITE_DATE
             )
             + FOOTER.format(d=SITE_DATE)
@@ -173,7 +173,7 @@ class StampTests(FixtureTestCase):
             'prices checked <time datetime="2026-09-30">2026-09-30</time>', text
         )
         self.assertIn(
-            "Prices checked 2026-09-30 by the PlanPrice research team", text
+            "Prices checked 2026-09-30 by Mike, editor of PlanPrice", text
         )
 
     def test_stamp_is_idempotent(self):
@@ -224,11 +224,11 @@ class MetaCheckedFormTests(FixtureTestCase):
 
     ALPHA_META_OK = (
         '<meta name="description" content="Alpha pricing, plans and features.'
-        ' Checked 2026-10-25 by the PlanPrice research team.">'
+        ' Checked 2026-10-25 by Mike, editor of PlanPrice.">'
     )
     ALPHA_META_STALE = (
         '<meta name="description" content="Alpha pricing, plans and features.'
-        ' Checked 2026-09-30 by the PlanPrice research team.">'
+        ' Checked 2026-09-30 by Mike, editor of PlanPrice.">'
     )
 
     def _write_alpha(self, meta):
@@ -260,7 +260,7 @@ class MetaCheckedFormTests(FixtureTestCase):
         first = self.stamp()
         self.assertEqual(first.returncode, 0, first.stderr)
         text = (self.root / "deals" / "alpha.html").read_text()
-        self.assertIn("Checked 2026-10-25 by the PlanPrice research team.", text)
+        self.assertIn("Checked 2026-10-25 by Mike, editor of PlanPrice.", text)
         second = self.stamp()
         self.assertIn("0 replacement(s) total", second.stdout)
 
@@ -272,7 +272,7 @@ class MetaCheckedFormTests(FixtureTestCase):
             "products": [
                 {
                     "slug": "alpha",
-                    "meta_description": "Alpha pricing. Checked 2026-09-30 by the PlanPrice research team.",
+                    "meta_description": "Alpha pricing. Checked 2026-09-30 by Mike, editor of PlanPrice.",
                 }
             ],
         }

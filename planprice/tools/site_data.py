@@ -36,20 +36,20 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 # two tools' former private copies matched.
 ISO = r"\d{4}-\d{2}-\d{2}"
 FOOTER_RE = re.compile(
-    r"(?P<prefix>Prices verified )(?P<date>" + ISO + r")(?P<suffix> by the PlanPrice research team)"
+    r"(?P<prefix>Prices verified )(?P<date>" + ISO + r")(?P<suffix> by Mike, editor of PlanPrice)"
 )
 TIME_RE = re.compile(
     r"(?P<prefix>[Pp]rices checked )<time datetime=\"(?P<attr>" + ISO + r")\">(?P<inner>" + ISO + r")</time>"
 )
 COMPARE_PLAIN_RE = re.compile(r"(?P<prefix>[Pp]rices checked )(?P<date>" + ISO + r")")
 # Deal-page META form (PP-DEAL-META-AUDIT-GAP): the " Checked <date> by the
-# PlanPrice research team." suffix inside a deal page's meta description
+# Mike, editor of PlanPrice." suffix inside a deal page's meta description
 # (extracted into products.json meta_description by PP-GEN-DRIFT; the suffix
 # is present on 37 of 49 deal pages and must never be invented for the 12
 # that do not carry it — both tools only judge/rewrite the form when it is
 # present, and its date is the product's canonical date, not the site date).
 META_CHECKED_RE = re.compile(
-    r"(?P<prefix> Checked )(?P<date>" + ISO + r")(?P<suffix> by the PlanPrice research team\.)"
+    r"(?P<prefix> Checked )(?P<date>" + ISO + r")(?P<suffix> by Mike, editor of PlanPrice\.)"
 )
 # Whitelisted plain-text template phrasings for non-compare pages
 # (see stamp-dates.py header for the derivation).

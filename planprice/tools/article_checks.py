@@ -6,7 +6,7 @@ claims: real per-page facts owned by the content pipeline's editorial
 process. This module is the article-level record for them:
 
   * extract_claims(text) parses every "Prices checked" claim in a page:
-    the claim head (up to the "by the PlanPrice research team" marker, a
+    the claim head (up to the "by Mike, editor of PlanPrice" marker, a
     source-note colon, or a parenthetical) and the dates the head states.
   * article_dates(text) returns the article's canonical date set: the
     sorted union of the dates across its claim heads.
@@ -44,7 +44,7 @@ import sys
 from pathlib import Path
 
 CLAIM_RE = re.compile(r"[Pp]rices checked ")
-HEAD_END_RE = re.compile(r" by the PlanPrice research team|[:\(;]")
+HEAD_END_RE = re.compile(r" by Mike, editor of PlanPrice|[:\(;]")
 ISO_RE = re.compile(r"\b(20\d{2})-(0[1-9]|1[0-2])-([0-3]\d)\b")
 MONTHS = {
     "january": 1, "february": 2, "march": 3, "april": 4, "may": 5,

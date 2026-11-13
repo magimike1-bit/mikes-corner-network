@@ -178,7 +178,7 @@ const anyAffiliateLive = products.some(affiliateLive);
 const AFFILIATE_BLUNT =
   "The product links on PlanPrice are affiliate links: if you buy through them, we may earn a commission at no extra cost to you.";
 const AFFILIATE_INTERIM =
-  "PlanPrice is funded by affiliate commissions. Right now our affiliate partnerships are still being set up, so the links on this site are plain links to vendors, when affiliate links go live, this page will say so, and buying through them will never cost you extra.";
+  "PlanPrice earns no affiliate commissions today. The plan is to fund the site through affiliate commissions in the future, but our affiliate partnerships are still being set up, so every link on this site is currently a plain link to the vendor and buying through it earns PlanPrice nothing. When affiliate links go live, this page and our affiliate disclosure will say so, and buying through them will never cost you extra.";
 
 /* ---- Freshness flags (PP-PRICE-DROP-FLAGS) ----
  * Diff current prices/deals against the most recent monthly sweep snapshot
@@ -619,7 +619,6 @@ function indexPage() {
       <a href="/top-rated.html">Top rated</a>
       <a href="/compare.html">Compare</a>
       <a href="/guides.html">Guides</a>
-      <a href="/marketing.html">Marketing</a>
       <a href="/glossary.html">Glossary</a>
       <a href="/tools.html">Tools</a>
       <a href="/calculators.html">Calculators</a>
@@ -742,7 +741,7 @@ function indexPage() {
   <section class="section home-guides" aria-label="Buying guides">
     <div class="wrap">
       <h2 class="section-title">Buying guides</h2>
-      <p class="section-sub">The playbooks behind the tools, how to negotiate, when vendors discount, and where the hidden fees live. <a href="/guides.html">All 150 guides</a>.</p>
+      <p class="section-sub">The playbooks behind the tools, how to negotiate, when vendors discount, and where the hidden fees live. <a href="/guides.html">All 141 guides</a>.</p>
       <ul class="guide-list">
         <li><a href="/guides/negotiate-saas-renewal.html">How to Negotiate Your SaaS Renewal (and What Discounts to Ask For)</a><p>When to start, what to ask for, and realistic discount ranges for Canadian small businesses.</p></li>
         <li><a href="/guides/stack-saas-discounts.html">How to Stack SaaS Discounts Without Breaking Terms</a><p>Which discounts legitimately combine: annual billing, promo codes, nonprofit pricing, referral credits.</p></li>
@@ -790,7 +789,7 @@ ${homeChips}
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
     </nav>
-    <p class="fine">Prices verified 2026-10-25 by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions, partnerships are still being set up.</p>
+    <p class="fine">Prices are re-checked in a full sweep once a month by Mike, editor of PlanPrice. Each page shows the date its prices were last checked. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions, partnerships are still being set up. PlanPrice currently earns no affiliate commissions, partnerships are still being set up.</p>
   </div>
 </footer>
 </body>
@@ -983,7 +982,7 @@ function dealPage(p) {
     `${p.name} Pricing & Deals (Verified ${p.last_verified}) | PlanPrice`,
     // PP-GEN-DRIFT (R10): the committed SERP copy wins. products.json carries
     // a per-product meta_description extracted verbatim from the committed
-    // deal pages (incl. the " Checked <date> by the PlanPrice research team."
+    // deal pages (incl. the " Checked <date> by Mike, editor of PlanPrice."
     // suffix on 37 of them); the PP-SERP-DESC-PAGES formula remains only as
     // the fallback for a future product that has no extracted meta yet.
     p.meta_description || `${p.name} verified list pricing and current promotions. ${p.tagline}`,
@@ -1800,7 +1799,7 @@ function footer() {
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
     </nav>
-    <p class="fine">Prices verified ${CHECKED} by the PlanPrice research team. Always confirm current pricing on the vendor's own site before buying. ${
+    <p class="fine">Prices are re-checked in a full sweep once a month by Mike, editor of PlanPrice. Each page shows the date its prices were last checked. Always confirm current pricing on the vendor's own site before buying. ${
       anyAffiliateLive
         ? "PlanPrice may earn a commission on qualifying purchases."
         : "PlanPrice currently earns no affiliate commissions, partnerships are still being set up."
@@ -1831,17 +1830,17 @@ function aboutBody() {
       <p>PlanPrice is a deals directory for business software. We track list prices and current promotions for the tools small businesses actually buy, accounting, CRM, ecommerce, point of sale, scheduling, and more.</p>
       <p><strong>Our standard:</strong> every discount headline on this site links to the vendor's own page. If we couldn't find a public promotion, the page says so plainly instead of dressing up standard list prices as a deal.</p>
       <p><strong>Review scores:</strong> deal pages show aggregate user ratings from third-party review sites (G2 and Capterra), these are not PlanPrice's own ratings. We re-check every score during the monthly verification sweep; each score shows its source and the date it was last checked.</p>
-      <p>Prices are checked by the PlanPrice research team and dated. Vendors change prices and promotions without notice, so always confirm on the vendor's pricing page before purchasing.</p>
+      <p>Prices are checked by Mike, editor of PlanPrice and dated. Vendors change prices and promotions without notice, so always confirm on the vendor's pricing page before purchasing.</p>
       ${funding}
     </div></section><section class="section"><div class="wrap">
       <h2>How we verify prices</h2>
-      <p>Every price on PlanPrice is checked against the vendor's own pricing page by the research team, and the check date is printed next to the price, the current site-wide verification date is ${CHECKED}. When a vendor runs a public promotion, the deal page shows the promo terms and links to the vendor's own offer page; when no public promotion exists, the page says so plainly instead of dressing up list prices as a deal. Prices are re-checked on a regular sweep, and the verified date moves with each pass.</p>
+      <p>Every price on PlanPrice is checked against the vendor's own pricing page by Mike, editor of PlanPrice, and the check date is printed next to the price, the current site-wide verification date is ${CHECKED}. When a vendor runs a public promotion, the deal page shows the promo terms and links to the vendor's own offer page; when no public promotion exists, the page says so plainly instead of dressing up list prices as a deal. Prices are re-checked on a regular sweep, and the verified date moves with each pass.</p>
       <p>Review scores work the same way: the G2 and Capterra aggregates shown on deal pages are third-party user ratings, not PlanPrice's own opinions, and each score is re-checked during the verification sweep with its source and check date shown. Scores describe other users' experience; they don't include pricing, and a high score on an expensive tool doesn't make it the right tool for a tight budget.</p>
       <h2>What PlanPrice doesn't do</h2>
       <p>PlanPrice doesn't sell software and doesn't take a cut of anything you buy, right now our affiliate partnerships are still being set up, so every outbound link is a plain link to the vendor (see the <a href="/disclosure.html">affiliate disclosure</a>). We don't invent prices, fabricate promotions, or publish "deals" we couldn't find on the vendor's own site. And we're a pricing directory, not an advisor: nothing here is financial or tax advice, and the final price is always whatever the vendor's own checkout shows.</p>
       <p>Spot something wrong? A price that changed, a promo that ended, a product we should track, <a href="/contact.html">tell us</a>. Corrections get re-checked against the vendor's site, and the page gets updated when the correction checks out.</p>
     <h2>AI disclosure</h2>
-      <p>AI assists with content production on this site, under human direction and review.</p>
+      <p>AI tools assist with content production on this site. Mike, the editor of PlanPrice, directs that work and reviews the content before it is published.</p>
     </div></section>`;
 }
 
@@ -1934,7 +1933,7 @@ function methodologyBody() {
       <h2>How listings are ordered</h2>
       <ul>
         <li><strong>Order is never sold.</strong> No vendor can pay to appear, to rank higher, or to be featured on PlanPrice. There are no sponsored placements anywhere on this site.</li>
-        <li><strong>Default ordering is our editorial featured order.</strong> Category and directory pages present tools in the order our research team features them. Every listing shows its verified starting price, or is marked Custom where the vendor publishes no list price, and every listing shows what the tool is best for. The deals directory can be re-sorted by price. Alternatives tables on compare pages are ordered by aggregate review score.</li>
+        <li><strong>Default ordering is our editorial featured order.</strong> Category and directory pages present tools in the order the editor features them. Every listing shows its verified starting price, or is marked Custom where the vendor publishes no list price, and every listing shows what the tool is best for. The deals directory can be re-sorted by price. Alternatives tables on compare pages are ordered by aggregate review score.</li>
         ${affiliateLine}
         <li><strong>Review scores are aggregate and attributed.</strong> Where we show G2 or Capterra scores, we show the average, the review count, and the date we checked them. We do not adjust scores.</li>
       </ul>

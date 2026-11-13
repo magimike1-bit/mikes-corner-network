@@ -9,7 +9,7 @@ tools/site_data.py, shared with stamp-dates.py, so audit and stamp can
 never drift apart.
 
 Findings (each printed with file + expected + found):
-  (a) Footer "Prices verified <ISO> by the PlanPrice research team" whose
+  (a) Footer "Prices verified <ISO> by Mike, editor of PlanPrice" whose
       date != registry prices_verified_date. Applies to every page,
       including deals/<slug>.html (their footer is the site-level line).
   (b) "prices checked" literals in the stamped forms (see stamp-dates.py

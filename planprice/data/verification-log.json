@@ -3,6 +3,13 @@
  "entries": [
   {
    "date": "2026-11-13",
+   "item": "QuickBooks Online",
+   "type": "Spot Check (promotion correction)",
+   "detail": "Correction: the 2026-10-25 entries for QuickBooks Online recorded a plan name and list price that do not exist in QuickBooks Online Canada (Lite C$2/mo, list C$20). The offer confirmed on the vendor's site is 90% off for 6 months for new subscribers (EasyStart C$3/mo, list C$30). The original entries stay in this log; this entry corrects them.",
+   "url": "/deals/quickbooks.html"
+  },
+  {
+   "date": "2026-11-13",
    "item": "Xero",
    "type": "pricing-verified",
    "detail": "US list prices re-verified against the vendor's own pricing page and corrected: Early $25 to $27, Growing $55 to $59, Established $90 to $97. A new entry tier, Simple at $10 per month, now sits below Early; starting prices and page dates updated.",
@@ -19,7 +26,7 @@
    "date": "2026-10-25",
    "item": "HubSpot",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/hubspot.html"
   },
   {
@@ -40,14 +47,14 @@
    "date": "2026-10-25",
    "item": "Monday.com",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/monday.html"
   },
   {
    "date": "2026-10-25",
    "item": "Semrush",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/semrush.html"
   },
   {
@@ -61,7 +68,7 @@
    "date": "2026-10-25",
    "item": "Wave",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/wave.html"
   },
   {
@@ -96,7 +103,7 @@
    "date": "2026-10-25",
    "item": "Square",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/square.html"
   },
   {
@@ -110,7 +117,7 @@
    "date": "2026-10-25",
    "item": "Calendly",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/calendly.html"
   },
   {
@@ -124,42 +131,42 @@
    "date": "2026-10-25",
    "item": "Jobber",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/jobber.html"
   },
   {
    "date": "2026-10-25",
    "item": "Humi",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/humi.html"
   },
   {
    "date": "2026-10-25",
    "item": "Ahrefs",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/ahrefs.html"
   },
   {
    "date": "2026-10-25",
    "item": "Plausible",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/plausible.html"
   },
   {
    "date": "2026-10-25",
    "item": "Stripe",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/stripe.html"
   },
   {
    "date": "2026-10-25",
    "item": "Big Cartel",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/big-cartel.html"
   },
   {
@@ -173,21 +180,21 @@
    "date": "2026-10-25",
    "item": "Pipedrive",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/pipedrive.html"
   },
   {
    "date": "2026-10-25",
    "item": "Zoho CRM",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/zoho-crm.html"
   },
   {
    "date": "2026-10-25",
    "item": "Wagepoint",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/wagepoint.html"
   },
   {
@@ -201,21 +208,21 @@
    "date": "2026-10-25",
    "item": "Knit People",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/knit-people.html"
   },
   {
    "date": "2026-10-25",
    "item": "Acuity Scheduling",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/acuity.html"
   },
   {
    "date": "2026-10-25",
    "item": "Setmore",
    "type": "promo-checked",
-   "detail": "Promotion status re-checked \u2014 no public promotion found; page shows standard list prices.",
+   "detail": "Promotion status re-checked — no public promotion found; page shows standard list prices.",
    "url": "/deals/setmore.html"
   },
   {
@@ -289,7 +296,7 @@
    "url": "/deals/capsule-crm.html"
   },
   {
-   "date": "2026-10-25",
+   "date": "2026-10-20",
    "item": "Mailchimp",
    "type": "promo-verified",
    "detail": "Promotion confirmed on the vendor's site: 15% off your first 12 months (accounts with 10,000+ contacts). Vendor page added to PlanPrice today from the research inventory.",
@@ -439,13 +446,13 @@
    "date": "2026-09-30",
    "item": "Full catalogue",
    "type": "baseline",
-   "detail": "Baseline verification sweep: list prices and promo status recorded for the 22 products then tracked. This is the date most older pages still show \u2014 it stays wherever pricing was not re-checked since.",
+   "detail": "Baseline verification sweep: list prices and promo status recorded for the 22 products then tracked. This is the date most older pages still show — it stays wherever pricing was not re-checked since.",
    "url": "/deals.html"
   },
   {
    "date": "2026-10-25",
    "item": "Business cost teardowns (6 profiles)",
-   "detail": "Every line priced from PlanPrice's verified vendor dataset (Square, Lightspeed, Wagepoint, QuickBooks, FreshBooks, Housecall Pro, Wave \u2014 per-vendor check dates on their deal pages); totals computed from those lines.",
+   "detail": "Every line priced from PlanPrice's verified vendor dataset (Square, Lightspeed, Wagepoint, QuickBooks, FreshBooks, Housecall Pro, Wave — per-vendor check dates on their deal pages); totals computed from those lines.",
    "type": "content built from verified data"
   },
   {

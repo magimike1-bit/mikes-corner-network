@@ -451,7 +451,7 @@
       "category": "Accounting",
       "tagline": "Cloud accounting with unlimited users on every plan.",
       "vendor_homepage": "https://www.xero.com",
-      "description": "Xero is the main cloud rival to QuickBooks, known for clean design and unlimited users on every tier, you pay for features, not seats. List pricing is in USD. Xero regularly offers introductory discounts to new subscribers, but the headline offer and its term change often, so always check the current pricing page before signing up.",
+      "description": "Xero is the main cloud rival to QuickBooks, known for clean design and unlimited users on every tier, you pay for features, not seats. List pricing is in USD. Xero regularly offers introductory discounts to new subscribers, but the headline offer and its term change often, so always check the current pricing page before signing up. This page tracks the US list in USD; our Xero vs QuickBooks Canada guide prices the Canada list (Starter, Standard, Premium) in CAD instead.",
       "best_for": "Small businesses that want unlimited users and strong bank-feed reconciliation.",
       "similar_to": "the Mac to QuickBooks' PC",
       "pricing_tiers": [
@@ -1103,7 +1103,7 @@
       ],
       "lead": "Canadian payroll and HR on one platform, with base plus per employee pricing and unlimited pay runs.",
       "hand_built": true,
-      "history_stable_fine": true
+      "history_stable_fine": false
     },
     {
       "slug": "acuity",
@@ -2188,7 +2188,7 @@
       "category": "Payments & POS",
       "tagline": "Retail and restaurant POS from Montreal.",
       "vendor_homepage": "https://www.lightspeedhq.com",
-      "description": "Lightspeed, headquartered in Montreal, is the POS for retailers and restaurants that have outgrown a basic till: deep inventory, multi-location and ecommerce sync. Software is priced per location register plan; Lightspeed Payments charges 2.6% + 10¢ in person. Model software plus processing together, either alone misleads.",
+      "description": "Lightspeed, headquartered in Montreal, is the POS for retailers and restaurants that have outgrown a basic till: deep inventory, multi-location and ecommerce sync. Software is priced per location register plan; Lightspeed Payments charges 2.6% + USD 0.10 in person. Model software plus processing together, either alone misleads.",
       "best_for": "Retailers and restaurants with real inventory complexity or multiple locations.",
       "similar_to": "the Montreal POS for serious retail",
       "pricing_tiers": [
@@ -2212,7 +2212,7 @@
         },
         {
           "name": "Lightspeed Payments",
-          "price": "2.6% + 10¢",
+          "price": "2.6% + USD 0.10",
           "cadence": "per in-person transaction",
           "notes": "The processing rate to pair with any plan above."
         }

@@ -282,7 +282,7 @@ function priceHistorySection(p, batch = false) {
   if (!rows.length) return "";
   return `<section class="section price-history">
       <h2>Price history</h2>
-      <p>What our verification snapshots recorded for ${esc(p.name)}. Snapshots are taken in the monthly full sweep and in any spot check between sweeps, they are not a continuous feed. A change between two snapshot dates happened somewhere in between.</p>
+      <p>What our verification snapshots recorded for ${esc(p.name)}. Snapshots are taken in the monthly full sweep and in any spot check between sweeps, they are not a continuous feed. A change between two snapshot dates happened somewhere in between. Each snapshot row records the starting price and promotion status checked on that date; the full price table was verified on the date at the top of this page.</p>
       <div class="table-scroll">
       <table class="tiers">
         <caption>${esc(p.name)}. PlanPrice verification snapshots.</caption>
@@ -293,6 +293,7 @@ function priceHistorySection(p, batch = false) {
       </div>${batch ? "\n      <p class=\"fine\">First PlanPrice snapshot for this vendor. The monthly full sweep adds a new snapshot point for every tracked vendor.</p>" : p.history_stable_fine ? "\n      <p class=\"fine\">No price changes recorded since Sep 2026, the starting price and promo status above have been stable across every snapshot we hold.</p>" : ""}
     </section>`;
 }
+const PRICE_DROP_MIN_RATIO = 0.99; // flag a drop only at 1%+ below the prior snapshot
 const priceFlags = {}; // slug -> array of "price-drop" | "new-deal"
 if (!priorSweep) {
   console.log(
@@ -306,10 +307,13 @@ if (!priorSweep) {
     if (!s) continue;
     const f = [];
     const curNum = startPriceNumeric(p);
+    /* A price-drop flag needs a material drop of at least 1 percent
+     * (PRICE_DROP_MIN_RATIO): a display rounding step such as Semrush
+     * $139.95 to $139 must not render as a price drop. */
     if (
       typeof curNum === "number" &&
       typeof s.start_price_numeric === "number" &&
-      curNum < s.start_price_numeric
+      curNum <= s.start_price_numeric * PRICE_DROP_MIN_RATIO
     )
       f.push("price-drop");
     const curDeal = p.deal ? p.deal.headline : null;
@@ -690,7 +694,7 @@ function indexPage() {
     <section class="section" aria-label="Featured report">
     <div class="wrap">
       <h2 class="section-title">From Our Own Price Checks</h2>
-      <p class="section-sub">Our first party data publication: the <a href="/reports/canadian-saas-pricing-2026.html">Canadian SaaS Pricing Report 2026</a> reports what our dated price checks across 184 tracked vendors actually showed, including the five real list price changes of fall 2026.</p>
+      <p class="section-sub">Our first party data publication: the <a href="/reports/canadian-saas-pricing-2026.html">Canadian SaaS Pricing Report 2026</a> reports what our dated price checks across 184 tracked vendors actually showed, including the five real list price changes of fall 2026. The 184 counts every vendor in our research store; the 49 products tracked on this page are the ones with full verified deal pages.</p>
     </div>
 </section>
     <section class="section featured" aria-label="Featured deals">

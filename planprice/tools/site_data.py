@@ -35,7 +35,19 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 # uses date/attr/inner). Grouping only — these match exactly what the
 # two tools' former private copies matched.
 ISO = r"\d{4}-\d{2}-\d{2}"
+# Batch 2 footer (2026-11-13): the shipped footer carries NO date. Its text
+# is "Prices are re-checked in a full sweep once a month by Mike, editor of
+# PlanPrice. Each page shows the date its prices were last checked. ..."
+# FOOTER_RE matches that invariant opening so audit-literals.py can
+# recognise the current form; there is no date group because there is no
+# date to check. LEGACY_FOOTER_RE matches the pre-Batch 2 dated form
+# ("Prices verified <ISO> by Mike, editor of PlanPrice"): audit flags it
+# as a stale form, and stamp-dates.py never writes either form (see its
+# header). The dated form matches zero pages in the shipped tree.
 FOOTER_RE = re.compile(
+    r"(?P<prefix>Prices are re-checked in a full sweep once a month by Mike, editor of PlanPrice\.)"
+)
+LEGACY_FOOTER_RE = re.compile(
     r"(?P<prefix>Prices verified )(?P<date>" + ISO + r")(?P<suffix> by Mike, editor of PlanPrice)"
 )
 TIME_RE = re.compile(

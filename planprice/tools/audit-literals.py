@@ -9,9 +9,13 @@ tools/site_data.py, shared with stamp-dates.py, so audit and stamp can
 never drift apart.
 
 Findings (each printed with file + expected + found):
-  (a) Footer "Prices verified <ISO> by Mike, editor of PlanPrice" whose
-      date != registry prices_verified_date. Applies to every page,
-      including deals/<slug>.html (their footer is the site-level line).
+  (a) Footer form. The Batch 2 footer ("Prices are re-checked in a full
+      sweep once a month by Mike, editor of PlanPrice. Each page shows
+      the date its prices were last checked. ...") carries no date, so
+      there is no footer date to compare with the registry. A page still
+      carrying the legacy dated form ("Prices verified <ISO> by Mike,
+      editor of PlanPrice") is reported as a stale-form finding. Applies
+      to every page, including deals/<slug>.html.
   (b) "prices checked" literals in the stamped forms (see stamp-dates.py
       for the form list and the plain-text whitelist):
         - <time> form on any page except deals/<slug>.html
@@ -64,6 +68,7 @@ import article_checks  # noqa: E402
 # still used below for the audit-only deal-page patterns.
 ISO = site_data.ISO
 FOOTER_RE = site_data.FOOTER_RE
+LEGACY_FOOTER_RE = site_data.LEGACY_FOOTER_RE
 TIME_RE = site_data.TIME_RE
 COMPARE_PLAIN_RE = site_data.COMPARE_PLAIN_RE
 WHITELIST_RES = site_data.WHITELIST_RES
@@ -106,10 +111,16 @@ class Auditor:
         rel = path.relative_to(self.root).as_posix()
         text = path.read_text(encoding="utf-8")
 
-        # (a) footer
-        for match in FOOTER_RE.finditer(text):
-            if match.group("date") != self.site:
-                self.add("a:footer", rel, self.site, match.group("date"))
+        # (a) footer: the current footer carries no date (Batch 2), so
+        # the only footer finding is a page still using the legacy dated
+        # form. FOOTER_RE matches the current form and needs no check.
+        for match in LEGACY_FOOTER_RE.finditer(text):
+            self.add(
+                "a:footer legacy dated form",
+                rel,
+                "the dateless Batch 2 footer (Prices are re-checked in a full sweep once a month by Mike, editor of PlanPrice.)",
+                f"Prices verified {match.group('date')} by Mike, editor of PlanPrice",
+            )
 
         if rel.startswith("deals/") and path.name != "deals.html":
             self.check_deal_page(rel, text)

@@ -22,7 +22,17 @@ import site_data  # noqa: E402
 SITE_DATE = "2026-10-25"
 STALE = "2026-09-30"
 
+# Batch 2 footer: carries no date. Stamp must never touch it; audit
+# accepts it. LEGACY_FOOTER is the pre-Batch 2 dated form: stamp still
+# leaves it alone, audit flags it as a stale form.
 FOOTER = (
+    '<p class="fine">Prices are re-checked in a full sweep once a month '
+    "by Mike, editor of PlanPrice. Each page shows the date its prices "
+    "were last checked. Always confirm current pricing on the vendor's "
+    "own site before buying. PlanPrice currently earns no affiliate "
+    "commissions, partnerships are still being set up.</p>"
+)
+LEGACY_FOOTER = (
     '<p class="fine">Prices verified {d} by Mike, editor of PlanPrice. '
     "Always confirm current pricing.</p>"
 )
@@ -68,24 +78,29 @@ def build_fixture(base: Path) -> Path:
     ]
     (root / "data" / "compare-vendors.json").write_text(json.dumps(vendors))
     (root / "data" / "compare.json").write_text(json.dumps({"sets": []}))
+    # The audit requires the article-level record to exist; an empty
+    # record matches the fixture's empty guides/ set.
+    (root / "data" / "article-checks.json").write_text(
+        json.dumps({"articles": {}}, indent=2)
+    )
 
     # Pages start out already stamped correctly EXCEPT where a test wants
     # staleness; helpers below write the clean versions.
-    (root / "index.html").write_text(FOOTER.format(d=SITE_DATE))
+    (root / "index.html").write_text(FOOTER)
     (root / "categories" / "listing.html").write_text(
         '<p>2 products tracked, checked {d}.</p>'
         '<p>prices checked <time datetime="{d}">{d}</time></p>'.format(d=SITE_DATE)
-        + FOOTER.format(d=SITE_DATE)
+        + FOOTER
     )
     (root / "compare" / "housecall-pro-vs-jobber.html").write_text(
         '<meta content="Prices checked {d}.">'
         '<p>prices checked <time datetime="{d}">{d}</time></p>'.format(d="2026-09-30")
-        + FOOTER.format(d=SITE_DATE)
+        + FOOTER
     )
     (root / "deals" / "alpha.html").write_text(
         '<div class="facts-item"><dt>Verified</dt><dd>Prices verified '
         '<time datetime="{d}">Oct 25, 2026</time></dd></div>'.format(d=SITE_DATE)
-        + FOOTER.format(d=SITE_DATE)
+        + FOOTER
     )
 
     registry = {
@@ -133,19 +148,30 @@ class FixtureTestCase(unittest.TestCase):
 
 
 class StampTests(FixtureTestCase):
-    def test_footer_replaced(self):
+    def test_footer_is_left_untouched_by_stamp(self):
+        # The Batch 2 footer carries no date: stamp is a no-op for it.
         index = self.root / "index.html"
-        index.write_text(FOOTER.format(d=STALE))
+        before = index.read_bytes()
         result = self.stamp()
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn(f"Prices verified {SITE_DATE} by the PlanPrice", index.read_text())
+        self.assertEqual(index.read_bytes(), before)
+        self.assertIn("footers left untouched", result.stdout)
+
+    def test_legacy_footer_is_not_rewritten_by_stamp(self):
+        # Stamp never writes a footer, even a legacy dated one; flagging
+        # the stale form is the audit's job (see AuditTests).
+        index = self.root / "index.html"
+        index.write_text(LEGACY_FOOTER.format(d=STALE))
+        result = self.stamp()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(f"Prices verified {STALE} by Mike", index.read_text())
 
     def test_listing_time_tag_replaced_with_site_date(self):
         listing = self.root / "categories" / "listing.html"
         listing.write_text(
             '<p>2 products tracked, checked {d}.</p>'
             '<p>prices checked <time datetime="{d}">{d}</time></p>'.format(d=STALE)
-            + FOOTER.format(d=STALE)
+            + FOOTER
         )
         result = self.stamp()
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -163,7 +189,7 @@ class StampTests(FixtureTestCase):
             '<p class="fine">Prices checked {d} by Mike, editor of PlanPrice.</p>'.format(
                 d=SITE_DATE
             )
-            + FOOTER.format(d=SITE_DATE)
+            + FOOTER
         )
         result = self.stamp()
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -178,7 +204,10 @@ class StampTests(FixtureTestCase):
 
     def test_stamp_is_idempotent(self):
         index = self.root / "index.html"
-        index.write_text(FOOTER.format(d=STALE))
+        index.write_text(
+            '<p>prices checked <time datetime="{d}">{d}</time></p>'.format(d=STALE)
+            + FOOTER
+        )
         first = self.stamp()
         self.assertEqual(first.returncode, 0, first.stderr)
         snapshot = {
@@ -195,7 +224,7 @@ class StampTests(FixtureTestCase):
             f'<meta content="Prices checked {SITE_DATE}.">'
         )
         index = self.root / "index.html"
-        index.write_text(FOOTER.format(d=STALE))
+        index.write_text(FOOTER)
         before = index.read_bytes()
         result = self.stamp()
         self.assertNotEqual(result.returncode, 0)
@@ -207,11 +236,12 @@ class StampTests(FixtureTestCase):
 class AuditTests(FixtureTestCase):
     def test_audit_catches_planted_stale_footer(self):
         index = self.root / "index.html"
-        index.write_text(FOOTER.format(d=STALE))
+        index.write_text(LEGACY_FOOTER.format(d=STALE))
         result = self.audit()
         self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
         self.assertIn("index.html", result.stdout)
         self.assertIn(STALE, result.stdout)
+        self.assertIn("legacy dated form", result.stdout)
 
     def test_audit_passes_clean_fixture_tree(self):
         result = self.audit()
@@ -236,7 +266,7 @@ class MetaCheckedFormTests(FixtureTestCase):
             meta
             + '<div class="facts-item"><dt>Verified</dt><dd>Prices verified '
             + '<time datetime="{d}">Oct 25, 2026</time></dd></div>'.format(d=SITE_DATE)
-            + FOOTER.format(d=SITE_DATE)
+            + FOOTER
         )
         (self.root / "deals" / "alpha.html").write_text(body)
 

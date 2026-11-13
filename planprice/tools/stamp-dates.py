@@ -9,8 +9,12 @@ is out of scope.
 What is stamped
 ---------------
 All pages:
-  * Footer: "Prices verified <ISO> by Mike, editor of PlanPrice"
-    -> registry prices_verified_date.
+  * Footer: NOT stamped. Since Batch 2 (2026-11-13) the footer reads
+    "Prices are re-checked in a full sweep once a month by Mike, editor
+    of PlanPrice. Each page shows the date its prices were last checked."
+    and carries no date, so there is nothing to stamp into it. This tool
+    leaves every footer byte-identical (the current form and the legacy
+    dated form alike) and reports that in its summary line.
 compare/<slug>.html (that page's registry date from page_checked_dates):
   * "Prices checked <ISO>" / "prices checked <ISO>" (plain text, including
     the hand-written pairs' "Prices checked <ISO> by the PlanPrice research
@@ -36,8 +40,8 @@ Anything else containing "checked <date>" is article prose with its own
 check date (guides/, glossary/, calculators/, ...) and is NEVER stamped:
 no blanket replacement of "checked <date>" happens anywhere in this script.
 Deals pages (deals/<slug>.html) are not stamped for per-product
-facts/pills — those dates are data-driven per product; the shared footer
-applies there, plus (PP-DEAL-META-AUDIT-GAP) the meta description's
+facts/pills — those dates are data-driven per product; the (unstamped)
+footer appears there too, plus (PP-DEAL-META-AUDIT-GAP) the meta description's
 " Checked <date> by Mike, editor of PlanPrice." suffix when present,
 stamped to the product's canonical date.
 
@@ -65,7 +69,8 @@ import site_data  # noqa: E402
 # Stamped-form patterns are shared with audit-literals.py via site_data
 # (named-group layout: prefix / date / attr / inner / suffix).
 ISO = site_data.ISO
-FOOTER_RE = site_data.FOOTER_RE
+# The footer is deliberately never rewritten (see header): FOOTER_RE and
+# LEGACY_FOOTER_RE live in site_data for audit-literals.py only.
 TIME_RE = site_data.TIME_RE
 COMPARE_PLAIN_RE = site_data.COMPARE_PLAIN_RE
 WHITELIST_RES = site_data.WHITELIST_RES
@@ -89,13 +94,13 @@ def stamp_text(rel: str, text: str, registry: dict, canon: dict = None) -> tuple
     site = site_data.site_date(registry)
     counts: dict = {}
 
-    text, counts["footer"] = _sub_count(
-        FOOTER_RE, text, lambda m: f"{m.group('prefix')}{site}{m.group('suffix')}"
-    )
+    # Footer: no-op by design (Batch 2 footer carries no date). The count
+    # stays in the report so the absence is visible, never silent.
+    counts["footer"] = 0
 
     if rel.startswith("deals/"):
         # deals/<slug>.html: per-product facts/pills are data-driven; the
-        # shared footer (above) plus the META checked-date suffix
+        # META checked-date suffix
         # (PP-DEAL-META-AUDIT-GAP) are the stamps on these pages. The meta
         # suffix carries the product's canonical date; pages whose meta has
         # no suffix are left untouched (the form is never invented).
@@ -182,6 +187,7 @@ def main(argv=None) -> int:
         detail = ", ".join(f"{name} x{n}" for name, n in counts.items())
         print(f"{rel}: {sum(counts.values())} replacement(s) [{detail}]")
     print(f"stamp-dates: {mode} {len(planned)} file(s), {total} replacement(s) total")
+    print("stamp-dates: footer carries no date since Batch 2; footers left untouched")
     return 0
 
 

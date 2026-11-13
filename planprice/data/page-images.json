@@ -1,89 +1,89 @@
 {
- "deals/hubspot": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-hubspot.jpg\" alt=\"Three colleagues studying a table covered in blank colorful sticky notes in a sunlit office\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Mapping the marketing plan together before touching any software.</figcaption>\n</figure>"
- ],
- "deals/freshbooks": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-freshbooks.jpg\" alt=\"Hands sorting blank white paper sheets on a desk with a white calculator, a pen, and a coffee cup in daylight.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Paperwork without the pain, invoicing kept simple.</figcaption>\n</figure>"
- ],
- "deals/monday": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-monday.jpg\" alt=\"Team placing blank colorful sticky notes on a whiteboard in a bright office\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Every plan on the board, every task where everyone can see it.</figcaption>\n</figure>"
- ],
- "deals/semrush": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-semrush.jpg\" alt=\"Writer researching with open books, a blank notebook, and a magnifying glass on a bright desk.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Deep keyword research before the first word gets written.</figcaption>\n</figure>"
- ],
- "deals/shopify": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-shopify.jpg\" alt=\"Three handmade ceramic mugs on a white studio backdrop, lit by a softbox, with a smartphone on a tripod.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Product shots that sell: a seller&#x27;s studio on a budget.</figcaption>\n</figure>"
- ],
- "deals/wave": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-wave.jpg\" alt=\"Smiling small business owner at a bright tidy desk with neat stacks of folders and a calculator\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Free accounting and invoicing made for Canadian small businesses.</figcaption>\n</figure>"
- ],
- "deals/quickbooks": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-quickbooks.jpg\" alt=\"Hands sorting paper receipts on a white desk beside a calculator, coffee cup, and manila folder.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>The monthly bookkeeping ritual, minus the shoebox.</figcaption>\n</figure>"
- ],
- "deals/xero": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-xero.jpg\" alt=\"Bookkeeper reviewing an open ledger book with blank pages at a bright office desk\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Cloud accounting with unlimited users on every plan.</figcaption>\n</figure>"
- ],
- "deals/square": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-square.jpg\" alt=\"Barista handing a ceramic coffee cup to a customer across a wooden cafe counter with a card reader terminal nearby\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Free point-of-sale software for retailers and cafés, pay only when you take payments.</figcaption>\n</figure>"
- ],
- "deals/calendly": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-calendly.jpg\" alt=\"An open blank paper planner with a fountain pen resting on it and a coffee cup on a bright desk near a window.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Time well planned, a tidy week starts with an open page.</figcaption>\n</figure>"
- ],
- "deals/jobber": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-jobber.jpg\" alt=\"Technician lifting a toolbox beside an unmarked white service van in a suburban driveway\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>The crew arrives ready, job management starts at the doorstep.</figcaption>\n</figure>"
- ],
- "deals/humi": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-humi.jpg\" alt=\"Two people shaking hands across a desk as one passes over a plain folder\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Day one: the warm handoff every onboarding should start with.</figcaption>\n</figure>"
- ],
- "deals/ahrefs": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-ahrefs.jpg\" alt=\"Hands holding a magnifying glass over blank white pages, with an open blank notebook and a wooden pen on a bright desk.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Close, careful research, comparing SEO toolkits line by line.</figcaption>\n</figure>"
- ],
- "deals/plausible": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-plausible.jpg\" alt=\"Woman reviewing a blank notebook at a bright white desk, with a small padlock and shield figurine beside it.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Shield up, trackers off: privacy without the cookie banners.</figcaption>\n</figure>"
- ],
- "deals/stripe": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-stripe.jpg\" alt=\"Hands holding a blank credit card in front of an open laptop with a dark blurred screen on a bright desk\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Online and in-person card payments with no setup or monthly fees.</figcaption>\n</figure>"
- ],
- "deals/big-cartel": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-big-cartel.jpg\" alt=\"Hands tying twine around a kraft paper mailer on a bright studio table with blank boxes and ceramic mugs.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Small-batch goods, packed with care for online shoppers.</figcaption>\n</figure>"
- ],
- "categories/accounting": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-accounting.jpg\" alt=\"Bookkeeper writing in a blank paper ledger at a sunlit white desk with calculator, receipt stack, and coffee mug.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>A calm, uncluttered way to picture the bookkeeping page.</figcaption>\n</figure>"
- ],
- "categories/crm-marketing": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-crm-marketing.jpg\" alt=\"Three colleagues around a white table sorting blank pastel sticky notes in a bright glass-walled office.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>The CRM &amp; Marketing page&#x27;s planning-table moment.</figcaption>\n</figure>"
- ],
- "categories/ecommerce": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-ecommerce.jpg\" alt=\"Row of sealed kraft shipping boxes in a bright studio, one open box with tissue paper in front.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Packed and ready: the ecommerce shipping story in one frame.</figcaption>\n</figure>"
- ],
- "categories/field-service": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-field-service.jpg\" alt=\"Technician carrying a red toolbox across a lawn toward a modern house&#x27;s front door, seen from behind.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Home-service work, where the field-service tools earn their keep.</figcaption>\n</figure>"
- ],
- "categories/hr-payroll": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-hr-payroll.jpg\" alt=\"Two smiling colleagues shaking hands across a wooden desk with a blank folder and small potted plant.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>A warm welcome, the onboarding scene behind the HR &amp; Payroll page.</figcaption>\n</figure>"
- ],
- "categories/payments-pos": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-payments-pos.jpg\" alt=\"Small white unbranded card payment terminal and folded paper shopping bag on a wooden shop counter.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>The checkout moment behind the Payments &amp; POS deals.</figcaption>\n</figure>"
- ],
- "categories/seo-marketing": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-seo-marketing.jpg\" alt=\"Writer holding a brass magnifying glass over a blank notebook at a sunlit desk beside stacked books.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Research close-up: the curiosity behind the SEO &amp; Marketing page.</figcaption>\n</figure>"
- ],
- "categories/scheduling": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-scheduling.jpg\" alt=\"Overhead flat-lay of an open blank planner and pen beside a blank-faced alarm clock and cup of tea.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Time, neatly laid out, the scheduling page&#x27;s quiet hero shot.</figcaption>\n</figure>"
- ],
- "categories/work-management": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-work-management.jpg\" alt=\"Two colleagues arranging blank white sticky notes on a large whiteboard in a bright office.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Planning session in progress, the work-management page&#x27;s board.</figcaption>\n</figure>"
- ],
- "compare/accounting": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/compare-accounting.jpg\" alt=\"Four blank documents fanned out on a wooden desk with a brass magnifying glass and a blank notebook\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Four accounting apps, one careful look, the details decide.</figcaption>\n</figure>"
- ],
- "compare/square-vs-stripe": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/compare-square-vs-stripe.jpg\" alt=\"Card payment terminal on a wooden shop counter beside a laptop with a blank screen, bright storefront interior\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Countertop hardware meets online checkout, comparing payment processors means looking at both sides.</figcaption>\n</figure>"
- ],
- "compare/semrush-vs-ahrefs": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/compare-semrush-vs-ahrefs.jpg\" alt=\"Two blank reports lying side by side on a bright desk with a magnifying glass and a small notebook\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Two SEO tools, compared line by line, the magnifier helps separate features from marketing.</figcaption>\n</figure>"
- ],
- "index": [
-  "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"images/hero.jpg\" alt=\"Sunlit home-office desk with a laptop with a blank dark screen, a closed notebook, a coffee cup, and a small potted plant.\" loading=\"eager\" width=\"1920\" height=\"1280\">\n</figure>"
- ]
+  "deals/hubspot": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-hubspot.jpg\" alt=\"Three colleagues studying a table covered in blank colorful sticky notes in a sunlit office\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Mapping the marketing plan together before touching any software.</figcaption>\n</figure>"
+  ],
+  "deals/freshbooks": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-freshbooks.jpg\" alt=\"Hands sorting blank white paper sheets on a desk with a white calculator, a pen, and a coffee cup in daylight.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Paperwork without the pain, invoicing kept simple.</figcaption>\n</figure>"
+  ],
+  "deals/monday": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-monday.jpg\" alt=\"Team placing blank colorful sticky notes on a whiteboard in a bright office\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Every plan on the board, every task where everyone can see it.</figcaption>\n</figure>"
+  ],
+  "deals/semrush": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-semrush.jpg\" alt=\"Writer researching with open books, a blank notebook, and a magnifying glass on a bright desk.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Deep keyword research before the first word gets written.</figcaption>\n</figure>"
+  ],
+  "deals/shopify": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-shopify.jpg\" alt=\"Three handmade ceramic mugs on a white studio backdrop, lit by a softbox, with a smartphone on a tripod.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Product shots that sell: a seller&#x27;s studio on a budget.</figcaption>\n</figure>"
+  ],
+  "deals/wave": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-wave.jpg\" alt=\"Smiling small business owner at a bright tidy desk with neat stacks of folders and a calculator\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Free accounting and invoicing made for Canadian small businesses.</figcaption>\n</figure>"
+  ],
+  "deals/quickbooks": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-quickbooks.jpg\" alt=\"Hands sorting paper receipts on a white desk beside a calculator, coffee cup, and manila folder.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>The monthly bookkeeping ritual, minus the shoebox.</figcaption>\n</figure>"
+  ],
+  "deals/xero": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-xero.jpg\" alt=\"Bookkeeper reviewing an open ledger book with blank pages at a bright office desk\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Cloud accounting with unlimited users on every plan.</figcaption>\n</figure>"
+  ],
+  "deals/square": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-square.jpg\" alt=\"Barista handing a ceramic coffee cup to a customer across a wooden cafe counter with a card reader terminal nearby\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Free point-of-sale software for retailers and cafés, pay only when you take payments.</figcaption>\n</figure>"
+  ],
+  "deals/calendly": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-calendly.jpg\" alt=\"An open blank paper planner with a fountain pen resting on it and a coffee cup on a bright desk near a window.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Time well planned, a tidy week starts with an open page.</figcaption>\n</figure>"
+  ],
+  "deals/jobber": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-jobber.jpg\" alt=\"Technician lifting a toolbox beside an unmarked white service van in a suburban driveway\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>The crew arrives ready, job management starts at the doorstep.</figcaption>\n</figure>"
+  ],
+  "deals/humi": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-humi.jpg\" alt=\"Two people shaking hands across a desk as one passes over a plain folder\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Day one: the warm handoff every onboarding should start with.</figcaption>\n</figure>"
+  ],
+  "deals/ahrefs": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-ahrefs.jpg\" alt=\"Hands holding a magnifying glass over blank white pages, with an open blank notebook and a wooden pen on a bright desk.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Close, careful research, comparing SEO toolkits line by line.</figcaption>\n</figure>"
+  ],
+  "deals/plausible": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-plausible.jpg\" alt=\"Woman reviewing a blank notebook at a bright white desk, with a small padlock and shield figurine beside it.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Shield up, trackers off: privacy without the cookie banners.</figcaption>\n</figure>"
+  ],
+  "deals/stripe": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-stripe.jpg\" alt=\"Hands holding a blank credit card in front of an open laptop with a dark blurred screen on a bright desk\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Online and in-person card payments with no setup or monthly fees.</figcaption>\n</figure>"
+  ],
+  "deals/big-cartel": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/deal-big-cartel.jpg\" alt=\"Hands tying twine around a kraft paper mailer on a bright studio table with blank boxes and ceramic mugs.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Small-batch goods, packed with care for online shoppers.</figcaption>\n</figure>"
+  ],
+  "categories/accounting": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-accounting.jpg\" alt=\"Bookkeeper writing in a blank paper ledger at a sunlit white desk with calculator, receipt stack, and coffee mug.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>A calm, uncluttered way to picture the bookkeeping page.</figcaption>\n</figure>"
+  ],
+  "categories/crm-marketing": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-crm-marketing.jpg\" alt=\"Three colleagues around a white table sorting blank pastel sticky notes in a bright glass-walled office.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>The CRM &amp; Marketing page&#x27;s planning-table moment.</figcaption>\n</figure>"
+  ],
+  "categories/ecommerce": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-ecommerce.jpg\" alt=\"Row of sealed kraft shipping boxes in a bright studio, one open box with tissue paper in front.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Packed and ready: the ecommerce shipping story in one frame.</figcaption>\n</figure>"
+  ],
+  "categories/field-service": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-field-service.jpg\" alt=\"Technician carrying a red toolbox across a lawn toward a modern house&#x27;s front door, seen from behind.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Home-service work, where the field-service tools earn their keep.</figcaption>\n</figure>"
+  ],
+  "categories/hr-payroll": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-hr-payroll.jpg\" alt=\"Two smiling colleagues shaking hands across a wooden desk with a blank folder and small potted plant.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>A warm welcome, the onboarding scene behind the HR &amp; Payroll page.</figcaption>\n</figure>"
+  ],
+  "categories/payments-pos": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-payments-pos.jpg\" alt=\"Small white unbranded card payment terminal and folded paper shopping bag on a wooden shop counter.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>The checkout moment behind the Payments &amp; POS deals.</figcaption>\n</figure>"
+  ],
+  "categories/seo-marketing": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-seo-marketing.jpg\" alt=\"Writer holding a brass magnifying glass over a blank notebook at a sunlit desk beside stacked books.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Research close-up: the curiosity behind the SEO &amp; Marketing page.</figcaption>\n</figure>"
+  ],
+  "categories/scheduling": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-scheduling.jpg\" alt=\"Overhead flat-lay of an open blank planner and pen beside a blank-faced alarm clock and cup of tea.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Time, neatly laid out, the scheduling page&#x27;s quiet hero shot.</figcaption>\n</figure>"
+  ],
+  "categories/work-management": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/cat-work-management.jpg\" alt=\"Two colleagues arranging blank white sticky notes on a large whiteboard in a bright office.\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Planning session in progress, the work-management page&#x27;s board.</figcaption>\n</figure>"
+  ],
+  "compare/accounting": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/compare-accounting.jpg\" alt=\"Four blank documents fanned out on a wooden desk with a brass magnifying glass and a blank notebook\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Four accounting apps, one careful look, the details decide.</figcaption>\n</figure>"
+  ],
+  "compare/square-vs-stripe": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/compare-square-vs-stripe.jpg\" alt=\"Card payment terminal on a wooden shop counter beside a laptop with a blank screen, bright storefront interior\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Countertop hardware meets online checkout, comparing payment processors means looking at both sides.</figcaption>\n</figure>"
+  ],
+  "compare/semrush-vs-ahrefs": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"../images/compare-semrush-vs-ahrefs.jpg\" alt=\"Two blank reports lying side by side on a bright desk with a magnifying glass and a small notebook\" loading=\"lazy\" width=\"1920\" height=\"1280\">\n  <figcaption>Two SEO tools, compared line by line, the magnifier helps separate features from marketing.</figcaption>\n</figure>"
+  ],
+  "index": [
+    "<figure class=\"post-figure\">\n  <img class=\"post-image\" src=\"images/hero.jpg\" alt=\"Sunlit home-office desk with a laptop with a blank dark screen, a closed notebook, a coffee cup, and a small potted plant.\" loading=\"eager\" width=\"1920\" height=\"1280\">\n</figure>"
+  ]
 }

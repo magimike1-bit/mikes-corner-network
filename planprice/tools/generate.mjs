@@ -1,5 +1,17 @@
 // PlanPrice static site generator — reads data/products.json, renders the whole site.
 // Idempotent: output depends only on data + SITE_HOST. No timestamps in output.
+//
+// HAND-MAINTAINED PAGES (Batch 2, 2026-11-13): the generator must never
+// write or resurrect these. price-changes.html (its Check Type column and
+// spot check rows come from the verification log, not the sweep diffs),
+// verified.html, guides.html and the article guides under guides/,
+// authors/mike.html, and every page deleted in Batch 2 (marketing.html,
+// the 5 ads-arbitrage guides, and the 9 category guides under guides/
+// whose content merged into categories/*.html as How to Choose sections,
+// now stored in data/page-extras.json as categories-howto/<slug>).
+// data/guides.json is intentionally an empty list since that merge: the
+// generator writes no guides/<slug>.html pages at all (see the loud log
+// line at the guides write loop).
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,6 +26,12 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HOST = process.env.SITE_HOST || "staging.planprice.local";
 const SITE_URL = `https://${HOST}`;
 const CHECKED = PRICES_VERIFIED_DATE;
+/* Last FULL sweep date (Batch 2): the most recent monthly full sweep was
+ * completed 2026-09-30 (see verified.html and data/verification-log.json).
+ * The 2026-10-25 pass was a set of spot checks, not a full sweep, so this
+ * is a named editorial constant, not the registry CHECKED date. Update it
+ * only when a new full sweep completes. */
+const LAST_FULL_SWEEP = "2026-09-30";
 
 const data = JSON.parse(readFileSync(join(ROOT, "data", "products.json"), "utf8"));
 const products = data.products;
@@ -215,6 +233,18 @@ const allSweeps = (() => {
     .sort((a, b) => (a.sweep_date < b.sweep_date ? -1 : 1));
 })();
 
+/* Batch 2 history corrections (2026-11-13, from data/verification-log.json):
+ * the QuickBooks 2026-10-25 sweep row recorded a plan name and list price
+ * that do not exist in QuickBooks Online Canada; the shipped price history
+ * tables carry the corrected headline, so the row is corrected here rather
+ * than in the sweep snapshot (the snapshot stays as recorded, and the
+ * verification log keeps the correction entry). The Xero 2026-11-13 spot
+ * check is not a sweep file, so its history row is appended here. */
+const HISTORY_CORRECTIONS = {
+  quickbooks: { replaceHeadline: { "2026-10-25": "90% off for 6 months for new subscribers (EasyStart C$3/mo, list C$30)" } },
+  xero: { append: [{ date: "2026-11-13", start_price_text: "From $10 per month", deal_headline: "80% off your first 3 months for new customers", start_price_numeric: 10 }] },
+};
+
 // slug -> sweep rows, built once (priceHistorySection looks up, never rescans).
 const sweepRowsBySlug = (() => {
   const map = new Map();
@@ -229,6 +259,15 @@ const sweepRowsBySlug = (() => {
       });
     }
   }
+  for (const [slug, corr] of Object.entries(HISTORY_CORRECTIONS)) {
+    const rows = map.get(slug) || [];
+    for (const row of rows) {
+      if (corr.replaceHeadline && corr.replaceHeadline[row.date]) row.deal_headline = corr.replaceHeadline[row.date];
+    }
+    for (const extra of corr.append || []) rows.push({ ...extra });
+    rows.sort((a, b) => (a.date < b.date ? -1 : 1));
+    map.set(slug, rows);
+  }
   return map;
 })();
 
@@ -241,7 +280,7 @@ function priceHistorySection(p, batch = false) {
   if (!rows.length) return "";
   return `<section class="section price-history">
       <h2>Price history</h2>
-      <p>What our verification snapshots recorded for ${esc(p.name)}. Snapshots are periodic checks, not a continuous feed, a change between two dates happened somewhere in between.</p>
+      <p>What our verification snapshots recorded for ${esc(p.name)}. Snapshots are taken in the monthly full sweep and in any spot check between sweeps, they are not a continuous feed. A change between two snapshot dates happened somewhere in between.</p>
       <div class="table-scroll">
       <table class="tiers">
         <caption>${esc(p.name)}. PlanPrice verification snapshots.</caption>
@@ -249,7 +288,7 @@ function priceHistorySection(p, batch = false) {
         <tbody>${rows.join("\n")}
 </tbody>
       </table>
-      </div>${batch ? "\n      <p class=\"fine\">First PlanPrice snapshot for this vendor, future verification sweeps will add points here.</p>" : p.history_stable_fine ? "\n      <p class=\"fine\">No price changes recorded since Sep 2026, the starting price and promo status above have been stable across every snapshot we hold.</p>" : ""}
+      </div>${batch ? "\n      <p class=\"fine\">First PlanPrice snapshot for this vendor. The monthly full sweep adds a new snapshot point for every tracked vendor.</p>" : p.history_stable_fine ? "\n      <p class=\"fine\">No price changes recorded since Sep 2026, the starting price and promo status above have been stable across every snapshot we hold.</p>" : ""}
     </section>`;
 }
 const priceFlags = {}; // slug -> array of "price-drop" | "new-deal"
@@ -550,18 +589,18 @@ function indexPage() {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PlanPrice | Verified B2B Software Deals &amp; Pricing</title>
-<meta name="description" content="PlanPrice tracks verified list prices and promotions for ${products.length} essential B2B software products. Every deal is checked against the vendor's own site.">
+<meta name="description" content="PlanPrice tracks list prices and promotions for ${products.length} B2B software products, re-checked in a full sweep once a month against each vendor's own site.">
 <link rel="canonical" href="${SITE_URL}/">
 <!-- Open Graph / Twitter cards (PP-OG-IMAGE, 2026-10-04) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PlanPrice">
 <meta property="og:title" content="PlanPrice | Verified B2B Software Deals &amp; Pricing">
-<meta property="og:description" content="PlanPrice tracks verified list prices and promotions for ${products.length} essential B2B software products. Every deal is checked against the vendor's own site.">
+<meta property="og:description" content="PlanPrice tracks list prices and promotions for ${products.length} B2B software products, re-checked in a full sweep once a month against each vendor's own site.">
 <meta property="og:url" content="${SITE_URL}/">
 <meta property="og:image" content="${SITE_URL}/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PlanPrice | Verified B2B Software Deals &amp; Pricing">
-<meta name="twitter:description" content="PlanPrice tracks verified list prices and promotions for ${products.length} essential B2B software products. Every deal is checked against the vendor's own site.">
+<meta name="twitter:description" content="PlanPrice tracks list prices and promotions for ${products.length} B2B software products, re-checked in a full sweep once a month against each vendor's own site.">
 <meta name="twitter:image" content="${SITE_URL}/og-image.jpg">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -628,7 +667,7 @@ function indexPage() {
 </header>
 <section class="hero">
   <div class="wrap">
-    <p class="kicker">Verified pricing · Checked ${CHECKED}</p>
+    <p class="kicker">Verified Pricing · Last Full Sweep ${LAST_FULL_SWEEP}</p>
     <h1>B2B software deals, with the receipts.</h1>
     <p class="lead">Real list prices and current promotions, every deal claim links to the vendor's own page so you can check it yourself.</p>
     <div class="hero-ctas"><a class="btn" href="/deals.html">Browse ${liveDeals(products).length} verified deals</a><a class="btn btn-secondary" href="/tools/deal-verifier.html">Verify a deal free</a></div>${figFor("index").trim()}
@@ -642,7 +681,7 @@ function indexPage() {
     <span class="trust-dot" aria-hidden="true">·</span>
     <span class="trust-stat"><strong>${liveDeals(products).length}</strong> live deals</span>
     <span class="trust-dot" aria-hidden="true">·</span>
-    <span class="trust-stat">Promos re-verified <time datetime="${CHECKED}">${CHECKED}</time></span>
+    <span class="trust-stat">Last Full Price Sweep <time datetime="${LAST_FULL_SWEEP}">${LAST_FULL_SWEEP}</time> · Spot Checks Logged Between Sweeps</span>
   </div>
 </div>
 <main>
@@ -662,7 +701,7 @@ function indexPage() {
         <div class="featured-deal">
           <p class="kicker">Verified promo</p>
           <h3><a href="/deals/quickbooks.html">QuickBooks Online</a></h3>
-          <p><strong>90% off</strong> for new subscribers (Lite C$2/mo, list C$20)</p>
+          <p><strong>90% off for 6 months</strong> for new subscribers (EasyStart C$3/mo, list C$30)</p>
           <p>The accounting suite most Canadian accountants already know.</p>
           <p class="src">✓ Vendor-verified <time datetime="2026-10-25">2026-10-25</time>, details on the deal page.</p>
           <p><a class="btn" href="/deals/quickbooks.html">See pricing &amp; deal</a></p>
@@ -672,7 +711,7 @@ function indexPage() {
           <h3><a href="/deals/xero.html">Xero</a></h3>
           <p><strong>80% off your first 3 months</strong> for new customers</p>
           <p>Cloud accounting with unlimited users on every plan.</p>
-          <p class="src">✓ Vendor-verified <time datetime="2026-10-25">2026-10-25</time>, source: <a href="https://www.xero.com/ca/pricing-plans" target="_blank" rel="noopener">www.xero.com</a>.</p>
+          <p class="src">✓ Spot-checked <time datetime="2026-11-13">2026-11-13</time>, source: <a href="https://www.xero.com/ca/pricing-plans" target="_blank" rel="noopener">www.xero.com</a>. Last full sweep ${LAST_FULL_SWEEP}.</p>
           <p><a class="btn" href="/deals/xero.html">See pricing &amp; deal</a></p>
         </div>
         <div class="featured-deal">
@@ -698,7 +737,7 @@ function indexPage() {
   <section class="section tools-feature" aria-label="Free pricing tools">
     <div class="wrap">
       <h2 class="section-title">Free pricing tools</h2>
-      <p class="section-sub">Free interactive tools built on our verified pricing data, plus twenty small business calculators. No sign-up, everything runs in your browser. <a href="/tools.html">See all tools</a>.</p>
+      <p class="section-sub">Free interactive tools built on our verified pricing data, plus twenty-two small business calculators. No sign-up, everything runs in your browser. <a href="/tools.html">See all tools</a>.</p>
       <div class="tools-grid">
         <div class="tool-card">
           <div class="tool-icon" aria-hidden="true">🔍</div>
@@ -733,7 +772,7 @@ function indexPage() {
         <div class="tool-card">
           <div class="tool-icon" aria-hidden="true">📊</div>
           <h3><a href="/calculators.html">Small Business Calculators</a></h3>
-          <p>Twenty free calculators beyond software pricing: break-even, Canadian payroll cost, HST/GST, freelance rates, CAC, LTV, runway, and more.</p>
+          <p>Twenty-two free calculators beyond software pricing: break-even, Canadian payroll cost, HST/GST, freelance rates, CAC, LTV, runway, and more.</p>
         </div>
       </div>
     </div>
@@ -767,33 +806,13 @@ ${homeChips}
     <ol class="verify-steps-list verify-strip-list">
       <li><strong>Check the vendor's own pricing page.</strong> We read current list prices straight from the vendor's public pricing page, not a review, not an aggregator.</li>
       <li><strong>Link every deal claim.</strong> When a vendor runs a public promotion, the headline links to the vendor's own page so you can confirm the offer yourself.</li>
-      <li><strong>Re-check on a schedule.</strong> Every product's prices and promos are re-verified regularly, and each page shows the date it was last checked.</li>
+      <li><strong>Re-check once a month, in full.</strong> PlanPrice re-checks every tracked product's list prices and promotions in a full sweep once a month. Each page shows the date of the last full sweep that covered it, and any spot check since then is logged as a spot check.</li>
     </ol>
   </div>
 </section>
   
 </main>
-<footer class="site-footer">
-  <div class="wrap">
-    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
-    <p class="footer-brand">PlanPrice, verified B2B software pricing and deals.</p>
-    <nav class="footer-nav">
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
-      <a href="/guides.html">Guides</a>
-      <a href="/glossary.html">Glossary</a>
-      <a href="/verified.html">Verification log</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/price-changes.html">Price changes</a>
-      <a href="/disclosure.html">Affiliate disclosure</a>
-      <a href="/privacy-policy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-    </nav>
-    <p class="fine">Prices are re-checked in a full sweep once a month by Mike, editor of PlanPrice. Each page shows the date its prices were last checked. Always confirm current pricing on the vendor's own site before buying. PlanPrice currently earns no affiliate commissions, partnerships are still being set up. PlanPrice currently earns no affiliate commissions, partnerships are still being set up.</p>
-  </div>
-</footer>
-</body>
-</html>`;
+${footer()}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -997,7 +1016,7 @@ ${header(batch ? null : "/")}
     <article class="product">
       <p class="card-cat">${esc(p.category)}</p>
       <h1>${esc(p.name)}</h1>
-      <p class="lead">${esc(p.lead || p.tagline)}</p>${figFor(`deals/${p.slug}`)}${canLine ? `
+      <p class="lead">${esc(p.lead || p.tagline)}</p><p class="byline">By <a href="/authors/mike.html">Mike</a>, Editor · Prices on this page are checked against the vendor's own pricing page. See <a href="/methodology.html">How PlanPrice verifies</a>.</p>${figFor(`deals/${p.slug}`)}${canLine ? `
       ${canLine}` : slotBare ? "" : "\n      "}
       <div class="facts-wrap">
         ${factsStrip(p, "", batch)}
@@ -1068,13 +1087,12 @@ ${header(null)}
   <div class="wrap" id="all-deals">
     <p class="breadcrumbs"><a href="/">All deals</a> › ${esc(c)}</p>
     <h1 class="page-title">${esc(c)}</h1>
-    <p class="section-sub">${n} product${plural} tracked · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>${figFor(`categories/${slugify(c)}`)}
-    <p class="guide-banner"><a href="/guides/${slugify(c)}.html">Buyer's guide: how to choose ${esc(c)} software</a></p>
+    <p class="section-sub">${n} product${plural} tracked · Last Full Sweep ${LAST_FULL_SWEEP} · Each Row Shows Its Own Check Date</p>${figFor(`categories/${slugify(c)}`).trimEnd()}
     ${h2hBannerLink(c)}${extraFor(`categories/${slugify(c)}`)}
     ${filterForm(false)}
     <section class="dir-cat" id="cat-${slugify(c)}" aria-label="${esc(c)}">
       <ul class="dir-rows">${rows}</ul>
-    </section>
+    </section>${pageExtras[`categories-howto/${slugify(c)}`] ? "\n\n    " + pageExtras[`categories-howto/${slugify(c)}`] : ""}
     ${transparencySection(c)}
   </div>
 </main>
@@ -1361,7 +1379,7 @@ ${header("/compare.html")}
   <div class="wrap">
     <p class="breadcrumbs"><a href="/compare.html">Compare</a> › ${esc(set.title)}</p>
     <h1 class="page-title">${esc(set.title)}</h1>
-    <p class="section-sub">${set.products.length} products, side by side · prices checked <time datetime="${pageDate}">${pageDate}</time></p>${figFor(`compare/${set.slug}`)}
+    <p class="section-sub">${set.products.length} products, side by side · Each Section Shows Its Own Check Date</p>${figFor(`compare/${set.slug}`)}
     <div class="compare-cols">
       ${cols}
     </div>
@@ -1427,7 +1445,7 @@ ${header("/deals.html")}
   <div class="wrap" id="all-deals">
     <p class="breadcrumbs"><a href="/">All deals</a> › Current promos</p>
     <h1 class="page-title">Current promos</h1>
-    <p class="section-sub">${n} active promo${plural} · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>${extraFor("deals")}
+    <p class="section-sub">${n} Active Promo${plural} · Last Full Sweep ${LAST_FULL_SWEEP} · Each Card Shows Its Own Check Date</p>${extraFor("deals")}
     ${saversStrip()}
     ${filterForm(false, { dealsOnly: false })}
     <section class="dir-cat" id="cat-deals" aria-label="Current promos">
@@ -1519,7 +1537,7 @@ ${header("/free.html")}
   <div class="wrap" id="all-deals">
     <p class="breadcrumbs"><a href="/">All deals</a> › Free to start</p>
     <h1 class="page-title">Free to start</h1>
-    <p class="section-sub">${n} products with a free tier · prices checked <time datetime="${CHECKED}">${CHECKED}</time></p>${extraFor("free")}
+    <p class="section-sub">${n} Products With a Free Tier · Each Row Shows Its Own Check Date</p>${extraFor("free")}
     <section class="dir-cat" id="cat-free" aria-label="Free to start">
       <ul class="dir-rows">${cards}</ul>
     </section>
@@ -1543,8 +1561,7 @@ function topRatedPage() {
   const monday = byReviews.find((r) => r.slug === "monday");
   const plausible = byAvg.find((r) => r.slug === "plausible");
   const ratedGuide = (pageExtras["top-rated"] || "")
-    .replace("the 16 products PlanPrice currently tracks", `the ${n} products PlanPrice currently tracks`)
-    .replace("re-checked on 2026-09-30", `re-checked on ${SCORES_CHECKED}`)
+    .replace("the 16 products PlanPrice currently tracks, and every score was re-checked on 2026-09-30, the date is printed", `the ${n} tracked products that carry a review score, out of the ${products.length} products PlanPrice tracks. Every score was re-checked on ${SCORES_CHECKED}. The date is printed`)
     .replace("23,267 (Monday.com)", monday ? `${monday.totalReviews.toLocaleString("en-US")} (Monday.com)` : "23,267 (Monday.com)")
     // The worked example in the prose ("A 4.6 average built on 12 reviews
     // (Plausible) ... a 4.7 built on ...") must track the same rank rows the
@@ -1822,23 +1839,28 @@ function aboutBody() {
     : `<p>${AFFILIATE_INTERIM}</p>`;
   // PP-GEN-DRIFT (R4a): body extracted verbatim from the committed about.html
   // (incl. the How we verify prices / What PlanPrice doesn't do / AI
-  // disclosure sections). Only two dynamic slots: the funding paragraph
-  // (affiliate-state conditional, as before) and the site-wide verification
-  // date claim, which now follows the registry date (was a stale 2026-09-30
-  // literal in the committed prose).
+  // disclosure sections). Only one dynamic slot: the funding paragraph
+  // (affiliate-state conditional, as before). Batch 2 (2026-11-13) removed
+  // the single site-wide verification date claim and the monthly-sweep
+  // score claim; the Meet The Editor section was added. The body below is
+  // the Batch 2 text verbatim.
   return `<section class="section"><div class="wrap">
       <p>PlanPrice is a deals directory for business software. We track list prices and current promotions for the tools small businesses actually buy, accounting, CRM, ecommerce, point of sale, scheduling, and more.</p>
       <p><strong>Our standard:</strong> every discount headline on this site links to the vendor's own page. If we couldn't find a public promotion, the page says so plainly instead of dressing up standard list prices as a deal.</p>
-      <p><strong>Review scores:</strong> deal pages show aggregate user ratings from third-party review sites (G2 and Capterra), these are not PlanPrice's own ratings. We re-check every score during the monthly verification sweep; each score shows its source and the date it was last checked.</p>
-      <p>Prices are checked by Mike, editor of PlanPrice and dated. Vendors change prices and promotions without notice, so always confirm on the vendor's pricing page before purchasing.</p>
+      <p><strong>Review scores:</strong> deal pages show aggregate user ratings from third-party review sites (G2 and Capterra), these are not PlanPrice's own ratings. Review scores are checked on their own schedule, separately from the monthly price sweep. Each score shows its source and the date it was last checked.</p>
+      <p>Prices are checked by Mike, editor of PlanPrice, and dated. Vendors change prices and promotions without notice, so always confirm on the vendor's pricing page before purchasing.</p>
       ${funding}
     </div></section><section class="section"><div class="wrap">
       <h2>How we verify prices</h2>
-      <p>Every price on PlanPrice is checked against the vendor's own pricing page by Mike, editor of PlanPrice, and the check date is printed next to the price, the current site-wide verification date is ${CHECKED}. When a vendor runs a public promotion, the deal page shows the promo terms and links to the vendor's own offer page; when no public promotion exists, the page says so plainly instead of dressing up list prices as a deal. Prices are re-checked on a regular sweep, and the verified date moves with each pass.</p>
-      <p>Review scores work the same way: the G2 and Capterra aggregates shown on deal pages are third-party user ratings, not PlanPrice's own opinions, and each score is re-checked during the verification sweep with its source and check date shown. Scores describe other users' experience; they don't include pricing, and a high score on an expensive tool doesn't make it the right tool for a tight budget.</p>
+      <p>Every price on PlanPrice is checked against the vendor's own pricing page by Mike, editor of PlanPrice, and the check date printed next to each price is the date of the last full sweep that covered that product, or the date of a later spot check where the log says so. There is no single site wide verification date, because products are covered sweep by sweep and page by page. When a vendor runs a public promotion, the deal page shows the promo terms and links to the vendor's own offer page; when no public promotion exists, the page says so plainly instead of dressing up list prices as a deal. Prices are re-checked in a full sweep once a month, and a page's verified date moves only when a full sweep covers that product, or when a spot check re-reads that product's full list pricing and the log records it as one.</p>
+      <p>Review scores are labelled with their source and their own check date, separately from pricing. A score date is never presented as a price verification date. Scores describe other users' experience; they don't include pricing, and a high score on an expensive tool doesn't make it the right tool for a tight budget.</p>
       <h2>What PlanPrice doesn't do</h2>
       <p>PlanPrice doesn't sell software and doesn't take a cut of anything you buy, right now our affiliate partnerships are still being set up, so every outbound link is a plain link to the vendor (see the <a href="/disclosure.html">affiliate disclosure</a>). We don't invent prices, fabricate promotions, or publish "deals" we couldn't find on the vendor's own site. And we're a pricing directory, not an advisor: nothing here is financial or tax advice, and the final price is always whatever the vendor's own checkout shows.</p>
       <p>Spot something wrong? A price that changed, a promo that ended, a product we should track, <a href="/contact.html">tell us</a>. Corrections get re-checked against the vendor's site, and the page gets updated when the correction checks out.</p>
+    <h2>Meet The Editor</h2>
+      <p>PlanPrice is edited by <a href="/authors/mike.html">Mike</a>, a retail IT professional who has spent more than ten years in IT vendor management.</p>
+      <p>That background is the working basis for this site. Vendor management means reading vendor pricing pages, plan tiers, and contract terms as a day job, and comparing what vendors publish against what they actually charge. PlanPrice applies the same reading to the business software prices and promotions tracked here.</p>
+      <p>Mike directs what PlanPrice covers and reviews the prices, guides, and deal pages before they are published. When a reader reports a price that looks wrong, the correction comes to Mike, gets re-checked against the vendor's own site, and the page is updated when the correction checks out. See the <a href="/contact.html">Contact page</a> for how to send a correction.</p>
     <h2>AI disclosure</h2>
       <p>AI tools assist with content production on this site. Mike, the editor of PlanPrice, directs that work and reviews the content before it is published.</p>
     </div></section>`;
@@ -1879,20 +1901,31 @@ function disclosureBody() {
  * wording. The new wording (naming Cloudflare Web Analytics) ships ONLY
  * when a token is set — never ship it while the beacon is inert. */
 function privacyBody() {
-  const analytics = CF_BEACON_TOKEN
-    ? `<li><strong>No cookies set by us.</strong> We measure site visits with Cloudflare Web Analytics, a cookieless, privacy-first measurement tool that sets no cookies and collects no personal data.</li>`
-    : `<li><strong>No cookies set by us.</strong> Our pages do not use analytics cookies or tracking pixels.</li>`;
+  // Batch 2 (P12, 2026-11-13): body extracted verbatim from the committed
+  // privacy-policy.html, including the Advertising And Cookies section
+  // and the literal Last updated date (the policy date moves only when
+  // the policy text changes, not with the registry CHECKED date). The
+  // Cloudflare Web Analytics wording below matches the live beacon
+  // (CF_BEACON_TOKEN is set); if the beacon is ever removed, this body
+  // must be edited in the same change.
   return `<section class="section"><div class="wrap">
-      <p><strong>Last updated: ${CHECKED}.</strong></p>
+      <p><strong>Last updated: 2026-11-13.</strong></p>
       <p>PlanPrice is a static informational site. We collect almost nothing:</p>
       <ul>
         <li><strong>No accounts, no signups, no email capture.</strong> There is nothing to subscribe to and nothing to log into.</li>
-        ${analytics}
-        <li><strong>Third parties.</strong> Our hosting provider may log basic server data (IP address, pages requested) for security. When affiliate links go live, clicking one takes you to the vendor's site, which is governed by that vendor's privacy policy, not ours.</li>
-        <li><strong>Advertising.</strong> We've signed up for Google AdSense and placed the account-verification code on our pages, but ads aren't showing yet, they start only if Google approves this site. When they do, Google and its partners may use cookies, including the DoubleClick cookie, to show personalized ads based on your visits to this site and other sites. You can opt out of personalized advertising at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>. Visitors in the European Economic Area, the UK, and Switzerland will see a consent message from Google's certified consent management platform before personalized ads can show.</li>
+        <li><strong>No cookies set by us.</strong> We measure site visits with Cloudflare Web Analytics, a cookieless, privacy-first measurement tool that sets no cookies and collects no personal data.</li>
+        <li><strong>Third parties.</strong> Our hosting provider may log basic server data (IP address, pages requested) for security. Like most websites, PlanPrice and its hosting provider use log files. The information in log files includes internet protocol (IP) addresses, browser type, internet service provider, date and time stamps, and the pages visited, and it is used to operate and secure the site and to understand aggregate use. When affiliate links go live, clicking one takes you to the vendor's site, which is governed by that vendor's privacy policy, not ours.</li>
       </ul>
+      <h2>Advertising And Cookies</h2>
+      <p>We've signed up for Google AdSense and placed the account-verification code on our pages, but ads aren't showing yet, they start only if Google approves this site. When ads show on this site, third-party vendors, including Google, will use cookies to serve ads based on a user's prior visits to this website or other websites.</p>
+      <p>Google's use of advertising cookies enables it and its partners to serve ads to visitors based on their visits to this site and to other sites on the internet. One of the cookies Google uses for this purpose is the DoubleClick cookie, also known as the DART cookie. The DART cookie is used by Google in the ads served on the websites of its partners, such as websites displaying AdSense ads, and Google uses information about visits to this and other websites, not including name, address, email address, or telephone number, to serve ads about goods and services of interest to visitors.</p>
+      <p>Third-party ad servers and ad networks use technologies such as cookies, JavaScript, and web beacons in the advertisements and links that appear on this site, and those technologies are sent directly to a visitor's browser. The third-party servers automatically receive the visitor's IP address when this occurs. These technologies are used to measure the effectiveness of advertising campaigns and to personalise the advertising content a visitor sees on this and other websites. PlanPrice has no access to or control over the cookies and web beacons used by third-party advertisers.</p>
+      <p>You can opt out of personalized advertising at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>. Visitors may opt out of the use of the DART cookie, and of Google's personalised advertising, by visiting Google Ads Settings at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">https://www.google.com/settings/ads</a>. Visitors may also opt out of some third-party vendors' use of cookies for personalised advertising by visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener">https://www.aboutads.info</a>, and may opt out of cookies used by members of the Network Advertising Initiative at <a href="https://optout.networkadvertising.org" target="_blank" rel="noopener">https://optout.networkadvertising.org</a>. Visitors can also disable cookies entirely in their own browser settings, although some parts of other websites may not work correctly without them.</p>
+      <p>Other third-party vendors or ad networks may also use cookies to serve ads on this site. When any such vendor or network serves ads here, its use of cookies is governed by its own privacy policy, and visitors can opt out of its personalised advertising through the routes above and through the vendor's own website.</p>
+      <p>Visitors in the European Economic Area, the UK, and Switzerland will see a consent message from Google's certified consent management platform before personalized ads can show.</p>
       <p>We do not sell personal information because we do not collect any. If you contact us about the site, we use your message only to respond.</p>
-    </div></section>`;
+    </div></section>
+`;
 }
 
 /* ---- Contact page (PP-ADSENSE-READINESS) ----
@@ -1912,9 +1945,9 @@ function contactBody() {
       <p>We read every message. There is no contact form and no mailing list, just email.</p>
       <h2>What to include</h2>
       <p>For pricing corrections, include the vendor and plan name, the price you saw, the date you saw it, and a link to the vendor's pricing page where you saw it, that lets us re-check the correction in one pass instead of trading emails. A screenshot of the vendor's pricing page helps when the price differs by region or account type. For product or category suggestions, tell us the product name and what it does; for site feedback, tell us which page you were on and what was unclear or missing.</p>
-      <p>The more specific the report, the faster the fix: "QuickBooks Online's Simple Start plan shows C$32/month on the vendor's Canadian pricing page as of October 6" is actionable in minutes, while "your QuickBooks price looks off" needs a full re-verification from scratch. If you're a vendor with a correction or a public promotion we missed, include a link to the public offer page, we only list promotions we can verify on the vendor's own site.</p>
+      <p>The more specific the report, the faster the fix: "Vendor X's entry plan shows C$32/month on the vendor's Canadian pricing page as of October 6" is actionable in minutes, while "your QuickBooks price looks off" needs a full spot check of that product before anything can be corrected. If you're a vendor with a correction or a public promotion we missed, include a link to the public offer page, we only list promotions we can verify on the vendor's own site.</p>
       <h2>What happens next</h2>
-      <p>Every message is read by a person on the PlanPrice team. Pricing corrections get re-checked against the vendor's own site: if the correction checks out, the page is updated and the verified date moves; if the price we show is still the one the vendor lists, we'll say so. Product suggestions go onto the tracking shortlist, and site feedback gets folded into the next round of page improvements.</p>
+      <p>Every message is read by a person on the PlanPrice team. Pricing corrections are handled as spot checks. The correction is re-checked against the vendor's own site and logged as a spot check with its date and scope. If the correction checks out, the price is updated. A spot check does not move a page's full sweep date unless it re-read that product's full list pricing. Product suggestions go onto the tracking shortlist, and site feedback gets folded into the next round of page improvements.</p>
       <p>There's no contact form, no mailing list, and no ticket system, just email, answered by the people who maintain the pages. We won't promise a reply time we can't guarantee, but corrections that affect a published price get priority, because an out-of-date price is the one thing this site can't afford to carry.</p>
     </div></section>`;
 }
@@ -1926,28 +1959,65 @@ function contactBody() {
  * PlanPrice are limited to what the site actually does today; claims about
  * Capterra and G2 are the vendor-sourced facts noted at directoriesSection. */
 function methodologyBody() {
-  const affiliateLine = anyAffiliateLive
-    ? `<li><strong>Affiliate status is labelled per listing.</strong> Where a link can earn PlanPrice a commission, the listing says so. See the <a href="/disclosure.html">affiliate disclosure</a>.</li>`
-    : `<li><strong>Affiliate status is labelled per listing.</strong> No affiliate links are live today, so no listing earns PlanPrice a commission. When that changes, each affected listing will say so. See the <a href="/disclosure.html">affiliate disclosure</a>.</li>`;
+  // Batch 2 (P5, 2026-11-13): body extracted verbatim from the committed
+  // methodology.html (11 sections, Title Case). It carries no dynamic
+  // slots: the old registry-date line and the affiliate list item are
+  // gone by design. If affiliate links ever go live, the Affiliate Status
+  // And Ordering section must be edited here in the same change.
   return `<section class="section"><div class="wrap">
-      <h2>How listings are ordered</h2>
-      <ul>
-        <li><strong>Order is never sold.</strong> No vendor can pay to appear, to rank higher, or to be featured on PlanPrice. There are no sponsored placements anywhere on this site.</li>
-        <li><strong>Default ordering is our editorial featured order.</strong> Category and directory pages present tools in the order the editor features them. Every listing shows its verified starting price, or is marked Custom where the vendor publishes no list price, and every listing shows what the tool is best for. The deals directory can be re-sorted by price. Alternatives tables on compare pages are ordered by aggregate review score.</li>
-        ${affiliateLine}
-        <li><strong>Review scores are aggregate and attributed.</strong> Where we show G2 or Capterra scores, we show the average, the review count, and the date we checked them. We do not adjust scores.</li>
-      </ul>
-      <h2>About our data</h2>
-      <ul>
-        <li><strong>Every price comes from the vendor's own published pricing.</strong> A person on our team reads the vendor's pricing page and records the price and the date. Vendor-submitted list prices and press releases are not sources.</li>
-        <li><strong>Checks are dated, per product.</strong> Deal pages show when each price was last verified, and the <a href="/verified.html">verification log</a> keeps the full record. A monthly sweep re-checks the catalogue; the registry date for the current catalogue is ${CHECKED}.</li>
-        <li><strong>Quote-only pricing is flagged, not guessed.</strong> When a vendor does not publish a price, our tables say so. We never estimate a hidden price.</li>
-        <li><strong>Changes are tracked in the open.</strong> Our <a href="/price-changes.html">price changes</a> page logs starting-price and promotion changes between sweeps, with dates, and every deal page carries its own price history table.</li>
-        <li><strong>Corrections are welcome.</strong> If a price here does not match the vendor's page, tell us through the <a href="/contact.html">contact page</a> and we will re-check it.</li>
-      </ul>
-      <h2>How other directories rank</h2>
-      <p>On Capterra, vendors pay referral fees for sponsored profiles, and Capterra's own transparency page says sponsored profiles may appear first on its product listings, identified by their link-out buttons. On G2, vendors can buy advertising in sponsored positions on category and competitor pages; G2 says paying does not change its organic ranking or Grid scores. We publish those mechanics because buyers deserve to know how any directory they use makes its ordering decisions, including ours.</p>
-    </div></section>`;
+      <h2>What PlanPrice Is</h2>
+      <p>PlanPrice is a pricing directory for business software. It tracks list prices and current promotions for tools small businesses buy, in categories including accounting, CRM and marketing, ecommerce, point of sale and payments, scheduling, field service, HR and payroll, work management, and SEO and marketing tools.</p>
+      <p>PlanPrice does not sell software. It reads the prices vendors publish, records them with the date they were checked, and shows buyers where each price came from. This page explains how that work is done, in the order it is done.</p>
+      <h2>How Products Are Selected</h2>
+      <p>Products are added when they are business software that small businesses buy on a subscription or per transaction basis and the vendor publishes pricing, or a clear quote only position, in public.</p>
+      <p>Three rules govern the tracked list:</p>
+      <ol>
+        <li>The vendor must publish enough public information to check. If a vendor publishes no list price, the product can still be tracked, and its listing is marked Custom. If nothing about pricing can be verified in public, the product is not listed with a price.</li>
+        <li>Products are tracked because buyers compare them, not because a vendor asked to be listed. No vendor can pay to be added, and no product is removed because a vendor asked for removal of an accurate price.</li>
+        <li>Readers can suggest a product or a category through the <a href="/contact.html">Contact page</a>. Suggestions go onto a tracking shortlist and are added when they meet the first rule.</li>
+      </ol>
+      <h2>What Is Checked, And In What Order</h2>
+      <p>Every product goes through the same checks. The order matters, because later steps rely on what the earlier steps recorded.</p>
+      <p>Step 1, the vendor's own pricing page. The starting price and the price of each published plan tier are read from the vendor's own published pricing and recorded with the date of the check. Vendor submitted list prices, press releases, and third party price listings are not sources. If the vendor publishes no price, the listing is marked Custom and no price is estimated.</p>
+      <p>Step 2, the current promotion. The vendor's own offer pages are checked for a public promotion. When a public promotion exists, the deal page shows the promotion terms and links to the vendor's own offer page. When no public promotion exists, the deal page says so plainly instead of presenting standard list prices as a deal.</p>
+      <p>Step 3, the review scores. The product's aggregate user ratings on G2 and Capterra are recorded with the score, the number of reviews behind it, the source, and the date checked. How those scores are used, and how they are not used, is set out in the Review Scores section below.</p>
+      <p>Step 4, publication with dates. The deal page is published or updated with the check date printed next to the price and next to the scores. A page keeps its older date wherever its pricing has not been re-checked. PlanPrice never re-dates a page it did not actually re-verify.</p>
+      <p>Step 5, the public record. Each check is entered in the <a href="/verified.html">Verification Log</a> with the date, the product, the type of check, and what was found. Price and promotion changes between sweeps are recorded on the <a href="/price-changes.html">Price Changes page</a>, and every deal page carries its own price history table.</p>
+      <h2>Review Scores From G2 And Capterra</h2>
+      <p>Deal pages show aggregate user ratings from two third party review sites, G2 and Capterra. Those scores are labelled with their source on every page where they appear, for three reasons:</p>
+      <ol>
+        <li>They are not PlanPrice ratings. They describe other users' experience of the product, collected by G2 and Capterra, not by PlanPrice.</li>
+        <li>They are shown as found. PlanPrice records the average score and the review count and does not adjust, round in its own favour, or reweight them.</li>
+        <li>They are checked on a date, like prices. Each score shows the date it was last checked, and scores are re-checked during the monthly sweep described below.</li>
+      </ol>
+      <p>How the scores are weighted in PlanPrice's own ordering: scores do not change any price shown on this site, and they do not decide the default order of the directory. They have exactly two jobs. First, they inform the reader, next to the price, because a cheap tool with poor user ratings and an expensive tool with strong ratings are different purchases. Second, alternatives tables on comparison pages are ordered by aggregate review score, and those tables say so. A high score on an expensive tool does not make it the right tool for a tight budget, and no score is presented as a recommendation on its own.</p>
+      <h2>How Listings Are Ordered</h2>
+      <p>Order is never sold. No vendor can pay to appear on PlanPrice, to rank higher, or to be featured. There are no sponsored placements anywhere on this site.</p>
+      <p>The default order on category and directory pages is an editorial featured order set by the editor. PlanPrice does not use a weighted scoring formula, and this page will not present the order as one. What a reader can check on every listing is the verified starting price, or the Custom marker where the vendor publishes no list price, and a plain statement of what the tool is best for, so the order can be judged against the prices themselves.</p>
+      <p>Two exceptions to the default order are mechanical and are labelled where they appear. The deals directory can be re-sorted by price by the reader. Alternatives tables on comparison pages are ordered by aggregate review score, as described above.</p>
+      <p>What makes one product sit above another in the featured order is editorial judgement about fit for the small businesses this site serves, applied by the editor named below. It is never payment, never an affiliate relationship, and never the review score alone.</p>
+      <h2>The Monthly Price Sweep</h2>
+      <p>PlanPrice runs a full price sweep every month. In each sweep, the list price and promotion status of every tracked product are re-checked against the vendor's own pricing and offer pages, and the review scores are re-checked against G2 and Capterra.</p>
+      <p>Deal pages show the date each price was last verified, per product. The <a href="/verified.html">Verification Log</a> keeps the full record of each sweep and of checks made between sweeps, including corrections and expired promotions. When a sweep finds that a vendor changed a starting price or ended a promotion, the change is recorded on the <a href="/price-changes.html">Price Changes page</a> with its date, and the affected deal page is updated with the new check date.</p>
+      <p>Between sweeps, vendors can and do change prices and promotions without notice. That is why every price on this site carries its check date, and why the final price is always the one on the vendor's own checkout page.</p>
+      <h2>Corrections</h2>
+      <p>Corrections are welcome, and pricing corrections take priority over other reader mail because an out of date price is the one thing this site cannot afford to carry.</p>
+      <p>To send a correction, use the <a href="/contact.html">Contact page</a> and include the vendor and plan name, the price you saw, the date you saw it, and a link to the vendor's pricing page where you saw it. A screenshot of the vendor's pricing page helps when a price differs by region or account type.</p>
+      <p>Each correction is re-checked against the vendor's own site. If the correction checks out, the page is updated and its verified date moves. If the price shown here is still the price the vendor lists, the reply will say so. Corrections that change a price are entered in the <a href="/verified.html">Verification Log</a> like any other check.</p>
+      <h2>Who Reviews What</h2>
+      <p>PlanPrice is edited by <a href="/authors/mike.html">Mike</a>, a retail IT professional who has spent more than ten years in IT vendor management. His author page gives his role and background.</p>
+      <p>Mike directs what PlanPrice covers and reviews the content before it is published, including the prices and scores recorded in the checks above and the check dates printed with them. AI tools assist with content production on this site. Mike directs that work and reviews the content before it is published.</p>
+      <p>If a check cannot be supported by the vendor's own published information, it does not go on a page as a verified price. That rule produced the one public exception in PlanPrice's record to date: where a guide's prices could only be checked against published guides rather than a live vendor page, the guide says so on its face instead of claiming the standard check.</p>
+      <h2>No Hands-On Testing</h2>
+      <p>PlanPrice does not do hands-on product testing. It does not buy, install, or run the products it lists, and it publishes no test results of its own.</p>
+      <p>What PlanPrice does is narrower, and it is the whole offer: it reads vendor published pricing carefully, dates every check, labels borrowed review scores with their source, and corrects the record in public when a price changes or a reader finds an error. Buyers who need hands-on evaluation should use free trials, which most tracked vendors offer, and the first party reviews on G2 and Capterra.</p>
+      <h2>Affiliate Status And Ordering</h2>
+      <p>Affiliate status is labelled per listing. No affiliate links are live today, so no listing earns PlanPrice a commission. When that changes, each affected listing will say so. The full position is set out in the <a href="/disclosure.html">Affiliate Disclosure</a>.</p>
+      <p>Affiliate status, present or future, does not affect which products are tracked, the prices recorded, the scores shown, or the order of listings.</p>
+      <h2>How Other Directories Rank</h2>
+      <p>On Capterra, vendors pay referral fees for sponsored profiles, and Capterra's own transparency page says sponsored profiles may appear first on its product listings, identified by their link out buttons. On G2, vendors can buy advertising in sponsored positions on category and competitor pages; G2 says paying does not change its organic ranking or Grid scores. PlanPrice publishes those mechanics because buyers deserve to know how any directory they use makes its ordering decisions, including this one.</p>
+    </div></section>
+`;
 }
 
 /** PP-PRICE-CHANGE-TRACKER: the public change log. Derived from the same
@@ -2055,17 +2125,19 @@ const STATIC_PAGES = {
     body: disclosureBody()
   },
   "methodology.html": {
-    title: "How PlanPrice Ranks and Verifies | PlanPrice",
-    description: "PlanPrice methodology: how listings are ordered, why order is never sold, how affiliate status is labelled, and how every price is verified.",
+    title: "How PlanPrice Ranks And Verifies | PlanPrice",
+    description: "PlanPrice methodology: how products are selected, how every price and review score is checked, how listings are ordered, and how corrections are handled.",
     path: "/methodology.html",
-    h1: "How PlanPrice ranks and verifies",
+    h1: "How PlanPrice Ranks And Verifies",
+    looseMain: true,
     body: methodologyBody()
   },
   "privacy-policy.html": {
     title: "Privacy Policy | PlanPrice",
-    description: "PlanPrice privacy policy: what data we collect (almost nothing) and how we use it.",
+    description: "PlanPrice privacy policy: what data we collect (almost nothing), the cookies third party vendors including Google use to serve ads, and how to opt out.",
     path: "/privacy-policy.html",
     h1: "Privacy Policy",
+    looseMain: true,
     body: privacyBody()
   },
   "terms.html": {
@@ -2094,9 +2166,12 @@ const STATIC_PAGES = {
 };
 
 function staticPage(file, cfg) {
+  // Batch 2: methodology.html and privacy-policy.html were rebuilt with a
+  // newline after <main> (cfg.looseMain); the other static pages keep the
+  // one-line form. The body strings carry any trailing newline themselves.
   return `${head(cfg.title, cfg.description, cfg.path)}
 ${header(cfg.path)}
-<main><div class="wrap wrap-prose"><h1 class="page-title">${esc(cfg.h1)}</h1></div>${cfg.body}</main>
+<main>${cfg.looseMain ? "\n" : ""}<div class="wrap wrap-prose"><h1 class="page-title">${esc(cfg.h1)}</h1></div>${cfg.body}</main>
 ${footer()}`;
 }
 
@@ -2105,10 +2180,12 @@ function sitemap() {
   // set, order, and per-entry elements (changefreq/priority included) — the
   // committed sitemap lists ~150 article-guide URLs and the 12 editorial
   // compare pages that this generator does not write, and dropping them at
-  // regen would de-index live pages. lastmod is refreshed to CHECKED only
-  // for pages this generator itself writes; every other entry is kept
-  // byte-verbatim. On a tree with no existing sitemap, fall back to the
-  // generated set.
+  // regen would de-index live pages. Batch 2 (2026-11-13): every entry's
+  // lastmod was set editorially to the Batch 2 date, authors/mike.html was
+  // added, search.html and the deleted guides were removed — so entries are
+  // now preserved byte-verbatim, lastmod included; the generator no longer
+  // rewrites any lastmod. On a tree with no existing sitemap, fall back to
+  // the generated set.
   const generatedPaths = new Set([
     "/", "/about.html", "/disclosure.html", "/privacy-policy.html", "/terms.html",
     "/contact.html", "/deals.html", "/canadian.html", "/free.html", "/top-rated.html",
@@ -2126,13 +2203,7 @@ function sitemap() {
     const existing = readFileSync(existingPath, "utf8");
     const blocks = existing.match(/<url>[\s\S]*?<\/url>/g);
     if (blocks && blocks.length) {
-      const out = blocks.map((b0) => {
-        const b = "  " + b0;
-        const loc = (b.match(/<loc>([^<]+)<\/loc>/) || [])[1] || "";
-        const path = loc.startsWith(SITE_URL) ? loc.slice(SITE_URL.length) : loc;
-        if (!generatedPaths.has(path)) return b;
-        return b.replace(/<lastmod>[^<]*<\/lastmod>/, `<lastmod>${CHECKED}</lastmod>`);
-      });
+      const out = blocks.map((b0) => "  " + b0);
       return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${out.join("\n")}\n</urlset>\n`;
     }
   }
@@ -2174,13 +2245,26 @@ write("canadian.html", canadianPage());
 // Overnight-5 collection pages (PP-OVERNIGHT-5): /free.html + /top-rated.html.
 write("free.html", freePage());
 write("top-rated.html", topRatedPage());
-// PP-PRICE-CHANGE-TRACKER: the public change log page (data-derived from
-// the sweep snapshots, so it is written directly rather than via
-// STATIC_PAGES).
-write("price-changes.html", priceChangesPage());
+// Batch 2 (2026-11-13): price-changes.html is HAND-MAINTAINED. The Batch 2
+// restructure gave it a Check Type column, spot check rows, and editorial
+// rows (the Wagepoint plan ladder, the Xero tier changes, the QuickBooks
+// correction note) sourced from data/verification-log.json, which the
+// sweep-diff model in priceChangesPage() cannot derive. The generator no
+// longer writes the page; priceChangesPage() is kept only as the record of
+// the old derivation. Do not re-enable the write without porting the
+// Batch 2 rows first.
+console.log("price-changes.html: hand-maintained since Batch 2, not written.");
 // AdSense-readiness content (PP-ADSENSE-READINESS): contact page (via
 // STATIC_PAGES above), buyer's guides, and the pricing glossary.
 for (const g of guidesData) write(`guides/${g.slug}.html`, guidePage(g));
+if (!guidesData.length) {
+  // Batch 2 (2026-11-13): data/guides.json is intentionally empty. The 9
+  // category buyer's guides were merged into categories/*.html (How to
+  // Choose sections, stored in data/page-extras.json) and their
+  // guides/<slug>.html pages deleted; writing nothing here is what keeps
+  // the generator from resurrecting them.
+  console.log("guides.json is empty: no buyer's-guide pages written (category guides merged into category pages in Batch 2).");
+}
 // PP-GEN-DRIFT (R4e): guides.html is a hand-built grouped index of ~150
 // article guides — the generator does NOT write it (or the article guide
 // pages). The sitemap fallback builds its page inventory from guidesData

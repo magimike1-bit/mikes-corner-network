@@ -9,6 +9,13 @@
    "url": "/deals/xero.html"
   },
   {
+   "date": "2026-11-13",
+   "item": "Canva",
+   "type": "pricing-verified",
+   "detail": "US list prices re-verified against Canva's own published pricing and corrected: Pro $15 to $18 per month and $120 to $144 per year; Canva Teams ($10 per person, 3-person minimum) is discontinued for new sign-ups and replaced by Canva Business at $25 per person per month or $250 per person per year, no seat minimum. The old 3-person crossover math was removed.",
+   "url": "/guides/canva-pro-vs-teams-pricing.html"
+  },
+  {
    "date": "2026-10-25",
    "item": "HubSpot",
    "type": "promo-checked",

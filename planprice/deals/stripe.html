@@ -95,6 +95,57 @@
         <!-- Canada domestic rate 2.9% + 30¢: tipsandtricks-hq.com Stripe fees table ("Canada: 2.9% + 30 c"); TechCrunch 2012 Canada launch confirmed Stripe brought its 2.9% + $0.30 structure to Canada. Cross-border/FX surcharges on international cards: getnews/lethbridgeherald 2026 cross-border comparison (~1% cross-border surcharge + ~1% currency conversion fee). -->
         <p>The 2.9% + 30¢ rate quoted here is the domestic Canadian card rate, charged per successful transaction with no setup or monthly fees. Do the per-ticket math before you compare it to anything: on a $10 sale the fixed 30¢ is the expensive half of the fee, while on a $200 invoice it's a rounding error, the same rate favours very different businesses depending on ticket size. International cards add cross-border and currency-conversion surcharges on top of the domestic rate, so price your US and overseas sales as a separate segment. Stripe doesn't run public promos, so the rate above is the rate; confirm the current terms on stripe.com before you switch processors.</p>
       </section>
+<section class="section deep-dive">
+      <h2>Who It Fits, and Who It Does Not</h2>
+      <p><strong>Fits:</strong> online first sellers, SaaS billing, and developer led checkouts that need subscriptions, payment links, and a serious API.</p>
+      <p><strong>Does not fit:</strong> walk in retail as the primary till, where Square's in-person rate and hardware path win, and anyone who cannot absorb per transaction fixed fees on small tickets.</p>
+      <h2>Feature Comparison</h2>
+      <div class="table-scroll">
+      <table class="tiers">
+        <caption>Stripe against Square and Moneris on the lines that decide a processor.</caption>
+        <thead><tr><th scope="col">Line</th><th scope="col">Stripe</th><th scope="col">Square</th><th scope="col">Moneris</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">Online rate</th><td>2.9% plus CAD 0.30</td><td>2.8% plus CAD 0.30</td><td>Quoted per merchant</td></tr>
+        <tr><th scope="row">In-person rate</th><td>2.7% plus CAD 0.05 (Terminal)</td><td>2.5%</td><td>Quoted per merchant</td></tr>
+        <tr><th scope="row">Fixed fee per transaction</th><td>CAD 0.30 online; CAD 0.05 in person</td><td>None on the in-person rate; CAD 0.30 online</td><td>Varies by quote</td></tr>
+        <tr><th scope="row">Hardware</th><td>WisePad 3 reader CAD 79; Tap to Pay on a phone</td><td>Reader CAD 69</td><td>Terminals supplied on contract terms</td></tr>
+        <tr><th scope="row">Billing and subscriptions</th><td>Full subscription billing tooling</td><td>Basic recurring payments</td><td>Via gateway partners</td></tr>
+        <tr><th scope="row">Payouts</th><td colspan="3">All three pay out to a Canadian bank account on their own schedules; confirm the current schedule before you switch, because payout timing is a cash flow decision</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <h2>Total Cost: A Worked Example</h2>
+      <p>Take an online store at CAD 30,000 a month across 1,000 orders. At 2.9% plus CAD 0.30, processing is CAD 870 in percentage fees plus CAD 300 in fixed fees: CAD 1,170 a month, CAD 14,040 a year. Now halve the average ticket to CAD 15, so the same CAD 30,000 arrives as 2,000 orders. The percentage stays CAD 870, but the fixed fees double to CAD 600, and the month costs CAD 1,470. That is the fixed fee lesson in one line: at small tickets, the 30 cents matters more than the percentage.</p>
+      <p class="fine">Figures from PlanPrice research readings: entity stripe, checked 2026-10-20 (online 2.9% plus CAD 0.30), 2026-10-11 (Terminal 2.7% plus CAD 0.05), and 2026-10-29 (WisePad 3 CAD 79; Tap to Pay add-on CAD 0.15 per authorization).</p>
+      <h2>Alternatives</h2>
+      <ul>
+      <li><a href="/deals/square.html">Square</a>: pick it for in-person first selling.</li>
+      <li><a href="/deals/lightspeed.html">Lightspeed</a>: pick Lightspeed Payments when you already run Lightspeed POS.</li>
+      <li>Helcim and Moneris: pick them for interchange plus pricing or a Canadian bank owned processor at volume; see the payments guides.</li>
+      </ul>
+      <h2>Frequently Asked Questions</h2>
+      <h3>What does Stripe charge in Canada?</h3>
+      <p>Online, 2.9% plus CAD 0.30 per successful transaction, with no setup or monthly fee. In person through Terminal, 2.7% plus CAD 0.05.</p>
+      <h3>Why does my average ticket size change the answer?</h3>
+      <p>Because the CAD 0.30 fixed fee is charged per transaction. At a CAD 15 ticket it is 2.0% before the percentage; at CAD 100 it is 0.3%. Small ticket sellers should compare effective rates, not headline rates.</p>
+      <h3>What does Tap to Pay really add per sale?</h3>
+      <p>Tap to Pay on a phone carries an add-on of CAD 0.15 per authorization on top of the Terminal rate. It removes the reader purchase, not the per sale cost.</p>
+      <h3>When is Stripe cheaper than Square?</h3>
+      <p>Online, the two are close and the fixed fees decide it by ticket size. In person, Square's 2.5% with no fixed fee beats Terminal's 2.7% plus CAD 0.05 on most till mixes.</p>
+      <h3>What are dispute fees?</h3>
+      <p>Our research records a dispute fee of CAD 15 when a dispute is received and a further CAD 15 when you counter it, with the counter fee returned when you win (entity stripe, fact checked 2026-10-26). Price your dispute rate into any processor comparison.</p>
+      <h2>Before You Sign: The Renewal Checklist</h2>
+      <ul>
+      <li><strong>Compute your effective rate, not the headline rate.</strong> Divide total Stripe fees by total volume for a real month. Small ticket stores regularly discover an effective rate well above 2.9%, entirely because of the CAD 0.30 fixed fee, and that number is the one to compare against rivals.</li>
+      <li><strong>Price the dispute line.</strong> Disputes cost CAD 15 on receipt and CAD 15 to counter in our research readings, with the counter fee returned on a win. A store with a dispute problem pays a second, quieter processing bill; fix the cause before shopping processors.</li>
+      <li><strong>Match the product to the channel.</strong> Online checkout, payment links, Terminal in person, and Tap to Pay each price differently. The classic Stripe mistake is one integration quietly serving two channels at the wrong rate for one of them.</li>
+      <li><strong>Confirm payout timing in CAD.</strong> Processing cost gets the attention, but payout speed is a cash flow term. Check the current payout schedule for Canadian accounts before the switch, not during the first tight week after it.</li>
+      </ul>
+      <h2>Switching and Exit Notes</h2>
+      <p>Stripe's lock in is code, not contract. There is no monthly fee to escape and no term to buy out, but a checkout built deeply on Stripe's APIs, billing objects, and webhooks is engineering work to move. For a simple hosted checkout or payment links setup, leaving is an afternoon. For a SaaS business whose subscriptions, trials, and dunning all live in Stripe Billing, leaving is a migration project with real risk to live recurring revenue, and it should be planned like one. The practical rule: the deeper you build on the platform, the more the platform is worth to you and the more it costs to leave, and both sides of that sentence grow together. Keep your customer and product data exportable, document which Stripe objects your business depends on, and the exit stays a project instead of becoming a hostage negotiation. Most small sellers never come close to that depth, which is why Stripe remains easy to recommend at the start.</p>
+      <h2>Verdict</h2>
+      <p>Stripe is priced like a utility and documented like one too. Online, it is the benchmark everyone else is measured against. At the till, run Square's numbers first; I have seen stores pay the online rate in person for a year before anyone noticed.</p>
+    </section>
       
       <section class="section scores">
       <h2>Review scores</h2>

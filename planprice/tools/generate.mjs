@@ -1358,6 +1358,33 @@ function transparencySection(category) {
 }
 
 function compareSetPage(set) {
+  /* Batch 2 Deploy 2 (2026-11-13): a set whose slug has a compare/<slug>
+   * entry in data/page-extras.json renders that entry as the page body
+   * (original comparison content only: verdict, summary price table,
+   * worked scenario, FAQ) instead of the per-product columns below,
+   * which duplicated the deal pages verbatim. The shell (head, header,
+   * breadcrumbs, H1, figure, footer) stays generated, and the set stays
+   * non-editorial so deal pages keep their head-to-head links. Sets
+   * without an entry keep the column rendering. */
+  const override = pageExtras[`compare/${set.slug}`];
+  if (override) {
+    const pageDate = comparePageDate(set.slug);
+    return `${head(
+      `${set.title} | PlanPrice`,
+      `${set.title}: compare verified pricing, current deals, and user feedback side by side. Prices checked ${pageDate}.`,
+      `/compare/${set.slug}.html`
+    )}
+${header("/compare.html")}
+<main>
+  <div class="wrap">
+    <p class="breadcrumbs"><a href="/compare.html">Compare</a> › ${esc(set.title)}</p>
+    <h1 class="page-title">${esc(set.title)}</h1>
+    <p class="section-sub">${set.products.length} products, side by side · Each Section Shows Its Own Check Date</p>${figFor(`compare/${set.slug}`)}
+    ${override}
+  </div>
+</main>
+${footer()}`;
+  }
   const pageDate = comparePageDate(set.slug);
   const cols = set.products
     .map((p) => `<section class="compare-col" id="cmp-${esc(p.slug)}" aria-label="${esc(p.name)}">

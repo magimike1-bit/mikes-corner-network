@@ -23,9 +23,9 @@
         },
         {
           "name": "Starter",
-          "price": "$15",
+          "price": "$20",
           "cadence": "per seat/month",
-          "notes": "Sales or marketing starter tools per hub."
+          "notes": "USD 20 per seat at list. Sales or marketing starter tools per hub."
         },
         {
           "name": "Sales Hub Professional",
@@ -46,7 +46,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-10-27",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -125,9 +125,9 @@
       "meter": {
         "unit": "Billable clients",
         "counts": "Active and archived clients both count toward the plan limit; deleted clients do not. Lite allows 5 billable clients, Plus 50, and Premium and Select are unlimited.",
-        "seats": "Every plan includes 1 user. Additional team members cost $11/month each; the Select plan includes 2 team member accounts.",
+        "seats": "Every plan includes 1 user. Additional team members cost CAD 13/month each; the Select plan includes 2 team member accounts.",
         "checked": "2026-11-10",
-        "source": "FreshBooks pricing page and FreshBooks support (How does archive or delete work?), checked 2026-11-10"
+        "source": "FreshBooks pricing page and FreshBooks support (How does archive or delete work?), checked 2026-11-10; team member add-on price from the FreshBooks Canada pricing page, checked 2026-10-23"
       }
     },
     {
@@ -205,27 +205,27 @@
       "category": "SEO & Marketing",
       "tagline": "The heavy-duty SEO and competitive research toolkit.",
       "vendor_homepage": "https://www.semrush.com",
-      "description": "Semrush is the standard all-in-one toolkit for keyword research, site audits, rank tracking, and spying on competitors' search traffic. It is priced per user and aimed at agencies, in-house marketers, and serious content operations. Annual billing cuts roughly 17% off the monthly rate. There is a limited free tier for casual use.",
+      "description": "Semrush is the standard all-in-one toolkit for keyword research, site audits, rank tracking, and spying on competitors' search traffic. It is priced per user and aimed at agencies, in-house marketers, and serious content operations. Annual billing on the entry SEO plan works out to USD 117.33 per month against USD 139 billed monthly. There is a limited free tier for casual use.",
       "best_for": "Agencies and content teams doing serious SEO, PPC research, and competitive analysis.",
       "similar_to": "the Bloomberg Terminal of marketing",
       "pricing_tiers": [
         {
-          "name": "Pro",
-          "price": "$139.95",
+          "name": "SEO",
+          "price": "$139",
           "cadence": "per month",
-          "notes": "~17% off with annual billing."
+          "notes": "USD 139 per month; USD 117.33 per month billed annually. Current entry plan; the classic Pro, Guru and Business plan names were retired in 2026."
         },
         {
-          "name": "Guru",
-          "price": "$249.95",
+          "name": "Semrush One Starter",
+          "price": "$199",
           "cadence": "per month",
-          "notes": "~17% off with annual billing; more limits and content tools."
+          "notes": "USD 199 per month. Current ladder tier above the SEO plan."
         },
         {
-          "name": "Business",
-          "price": "$499.95",
+          "name": "Pro+",
+          "price": "$299",
           "cadence": "per month",
-          "notes": "~17% off with annual billing; highest limits, API access."
+          "notes": "USD 299 per month. Successor to the retired Guru tier; higher limits and content tools."
         }
       ],
       "deal": null,
@@ -234,7 +234,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-11-10",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -243,10 +243,10 @@
           "Actionable keyword tracking."
         ],
         "weaknesses": [
-          "Steep pricing.",
-          "Subscription complexity.",
-          "Limited trial utility.",
-          "Learning curve for small businesses."
+          "Steep pricing: the entry SEO plan is USD 139 per month in our latest research reading (checked 2026-11-10), and the ladder climbs steeply from there, so casual use is hard to justify.",
+          "Subscription complexity: Semrush renamed its plan ladder in 2026 (the classic Pro, Guru, and Business names were retired for current buyers), so older reviews and comparisons quote plan names and prices that no longer match the checkout.",
+          "Limited trial utility: the trial is too limited to evaluate the full toolkit, so buyers are advised to enter it with a fixed list of keyword, competitor, and audit questions and answer exactly those.",
+          "Learning curve for small businesses: the breadth that makes the suite valuable to agencies takes real time to learn, and small teams report paying for depth they have not yet grown into."
         ]
       },
       "meta_description": "Semrush verified list pricing and current promotions. The heavy-duty SEO and competitive research toolkit."
@@ -342,9 +342,9 @@
         },
         {
           "name": "Pro",
-          "price": "$19",
+          "price": "C$25",
           "cadence": "per month",
-          "notes": "$190/year if billed annually; receipt scanning, no ads."
+          "notes": "Canada price (CAD); the US list is USD 19. Receipt scanning, no ads."
         },
         {
           "name": "Payments",
@@ -359,7 +359,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-10-27",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -520,7 +520,7 @@
       "category": "Payments & POS",
       "tagline": "Free point-of-sale software; you pay when you take payments.",
       "vendor_homepage": "https://squareup.com",
-      "description": "Square's point-of-sale software is free, the business model is the processing fee on each sale (2.6% + 15¢ for in-person payments). Hardware readers are cheap and the ecosystem grows into online stores, appointments, and payroll. Square Appointments adds paid tiers for salons, clinics, and services that book online.",
+      "description": "Square's point-of-sale software is free, the business model is the processing fee on each sale (2.5% for in-person credit payments, with no fixed per-transaction fee; Interac debit is 0.75% + 7¢). Hardware readers are cheap and the ecosystem grows into online stores, appointments, and payroll. Square Appointments adds paid tiers for salons, clinics, and services that book online.",
       "best_for": "Retailers, cafés, and service businesses that need a free POS and transparent card rates.",
       "similar_to": "the Shopify of Main Street",
       "pricing_tiers": [
@@ -528,7 +528,7 @@
           "name": "Square POS",
           "price": "$0",
           "cadence": "free",
-          "notes": "Free POS software; in-person card processing 2.6% + 15¢ per transaction."
+          "notes": "Free POS software; in-person credit processing 2.5% per transaction, no fixed fee. Interac debit 0.75% + CAD 0.07 per transaction."
         },
         {
           "name": "Appointments Free",
@@ -555,7 +555,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-11-03",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -564,7 +564,7 @@
           "Built-in reporting gives useful sales and staff insights."
         ],
         "weaknesses": [
-          "Flat 2.6% processing fee adds up and is considered high at volume.",
+          "Flat 2.5% processing fee adds up and is considered high at volume.",
           "Depends on internet connectivity; outages can disrupt sales.",
           "Free plan lacks features; customization limited without paid tiers."
         ]
@@ -634,41 +634,41 @@
       "slug": "jobber",
       "name": "Jobber",
       "category": "Field Service",
-      "tagline": "Job management for home-service businesses, priced in CAD.",
+      "tagline": "Job management for home-service businesses, priced in USD.",
       "vendor_homepage": "https://www.getjobber.com",
-      "description": "Jobber is built for field-service businesses, plumbers, cleaners, landscapers, contractors, covering quotes, scheduling, dispatch, invoicing, and client communication. It is a Canadian company with CAD pricing, and annual prepayment cuts the monthly rate significantly on every tier. Extra team members cost C$29/month each.",
+      "description": "Jobber is built for field-service businesses, plumbers, cleaners, landscapers, contractors, covering quotes, scheduling, dispatch, invoicing, and client communication. It is a Canadian company, founded in Edmonton, but its official price list is published in USD, so Canadian buyers should budget the conversion. Annual prepayment cuts the monthly rate significantly on every tier. Extra team members cost USD 29/month each.",
       "best_for": "Canadian home-service and field-service businesses managing jobs and crews.",
       "similar_to": "the Shopify for the trades",
       "pricing_tiers": [
         {
           "name": "Core",
-          "price": "C$49",
-          "cadence": "per month",
-          "notes": "Month-to-month; C$29/month with annual prepayment."
+          "price": "$49",
+          "cadence": "per user/month",
+          "notes": "USD, month-to-month; USD 29 per user/month with annual prepayment."
         },
         {
           "name": "Connect",
-          "price": "C$139",
-          "cadence": "per month",
-          "notes": "Month-to-month; C$99/month with annual prepayment."
+          "price": "$139",
+          "cadence": "per user/month",
+          "notes": "USD, month-to-month; USD 99 per user/month with annual prepayment. A five-user team on annual billing is USD 149/month in total."
         },
         {
           "name": "Grow",
-          "price": "C$199",
-          "cadence": "per month",
-          "notes": "Month-to-month; C$149/month with annual prepayment."
+          "price": "$199",
+          "cadence": "per user/month",
+          "notes": "USD, month-to-month; USD 149 per user/month with annual prepayment."
         },
         {
           "name": "Plus",
-          "price": "C$499",
+          "price": "$499",
           "cadence": "per month",
-          "notes": "Month-to-month; C$399/month with annual prepayment."
+          "notes": "USD, month-to-month; USD 399/month for a five-user team with annual prepayment."
         },
         {
           "name": "Extra users",
-          "price": "C$29",
+          "price": "$29",
           "cadence": "per user/month",
-          "notes": "Per additional team member beyond plan limits."
+          "notes": "USD, per additional team member beyond plan limits."
         }
       ],
       "deal": null,
@@ -677,7 +677,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-10-27",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -699,7 +699,7 @@
         "founded_place": "Edmonton",
         "hq": "Edmonton, Alberta"
       },
-      "meta_description": "Jobber verified list pricing and current promotions. Job management for home-service businesses, priced in CAD.",
+      "meta_description": "Jobber verified list pricing and current promotions. Job management for home-service businesses, priced in USD.",
       "history_stable_fine": true
     },
     {
@@ -720,15 +720,15 @@
         },
         {
           "name": "Payroll",
-          "price": "$7",
+          "price": "C$7",
           "cadence": "per employee/month",
-          "notes": "$70/month minimum."
+          "notes": "CAD 7 per employee per month; CAD 70/month minimum."
         },
         {
           "name": "Managed Payroll",
-          "price": "$30",
+          "price": "C$30",
           "cadence": "per employee/month",
-          "notes": "$500/month minimum."
+          "notes": "CAD 30 per employee per month; CAD 500/month minimum."
         }
       ],
       "deal": null,
@@ -737,7 +737,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-11-13",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -777,6 +777,12 @@
           "notes": "Entry tier; no discounts, no free trial."
         },
         {
+          "name": "Lite",
+          "price": "$129",
+          "cadence": "per month",
+          "notes": "USD 129 per month; USD 1,290 per year billed annually (two months free)."
+        },
+        {
           "name": "Standard",
           "price": "$249",
           "cadence": "per month",
@@ -795,7 +801,7 @@
         "network": null,
         "status": "none"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-11-13",
       "sort_priority": 999,
       "meta_description": "Ahrefs verified list pricing and current promotions. SEO toolkit with one of the web's most active crawlers."
     },
@@ -1011,8 +1017,8 @@
       "category": "HR & Payroll",
       "tagline": "Canadian-built payroll that handles CPP, EI, and T4s without the enterprise price tag.",
       "vendor_homepage": "https://www.wagepoint.com",
-      "description": "Wagepoint was built in Canada for Canadian payroll. CPP/QPP, EI, federal and provincial tax tables, T4/T4A and RL-1 generation, and ROEs are all native, not adapted from a US product. Pricing is a flat base fee plus a small per-employee charge, across three tiers (Lite, Core and Plus). That makes it one of the most predictable payroll costs a small business can budget.",
-      "last_verified": "2026-10-25",
+      "description": "Wagepoint was built in Canada for Canadian payroll. CPP/QPP, EI, federal and provincial tax tables, T4/T4A and RL-1 generation, and ROEs are all native, not adapted from a US product. Pricing is a flat base fee plus a small per-employee charge, across three plans (Lite, Core and Plus). That makes it one of the most predictable payroll costs a small business can budget.",
+      "last_verified": "2026-11-13",
       "best_for": "Canadian small businesses (roughly 1 to 100 employees) that want straightforward, compliant payroll without a full HR platform.",
       "similar_to": "payroll done the Canadian way, without paying for an HR suite you don't need",
       "pricing_tiers": [
@@ -1020,22 +1026,22 @@
           "name": "Lite",
           "price": "C$20 + C$4/employee",
           "cadence": "per month",
-          "notes": "Lowest base fee tier (fee schedule updated 2026-10-22)."
+          "notes": "One payroll run per month. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22) and the Wagepoint pricing page, checked 2026-11-13."
         },
         {
           "name": "Core",
           "price": "C$40 + C$6/employee",
           "cadence": "per month",
-          "notes": "Mid tier (fee schedule updated 2026-10-22)."
+          "notes": "Unlimited payroll runs per month. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22) and the Wagepoint pricing page, checked 2026-11-13."
         },
         {
           "name": "Plus",
           "price": "C$80 + C$10/employee",
           "cadence": "per month",
-          "notes": "Top tier (fee schedule updated 2026-10-22)."
+          "notes": "Unlimited payroll runs, plus clock in and out, geo-fencing, paid time off management, and priority support; next-day deposit included. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22), checked 2026-11-13."
         }
       ],
-      "meta_description": "Wagepoint verified list pricing and current promotions. Canadian-built payroll for small businesses, from $20/month. Checked 2026-10-25 by Mike, editor of PlanPrice.",
+      "meta_description": "Wagepoint verified list pricing and current promotions. Canadian-built payroll for small businesses, from C$20/month. Checked 2026-11-13 by Mike, editor of PlanPrice.",
       "canadian_note": "This is the rare vendor on PlanPrice that bills in CAD natively, the invoice matches your books with no conversion. Being Canadian-built also means provincial edge cases (QST, Quebec parental insurance, Ontario ESA rules) are handled as first-class features rather than afterthoughts.",
       "canadian": {
         "founded": "2012",
@@ -1051,9 +1057,9 @@
       "category": "HR & Payroll",
       "tagline": "Canadian payroll and HR on one platform, unlimited pay runs.",
       "vendor_homepage": "https://www.knitpeople.com",
-      "description": "Knit is a Toronto-based platform combining Canadian payroll with HR tools, time-off management, document e-signing, onboarding, and performance reviews, under one subscription. The pricing differentiator is unlimited pay runs: weekly payroll, off-cycle corrections, and bonus runs all cost the same flat monthly fee, where per-run competitors charge extra each time.",
-      "last_verified": "2026-10-10",
-      "meta_description": "Knit People verified list pricing and current promotions. Canadian payroll plus HR with flat-rate pricing and unlimited pay runs. Checked 2026-10-10 by Mike, editor of PlanPrice.",
+      "description": "Knit is a Toronto-based platform combining Canadian payroll with HR tools, time-off management, document e-signing, onboarding, and performance reviews, under one subscription. The pricing differentiator is unlimited pay runs: weekly payroll, off-cycle corrections, and bonus runs all cost the same base plus per employee fee, where per-run competitors charge extra each time.",
+      "last_verified": "2026-11-13",
+      "meta_description": "Knit People verified list pricing and current promotions. Canadian payroll plus HR with base plus per employee pricing and unlimited pay runs. Checked 2026-11-13 by Mike, editor of PlanPrice.",
       "canadian_note": "Knit is Canadian-built and bills in CAD. CRA remittances, T4/T4A/RL-1 generation, and provincial tax handling are native. The support team is Toronto-based, which matters when a payroll question needs an answer before the pay run closes.",
       "canadian": {
         "founded": "2015",
@@ -1064,7 +1070,7 @@
       "best_for": "Growing Canadian teams (roughly 10 to 200 employees) that want payroll and HR together without buying two products.",
       "reviews": {
         "strengths": [
-          "Unlimited pay runs at a flat price, a real saving for teams on weekly payroll or frequent off-cycle runs.",
+          "Unlimited pay runs at one base plus per employee price, a real saving for teams on weekly payroll or frequent off-cycle runs.",
           "Modern, intuitive interface compared to legacy payroll providers.",
           "HR features included rather than sold as separate add-ons.",
           "Canadian support team with payroll expertise."
@@ -1078,24 +1084,24 @@
       "pricing_tiers": [
         {
           "name": "Lite",
-          "price": "C$39/mo",
+          "price": "C$40 + C$6/employee",
           "cadence": "per month",
-          "notes": "Full payroll + lite HR (time off, documents, e-signing)."
+          "notes": "Base fee CAD 40 plus CAD 6 per employee per month (checked 2026-11-13). Full payroll + lite HR (time off, documents, e-signing)."
         },
         {
           "name": "Complete",
-          "price": "C$39/mo",
+          "price": "C$50 + C$8/employee",
           "cadence": "per month",
-          "notes": "Full payroll + complete HR suite (performance, onboarding, benefits admin)."
+          "notes": "Base fee CAD 50 plus CAD 8 per employee per month (checked 2026-11-13). Full payroll + complete HR suite (performance, onboarding, benefits admin)."
         },
         {
           "name": "Concierge",
-          "price": "C$199/mo",
-          "cadence": "per month",
-          "notes": "Knit runs your payroll and HR for you, managed service."
+          "price": "Custom",
+          "cadence": "quote",
+          "notes": "Pricing not currently published; contact Knit for a quote. Knit runs your payroll and HR for you, managed service."
         }
       ],
-      "lead": "Canadian payroll and HR on one platform, with flat-rate pricing and unlimited pay runs.",
+      "lead": "Canadian payroll and HR on one platform, with base plus per employee pricing and unlimited pay runs.",
       "hand_built": true,
       "history_stable_fine": true
     },
@@ -2014,21 +2020,21 @@
         },
         {
           "name": "Standard",
-          "price": "$15",
+          "price": "C$15",
           "cadence": "per organization/month, billed annually",
-          "notes": "Core invoicing, expenses and bank feeds."
+          "notes": "Canada price list (CAD). Core invoicing, expenses and bank feeds."
         },
         {
           "name": "Professional",
-          "price": "$40",
+          "price": "C$30",
           "cadence": "per organization/month, billed annually",
-          "notes": "Multi-currency, projects and inventory."
+          "notes": "Canada price list (CAD). Multi-currency, projects and inventory."
         },
         {
           "name": "Premium",
-          "price": "$60",
+          "price": "C$40",
           "cadence": "per organization/month, billed annually",
-          "notes": "Advanced workflows and reporting."
+          "notes": "Canada price list (CAD). Advanced workflows and reporting."
         }
       ],
       "deal": null,
@@ -2037,12 +2043,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-12",
+      "last_verified": "2026-11-03",
       "sort_priority": 999,
-      "meta_description": "Zoho Books verified list pricing and current promotions. Accounting priced per organization, not per seat. Checked 2026-10-12 by Mike, editor of PlanPrice.",
-      "canadian_note": "Zoho bills in USD for the Canadian edition; per-organization pricing means the conversion hits one line, not every seat.",
+      "meta_description": "Zoho Books verified list pricing and current promotions. Accounting priced per organization, not per seat. Checked 2026-11-03 by Mike, editor of PlanPrice.",
+      "canadian_note": "Zoho publishes a Canada price list in CAD (Standard CAD 15, Professional CAD 30, Premium CAD 40 per organization per month, billed annually, checked 2026-11-03). Confirm the checkout shows the Canada list, because Zoho also publishes a USD list with different figures for the same tiers.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-12"
+      "batch_checked_date": "2026-11-03"
     },
     {
       "slug": "bigcommerce",

@@ -4,7 +4,7 @@
   "name": "HubSpot",
   "category": "CRM & Marketing",
   "url": "/deals/hubspot.html",
-  "verified": "2026-09-30",
+  "verified": "2026-10-27",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -15,7 +15,7 @@
    },
    {
     "name": "Starter",
-    "price": "$15",
+    "price": "$20",
     "cadence": "per seat/month"
    },
    {
@@ -97,23 +97,23 @@
   "name": "Semrush",
   "category": "SEO & Marketing",
   "url": "/deals/semrush.html",
-  "verified": "2026-09-30",
+  "verified": "2026-11-10",
   "deal": null,
-  "start": "$139.95 per month",
+  "start": "$139 per month",
   "tiers": [
    {
-    "name": "Pro",
-    "price": "$139.95",
+    "name": "SEO",
+    "price": "$139",
     "cadence": "per month"
    },
    {
-    "name": "Guru",
-    "price": "$249.95",
+    "name": "Semrush One Starter",
+    "price": "$199",
     "cadence": "per month"
    },
    {
-    "name": "Business",
-    "price": "$499.95",
+    "name": "Pro+",
+    "price": "$299",
     "cadence": "per month"
    }
   ]
@@ -159,7 +159,7 @@
   "name": "Wave",
   "category": "Accounting",
   "url": "/deals/wave.html",
-  "verified": "2026-10-25",
+  "verified": "2026-10-27",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -170,7 +170,7 @@
    },
    {
     "name": "Pro",
-    "price": "$19",
+    "price": "C$25",
     "cadence": "per month"
    },
    {
@@ -309,33 +309,33 @@
   "name": "Jobber",
   "category": "Field Service",
   "url": "/deals/jobber.html",
-  "verified": "2026-09-30",
+  "verified": "2026-10-27",
   "deal": null,
-  "start": "C$49 per month",
+  "start": "$49 per month",
   "tiers": [
    {
     "name": "Core",
-    "price": "C$49",
-    "cadence": "per month"
+    "price": "$49",
+    "cadence": "per user/month"
    },
    {
     "name": "Connect",
-    "price": "C$139",
-    "cadence": "per month"
+    "price": "$139",
+    "cadence": "per user/month"
    },
    {
     "name": "Grow",
-    "price": "C$199",
-    "cadence": "per month"
+    "price": "$199",
+    "cadence": "per user/month"
    },
    {
     "name": "Plus",
-    "price": "C$499",
+    "price": "$499",
     "cadence": "per month"
    },
    {
     "name": "Extra users",
-    "price": "C$29",
+    "price": "$29",
     "cadence": "per user/month"
    }
   ]
@@ -345,7 +345,7 @@
   "name": "Humi",
   "category": "HR & Payroll",
   "url": "/deals/humi.html",
-  "verified": "2026-09-30",
+  "verified": "2026-11-13",
   "deal": null,
   "start": "Custom",
   "tiers": [
@@ -356,12 +356,12 @@
    },
    {
     "name": "Payroll",
-    "price": "$7",
+    "price": "C$7",
     "cadence": "per employee/month"
    },
    {
     "name": "Managed Payroll",
-    "price": "$30",
+    "price": "C$30",
     "cadence": "per employee/month"
    }
   ]
@@ -371,13 +371,18 @@
   "name": "Ahrefs",
   "category": "SEO & Marketing",
   "url": "/deals/ahrefs.html",
-  "verified": "2026-09-30",
+  "verified": "2026-11-13",
   "deal": null,
   "start": "$29 per month",
   "tiers": [
    {
     "name": "Starter",
     "price": "$29",
+    "cadence": "per month"
+   },
+   {
+    "name": "Lite",
+    "price": "$129",
     "cadence": "per month"
    },
    {
@@ -522,7 +527,7 @@
   "name": "Wagepoint",
   "category": "HR & Payroll",
   "url": "/deals/wagepoint.html",
-  "verified": "2026-10-25",
+  "verified": "2026-11-13",
   "deal": null,
   "start": "C$20 per month",
   "tiers": [
@@ -548,24 +553,24 @@
   "name": "Knit People",
   "category": "HR & Payroll",
   "url": "/deals/knit-people.html",
-  "verified": "2026-10-10",
+  "verified": "2026-11-13",
   "deal": null,
-  "start": "C$39 per month",
+  "start": "C$40 per month",
   "tiers": [
    {
     "name": "Lite",
-    "price": "C$39/mo",
-    "cadence": ""
+    "price": "C$40 + C$6/employee",
+    "cadence": "per month"
    },
    {
     "name": "Complete",
-    "price": "C$39/mo",
-    "cadence": ""
+    "price": "C$50 + C$8/employee",
+    "cadence": "per month"
    },
    {
     "name": "Concierge",
-    "price": "C$199/mo",
-    "cadence": ""
+    "price": "Custom",
+    "cadence": "quote"
    }
   ]
  },
@@ -1114,7 +1119,7 @@
   "name": "Zoho Books",
   "category": "Accounting",
   "url": "/deals/zoho-books.html",
-  "verified": "2026-10-12",
+  "verified": "2026-11-03",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -1125,17 +1130,17 @@
    },
    {
     "name": "Standard",
-    "price": "$15",
+    "price": "C$15",
     "cadence": "per organization/month, billed annually"
    },
    {
     "name": "Professional",
-    "price": "$40",
+    "price": "C$30",
     "cadence": "per organization/month, billed annually"
    },
    {
     "name": "Premium",
-    "price": "$60",
+    "price": "C$40",
     "cadence": "per organization/month, billed annually"
    }
   ]

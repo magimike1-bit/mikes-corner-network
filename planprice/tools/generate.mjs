@@ -1970,7 +1970,7 @@ function privacyBody() {
 function contactBody() {
   // PP-GEN-DRIFT (R4a): body extracted verbatim from the committed contact.html.
   return `<section class="section"><div class="wrap">
-      <p>The best way to reach the PlanPrice team is email: <a href="mailto:magimike4@gmail.com">magimike4@gmail.com</a>.</p>
+      <p>The best way to reach the PlanPrice team is email: <a href="mailto:contact@planprice.ca">contact@planprice.ca</a>.</p>
       <p><strong>Good reasons to write:</strong></p>
       <ul>
         <li>A price or promotion on the site looks wrong or out of date</li>

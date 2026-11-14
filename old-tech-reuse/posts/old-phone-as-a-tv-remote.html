@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn an Old Phone Into the TV Remote: IR First, Wi-Fi Second, Wake Limit Included | Old Tech, New Life</title>
+<meta name="description" content="A drawer phone becomes the permanent couch remote only when its hardware matches the TV: the 60 second IR check, the brand app routes, and the wake limit stated plainly.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Old Tech, New Life</a>
+    <p class="tagline">Second jobs for retired gadgets</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>Turn an old phone into the TV remote: IR first, Wi-Fi second, wake limit included</h1>
+  <p class="meta">Repurpose &middot; 7 min read &middot; Published November 14, 2026</p><figure class="post-figure">
+  <img class="post-image" src="../images/old-phone-as-a-tv-remote.jpg" alt="Bold duotone illustration of a smartphone on a side table facing a television across a living room" loading="lazy" width="1600" height="533">
+</figure>
+
+
+
+  <!-- AdSense: ad code goes here -->
+
+  <p>Which remote can a retired phone actually be? That question has a hardware answer, and it splits every drawer phone into one of three groups within about a minute. A phone with a built in infrared blaster can imitate the plastic remote for almost anything in the room, smart or not. A phone without one can still run the television brand network app, if the set is a smart TV. A phone in neither group, paired with a television in neither group, cannot do this job at all, and finding that out in minute one is a better outcome than finding it out after an evening of app installs. The checks come first here, the routes second, and the limits get their own section rather than a footnote.</p>
+
+  <h2>The 60 second hardware check</h2>
+  <ol>
+    <li><strong>Look for a preinstalled remote app.</strong> Open the app drawer and look for an app named Remote, Mi Remote, or Smart Remote that shipped with the phone. Phones from the Xiaomi, Redmi, Poco and realme lines commonly include one when infrared hardware is fitted. No preinstalled remote app is a strong sign the phone has no blaster. Check: app found, or absence noted.</li>
+    <li><strong>Look at the top edge.</strong> An infrared emitter usually sits on the top edge as a small dark window, easy to miss when nobody has pointed it out. Check: window spotted, or ruled out.</li>
+    <li><strong>Confirm against the model specifications.</strong> The maker spec sheet for the exact model states whether an infrared emitter is fitted. On Android, the platform itself can answer: the ConsumerIrManager interface includes a check for the hardware, and remote apps built on it will report a missing emitter on open. Check: hardware confirmed present or confirmed absent, from a source stronger than hope.</li>
+    <li><strong>Name the television side.</strong> Write down whether the set is a smart TV, and which platform it runs, or whether it is an older set that only ever listened to its own remote. Check: one sentence that pairs this phone with this television.</li>
+  </ol>
+  <p>One rule governs the whole check: an app cannot add infrared hardware. A downloaded universal remote app on a phone with no emitter is a picture of a remote, and it will control exactly nothing that needs infrared. That sentence, believed early, is the entire saving this guide offers.</p>
+
+  <h2>Route A: IR, for anything with a remote</h2>
+  <p>An IR blaster is a small infrared transmitter that sends the same pulses a traditional remote sends. It works with legacy electronics, including older televisions, air conditioners, DVD and Blu ray players, and set top boxes, and it asks for nothing in return: no account, no network setup, no subscription. The phone doing this job is not really a smart device at all. It is a remote with a screen, and its simplicity is the charm.</p>
+  <p>Setup follows the pattern the preinstalled apps use:</p>
+  <ol>
+    <li><strong>Open the remote app and add a device.</strong> Tap Add remote, choose TV, then pick the brand. Check: the brand test screen appears.</li>
+    <li><strong>Aim the top edge at the television and test the buttons.</strong> The app offers candidate code sets; confirm power or volume on the real set before saving. Working range is about 8 metres, with a clear line of sight. Check: the television responds to the phone, not just to optimism.</li>
+    <li><strong>Repeat for the rest of the stack.</strong> Add the soundbar, the player, and the air conditioner, each as its own remote inside the same app. Check: every device in the room answers from the one phone.</li>
+  </ol>
+  <p>Infrared carries two honest limits. Commands travel one way, so the phone never learns whether the television received them; the screen in front of the viewer is the only confirmation. And line of sight is physics, not a setting: no control from another room, and no control through a cabinet door.</p>
+
+  <h2>Route B: the brand Wi-Fi app, for smart sets</h2>
+  <p>Network control covers the territory infrared cannot reach. Launching apps, searching, voice control, and reading device state all live in the software layer of a modern smart TV, and only a network app can touch them. The routes are brand specific:</p>
+  <table>
+    <tr><th>Television</th><th>Phone route</th><th>Conditions</th></tr>
+    <tr><td>Android TV or Google TV set</td><td>Google TV app over Wi-Fi</td><td>Phone and television on the same network; pairing by a code shown on the television</td></tr>
+    <tr><td>Chromecast with Google TV or Google TV Streamer</td><td>Google Home or Google TV app</td><td>Same network; the route varies by Chromecast generation, so confirm the exact model</td></tr>
+    <tr><td>Compatible Samsung television or projector</td><td>SmartThings app</td><td>Samsung specific; documented controls include volume, launching apps, and changing inputs</td></tr>
+    <tr><td>Older or non smart set</td><td>No Wi-Fi route exists</td><td>Route A or the original remote; a network app cannot speak to a set with no network</td></tr>
+  </table>
+  <p>The two conditions repeat across every brand. The phone and the television must share a network, which is a separate requirement from infrared and easy to break by parking the phone on a guest network. And the television must already be on, or resting in a standby mode that keeps Wi-Fi alive, because most Wi-Fi apps cannot wake a fully powered off set. Keep that second condition in view; it decides how the permanent setup below gets arranged.</p>
+
+  <h2>Set it up as a permanent remote</h2>
+  <p>A phone tested once and returned to the drawer is a party trick. A phone stripped to one job and parked beside the couch is equipment.</p>
+  <ol>
+    <li><strong>Reset the phone to the job.</strong> Remove accounts and apps the remote role does not need, leaving the remote app, the brand app where Route B applies, and nothing competing for the home screen. Check: one tap from wake to a working remote.</li>
+    <li><strong>Fix its network identity.</strong> Join the phone to the same home network as the television, the main network, not the guest one, and leave Wi-Fi on permanently. Check: the brand app finds the television after the phone has slept overnight.</li>
+    <li><strong>Park it on power.</strong> Give the phone a permanent charging spot at the couch end of the room. A remote that is dead is a coaster. Check: the phone lives in one place, charged, the way the plastic remotes never managed.</li>
+    <li><strong>Label the division of labour.</strong> Decide which remote handles power. If the set needs its original remote or the IR route to wake, keep that one action assigned, and let the phone run everything after wake: volume, inputs, apps, playback. Check: every household member can get from off to watching without a search party.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> the phone sits charged in its spot, opens straight to remote controls, drives every device in the stack, and the only remote ever hunted for is the one that got retired.</p>
+
+  <h2>The limits, stated plainly</h2>
+  <p>Three limits survive every setup. A Wi-Fi remote generally cannot turn a fully off television on, so the wake action may stay with the original remote or with infrared where the phone has it. Infrared needs line of sight at about 8 metres and offers no confirmation beyond watching the set respond. And app support varies by exact model on both sides of the pairing and changes over time, so a combination that works this winter deserves a retest after any television firmware update rather than blind trust. None of these limits cancels the project. A free phone that handles volume, inputs, apps and playback for every device in the room, from a permanent spot, with its limits written down, beats a universal remote purchase for most rooms, and it beats a drawer for every phone.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Old Tech, New Life. DIY project notes for personal use. Content is for information only. Before repurposing, donating, or recycling any device: back up anything you want to keep, wipe your personal data, and unplug equipment before opening or rearranging it. Check local rules for e-waste disposal.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

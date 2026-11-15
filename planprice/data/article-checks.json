@@ -409,19 +409,19 @@
     },
     "google-workspace-canada-cad-pricing": {
       "dates": [
-        "2026-10-18"
+        "2026-11-15"
       ],
       "claims": [
         {
-          "raw_head": "prices checked October 18, 2026",
+          "raw_head": "prices checked November 15, 2026",
           "dates": [
-            "2026-10-18"
+            "2026-11-15"
           ]
         },
         {
-          "raw_head": "prices checked October 18, 2026. Tier feature summaries reflect the vendors' published plan comparisons at check time. General information only, not financial advice.",
+          "raw_head": "prices checked November 15, 2026. Tier feature summaries reflect the vendors' published plan comparisons at check time. General information only, not financial advice.",
           "dates": [
-            "2026-10-18"
+            "2026-11-15"
           ]
         }
       ],
@@ -680,13 +680,13 @@
     },
     "microsoft-365-canada-pricing-2026": {
       "dates": [
-        "2026-10-18"
+        "2026-11-15"
       ],
       "claims": [
         {
-          "raw_head": "prices checked October 18, 2026",
+          "raw_head": "prices checked November 15, 2026",
           "dates": [
-            "2026-10-18"
+            "2026-11-15"
           ]
         }
       ],

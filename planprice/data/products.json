@@ -2,7 +2,7 @@
   "site": {
     "name": "PlanPrice",
     "tagline": "Verified B2B software pricing and deals",
-    "last_checked": "2026-09-30"
+    "last_checked": "2026-11-15"
   },
   "products": [
     {
@@ -177,7 +177,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -295,14 +295,14 @@
       "deal": {
         "headline": "$1/month for 3 months for new merchants (Basic, Grow and Advanced)",
         "source_url": "https://www.shopify.com",
-        "verified_date": "2026-10-25"
+        "verified_date": "2026-11-15"
       },
       "affiliate": {
         "program": "shopify-affiliate",
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -484,7 +484,7 @@
         "headline": "80% off your first 3 months for new customers",
         "source_url": "https://www.xero.com/ca/pricing-plans",
         "verified_date": "2026-11-15",
-        "full_sweep_date": "2026-09-30",
+        "full_sweep_date": "2026-11-15",
         "spot_check_date": "2026-11-15"
       },
       "affiliate": {
@@ -955,9 +955,9 @@
       "category": "CRM & Marketing",
       "tagline": "Full-featured CRM at small-business prices, with a free tier for 3 users.",
       "vendor_homepage": "https://www.zoho.com/crm",
-      "description": "Zoho CRM packs in workflow automation, AI assistance (Zia), territory management, and deep customization at prices that undercut HubSpot and Salesforce by half or more. The free tier covers 3 users with core CRM features, making it viable for freelancers and micro-teams. Paid plans start at $14 per user per month, the same entry price as Pipedrive's Lite, but with more built in.",
-      "last_verified": "2026-10-10",
-      "meta_description": "Zoho CRM verified list pricing and current promotions. Full-featured CRM at a fraction of enterprise prices, with a free tier for 3 users. Checked 2026-10-10 by Mike, editor of PlanPrice.",
+      "description": "Zoho CRM packs in workflow automation, AI assistance (Zia), territory management, and deep customization at prices that undercut HubSpot and Salesforce by half or more. The free tier covers 3 users with core CRM features, making it viable for freelancers and micro-teams. Paid plans start at $14 per user per month billed annually, the same entry price as Pipedrive's Lite, but with more built in.",
+      "last_verified": "2026-11-15",
+      "meta_description": "Zoho CRM verified list pricing and current promotions. Full-featured CRM at a fraction of enterprise prices, with a free tier for 3 users. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Zoho bills in USD, so convert before comparing against CAD-billed alternatives. The broader Zoho ecosystem (Books for accounting, Payroll, Projects) is a plus for Canadian small businesses that want one vendor. Zoho Books handles GST/HST, which pairs naturally with the CRM for a full back office.",
       "similar_to": "the budget Salesforce, enterprise-grade CRM features without the enterprise invoice",
       "best_for": "Cost-conscious teams that want real CRM depth (automation, AI, customization) without paying HubSpot Professional prices.",
@@ -985,26 +985,26 @@
         {
           "name": "Standard",
           "price": "$14",
-          "cadence": "per month",
-          "notes": "Mass email, workflows, sales forecasting."
+          "cadence": "per user/month billed annually",
+          "notes": "Mass email, workflows, sales forecasting. $20 per user/month if billed monthly."
         },
         {
           "name": "Professional",
           "price": "$23",
-          "cadence": "per month",
-          "notes": "Adds Blueprint process automation, inventory, webhooks. Most popular for SMBs."
+          "cadence": "per user/month billed annually",
+          "notes": "Adds Blueprint process automation, inventory, webhooks. Most popular for SMBs. $35 per user/month if billed monthly."
         },
         {
           "name": "Enterprise",
           "price": "$40",
-          "cadence": "per month",
-          "notes": "Adds Zia AI, custom functions, territory management."
+          "cadence": "per user/month billed annually",
+          "notes": "Adds Zia AI, custom functions, territory management. $50 per user/month if billed monthly."
         },
         {
           "name": "Ultimate",
           "price": "$52",
-          "cadence": "per month",
-          "notes": "Highest limits, advanced analytics, premium support."
+          "cadence": "per user/month billed annually",
+          "notes": "Highest limits, advanced analytics, premium support. $65 per user/month if billed monthly."
         }
       ],
       "lead": "Full-featured CRM at small-business prices, with a genuinely free tier for tiny teams.",
@@ -1162,8 +1162,8 @@
       "tagline": "Free appointment scheduling for up to 4 staff.",
       "vendor_homepage": "https://www.setmore.com",
       "description": "Setmore's free plan covers up to 4 staff with unlimited appointments, online payments, and email reminders, genuinely enough to run a small salon, clinic, or consultancy at zero cost. Paid Pro ($5 per user per month on annual billing) adds SMS reminders, two-way calendar sync, recurring appointments, and branding removal. It's the lowest-cost path from \"free\" to \"fully featured\" in scheduling.",
-      "last_verified": "2026-10-10",
-      "meta_description": "Setmore verified list pricing and current promotions. Free appointment scheduling for up to 4 staff, Pro from $5/user/month. Checked 2026-10-10 by Mike, editor of PlanPrice.",
+      "last_verified": "2026-11-15",
+      "meta_description": "Setmore verified list pricing and current promotions. Free appointment scheduling for up to 4 staff, Pro from $5/user/month. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Setmore bills in USD. The free tier sidesteps currency entirely; on Pro, a $5 USD seat runs roughly $7 CAD. It integrates with Square and Stripe for payment collection, both available to Canadian businesses.",
       "similar_to": "the free way to run a booking calendar before you can justify paying for one",
       "best_for": "Solo operators and teams up to 4 who want full appointment scheduling without paying, and small teams that need SMS and sync at the lowest per-user price available.",
@@ -1191,14 +1191,8 @@
         {
           "name": "Pro",
           "price": "$5/user",
-          "cadence": "per month",
-          "notes": "Adds SMS reminders, 2-way calendar sync, recurring appointments, no branding."
-        },
-        {
-          "name": "Team",
-          "price": "$5/user",
-          "cadence": "per month",
-          "notes": "Same as Pro, priced for 11+ users."
+          "cadence": "per month, billed annually",
+          "notes": "Adds SMS reminders, 2-way calendar sync, recurring appointments, no branding. $12/user/month if billed monthly."
         }
       ],
       "lead": "Free appointment scheduling for small teams, the most generous free tier in the category.",
@@ -1518,7 +1512,7 @@
       "category": "Work Management",
       "tagline": "Office apps, Teams and business email, priced in CAD.",
       "vendor_homepage": "https://www.microsoft.com",
-      "description": "Microsoft 365 is the Office suite. Word, Excel, Outlook, Teams, on a per-user subscription with Canadian-dollar list prices. Note the July 2026 change: Business Standard rose from US$12.50 to US$14 on annual commitment, and month-to-month billing runs about 20% above the annual rate.",
+      "description": "Microsoft 365 is the Office suite. Word, Excel, Outlook, Teams, on a per-user subscription with Canadian-dollar list prices. Microsoft's published Canadian lineup now bundles Copilot into Business Standard and Business Premium, and the without-Copilot versions are no longer listed on Microsoft's public pricing pages. Month-to-month billing runs about 20% above the annual rate.",
       "best_for": "Businesses standardized on Office documents and Outlook email.",
       "similar_to": "the office suite your accountant's files already assume",
       "pricing_tiers": [
@@ -1529,16 +1523,16 @@
           "notes": "Web/mobile Office apps, Teams, 1 TB OneDrive per user."
         },
         {
-          "name": "Business Standard",
-          "price": "C$19.00",
+          "name": "Business Standard with Copilot",
+          "price": "C$31.90",
           "cadence": "per user/month, annual commitment",
-          "notes": "Desktop Office apps plus everything in Basic."
+          "notes": "Copilot included, plus desktop Office apps and everything in Basic."
         },
         {
-          "name": "Business Premium",
-          "price": "C$29.80",
+          "name": "Business Premium with Copilot",
+          "price": "C$43.40",
           "cadence": "per user/month, annual commitment",
-          "notes": "Advanced security, Intune device management, Azure AD Premium."
+          "notes": "Copilot included, plus advanced security, Intune device management, Entra ID Premium."
         }
       ],
       "deal": null,
@@ -1547,12 +1541,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-18",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Microsoft 365 verified list pricing and current promotions. Office apps, Teams and business email, priced in CAD. Checked 2026-10-18 by Mike, editor of PlanPrice.",
+      "meta_description": "Microsoft 365 verified list pricing and current promotions. Office apps, Teams and business email, priced in CAD. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Prices above are Microsoft's published Canadian-dollar list for annual commitment.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-18"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "salesforce",
@@ -1725,9 +1719,9 @@
         },
         {
           "name": "SMS (add-on)",
-          "price": "$18",
-          "cadence": "per 1,000 sends in Canada",
-          "notes": "US sends are $15 per 1,000; Canadian sends cost more."
+          "price": "Per message",
+          "cadence": "per message",
+          "notes": "Billed per message in dollars since July 13, 2026; credits are gone. Rates vary by country and number type, carrier fees included, and the exact rate shows in the app."
         }
       ],
       "deal": null,
@@ -1736,12 +1730,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-20",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Klaviyo verified list pricing and current promotions. Email and SMS marketing priced by active profiles. Checked 2026-10-20 by Mike, editor of PlanPrice.",
-      "canadian_note": "Klaviyo bills in USD, and SMS sends to Canadian numbers are priced above US sends ($18 vs $15 per 1,000).",
+      "meta_description": "Klaviyo verified list pricing and current promotions. Email and SMS marketing priced by active profiles. Checked 2026-11-15 by Mike, editor of PlanPrice.",
+      "canadian_note": "Klaviyo bills in USD. Mobile messages are billed per message at dollar rates that vary by destination and number type; sends to Canadian numbers are priced above US sends, and Klaviyo shows each account's exact rates in the app.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-20"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "activecampaign",

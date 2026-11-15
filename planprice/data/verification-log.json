@@ -4,6 +4,55 @@
   {
    "date": "2026-11-15",
    "item": "November 2026 sweep (catalogue)",
+   "type": "sweep-complete",
+   "detail": "The November 2026 sweep is complete: the six products that could not be verified in the first pass (Monday.com, Shopify, Zoho CRM, Setmore, Microsoft 365, Klaviyo) were verified later on 2026-11-15 against vendor sources, closing full coverage at 49 of 49 products. The full sweep date advances to 2026-11-15.",
+   "url": "/verified.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Monday.com",
+   "type": "pricing-verified",
+   "detail": "US list prices verified against the structured pricing data published on monday.com/pricing in USD: Free $0, Basic $9 per seat per month billed annually ($12 billed monthly), Standard $12 ($14 monthly), Pro $19 ($24 monthly), Enterprise custom. No change.",
+   "url": "/deals/monday.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Shopify",
+   "type": "pricing-verified",
+   "detail": "Full US ladder verified on shopify.com/pricing: Starter $5, Basic $39 per month ($29 billed annually), Grow $105 ($79 annually), Advanced $399 ($299 annually), Plus from $2,300. The $1/month for 3 months new merchant offer is live on the page. No change.",
+   "url": "/deals/shopify.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Zoho CRM",
+   "type": "pricing-verified",
+   "detail": "US list prices verified against Zoho's own published price file for its CRM pricing page: Standard $14, Professional $23, Enterprise $40, Ultimate $52 per user per month billed annually; monthly billing is $20, $35, $50 and $65. Prices unchanged; the billing basis is now stated wherever the tiers appear.",
+   "url": "/deals/zoho-crm.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Setmore",
+   "type": "pricing-corrected",
+   "detail": "Setmore's current published lineup is two plans, Free $0 (up to 4 users) and Pro $5 per user per month billed annually ($12 billed monthly), per Setmore's own published pricing information. The recorded Team tier no longer exists: it appeared on Setmore's pricing page in January 2025 (unlimited users, $5 billed annually, $9 billed monthly) and was gone by November 2025. Team tier removed.",
+   "url": "/deals/setmore.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Microsoft 365",
+   "type": "pricing-corrected",
+   "detail": "Microsoft's public Canadian pricing pages (the plan comparison page and the plan chooser, checked 2026-11-15) now publish only Business Basic C$9.50 and the Copilot bundles, Business Standard with Copilot C$31.90 and Business Premium with Copilot C$43.40 per user per month paid yearly. The without-Copilot Standard and Premium prices recorded in October are no longer published there. Lineup corrected to the published tiers.",
+   "url": "/deals/microsoft-365.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Klaviyo",
+   "type": "pricing-corrected",
+   "detail": "Free $0 (250 profiles) and Email $20 per month at 500 profiles re-verified on klaviyo.com/pricing. The recorded SMS figure (Canada $18 per 1,000 sends) belonged to the credit system Klaviyo retired on July 13, 2026; per Klaviyo's help centre, mobile messages are now billed per message in dollars, with rates by country and number type shown in the app. SMS tier corrected to the per-message model; Klaviyo no longer publishes a per-1,000 figure.",
+   "url": "/deals/klaviyo.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "November 2026 sweep (catalogue)",
    "type": "sweep-partial",
    "detail": "Monthly sweep of all 49 tracked products against vendor pricing pages. 43 products verified and re-dated to 2026-11-15; six could not be verified this pass and keep their previous dates (Monday.com, Shopify, Zoho CRM, Setmore, Microsoft 365, Klaviyo). Coverage was not complete, so this pass is not a full sweep and the full sweep date stays 2026-09-30.",
    "url": "/verified.html"

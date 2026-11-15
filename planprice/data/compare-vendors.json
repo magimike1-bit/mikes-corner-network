@@ -61,7 +61,7 @@
   "name": "Monday.com",
   "category": "Work Management",
   "url": "/deals/monday.html",
-  "verified": "2026-09-30",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -123,7 +123,7 @@
   "name": "Shopify",
   "category": "Ecommerce",
   "url": "/deals/shopify.html",
-  "verified": "2026-09-30",
+  "verified": "2026-11-15",
   "deal": "$1/month for 3 months for new merchants",
   "start": "$5 per month",
   "tiers": [
@@ -491,7 +491,7 @@
   "name": "Zoho CRM",
   "category": "CRM & Marketing",
   "url": "/deals/zoho-crm.html",
-  "verified": "2026-10-10",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free (3 users)",
   "tiers": [
@@ -605,7 +605,7 @@
   "name": "Setmore",
   "category": "Scheduling",
   "url": "/deals/setmore.html",
-  "verified": "2026-10-10",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free (4 staff)",
   "tiers": [
@@ -616,11 +616,6 @@
    },
    {
     "name": "Pro",
-    "price": "$5/user",
-    "cadence": ""
-   },
-   {
-    "name": "Team",
     "price": "$5/user",
     "cadence": ""
    }
@@ -818,7 +813,7 @@
   "name": "Microsoft 365",
   "category": "Work Management",
   "url": "/deals/microsoft-365.html",
-  "verified": "2026-10-18",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "C$9.50 per user/month",
   "tiers": [
@@ -828,13 +823,13 @@
     "cadence": "per user/month, annual commitment"
    },
    {
-    "name": "Business Standard",
-    "price": "C$19.00",
+    "name": "Business Standard with Copilot",
+    "price": "C$31.90",
     "cadence": "per user/month, annual commitment"
    },
    {
-    "name": "Business Premium",
-    "price": "C$29.80",
+    "name": "Business Premium with Copilot",
+    "price": "C$43.40",
     "cadence": "per user/month, annual commitment"
    }
   ]
@@ -937,7 +932,7 @@
   "name": "Klaviyo",
   "category": "CRM & Marketing",
   "url": "/deals/klaviyo.html",
-  "verified": "2026-10-20",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -953,8 +948,8 @@
    },
    {
     "name": "SMS (add-on)",
-    "price": "$18",
-    "cadence": "per 1,000 sends in Canada"
+    "price": "Per message",
+    "cadence": "per message"
    }
   ]
  },

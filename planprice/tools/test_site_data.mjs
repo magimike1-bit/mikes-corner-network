@@ -16,10 +16,10 @@ const TOOLS = dirname(fileURLToPath(import.meta.url));
 
 assert.equal(
   PRICES_VERIFIED_DATE,
-  "2026-10-25",
+  "2026-11-15",
   "loader returns the registry prices_verified_date"
 );
-console.log("ok - PRICES_VERIFIED_DATE == 2026-10-25");
+console.log("ok - PRICES_VERIFIED_DATE == 2026-11-15");
 
 assert.equal(
   comparePageDate("housecall-pro-vs-jobber"),

@@ -46,7 +46,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-27",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -95,14 +95,14 @@
       "deal": {
         "headline": "80% off for 4 months for new subscribers",
         "source_url": "https://www.freshbooks.com/en-ca/pricing",
-        "verified_date": "2026-10-25"
+        "verified_date": "2026-11-15"
       },
       "affiliate": {
         "program": "freshbooks-affiliate",
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -211,9 +211,9 @@
       "pricing_tiers": [
         {
           "name": "SEO",
-          "price": "$139",
+          "price": "$139.95",
           "cadence": "per month",
-          "notes": "USD 139 per month; USD 117.33 per month billed annually. Current entry plan; the classic Pro, Guru and Business plan names were retired in 2026."
+          "notes": "USD 139.95 per month; USD 117.33 per month billed annually. Current entry plan; the classic Pro, Guru and Business plan names were retired in 2026."
         },
         {
           "name": "Semrush One Starter",
@@ -234,7 +234,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-11-10",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -359,7 +359,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-27",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -420,14 +420,14 @@
       "deal": {
         "headline": "90% off for 6 months for new subscribers (EasyStart C$3/mo, list C$30)",
         "source_url": "https://quickbooks.intuit.com/ca",
-        "verified_date": "2026-10-25"
+        "verified_date": "2026-11-15"
       },
       "affiliate": {
         "program": "quickbooks-affiliate",
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -483,16 +483,16 @@
       "deal": {
         "headline": "80% off your first 3 months for new customers",
         "source_url": "https://www.xero.com/ca/pricing-plans",
-        "verified_date": "2026-11-13",
+        "verified_date": "2026-11-15",
         "full_sweep_date": "2026-09-30",
-        "spot_check_date": "2026-11-13"
+        "spot_check_date": "2026-11-15"
       },
       "affiliate": {
         "program": "xero-affiliate",
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-11-13",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -505,7 +505,7 @@
           "Pricing is seen as expensive for micro-businesses."
         ]
       },
-      "meta_description": "Xero verified list pricing and current promotions. Cloud accounting with unlimited users on every plan. Checked 2026-11-13 by Mike, editor of PlanPrice.",
+      "meta_description": "Xero verified list pricing and current promotions. Cloud accounting with unlimited users on every plan. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "entry_cap": {
         "cap": "Early allows 20 invoices and 5 bills per month.",
         "counting": "The invoice limit applies to approving and sending invoices, and transactions initiated by app partners may automatically contribute to the limit (Xero pricing page footnote).",
@@ -555,7 +555,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-11-03",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -612,7 +612,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -628,7 +628,7 @@
           "Lacks Apple/iCloud calendar support."
         ]
       },
-      "meta_description": "Calendly verified list pricing and current promotions. Booking pages that kill the back-and-forth email. Checked 2026-10-25 by Mike, editor of PlanPrice."
+      "meta_description": "Calendly verified list pricing and current promotions. Booking pages that kill the back-and-forth email. Checked 2026-11-15 by Mike, editor of PlanPrice."
     },
     {
       "slug": "jobber",
@@ -677,7 +677,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-27",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -737,7 +737,7 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-11-13",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "reviews": {
         "strengths": [
@@ -801,7 +801,7 @@
         "network": null,
         "status": "none"
       },
-      "last_verified": "2026-11-13",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "meta_description": "Ahrefs verified list pricing and current promotions. SEO toolkit with one of the web's most active crawlers."
     },
@@ -827,9 +827,9 @@
         "network": null,
         "status": "none"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Plausible verified list pricing and current promotions. Privacy-friendly web analytics without cookies. Checked 2026-09-30 by Mike, editor of PlanPrice."
+      "meta_description": "Plausible verified list pricing and current promotions. Privacy-friendly web analytics without cookies. Checked 2026-11-15 by Mike, editor of PlanPrice."
     },
     {
       "slug": "stripe",
@@ -853,9 +853,9 @@
         "network": null,
         "status": "none"
       },
-      "last_verified": "2026-09-30",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Stripe verified list pricing and current promotions. Payment processing for online and in-person sales. Checked 2026-09-30 by Mike, editor of PlanPrice."
+      "meta_description": "Stripe verified list pricing and current promotions. Payment processing for online and in-person sales. Checked 2026-11-15 by Mike, editor of PlanPrice."
     },
     {
       "slug": "big-cartel",
@@ -891,7 +891,7 @@
         "network": null,
         "status": "none"
       },
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
       "meta_description": "Big Cartel verified list pricing and current promotions. Simple online stores for independent artists and makers."
     },
@@ -902,8 +902,8 @@
       "tagline": "Visual pipeline CRM designed for sales teams that live in their deal flow.",
       "vendor_homepage": "https://www.pipedrive.com",
       "description": "Pipedrive is built around a visual deal pipeline, drag deals between stages, see exactly where every opportunity sits. Unlike HubSpot's free-first model, Pipedrive has no free tier; every plan is paid, starting at $14 per user per month on annual billing. The tradeoff is focus: where HubSpot spreads across marketing, sales, and service hubs, Pipedrive does one thing (sales pipeline) and stays out of your way doing it.",
-      "last_verified": "2026-10-10",
-      "meta_description": "Pipedrive verified list pricing and current promotions. Visual pipeline CRM built for sales teams. Checked 2026-10-10 by Mike, editor of PlanPrice.",
+      "last_verified": "2026-11-15",
+      "meta_description": "Pipedrive verified list pricing and current promotions. Visual pipeline CRM built for sales teams. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Pipedrive bills in USD. A $14 USD seat runs roughly $19 to 20 CAD at typical card exchange rates, budget the conversion, not the sticker price. There's no CAD billing option; the invoice your bookkeeper reconciles will show the USD charge plus your card's foreign-exchange fee.",
       "similar_to": "the pipeline-first alternative to HubSpot for sales-led teams",
       "best_for": "Small sales teams that want a CRM their reps will actually open every day, without paying for marketing automation they won't use.",
@@ -1018,7 +1018,7 @@
       "tagline": "Canadian-built payroll that handles CPP, EI, and T4s without the enterprise price tag.",
       "vendor_homepage": "https://www.wagepoint.com",
       "description": "Wagepoint was built in Canada for Canadian payroll. CPP/QPP, EI, federal and provincial tax tables, T4/T4A and RL-1 generation, and ROEs are all native, not adapted from a US product. Pricing is a flat base fee plus a small per-employee charge, across three plans (Lite, Core and Plus). That makes it one of the most predictable payroll costs a small business can budget.",
-      "last_verified": "2026-11-13",
+      "last_verified": "2026-11-15",
       "best_for": "Canadian small businesses (roughly 1 to 100 employees) that want straightforward, compliant payroll without a full HR platform.",
       "similar_to": "payroll done the Canadian way, without paying for an HR suite you don't need",
       "pricing_tiers": [
@@ -1026,22 +1026,22 @@
           "name": "Lite",
           "price": "C$20 + C$4/employee",
           "cadence": "per month",
-          "notes": "One payroll run per month. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22) and the Wagepoint pricing page, checked 2026-11-13."
+          "notes": "One payroll run per month. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22) and the Wagepoint pricing page, checked 2026-11-15."
         },
         {
           "name": "Core",
           "price": "C$40 + C$6/employee",
           "cadence": "per month",
-          "notes": "Unlimited payroll runs per month. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22) and the Wagepoint pricing page, checked 2026-11-13."
+          "notes": "Unlimited payroll runs per month. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22) and the Wagepoint pricing page, checked 2026-11-15."
         },
         {
           "name": "Plus",
           "price": "C$80 + C$10/employee",
           "cadence": "per month",
-          "notes": "Unlimited payroll runs, plus clock in and out, geo-fencing, paid time off management, and priority support; next-day deposit included. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22), checked 2026-11-13."
+          "notes": "Unlimited payroll runs, plus clock in and out, geo-fencing, paid time off management, and priority support; next-day deposit included. Wagepoint 2.0 Service Fee Schedule (last updated 2026-10-22), checked 2026-11-15."
         }
       ],
-      "meta_description": "Wagepoint verified list pricing and current promotions. Canadian-built payroll for small businesses, from C$20/month. Checked 2026-11-13 by Mike, editor of PlanPrice.",
+      "meta_description": "Wagepoint verified list pricing and current promotions. Canadian-built payroll for small businesses, from C$20/month. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "This is the rare vendor on PlanPrice that bills in CAD natively, the invoice matches your books with no conversion. Being Canadian-built also means provincial edge cases (QST, Quebec parental insurance, Ontario ESA rules) are handled as first-class features rather than afterthoughts.",
       "canadian": {
         "founded": "2012",
@@ -1058,8 +1058,8 @@
       "tagline": "Canadian payroll and HR on one platform, unlimited pay runs.",
       "vendor_homepage": "https://www.knitpeople.com",
       "description": "Knit is a Toronto-based platform combining Canadian payroll with HR tools, time-off management, document e-signing, onboarding, and performance reviews, under one subscription. The pricing differentiator is unlimited pay runs: weekly payroll, off-cycle corrections, and bonus runs all cost the same base plus per employee fee, where per-run competitors charge extra each time.",
-      "last_verified": "2026-11-13",
-      "meta_description": "Knit People verified list pricing and current promotions. Canadian payroll plus HR with base plus per employee pricing and unlimited pay runs. Checked 2026-11-13 by Mike, editor of PlanPrice.",
+      "last_verified": "2026-11-15",
+      "meta_description": "Knit People verified list pricing and current promotions. Canadian payroll plus HR with base plus per employee pricing and unlimited pay runs. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Knit is Canadian-built and bills in CAD. CRA remittances, T4/T4A/RL-1 generation, and provincial tax handling are native. The support team is Toronto-based, which matters when a payroll question needs an answer before the pay run closes.",
       "canadian": {
         "founded": "2015",
@@ -1086,13 +1086,13 @@
           "name": "Lite",
           "price": "C$40 + C$6/employee",
           "cadence": "per month",
-          "notes": "Base fee CAD 40 plus CAD 6 per employee per month (checked 2026-11-13). Full payroll + lite HR (time off, documents, e-signing)."
+          "notes": "Base fee CAD 40 plus CAD 6 per employee per month (checked 2026-11-15). Full payroll + lite HR (time off, documents, e-signing)."
         },
         {
           "name": "Complete",
           "price": "C$50 + C$8/employee",
           "cadence": "per month",
-          "notes": "Base fee CAD 50 plus CAD 8 per employee per month (checked 2026-11-13). Full payroll + complete HR suite (performance, onboarding, benefits admin)."
+          "notes": "Base fee CAD 50 plus CAD 8 per employee per month (checked 2026-11-15). Full payroll + complete HR suite (performance, onboarding, benefits admin)."
         },
         {
           "name": "Concierge",
@@ -1112,9 +1112,9 @@
       "tagline": "Squarespace's appointment scheduler with payments built in.",
       "vendor_homepage": "https://www.acuityscheduling.com",
       "description": "Acuity Scheduling (owned by Squarespace) goes deeper than simple meeting links: clients can book, pay, fill intake forms, and buy packages or gift certificates in one flow. Pricing is flat monthly by tier, not per user, so a 6-person team on Growing pays the same $34 as a solo operator. The tradeoff versus Calendly is price: Acuity starts higher and has no free tier.",
-      "last_verified": "2026-10-10",
-      "meta_description": "Acuity Scheduling verified list pricing and current promotions. Squarespace's appointment scheduler, from $20/month. Checked 2026-10-10 by Mike, editor of PlanPrice.",
-      "canadian_note": "Acuity bills in USD, the $20 Emerging tier runs roughly $27 to 28 CAD at typical card rates. It integrates with Stripe and Square for payment collection, both of which support Canadian businesses. SMS reminders (Growing and up) are worth pricing against Canadian carrier rates if you book high volumes.",
+      "last_verified": "2026-11-15",
+      "meta_description": "Acuity Scheduling verified list pricing and current promotions. Squarespace's appointment scheduler, from $20/month. Checked 2026-11-15 by Mike, editor of PlanPrice.",
+      "canadian_note": "Acuity bills in USD, the $20 Starter tier runs roughly $27 to 28 CAD at typical card rates. It integrates with Stripe and Square for payment collection, both of which support Canadian businesses. SMS reminders (Standard and up) are worth pricing against Canadian carrier rates if you book high volumes.",
       "similar_to": "Calendly's more customizable cousin, with payments and intake forms built in",
       "best_for": "Service businesses (salons, clinics, consultants, studios) that need client self-booking with payments, intake forms, and reminders.",
       "reviews": {
@@ -1133,22 +1133,22 @@
       },
       "pricing_tiers": [
         {
-          "name": "Emerging",
+          "name": "Starter",
           "price": "$20",
           "cadence": "per month",
-          "notes": "1 calendar, unlimited appointments, email confirmations. No SMS reminders."
+          "notes": "1 calendar, unlimited appointments, email confirmations. No SMS reminders. $16 per month billed annually."
         },
         {
-          "name": "Growing",
+          "name": "Standard",
           "price": "$34",
           "cadence": "per month",
-          "notes": "Up to 6 calendars, SMS reminders, intake forms, group scheduling."
+          "notes": "Up to 6 calendars, SMS reminders, intake forms, group scheduling. $27 per month billed annually."
         },
         {
-          "name": "Powerhouse",
-          "price": "$61",
+          "name": "Premium",
+          "price": "$69",
           "cadence": "per month",
-          "notes": "Up to 36 calendars, HIPAA compliance, API access, custom CSS."
+          "notes": "Up to 36 calendars, HIPAA compliance, API access, custom CSS. $55 per month billed annually."
         }
       ],
       "lead": "Squarespace's appointment scheduler, built for service businesses that live on bookings.",
@@ -1246,12 +1246,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-12",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Trello verified list pricing and current promotions. Kanban boards for visual task tracking. Checked 2026-10-12 by Mike, editor of PlanPrice.",
+      "meta_description": "Trello verified list pricing and current promotions. Kanban boards for visual task tracking. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Trello bills in USD. Budget the card conversion on top of the sticker price, there is no CAD price list.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-12"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "asana",
@@ -1288,12 +1288,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-23",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Asana verified list pricing and current promotions. Work management with timelines, portfolios and automation. Checked 2026-10-23 by Mike, editor of PlanPrice.",
+      "meta_description": "Asana verified list pricing and current promotions. Work management with timelines, portfolios and automation. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "List prices are USD; Asana documents CAD payment support in its help centre, so confirm which currency your account is billed in before comparing.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "clickup",
@@ -1312,14 +1312,14 @@
           "notes": "Free tier with limited storage and views."
         },
         {
-          "name": "Unlimited",
-          "price": "$7",
+          "name": "Core",
+          "price": "$9",
           "cadence": "per user/month, billed annually",
           "notes": "Unlimited storage, integrations and dashboards."
         },
         {
           "name": "Business",
-          "price": "$12",
+          "price": "$17",
           "cadence": "per user/month, billed annually",
           "notes": "Advanced automation, timelines and workload views."
         }
@@ -1330,14 +1330,14 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-15",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "ClickUp verified list pricing and current promotions. All-in-one work app: tasks, docs, goals and time tracking. Checked 2026-10-15 by Mike, editor of PlanPrice.",
+      "meta_description": "ClickUp verified list pricing and current promotions. All-in-one work app: tasks, docs, goals and time tracking. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "ClickUp bills in USD; Canadian buyers pay conversion on top of list.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-15",
+      "batch_checked_date": "2026-11-15",
       "guest_billing": {
-        "included": "The Unlimited plan includes 5 permission controlled guest seats for a one member workspace, plus 2 more for each member invited. Business plans include 10, plus 5 per member.",
+        "included": "The Core plan includes 5 permission controlled guest seats for a one member workspace, plus 2 more for each member invited. Business plans include 10, plus 5 per member.",
         "autocharge": "If you run out of permission controlled guest seats and invite a permission controlled guest, a paid member seat is added and charged automatically. Adding a view only guest to a Team also converts them to a permission controlled guest.",
         "internal": "People who use your organization's email domain or SSO cannot be added as guests; they are converted to limited members and charged at the member rate. View only guests are free and unlimited.",
         "checked": "2026-11-10",
@@ -1379,12 +1379,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-23",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Notion verified list pricing and current promotions. Docs, wikis and lightweight projects in one workspace. Checked 2026-10-23 by Mike, editor of PlanPrice.",
+      "meta_description": "Notion verified list pricing and current promotions. Docs, wikis and lightweight projects in one workspace. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Notion bills in USD; there is no CAD price list.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "slack",
@@ -1421,12 +1421,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-11",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Slack verified list pricing and current promotions. Team messaging with channels, huddles and workflow automation. Checked 2026-10-11 by Mike, editor of PlanPrice.",
+      "meta_description": "Slack verified list pricing and current promotions. Team messaging with channels, huddles and workflow automation. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Slack bills in USD even for Canadian accounts. Salesforce's Canadian pricing page lists the same USD prices.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "zoom",
@@ -1463,12 +1463,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-18",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Zoom verified list pricing and current promotions. Video meetings, phone and webinars under one licence. Checked 2026-10-18 by Mike, editor of PlanPrice.",
+      "meta_description": "Zoom verified list pricing and current promotions. Video meetings, phone and webinars under one licence. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Zoom bills in USD; the Phone US & Canada plans are the relevant add-ons for Canadian teams.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "google-workspace",
@@ -1505,12 +1505,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-18",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Google Workspace verified list pricing and current promotions. Gmail, Drive and Docs for business, priced in CAD. Checked 2026-10-18 by Mike, editor of PlanPrice.",
+      "meta_description": "Google Workspace verified list pricing and current promotions. Gmail, Drive and Docs for business, priced in CAD. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Prices above are Google's published Canadian-dollar list, no conversion needed.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-18"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "microsoft-365",
@@ -1589,12 +1589,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-12",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Salesforce verified list pricing and current promotions. The enterprise CRM, with a small-business suite at the door. Checked 2026-10-12 by Mike, editor of PlanPrice.",
+      "meta_description": "Salesforce verified list pricing and current promotions. The enterprise CRM, with a small-business suite at the door. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Salesforce bills in USD; implementation and training costs are typically quoted separately from licences.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "capsule-crm",
@@ -1616,13 +1616,13 @@
           "name": "Starter",
           "price": "$18",
           "cadence": "per user/month, billed annually",
-          "notes": "$21 billed monthly. 30,000 contacts, 1 pipeline."
+          "notes": "$22 billed monthly. 30,000 contacts, 1 pipeline."
         },
         {
           "name": "Growth",
           "price": "$36",
           "cadence": "per user/month, billed annually",
-          "notes": "$38 billed monthly. 60,000 contacts, 5 pipelines, automation and AI features."
+          "notes": "$40 billed monthly. 60,000 contacts, 5 pipelines, automation and AI features."
         },
         {
           "name": "Advanced",
@@ -1643,12 +1643,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Capsule CRM verified list pricing and current promotions. Simple contact-and-pipeline CRM for small teams. Checked 2026-10-25 by Mike, editor of PlanPrice.",
+      "meta_description": "Capsule CRM verified list pricing and current promotions. Simple contact-and-pipeline CRM for small teams. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Capsule bills in USD; there is no CAD price list.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "mailchimp",
@@ -1688,16 +1688,16 @@
       "deal": {
         "headline": "15% off your first 12 months (accounts with 10,000+ contacts)",
         "source_url": "https://mailchimp.com",
-        "verified_date": "2026-10-25"
+        "verified_date": "2026-11-15"
       },
       "affiliate": {
         "program": "mailchimp-affiliate",
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-20",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Mailchimp verified list pricing and current promotions. Email and SMS marketing for growing lists. Checked 2026-10-20 by Mike, editor of PlanPrice.",
+      "meta_description": "Mailchimp verified list pricing and current promotions. Email and SMS marketing for growing lists. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Mailchimp bills in USD; Canadian lists pay conversion on top of the contact-based price.",
       "batch_template": true
     },
@@ -1784,12 +1784,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-12",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "ActiveCampaign verified list pricing and current promotions. Email automation with a built-in CRM ladder. Checked 2026-10-12 by Mike, editor of PlanPrice.",
+      "meta_description": "ActiveCampaign verified list pricing and current promotions. Email automation with a built-in CRM ladder. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "ActiveCampaign bills in USD; contact-count pricing means a Canadian list pays conversion on a number that grows with the list.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-12"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "aweber",
@@ -1826,12 +1826,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-22",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "AWeber verified list pricing and current promotions. Email marketing for creators and small lists. Checked 2026-10-22 by Mike, editor of PlanPrice.",
+      "meta_description": "AWeber verified list pricing and current promotions. Email marketing for creators and small lists. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "AWeber bills in USD only, the pricing page lists prices in USD with no CAD option.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-22"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "mailerlite",
@@ -1868,12 +1868,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-20",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "MailerLite verified list pricing and current promotions. Budget email marketing with a nonprofit discount. Checked 2026-10-20 by Mike, editor of PlanPrice.",
+      "meta_description": "MailerLite verified list pricing and current promotions. Budget email marketing with a nonprofit discount. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "MailerLite bills in USD; data is hosted in the EU, which some Canadian buyers count as a plus.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-20"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "moz",
@@ -1904,12 +1904,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-13",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Moz verified list pricing and current promotions. SEO software with the original domain-authority metric. Checked 2026-10-13 by Mike, editor of PlanPrice.",
+      "meta_description": "Moz verified list pricing and current promotions. SEO software with the original domain-authority metric. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Moz bills in USD.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-13",
+      "batch_checked_date": "2026-11-15",
       "batch_amount_related": true
     },
     {
@@ -1941,9 +1941,9 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-13",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Hootsuite verified list pricing and current promotions. Social media scheduling and management, from a Canadian company. Checked 2026-10-13 by Mike, editor of PlanPrice.",
+      "meta_description": "Hootsuite verified list pricing and current promotions. Social media scheduling and management, from a Canadian company. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Hootsuite is a Canadian company (Vancouver), but list prices are published in USD, the invoice currency is what matters for your books.",
       "canadian": {
         "founded": "2008",
@@ -1951,7 +1951,7 @@
         "hq": "Vancouver, British Columbia"
       },
       "batch_template": true,
-      "batch_checked_date": "2026-10-13",
+      "batch_checked_date": "2026-11-15",
       "batch_amount_related": true
     },
     {
@@ -1995,12 +1995,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-12",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Sage 50 verified list pricing and current promotions. Desktop-rooted Canadian accounting with payroll bundles. Checked 2026-10-12 by Mike, editor of PlanPrice.",
+      "meta_description": "Sage 50 verified list pricing and current promotions. Desktop-rooted Canadian accounting with payroll bundles. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Sage 50 Canada prices are published in CAD on Sage's Canadian site, no conversion, and the Canadian price book is separate from the US one.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-12"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "zoho-books",
@@ -2043,12 +2043,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-11-03",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Zoho Books verified list pricing and current promotions. Accounting priced per organization, not per seat. Checked 2026-11-03 by Mike, editor of PlanPrice.",
+      "meta_description": "Zoho Books verified list pricing and current promotions. Accounting priced per organization, not per seat. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Zoho publishes a Canada price list in CAD (Standard CAD 15, Professional CAD 30, Premium CAD 40 per organization per month, billed annually, checked 2026-11-03). Confirm the checkout shows the Canada list, because Zoho also publishes a USD list with different figures for the same tiers.",
       "batch_template": true,
-      "batch_checked_date": "2026-11-03"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "bigcommerce",
@@ -2085,12 +2085,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-14",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "BigCommerce verified list pricing and current promotions. Hosted ecommerce with a B2B and multi-storefront ladder. Checked 2026-10-14 by Mike, editor of PlanPrice.",
+      "meta_description": "BigCommerce verified list pricing and current promotions. Hosted ecommerce with a B2B and multi-storefront ladder. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "BigCommerce bills in USD; Canadian stores pay conversion on the plan price.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-14"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "squarespace",
@@ -2104,19 +2104,19 @@
       "pricing_tiers": [
         {
           "name": "Basic",
-          "price": "$16",
+          "price": "$19",
           "cadence": "per month, billed annually",
-          "notes": "Website with core features; $19 billed monthly."
+          "notes": "Website with core features; $25 billed monthly."
         },
         {
           "name": "Core",
-          "price": "$23",
+          "price": "$29",
           "cadence": "per month, billed annually",
           "notes": "More customization and analytics."
         },
         {
           "name": "Plus",
-          "price": "$39",
+          "price": "$49",
           "cadence": "per month, billed annually",
           "notes": "Commerce features with 0% transaction fees."
         },
@@ -2133,12 +2133,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-12",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Squarespace verified list pricing and current promotions. Design-led websites with commerce on the upper tiers. Checked 2026-10-12 by Mike, editor of PlanPrice.",
+      "meta_description": "Squarespace verified list pricing and current promotions. Design-led websites with commerce on the upper tiers. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Squarespace bills in USD; Canadian sellers pay conversion and should check the transaction-fee tier carefully.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "wix",
@@ -2175,12 +2175,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-20",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Wix verified list pricing and current promotions. Website builder with a free tier and business plans. Checked 2026-10-20 by Mike, editor of PlanPrice.",
+      "meta_description": "Wix verified list pricing and current promotions. Website builder with a free tier and business plans. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Wix bills in USD on the published price list; Canadian buyers pay conversion.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "lightspeed",
@@ -2223,9 +2223,9 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-20",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Lightspeed verified list pricing and current promotions. Retail and restaurant POS from Montreal. Checked 2026-10-20 by Mike, editor of PlanPrice.",
+      "meta_description": "Lightspeed verified list pricing and current promotions. Retail and restaurant POS from Montreal. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Lightspeed is a Canadian company (Montreal). Published plan prices are in USD, confirm the billing currency for your account, and budget processing on top of software.",
       "canadian": {
         "founded": "2005",
@@ -2233,7 +2233,7 @@
         "hq": "Montreal, Quebec"
       },
       "batch_template": true,
-      "batch_checked_date": "2026-10-25",
+      "batch_checked_date": "2026-11-15",
       "batch_amount_related": true
     },
     {
@@ -2271,12 +2271,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-20",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Toast verified list pricing and current promotions. Restaurant POS with Canadian pricing in CAD. Checked 2026-10-20 by Mike, editor of PlanPrice.",
+      "meta_description": "Toast verified list pricing and current promotions. Restaurant POS with Canadian pricing in CAD. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Toast publishes Canadian plan prices in CAD, a genuine plus, but processing rates for Canada are quote-only.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-20"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "deel",
@@ -2319,12 +2319,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-23",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Deel verified list pricing and current promotions. Global payroll and employer-of-record for distributed teams. Checked 2026-10-23 by Mike, editor of PlanPrice.",
+      "meta_description": "Deel verified list pricing and current promotions. Global payroll and employer-of-record for distributed teams. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Deel bills in USD. For Canadian-only payroll, compare Wagepoint or Knit first. Deel's premium is for cross-border employment.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-23"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "housecall-pro",
@@ -2361,12 +2361,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-23",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Housecall Pro verified list pricing and current promotions. Field-service software for home-service trades. Checked 2026-10-23 by Mike, editor of PlanPrice.",
+      "meta_description": "Housecall Pro verified list pricing and current promotions. Field-service software for home-service trades. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Housecall Pro bills in USD and is US-focused; confirm Canadian tax handling (GST/HST on invoices) before switching from a Canadian tool.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-23"
+      "batch_checked_date": "2026-11-15"
     },
     {
       "slug": "cal-com",
@@ -2386,15 +2386,15 @@
         },
         {
           "name": "Teams",
-          "price": "$16",
-          "cadence": "per user/month",
-          "notes": "Team booking pages, routing and workflows."
+          "price": "$12",
+          "cadence": "per user/month, billed annually",
+          "notes": "Team booking pages, routing and workflows. $16 per user/month billed monthly."
         },
         {
           "name": "Organizations",
-          "price": "$37",
-          "cadence": "per user/month",
-          "notes": "Multi-team structure, advanced admin and SSO options."
+          "price": "$28",
+          "cadence": "per user/month, billed annually",
+          "notes": "Multi-team structure, advanced admin and SSO options. $37 per user/month billed monthly."
         }
       ],
       "deal": null,
@@ -2403,12 +2403,12 @@
         "network": "pending",
         "status": "pending-approval"
       },
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-11-15",
       "sort_priority": 999,
-      "meta_description": "Cal.com verified list pricing and current promotions. Open-source scheduling with a genuinely free tier. Checked 2026-10-25 by Mike, editor of PlanPrice.",
+      "meta_description": "Cal.com verified list pricing and current promotions. Open-source scheduling with a genuinely free tier. Checked 2026-11-15 by Mike, editor of PlanPrice.",
       "canadian_note": "Cal.com bills in USD; the free tier makes the conversion question moot until a team outgrows it.",
       "batch_template": true,
-      "batch_checked_date": "2026-10-25"
+      "batch_checked_date": "2026-11-15"
     }
   ]
 }

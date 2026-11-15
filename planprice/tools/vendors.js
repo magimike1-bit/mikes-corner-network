@@ -8,7 +8,7 @@ var VENDORS = [
   {slug:"hubspot",name:"HubSpot",category:"CRM & Marketing",catSlug:"crm-marketing",priceSort:0,priceText:"From $0 free"},
   {slug:"freshbooks",name:"FreshBooks",category:"Accounting",catSlug:"accounting",priceSort:26,priceText:"From C$26 per month"},
   {slug:"monday",name:"Monday.com",category:"Work Management",catSlug:"work-management",priceSort:0,priceText:"From $0 free"},
-  {slug:"semrush",name:"Semrush",category:"SEO & Marketing",catSlug:"seo-marketing",priceSort:139,priceText:"From $139 per month"},
+  {slug:"semrush",name:"Semrush",category:"SEO & Marketing",catSlug:"seo-marketing",priceSort:139.95,priceText:"From $139.95 per month"},
   {slug:"shopify",name:"Shopify",category:"Ecommerce",catSlug:"ecommerce",priceSort:5,priceText:"From $5 per month"},
   {slug:"wave",name:"Wave",category:"Accounting",catSlug:"accounting",priceSort:0,priceText:"From $0 free"},
   {slug:"quickbooks",name:"QuickBooks Online",category:"Accounting",catSlug:"accounting",priceSort:30,priceText:"From C$30 per month"},

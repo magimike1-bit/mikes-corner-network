@@ -4,7 +4,7 @@
   "name": "HubSpot",
   "category": "CRM & Marketing",
   "url": "/deals/hubspot.html",
-  "verified": "2026-10-27",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -35,7 +35,7 @@
   "name": "FreshBooks",
   "category": "Accounting",
   "url": "/deals/freshbooks.html",
-  "verified": "2026-10-25",
+  "verified": "2026-11-15",
   "deal": "80% off for 4 months for new subscribers",
   "start": "C$26 per month",
   "tiers": [
@@ -97,13 +97,13 @@
   "name": "Semrush",
   "category": "SEO & Marketing",
   "url": "/deals/semrush.html",
-  "verified": "2026-11-10",
+  "verified": "2026-11-15",
   "deal": null,
-  "start": "$139 per month",
+  "start": "$139.95 per month",
   "tiers": [
    {
     "name": "SEO",
-    "price": "$139",
+    "price": "$139.95",
     "cadence": "per month"
    },
    {
@@ -159,7 +159,7 @@
   "name": "Wave",
   "category": "Accounting",
   "url": "/deals/wave.html",
-  "verified": "2026-10-27",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -185,7 +185,7 @@
   "name": "QuickBooks Online",
   "category": "Accounting",
   "url": "/deals/quickbooks.html",
-  "verified": "2026-10-25",
+  "verified": "2026-11-15",
   "deal": "90% off for new subscribers",
   "start": "C$30 per month",
   "tiers": [
@@ -216,7 +216,7 @@
   "name": "Xero",
   "category": "Accounting",
   "url": "/deals/xero.html",
-  "verified": "2026-11-13",
+  "verified": "2026-11-15",
   "deal": "80% off your first 3 months for new customers",
   "start": "$10 per month",
   "tiers": [
@@ -247,7 +247,7 @@
   "name": "Square",
   "category": "Payments & POS",
   "url": "/deals/square.html",
-  "verified": "2026-10-25",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -278,7 +278,7 @@
   "name": "Calendly",
   "category": "Scheduling",
   "url": "/deals/calendly.html",
-  "verified": "2026-10-25",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -309,7 +309,7 @@
   "name": "Jobber",
   "category": "Field Service",
   "url": "/deals/jobber.html",
-  "verified": "2026-10-27",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$49 per month",
   "tiers": [
@@ -345,7 +345,7 @@
   "name": "Humi",
   "category": "HR & Payroll",
   "url": "/deals/humi.html",
-  "verified": "2026-11-13",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "Custom",
   "tiers": [
@@ -371,7 +371,7 @@
   "name": "Ahrefs",
   "category": "SEO & Marketing",
   "url": "/deals/ahrefs.html",
-  "verified": "2026-11-13",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$29 per month",
   "tiers": [
@@ -402,7 +402,7 @@
   "name": "Plausible",
   "category": "SEO & Marketing",
   "url": "/deals/plausible.html",
-  "verified": "2026-09-30",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$9 per month",
   "tiers": [
@@ -418,7 +418,7 @@
   "name": "Stripe",
   "category": "Payments & POS",
   "url": "/deals/stripe.html",
-  "verified": "2026-09-30",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "2.9% + 30¢ per transaction",
   "tiers": [
@@ -434,7 +434,7 @@
   "name": "Big Cartel",
   "category": "Ecommerce",
   "url": "/deals/big-cartel.html",
-  "verified": "2026-10-25",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -460,7 +460,7 @@
   "name": "Pipedrive",
   "category": "CRM & Marketing",
   "url": "/deals/pipedrive.html",
-  "verified": "2026-10-10",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$14 per user/month",
   "tiers": [
@@ -527,7 +527,7 @@
   "name": "Wagepoint",
   "category": "HR & Payroll",
   "url": "/deals/wagepoint.html",
-  "verified": "2026-11-13",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "C$20 per month",
   "tiers": [
@@ -553,7 +553,7 @@
   "name": "Knit People",
   "category": "HR & Payroll",
   "url": "/deals/knit-people.html",
-  "verified": "2026-11-13",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "C$40 per month",
   "tiers": [
@@ -579,23 +579,23 @@
   "name": "Acuity Scheduling",
   "category": "Scheduling",
   "url": "/deals/acuity.html",
-  "verified": "2026-10-10",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$20 per month",
   "tiers": [
    {
-    "name": "Emerging",
+    "name": "Starter",
     "price": "$20",
     "cadence": ""
    },
    {
-    "name": "Growing",
+    "name": "Standard",
     "price": "$34",
     "cadence": ""
    },
    {
-    "name": "Powerhouse",
-    "price": "$61",
+    "name": "Premium",
+    "price": "$69",
     "cadence": ""
    }
   ]
@@ -631,7 +631,7 @@
   "name": "Trello",
   "category": "Work Management",
   "url": "/deals/trello.html",
-  "verified": "2026-10-12",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -662,7 +662,7 @@
   "name": "Asana",
   "category": "Work Management",
   "url": "/deals/asana.html",
-  "verified": "2026-10-23",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -688,7 +688,7 @@
   "name": "ClickUp",
   "category": "Work Management",
   "url": "/deals/clickup.html",
-  "verified": "2026-10-15",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -698,13 +698,13 @@
     "cadence": "per month"
    },
    {
-    "name": "Unlimited",
-    "price": "$7",
+    "name": "Core",
+    "price": "$9",
     "cadence": "per user/month, billed annually"
    },
    {
     "name": "Business",
-    "price": "$12",
+    "price": "$17",
     "cadence": "per user/month, billed annually"
    }
   ]
@@ -714,7 +714,7 @@
   "name": "Notion",
   "category": "Work Management",
   "url": "/deals/notion.html",
-  "verified": "2026-10-23",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -740,7 +740,7 @@
   "name": "Slack",
   "category": "Work Management",
   "url": "/deals/slack.html",
-  "verified": "2026-10-11",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -766,7 +766,7 @@
   "name": "Zoom",
   "category": "Work Management",
   "url": "/deals/zoom.html",
-  "verified": "2026-10-18",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -792,7 +792,7 @@
   "name": "Google Workspace",
   "category": "Work Management",
   "url": "/deals/google-workspace.html",
-  "verified": "2026-10-18",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "C$9.20 per user/month",
   "tiers": [
@@ -844,7 +844,7 @@
   "name": "Salesforce",
   "category": "CRM & Marketing",
   "url": "/deals/salesforce.html",
-  "verified": "2026-10-12",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$25 per user/month",
   "tiers": [
@@ -870,7 +870,7 @@
   "name": "Capsule CRM",
   "category": "CRM & Marketing",
   "url": "/deals/capsule-crm.html",
-  "verified": "2026-10-25",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -906,7 +906,7 @@
   "name": "Mailchimp",
   "category": "CRM & Marketing",
   "url": "/deals/mailchimp.html",
-  "verified": "2026-10-20",
+  "verified": "2026-11-15",
   "deal": "15% off your first 12 months",
   "start": "$0 free",
   "tiers": [
@@ -963,7 +963,7 @@
   "name": "ActiveCampaign",
   "category": "CRM & Marketing",
   "url": "/deals/activecampaign.html",
-  "verified": "2026-10-12",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$15 per month",
   "tiers": [
@@ -994,7 +994,7 @@
   "name": "AWeber",
   "category": "CRM & Marketing",
   "url": "/deals/aweber.html",
-  "verified": "2026-10-22",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -1020,7 +1020,7 @@
   "name": "MailerLite",
   "category": "CRM & Marketing",
   "url": "/deals/mailerlite.html",
-  "verified": "2026-10-20",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -1046,7 +1046,7 @@
   "name": "Moz",
   "category": "SEO & Marketing",
   "url": "/deals/moz.html",
-  "verified": "2026-10-13",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$79 per month",
   "tiers": [
@@ -1067,7 +1067,7 @@
   "name": "Hootsuite",
   "category": "SEO & Marketing",
   "url": "/deals/hootsuite.html",
-  "verified": "2026-10-13",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$99 per user/month",
   "tiers": [
@@ -1088,7 +1088,7 @@
   "name": "Sage 50",
   "category": "Accounting",
   "url": "/deals/sage-50.html",
-  "verified": "2026-10-12",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "C$916 per year",
   "tiers": [
@@ -1119,7 +1119,7 @@
   "name": "Zoho Books",
   "category": "Accounting",
   "url": "/deals/zoho-books.html",
-  "verified": "2026-11-03",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -1150,7 +1150,7 @@
   "name": "BigCommerce",
   "category": "Ecommerce",
   "url": "/deals/bigcommerce.html",
-  "verified": "2026-10-14",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$29 per month",
   "tiers": [
@@ -1176,23 +1176,23 @@
   "name": "Squarespace",
   "category": "Ecommerce",
   "url": "/deals/squarespace.html",
-  "verified": "2026-10-12",
+  "verified": "2026-11-15",
   "deal": null,
-  "start": "$16 per month",
+  "start": "$19 per month",
   "tiers": [
    {
     "name": "Basic",
-    "price": "$16",
+    "price": "$19",
     "cadence": "per month, billed annually"
    },
    {
     "name": "Core",
-    "price": "$23",
+    "price": "$29",
     "cadence": "per month, billed annually"
    },
    {
     "name": "Plus",
-    "price": "$39",
+    "price": "$49",
     "cadence": "per month, billed annually"
    },
    {
@@ -1207,7 +1207,7 @@
   "name": "Wix",
   "category": "Ecommerce",
   "url": "/deals/wix.html",
-  "verified": "2026-10-20",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -1233,7 +1233,7 @@
   "name": "Lightspeed",
   "category": "Payments & POS",
   "url": "/deals/lightspeed.html",
-  "verified": "2026-10-20",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$89 per month",
   "tiers": [
@@ -1264,7 +1264,7 @@
   "name": "Toast",
   "category": "Payments & POS",
   "url": "/deals/toast.html",
-  "verified": "2026-10-20",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "C$120 per month",
   "tiers": [
@@ -1290,7 +1290,7 @@
   "name": "Deel",
   "category": "HR & Payroll",
   "url": "/deals/deel.html",
-  "verified": "2026-10-23",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$29 per employee/month",
   "tiers": [
@@ -1321,7 +1321,7 @@
   "name": "Housecall Pro",
   "category": "Field Service",
   "url": "/deals/housecall-pro.html",
-  "verified": "2026-10-23",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$59 per month",
   "tiers": [
@@ -1347,7 +1347,7 @@
   "name": "Cal.com",
   "category": "Scheduling",
   "url": "/deals/cal-com.html",
-  "verified": "2026-10-25",
+  "verified": "2026-11-15",
   "deal": null,
   "start": "$0 free",
   "tiers": [
@@ -1358,13 +1358,13 @@
    },
    {
     "name": "Teams",
-    "price": "$16",
-    "cadence": "per user/month"
+    "price": "$12",
+    "cadence": "per user/month, billed annually"
    },
    {
     "name": "Organizations",
-    "price": "$37",
-    "cadence": "per user/month"
+    "price": "$28",
+    "cadence": "per user/month, billed annually"
    }
   ]
  }

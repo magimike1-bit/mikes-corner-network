@@ -23,17 +23,17 @@ console.log("ok - PRICES_VERIFIED_DATE == 2026-10-25");
 
 assert.equal(
   comparePageDate("housecall-pro-vs-jobber"),
-  "2026-09-30",
+  "2026-11-15",
   "comparePageDate returns the registry page date (min of members)"
 );
-console.log("ok - comparePageDate('housecall-pro-vs-jobber') == 2026-09-30");
+console.log("ok - comparePageDate('housecall-pro-vs-jobber') == 2026-11-15");
 
 assert.equal(
   comparePageDate("capsule-vs-pipedrive"),
-  "2026-10-10",
-  "partial compare page still resolves to its registry date"
+  "2026-11-15",
+  "compare page resolves to its registry date once both members are verified"
 );
-console.log("ok - comparePageDate('capsule-vs-pipedrive') == 2026-10-10");
+console.log("ok - comparePageDate('capsule-vs-pipedrive') == 2026-11-15");
 
 assert.throws(
   () => comparePageDate("no-such-compare-page"),

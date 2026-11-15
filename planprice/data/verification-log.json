@@ -1,6 +1,104 @@
 {
- "updated": "2026-11-13",
+ "updated": "2026-11-15",
  "entries": [
+  {
+   "date": "2026-11-15",
+   "item": "November 2026 sweep (catalogue)",
+   "type": "sweep-partial",
+   "detail": "Monthly sweep of all 49 tracked products against vendor pricing pages. 43 products verified and re-dated to 2026-11-15; six could not be verified this pass and keep their previous dates (Monday.com, Shopify, Zoho CRM, Setmore, Microsoft 365, Klaviyo). Coverage was not complete, so this pass is not a full sweep and the full sweep date stays 2026-09-30.",
+   "url": "/verified.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Squarespace",
+   "type": "pricing-corrected",
+   "detail": "US list prices corrected from the vendor's pricing page: Basic $16 to $19 per month billed annually ($25 billed monthly), Core $23 to $29, Plus $39 to $49. Advanced $99 billed annually unchanged.",
+   "url": "/deals/squarespace.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "ClickUp",
+   "type": "pricing-corrected",
+   "detail": "The Unlimited tier is renamed Core and corrected $7 to $9 per user per month billed yearly ($12 billed monthly). Business corrected $12 to $17 billed yearly ($25 billed monthly). Free Forever $0 unchanged.",
+   "url": "/deals/clickup.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Acuity Scheduling",
+   "type": "pricing-corrected",
+   "detail": "Tiers renamed: Emerging to Starter, Growing to Standard, Powerhouse to Premium. Starter $20 and Standard $34 per month unchanged; Premium corrected $61 to $69 per month ($49 to $55 billed annually).",
+   "url": "/deals/acuity.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Cal.com",
+   "type": "pricing-corrected",
+   "detail": "Billing basis corrected: recorded $16 (Teams) and $37 (Organizations) are the monthly billing rates. Annual billing: Teams $12, Organizations $28 per user per month; pages now lead with the annual figures.",
+   "url": "/deals/cal-com.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Capsule CRM",
+   "type": "pricing-corrected",
+   "detail": "Annual prices unchanged ($18, $36, $54, $72). Monthly billing figures corrected from the vendor's pricing FAQ: Starter $21 to $22, Growth $38 to $40. Advanced $60 and Ultimate $75 monthly unchanged.",
+   "url": "/deals/capsule-crm.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Semrush",
+   "type": "pricing-corrected",
+   "detail": "SEO entry price corrected $139 to $139.95 per month (about $117.33 billed annually, unchanged). Starter $199 and Pro+ $299 confirmed.",
+   "url": "/deals/semrush.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Xero",
+   "type": "pricing-verified",
+   "detail": "US list prices confirmed on the rendered US pricing page: Simple $10, Early $27, Growing $59, Established $97 per month; 80% off the first 3 months for new customers. No change from the 2026-11-13 correction.",
+   "url": "/deals/xero.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Monday.com",
+   "type": "not-verified",
+   "detail": "Not verified this pass: the vendor's pricing page serves Canadian-dollar pricing with no US-dollar view; recorded US list prices could not be read on a vendor page. Verification date not advanced.",
+   "url": "/deals/monday.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Shopify",
+   "type": "partly-verified",
+   "detail": "Partly verified: Basic US$39 per month (US$29 billed annually) and the $1 per month for 3 months offer confirmed on vendor pages; the full US plan ladder could not be displayed (Canadian-dollar regional pricing served). Verification date not advanced.",
+   "url": "/deals/shopify.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Zoho CRM",
+   "type": "not-verified",
+   "detail": "Not verified this pass: Zoho's pricing page serves Canadian-dollar pricing only from this region; recorded US list prices could not be read on a vendor page. Verification date not advanced.",
+   "url": "/deals/zoho-crm.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Setmore",
+   "type": "partly-verified",
+   "detail": "Partly verified: Free $0 and Pro $5 per user per month billed annually confirmed; the recorded Team tier no longer appears on the vendor's pricing page, so the ladder was not verified as a whole and no change was made. Verification date not advanced.",
+   "url": "/deals/setmore.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Microsoft 365",
+   "type": "partly-verified",
+   "detail": "Partly verified: Business Basic C$9.50 confirmed; the recorded without-Copilot prices for Business Standard and Premium are no longer published on Microsoft's public pricing pages, so the ladder was not verified as a whole and no change was made. Verification date not advanced.",
+   "url": "/deals/microsoft-365.html"
+  },
+  {
+   "date": "2026-11-15",
+   "item": "Klaviyo",
+   "type": "partly-verified",
+   "detail": "Partly verified: Free $0 and Email $20 per month at 500 profiles confirmed; the recorded SMS add-on figure (Canada $18 per 1,000 sends) could not be confirmed after Klaviyo's move to per-message billing, and published sources disagree on the Canadian rate. No change made. Verification date not advanced.",
+   "url": "/deals/klaviyo.html"
+  },
   {
    "date": "2026-11-13",
    "item": "QuickBooks Online",

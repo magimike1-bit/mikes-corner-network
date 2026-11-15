@@ -23,8 +23,7 @@
     },
     "1password-vs-dashlane-business": {
       "dates": [
-        "2026-09",
-        "2026-10-12"
+        "2026-09"
       ],
       "claims": [
         {
@@ -32,41 +31,20 @@
           "dates": [
             "2026-09"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
         }
       ],
       "flags": []
     },
-    "accounting": {
+    "activecampaign-pricing-canada-decoded": {
       "dates": [],
       "claims": [],
       "flags": [
         "no-claim"
       ]
     },
-    "activecampaign-pricing-canada-decoded": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
-    },
     "adobe-acrobat-sign-pricing-decoded": {
       "dates": [
-        "2026-10",
-        "2026-10-12"
+        "2026-10"
       ],
       "claims": [
         {
@@ -74,59 +52,30 @@
           "dates": [
             "2026-10"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
         }
       ],
       "flags": []
     },
     "airtable-pricing-decoded": {
-      "dates": [
-        "2026-10-15"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-15",
-          "dates": [
-            "2026-10-15"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "amex-acceptance-cost-math": {
-      "dates": [
-        "2026-11-03"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-11-03",
-          "dates": [
-            "2026-11-03"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "annual-true-up-traps": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "annual-vs-monthly-math": {
       "dates": [
@@ -147,12 +96,6 @@
         "2026-10-12"
       ],
       "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        },
         {
           "raw_head": "Prices checked 2026-10-12",
           "dates": [
@@ -204,18 +147,11 @@
       "flags": []
     },
     "basecamp-pricing-decoded": {
-      "dates": [
-        "2026-10-15"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-15",
-          "dates": [
-            "2026-10-15"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "beehiiv-pricing-decoded": {
       "dates": [
@@ -239,54 +175,40 @@
       ]
     },
     "calendly-vs-microsoft-bookings": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "canadian-small-business-software-costs-2026": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "canva-pro-vs-teams-pricing": {
       "dates": [
-        "2026-10-11"
+        "2026-11-13"
       ],
       "claims": [
         {
-          "raw_head": "Prices checked 2026-10-11, in USD.",
+          "raw_head": "Prices checked 2026-11-13 against Canva's published US pricing.",
           "dates": [
-            "2026-10-11"
+            "2026-11-13"
           ]
         },
         {
-          "raw_head": "Prices checked 2026-10-11, in USD.",
+          "raw_head": "Prices checked 2026-11-13 against Canva's published US pricing.",
           "dates": [
-            "2026-10-11"
+            "2026-11-13"
           ]
         },
         {
-          "raw_head": "Prices checked 2026-10-11, always confirm current pricing on the vendor's own site before buying.",
+          "raw_head": "Prices checked 2026-11-13, always confirm current pricing on the vendor's own site before buying.",
           "dates": [
-            "2026-10-11"
+            "2026-11-13"
           ]
         }
       ],
@@ -321,18 +243,11 @@
       ]
     },
     "clickup-pricing-decoded": {
-      "dates": [
-        "2026-10-15"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-15",
-          "dates": [
-            "2026-10-15"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "cloudflare-plans-decoded": {
       "dates": [
@@ -348,68 +263,33 @@
       ],
       "flags": []
     },
-    "crm-marketing": {
+    "crm-pay-for-itself-math": {
       "dates": [],
       "claims": [],
       "flags": [
         "no-claim"
       ]
     },
-    "crm-pay-for-itself-math": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
-    },
     "dashlane-business-pricing-decoded": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "data-migration-costs-switching-tools": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "deel-vs-remote-pricing-canada": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "dental-clinic-software-pricing": {
       "dates": [
@@ -430,12 +310,6 @@
           "raw_head": "Prices checked 2026-09-18 to 2026-10-12.",
           "dates": [
             "2026-09-18",
-            "2026-10-12"
-          ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
             "2026-10-12"
           ]
         }
@@ -471,20 +345,6 @@
       "flags": []
     },
     "ecommerce-brand-software-stack-costs": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
-    },
-    "ecommerce": {
       "dates": [],
       "claims": [],
       "flags": [
@@ -512,13 +372,6 @@
       ],
       "flags": []
     },
-    "field-service": {
-      "dates": [],
-      "claims": [],
-      "flags": [
-        "no-claim"
-      ]
-    },
     "figma-seat-pricing-decoded": {
       "dates": [],
       "claims": [],
@@ -527,22 +380,11 @@
       ]
     },
     "free-tier-true-cost": {
-      "dates": [
-        "2026-09-17",
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-09-17, 2026-10-05, and 2026-10-11",
-          "dates": [
-            "2026-09-17",
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "freshbooks-plans-freelancer-math": {
       "dates": [],
@@ -552,37 +394,22 @@
       ]
     },
     "freshbooks-vs-wave-vs-xero-pricing": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "freshdesk-pricing-decoded-canada": {
-      "dates": [
-        "2026-11-01"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-11-01",
-          "dates": [
-            "2026-11-01"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "google-workspace-canada-cad-pricing": {
       "dates": [
-        "2026-10-18",
-        "2026-10-25"
+        "2026-10-18"
       ],
       "claims": [
         {
@@ -596,29 +423,16 @@
           "dates": [
             "2026-10-18"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
         }
       ],
       "flags": []
     },
     "google-workspace-vs-microsoft-365-pricing-canada": {
-      "dates": [
-        "2026-10-18"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-18",
-          "dates": [
-            "2026-10-18"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "goto-meeting-pricing-decoded": {
       "dates": [
@@ -655,26 +469,12 @@
         "no-claim"
       ]
     },
-    "hr-payroll": {
+    "hubspot-service-hub-pricing-tiers": {
       "dates": [],
       "claims": [],
       "flags": [
         "no-claim"
       ]
-    },
-    "hubspot-service-hub-pricing-tiers": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
     },
     "hubspot-starter-vs-pro-jump": {
       "dates": [],
@@ -692,20 +492,13 @@
     },
     "hubspot-vs-salesforce-small-business": {
       "dates": [
-        "2026-09-01",
-        "2026-10-12"
+        "2026-09-01"
       ],
       "claims": [
         {
           "raw_head": "prices checked 2026-09-01 on both vendors' pages),",
           "dates": [
             "2026-09-01"
-          ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
           ]
         }
       ],
@@ -719,18 +512,11 @@
       ]
     },
     "intercom-vs-drift-vs-crisp-pricing": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "klaviyo-pricing-sms-email-math": {
       "dates": [],
@@ -782,29 +568,16 @@
           "dates": [
             "2026-10-12"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
         }
       ],
       "flags": []
     },
     "lightspeed-payments-rate-math": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "lightspeed-pos-pricing-canada": {
       "dates": [
@@ -839,18 +612,11 @@
       "flags": []
     },
     "mailchimp-discount-eligibility-math": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "mailchimp-pricing-contacts-math": {
       "dates": [],
@@ -867,18 +633,11 @@
       ]
     },
     "manufacturing-software-costs": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "marketing-agency-software-stack-costs": {
       "dates": [
@@ -921,8 +680,7 @@
     },
     "microsoft-365-canada-pricing-2026": {
       "dates": [
-        "2026-10-18",
-        "2026-10-25"
+        "2026-10-18"
       ],
       "claims": [
         {
@@ -930,43 +688,23 @@
           "dates": [
             "2026-10-18"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
         }
       ],
       "flags": []
     },
     "monday-pricing-decoded": {
-      "dates": [
-        "2026-10-18"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-18",
-          "dates": [
-            "2026-10-18"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "multi-currency-billing-fees": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "negotiate-saas-renewal": {
       "dates": [],
@@ -1004,43 +742,23 @@
           "dates": [
             "2026-10-12"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
         }
       ],
       "flags": []
     },
     "notion-pricing-decoded-canada": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "notion-vs-asana-pricing": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "notion-vs-confluence-pricing": {
       "dates": [],
@@ -1050,37 +768,22 @@
       ]
     },
     "online-booking-no-show-math": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "paid-faster-invoicing-math": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "pandadoc-pricing-plans-decoded": {
       "dates": [
-        "2026-10",
-        "2026-10-12"
+        "2026-10"
       ],
       "claims": [
         {
@@ -1088,31 +791,11 @@
           "dates": [
             "2026-10"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
         }
       ],
       "flags": []
     },
     "payment-links-vs-invoices-fees": {
-      "dates": [
-        "2026-11-03"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-11-03",
-          "dates": [
-            "2026-11-03"
-          ]
-        }
-      ],
-      "flags": []
-    },
-    "payments-pos": {
       "dates": [],
       "claims": [],
       "flags": [
@@ -1120,18 +803,11 @@
       ]
     },
     "per-seat-minimums-tier-rungs": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "per-seat-vs-flat-pricing": {
       "dates": [],
@@ -1163,6 +839,7 @@
     },
     "pos-hardware-costs-canada": {
       "dates": [
+        "2026-10-20",
         "2026-10-29"
       ],
       "claims": [
@@ -1171,23 +848,23 @@
           "dates": [
             "2026-10-29"
           ]
+        },
+        {
+          "raw_head": "prices checked 2026-10-20 to 2026-10-29, including the rental crossover.",
+          "dates": [
+            "2026-10-20",
+            "2026-10-29"
+          ]
         }
       ],
       "flags": []
     },
     "premium-support-tier-costs": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "quickbooks-online-tiers-canada-decoded": {
       "dates": [],
@@ -1197,18 +874,11 @@
       ]
     },
     "quickbooks-vs-sage-50-canada": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "read-saas-pricing-pages": {
       "dates": [],
@@ -1224,12 +894,6 @@
       "claims": [
         {
           "raw_head": "Prices checked 2026-10-12. USD as listed",
-          "dates": [
-            "2026-10-12"
-          ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
           "dates": [
             "2026-10-12"
           ]
@@ -1277,66 +941,32 @@
       "flags": []
     },
     "saas-audit-checklist": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "saas-auto-renewal-traps": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "saas-compliance-costs-soc2-pipeda": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "saas-contract-red-flags": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "saas-discount-calendar": {
       "dates": [],
@@ -1346,92 +976,46 @@
       ]
     },
     "saas-implementation-fees-explained": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "saas-onboarding-training-costs": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "saas-price-increase-clauses": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "saas-procurement-small-teams": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "saas-vendor-lock-in-exit-costs": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "sage-50-pricing-canada-decoded": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "salesforce-editions-pricing-decoded": {
       "dates": [],
@@ -1441,34 +1025,13 @@
       ]
     },
     "salesforce-total-cost-beyond-licence": {
-      "dates": [
-        "2026-11-10"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-11-10",
-          "dates": [
-            "2026-11-10"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "salon-spa-software-pricing": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
-    },
-    "scheduling": {
       "dates": [],
       "claims": [],
       "flags": [
@@ -1476,36 +1039,18 @@
       ]
     },
     "seat-license-optimization": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "seat-vs-usage-based-pricing": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "semrush-vs-ahrefs-canada-pricing": {
       "dates": [],
@@ -1514,42 +1059,19 @@
         "no-claim"
       ]
     },
-    "seo-marketing": {
+    "shadow-it-cost-control": {
       "dates": [],
       "claims": [],
       "flags": [
         "no-claim"
       ]
     },
-    "shadow-it-cost-control": {
-      "dates": [
-        "2026-10-05",
-        "2026-10-11"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05 and 2026-10-11",
-          "dates": [
-            "2026-10-05",
-            "2026-10-11"
-          ]
-        }
-      ],
-      "flags": []
-    },
     "shopify-dollar-a-month-promo-real-savings": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "shopify-plus-breakeven-when-worth-it": {
       "dates": [],
@@ -1559,49 +1081,28 @@
       ]
     },
     "shopify-vs-squarespace-ecommerce-fees": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "signnow-pricing-decoded": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "slack-pricing-decoded-small-teams": {
       "dates": [
-        "2026-10-18",
-        "2026-10-25"
+        "2026-10-18"
       ],
       "claims": [
         {
           "raw_head": "prices checked October 18, 2026. Free-plan history limit as published by Slack at check time. General information only, not financial advice.",
           "dates": [
             "2026-10-18"
-          ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
           ]
         }
       ],
@@ -1615,18 +1116,11 @@
       ]
     },
     "smartsheet-pricing-decoded": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "square-fees-volume": {
       "dates": [],
@@ -1636,46 +1130,25 @@
       ]
     },
     "square-interac-debit-fees-canada": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "square-offline-mode-limits": {
-      "dates": [
-        "2026-11-03"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-11-03",
-          "dates": [
-            "2026-11-03"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "stack-saas-discounts": {
-      "dates": [
-        "2026-10-05"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-05",
-          "dates": [
-            "2026-10-05"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "stripe-vs-square-canada-rates": {
       "dates": [],
@@ -1736,12 +1209,6 @@
           "dates": [
             "2026-10-25"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
         }
       ],
       "flags": []
@@ -1753,12 +1220,6 @@
       "claims": [
         {
           "raw_head": "Prices checked October 25, 2026",
-          "dates": [
-            "2026-10-25"
-          ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
           "dates": [
             "2026-10-25"
           ]
@@ -1776,12 +1237,6 @@
           "dates": [
             "2026-10-25"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
         }
       ],
       "flags": []
@@ -1793,12 +1248,6 @@
       "claims": [
         {
           "raw_head": "Prices checked October 25, 2026",
-          "dates": [
-            "2026-10-25"
-          ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
           "dates": [
             "2026-10-25"
           ]
@@ -1816,12 +1265,6 @@
           "dates": [
             "2026-10-25"
           ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
         }
       ],
       "flags": []
@@ -1833,12 +1276,6 @@
       "claims": [
         {
           "raw_head": "Prices checked October 25, 2026",
-          "dates": [
-            "2026-10-25"
-          ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-25",
           "dates": [
             "2026-10-25"
           ]
@@ -1855,8 +1292,7 @@
     },
     "trades-job-management-software-pricing": {
       "dates": [
-        "2026-10",
-        "2026-10-12"
+        "2026-10"
       ],
       "claims": [
         {
@@ -1875,44 +1311,24 @@
           "raw_head": "Prices checked October 2026.",
           "dates": [
             "2026-10"
-          ]
-        },
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
           ]
         }
       ],
       "flags": []
     },
     "trello-pricing-breakdown": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "wagepoint-fee-schedule-2026-explained": {
-      "dates": [
-        "2026-10-25"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-25",
-          "dates": [
-            "2026-10-25"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "wagepoint-vs-humi-vs-knit-payroll-pricing": {
       "dates": [],
@@ -1990,47 +1406,33 @@
       ],
       "flags": []
     },
-    "work-management": {
+    "wrike-pricing-decoded": {
       "dates": [],
       "claims": [],
       "flags": [
         "no-claim"
       ]
-    },
-    "wrike-pricing-decoded": {
-      "dates": [
-        "2026-10-15"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-15",
-          "dates": [
-            "2026-10-15"
-          ]
-        }
-      ],
-      "flags": []
     },
     "xero-vs-quickbooks-canada-pricing": {
+      "dates": [
+        "2026-10-27"
+      ],
+      "claims": [
+        {
+          "raw_head": "prices checked 2026-10-27. At the comparable mid tier. Xero Standard vs QuickBooks Plus. Xero is $50/month cheaper on subscription. But subscriptions are only the first line of the bill.",
+          "dates": [
+            "2026-10-27"
+          ]
+        }
+      ],
+      "flags": []
+    },
+    "zapier-make-middleware-costs": {
       "dates": [],
       "claims": [],
       "flags": [
         "no-claim"
       ]
-    },
-    "zapier-make-middleware-costs": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
     },
     "zendesk-vs-freshdesk-vs-intercom-pricing": {
       "dates": [],
@@ -2040,18 +1442,11 @@
       ]
     },
     "zoho-books-pricing-canada-decoded": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "zoho-one-vs-zoho-crm-pricing": {
       "dates": [
@@ -2086,18 +1481,11 @@
       "flags": []
     },
     "zoom-pricing-decoded": {
-      "dates": [
-        "2026-10-18"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-18",
-          "dates": [
-            "2026-10-18"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     },
     "zoom-vs-google-meet-pricing-canada": {
       "dates": [],
@@ -2107,18 +1495,11 @@
       ]
     },
     "zoom-vs-teams-vs-meet-small-business": {
-      "dates": [
-        "2026-10-12"
-      ],
-      "claims": [
-        {
-          "raw_head": "Prices checked 2026-10-12",
-          "dates": [
-            "2026-10-12"
-          ]
-        }
-      ],
-      "flags": []
+      "dates": [],
+      "claims": [],
+      "flags": [
+        "no-claim"
+      ]
     }
   }
 }

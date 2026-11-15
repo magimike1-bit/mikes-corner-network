@@ -35,8 +35,8 @@
    "slug": "semrush",
    "name": "Semrush",
    "category": "SEO & Marketing",
-   "priceText": "From $139 per month",
-   "priceSort": 139,
+   "priceText": "From $139.95 per month",
+   "priceSort": 139.95,
    "dealHeadline": null,
    "country": null,
    "url": "/deals/semrush.html"
@@ -425,8 +425,8 @@
    "slug": "squarespace",
    "name": "Squarespace",
    "category": "Ecommerce",
-   "priceText": "From $16 per month",
-   "priceSort": 16,
+   "priceText": "From $19 per month",
+   "priceSort": 19,
    "dealHeadline": null,
    "country": null,
    "url": "/deals/squarespace.html"

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Double NAT: Symptoms, the Two-Minute Check, and the Three Fixes | Fix Your Wi-Fi</title>
+<meta name="description" content="Double NAT rarely slows browsing. It breaks port forwarding, console NAT type, and remote access. Read the WAN address to prove it, tell it apart from carrier-grade NAT, and pick from three fixes compared.">
+<!-- AdSense: ad code goes here -->
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Fix Your Wi-Fi</a>
+    <p class="tagline">Plain-English fixes for slow, spotty home Wi-Fi</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="../index.html">&larr; All guides</a>
+  <h1>Double NAT: symptoms, the two-minute check, and the three fixes</h1>
+  <p class="meta">Troubleshooting &middot; 8 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/double-nat-symptoms-and-fix.jpg" alt="Illustration of two routers in a chain each adding a tag to the same envelope before it reaches a game controller" loading="lazy" width="1200" height="675">
+</figure>
+
+
+
+  <p>Double NAT gets blamed for slow internet constantly, and it almost never
+  deserves it. Two routers doing address translation in a chain does not slow
+  ordinary browsing, streaming, email, or video calls in any way most people
+  can measure. Google's own guidance says that for most people a double NAT
+  configuration creates no noticeable effect. So if pages load slowly, this is
+  the wrong suspect. What double NAT actually breaks is a specific, annoying
+  list, and if your problem is on that list, one two-minute check settles
+  whether you have it.</p>
+
+  <h2>What double NAT breaks, and what it does not</h2>
+  <p>NAT, network address translation, is how one public address serves every
+  device in a house: the router swaps private addresses for the public one as
+  traffic passes. Double NAT is what happens when two devices do that job in
+  a chain, usually the provider's gateway and your own router plugged into
+  it. Outbound traffic survives the double translation fine, which is why
+  everyday use feels normal. Inbound and peer-to-peer traffic is where the
+  second translation bites:</p>
+  <ul>
+    <li>A game console reporting a moderate, strict, or double NAT type on
+    its network test.</li>
+    <li>A port forwarding rule that is set correctly on your router, yet the
+    service stays unreachable from outside, because the gateway in front of
+    the router never passes the traffic through.</li>
+    <li>UPnP opening a port on the inner router only, with no matching path
+    through the outer one.</li>
+    <li>Hosting a game, reaching a home camera, NAS, or media server from
+    away, VPN hosting, remote access, or DDNS misbehaving.</li>
+    <li>Devices connected to the gateway's network and devices on your
+    router's network failing to discover each other for casting, printing, or
+    local sharing.</li>
+  </ul>
+  <p>And the negative list matters just as much: double NAT does not
+  automatically explain slow downloads, high ping, jitter, or packet loss.
+  Chasing it as a speed fix wastes an afternoon. One more false suspect to
+  clear: a plain cable modem or a fibre ONT that only converts the signal
+  and hands your router a public address is not a router and creates no
+  double NAT at all.</p>
+
+  <h2>The two-minute check: read the WAN address</h2>
+  <p>Every router shows the address it received on its internet connection.
+  That one number separates three different situations.</p>
+  <ol>
+    <li><strong>Open your router's status page.</strong> Use the maker's app,
+    or log in at the address on the router's label (commonly 192.168.1.1 or
+    192.168.0.1), and find the Internet or WAN status section.</li>
+    <li><strong>Read the WAN IP address</strong> and match its range:
+      <ul>
+        <li><strong>10.x.x.x, 172.16.x.x to 172.31.x.x, or
+        192.168.x.x:</strong> a private RFC 1918 address. Something in front
+        of your router is routing. That is home double NAT, and the fixes
+        below apply.</li>
+        <li><strong>100.64.x.x to 100.127.x.x:</strong> the shared address
+        space reserved for carrier-grade NAT (RFC 6598). The second
+        translation is happening at the provider, not in your house. No home
+        setting removes it; skip to the decision section.</li>
+        <li><strong>Anything else:</strong> a public address. Your router is
+        already the only translator, and double NAT is not your problem.</li>
+      </ul>
+    </li>
+    <li><strong>Photograph or write down the current settings</strong> on
+    both the gateway and your router before changing anything, so every step
+    below is reversible.</li>
+  </ol>
+  <p><strong>What success looks like at this stage:</strong> you can name
+  which of the three situations you are in from one number, instead of
+  guessing from symptoms.</p>
+
+  <h2>Three fixes, and what each one switches off</h2>
+  <p>Every real fix does the same thing: it leaves exactly one device routing.
+  They differ in which box keeps the job, and in what you give up. Never put
+  both devices into bridge or access point mode; a home network still needs
+  one device routing, assigning addresses, and running the firewall.</p>
+  <table>
+    <thead>
+      <tr><th>Fix</th><th>Which box routes</th><th>What it switches off</th><th>Best for</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bridge mode on the ISP gateway</td>
+        <td>Your router</td>
+        <td>Gateway routing and gateway Wi-Fi. On Xfinity, network management
+        in the app and WiFi Extenders also stop working, and bridge mode is
+        unavailable with Xfinity CyberSecure or with extenders already
+        activated.</td>
+        <td>Homes that bought their own router or mesh to run the network.
+        NETGEAR recommends this route wherever the gateway supports it.</td>
+      </tr>
+      <tr>
+        <td>IP Passthrough on the gateway (AT&amp;T)</td>
+        <td>Your router, using the gateway's public address</td>
+        <td>The gateway's firewall protection for the passthrough device; your
+        router's firewall takes over that job. The gateway itself stays in
+        place and powered.</td>
+        <td>AT&amp;T fibre customers, because BGW210 and BGW320 gateways have
+        no bridge mode. Passthrough is AT&amp;T's documented alternative.</td>
+      </tr>
+      <tr>
+        <td>Access point mode on your router</td>
+        <td>The ISP gateway</td>
+        <td>Most of your router's routing features. On NETGEAR models they are
+        greyed out in the interface once AP mode is on. Your router becomes
+        Wi-Fi coverage only.</td>
+        <td>Gateways that cannot bridge or pass through, or homes happy to
+        let the gateway run the network and keep their router purely for
+        coverage.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>One honest limit applies to the whole table: where the provider itself
+  runs carrier-grade NAT, as on T-Mobile and Starlink default plans, the
+  provider's translation stays in place no matter which home fix you choose.
+  The home fixes still unify your in-house network, but inbound connections
+  from the internet remain limited by the provider layer.</p>
+
+  <h2>The fix, step by step</h2>
+  <p>Worked for the most common case, an Xfinity gateway with your own router
+  behind it, with the AT&amp;T and AP mode variations marked where they
+  branch.</p>
+  <ol>
+    <li><strong>Confirm the diagnosis first</strong> with the WAN address
+    check above. A private WAN address on your router is the green light.</li>
+    <li><strong>Xfinity: open the gateway Admin Tool.</strong> From a device
+    connected to the gateway, go to 10.0.0.1 and sign in. Select Gateway,
+    then At a Glance.</li>
+    <li><strong>Enable Bridge Mode</strong> and click OK on the warning. The
+    gateway restarts. Only one device can connect to it afterwards, on any of
+    its Ethernet ports, and that device must be your router, so plug your
+    router's WAN port into the gateway now.
+    <br><strong>AT&amp;T instead:</strong> go to 192.168.1.254, open Firewall,
+    then IP Passthrough. Set Allocation Mode to Passthrough and Passthrough
+    Mode to DHCPS-fixed, then enter your router's MAC address in the
+    Passthrough Fixed MAC Address field and save.</li>
+    <li><strong>Restart in order.</strong> Restart the gateway first and wait
+    for its connection light to stabilise, then restart your router. On
+    AT&amp;T, a restart of both boxes may be needed before the router picks
+    up the new address.</li>
+    <li><strong>AP mode variation:</strong> if your gateway offers neither
+    bridge mode nor passthrough, leave the gateway routing and convert your
+    router instead. On a NETGEAR router, sign in at routerlogin.net, select
+    ADVANCED, then Advanced Setup, then Wireless AP, select AP Mode, and
+    click Apply. Other brands place the same setting under an operation mode
+    or AP mode menu.</li>
+    <li><strong>Re-run the WAN address check</strong> on your router, then
+    re-test the thing that was broken: the console network test, the port
+    forward from outside, or the camera from your phone with Wi-Fi off.</li>
+  </ol>
+  <p><strong>What success looks like:</strong> after a bridge or passthrough
+  fix, your router's WAN address is a public address, not a 10, 172, or
+  192.168 one, and the console reports an open or moderate NAT type instead
+  of double NAT, or the forwarded service answers from outside. After an AP
+  mode fix, every device in the house sits on the gateway's single network
+  and can discover the others. If the WAN address still starts with 100.64
+  to 100.127, the remaining translation is the provider's, and the honest
+  options are to ask the provider about a public address or a static IP, or
+  to accept the limit for inbound connections while everything outbound works
+  normally. To undo the Xfinity change, connect a computer to the gateway by
+  Ethernet, sign in at 10.0.0.1, and set Bridge Mode back to Disable.</p>
+
+  <h2>Bottom line: which box should route</h2>
+  <p>The decision is simpler than the menu names suggest. If you bought your
+  own router or mesh because you wanted it in charge, bridge the gateway, or
+  use passthrough where bridge mode does not exist, and let your router hold
+  the public address, the firewall, and every rule in one place. If the
+  gateway is newer than the router behind it, or the gateway cannot be
+  bridged, reverse the arrangement: gateway routes, router becomes an access
+  point, and the second network disappears. Either direction fixes the fault.
+  The only wrong answers are leaving both boxes routing once you have proven
+  double NAT is your problem, and bridging both boxes so nothing routes at
+  all.</p>
+
+  <p class="disclaimer">General information about home networking, not
+  professional IT advice. Gateway menus and provider features vary by model
+  and plan; check the provider's support pages for a specific gateway before
+  changing its mode.</p>
+
+  <p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer">This site provides general information about home networking. It is not professional IT advice. If you are unsure about changing your router's settings, check your router's manual or ask your internet provider.</p>
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="../privacy-policy.html">Privacy Policy</a> &middot; <a href="../terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

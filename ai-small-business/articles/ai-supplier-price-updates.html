@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for Supplier Price List Updates: Turn a New Price List Into a Checked Change List | AI for Small Business</title>
+<meta name="description" content="A supplier price list lands with hundreds of lines. Exact matching belongs to XLOOKUP or a Power Query merge, AI belongs on the rows formulas cannot match, and the counts have to reconcile before any shop price changes.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark">AI</span> Small Business Playbook</a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      <a href="/#guides">Guides</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/ai-cost-simulator.html">Cost Simulator</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap article-layout">
+  <article class="article">
+    <p class="kicker">Operations</p>
+    <h1>AI for Supplier Price List Updates: Turn a New Price List Into a Checked Change List</h1>
+    <p class="lede">Your supplier just sent a new price list. Which prices actually changed, which lines are new, and which lines quietly disappeared? The reliable answer splits the work in two: formulas do the exact matching they are documented to do, and an AI assistant handles only the leftover rows that formulas cannot match, with every AI suggestion checked before it touches a price.</p><figure class="post-figure">
+  <img class="post-image" src="../images/ai-supplier-price-updates.jpg" alt="Flat illustration of two printed price lists side by side with a magnifying glass and a pencil marking changed rows" loading="lazy" width="1200" height="800">
+  <figcaption>Two versions of the same list, compared row by row: the changes are the deliverable.</figcaption>
+</figure>
+
+
+    <p class="meta">Published 2026-11-20 &middot; Last updated 2026-11-20</p>
+
+<h2>What counts as changed? Four groups, not a feeling</h2>
+<p>Start with the structure of the problem, because it decides which tool does what. When two versions of a list are compared by a key column, a column that identifies each row and does not change between versions, such as a product code or SKU, every row lands in exactly one of four groups: matched and identical, matched with a different price, present only in the old list, or present only in the new list. The first group needs no action. The second group is your reprice list. The third group is your discontinued list, and the fourth is your new lines list. Any comparison that cannot sort every row into one of those four groups is not finished, whatever tool produced it.</p>
+<p>Two traps sit inside the exact matching itself, and both are documented rather than hypothetical. The first is type mismatch: a product code stored as text never matches the same code stored as a number, so a row can report as missing from both lists while sitting in plain sight in each one. The second is formatting noise: 1200 in one file and 1,200.00 in the other, or a trailing space after a name, can register as a change that never happened. Clean those two things first and the exact match becomes trustworthy. Skip them and every later step, AI included, builds on false differences.</p>
+
+<h2>Four routes, checked against what they are documented to do</h2>
+<p><strong>XLOOKUP in Excel.</strong> Microsoft documents XLOOKUP as matching exactly by default: the match mode for exact match is the default setting, and the function takes an optional if_not_found argument that returns text you supply, such as Not in new list, instead of an error. That makes it the right first pass when both lists carry the same product code. Two limits matter: XLOOKUP is not available in Excel 2016 or Excel 2019, and it only finds what the key can match, so a renamed product with a new code reads as one removal plus one addition.</p>
+<p><strong>A Power Query merge.</strong> Where the same comparison runs every week, or a code can appear twice, Microsoft documents the stronger route: a merge with a full outer join, which brings in all rows from both tables whether or not they match. Run in both directions by construction, it produces the four groups directly, and the merge can be saved and refreshed when the next list arrives instead of being rebuilt by hand.</p>
+<p><strong>Uploading both lists to a chatbot.</strong> A general assistant can read two uploaded files and talk through the differences in plain language, which is genuinely useful for a small, one off list. The weakness is proof: the work happens out of sight, in a conversation, and the four group counts still have to be produced and checked by someone. Treat its output as a draft change list, never as the record.</p>
+<p><strong>Copilot inside Excel.</strong> The in workbook AI route keeps the files where they already live and can help phrase the comparison and summarise the changes. It rides on a Microsoft 365 subscription rather than standing alone, and it inherits the same rule as every AI route here: its summary is a draft until the counts reconcile.</p>
+<table>
+<thead><tr><th>Route</th><th>Matches on</th><th>Handles renamed or repacked items?</th><th>Proof it produces</th></tr></thead>
+<tbody>
+<tr><td>XLOOKUP</td><td>Exact product code, exact match by default</td><td>No. A new code reads as a removal plus an addition</td><td>The formula itself, plus an if_not_found label for unmatched rows</td></tr>
+<tr><td>Power Query full outer merge</td><td>Exact key, all rows from both lists kept</td><td>No, but it isolates every unmatched row in one place for review</td><td>A refreshable table sorted into the four groups</td></tr>
+<tr><td>Chatbot file upload</td><td>Whatever the assistant can read across both files, including names</td><td>It can propose matches, and each proposal needs a human check</td><td>None by itself. The four group counts still have to be produced and verified</td></tr>
+<tr><td>Copilot in Excel</td><td>Works inside the workbook on the same keys and columns</td><td>It can suggest, with the same verification rule as the upload route</td><td>A summary draft. The underlying comparison still has to reconcile</td></tr>
+</tbody>
+</table>
+<p>Prices for the AI routes, checked on 2026-11-20: ChatGPT Plus, which includes file uploads and analysis, is US$20 per month billed monthly on OpenAI's help pages, with API use billed separately. Microsoft lists Microsoft 365 Business Standard with Copilot at US$23.50 per user per month paid yearly, and a dated rollout note reading Microsoft's own pricing put the Copilot Business add-on at US$18 per user per month paid yearly on a promotion running to December 31, 2026, against a US$21 regular price. The formula routes cost nothing beyond the spreadsheet you already run. Verify the price in your own account before spending, because plan names and promotions move.</p>
+
+<h2>The update procedure: match, isolate, verify, reconcile</h2>
+<ol>
+<li><strong>Freeze both files.</strong> Save the current list and the new list under dated names and work on copies. The dated originals are what you check against when a number looks wrong later.</li>
+<li><strong>Agree the key.</strong> Pick the column that identifies a product in both lists, usually the supplier product code. Confirm both copies store it the same way, all text or all numbers, and trim stray spaces before matching anything.</li>
+<li><strong>Run the exact match first.</strong> Use XLOOKUP with an if_not_found label, or a Power Query full outer merge, to sort every row into the four groups: unchanged, price changed, only in old, only in new.</li>
+<li><strong>Isolate the unmatched rows.</strong> Pull the only in old and only in new rows into a separate review list. This small remainder, not the whole price list, is where the next step happens.</li>
+<li><strong>Run the AI pass on the remainder only.</strong> Give the assistant the review list and ask for proposed pairings with a reason for each one, such as a renamed product or a changed pack size. Ask for proposals in a table, not for updated prices.</li>
+<li><strong>Verify every proposal against both files.</strong> A pairing is accepted only when a person can see why the two rows are the same product: same pack contents, same unit size, or a supplier note confirming the rename. Anything unverified stays unmatched and is treated as a removal plus a new line.</li>
+<li><strong>Reconcile the counts, then reprice.</strong> Check that old list rows equal matched rows plus removed rows, and new list rows equal matched rows plus added rows. Only when both sums balance do the verified price changes go into your shop or accounting system, biggest rises first.</li>
+</ol>
+<p><strong>What success looks like:</strong> every row of both lists sits in exactly one of the four groups, the two count equations balance, every AI proposed pairing carries a human verified reason, and no price in your system changed from an unverified suggestion.</p>
+
+<h2>The AI pass: only for the rows the formulas cannot match</h2>
+<p>The case for using AI at all rests on a real and common failure of exact matching. Some suppliers send price lists with product names and prices only, no product codes at all, sometimes weekly. Sellers in that position have been told for years that name matching demands the names be character for character identical in both lists, extra spaces and punctuation included, which makes the formula route fragile exactly where the list is messiest. A renamed product, a pack that moved from 12 units to 10, or a description rewritten by the supplier all defeat the key while remaining obvious to a reader.</p>
+<p>That reading work is what the assistant is for, and its limits are the point. A proposed pairing is a hypothesis about two rows, and hypotheses about pack sizes are exactly where money leaks: treat a 10 pack as the same line as the 12 pack it replaced and your per unit cost is wrong on every sale until someone notices. So the AI pass proposes, a person disposes, and the unit size, pack count, and price per unit get compared on every accepted pairing. Keep the review list small by running the exact match first and the temptation to hand the assistant the whole file, and your prices with it, goes away.</p>
+
+<h2>Decide the rises before you reprice anything</h2>
+<p>A verified change list is still not a decision. Work it in this order. First, the discontinued group: anything you still hold stock of needs a plan, and anything on a customer quote needs a conversation before the quote expires. Second, the rises, ranked by percentage rather than by dollars, because a small dollar rise on a low priced, high volume line usually costs more margin than a large rise on a slow line. For each of your top rises, the choice is one of three: pass it on in your selling price, absorb it and accept the thinner margin, or find the product elsewhere. Third, the new lines: add them deliberately, with a selling price set from the new cost, not copied from whatever they resemble.</p>
+<p>None of that requires the AI. It requires the change list to be complete and verified, which is what the procedure above buys you. The formulas did the counting, the assistant did the reading, and the decisions stayed where they belong.</p>
+<p><em>General information only, not financial advice. Prices and plan details were checked on 2026-11-20 and change often; confirm current pricing in your own accounts before you spend.</em></p>
+<p>, Dex Carter, Tech Writer</p>
+    <section class="keep-reading"><h2>Keep reading: Operations</h2><ul>
+      <li><a href="/articles/ai-spreadsheet-cleanup.html">AI Spreadsheet Cleanup for Small Business: Fix the List Without Breaking It</a></li>
+      <li><a href="/articles/ai-inventory.html">Inventory Forecasting with AI for Small Shops</a></li>
+      <li><a href="/articles/ai-invoice-capture.html">AI Invoice Capture and Document Processing</a></li>
+      <li><a href="/articles/ai-supplier-email-prep.html">Supplier Emails With AI Prep: Draft Faster, Commit to Nothing by Accident</a></li>
+    </ul></section>
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p><strong>AI Small Business Playbook</strong>, practical starter guides for small business owners researching AI tools. AI products change quickly: verify features and pricing before you spend money. Nothing here is professional financial, legal, or tax advice.</p>
+    <nav><a href="/">Home</a><a href="/#guides">All guides</a><a href="/roi-calculator.html">ROI Calculator</a><a href="/ai-cost-simulator.html">Cost Simulator</a><a href="/about.html">About</a></nav>
+  <p class="footer-nav"><a href="/about.html">About</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a></p>
+</div>
+</footer>
+</body>
+</html>

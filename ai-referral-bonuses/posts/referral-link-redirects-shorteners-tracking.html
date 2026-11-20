@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referral Link Redirects and Shorteners: What Each Hop Does to Tracking | AI Referral Bonuses</title>
+<meta name="description" content="Does shortening a referral link break tracking? The status codes checked against the HTTP specification, the three redirect methods ranked, the program terms line between shortening and manipulation, and the expanded URL test.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">AI Referral Bonuses</a><p class="tagline">Every verified AI referral &amp; affiliate bonus, in one filterable list</p><nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy-policy.html">Privacy</a></nav></div></header>
+<main class="wrap"><p><a href="/">&larr; All programs and guides</a></p>
+
+<h1>Referral Link Redirects and Shorteners: What Each Hop Does to Tracking</h1>
+<p class="meta">Guides &middot; Published 2026-11-20 &middot; Last updated 2026-11-20</p><figure class="post-figure">
+  <img class="post-image" src="../images/referral-link-redirects-shorteners-tracking.jpg" alt="Three rounded arrows passing a golden key along above an empty browser window outline" loading="lazy" width="2736" height="912">
+  <figcaption>Every hop hands the click along. What matters is whether the key, your identifying parameters, arrives with it.</figcaption>
+</figure>
+
+
+<p>Does shortening a referral link break its tracking? The short answer: a redirect, by itself, does not. What breaks tracking is specific and checkable. The destination URL loses the parameters that identify you, the landing page lacks the snippet that records the click, or the program&rsquo;s terms classify your redirect as manipulation rather than shortening. Everything else, including the popular argument about which status code to pick, matters less than shortener guides claim. The evidence, in order.</p>
+<h2>What a redirect actually is, in spec terms</h2>
+<p>MDN&rsquo;s HTTP redirection guide, the reference this article checks vendor advice against, defines the mechanism plainly. A server answers a request with a status code in the 3xx range and a Location header holding the URL to load next. The browser loads that URL immediately. Two costs are built in: an extra round trip on every hop, and a performance impact that grows with each redirect added, which is why the guide advises keeping redirects to a minimum. A referral link that passes through a shortener, then a tracking platform, then the vendor has already spent three hops before the page starts loading.</p>
+<p>The guide also settles the order of methods. HTTP redirects execute first, before any page exists. JavaScript redirects, set through window.location, execute next. Meta refresh redirects execute last, after the page has completely loaded. When server control is available, the guide&rsquo;s advice is to use HTTP redirects. For a referral link, that ranking has a practical edge: a meta refresh page is an extra page that must load, render, and fire before the visitor moves on, and anything that interrupts that page interrupts the hop.</p>
+<h2>The status codes, checked against the spec</h2>
+<p>Shortener guides typically recommend 301 for stable links and 302 for promotions that might be reverted. Digistore24&rsquo;s cloaking guide states exactly that pairing, and adds that its platform reads the cookie stored at the moment of the first click to attribute later purchases. The recommendation is workable, but the reasoning usually offered for it is habit, not specification. Here is what the codes actually guarantee, from the MDN table:</p>
+<table>
+<thead><tr><th>Code</th><th>Class</th><th>Method handling</th><th>What crawlers do</th></tr></thead>
+<tbody>
+<tr><td>301</td><td>Permanent</td><td>GET unchanged; other methods may or may not change to GET</td><td>Update to the new URL and stop using the old one</td></tr>
+<tr><td>308</td><td>Permanent</td><td>Method and body not changed</td><td>Update to the new URL</td></tr>
+<tr><td>302</td><td>Temporary</td><td>GET unchanged; other methods may or may not change to GET</td><td>Do not memorise the new URL</td></tr>
+<tr><td>303</td><td>Temporary</td><td>Other methods changed to GET, body lost</td><td>Do not memorise the new URL</td></tr>
+<tr><td>307</td><td>Temporary</td><td>Method and body not changed</td><td>Do not memorise the new URL</td></tr>
+</tbody>
+</table>
+<p>For a referral click, which is a GET request, every code in the table carries the visitor and the full destination URL, parameters included, to the same place. The differences that matter are the two in the last columns. A permanent code tells crawlers and browsers that the short address is settled, which is the wrong signal for a destination you intend to swap during a promotion. A temporary code keeps the short address authoritative. Method handling, the distinction the 307 and 308 codes exist to protect, is real and irrelevant here: there is no request body in a link click for a redirect to preserve or lose. Choose the code by permanence, not by folklore.</p>
+<h2>Where tracking actually breaks</h2>
+<p>PartnerStack&rsquo;s troubleshooting documentation names the failure points, and none of them is a status code. First, the expanded destination URL must still carry the identifying parameters: the documentation&rsquo;s test is to follow the partner link in an incognito window and confirm the fully expanded URL includes a GSPK or ps_partner_key, the partner key, and a GSXID or ps_xid, the click ID. A shortener that rebuilds the destination and drops the query string fails this test completely, whatever code it returns. Second, where the integration uses the platform&rsquo;s JavaScript snippet, the customer must land on a page that carries the snippet. No snippet on the destination page means no customer capture, so a redirect to a deep page the program never instrumented loses the referral at the last hop. Third, the click places a cookie in the visitor&rsquo;s browser, and a sign-up completed in a different browser or on a different device does not track. That failure has nothing to do with your redirect at all, and no choice of shortener fixes it.</p>
+<h2>Where shortening ends and manipulation begins</h2>
+<p>The technical answer is incomplete without the contractual one, because a redirect can track perfectly and still breach the program&rsquo;s terms. Descript&rsquo;s affiliate terms, in this site&rsquo;s directory, draw the line in three clauses that deserve to be read together. Affiliates must use the unique URL obtained from the affiliate interface without manipulation. The same section expressly permits shortening that URL through URL shortener services. And a separate clause prohibits direct linking to the company&rsquo;s website from any online ad, or using redirects that yield the same result, which the terms name URL hijacking; affiliates must send ad traffic to an actual page of their own first.</p>
+<p>Put together, the pattern is consistent. Shortening is allowed because it changes how the link looks, not where the click is recorded or who appears to have sent it. Manipulation begins where the redirect changes the substance: a different destination than the issued link intends, an ad click dressed up as a content click, or a hop inserted to intercept traffic meant for someone else. The test is not whether a redirect exists. It is whether the program, reading its own terms, would call the result the same link it issued.</p>
+<h2>Verify the hop before you share the link</h2>
+<ol>
+<li><strong>Copy the issued link exactly.</strong> Start from the affiliate interface URL, unmodified. Any shortening is applied to that string, never to a rebuilt version of it.</li>
+<li><strong>Create the short link and open it in a private window.</strong> Private mode removes your own cookies and extensions from the test, so what you observe is the hop a stranger&rsquo;s browser makes.</li>
+<li><strong>Read the fully expanded destination URL.</strong> Confirm the partner key and click ID parameters are present in the final address, using the platform&rsquo;s own parameter names where it publishes them. Missing parameters mean the shortener rebuilt the URL; change the setting or the tool.</li>
+<li><strong>Confirm the landing page is an instrumented one.</strong> Use the program&rsquo;s default destination unless the program confirms the deep page carries its tracking. A prettier landing page that lacks the snippet earns nothing.</li>
+<li><strong>Check the redirect class matches your intent.</strong> Temporary for destinations you may swap, permanent only for addresses you are committing to. One hop where one will do; every extra redirect is latency a share of visitors will not wait through.</li>
+<li><strong>Read the program&rsquo;s link clauses before the first paid placement.</strong> Shortening permission, manipulation wording, and any rule about ads and redirects, in the terms, not in a forum summary.</li>
+</ol>
+<p><strong>What success looks like:</strong> the private window test lands on the intended page, the expanded URL carries both identifying parameters, and the dashboard records the click against your account. At that point the redirect is verified as a hop, not trusted as one.</p>
+<section class="note"><h2>Important: no income guarantees</h2><p>This article is general information, not financial or tax advice. Referral and affiliate rewards are never guaranteed income, and a verified redirect cannot promise that a referral will be recorded or credited. Specification details and program terms described here were checked against the named sources in November 2026 and can change; confirm current terms on the official program page. Report any income you do receive as your local tax rules require.</p></section>
+<p>, Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer"><div class="wrap"><p class="ai-disclosure">Made mostly by AI with human oversight. Built with <a href="https://muse.ai/join">Muse</a>.</p><p>AI Referral Bonuses, a directory of AI referral and affiliate programs. Bonus terms change frequently; always confirm current terms on the official program page. Content is for general information only.</p><p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p></div></footer>
+</body>
+</html>

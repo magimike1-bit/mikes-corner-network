@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agents for Spreadsheets and Reports: Safe Workflows, Checks, and Handoff Formats | Using AI Agents</title>
+<meta name="description" content="A spreadsheet agent run is a delivery, not a chat. Pick the risk tier first, run a pre-flight on the data shape, require control totals, and accept the work only as a three part handoff.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>AI agents for spreadsheets and reports: safe workflows, checks, and handoff formats</h1>
+  <p class="meta">Spreadsheets and reports &middot; 9 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/ai-agents-for-spreadsheets-and-reports.jpg" alt="Flat illustration of an open workbook with an empty cell grid, a magnifying glass over it, and a checklist card beside it." loading="lazy" width="1600" height="1066">
+  <figcaption>Check the figures before you read the summary.</figcaption>
+</figure>
+
+
+<p>Short answer: never let an agent loose on the only copy of a workbook, and never accept a finished spreadsheet on its own. A safe run has three parts decided before the agent starts. The tier, meaning whether it may only read, may write on a copy, or may write on the live file. The checks, meaning control totals taken before the run and compared after it. And the handoff, meaning the workbook arrives with a reconciliation note and an exceptions list, or it does not count as delivered.</p>
+<p>That sounds like paperwork. It is the opposite. Spreadsheet errors are quiet: a wrong value looks exactly like a right one, and a report built on it carries the error to everyone who reads it. The checks below are how you catch the quiet kind, while the fix is still cheap.</p>
+<h2>Pick the tier before the task</h2>
+<table><tr><th>Tier</th><th>What the agent may do</th><th>Check that tier requires</th></tr>
+<tr><td>1. Read only</td><td>Answer questions about the data, draft formulas, propose a cleanup plan, write the report text in a separate document</td><td>Spot check two or three answers against cells you can see</td></tr>
+<tr><td>2. Writes on a copy</td><td>Clean, sort, merge, calculate, and build the report inside a copied workbook or an uploaded CSV</td><td>Full reconciliation: row counts and control totals before and after, exceptions list reviewed</td></tr>
+<tr><td>3. Writes on the live file</td><td>Edit the shared workbook other people use</td><td>Everything in tier 2, plus a named human approves the result before anyone relies on it, and the pre-run version is kept</td></tr></table>
+<p>Most report work belongs in tier 2. Tier 1 is the right start with any new tool, and it is also the right permanent tier for a workbook you cannot afford to have altered. Tier 3 is for work where the shared file is the deliverable and a person is standing by to approve the outcome.</p>
+<p>The built in tools show why the tier matters. In Google Sheets, Gemini proposes actions on an Action preview card and runs them when you click Apply, and an Undo button appears after the action completes. That preview is a tier control built into the product: read the card before you apply it. Microsoft documents a different kind of gate for Copilot in Excel, covered in the pre-flight below: the tool only works on files with AutoSave turned on, and only on data shaped the way it can read.</p>
+<h2>Pre-flight: make the data readable first</h2>
+<p>Agents misread spreadsheets in predictable ways, and the official documentation names most of them. Microsoft Support states that Copilot in Excel needs your data formatted as an Excel table, or as a supported range that meets all of these conditions:</p>
+<ul>
+<li>Only one header row, with headers on columns only</li>
+<li>Headers are unique, with no blank headers</li>
+<li>Data formatted in a consistent way</li>
+<li>No subtotals</li>
+<li>No empty rows or columns</li>
+<li>No merged cells</li>
+</ul>
+<p>Read that list as a general pre-flight, not just a Copilot rule. A second header row, a merged title cell, or a subtotal sitting inside the data is exactly the sort of thing that detaches a number from its label, with no error message to warn you. Converting a range to a table is one menu path in Excel: select the range, then Home, then Format as Table, and tick the box that says the table has headers.</p>
+<p>Two more pre-flight items come from the Google side. Gemini in Sheets works best with native Google Sheets files, so an Excel file should be saved as a Google Sheet first, through File, then Save as Google Sheets. And if only a formula is needed, share the structure instead of the data: the column headers plus two or three sample rows are usually enough, and no sensitive values leave the sheet at all.</p>
+<h2>The workflow, step by step</h2>
+<ol>
+<li><strong>Copy the workbook.</strong> Work on the copy, named with the date and the word copy, so versions can never be confused. The original stays untouched until the handoff passes its checks.</li>
+<li><strong>Run the pre-flight.</strong> One header row, unique headers, no merged cells, no empty rows or columns inside the data, no subtotals mixed into the rows. Fix the shape before the agent sees the file, not after it produces odd results.</li>
+<li><strong>Take the control totals.</strong> Write down the row count and one or two totals you trust, calculated by you or by a formula you already believe. The sum of the Amount column and the count of records are the usual pair.</li>
+<li><strong>Write the brief as a delivery spec.</strong> Name the source tabs, the exact output wanted, the columns that must not change, and the handoff format from the next section. State what the agent should do with a row it cannot classify: list it as an exception, never guess it into a category.</li>
+<li><strong>Run the agent on the copy.</strong> Where the tool offers a plan or a preview, read it before approving. Google's Build feature in Sheets shows a plan and a template outline for review before it generates, and its action cards wait for an Apply click. Use those pauses; they are the cheapest check in the whole workflow.</li>
+<li><strong>Reconcile before you read the report.</strong> Compare the row count and control totals in the output against the numbers from step 3. Then read the exceptions list. Only then read the summary the agent wrote.</li>
+<li><strong>Accept, fix, or reject as a whole.</strong> If the totals match and the exceptions are genuinely ambiguous rows, accept the handoff and replace the original. If a total is off, send the whole run back with the difference stated. Do not patch single cells in a workbook whose totals failed; the error you found is rarely the only one.</li>
+</ol>
+<p>What success looks like: the output row count equals the input row count, minus any rows the exceptions list accounts for, the control totals match to the cent, and every figure quoted in the report text can be found in the workbook it arrived with. If you cannot trace a headline number in the report back to a cell, the run is not finished.</p>
+<h2>The handoff format: three parts, every time</h2>
+<p>Ask for the same package on every run, whatever tool you use:</p>
+<ol>
+<li><strong>The workbook.</strong> The cleaned data and the report, in the file, not described in chat. This matters more than it sounds: Google warns that Gemini conversation history is lost when the browser reloads or the spreadsheet is closed and reopened, unless the generated output was inserted into the spreadsheet. Work that lives only in a chat panel is work you can lose.</li>
+<li><strong>The reconciliation note.</strong> A short block, in the workbook or in a text file beside it, stating the input row count, the output row count, the control totals before and after, and the rules the agent applied, such as how dates were standardised and which columns were treated as keys.</li>
+<li><strong>The exceptions list.</strong> Every row the agent could not classify, match, or calculate, with the reason in plain words. A duplicate period, a missing price, a name that matches two records. The exceptions list is not an admission of failure; it is the part of the handoff that tells you where human judgment is still owed.</li>
+</ol>
+<p>This package is not an invention for its own sake. It is the shape that serious spreadsheet automation already uses internally. One vendor built agent, for example, checks each source file against an agreed layout before any calculation, tests row counts, totals against the source, blank keys, duplicate periods, and broken formulas, lists anything that does not add up for a person, and stops the run there. Its design also separates the jobs: code does the arithmetic, while the model reads files, maps columns, and writes the comment. You may never buy such a service. You can still demand its outputs from the tool you already have.</p>
+<h2>Trade-offs and failure shapes</h2>
+<p><strong>The chart that does not update.</strong> Google states plainly that a chart Gemini generates does not link or respond to changes in the original data set; it is added on a new tab with a copy of the underlying data. A report chart can therefore be a snapshot wearing a live chart's clothes. If the numbers change, regenerate the chart, and say in the report which data the chart was built from.</p>
+<p><strong>The summary that outruns the data.</strong> An agent asked for insights will write them fluently whether or not the underlying cleanup went well. That is why the workflow reconciles numbers before anyone reads prose. Read the commentary last, and treat any figure in it that is not in the workbook as an error, not a bonus.</p>
+<p><strong>The copy that becomes the original.</strong> Tier 2 fails in one mundane way: someone starts editing the copy, someone else keeps editing the original, and a week later nobody knows which file is real. The dated name, the single handoff, and deleting or archiving the losing version on acceptance day are the whole defence.</p>
+<p><strong>Live file convenience.</strong> Tier 3 saves the copy step and costs you the safety net. Undo exists in these tools, Google shows an Undo button after a Gemini action completes, but undo covers the last action, not a twenty step run you reviewed too late. Keep tier 3 for small, watched edits.</p>
+<h2>Which tier for which job</h2>
+<p>Use this decision rule. If the workbook is shared, financial, or sent to anyone outside your own desk, the job is tier 2 at minimum, with the full three part handoff. If you are still learning what a tool does to your kind of data, stay at tier 1 until its answers have matched your spot checks several runs in a row. Promote a recurring report to tier 3 only when its reconciliation has passed unchanged for several cycles and a named person still approves the result before it circulates. The tier is not about trusting the agent in general. It is about matching the check to what an error would cost, one job at a time.</p>
+<p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents, beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>

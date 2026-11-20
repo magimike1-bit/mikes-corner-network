@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Troubleshooting Checklist: Work the Layers in Order | Using AI Agents</title>
+<meta name="description" content="When an agent's result goes wrong, do not retry and hope. Freeze the case, then walk five layers in a fixed order: instructions, permissions, data, tools and limits, output. Change one layer, retest the same case.">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: ad code goes here -->
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Using AI Agents</a>
+    <p class="tagline">Plain-spoken guides for working with AI agents, no jargon required</p>
+  </div>
+</header>
+<main class="wrap post">
+  <a class="back" href="/">&larr; All guides</a>
+  <h1>AI agent troubleshooting checklist: a systematic pass through instructions, permissions, data, and outputs</h1>
+  <p class="meta">Troubleshooting &middot; 9 min read</p><figure class="post-figure">
+  <img class="post-image" src="../images/ai-agent-troubleshooting-checklist.jpg" alt="Flat illustration of a teal robot beside stacked transparent layers, an orange wrench resting on the middle layer." loading="lazy" width="1600" height="1066">
+  <figcaption>Work the layers in order, one fix at a time.</figcaption>
+</figure>
+
+
+<p>The agent just produced something wrong. What do you change first?</p>
+<p>Most people change the prompt, because the prompt is the part they can see. Sometimes that is the fault. Often it is not, and rewriting the instruction on top of a permissions problem or a broken input file produces a second wrong answer that looks different enough to waste another half hour. A run is built in layers: an instruction, an account with permissions, data it could reach, tools it could call within set limits, and an output. The failure lives in one of those layers, occasionally two. This checklist walks them in a fixed order, cheapest and most common first, and it starts before any of them, with saving the evidence.</p>
+<h2>Step zero: freeze the case</h2>
+<p>Before you change a single word, save the failing case exactly as it stands:</p>
+<ul>
+<li>The instruction you gave, word for word, including any standing instructions the agent works under</li>
+<li>The inputs: the files, links, or records it was given, in the version it saw them</li>
+<li>The output it produced, copied out in full, not summarised</li>
+<li>The tool and, where the product shows it, the model and the date and time of the run</li>
+<li>Any error message, quoted exactly</li>
+</ul>
+<p>Two minutes, one folder or one document. Practitioner debugging guides give the same advice in developer language: save the input, the output, the prompt, the model, and the tools and files involved. Platform documentation agrees from the other side. Appian's troubleshooting guide for its agent studio starts with reproducing the problem from a saved test case, so the inputs stay controlled and repeatable, and collecting the run context: the request ID, the agent version, the inputs used, the tools invoked, and the timestamps. Your frozen case is the home version of that record, and it is what makes every later step a test instead of a guess. It also protects you from the most common troubleshooting failure of all: fixing the run, then being unable to say what was wrong.</p>
+<h2>The five layer pass, in order</h2>
+<ol>
+<li><strong>Instructions.</strong> Read your own instruction as a stranger would. Does it name the output, the format, the sources to use, and what done looks like? Check for the three classic faults: two instructions that pull against each other, a key term you never defined, and a task that quietly contains two tasks. Anthropic's guidance to agent builders stresses transparency, the agent showing its planning steps, and the user version of that principle is to ask the agent to state its plan and its reading of the task before it runs. A plan that answers a different question than yours is an instruction fault caught for free.</li>
+<li><strong>Permissions and access.</strong> Ask what the agent could not reach. A run that fails immediately, or that reports finding nothing, is an access problem until proven otherwise. Appian's quick fix table maps a run that fails at once with a permission message to one cause: the person or account running the agent lacks access to a tool the agent needs to call. The quieter version leaves no error at all. In Appian's documentation, an agent that finds nothing in a document may be facing an unsupported file or a PDF that is only an image, with no text to extract, and unsupported files are skipped without an error. Check that the agent's account can open every file, folder, and connected service the task touches, and that each file is in a form it can actually read.</li>
+<li><strong>Data and inputs.</strong> Open the inputs yourself, in the version the agent saw. Appian maps an early step failing with missing or wrong values to missing or invalid inputs, and advises keeping a set of known good test values to tighten the loop. Look for the faults that produce confident wrong answers rather than errors: the older copy of the file, the tab you forgot was filtered, the record set that stops last month, the empty field the agent filled with a plausible guess. An agent judges its own progress from the results its tools return at each step, what Anthropic calls ground truth from the environment, so wrong input data does not produce a confused agent. It produces a confident one, working correctly on the wrong facts.</li>
+<li><strong>Tools and limits.</strong> If the first three layers are clean, ask whether a tool failed, returned less than the agent assumed, or never got called. Then check the limits. Runs have ceilings: Appian stops a run that exceeds its maximum number of tool calls, 30 by default in that product, and records it as system canceled. Anthropic makes the same point as design advice: stopping conditions, such as a maximum number of iterations, are how control is kept. A task that legitimately needs more steps than the limit allows will die mid job with its output half built, which looks like carelessness and is actually arithmetic. Split the task, or raise the limit where the product allows it, and note which one you did.</li>
+<li><strong>The output itself.</strong> Only now examine the answer as an answer. Separate two kinds of fault. A shape fault: the right content in the wrong form, a table where a list was specified, a summary where figures were asked for. Appian's table includes the platform version of this, a tool that runs and then fails because its output does not match the configured output type. A substance fault: the form is right and the content is wrong, which sends you back up the layers, because substance faults are almost always instruction, access, or data faults that survived the pass. If all five layers check out and the output is still wrong in a new way each run, you are looking at a capability limit, not a fixable fault, and the decision section below applies.</li>
+</ol>
+<p>What success looks like at the end of a pass: you can name the layer, the specific fault inside it, and the one change you are about to make, in a single sentence each. If you cannot, you have not finished the pass; you have a suspicion, and suspicions get tested at the smallest scale that can prove them, not on the full task.</p>
+<h2>Symptom to first layer: where to start</h2>
+<table><tr><th>What you see</th><th>Check first</th><th>Why</th></tr>
+<tr><td>Run fails immediately, or an access or permission message appears</td><td>Permissions</td><td>Pre-run access checks block the run before any reasoning happens</td></tr>
+<tr><td>Agent says it found nothing, or works from an empty result</td><td>Permissions, then data</td><td>Unreadable or unsupported files can be skipped silently, with no error</td></tr>
+<tr><td>Confident, specific, and wrong facts</td><td>Data</td><td>The agent builds on whatever its tools returned; wrong inputs read as ground truth</td></tr>
+<tr><td>Right content, wrong format</td><td>Instructions, then output</td><td>An unspecified format gets guessed; a specified one that still fails is an output fault</td></tr>
+<tr><td>Task stops halfway, or output ends mid build</td><td>Tools and limits</td><td>Step and tool call ceilings stop runs regardless of progress</td></tr>
+<tr><td>A different wrong answer on every retry</td><td>Instructions</td><td>An ambiguous instruction gets resolved differently each run; a data fault repeats the same wrong answer</td></tr>
+<tr><td>Same wrong answer on every retry</td><td>Data, then permissions</td><td>Deterministic repetition points at what the agent is reading, not at chance</td></tr></table>
+<p>That last pair is the most useful diagnostic in the table. Run the frozen case once more, unchanged, before you fix anything. Appian's method depends on the same move: reproduce first, with the inputs held stable. A fault that repeats exactly is a fault in something fixed, the instruction, the access, or the data. A fault that changes shape each time is a fault in something loose, usually an instruction with room for two readings.</p>
+<h2>Change one layer, retest the same case</h2>
+<p>The discipline that makes the pass worth doing: change exactly one thing, then rerun the frozen case, the same instruction and the same inputs, and compare the outputs side by side. Change two layers and a better result tells you nothing about which change worked, so the fault will be back next month wearing the other layer's clothes. Appian's guide closes the loop the same way: apply the fix, validate with the same saved case, confirm the step history and outputs, and keep the case for future checks. Developer tracing tools exist to make this comparison possible at scale; OpenAI's Agents SDK, for instance, records a run as a trace covering model generations, tool calls, handoffs, and guardrails. A user of a ready made agent gets the same value from a humbler record: the frozen case, the one change, and the two outputs.</p>
+<p>One caution belongs here. A run record can contain the very data you were protecting. The same OpenAI documentation notes that its tracing spans store the inputs and outputs of model generations and tool calls, which may contain sensitive data, and offers a setting to leave that data out. Before you paste a frozen case into a ticket, a forum post, or a support chat, read it as a stranger would and remove credentials, contact details, and anything the original task did not need to expose.</p>
+<h2>When the checklist says stop</h2>
+<p>Some passes end without a fix, and recognising that is part of the system. Hand the problem to the tool's support, or to whoever administers the agent, when: the same layer fails after two single changes tested on the frozen case; the error names something you cannot see or set, such as a platform object or an administrator controlled permission; or the run record shows the agent did everything the instruction asked and the result is still not good enough, which is a capability question, not a fault. Escalate with evidence, not frustration. Appian's escalation list transfers directly: the run identifier where one exists, what failed, the timestamps, and a brief summary of what you already tried. Your frozen case plus the list of single changes you tested is exactly that package, and it gets a serious answer faster than any description of the problem.</p>
+<p>Do the task yourself, or narrow it, when the pass shows the job needs judgment the agent keeps guessing at, or when the data it would need cannot be given to it safely. That is the same boundary the site's guide to checking an agent's work draws from the other side. Troubleshooting tells you why the run failed. It does not oblige you to make the agent succeed at a task that does not fit it.</p>
+<h2>Keep the case: today's fix is next month's test</h2>
+<p>File the frozen case, the fault, and the fix together, in the agent's runbook if it has one, or in a plain document named for the symptom. Three entries make a pattern library: the next time a run goes wrong, the symptom table in your own notes will be shorter than the generic one above, because it will be written in your tasks, your files, and your tools. Testing advice from the platform world points the same way: keep the saved case that caught the fault and rerun it after changes, as a regression check. Run your kept cases after any change to the agent's standing instructions, its permissions, or the shape of the data you feed it. The run that broke in November is the cheapest insurance you own against the same break in January, and it costs one rerun of a case you already saved.</p>
+<p>— Dex Carter, Tech Writer</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-disclosure">Built with <a href="https://muse.ai/join">Muse</a>.</p>
+    <p>Using AI Agents, beginner guides to working with AI agents. Content is for information only; AI tools change quickly, so double-check anything time-sensitive.</p>
+    <p class="footer-nav"><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></p>
+  </div>
+</footer>
+</body>
+</html>
